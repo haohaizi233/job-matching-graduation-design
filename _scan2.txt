@@ -1,0 +1,270 @@
+baseline_education.py 8402
+baseline_ranking.py 8905
+config.py 3331
+core.py 7847
+education_data.py 18434
+embeddings.py 7763
+metrics_classification.py 2646
+metrics_ranking.py 5739
+pair_features.py 6249
+pipeline.py 22320
+policy.py 10433
+preprocess_education.py 4594
+preprocess_job.py 5863
+preprocess_resume.py 4579
+preprocess_risk.py 3894
+preprocess_skills.py 4355
+reporting.py 47091
+schema.py 16533
+split_matching.py 21742
+__init__.py 623
+build_features.py 1340
+build_splits.py 829
+rerun_consistency.py 6119
+run_all.py 3664
+run_baselines.py 788
+validate_pipeline.py 830
+_bootstrap.py 310
+run_all.py 4521
+test_g1_raw_unchanged.py 1706
+test_g2_schema_constraints.py 8289
+test_g3_leakage_guard.py 6815
+test_g4_split_disjoint.py 9030
+test_g5_reproducibility.py 7189
+test_g6_loadability.py 4924
+test_g7_resource_guard.py 3839
+_util.py 1175
+== feature_schema.json ==
+{
+  "all_feature_columns": [
+    "skill_jaccard",
+    "skill_overlap_ratio_cv",
+    "skill_overlap_ratio_job",
+    "position_token_overlap",
+    "category_match",
+    "years_experience",
+    "target_position_norm",
+    "inferred_category",
+    "job_title_norm",
+    "job_category",
+    "cv_skills_canonical_json",
+    "job_skills_canonical_json",
+    "both_skills_empty"
+  ],
+  "education_feature_columns": [
+    "job_title_norm",
+    "slot_education_norm",
+    "slot_present",
+    "user_len"
+  ],
+  "education_inputs_file": "data/processed/education/education_inputs.csv",
+  "education_key_columns": [
+    "record_key",
+    "user_hash"
+  ],
+  "education_labels_file": "data/processed/education/education_labels.csv",
+  "education_target_columns": [
+    "label_tokens_json",
+    "label_multi_hot"
+  ],
+  "features_file": "data/processed/matching/features_pairs.csv",
+  "forbidden_features": [
+    "semantic_score",
+    "skill_score",
+    "position_score",
+    "category_score",
+    "experience_score",
+    "education_score",
+    "raw_score",
+    "final_score",
+    "candidate_rank",
+    "candidate_rank_pct"
+  ],
+  "generated_by": "step_build_features",
+  "indirect_leakage_rules": [
+    {
+      "id": "IL-1",
+      "rule": "StandardScaler / MinMaxScaler / 浠讳綍缁熻褰掍竴鍖栧弬鏁板彧鑳藉湪 train 涓?fit"
+    },
+    {
+      "id": "IL-2",
+      "rule": "TF-IDF / 璇嶈〃 / 鐗瑰緛閫夋嫨鍣ㄥ彧鑳藉湪 train 涓?fit"
+    },
+    {
+      "id": "IL-3",
+      "rule": "绂佹鐢?final_score / raw_score 鍒嗕綅鏁版瀯閫犲垎绠便€侀毦璐熶緥鏉冮噸鎴栨牱鏈潈閲?
+    },
+    {
+      "id": "IL-4",
+      "rule": "绂佹鐢?candidate_rank / candidate_rank_pct 鍋氱壒寰佸垎妗躲€佺洰鏍囩紪鐮佹垨 group prior"
+    },
+    {
+      "id": "IL-5",
+      "rule": "绂佹鎶?label_strength 缂栫爜杩涗换浣曡緭鍏ュ垪锛堝寘鎷?one-hot 鎷兼帴銆佺洰鏍囩紪鐮併€佽仛绫?ID锛?
+    },
+    {
+      "id": "IL-6",
+      "rule": "棰勮绠?embedding 鐢卞叏閲忔暟鎹骇鐢燂紝鍏跺綊涓€鍖栫粺璁′笉寰楀啀鐢ㄥ叏閲忔暟鎹噸澶嶆嫙鍚?
+    }
+  ],
+  "matrix_file": "data/processed/matching/feature_matrix_match_label_strength.npz",
+  "matrix_shape": [
+    122560,
+    6
+  ],
+  "numeric_feature_columns": [
+    "skill_jaccard",
+    "skill_overlap_ratio_cv",
+    "skill_overlap_ratio_job",
+    "position_token_overlap",
+    "category_match",
+    "years_experience"
+  ],
+  "relevance_columns": [
+    "final_score",
+    "candidate_rank",
+    "candidate_rank_pct"
+  ],
+  "target_columns": [
+    "label_strength",
+    "label_ordinal"
+  ],
+  "target_file": "data/processed/matching/targets_pairs.csv",
+  "task": "match_label_strength",
+  "uncertain_features": [
+    "embedding",
+    "years_required",
+    "education_text"
+  ]
+}
+
+== headers features_pairs ==
+candidate_id,job_id,skill_jaccard,skill_overlap_ratio_cv,skill_overlap_ratio_job,position_token_overlap,category_match,years_experience,target_position_norm,inferred_category,job_title_norm,job_category,cv_skills_canonical_json,job_skills_canonical_json,both_skills_empty
+== headers targets_pairs ==
+pair_index,candidate_id,job_id,label_strength,final_score,candidate_rank,candidate_rank_pct,label_ordinal,relevance_role
+== headers split train ==
+pair_index,candidate_id,job_id 0,cand_00000,3906246896 1,cand_00000,3902931012
+== manifest keys ==
+{
+  "coverage": {
+    "assigned_pairs": 122560,
+    "coverage_ratio": 1.0,
+    "raw_pairs": 122560
+  },
+  "created_at": "2026-10-28T20:11:30",
+  "excluded": {
+    "pairs": 0
+  },
+  "files": [
+    {
+      "path": "data/splits/matching/candidate_cold/train.csv",
+      "rows": 98029,
+      "sha256": "08bb0785901fdd03379e17946b1e4b502eb399517302efea8fcea50ffa6ab56d",
+      "split": "train"
+    },
+    {
+      "path": "data/splits/matching/candidate_cold/validation.csv",
+      "rows": 12270,
+      "sha256": "149c7474d06121da58ef8c78653a15232ef455d0f1c1aa07e6780bc48d1ef96c",
+      "split": "validation"
+    },
+    {
+      "path": "data/splits/matching/candidate_cold/test.csv",
+      "rows": 12261,
+      "sha256": "d5bbf1c50863ddc9f404a3452162142324df8f1bfbff2495813631a9c1149a1f",
+      "split": "test"
+    },
+    {
+      "path": "data/splits/matching/candidate_cold/excluded.csv",
+      "rows": 0,
+      "sha256": "467fe8656b207a4a951bd8e815fbd4a564c31e40d2bcf1123f847b745137911f",
+      "split": "excluded"
+    }
+  ],
+  "generated_by": "src/job_matching/split_matching.py",
+  "group_key": "candidate_id",
+  "overlap_check": {
+    "candidate_overlap": {
+      "train&test": 0,
+      "train&validation": 0,
+      "validation&test": 0
+    },
+    "group_key_overlap": {
+      "train&test": 0,
+      "train&validation": 0,
+      "validation&test": 0
+    },
+    "job_overlap": {
+      "train&test": 944,
+      "train&validation": 896,
+      "validation&test": 773
+    },
+    "pair_overlap": {
+      "train&test": 0,
+      "train&validation": 0,
+      "validation&test": 0
+    }
+  },
+  "pipeline_version": "phase3-v1",
+  "protocol": "candidate_cold",
+  "ratios": {
+    "test": 0.1,
+    "train": 0.8,
+    "validation": 0.1
+  },
+  "seed": 20261028,
+  "splits": {
+    "test": {
+      "candidates": 974,
+      "groups_size_eq_1": 1,
+      "groups_size_ge_2": 973,
+      "groups_size_ge_min": 973,
+      "groups_total": 974,
+      "jobs": 944,
+      "label_distribution": {
+        "medium_positive": 7133,
+        "strong_positive": 70,
+        "weak_positive": 5058
+      },
+      "pairs": 12261,
+      "size_max": 83,
+      "size_median": 11.0,
+      "size_min": 1
+    },
+    "train": {
+      "candidates": 7617,
+      "groups_size_eq_1": 52,
+      "groups_size_ge_2": 7565,
+      "groups_size_ge_min": 7565,
+      "groups_total": 7617,
+      "jobs": 1163,
+      "label_distribution": {
+        "medium_positive": 56322,
+        "strong_positive": 634,
+        "weak_positive": 41073
+      },
+      "pairs": 98029,
+      "size_max": 122,
+      "size_median": 11.0,
+      "size_min": 1
+    },
+    "validation": {
+      "candidates": 941,
+      "groups_size_eq_1": 7,
+      "groups_size_ge_2": 934,
+      "groups_size_ge_min": 934,
+      "groups_total": 941,
+      "jobs": 897,
+      "label_distribution": {
+        "medium_positive": 7181,
+        "strong_positive": 70,
+        "weak_positive": 5019
+      },
+      "pairs": 12270,
+      "size_max": 62,
+      "size_median": 11.0,
+      "size_min": 1
+    }
+  }
+}
+

@@ -1,0 +1,246 @@
+== baseline-results.json top keys ==
+['created_at', 'dataset_version', 'education', 'environment', 'generated_by', 'matching', 'pipeline_version']
+  created_at: str = 2026-10-28T20:11:36
+  dataset_version: str = dv-0ce28fa6b560
+  education: dict keys=['binary_note', 'created_at', 'dataset_version', 'evaluation_sets', 'gold_eval_policy', 'gold_used_for_rule_fitting', 'label_order', 'seconds', 'slot_label_mapping_size', 'slot_label_mapping_top']
+  environment: dict keys=['device_policy', 'numpy', 'pandas', 'python', 'torch']
+  generated_by: str = step_run_baselines
+  matching: dict keys=['candidate_cold', 'double_cold', 'job_cold']
+  pipeline_version: str = phase3-v1
+--- nested sample ---
+{}
+== data_pipeline.yaml ==
+{
+ "version": 1,
+ "pipeline_version": "phase3-v1",
+ "stage": "第三阶段：数据预处理、可信数据划分与零训练 Baseline",
+ "paths": {
+  "raw": "data/raw",
+  "interim": "data/interim",
+  "processed": "data/processed",
+  "splits": "data/splits",
+  "reports": "reports",
+  "logs": "reports/phase3-logs"
+ },
+ "sources": {
+  "matching": {
+   "cv": "data/raw/job-resume-matching/cv.csv",
+   "job": "data/raw/job-resume-matching/job.csv",
+   "matches": "data/raw/job-resume-matching/matches.csv"
+  },
+  "education": {
+   "train": "data/raw/job-education/default/train/19w_0701.csv",
+   "validation": "data/raw/job-education/default/validation/4w_0708.csv",
+   "test": "data/raw/job-education/default/test/2w_0716.csv",
+   "annotated": "data/raw/job-education/annotated/2w_0716_eval.csv"
+  },
+  "risk": {
+   "all_df": "data/raw/other/all_df.csv/all_df.csv"
+  }
+ },
+ "outputs": {
+  "interim_matching": "data/interim/matching",
+  "interim_education": "data/interim/education",
+  "interim_risk": "data/interim/risk",
+  "processed_embeddings": "data/processed/embeddings",
+  "processed_matching": "data/processed/matching",
+  "processed_education": "data/processed/education",
+  "splits_matching": "data/splits/matching",
+  "splits_education": "data/splits/education"
+ },
+ "seeds": {
+  "global": 20261028,
+  "split_candidate_cold": 20261028,
+  "split_job_cold": 20261029,
+  "split_double_cold": 20261030,
+  "split_education": 20261031,
+  "baseline_random_ranking": 20261101,
+  "baseline_random_repeats": 20
+ },
+ "formats": {
+  "table": "csv",
+  "table_encoding": "utf-8",
+  "table_float_format": "%.10g",
+  "vector": "npy",
+  "manifest": "json",
+  "parquet_available": false,
+  "parquet_note": "本地缺少 Parquet 引擎（pyarrow/fastparquet 均未安装），按约束不修改环境；改用 CSV + NPY + JSON，并在 manifest 中记录该限制。"
+ },
+ "io": {
+  "csv_chunk_rows": 20000,
+  "cosine_block_rows": 512,
+  "json_indent": 2,
+  "json_sort_keys": true
+ },
+ "resources": {
+  "gpu_budget_mb": 4094,
+  "prefer_cpu_for_baselines": true,
+  "max_rows_in_log_sample": 0
+ },
+ "privacy": {
+  "forbid_in_logs": [
+   "resume_text",
+   "experience_text",
+   "education_text",
+   "job_description",
+   "job_text",
+   "user"
+  ],
+  "note": "简历正文与招聘 JD 原文不得写入日志与报告；仅统计长度、哈希与计数。"
+ }
+}
+== matching_splits.yaml ==
+{
+ "default_ratios": {
+  "train": 0.8,
+  "validation": 0.1,
+  "test": 0.1
+ },
+ "min_group_size_for_ranking": 2,
+ "protocols": {
+  "candidate_cold": {
+   "id": "A",
+   "name": "Candidate Cold-start",
+   "group_keys": [
+    "candidate_id"
+   ],
+   "seed_key": "split_candidate_cold",
+   "ratios": {
+    "train": 0.8,
+    "validation": 0.1,
+    "test": 0.1
+   },
+   "enforce": {
+    "candidate_overlap": 0,
+    "job_overlap": "not_required",
+    "pair_overlap": 0
+   },
+   "description": "候选人 ID 在三个集合间完全互斥；同一候选人的全部匹配记录只进入一个集合。"
+  },
+  "job_cold": {
+   "id": "B",
+   "name": "Job Cold-start",
+   "group_keys": [
+    "job_id"
+   ],
+   "seed_key": "split_job_cold",
+   "ratios": {
+    "train": 0.8,
+    "validation": 0.1,
+    "test": 0.1
+   },
+   "enforce": {
+    "candidate_overlap": "not_required",
+    "job_overlap": 0,
+    "pair_overlap": 0
+   },
+   "description": "岗位 ID 在三个集合间完全互斥；同一岗位的全部匹配记录只进入一个集合。"
+  },
+  "double_cold": {
+   "id": "C",
+   "name": "Double Cold-start",
+   "group_keys": [
+    "candidate_id",
+    "job_id"
+   ],
+   "seed_key": "split_double_cold",
+   "ratios": {
+    "train": 0.8,
+    "validation": 0.1,
+    "test": 0.1
+   },
+   "assignment_strategy": "eval_first_greedy",
+   "strategy_params": {
+    "budget_ratio_per_minor_split": 0.1,
+    "eval_soft_target": 5,
+    "gain_deficit_power": 2
+   },
+   "assignment_strategy_note": "两阶段确定性分配：阶段 1 先把主要实体（candidate_id）按观测边数贪心分配到 80/10/10 （组完整、边不拆）；阶段 2 再分配次要实体（job_id）。默认策略 eval_first_greedy 为本阶段提出的改进策略：先按\"多数边集合\"确定零代价归属，再用 gain/cost 贪心从 train 为验证/测试候选人补齐可排序性（每个次要集合带独立的训练边损失预算），其余 job 归给 边数最多的集合。两侧 ID 分组不一致的交叉边一律进入 excluded，绝不偷偷归入任何集合。 三种策略（majority_edge / proportional / eval_first_greedy）的实测对比会写入 manifest 的 strategy_comparison。",
+   "enforce": {
+    "candidate_overlap": 0,
+    "job_overlap": 0,
+    "pair_overlap": 0
+   },
+   "description": "候选人集合两两不相交且岗位集合两两不相交；交叉边单独落盘为 excluded 索引。"
+  }
+ },
+ "reproducibility": {
+  "rerun_check": true,
+  "compare": [
+   "split_ids_sha256",
+   "row_counts",
+   "label_stats",
+   "file_sha256"
+  ]
+ }
+}
+== targets_pairs head ==
+   pair_index candidate_id      job_id   label_strength  final_score  candidate_rank  candidate_rank_pct  label_ordinal                    relevance_role
+0           0   cand_00000  3906246896  medium_positive     0.635354               1            1.000000              2  proxy_relevance（原评分系统派生，非真实录用结果）
+1           1   cand_00000  3902931012  medium_positive     0.599043               2            0.977099              2  proxy_relevance（原评分系统派生，非真实录用结果）
+2           2   cand_00000  3905214623    weak_positive     0.560359               3            0.923664              1  proxy_relevance（原评分系统派生，非真实录用结果）
+3           3   cand_00000  3889743825    weak_positive     0.540995               4            0.885496              1  proxy_relevance（原评分系统派生，非真实录用结果）
+4           4   cand_00000  3902357305    weak_positive     0.538510               5            0.877863              1  proxy_relevance（原评分系统派生，非真实录用结果）
+{'pair_index': dtype('int64'), 'candidate_id': dtype('O'), 'job_id': dtype('int64'), 'label_strength': dtype('O'), 'final_score': dtype('float64'), 'candidate_rank': dtype('int64'), 'candidate_rank_pct': dtype('float64'), 'label_ordinal': dtype('int64'), 'relevance_role': dtype('O')}
+== relevance_role values ==
+{'proxy_relevance（原评分系统派生，非真实录用结果）': 122560}
+{2: 70636, 1: 51150, 3: 774}
+== embeddings metadata ==
+{
+  "created_at": "2026-10-28T20:11:18",
+  "data_version": "dv-0ce28fa6b560",
+  "dim": 768,
+  "dtype": "float32",
+  "generated_by": "src/job_matching/embeddings.py",
+  "id_as_feature": "禁止：candidate_id / job_id 的整数形式不得作为模型特征",
+  "id_mapping_policy": "id_map.json 提供 id->row 与 row->id 双向可逆索引",
+  "limitations": [
+    "预计算 embedding 的编码模型未知（数据集卡片明确声明未指定），不得仅凭 768 维推断模型。",
+    "编码输入是 resume_text / job_description 原文还是清洗后文本，未知。",
+    "单塔（共享编码器）还是双塔（两个编码器），数据不提供判别依据。",
+    "semantic_score = 0.5 * cosine(cv_emb, job_emb) + 0.5（审计以 R²=1.0 证实），故 embedding 经 semantic_score -> raw_score -> final_score -> label_strength 参与了标签生成，属于派生信息链的一环。",
+    "后续 '冷启动' 实验只能表示下游排序模型未使用这些候选人/岗位做监督训练，不能宣称预训练编码器从未见过相关文本。",
+    "向量由全量数据产生，其归一化统计不得再用全量数据重复拟合（间接泄漏规则 IL-6）。"
+  ],
+  "normalization_policy": "沿用原始向量的 L2 归一化状态，不做任何重新归一化",
+  "pipeline_version": "phase3-v1",
+  "sides": {
+    "cv": {
+      "all_finite": true,
+      "array_sha256": "98a21daff54f5f306a2e633ea1fa5bf47e8363f5aab193a0150886901106e4ba",
+      "build_seconds": 3.52,
+      "component_std": 0.03608427941799164,
+      "dim": 768,
+      "dtype": "float32",
+      "duplicate_vectors": 0,
+      "id_column": "candidate_id",
+      "id_map": "data/processed/embeddings/cv_id_map.json",
+      "id_map_sha256": "b097bbd5134498893c45d10d01c9297b5691b0e3aab96c4b4d581265b97d8965",
+      "l2_norm_max": 1.0000001192092896,
+      "l2_norm_mean": 1.0,
+      "l2_norm_min": 0.9999998807907104,
+      "l2_norm_std": 2.875339788488418e-08,
+      "npy": "data/processed/embeddings/cv_embeddings.npy",
+      "npy_sha256": "e6e2716d2ae168a5cc3c96d73a3c9074bb90d801e4546af2e3803c9e890761de",
+      "rows": 9544,
+      "side": "cv",
+      "source_csv": "data/raw/job-resume-matching/cv.csv",
+      "source_csv_sha256": "67c81a4761516113dbebcd8c6acc1b692c4b20e54341187ff864d2d637099640",
+      "zero_vectors": 0
+    },
+    "job": {
+      "all_finite": true,
+      "array_sha256": "c52315176aea02b34830cafed119eea95a2b0725dd60a1542e6ffc38ca1b107d",
+      "build_seconds": 0.47,
+      "component_std": 0.03608362376689911,
+      "dim": 768,
+      "dtype": "float32",
+      "duplicate_vectors": 0,
+      "id_column": "job_id",
+      "id_map": "data/processed/embeddings/job_id_map.json",
+      "id_map_sha256": "4982a456ae420f43556f08bc7461b46ba23342589e33e399c0bdafbf7ba46970",
+      "l2_norm_max": 1.0000001192092896,
+      "l2_norm_mean": 1.0,
+      "l2_norm_min": 0.9999999403953552,
+      "l2_norm_std": 3.121186153975941e-08,
+      "npy": "data/processed/embeddings/job

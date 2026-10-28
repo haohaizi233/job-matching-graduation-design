@@ -1,0 +1,167 @@
+== configs ==
+D:\desktop\毕业设计\configs\data_pipeline.yaml
+D:\desktop\毕业设计\configs\education_labels.yaml
+D:\desktop\毕业设计\configs\feature_policy.yaml
+D:\desktop\毕业设计\configs\matching_splits.yaml
+D:\desktop\毕业设计\configs\skills.yaml
+== src ==
+D:\desktop\毕业设计\src\job_matching\baseline_education.py
+D:\desktop\毕业设计\src\job_matching\baseline_ranking.py
+D:\desktop\毕业设计\src\job_matching\config.py
+D:\desktop\毕业设计\src\job_matching\core.py
+D:\desktop\毕业设计\src\job_matching\education_data.py
+D:\desktop\毕业设计\src\job_matching\embeddings.py
+D:\desktop\毕业设计\src\job_matching\metrics_classification.py
+D:\desktop\毕业设计\src\job_matching\metrics_ranking.py
+D:\desktop\毕业设计\src\job_matching\pair_features.py
+D:\desktop\毕业设计\src\job_matching\pipeline.py
+D:\desktop\毕业设计\src\job_matching\policy.py
+D:\desktop\毕业设计\src\job_matching\preprocess_education.py
+D:\desktop\毕业设计\src\job_matching\preprocess_job.py
+D:\desktop\毕业设计\src\job_matching\preprocess_resume.py
+D:\desktop\毕业设计\src\job_matching\preprocess_risk.py
+D:\desktop\毕业设计\src\job_matching\preprocess_skills.py
+D:\desktop\毕业设计\src\job_matching\reporting.py
+D:\desktop\毕业设计\src\job_matching\schema.py
+D:\desktop\毕业设计\src\job_matching\split_matching.py
+D:\desktop\毕业设计\src\job_matching\__init__.py
+== scripts ==
+D:\desktop\毕业设计\scripts\hash_datasets.py
+D:\desktop\毕业设计\scripts\verify_data_integrity.py
+D:\desktop\毕业设计\scripts\data_audit\analyze_education.py
+D:\desktop\毕业设计\scripts\data_audit\analyze_embeddings.py
+D:\desktop\毕业设计\scripts\data_audit\analyze_matching.py
+D:\desktop\毕业设计\scripts\data_audit\analyze_risk.py
+D:\desktop\毕业设计\scripts\data_audit\common.py
+D:\desktop\毕业设计\scripts\data_audit\profile_datasets.py
+D:\desktop\毕业设计\scripts\data_audit\reverse_label_formula.py
+D:\desktop\毕业设计\scripts\data_audit\run_all.py
+D:\desktop\毕业设计\scripts\data_audit\__pycache__\common.cpython-311.pyc
+D:\desktop\毕业设计\scripts\data_pipeline\build_features.py
+D:\desktop\毕业设计\scripts\data_pipeline\build_splits.py
+D:\desktop\毕业设计\scripts\data_pipeline\rerun_consistency.py
+D:\desktop\毕业设计\scripts\data_pipeline\run_all.py
+D:\desktop\毕业设计\scripts\data_pipeline\run_baselines.py
+D:\desktop\毕业设计\scripts\data_pipeline\validate_pipeline.py
+D:\desktop\毕业设计\scripts\data_pipeline\_bootstrap.py
+D:\desktop\毕业设计\scripts\data_pipeline\__pycache__\_bootstrap.cpython-311.pyc
+D:\desktop\毕业设计\scripts\__pycache__\hash_datasets.cpython-311.pyc
+== tests ==
+D:\desktop\毕业设计\tests\data_pipeline\run_all.py
+D:\desktop\毕业设计\tests\data_pipeline\test_g1_raw_unchanged.py
+D:\desktop\毕业设计\tests\data_pipeline\test_g2_schema_constraints.py
+D:\desktop\毕业设计\tests\data_pipeline\test_g3_leakage_guard.py
+D:\desktop\毕业设计\tests\data_pipeline\test_g4_split_disjoint.py
+D:\desktop\毕业设计\tests\data_pipeline\test_g5_reproducibility.py
+D:\desktop\毕业设计\tests\data_pipeline\test_g6_loadability.py
+D:\desktop\毕业设计\tests\data_pipeline\test_g7_resource_guard.py
+D:\desktop\毕业设计\tests\data_pipeline\_util.py
+D:\desktop\毕业设计\tests\data_pipeline\__pycache__\test_g1_raw_unchanged.cpython-311.pyc
+D:\desktop\毕业设计\tests\data_pipeline\__pycache__\test_g2_schema_constraints.cpython-311.pyc
+D:\desktop\毕业设计\tests\data_pipeline\__pycache__\test_g3_leakage_guard.cpython-311.pyc
+D:\desktop\毕业设计\tests\data_pipeline\__pycache__\test_g4_split_disjoint.cpython-311.pyc
+D:\desktop\毕业设计\tests\data_pipeline\__pycache__\test_g5_reproducibility.cpython-311.pyc
+D:\desktop\毕业设计\tests\data_pipeline\__pycache__\test_g6_loadability.cpython-311.pyc
+D:\desktop\毕业设计\tests\data_pipeline\__pycache__\test_g7_resource_guard.cpython-311.pyc
+D:\desktop\毕业设计\tests\data_pipeline\__pycache__\_util.cpython-311.pyc
+D:\desktop\毕业设计\tests\environment\test_conda.py
+D:\desktop\毕业设计\tests\environment\test_dataset_loading.py
+D:\desktop\毕业设计\tests\environment\test_e2e_pipeline.py
+D:\desktop\毕业设计\tests\environment\test_gpu_training.py
+D:\desktop\毕业设计\tests\environment\test_nlp_dependencies.py
+D:\desktop\毕业设计\tests\environment\test_numpy_compat.py
+D:\desktop\毕业设计\tests\environment\test_reproducibility.py
+D:\desktop\毕业设计\tests\environment\test_torch_cuda.py
+== data/processed ==
+D:\desktop\毕业设计\data\processed\.gitkeep 0
+D:\desktop\毕业设计\data\processed\education\education_inputs.csv 30124827
+D:\desktop\毕业设计\data\processed\education\education_labels.csv 18859649
+D:\desktop\毕业设计\data\processed\embeddings\cv_embeddings.npy 29319296
+D:\desktop\毕业设计\data\processed\embeddings\cv_id_map.json 399830
+D:\desktop\毕业设计\data\processed\embeddings\job_embeddings.npy 3585152
+D:\desktop\毕业设计\data\processed\embeddings\job_id_map.json 47990
+D:\desktop\毕业设计\data\processed\embeddings\metadata.json 3986
+D:\desktop\毕业设计\data\processed\matching\features_pairs.csv 138867455
+D:\desktop\毕业设计\data\processed\matching\feature_matrix_match_label_strength.npz 2942260
+D:\desktop\毕业设计\data\processed\matching\feature_schema.json 2679
+D:\desktop\毕业设计\data\processed\matching\targets_pairs.csv 17111252
+== data/splits ==
+D:\desktop\毕业设计\data\splits\.gitkeep 0
+D:\desktop\毕业设计\data\splits\education\excluded.csv 2525245
+D:\desktop\毕业设计\data\splits\education\gold_holdout.csv 97960
+D:\desktop\毕业设计\data\splits\education\manifest.json 5960
+D:\desktop\毕业设计\data\splits\education\train.csv 23322664
+D:\desktop\毕业设计\data\splits\education\validation.csv 6056941
+D:\desktop\毕业设计\data\splits\matching\candidate_cold\excluded.csv 31
+D:\desktop\毕业设计\data\splits\matching\candidate_cold\manifest.json 3007
+D:\desktop\毕业设计\data\splits\matching\candidate_cold\test.csv 344169
+D:\desktop\毕业设计\data\splits\matching\candidate_cold\train.csv 2754714
+D:\desktop\毕业设计\data\splits\matching\candidate_cold\validation.csv 344340
+D:\desktop\毕业设计\data\splits\matching\double_cold\excluded.csv 1377454
+D:\desktop\毕业设计\data\splits\matching\double_cold\manifest.json 8554
+D:\desktop\毕业设计\data\splits\matching\double_cold\test.csv 62528
+D:\desktop\毕业设计\data\splits\matching\double_cold\train.csv 1936675
+D:\desktop\毕业设计\data\splits\matching\double_cold\validation.csv 66597
+D:\desktop\毕业设计\data\splits\matching\job_cold\excluded.csv 31
+D:\desktop\毕业设计\data\splits\matching\job_cold\manifest.json 2973
+D:\desktop\毕业设计\data\splits\matching\job_cold\test.csv 349078
+D:\desktop\毕业设计\data\splits\matching\job_cold\train.csv 2749987
+D:\desktop\毕业设计\data\splits\matching\job_cold\validation.csv 344158
+== data/interim ==
+D:\desktop\毕业设计\data\interim\.gitkeep 0
+D:\desktop\毕业设计\data\interim\education\education_normalized.csv 67164973
+D:\desktop\毕业设计\data\interim\matching\job_normalized.csv 14315785
+D:\desktop\毕业设计\data\interim\matching\resume_normalized.csv 49186634
+D:\desktop\毕业设计\data\interim\risk\risk_normalized.csv 54693661
+== reports ==
+D:\desktop\毕业设计\reports\data-preprocessing.md 7193
+D:\desktop\毕业设计\reports\data-quality-gates.json 19733
+D:\desktop\毕业设计\reports\data-split-validation.md 7285
+D:\desktop\毕业设计\reports\dependency-check.json 242
+D:\desktop\毕业设计\reports\environment-acceptance.json 14013
+D:\desktop\毕业设计\reports\environment-acceptance.md 13720
+D:\desktop\毕业设计\reports\phase3-acceptance.md 11306
+D:\desktop\毕业设计\reports\phase3-feature-build.json 3390
+D:\desktop\毕业设计\reports\phase3-preprocessing-summary.json 6991
+D:\desktop\毕业设计\reports\phase3-reproducibility-rerun.json 535
+D:\desktop\毕业设计\reports\phase3-reproducibility-snapshot.json 697177
+D:\desktop\毕业设计\reports\phase3-schema-validation.json 3653
+D:\desktop\毕业设计\reports\phase3-split-summary.json 23704
+D:\desktop\毕业设计\reports\workspace-migration-manifest.json 33735
+D:\desktop\毕业设计\reports\workspace-reorganization-plan.md 10510
+D:\desktop\毕业设计\reports\workspace-reorganization.md 17528
+D:\desktop\毕业设计\reports\baselines\baseline-results.json 124522
+D:\desktop\毕业设计\reports\baselines\education-baselines.md 5653
+D:\desktop\毕业设计\reports\baselines\matching-baselines.md 12646
+D:\desktop\毕业设计\reports\data-audit\audit-summary.json 12750
+D:\desktop\毕业设计\reports\data-audit\dataset-profile.json 584516
+D:\desktop\毕业设计\reports\data-audit\dataset-profile.md 14401
+D:\desktop\毕业设计\reports\data-audit\education-analysis.json 27352
+D:\desktop\毕业设计\reports\data-audit\embedding-analysis.json 5801
+D:\desktop\毕业设计\reports\data-audit\embedding-analysis.md 9873
+D:\desktop\毕业设计\reports\data-audit\label-formula.json 7832
+D:\desktop\毕业设计\reports\data-audit\matching-analysis.json 13398
+D:\desktop\毕业设计\reports\data-audit\matching-label-analysis.md 15382
+D:\desktop\毕业设计\reports\data-audit\model-feasibility.md 30777
+D:\desktop\毕业设计\reports\data-audit\risk-analysis.json 8186
+D:\desktop\毕业设计\reports\phase3-logs\pipeline-run-verify.log 9222
+D:\desktop\毕业设计\reports\phase3-logs\pipeline-run-verify2.log 5840
+D:\desktop\毕业设计\reports\phase3-logs\pipeline.log 49041
+D:\desktop\毕业设计\reports\phase3-logs\run-failure-archive-20261028-200836.json 1041
+D:\desktop\毕业设计\reports\phase3-steps\1-check_raw_integrity.json 2365
+D:\desktop\毕业设计\reports\phase3-steps\2-validate_schema.json 3653
+D:\desktop\毕业设计\reports\phase3-steps\3-normalize_data.json 6991
+D:\desktop\毕业设计\reports\phase3-steps\4-build_embeddings.json 3986
+D:\desktop\毕业设计\reports\phase3-steps\5-build_features.json 3390
+D:\desktop\毕业设计\reports\phase3-steps\6-build_splits.json 23704
+D:\desktop\毕业设计\reports\phase3-steps\7-run_baselines.json 124522
+D:\desktop\毕业设计\reports\phase3-steps\8-run_gates.json 19733
+D:\desktop\毕业设计\reports\phase3-steps\9-write_reports.json 314
+== docs ==
+D:\desktop\毕业设计\docs\data-pipeline.md
+D:\desktop\毕业设计\docs\environment-setup.md
+D:\desktop\毕业设计\docs\evaluation-protocol.md
+D:\desktop\毕业设计\docs\feature-schema.md
+D:\desktop\毕业设计\docs\project-overview.md
+D:\desktop\毕业设计\docs\project-structure.md
+D:\desktop\毕业设计\docs\datasets\README.md
