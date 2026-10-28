@@ -1,0 +1,407 @@
+{
+  "checks": [
+    {
+      "check": "single_pair_features_match_pipeline",
+      "detail": "抽样 51 个 pair，数值最大绝对误差 4.29e-11",
+      "ok": true
+    },
+    {
+      "check": "independent_inference_no_label_fields",
+      "detail": "单 pair 特征键 ['both_skills_empty', 'category_match', 'inferred_category', 'job_category', 'position_token_overlap', 'skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'target_position_norm', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-candidate_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-candidate_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=38）",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-candidate_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.724256,0.517090) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-candidate_cold-smoke-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-candidate_cold-smoke-20261028-203750:reload_consistency",
+      "detail": "无 predictions_test.npz，跳过与训练期预测比对",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-candidate_cold-smoke-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.664839,0.526281) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "smoke-gb-002:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "smoke-gb-002:reload_consistency",
+      "detail": "无 predictions_test.npz，跳过与训练期预测比对",
+      "ok": true
+    },
+    {
+      "check": "smoke-gb-002:cpu_inference_and_ranking",
+      "detail": "scores=(0.664839,0.526281) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-double_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-double_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=11）",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-double_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.729914,0.513276) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-job_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-job_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=46）",
+      "ok": true
+    },
+    {
+      "check": "gradient_boosting-job_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.712886,0.515421) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "mlp-candidate_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "mlp-candidate_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 5.96e-08（n=38）",
+      "ok": true
+    },
+    {
+      "check": "mlp-candidate_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.680723,0.490283) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "mlp-candidate_cold-smoke-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "mlp-candidate_cold-smoke-20261028-203750:reload_consistency",
+      "detail": "无 predictions_test.npz，跳过与训练期预测比对",
+      "ok": true
+    },
+    {
+      "check": "mlp-candidate_cold-smoke-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(-0.060643,-0.150890) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "smoke-mlp-001:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "smoke-mlp-001:reload_consistency",
+      "detail": "无 predictions_test.npz，跳过与训练期预测比对",
+      "ok": true
+    },
+    {
+      "check": "smoke-mlp-001:cpu_inference_and_ranking",
+      "detail": "scores=(-0.060643,-0.150890) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "mlp-double_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "mlp-double_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=11）",
+      "ok": true
+    },
+    {
+      "check": "mlp-double_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.649990,0.507180) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "mlp-job_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "mlp-job_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 5.96e-08（n=46）",
+      "ok": true
+    },
+    {
+      "check": "mlp-job_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.680614,0.494469) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-category-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-category-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 1.64e-07（n=38）",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-category-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(2.942909,-3.525416) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-position-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-position-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 1.19e-07（n=38）",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-position-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(3.205689,-2.490183) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-skill-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-skill-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 1.19e-07（n=38）",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-ablation-skill-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(2.610851,-1.459206) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 1.91e-06（n=38）",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(-2.160913,-11.064252) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-smoke-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-smoke-20261028-203750:reload_consistency",
+      "detail": "无 predictions_test.npz，跳过与训练期预测比对",
+      "ok": true
+    },
+    {
+      "check": "ranknet-candidate_cold-smoke-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(-0.087086,-0.301665) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "smoke-ranknet-002:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "smoke-ranknet-002:reload_consistency",
+      "detail": "无 predictions_test.npz，跳过与训练期预测比对",
+      "ok": true
+    },
+    {
+      "check": "smoke-ranknet-002:cpu_inference_and_ranking",
+      "detail": "scores=(-0.087086,-0.301665) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ranknet-double_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ranknet-double_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 9.54e-07（n=11）",
+      "ok": true
+    },
+    {
+      "check": "ranknet-double_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(2.715097,-6.562021) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ranknet-job_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ranknet-job_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 9.54e-07（n=46）",
+      "ok": true
+    },
+    {
+      "check": "ranknet-job_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(3.917234,-5.115232) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-category-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-category-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=38）",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-category-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.691426,0.572204) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-position-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-position-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=38）",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-position-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.620931,0.552065) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-skill-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-skill-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=38）",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-ablation-skill-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.621165,0.564320) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=38）",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.755919,0.526914) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-smoke-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-smoke-20261028-203750:reload_consistency",
+      "detail": "无 predictions_test.npz，跳过与训练期预测比对",
+      "ok": true
+    },
+    {
+      "check": "ridge-candidate_cold-smoke-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.780718,0.532934) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "smoke-ridge-001:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "smoke-ridge-001:reload_consistency",
+      "detail": "无 predictions_test.npz，跳过与训练期预测比对",
+      "ok": true
+    },
+    {
+      "check": "smoke-ridge-001:cpu_inference_and_ranking",
+      "detail": "scores=(0.780718,0.532934) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ridge-double_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ridge-double_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=11）",
+      "ok": true
+    },
+    {
+      "check": "ridge-double_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.766979,0.527966) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    },
+    {
+      "check": "ridge-job_cold-final-20261028-203750:feature_columns_policy",
+      "detail": "raw_columns=['skill_jaccard', 'skill_overlap_ratio_cv', 'skill_overlap_ratio_job', 'both_skills_empty', 'position_token_overlap', 'target_position_norm', 'category_match', 'inferred_category', 'job_category', 'years_experience']；命中禁止字段 []",
+      "ok": true
+    },
+    {
+      "check": "ridge-job_cold-final-20261028-203750:reload_consistency",
+      "detail": "重载预测与训练期预测最大绝对差 0.00e+00（n=46）",
+      "ok": true
+    },
+    {
+      "check": "ridge-job_cold-final-20261028-203750:cpu_inference_and_ranking",
+      "detail": "scores=(0.754644,0.527357) stable=True order_ok=True order_invariant=True",
+      "ok": true
+    }
+  ],
+  "created_at": "2026-10-28T20:59:32",
+  "generated_by": "scripts/model_training/verify_models.py",
+  "ok": true
+}

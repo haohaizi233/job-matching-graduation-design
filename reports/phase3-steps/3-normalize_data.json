@@ -1,0 +1,252 @@
+{
+  "dataset_version": "dv-0ce28fa6b560",
+  "education": {
+    "bytes": 67164973,
+    "gold_identity_check": {
+      "annotated_gold_rows": 736,
+      "same_user_hash_sets": true,
+      "test_gold_rows": 736
+    },
+    "label_status_counts": {
+      "ok": 243902,
+      "oov_token": 1
+    },
+    "label_token_counts": {
+      "博士": 134519,
+      "大专": 68173,
+      "学历不明": 3241,
+      "学历不限": 945,
+      "本科": 175839,
+      "硕士": 150412
+    },
+    "merged_rows": 243903,
+    "output": "data/interim/education/education_normalized.csv",
+    "sha256": "33cbf598913facdd0cfdc7c7efa8b494e96c31ae84c0dcd216171a96e4c86ff0",
+    "source_rows": {
+      "annotated_gold": 736,
+      "annotated_total": 22730,
+      "default_test_total": 22730,
+      "default_test_with_gold_label": 736,
+      "default_train": 197574,
+      "default_validation": 45593
+    }
+  },
+  "generated_by": "step_normalize_data",
+  "job": {
+    "bytes": 14315785,
+    "category_counts": {
+      "BUSINESS-DEVELOPMENT": 239,
+      "FINANCE": 236,
+      "HR": 220,
+      "INFORMATION-TECHNOLOGY": 240,
+      "SALES": 232
+    },
+    "columns_after": [
+      "job_id",
+      "job_title_norm",
+      "category",
+      "job_description_norm",
+      "job_description_hash",
+      "job_text_norm",
+      "job_text_len",
+      "job_text_truncated_at_3500",
+      "skills_canonical_json",
+      "skills_raw_json",
+      "skills_unmapped_json",
+      "skills_mapping_json",
+      "skills_count",
+      "skills_needs_review",
+      "education_text_norm",
+      "education_text_dup_of_job_description",
+      "years_required",
+      "years_required_flag",
+      "years_required_enabled",
+      "row_status"
+    ],
+    "columns_before": [
+      "job_id",
+      "job_title",
+      "category",
+      "job_description",
+      "job_text",
+      "clean_skills",
+      "clean_skills_json",
+      "education_text",
+      "years_required"
+    ],
+    "education_text_duplication": {
+      "action": "保留原字段 + 打 duplicate 标记 + 禁用为模型输入（不删除）",
+      "ratio": 1.0,
+      "rows_equal_to_job_description": 1167,
+      "rows_total": 1167,
+      "verdict": "整列复制（1167/1167 逐行相同）"
+    },
+    "output": "data/interim/matching/job_normalized.csv",
+    "primary_key_unique": true,
+    "row_status_counts": {
+      "skills_needs_review": 1167
+    },
+    "rows_after": 1167,
+    "rows_before": 1167,
+    "sha256": "4f4862ef4e05940258b2f7ef2e1a269f8648bc680138bc4ed10e965349a782bb",
+    "skills": {
+      "rows_needs_review": 1167,
+      "rows_with_zero_skills": 0,
+      "unique_canonical_skills": 4949,
+      "unique_raw_skills": 4950
+    },
+    "source": "D:/desktop/毕业设计/data/raw/job-resume-matching/job.csv",
+    "text_changed_by_normalization": {
+      "education_text": 1129,
+      "job_description": 1129,
+      "job_text": 121,
+      "job_title": 3
+    },
+    "years_required": {
+      "action": "保留原值 + 标记异常 + 暂时禁用为模型输入（uncertain_features）",
+      "flag_counts": {
+        "extreme_high": 140,
+        "fractional": 15,
+        "integer_ok": 867,
+        "zero": 145
+      },
+      "max": 40.0,
+      "mean": 14.301,
+      "min": 0.0,
+      "non_integer_count": 15,
+      "verdict": "语义不明（0~40、含小数），不得直接当作真实工作年限"
+    }
+  },
+  "pipeline_version": "phase3-v1",
+  "resume": {
+    "bytes": 49186634,
+    "columns_after": [
+      "candidate_id",
+      "source_row",
+      "target_position_norm",
+      "resume_text_norm",
+      "resume_text_len",
+      "resume_text_hash",
+      "skills_canonical_json",
+      "skills_raw_json",
+      "skills_unmapped_json",
+      "skills_mapping_json",
+      "skills_count",
+      "skills_needs_review",
+      "education_text_norm",
+      "education_text_hash",
+      "experience_text_norm",
+      "years_experience",
+      "years_experience_flag",
+      "inferred_category",
+      "row_status"
+    ],
+    "columns_before": [
+      "candidate_id",
+      "source_row",
+      "target_position",
+      "resume_text",
+      "clean_skills",
+      "clean_skills_json",
+      "education_text",
+      "experience_text",
+      "years_experience",
+      "inferred_category"
+    ],
+    "inferred_category_counts": {
+      "BUSINESS-DEVELOPMENT": 83,
+      "FINANCE": 1010,
+      "HR": 80,
+      "INFORMATION-TECHNOLOGY": 8140,
+      "SALES": 215,
+      "UNKNOWN": 16
+    },
+    "output": "data/interim/matching/resume_normalized.csv",
+    "primary_key_unique": true,
+    "row_status_counts": {
+      "empty_skills": 20,
+      "skills_needs_review": 9524
+    },
+    "rows_after": 9544,
+    "rows_before": 9544,
+    "sha256": "bdd16f3295c6f6f8538ad3d15ad4777bf17cbae0308522083f3d8d035532a84c",
+    "skills": {
+      "rows_needs_review": 9524,
+      "rows_with_zero_skills": 20,
+      "unique_canonical_skills": 3807,
+      "unique_raw_skills": 3814
+    },
+    "source": "D:/desktop/毕业设计/data/raw/job-resume-matching/cv.csv",
+    "text_changed_by_normalization": {
+      "education_text": 450,
+      "experience_text": 9544,
+      "resume_text": 30,
+      "target_position": 0
+    },
+    "years_experience_flag_counts": {
+      "extreme_high": 28,
+      "integer_ok": 8490,
+      "zero": 1026
+    }
+  },
+  "risk": {
+    "bytes": 54693661,
+    "columns_after": [
+      "row_key",
+      "duplicate_group_id",
+      "is_duplicate",
+      "job_name_norm",
+      "company_name_norm",
+      "job_salary",
+      "salary_flag",
+      "work_experience_norm",
+      "educational_requirements_norm",
+      "company_address_norm",
+      "job_type",
+      "scam_probability",
+      "scam_probability_flag",
+      "scam_probability_is_decile"
+    ],
+    "columns_before": [
+      "job_name",
+      "company_name",
+      "job_salary",
+      "work_experience",
+      "educational_requirements",
+      "company_address",
+      "job_type",
+      "scam_probability"
+    ],
+    "duplicate_policy": "整行重复只标记不删除（is_duplicate + duplicate_group_id），原始观测不丢失",
+    "duplicate_ratio": 0.101173,
+    "output": "data/interim/risk/risk_normalized.csv",
+    "rows_after": 251381,
+    "rows_before": 251381,
+    "rows_marked_duplicate": 25433,
+    "rows_removed": 0,
+    "salary_flag_counts": {
+      "extreme_high": 2501,
+      "ok": 248880
+    },
+    "salary_max": 4597500.0,
+    "scam_probability": {
+      "action": "仅登记为上游风险分数，本阶段不作为监督标签使用",
+      "all_multiples_of_10": true,
+      "unique_values": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80
+      ],
+      "verdict": "非人工真值；实测仅 9 个 10 的倍数取值，无任何人工复核列"
+    },
+    "sha256": "780ec8172630ce573c9301574c14b1344e1a653fc7560ac137eb0f723c8a1823",
+    "source": "D:/desktop/毕业设计/data/raw/other/all_df.csv/all_df.csv",
+    "task_decision": "本阶段仅规范化与元数据登记，不纳入核心监督训练任务"
+  }
+}

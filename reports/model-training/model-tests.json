@@ -1,0 +1,208 @@
+{
+  "generated_by": "tests/model_training/run_all.py",
+  "created_at": "2026-10-28T20:59:48",
+  "seconds": 7.13,
+  "ok": true,
+  "totals": {
+    "tests": 25,
+    "pass": 25,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "T1": {
+      "title": "特征黑名单 / 无标签依赖",
+      "total": 5,
+      "pass": 5,
+      "fail": 0,
+      "skip": 0
+    },
+    "T2": {
+      "title": "切分不变 / 协议合规 / 不碰 test",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "T3": {
+      "title": "模型训练 / GPU 反传 / 重载 / 可复现",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "T4": {
+      "title": "RankNet 偏好对方向与同分处理",
+      "total": 5,
+      "pass": 5,
+      "fail": 0,
+      "skip": 0
+    },
+    "T5": {
+      "title": "独立推理与稳定排序",
+      "total": 5,
+      "pass": 5,
+      "fail": 0,
+      "skip": 0
+    },
+    "T6": {
+      "title": "原始数据哈希 / 日志隐私",
+      "total": 2,
+      "pass": 2,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "records": [
+    {
+      "group": "T1",
+      "test": "test_config_whitelist_excludes_forbidden (test_t1_feature_policy.T1FeaturePolicy.test_config_whitelist_excludes_forbidden)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "test": "test_feature_map_fit_rejects_forbidden (test_t1_feature_policy.T1FeaturePolicy.test_feature_map_fit_rejects_forbidden)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "test": "test_inference_features_have_no_label_fields (test_t1_feature_policy.T1FeaturePolicy.test_inference_features_have_no_label_fields)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "test": "test_model_matrix_values_are_finite (test_t1_feature_policy.T1FeaturePolicy.test_model_matrix_values_are_finite)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "test": "test_trained_model_inputs_exclude_forbidden (test_t1_feature_policy.T1FeaturePolicy.test_trained_model_inputs_exclude_forbidden)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "test": "test_protocol_overlap_rules (test_t2_split_protocol.T2SplitProtocol.test_protocol_overlap_rules)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "test": "test_run_records_mark_test_unused (test_t2_split_protocol.T2SplitProtocol.test_run_records_mark_test_unused)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "test": "test_split_files_unchanged_since_phase3 (test_t2_split_protocol.T2SplitProtocol.test_split_files_unchanged_since_phase3)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "test": "test_training_pipeline_never_reads_test (test_t2_split_protocol.T2SplitProtocol.test_training_pipeline_never_reads_test)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "test": "test_mlp_forward_backward_updates (test_t3_models.T3Models.test_mlp_forward_backward_updates)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "test": "test_regression_models_train_and_predict (test_t3_models.T3Models.test_regression_models_train_and_predict)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "test": "test_reproducibility_fixed_seed (test_t3_models.T3Models.test_reproducibility_fixed_seed)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "test": "test_save_reload_consistency (test_t3_models.T3Models.test_save_reload_consistency)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_caps_and_empty_group (test_t4_ranknet_pairs.T4RankNetPairs.test_caps_and_empty_group)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_pairwise_loss_pushes_correct_direction (test_t4_ranknet_pairs.T4RankNetPairs.test_pairwise_loss_pushes_correct_direction)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_preference_direction_and_grouping (test_t4_ranknet_pairs.T4RankNetPairs.test_preference_direction_and_grouping)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_ties_and_near_ties_dropped (test_t4_ranknet_pairs.T4RankNetPairs.test_ties_and_near_ties_dropped)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_train_pairwise_end_to_end (test_t4_ranknet_pairs.T4RankNetPairs.test_train_pairwise_end_to_end)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "test": "test_info_declares_no_label_dependency (test_t5_inference.T5Inference.test_info_declares_no_label_dependency)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "test": "test_input_validation (test_t5_inference.T5Inference.test_input_validation)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "test": "test_prediction_without_labels (test_t5_inference.T5Inference.test_prediction_without_labels)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "test": "test_rank_jobs_stable_and_repeatable (test_t5_inference.T5Inference.test_rank_jobs_stable_and_repeatable)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "test": "test_single_pair_prediction (test_t5_inference.T5Inference.test_single_pair_prediction)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "test": "test_raw_data_hashes_unchanged (test_t6_integrity_privacy.T6IntegrityPrivacy.test_raw_data_hashes_unchanged)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "test": "test_training_logs_have_no_sensitive_info (test_t6_integrity_privacy.T6IntegrityPrivacy.test_training_logs_have_no_sensitive_info)",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

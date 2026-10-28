@@ -1,0 +1,734 @@
+{
+  "education": {
+    "created_at": "2026-10-28T20:11:35",
+    "duplicate_analysis": {
+      "cross_source_input_overlap": {
+        "annotated_gold&default_train": 0,
+        "annotated_gold&default_validation": 702,
+        "default_train&default_validation": 2
+      },
+      "input_groups_with_label_conflict": 374,
+      "job_id_duplicated_rows": 779,
+      "record_key_duplicated_rows": 0,
+      "rows": 243903,
+      "rows_in_label_conflict_groups": 812,
+      "unique_job_id": 243124,
+      "unique_user_hash": 226831,
+      "user_hash_duplicated_rows": 17072
+    },
+    "excluded": {
+      "by_reason": {
+        "excluded_gold_input_overlap": 762,
+        "excluded_input_duplicate": 16276
+      },
+      "rows": 17038
+    },
+    "files": [
+      {
+        "path": "data/splits/education/train.csv",
+        "rows": 180903,
+        "sha256": "c594ab7f5f77a0be3f798744a1d8bbe8fcd19006e2dfd9ff3f87a8ac2ea324a9",
+        "split": "train"
+      },
+      {
+        "path": "data/splits/education/validation.csv",
+        "rows": 45226,
+        "sha256": "28ea9ae4306532a1888ee54979203acf63fe14d30ef023edd784589518ad3c2c",
+        "split": "validation"
+      },
+      {
+        "path": "data/splits/education/gold_holdout.csv",
+        "rows": 736,
+        "sha256": "a2b5ea6552ed5a60faebc335a35cea95cd0289791563c849192c725a6f0155ac",
+        "split": "gold_holdout"
+      },
+      {
+        "path": "data/splits/education/excluded.csv",
+        "rows": 17038,
+        "sha256": "f6528050f05ae86bd18b1d9e0c1e4ecaa2a4a9c1232141fddac7ef7837e0ef88",
+        "split": "excluded"
+      }
+    ],
+    "generated_by": "src/job_matching/education_data.py",
+    "gold_isolation": {
+      "dev_input_hashes_touching_gold_after_removal": 0,
+      "dev_rows_removed_due_to_gold_input_overlap": 762,
+      "gold_eval_policy": "只做一次性最终评估；规则定义与阈值在开发集上确定后锁定，不对金标准反复调参",
+      "gold_input_hashes": 702,
+      "gold_label_provenance": "human_gold（人工正确结果，736 条）",
+      "gold_rows": 736,
+      "gold_used_for_rule_fitting": false
+    },
+    "group_key": "user_hash（规范化输入文本）",
+    "group_key_reason": "job_id 不是行级唯一键（实测重复 779 行），输入文本也有重复（重复 17072 行，占 7.0%）；按 user_hash 分组可同时保证输入文本与记录键在集合间互斥",
+    "label_provenance_policy": {
+      "human_gold": "annotated 的 人工正确结果，736 条，可信度标记 high",
+      "model_new": "annotated 的 模型结果-新的，实测含长文本噪声（22 个 '唯一值' 中含 JD 片段），不可用作标签",
+      "pseudo_online": "default/* 的 assistant，来源为线上旧系统输出，人工复核一致率 45.92%（338/736），可信度标记 low"
+    },
+    "overlap_check": {
+      "job_id_overlap": {
+        "train&gold_holdout": 0,
+        "train&validation": 1,
+        "validation&gold_holdout": 0
+      },
+      "record_key_overlap": {
+        "train&gold_holdout": 0,
+        "train&validation": 0,
+        "validation&gold_holdout": 0
+      },
+      "user_hash_overlap": {
+        "train&gold_holdout": 0,
+        "train&validation": 0,
+        "validation&gold_holdout": 0
+      }
+    },
+    "pipeline_version": "phase3-v1",
+    "ratios": {
+      "train": 0.8,
+      "validation": 0.2
+    },
+    "seed": 20261031,
+    "splits": {
+      "gold_holdout": {
+        "label_distribution": {
+          "[\"博士\", \"硕士\", \"本科\", \"大专\"]": 56,
+          "[\"博士\", \"硕士\", \"本科\"]": 114,
+          "[\"博士\", \"硕士\"]": 238,
+          "[\"博士\"]": 37,
+          "[\"大专\"]": 85,
+          "[\"学历不明\"]": 2,
+          "[\"学历不限\"]": 1,
+          "[\"本科\", \"大专\"]": 21,
+          "[\"本科\"]": 113,
+          "[\"硕士\", \"本科\"]": 33,
+          "[\"硕士\"]": 36
+        },
+        "label_provenance": {
+          "human_gold": 736
+        },
+        "label_status_counts": {
+          "ok": 735,
+          "oov_token": 1
+        },
+        "rows": 736,
+        "slot_present_ratio": 1.0,
+        "unique_job_id": 736,
+        "unique_user_hash": 702
+      },
+      "train": {
+        "label_distribution": {
+          "[\"博士\", \"本科\"]": 40,
+          "[\"博士\", \"硕士\", \"本科\", \"大专\"]": 25824,
+          "[\"博士\", \"硕士\", \"本科\"]": 58271,
+          "[\"博士\", \"硕士\"]": 11189,
+          "[\"博士\"]": 3282,
+          "[\"大专\"]": 23245,
+          "[\"学历不明\"]": 2442,
+          "[\"学历不限\"]": 708,
+          "[\"本科\", \"大专\"]": 1099,
+          "[\"本科\"]": 39401,
+          "[\"硕士\", \"本科\", \"大专\"]": 104,
+          "[\"硕士\", \"本科\"]": 5779,
+          "[\"硕士\"]": 9519
+        },
+        "label_provenance": {
+          "pseudo_online": 180903
+        },
+        "label_status_counts": {
+          "ok": 180903
+        },
+        "rows": 180903,
+        "slot_present_ratio": 0.999972,
+        "unique_job_id": 180866,
+        "unique_user_hash": 180903
+      },
+      "validation": {
+        "label_distribution": {
+          "[\"博士\", \"本科\"]": 14,
+          "[\"博士\", \"硕士\", \"本科\", \"大专\"]": 6239,
+          "[\"博士\", \"硕士\", \"本科\"]": 14617,
+          "[\"博士\", \"硕士\"]": 2843,
+          "[\"博士\"]": 773,
+          "[\"大专\"]": 5867,
+          "[\"学历不明\"]": 623,
+          "[\"学历不限\"]": 194,
+          "[\"本科\", \"大专\"]": 309,
+          "[\"本科\"]": 9815,
+          "[\"硕士\", \"大专\"]": 1,
+          "[\"硕士\", \"本科\", \"大专\"]": 33,
+          "[\"硕士\", \"本科\"]": 1485,
+          "[\"硕士\"]": 2413
+        },
+        "label_provenance": {
+          "pseudo_online": 45226
+        },
+        "label_status_counts": {
+          "ok": 45226
+        },
+        "rows": 45226,
+        "slot_present_ratio": 1.0,
+        "unique_job_id": 45222,
+        "unique_user_hash": 45226
+      }
+    },
+    "test_set_decision": {
+      "built": false,
+      "reason": "原 default/test 100% 被 default/validation 包含（job_id 22,730/22,730 重合），且其可用标签就是 736 条人工金标准；无法据此构建独立可信测试集。最终独立评估改用 gold_holdout。"
+    }
+  },
+  "matching": {
+    "candidate_cold": {
+      "coverage": {
+        "assigned_pairs": 122560,
+        "coverage_ratio": 1.0,
+        "raw_pairs": 122560
+      },
+      "created_at": "2026-10-28T20:11:30",
+      "excluded": {
+        "pairs": 0
+      },
+      "files": [
+        {
+          "path": "data/splits/matching/candidate_cold/train.csv",
+          "rows": 98029,
+          "sha256": "08bb0785901fdd03379e17946b1e4b502eb399517302efea8fcea50ffa6ab56d",
+          "split": "train"
+        },
+        {
+          "path": "data/splits/matching/candidate_cold/validation.csv",
+          "rows": 12270,
+          "sha256": "149c7474d06121da58ef8c78653a15232ef455d0f1c1aa07e6780bc48d1ef96c",
+          "split": "validation"
+        },
+        {
+          "path": "data/splits/matching/candidate_cold/test.csv",
+          "rows": 12261,
+          "sha256": "d5bbf1c50863ddc9f404a3452162142324df8f1bfbff2495813631a9c1149a1f",
+          "split": "test"
+        },
+        {
+          "path": "data/splits/matching/candidate_cold/excluded.csv",
+          "rows": 0,
+          "sha256": "467fe8656b207a4a951bd8e815fbd4a564c31e40d2bcf1123f847b745137911f",
+          "split": "excluded"
+        },
+        {
+          "path": "data/splits/matching/candidate_cold/manifest.json",
+          "sha256": "42557c1b37044d71e293bf446112163ceed7c7dbcf1f538d1c64fa0e9d9fc108",
+          "split": "manifest"
+        }
+      ],
+      "generated_by": "src/job_matching/split_matching.py",
+      "group_key": "candidate_id",
+      "overlap_check": {
+        "candidate_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        },
+        "group_key_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        },
+        "job_overlap": {
+          "train&test": 944,
+          "train&validation": 896,
+          "validation&test": 773
+        },
+        "pair_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        }
+      },
+      "pipeline_version": "phase3-v1",
+      "protocol": "candidate_cold",
+      "ratios": {
+        "test": 0.1,
+        "train": 0.8,
+        "validation": 0.1
+      },
+      "seed": 20261028,
+      "splits": {
+        "test": {
+          "candidates": 974,
+          "groups_size_eq_1": 1,
+          "groups_size_ge_2": 973,
+          "groups_size_ge_min": 973,
+          "groups_total": 974,
+          "jobs": 944,
+          "label_distribution": {
+            "medium_positive": 7133,
+            "strong_positive": 70,
+            "weak_positive": 5058
+          },
+          "pairs": 12261,
+          "size_max": 83,
+          "size_median": 11.0,
+          "size_min": 1
+        },
+        "train": {
+          "candidates": 7617,
+          "groups_size_eq_1": 52,
+          "groups_size_ge_2": 7565,
+          "groups_size_ge_min": 7565,
+          "groups_total": 7617,
+          "jobs": 1163,
+          "label_distribution": {
+            "medium_positive": 56322,
+            "strong_positive": 634,
+            "weak_positive": 41073
+          },
+          "pairs": 98029,
+          "size_max": 122,
+          "size_median": 11.0,
+          "size_min": 1
+        },
+        "validation": {
+          "candidates": 941,
+          "groups_size_eq_1": 7,
+          "groups_size_ge_2": 934,
+          "groups_size_ge_min": 934,
+          "groups_total": 941,
+          "jobs": 897,
+          "label_distribution": {
+            "medium_positive": 7181,
+            "strong_positive": 70,
+            "weak_positive": 5019
+          },
+          "pairs": 12270,
+          "size_max": 62,
+          "size_median": 11.0,
+          "size_min": 1
+        }
+      }
+    },
+    "double_cold": {
+      "assignment_strategy": "eval_first_greedy",
+      "assignment_strategy_note": "阶段 1：candidate_id 按观测边数贪心分配 80/10/10（组完整、边不拆）；阶段 2：job_id 归属由 assignment_strategy 指定。两侧归属不一致的交叉边一律进 excluded，不归入任何集合。eval_first_greedy 是本阶段提出的改进策略：先用 gain/cost 贪心为验证/测试候选人补齐可排序性（每个次要集合带独立的 train 损失预算），再把其余 job 归给边数最多的集合；而 majority_edge 虽保留率最高但验证/测试集为空（见 strategy_comparison）。",
+      "coverage": {
+        "assigned_pairs": 73526,
+        "drop_ratio": 0.400082,
+        "excluded_pairs": 49034,
+        "raw_pairs": 122560,
+        "retention_ratio": 0.599918
+      },
+      "created_at": "2026-10-28T20:11:32",
+      "excluded": {
+        "candidates": 9409,
+        "jobs": 1088,
+        "label_distribution": {
+          "medium_positive": 25947,
+          "strong_positive": 218,
+          "weak_positive": 22869
+        },
+        "pairs": 49034
+      },
+      "files": [
+        {
+          "path": "data/splits/matching/double_cold/train.csv",
+          "rows": 68932,
+          "sha256": "2178e216536d3bc1d87b3d32c536a9c495a7fab0cc61677a234d68bc6d81492a",
+          "split": "train"
+        },
+        {
+          "path": "data/splits/matching/double_cold/validation.csv",
+          "rows": 2369,
+          "sha256": "93f41d8df93c7a82f9fe167233de49d750dc92e498a5dd5d5be7eb188c72f4c6",
+          "split": "validation"
+        },
+        {
+          "path": "data/splits/matching/double_cold/test.csv",
+          "rows": 2225,
+          "sha256": "6e6e9271d918d32d4d268a71e02f2dc30b31aa73bf9d5e4e466c6f3bf6cb4b02",
+          "split": "test"
+        },
+        {
+          "path": "data/splits/matching/double_cold/excluded.csv",
+          "rows": 49034,
+          "sha256": "96d4d1ee282ea9cbaa7bb56f9d2494c7dac9a5aaec8b680110c01a83c3ec19a7",
+          "split": "excluded"
+        },
+        {
+          "path": "data/splits/matching/double_cold/manifest.json",
+          "sha256": "18efcf6fb1934a3a8b99418f1d9050b5e3dea88320076a3ddd603e176d368012",
+          "split": "manifest"
+        }
+      ],
+      "generated_by": "src/job_matching/split_matching.py",
+      "group_key": [
+        "candidate_id",
+        "job_id"
+      ],
+      "naive_independent_expected_retention": 0.66,
+      "naive_independent_note": "两侧独立按 80/10/10 随机分配时期望保留率约 66%（= 0.8² + 0.1² + 0.1²），且验证/测试各只占约 1% 的边。三种策略的实测对比见 strategy_comparison。",
+      "overlap_check": {
+        "candidate_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        },
+        "excluded_kept_in_any_split": 0,
+        "job_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        },
+        "pair_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        }
+      },
+      "pipeline_version": "phase3-v1",
+      "protocol": "double_cold",
+      "ratios": {
+        "test": 0.1,
+        "train": 0.8,
+        "validation": 0.1
+      },
+      "seed": 20261030,
+      "splits": {
+        "test": {
+          "candidates": 920,
+          "groups_size_eq_1": 203,
+          "groups_size_ge_2": 717,
+          "groups_size_ge_min": 717,
+          "groups_total": 920,
+          "job_rankable_groups": {
+            "groups_size_eq_1": 19,
+            "groups_size_ge_2": 146,
+            "groups_size_ge_min": 146,
+            "groups_total": 165,
+            "size_max": 64,
+            "size_median": 4.0,
+            "size_min": 1
+          },
+          "jobs": 165,
+          "label_distribution": {
+            "medium_positive": 1070,
+            "strong_positive": 2,
+            "weak_positive": 1153
+          },
+          "pairs": 2225,
+          "size_max": 12,
+          "size_median": 2.0,
+          "size_min": 1
+        },
+        "train": {
+          "candidates": 7217,
+          "groups_size_eq_1": 573,
+          "groups_size_ge_2": 6644,
+          "groups_size_ge_min": 6644,
+          "groups_total": 7217,
+          "job_rankable_groups": {
+            "groups_size_eq_1": 2,
+            "groups_size_ge_2": 810,
+            "groups_size_ge_min": 810,
+            "groups_total": 812,
+            "size_max": 420,
+            "size_median": 16.5,
+            "size_min": 1
+          },
+          "jobs": 812,
+          "label_distribution": {
+            "medium_positive": 42619,
+            "strong_positive": 553,
+            "weak_positive": 25760
+          },
+          "pairs": 68932,
+          "size_max": 92,
+          "size_median": 8.0,
+          "size_min": 1
+        },
+        "validation": {
+          "candidates": 908,
+          "groups_size_eq_1": 169,
+          "groups_size_ge_2": 739,
+          "groups_size_ge_min": 739,
+          "groups_total": 908,
+          "job_rankable_groups": {
+            "groups_size_eq_1": 32,
+            "groups_size_ge_2": 155,
+            "groups_size_ge_min": 155,
+            "groups_total": 187,
+            "size_max": 67,
+            "size_median": 3.0,
+            "size_min": 1
+          },
+          "jobs": 187,
+          "label_distribution": {
+            "medium_positive": 1000,
+            "strong_positive": 1,
+            "weak_positive": 1368
+          },
+          "pairs": 2369,
+          "size_max": 10,
+          "size_median": 2.0,
+          "size_min": 1
+        }
+      },
+      "strategy_budget_ratio_per_minor_split": 0.1,
+      "strategy_comparison": {
+        "eval_first_greedy": {
+          "greedy_budget": {
+            "test": {
+              "budget_edges": 12256.0,
+              "candidates_reaching_min_group": 717,
+              "candidates_reaching_soft_target": 40,
+              "candidates_total": 958,
+              "jobs_moved_from_train": 163,
+              "jobs_owned_in_split": 165,
+              "kept_edges_to_split": 2225,
+              "soft_target": 5,
+              "train_edges_spent": 12254.0
+            },
+            "validation": {
+              "budget_edges": 12256.0,
+              "candidates_reaching_min_group": 739,
+              "candidates_reaching_soft_target": 66,
+              "candidates_total": 943,
+              "jobs_moved_from_train": 187,
+              "jobs_owned_in_split": 187,
+              "kept_edges_to_split": 2369,
+              "soft_target": 5,
+              "train_edges_spent": 12255.0
+            }
+          },
+          "kept_pairs": 73526,
+          "retention_ratio": 0.599918,
+          "splits": {
+            "test": {
+              "candidates": 920,
+              "jobs": 165,
+              "pairs": 2225,
+              "rankable_groups_ge_10": 1,
+              "rankable_groups_ge_2": 717,
+              "rankable_groups_ge_5": 40,
+              "rankable_groups_ge_min": 717
+            },
+            "train": {
+              "candidates": 7217,
+              "jobs": 812,
+              "pairs": 68932,
+              "rankable_groups_ge_10": 2927,
+              "rankable_groups_ge_2": 6644,
+              "rankable_groups_ge_5": 4923,
+              "rankable_groups_ge_min": 6644
+            },
+            "validation": {
+              "candidates": 908,
+              "jobs": 187,
+              "pairs": 2369,
+              "rankable_groups_ge_10": 1,
+              "rankable_groups_ge_2": 739,
+              "rankable_groups_ge_5": 66,
+              "rankable_groups_ge_min": 739
+            }
+          }
+        },
+        "majority_edge": {
+          "kept_pairs": 98031,
+          "retention_ratio": 0.799861,
+          "splits": {
+            "test": {
+              "candidates": 3,
+              "jobs": 2,
+              "pairs": 3,
+              "rankable_groups_ge_10": 0,
+              "rankable_groups_ge_2": 0,
+              "rankable_groups_ge_5": 0,
+              "rankable_groups_ge_min": 0
+            },
+            "train": {
+              "candidates": 7631,
+              "jobs": 1161,
+              "pairs": 98025,
+              "rankable_groups_ge_10": 4495,
+              "rankable_groups_ge_2": 7583,
+              "rankable_groups_ge_5": 6671,
+              "rankable_groups_ge_min": 7583
+            },
+            "validation": {
+              "candidates": 3,
+              "jobs": 1,
+              "pairs": 3,
+              "rankable_groups_ge_10": 0,
+              "rankable_groups_ge_2": 0,
+              "rankable_groups_ge_5": 0,
+              "rankable_groups_ge_min": 0
+            }
+          }
+        },
+        "proportional": {
+          "kept_pairs": 82084,
+          "retention_ratio": 0.669745,
+          "splits": {
+            "test": {
+              "candidates": 544,
+              "jobs": 108,
+              "pairs": 1245,
+              "rankable_groups_ge_10": 2,
+              "rankable_groups_ge_2": 275,
+              "rankable_groups_ge_5": 54,
+              "rankable_groups_ge_min": 275
+            },
+            "train": {
+              "candidates": 7627,
+              "jobs": 941,
+              "pairs": 79462,
+              "rankable_groups_ge_10": 3653,
+              "rankable_groups_ge_2": 7522,
+              "rankable_groups_ge_5": 6371,
+              "rankable_groups_ge_min": 7522
+            },
+            "validation": {
+              "candidates": 675,
+              "jobs": 115,
+              "pairs": 1377,
+              "rankable_groups_ge_10": 1,
+              "rankable_groups_ge_2": 359,
+              "rankable_groups_ge_5": 39,
+              "rankable_groups_ge_min": 359
+            }
+          }
+        }
+      },
+      "strategy_params": {
+        "budget_ratio_per_minor_split": 0.1,
+        "eval_soft_target": 5,
+        "gain_deficit_power": 2,
+        "min_group_size_for_ranking": 2
+      }
+    },
+    "job_cold": {
+      "coverage": {
+        "assigned_pairs": 122560,
+        "coverage_ratio": 1.0,
+        "raw_pairs": 122560
+      },
+      "created_at": "2026-10-28T20:11:31",
+      "excluded": {
+        "pairs": 0
+      },
+      "files": [
+        {
+          "path": "data/splits/matching/job_cold/train.csv",
+          "rows": 97887,
+          "sha256": "4e98bc148ef4a7c81b4caf15497c3ccfc7baf296e689fb1fb8d1ebd0d1a127cb",
+          "split": "train"
+        },
+        {
+          "path": "data/splits/matching/job_cold/validation.csv",
+          "rows": 12251,
+          "sha256": "4076964e3af4ae49bfbdaa8d3d54755af67b0da43926325ac4d97c51ee9b9bf9",
+          "split": "validation"
+        },
+        {
+          "path": "data/splits/matching/job_cold/test.csv",
+          "rows": 12422,
+          "sha256": "17f12ac0e38f7b710c7896df6694d9555616ed5259dfb5fccc2ce7f91a80d11b",
+          "split": "test"
+        },
+        {
+          "path": "data/splits/matching/job_cold/excluded.csv",
+          "rows": 0,
+          "sha256": "467fe8656b207a4a951bd8e815fbd4a564c31e40d2bcf1123f847b745137911f",
+          "split": "excluded"
+        },
+        {
+          "path": "data/splits/matching/job_cold/manifest.json",
+          "sha256": "cf14ec736912193f060770438f970177084aa1e4a992e35ba7ad8c2db234370b",
+          "split": "manifest"
+        }
+      ],
+      "generated_by": "src/job_matching/split_matching.py",
+      "group_key": "job_id",
+      "overlap_check": {
+        "candidate_overlap": {
+          "train&test": 6414,
+          "train&validation": 6063,
+          "validation&test": 4676
+        },
+        "group_key_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        },
+        "job_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        },
+        "pair_overlap": {
+          "train&test": 0,
+          "train&validation": 0,
+          "validation&test": 0
+        }
+      },
+      "pipeline_version": "phase3-v1",
+      "protocol": "job_cold",
+      "ratios": {
+        "test": 0.1,
+        "train": 0.8,
+        "validation": 0.1
+      },
+      "seed": 20261029,
+      "splits": {
+        "test": {
+          "candidates": 6423,
+          "groups_size_eq_1": 0,
+          "groups_size_ge_2": 112,
+          "groups_size_ge_min": 112,
+          "groups_total": 112,
+          "jobs": 112,
+          "label_distribution": {
+            "medium_positive": 7288,
+            "strong_positive": 74,
+            "weak_positive": 5060
+          },
+          "pairs": 12422,
+          "size_max": 500,
+          "size_median": 19.5,
+          "size_min": 4
+        },
+        "train": {
+          "candidates": 9519,
+          "groups_size_eq_1": 2,
+          "groups_size_ge_2": 950,
+          "groups_size_ge_min": 950,
+          "groups_total": 952,
+          "jobs": 952,
+          "label_distribution": {
+            "medium_positive": 54791,
+            "strong_positive": 636,
+            "weak_positive": 42460
+          },
+          "pairs": 97887,
+          "size_max": 500,
+          "size_median": 19.5,
+          "size_min": 1
+        },
+        "validation": {
+          "candidates": 6071,
+          "groups_size_eq_1": 0,
+          "groups_size_ge_2": 100,
+          "groups_size_ge_min": 100,
+          "groups_total": 100,
+          "jobs": 100,
+          "label_distribution": {
+            "medium_positive": 8557,
+            "strong_positive": 64,
+            "weak_positive": 3630
+          },
+          "pairs": 12251,
+          "size_max": 500,
+          "size_median": 17.5,
+          "size_min": 2
+        }
+      }
+    }
+  }
+}

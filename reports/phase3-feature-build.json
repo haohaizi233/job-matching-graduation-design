@@ -1,0 +1,129 @@
+{
+  "education_policy_check": {
+    "checked_columns": [
+      "job_title_norm",
+      "slot_education_norm",
+      "slot_present",
+      "user_len"
+    ],
+    "indirect_findings": [],
+    "ok": true,
+    "task": "edu_label_multilabel",
+    "violations": []
+  },
+  "matrix_shape": [
+    122560,
+    6
+  ],
+  "outputs": {
+    "education_inputs": "data/processed/education/education_inputs.csv",
+    "education_labels": "data/processed/education/education_labels.csv",
+    "feature_matrix": "data/processed/matching/feature_matrix_match_label_strength.npz",
+    "features_pairs": "data/processed/matching/features_pairs.csv",
+    "targets_pairs": "data/processed/matching/targets_pairs.csv"
+  },
+  "pair_features": {
+    "all_feature_columns": [
+      "skill_jaccard",
+      "skill_overlap_ratio_cv",
+      "skill_overlap_ratio_job",
+      "position_token_overlap",
+      "category_match",
+      "years_experience",
+      "target_position_norm",
+      "inferred_category",
+      "job_title_norm",
+      "job_category",
+      "cv_skills_canonical_json",
+      "job_skills_canonical_json",
+      "both_skills_empty"
+    ],
+    "both_skills_empty_pairs": 0,
+    "derived_score_columns_used": [],
+    "numeric_feature_columns": [
+      "skill_jaccard",
+      "skill_overlap_ratio_cv",
+      "skill_overlap_ratio_job",
+      "position_token_overlap",
+      "category_match",
+      "years_experience"
+    ],
+    "numeric_summary": {
+      "category_match": {
+        "max": 1.0,
+        "mean": 0.8846605744125327,
+        "min": 0.0,
+        "std": 0.3194324264074586
+      },
+      "position_token_overlap": {
+        "max": 1.0,
+        "mean": 0.09422449280018834,
+        "min": 0.0,
+        "std": 0.15927776295178447
+      },
+      "skill_jaccard": {
+        "max": 0.2916666666666667,
+        "mean": 0.023484603587466076,
+        "min": 0.0,
+        "std": 0.02688571932437704
+      },
+      "skill_overlap_ratio_cv": {
+        "max": 1.0,
+        "mean": 0.035301573136774816,
+        "min": 0.0,
+        "std": 0.04534351040260725
+      },
+      "skill_overlap_ratio_job": {
+        "max": 0.7142857142857143,
+        "mean": 0.08604043849931217,
+        "min": 0.0,
+        "std": 0.10133976323411427
+      },
+      "years_experience": {
+        "max": 31.0,
+        "mean": 6.3740780026109665,
+        "min": 0.0,
+        "std": 4.722599398424293
+      }
+    },
+    "position_token_overlap_zero_pairs": 75338,
+    "rows": 122560
+  },
+  "policy_audit": {
+    "checked_columns": [
+      "skill_jaccard",
+      "skill_overlap_ratio_cv",
+      "skill_overlap_ratio_job",
+      "position_token_overlap",
+      "category_match",
+      "years_experience",
+      "target_position_norm",
+      "inferred_category",
+      "job_title_norm",
+      "job_category",
+      "cv_skills_canonical_json",
+      "job_skills_canonical_json",
+      "both_skills_empty"
+    ],
+    "indirect_findings": [
+      {
+        "abs_spearman": 1.0,
+        "code": "NEAR_DETERMINISTIC_MONOTONIC",
+        "column": "category_match",
+        "reference": "category_score",
+        "reference_level": "component",
+        "severity": "warn"
+      },
+      {
+        "code": "LINEAR_RECONSTRUCTION",
+        "r2": 1.0,
+        "reference": "category_score",
+        "reference_level": "component",
+        "severity": "warn"
+      }
+    ],
+    "ok": true,
+    "task": "match_label_strength",
+    "violations": []
+  }
+}

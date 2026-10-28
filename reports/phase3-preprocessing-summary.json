@@ -1,14 +1,13 @@
 {
   "dataset_version": "dv-0ce28fa6b560",
   "education": {
-    "bytes": 72515752,
+    "bytes": 67164973,
     "gold_identity_check": {
-      "annotated_gold_rows": 22730,
-      "same_user_hash_sets": false,
+      "annotated_gold_rows": 736,
+      "same_user_hash_sets": true,
       "test_gold_rows": 736
     },
     "label_status_counts": {
-      "empty": 21994,
       "ok": 243902,
       "oov_token": 1
     },
@@ -20,11 +19,11 @@
       "本科": 175839,
       "硕士": 150412
     },
-    "merged_rows": 265897,
+    "merged_rows": 243903,
     "output": "data/interim/education/education_normalized.csv",
-    "sha256": "4c92906056bd5071a993d6ddcf11e7a4e4b57ea3317f2d1bc9686cd4c061d810",
+    "sha256": "33cbf598913facdd0cfdc7c7efa8b494e96c31ae84c0dcd216171a96e4c86ff0",
     "source_rows": {
-      "annotated_gold": 22730,
+      "annotated_gold": 736,
       "annotated_total": 22730,
       "default_test_total": 22730,
       "default_test_with_gold_label": 736,
@@ -218,11 +217,13 @@
       "job_type",
       "scam_probability"
     ],
+    "duplicate_policy": "整行重复只标记不删除（is_duplicate + duplicate_group_id），原始观测不丢失",
     "duplicate_ratio": 0.101173,
     "output": "data/interim/risk/risk_normalized.csv",
     "rows_after": 251381,
     "rows_before": 251381,
-    "rows_dropped_as_duplicate": 25433,
+    "rows_marked_duplicate": 25433,
+    "rows_removed": 0,
     "salary_flag_counts": {
       "extreme_high": 2501,
       "ok": 248880

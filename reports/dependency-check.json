@@ -1,0 +1,8 @@
+{
+  "command": "C:\\Users\\MemoryLeak\\miniconda3\\envs\\graduation-design\\python.exe -m pip check",
+  "generated_by": "step_check_dependencies",
+  "ok": true,
+  "returncode": 0,
+  "stderr": "",
+  "stdout": "No broken requirements found."
+}

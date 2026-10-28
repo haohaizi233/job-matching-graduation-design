@@ -1,0 +1,521 @@
+{
+  "console_output": "\n========================================================================\n[PASS] G1 ԭʼ���ݲ���: 3/3 ͨ��\n[PASS] G2 �ֶ�Լ��: 14/14 ͨ��\n[PASS] G3 Ŀ��й©����: 14/14 ͨ��\n[PASS] G4 �зֻ���: 17/17 ͨ��\n[PASS] G5 ����ɸ�����: 10/10 ͨ��\n[PASS] G6 ���ݿɼ���: 9/9 ͨ��\n[PASS] G7 ��ԴԼ��: 7/7 ͨ��\n========================================================================\n�ܼ� 74 �ʧ�� 0������ 0����ʱ 21.35s -> D:\\desktop\\��ҵ���\\reports\\data-quality-gates.json\n",
+  "created_at": "2026-10-28T20:14:42",
+  "elapsed_seconds": 21.35,
+  "errors": 0,
+  "failures": 0,
+  "gates": {
+    "G1": {
+      "failed": 0,
+      "ok": true,
+      "passed": 3,
+      "tests": [
+        {
+          "detail": "",
+          "gate": "G1",
+          "status": "PASS",
+          "test": "test_raw_directory_not_written_by_pipeline (test_g1_raw_unchanged.G1RawUnchanged.test_raw_directory_not_written_by_pipeline)"
+        },
+        {
+          "detail": "",
+          "gate": "G1",
+          "status": "PASS",
+          "test": "test_raw_file_hashes_match_phase2_baseline (test_g1_raw_unchanged.G1RawUnchanged.test_raw_file_hashes_match_phase2_baseline)"
+        },
+        {
+          "detail": "",
+          "gate": "G1",
+          "status": "PASS",
+          "test": "test_raw_source_paths_declared_in_config (test_g1_raw_unchanged.G1RawUnchanged.test_raw_source_paths_declared_in_config)"
+        }
+      ],
+      "title": "原始数据不变",
+      "total": 3
+    },
+    "G2": {
+      "failed": 0,
+      "ok": true,
+      "passed": 14,
+      "tests": [
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_education_multihot_all_rows_valid (test_g2_schema_constraints.G2FieldConstraints.test_education_multihot_all_rows_valid)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_education_multihot_matches_vocabulary (test_g2_schema_constraints.G2FieldConstraints.test_education_multihot_matches_vocabulary)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_education_record_key_unique (test_g2_schema_constraints.G2FieldConstraints.test_education_record_key_unique)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_education_tokens_within_vocabulary_or_flagged (test_g2_schema_constraints.G2FieldConstraints.test_education_tokens_within_vocabulary_or_flagged)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_embedding_cache_shape_dtype_finite (test_g2_schema_constraints.G2FieldConstraints.test_embedding_cache_shape_dtype_finite)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_id_map_is_bijection (test_g2_schema_constraints.G2FieldConstraints.test_id_map_is_bijection)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_job_primary_key_unique (test_g2_schema_constraints.G2FieldConstraints.test_job_primary_key_unique)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_label_ordinal_consistent (test_g2_schema_constraints.G2FieldConstraints.test_label_ordinal_consistent)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_label_strength_in_declared_enum (test_g2_schema_constraints.G2FieldConstraints.test_label_strength_in_declared_enum)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_match_composite_key_unique (test_g2_schema_constraints.G2FieldConstraints.test_match_composite_key_unique)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_match_foreign_keys_complete (test_g2_schema_constraints.G2FieldConstraints.test_match_foreign_keys_complete)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_no_numeric_id_in_feature_columns (test_g2_schema_constraints.G2FieldConstraints.test_no_numeric_id_in_feature_columns)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_pair_numeric_features_finite_and_bounded (test_g2_schema_constraints.G2FieldConstraints.test_pair_numeric_features_finite_and_bounded)"
+        },
+        {
+          "detail": "",
+          "gate": "G2",
+          "status": "PASS",
+          "test": "test_resume_primary_key_unique (test_g2_schema_constraints.G2FieldConstraints.test_resume_primary_key_unique)"
+        }
+      ],
+      "title": "字段约束",
+      "total": 14
+    },
+    "G3": {
+      "failed": 0,
+      "ok": true,
+      "passed": 14,
+      "tests": [
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_audit_feature_set_reports_no_violation (test_g3_leakage_guard.G3LeakageGuard.test_audit_feature_set_reports_no_violation)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_derived_score_chain_listed_as_forbidden_for_both_matching_tasks (test_g3_leakage_guard.G3LeakageGuard.test_derived_score_chain_listed_as_forbidden_for_both_matching_tasks)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_education_inputs_do_not_contain_label_columns (test_g3_leakage_guard.G3LeakageGuard.test_education_inputs_do_not_contain_label_columns)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_education_labels_do_not_contain_features (test_g3_leakage_guard.G3LeakageGuard.test_education_labels_do_not_contain_features)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_feature_columns_pass_task_policy (test_g3_leakage_guard.G3LeakageGuard.test_feature_columns_pass_task_policy)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_features_cannot_reconstruct_derived_scores (test_g3_leakage_guard.G3LeakageGuard.test_features_cannot_reconstruct_derived_scores)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_forbidden_score_fields_not_in_features (test_g3_leakage_guard.G3LeakageGuard.test_forbidden_score_fields_not_in_features)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_id_columns_are_metadata_not_features (test_g3_leakage_guard.G3LeakageGuard.test_id_columns_are_metadata_not_features)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_matrix_feature_names_within_policy (test_g3_leakage_guard.G3LeakageGuard.test_matrix_feature_names_within_policy)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_matrix_matches_declared_columns (test_g3_leakage_guard.G3LeakageGuard.test_matrix_matches_declared_columns)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_no_forbidden_field_in_any_declared_allowed_feature (test_g3_leakage_guard.G3LeakageGuard.test_no_forbidden_field_in_any_declared_allowed_feature)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_target_columns_not_in_features (test_g3_leakage_guard.G3LeakageGuard.test_target_columns_not_in_features)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_targets_physically_isolated_from_features (test_g3_leakage_guard.G3LeakageGuard.test_targets_physically_isolated_from_features)"
+        },
+        {
+          "detail": "",
+          "gate": "G3",
+          "status": "PASS",
+          "test": "test_tensor_feature_matrix_passes_policy (test_g3_leakage_guard.G3LeakageGuard.test_tensor_feature_matrix_passes_policy)"
+        }
+      ],
+      "title": "目标泄漏防护",
+      "total": 14
+    },
+    "G4": {
+      "failed": 0,
+      "ok": true,
+      "passed": 17,
+      "tests": [
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_candidate_cold_candidate_overlap_zero (test_g4_split_disjoint.G4SplitDisjoint.test_candidate_cold_candidate_overlap_zero)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_candidate_cold_keeps_all_records_of_a_candidate_together (test_g4_split_disjoint.G4SplitDisjoint.test_candidate_cold_keeps_all_records_of_a_candidate_together)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_double_cold_both_sides_disjoint (test_g4_split_disjoint.G4SplitDisjoint.test_double_cold_both_sides_disjoint)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_double_cold_excluded_edges_not_in_any_split (test_g4_split_disjoint.G4SplitDisjoint.test_double_cold_excluded_edges_not_in_any_split)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_double_cold_reports_retention (test_g4_split_disjoint.G4SplitDisjoint.test_double_cold_reports_retention)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_education_excluded_records_reasons (test_g4_split_disjoint.G4SplitDisjoint.test_education_excluded_records_reasons)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_education_gold_isolation (test_g4_split_disjoint.G4SplitDisjoint.test_education_gold_isolation)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_education_gold_provenance_high_confidence (test_g4_split_disjoint.G4SplitDisjoint.test_education_gold_provenance_high_confidence)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_education_input_text_disjoint_across_train_val (test_g4_split_disjoint.G4SplitDisjoint.test_education_input_text_disjoint_across_train_val)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_education_label_conflict_excluded (test_g4_split_disjoint.G4SplitDisjoint.test_education_label_conflict_excluded)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_education_no_test_split_without_trustworthy_labels (test_g4_split_disjoint.G4SplitDisjoint.test_education_no_test_split_without_trustworthy_labels)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_education_record_key_disjoint (test_g4_split_disjoint.G4SplitDisjoint.test_education_record_key_disjoint)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_job_cold_job_overlap_zero (test_g4_split_disjoint.G4SplitDisjoint.test_job_cold_job_overlap_zero)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_no_pair_reused_across_splits (test_g4_split_disjoint.G4SplitDisjoint.test_no_pair_reused_across_splits)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_pair_index_disjoint_and_valid (test_g4_split_disjoint.G4SplitDisjoint.test_pair_index_disjoint_and_valid)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_rankable_groups_recorded (test_g4_split_disjoint.G4SplitDisjoint.test_rankable_groups_recorded)"
+        },
+        {
+          "detail": "",
+          "gate": "G4",
+          "status": "PASS",
+          "test": "test_raw_pair_coverage_full (test_g4_split_disjoint.G4SplitDisjoint.test_raw_pair_coverage_full)"
+        }
+      ],
+      "title": "切分互斥",
+      "total": 17
+    },
+    "G5": {
+      "failed": 0,
+      "ok": true,
+      "passed": 10,
+      "tests": [
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_candidate_cold_split_reproducible (test_g5_reproducibility.G5Reproducibility.test_candidate_cold_split_reproducible)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_cosine_scores_deterministic_within_tolerance (test_g5_reproducibility.G5Reproducibility.test_cosine_scores_deterministic_within_tolerance)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_embedding_cache_hash_stable (test_g5_reproducibility.G5Reproducibility.test_embedding_cache_hash_stable)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_feature_matrix_shape_and_names_stable (test_g5_reproducibility.G5Reproducibility.test_feature_matrix_shape_and_names_stable)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_group_assignment_changes_with_seed (test_g5_reproducibility.G5Reproducibility.test_group_assignment_changes_with_seed)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_group_assignment_deterministic (test_g5_reproducibility.G5Reproducibility.test_group_assignment_deterministic)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_random_baseline_deterministic (test_g5_reproducibility.G5Reproducibility.test_random_baseline_deterministic)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_rebuilding_features_in_temp_dir_reproduces_hashes (test_g5_reproducibility.G5Reproducibility.test_rebuilding_features_in_temp_dir_reproduces_hashes)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_split_files_hash_matches_manifest (test_g5_reproducibility.G5Reproducibility.test_split_files_hash_matches_manifest)"
+        },
+        {
+          "detail": "",
+          "gate": "G5",
+          "status": "PASS",
+          "test": "test_split_row_counts_and_label_stats_reproducible (test_g5_reproducibility.G5Reproducibility.test_split_row_counts_and_label_stats_reproducible)"
+        }
+      ],
+      "title": "结果可复现性",
+      "total": 10
+    },
+    "G6": {
+      "failed": 0,
+      "ok": true,
+      "passed": 9,
+      "tests": [
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_education_inputs_loadable (test_g6_loadability.G6Loadability.test_education_inputs_loadable)"
+        },
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_education_multihot_matrix_loadable (test_g6_loadability.G6Loadability.test_education_multihot_matrix_loadable)"
+        },
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_embedding_rows_match_id_map (test_g6_loadability.G6Loadability.test_embedding_rows_match_id_map)"
+        },
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_no_nan_in_key_feature_columns (test_g6_loadability.G6Loadability.test_no_nan_in_key_feature_columns)"
+        },
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_numeric_ids_not_used_as_semantic_features (test_g6_loadability.G6Loadability.test_numeric_ids_not_used_as_semantic_features)"
+        },
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_numpy_cache_readable_and_finite (test_g6_loadability.G6Loadability.test_numpy_cache_readable_and_finite)"
+        },
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_small_batch_to_torch_tensor_no_nan_inf (test_g6_loadability.G6Loadability.test_small_batch_to_torch_tensor_no_nan_inf)"
+        },
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_split_indices_loadable_and_in_range (test_g6_loadability.G6Loadability.test_split_indices_loadable_and_in_range)"
+        },
+        {
+          "detail": "",
+          "gate": "G6",
+          "status": "PASS",
+          "test": "test_target_tensor_conversion (test_g6_loadability.G6Loadability.test_target_tensor_conversion)"
+        }
+      ],
+      "title": "数据可加载",
+      "total": 9
+    },
+    "G7": {
+      "failed": 0,
+      "ok": true,
+      "passed": 7,
+      "tests": [
+        {
+          "detail": "",
+          "gate": "G7",
+          "status": "PASS",
+          "test": "test_baseline_module_does_not_require_cuda (test_g7_resource_guard.G7ResourceGuard.test_baseline_module_does_not_require_cuda)"
+        },
+        {
+          "detail": "",
+          "gate": "G7",
+          "status": "PASS",
+          "test": "test_cosine_block_budget_bounded (test_g7_resource_guard.G7ResourceGuard.test_cosine_block_budget_bounded)"
+        },
+        {
+          "detail": "",
+          "gate": "G7",
+          "status": "PASS",
+          "test": "test_cosine_scores_streams_blocks_not_full_matrix (test_g7_resource_guard.G7ResourceGuard.test_cosine_scores_streams_blocks_not_full_matrix)"
+        },
+        {
+          "detail": "",
+          "gate": "G7",
+          "status": "PASS",
+          "test": "test_embedding_cache_memory_footprint_documented (test_g7_resource_guard.G7ResourceGuard.test_embedding_cache_memory_footprint_documented)"
+        },
+        {
+          "detail": "",
+          "gate": "G7",
+          "status": "PASS",
+          "test": "test_gpu_budget_declared (test_g7_resource_guard.G7ResourceGuard.test_gpu_budget_declared)"
+        },
+        {
+          "detail": "",
+          "gate": "G7",
+          "status": "PASS",
+          "test": "test_no_gpu_tensor_created_by_split_or_feature_steps (test_g7_resource_guard.G7ResourceGuard.test_no_gpu_tensor_created_by_split_or_feature_steps)"
+        },
+        {
+          "detail": "",
+          "gate": "G7",
+          "status": "PASS",
+          "test": "test_pipeline_logs_do_not_contain_resume_or_jd_text (test_g7_resource_guard.G7ResourceGuard.test_pipeline_logs_do_not_contain_resume_or_jd_text)"
+        }
+      ],
+      "title": "资源约束",
+      "total": 7
+    }
+  },
+  "generated_by": "tests/data_pipeline/run_all.py",
+  "ok": true,
+  "returncode": 0,
+  "skipped": 0,
+  "tests_run": 74
+}

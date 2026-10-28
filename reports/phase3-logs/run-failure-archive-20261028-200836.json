@@ -1,0 +1,6 @@
+{
+  "error": "render_matching_baselines.<locals>._group_stats() missing 1 required positional argument: 'subset'",
+  "failed_step": "write_reports",
+  "ok": false,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\desktop\\毕业设计\\scripts\\data_pipeline\\run_all.py\", line 56, in main\n    results[name] = fn()\n                    ^^^^\n  File \"D:\\desktop\\毕业设计\\src\\job_matching\\pipeline.py\", line 474, in step_write_reports\n    return render_all()\n           ^^^^^^^^^^^^\n  File \"D:\\desktop\\毕业设计\\src\\job_matching\\reporting.py\", line 842, in render_all\n    render_matching_baselines()))\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\desktop\\毕业设计\\src\\job_matching\\reporting.py\", line 355, in render_matching_baselines\n    (_group_stats(mm.get(\"candidate_cold\", {}).get(\"subsets\", {})\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: render_matching_baselines.<locals>._group_stats() missing 1 required positional argument: 'subset'\n"
+}
