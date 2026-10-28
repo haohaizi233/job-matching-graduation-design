@@ -1,0 +1,61 @@
+# 人岗匹配数据切分协议（第三阶段 3.2.1）
+# 原则：绝不行级随机划分；一切随机过程由 configs/data_pipeline.yaml 的 seeds 提供。
+
+default_ratios:
+  train: 0.8
+  validation: 0.1
+  test: 0.1
+
+# 组内排序评估的最小可评估组大小：
+# 只有 1 条观测记录的候选人/岗位无法形成组内排序，单独统计但不计入排序指标。
+min_group_size_for_ranking: 2
+
+protocols:
+  # 协议 A：Candidate Cold-start（主评估协议）
+  candidate_cold:
+    id: "A"
+    name: "Candidate Cold-start"
+    group_keys: ["candidate_id"]
+    seed_key: "split_candidate_cold"
+    ratios: {train: 0.8, validation: 0.1, test: 0.1}
+    enforce:
+      candidate_overlap: 0
+      job_overlap: "not_required"   # 岗位允许跨集合出现
+      pair_overlap: 0
+    description: "候选人 ID 在三个集合间完全互斥；同一候选人的全部匹配记录只进入一个集合。"
+
+  # 协议 B：Job Cold-start
+  job_cold:
+    id: "B"
+    name: "Job Cold-start"
+    group_keys: ["job_id"]
+    seed_key: "split_job_cold"
+    ratios: {train: 0.8, validation: 0.1, test: 0.1}
+    enforce:
+      candidate_overlap: "not_required"  # 候选人允许跨集合出现
+      job_overlap: 0
+      pair_overlap: 0
+    description: "岗位 ID 在三个集合间完全互斥；同一岗位的全部匹配记录只进入一个集合。"
+
+  # 协议 C：Double Cold-start
+  double_cold:
+    id: "C"
+    name: "Double Cold-start"
+    group_keys: ["candidate_id", "job_id"]
+    seed_key: "split_double_cold"
+    ratios: {train: 0.8, validation: 0.1, test: 0.1}
+    assignment_strategy: "majority_edge"
+    assignment_strategy_note: >-
+      两阶段确定性分配：先把主要实体（candidate_id）按观测边数贪心分配到 80/10/10；
+      再把次要实体（job_id）分配到其拥有最多已分配边的那个集合，平局用种子哈希打破。
+      两侧 ID 分组不一致的交叉边一律进入 excluded，绝不偷偷归入任何集合。
+    enforce:
+      candidate_overlap: 0
+      job_overlap: 0
+      pair_overlap: 0
+    description: "候选人集合两两不相交且岗位集合两两不相交；交叉边单独落盘为 excluded 索引。"
+
+# 重复执行一致性检查：同一配置 + 同一种子必须产出完全一致的划分 ID 与文件哈希。
+reproducibility:
+  rerun_check: true
+  compare: ["split_ids_sha256", "row_counts", "label_stats", "file_sha256"]

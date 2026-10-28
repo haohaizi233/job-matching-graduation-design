@@ -1,0 +1,59 @@
+# 技能标准化规则（第三阶段 3.1.3）
+# ============================================================
+# 铁律：禁止用 substring 判断技能包含关系。
+#   Java != JavaScript，C != C++，C++ != C#，R != Rust，Go != golang 之外不做模糊合并。
+# 只做三件事：
+#   1) 形式规范化：NFKC -> casefold -> 空白/连字符统一 -> 去首尾标点
+#   2) 显式别名表精确映射（人工确认过的等价表达）
+#   3) 无法确认的保留原值并标记 needs_review，绝不强行归并
+# ============================================================
+
+normalization:
+  nfkc: true
+  casefold: true
+  strip: true
+  collapse_whitespace: true
+  hyphen_to_space: false        # 保留 c++ / c# / node.js / .net 等符号
+  strip_edge_punctuation: true
+  keep_original: true           # 永远保留原值（skills_raw）与映射关系
+
+# 显式别名表：key = 规范名，value = 允许映射到该规范名的原始写法（规范化之后的形式）
+aliases:
+  javascript: ["javascript", "js", "ecmascript", "es6", "es2015"]
+  typescript: ["typescript", "ts"]
+  python: ["python", "python3", "py"]
+  cplusplus: ["c++", "cpp", "c plus plus"]
+  csharp: ["c#", "csharp", "c sharp"]
+  c: ["c", "ansi c", "c language"]
+  golang: ["go", "golang"]
+  java: ["java", "java se", "java ee", "j2ee", "j2se"]
+  postgresql: ["postgresql", "postgres", "psql"]
+  mysql: ["mysql"]
+  mongodb: ["mongodb", "mongo"]
+  redis: ["redis"]
+  kubernetes: ["kubernetes", "k8s"]
+  docker: ["docker"]
+  tensorflow: ["tensorflow", "tf"]
+  pytorch: ["pytorch", "torch"]
+  scikit-learn: ["scikit-learn", "scikit learn", "sklearn"]
+  aws: ["aws", "amazon web services"]
+  "ci/cd": ["ci/cd", "ci cd", "cicd", "continuous integration"]
+  "node.js": ["node.js", "nodejs", "node"]
+  "restful": ["restful", "rest", "rest api", "restful api"]
+  "spring boot": ["spring boot", "springboot", "spring-boot"]
+  "html5": ["html5", "html"]
+  "css3": ["css3", "css"]
+
+# 明确不得合并的危险组（用于测试断言，防止未来误用子串匹配）
+must_remain_distinct:
+  - ["java", "javascript"]
+  - ["c", "c++", "c#"]
+  - ["r", "rust"]
+  - ["go", "goal"]
+  - ["sql", "mysql", "postgresql", "sqlite"]
+  - ["python", "python2"]
+  - ["ml", "machine learning", "deep learning"]
+  - ["spring", "spring boot"]
+
+# 归一化后仍无法映射的技能统一标记，供人工复核
+unmapped_flag: "needs_review"

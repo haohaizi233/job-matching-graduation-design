@@ -1,0 +1,191 @@
+# 特征白名单 / 黑名单（第三阶段 3.1.2）
+# ============================================================
+# 任务级定义。"黑名单"按具体任务生效，不误伤其它实验中合法的监督信号。
+# 通用原则：
+#   1) candidate_id / job_id 只能是评估元数据，永远不能当数值型语义特征。
+#   2) 派生评分链（semantic -> raw -> final -> rank）产生的 10 个字段，
+#      不得作为以 label_strength / candidate_rank 为目标的任何模型输入。
+#   3) 目标字段与其派生字段必须与输入物理隔离（不同文件 / 不同矩阵）。
+#   4) 间接泄漏：凡是用 forbidden 字段拟合/归一化/编码出来的量，同样视为泄漏。
+# ============================================================
+
+global:
+  # 与目标无关、任何任务都禁止进入特征矩阵的列
+  always_forbidden_as_features:
+    - candidate_id          # 数值型 ID 不得当语义特征
+    - job_id                # 数值型 ID 不得当语义特征
+    - source_row
+    - id
+    - record_key
+    - split
+    - protocol
+  id_like_columns: [candidate_id, job_id, source_row, id, record_key]
+
+  # 原系统派生评分链（audit 已证实闭环：semantic->raw->final->label_strength）
+  derived_score_chain:
+    - semantic_score
+    - skill_score
+    - position_score
+    - category_score
+    - experience_score
+    - education_score
+    - raw_score
+    - final_score
+    - candidate_rank
+    - candidate_rank_pct
+
+tasks:
+
+  # ------------------------------------------------ 任务 1：匹配强度三分类
+  match_label_strength:
+    description: "以 label_strength（weak_positive/medium_positive/strong_positive）为监督目标的分类任务"
+    target_columns: [label_strength]
+    target_derived_columns: [label_ordinal]
+    allowed_features:
+      # —— 候选人侧原始特征（推理时可用）
+      - target_position_norm
+      - years_experience
+      - inferred_category
+      - cv_skills_canonical_json
+      # —— 岗位侧原始特征（推理时可用）
+      - job_title_norm
+      - job_category
+      - job_skills_canonical_json
+      # —— 双侧独立构造特征（只用原始字段，不使用任何派生评分）
+      - skill_jaccard
+      - skill_overlap_ratio_cv
+      - skill_overlap_ratio_job
+      - position_token_overlap
+      - category_match
+      - both_skills_empty
+    forbidden_features:
+      - semantic_score
+      - skill_score
+      - position_score
+      - category_score
+      - experience_score
+      - education_score
+      - raw_score
+      - final_score
+      - candidate_rank
+      - candidate_rank_pct
+    uncertain_features:
+      # 预计算 embedding 经 semantic_score 参与了标签生成（派生信息链的一环），
+      # 用它预测 label_strength 存在派生特征泄漏风险，默认禁止进入本任务输入，
+      # 仅在显式 allow_uncertain=True 时放行并要求在报告中标注风险。
+      - embedding
+      # years_required 语义不明（0~40，含小数），仅登记不启用
+      - years_required
+      # education_text 经实测 1167/1167 与 job_description 完全相同，禁用
+      - education_text
+    evaluation_metadata:
+      - candidate_id
+      - job_id
+      - split
+      - protocol
+      - final_score        # 仅用于事后相关性分析，不进特征
+      - candidate_rank     # 仅用于事后相关性分析，不进特征
+    physical_isolation:
+      targets_file: "data/processed/matching/targets_pairs.csv"
+      features_file: "data/processed/matching/features_pairs.csv"
+
+  # ------------------------------------------------ 任务 2：人岗排序（Learning-to-Rank）
+  match_ranking:
+    description: "以 candidate_rank 所刻画的组内序 / final_score 作为代理相关性的排序任务"
+    target_columns: [candidate_rank]
+    relevance_columns: [final_score, label_strength]   # 只用于计算指标，不是特征
+    allowed_features:
+      - target_position_norm
+      - years_experience
+      - inferred_category
+      - cv_skills_canonical_json
+      - job_title_norm
+      - job_category
+      - job_skills_canonical_json
+      - skill_jaccard
+      - skill_overlap_ratio_cv
+      - skill_overlap_ratio_job
+      - position_token_overlap
+      - category_match
+      - both_skills_empty
+    forbidden_features:
+      - semantic_score
+      - skill_score
+      - position_score
+      - category_score
+      - experience_score
+      - education_score
+      - raw_score
+      - final_score
+      - candidate_rank
+      - candidate_rank_pct
+    uncertain_features:
+      - embedding           # 允许用于 embedding_cosine_baseline，但必须标注代理标签耦合
+    evaluation_metadata: [candidate_id, job_id, split, protocol]
+    baseline_feature_exception:
+      embedding_cosine_baseline:
+        uses: [embedding]
+        caveat: >-
+          semantic_score = 0.5 * cosine(cv_emb, job_emb) + 0.5 已被审计以 R²=1.0 证实，
+          而 semantic_score 占 raw_score 的 0.25 权重。该 Baseline 与代理标签生成机制
+          直接耦合，其 NDCG 不构成独立的语义匹配有效性证据。
+
+  # ------------------------------------------------ 任务 3：学历多标签抽取
+  edu_label_multilabel:
+    description: "岗位学历要求 -> 6 token 多热向量（本科/硕士/博士/大专/学历不限/学历不明）"
+    target_columns: [label_tokens]
+    target_derived_columns: [label_multi_hot]
+    allowed_features:
+      # 实际落盘的输入表只含槽位级特征与文本摘要；
+      # user_norm（完整输入文本）训练时可由 data/raw 按 record_key 规则重建，属合法输入。
+      - user_norm              # 完整输入文本（岗位名称+岗位描述+学历描述三段）
+      - job_title_norm         # <岗位名称> 槽位
+      - slot_education_norm    # <学历描述> 槽位
+      - slot_present
+      - user_len
+    forbidden_features:
+      - assistant              # 原系统/人工标签本身
+      - ai                     # 另一路模型输出
+      - diff                   # ai == assistant 的布尔标记，直接泄漏标签
+      - "线上学历-旧的"          # 旧线上系统输出
+      - "模型结果-新的"          # 新模型输出
+      - "人工正确结果"           # 人工金标准，只能做评估目标
+      - "【线上学历-旧的】是否正确"
+      - "【模型结果-新的】是否正确"
+      - label_tokens
+      - label_multi_hot
+      - label_provenance
+    uncertain_features:
+      - user_short             # 精简版输入，来源与生成方式未知
+    evaluation_metadata: [record_key, user_hash, job_id, source_split, is_gold,
+                          label_status, label_confidence]
+    physical_isolation:
+      targets_file: "data/processed/education/education_labels.csv"
+      features_file: "data/processed/education/education_inputs.csv"
+
+  # ------------------------------------------------ 任务 4：招聘风险（本阶段不建模）
+  risk_screening:
+    description: "all_df.csv 仅做规范化与元数据登记，本阶段不纳入核心监督训练任务"
+    target_columns: []
+    allowed_features: []
+    forbidden_features:
+      - scam_probability       # 非人工真值，实测仅 9 个 10 的倍数取值
+    uncertain_features:
+      - job_type               # 0~6 整数编码，含义未在数据中给出
+      - job_salary             # 存在 4,597,500 极端离群值
+    evaluation_metadata: [row_key, duplicate_group_id]
+
+# 间接泄漏防护：以下派生/归一化操作若使用了 forbidden 字段，同样视为泄漏。
+indirect_leakage_rules:
+  - id: IL-1
+    rule: "StandardScaler / MinMaxScaler / 任何统计归一化参数只能在 train 上 fit"
+  - id: IL-2
+    rule: "TF-IDF / 词表 / 特征选择器只能在 train 上 fit"
+  - id: IL-3
+    rule: "禁止用 final_score / raw_score 分位数构造分箱、难负例权重或样本权重"
+  - id: IL-4
+    rule: "禁止用 candidate_rank / candidate_rank_pct 做特征分桶、目标编码或 group prior"
+  - id: IL-5
+    rule: "禁止把 label_strength 编码进任何输入列（包括 one-hot 拼接、目标编码、聚类 ID）"
+  - id: IL-6
+    rule: "预计算 embedding 由全量数据产生，其归一化统计不得再用全量数据重复拟合"

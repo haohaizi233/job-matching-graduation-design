@@ -1,0 +1,77 @@
+version: 1
+pipeline_version: "phase3-v1"
+stage: "第三阶段：数据预处理、可信数据划分与零训练 Baseline"
+
+# 所有路径均相对项目根目录解析；Windows 中文路径兼容由 pathlib + UTF-8 IO 保证。
+paths:
+  raw: "data/raw"
+  interim: "data/interim"
+  processed: "data/processed"
+  splits: "data/splits"
+  reports: "reports"
+  logs: "reports/phase3-logs"
+
+sources:
+  matching:
+    cv: "data/raw/job-resume-matching/cv.csv"
+    job: "data/raw/job-resume-matching/job.csv"
+    matches: "data/raw/job-resume-matching/matches.csv"
+  education:
+    train: "data/raw/job-education/default/train/19w_0701.csv"
+    validation: "data/raw/job-education/default/validation/4w_0708.csv"
+    test: "data/raw/job-education/default/test/2w_0716.csv"
+    annotated: "data/raw/job-education/annotated/2w_0716_eval.csv"
+  risk:
+    all_df: "data/raw/other/all_df.csv/all_df.csv"
+
+outputs:
+  interim_matching: "data/interim/matching"
+  interim_education: "data/interim/education"
+  interim_risk: "data/interim/risk"
+  processed_embeddings: "data/processed/embeddings"
+  processed_matching: "data/processed/matching"
+  processed_education: "data/processed/education"
+  splits_matching: "data/splits/matching"
+  splits_education: "data/splits/education"
+
+# 固定随机种子：任何随机过程必须从此处取值，禁止在代码中硬编码。
+seeds:
+  global: 20261028
+  split_candidate_cold: 20261028
+  split_job_cold: 20261029
+  split_double_cold: 20261030
+  split_education: 20261031
+  baseline_random_ranking: 20261101
+  baseline_random_repeats: 20
+
+formats:
+  # 实测 pyarrow / fastparquet 均不可用（importlib.util.find_spec -> False），
+  # 按阶段约束不擅自安装依赖，因此表格产物统一用 CSV，向量用 NPY，索引/清单用 JSON。
+  table: "csv"
+  table_encoding: "utf-8"
+  table_float_format: "%.10g"
+  vector: "npy"
+  manifest: "json"
+  parquet_available: false
+  parquet_note: "本地缺少 Parquet 引擎（pyarrow/fastparquet 均未安装），按约束不修改环境；改用 CSV + NPY + JSON，并在 manifest 中记录该限制。"
+
+io:
+  csv_chunk_rows: 20000
+  cosine_block_rows: 512          # 分块计算余弦，避免完整 简历x岗位 中间矩阵常驻内存
+  json_indent: 2
+  json_sort_keys: true
+
+resources:
+  gpu_budget_mb: 4094             # RTX 2050 实测显存上限（4GB）
+  prefer_cpu_for_baselines: true
+  max_rows_in_log_sample: 0       # 日志中绝不输出简历/岗位正文样本
+
+privacy:
+  forbid_in_logs:
+    - "resume_text"
+    - "experience_text"
+    - "education_text"
+    - "job_description"
+    - "job_text"
+    - "user"
+  note: "简历正文与招聘 JD 原文不得写入日志与报告；仅统计长度、哈希与计数。"
