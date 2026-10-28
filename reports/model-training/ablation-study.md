@@ -1,6 +1,6 @@
 # 第四阶段 4.1 · 人岗匹配模型训练报告
 
-- 生成时间：2026-10-28 21:02:18
+- 生成时间：2026-10-28 21:05:09
 - 数据版本：`dv-0ce28fa6b560`；协议：candidate_cold / job_cold / double_cold
 - 排序查询单位：`candidate_id`（为一个候选人对其候选岗位排序）
 - 模型选择指标：`ndcg_at_5_ordinal`（只看 validation）

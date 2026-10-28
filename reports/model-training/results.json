@@ -6207,7 +6207,7 @@
     "test 已在第三阶段用于零训练基线比较，本阶段只做方案锁定后的确认评估，不用于调参。",
     "RankNet 学习的是原评分系统的代理排序偏好，不是用户真实偏好。"
   ],
-  "created_at": "2026-10-28T21:02:18",
+  "created_at": "2026-10-28T21:05:09",
   "dataset_version": "dv-0ce28fa6b560",
   "error_analysis": {
     "gradient_boosting": {
@@ -8494,7 +8494,8 @@
   "resources": [
     {
       "artifact_bytes": 540476,
-      "device": "cuda",
+      "device": "cpu",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 6.02e-06,
       "model": "gradient_boosting",
       "model_parameters": 3100,
@@ -8508,7 +8509,8 @@
     },
     {
       "artifact_bytes": 429862,
-      "device": "cuda",
+      "device": "cpu",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 6.47e-06,
       "model": "gradient_boosting",
       "model_parameters": 3100,
@@ -8522,7 +8524,8 @@
     },
     {
       "artifact_bytes": 542055,
-      "device": "cuda",
+      "device": "cpu",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 1.193e-05,
       "model": "gradient_boosting",
       "model_parameters": 3100,
@@ -8537,6 +8540,7 @@
     {
       "artifact_bytes": 258390,
       "device": "cuda",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 3.4e-07,
       "model": "mlp",
       "model_parameters": 5441,
@@ -8551,6 +8555,7 @@
     {
       "artifact_bytes": 174798,
       "device": "cuda",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 9.4e-07,
       "model": "mlp",
       "model_parameters": 5441,
@@ -8565,6 +8570,7 @@
     {
       "artifact_bytes": 264601,
       "device": "cuda",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 5.3e-07,
       "model": "mlp",
       "model_parameters": 5441,
@@ -8579,6 +8585,7 @@
     {
       "artifact_bytes": 266452,
       "device": "cuda",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 3.7e-07,
       "model": "ranknet",
       "model_parameters": 5441,
@@ -8593,6 +8600,7 @@
     {
       "artifact_bytes": 178948,
       "device": "cuda",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 9.6e-07,
       "model": "ranknet",
       "model_parameters": 5441,
@@ -8607,6 +8615,7 @@
     {
       "artifact_bytes": 273494,
       "device": "cuda",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 3.8e-07,
       "model": "ranknet",
       "model_parameters": 5441,
@@ -8620,7 +8629,8 @@
     },
     {
       "artifact_bytes": 130048,
-      "device": "cuda",
+      "device": "cpu",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 8e-08,
       "model": "ridge",
       "model_parameters": 50,
@@ -8634,7 +8644,8 @@
     },
     {
       "artifact_bytes": 48332,
-      "device": "cuda",
+      "device": "cpu",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 0.0,
       "model": "ridge",
       "model_parameters": 50,
@@ -8648,7 +8659,8 @@
     },
     {
       "artifact_bytes": 136199,
-      "device": "cuda",
+      "device": "cpu",
+      "device_recorded_in_run": "cuda",
       "inference_seconds_per_pair": 9e-08,
       "model": "ridge",
       "model_parameters": 50,

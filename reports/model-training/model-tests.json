@@ -1,7 +1,7 @@
 {
   "generated_by": "tests/model_training/run_all.py",
-  "created_at": "2026-10-28T20:59:48",
-  "seconds": 7.13,
+  "created_at": "2026-10-28T21:05:24",
+  "seconds": 7.82,
   "ok": true,
   "totals": {
     "tests": 25,
