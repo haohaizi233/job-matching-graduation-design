@@ -1,0 +1,44 @@
+# Model D：RankNet 成对排序模型（本阶段重点研究模型）
+# 共享参数评分网络 + Pairwise Logistic Loss：loss = softplus(-(s_a - s_b))
+# a = 组内代理偏好更优的一方（final_score 更高且差距 >= min_score_margin）
+model:
+  name: ranknet
+  type: torch_ranker
+  description: "同一 candidate_id 内已观测岗位之间的成对偏好学习（代理排序偏好，非用户真实偏好）"
+  architecture:
+    hidden: [64, 32]
+    activation: relu
+    layernorm: true
+    dropout: 0.0
+  loss: pairwise_logistic          # softplus(-(s_preferred - s_other))
+  params:
+    pair_batch_size: 4096
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    epochs: 60
+    early_stopping_patience: 8
+    grad_clip_norm: 5.0
+  pair_sampling:
+    strategy: "group_all_pairs_then_cap"   # 组内全配对 -> 超限按固定种子无放回抽样
+    min_score_margin: 0.001                # 与 common.yaml 一致：近似同分不构成可靠偏好
+    max_pairs_per_group: 64
+    max_total_pairs: 400000
+  search_space:
+    learning_rate: [0.001, 0.003]
+    pair_batch_size: [4096, 8192]
+  search_limit: 4
+  selection_metric: ndcg_at_5_ordinal
+  checkpoint:
+    monitor: ndcg_at_5_ordinal
+    mode: max
+    save_optimizer_state: true
+    keep_best: true
+outputs:
+  artifacts: [model.pt, feature_map.json, config.json, metrics.json, manifest.json, history.json, checkpoint_best.pt, pair_stats.json]
+inference:
+  supports_cpu: true
+  requires_labels: false
+  independence: >-
+    推理只依赖合法特征（FeatureMap 白名单），不读取 candidate_rank / final_score /
+    label_strength 或 matches.csv 的任何目标值；单对 (resume, job) 可独立打分。
+  resume_from_checkpoint: true

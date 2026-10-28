@@ -1,0 +1,36 @@
+# Model C：PyTorch MLP 匹配评分模型
+# 结构：Input -> Linear(d,64) -> LayerNorm -> ReLU -> Linear(64,32) -> ReLU -> Linear(32,1)
+# 输入维度 d 从特征矩阵实际读取（FeatureMap.transform 输出），禁止硬编码
+model:
+  name: mlp
+  type: torch_regressor
+  description: "轻量 MLP 回归代理匹配分数 final_score，适配 RTX 2050 4GB 显存"
+  architecture:
+    hidden: [64, 32]
+    activation: relu
+    layernorm: true
+    dropout: 0.0
+  loss: mse                        # 目标为 final_score（代理分数）
+  params:
+    batch_size: 2048
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    epochs: 60
+    early_stopping_patience: 8
+    grad_clip_norm: 5.0
+  search_space:
+    learning_rate: [0.001, 0.003]
+    weight_decay: [0.0001, 0.001]
+  search_limit: 4
+  selection_metric: ndcg_at_5_ordinal
+  checkpoint:
+    monitor: ndcg_at_5_ordinal
+    mode: max
+    save_optimizer_state: true     # 支持训练恢复（--resume）
+    keep_best: true
+outputs:
+  artifacts: [model.pt, feature_map.json, config.json, metrics.json, manifest.json, history.json, checkpoint_best.pt]
+inference:
+  supports_cpu: true
+  requires_labels: false
+  resume_from_checkpoint: true

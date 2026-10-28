@@ -44,11 +44,25 @@ protocols:
     group_keys: ["candidate_id", "job_id"]
     seed_key: "split_double_cold"
     ratios: {train: 0.8, validation: 0.1, test: 0.1}
-    assignment_strategy: "majority_edge"
+    assignment_strategy: "eval_first_greedy"
+    # 策略参数（全部确定性，种子取自 seeds.split_double_cold）
+    strategy_params:
+      # 每个次要集合（validation / test）允许消耗的训练边损失预算，占原始边数的比例。
+      # 实测扫描（seed=20261030）：0.05→保留 70.0%/可排序组 394-359；0.10→60.0%/739-717；
+      # 0.15→50.0%/886-816；0.20→40.0%/927-803。取 0.10 作为保留率与可评估性的折中。
+      budget_ratio_per_minor_split: 0.10
+      # 可排序性目标：贪心优先把候选人补到这个观测条数，再考虑下一个。
+      eval_soft_target: 5
+      # gain 的平方缺口权重指数：2 表示越缺越重要（(target-kept)^2）。
+      gain_deficit_power: 2
     assignment_strategy_note: >-
-      两阶段确定性分配：先把主要实体（candidate_id）按观测边数贪心分配到 80/10/10；
-      再把次要实体（job_id）分配到其拥有最多已分配边的那个集合，平局用种子哈希打破。
-      两侧 ID 分组不一致的交叉边一律进入 excluded，绝不偷偷归入任何集合。
+      两阶段确定性分配：阶段 1 先把主要实体（candidate_id）按观测边数贪心分配到 80/10/10
+      （组完整、边不拆）；阶段 2 再分配次要实体（job_id）。默认策略 eval_first_greedy
+      为本阶段提出的改进策略：先按"多数边集合"确定零代价归属，再用 gain/cost 贪心从 train
+      为验证/测试候选人补齐可排序性（每个次要集合带独立的训练边损失预算），其余 job 归给
+      边数最多的集合。两侧 ID 分组不一致的交叉边一律进入 excluded，绝不偷偷归入任何集合。
+      三种策略（majority_edge / proportional / eval_first_greedy）的实测对比会写入
+      manifest 的 strategy_comparison。
     enforce:
       candidate_overlap: 0
       job_overlap: 0

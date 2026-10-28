@@ -1,0 +1,23 @@
+# Model B：HistGradientBoostingRegressor（梯度提升树非线性回归）
+# 依赖：scikit-learn 1.5.2（已安装），不引入新的 GBDT 依赖
+model:
+  name: gradient_boosting
+  type: sklearn_regressor
+  description: "直方图梯度提升回归树，输出分数用于岗位排序"
+  params:
+    loss: squared_error
+    random_state: 20261201
+    early_stopping: false          # 早停由我们自己的 validation 选择完成，避免 sklearn 内部再切训练数据
+  # 受控的小规模网格（不执行无约束大规模搜索）：最多 3 x 2 x 2 = 12 个组合
+  search_space:
+    learning_rate: [0.05, 0.1]
+    max_depth: [3, 6]
+    max_iter: [200, 400]
+  search_limit: 8                  # 实际评估组合数上限（按配置顺序确定性截断）
+  selection_metric: ndcg_at_5_ordinal
+outputs:
+  artifacts: [model.pkl, feature_map.json, config.json, metrics.json, manifest.json]
+inference:
+  supports_cpu: true
+  requires_labels: false
+  resume_from_checkpoint: "NOT_APPLICABLE（sklearn 拟合一次性完成，无迭代检查点）"

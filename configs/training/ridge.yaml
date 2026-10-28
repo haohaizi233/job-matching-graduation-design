@@ -1,0 +1,19 @@
+# Model A：Ridge 回归（可解释线性对照）
+# 目标：预测代理连续匹配分数 final_score（原评分系统派生，非真实录用结果）
+model:
+  name: ridge
+  type: sklearn_regressor
+  description: "L2 正则线性回归，作为可解释线性对照；输出分数直接用于岗位排序"
+  params:
+    fit_intercept: true
+  # 超参数搜索空间（只在 train 上拟合、validation 上选择，绝不看 test）
+  search_space:
+    alpha: [0.1, 1.0, 10.0, 100.0]
+  selection_metric: ndcg_at_5_ordinal
+  standardize_numeric: false      # 输入特征已是有界比率/0-1 标志，仅 years_experience 做 train 统计标准化
+outputs:
+  artifacts: [model.pkl, feature_map.json, config.json, metrics.json, manifest.json, coefficients.json]
+inference:
+  supports_cpu: true
+  requires_labels: false
+  resume_from_checkpoint: "NOT_APPLICABLE（sklearn 闭式解求解，无迭代检查点）"

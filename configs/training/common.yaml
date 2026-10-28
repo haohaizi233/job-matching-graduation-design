@@ -1,0 +1,106 @@
+# 第四阶段 4.1 · 人岗匹配模型训练公共配置（唯一事实来源）
+# ============================================================
+# 约束（与第三阶段 docs/feature-schema.md、docs/evaluation-protocol.md 一致）：
+#   1) 特征只允许 configs/feature_policy.yaml 任务 match_ranking 白名单内的字段；
+#      派生评分链 10 字段（semantic_score ... candidate_rank_pct）与 label_strength
+#      一律禁止进入模型输入（由 policy.check_feature_columns 强制执行）。
+#   2) 切分沿用 data/splits/matching/{candidate_cold,job_cold,double_cold}，
+#      绝不重新随机切分；调参只用 train / validation，test 仅在方案锁定后做确认评估。
+#   3) 目标是原评分系统的代理偏好（final_score / candidate_rank），
+#      不是真实投递或录用结果。
+# ============================================================
+version: 1
+stage: "第四阶段 4.1：人岗匹配模型训练与排序算法实验"
+pipeline_version: "phase4-matching-v1"
+experiment_prefix: "mt41"
+
+data:
+  task: match_ranking
+  features_file: "data/processed/matching/features_pairs.csv"
+  targets_file: "data/processed/matching/targets_pairs.csv"
+  splits_dir: "data/splits/matching"
+  feature_schema_file: "data/processed/matching/feature_schema.json"
+  dataset_version: "dv-0ce28fa6b560"
+  # 特征表中训练时读取的列（两个技能 JSON 列只在一致性核验/推理时使用）
+  feature_columns:
+    numeric:
+      - skill_jaccard
+      - skill_overlap_ratio_cv
+      - skill_overlap_ratio_job
+      - both_skills_empty
+      - position_token_overlap
+      - category_match
+      - years_experience
+    categorical:
+      - target_position_norm
+      - inferred_category
+      - job_category
+  # 训练目标：代理连续匹配分数（原评分系统 final_score）
+  regression_target: final_score
+  # 排序代理相关性（评估用，不是特征）：score 模式用 final_score，ordinal 模式用 label_ordinal
+  relevance_columns: [final_score, label_ordinal, label_strength, candidate_rank]
+
+feature_groups:
+  skill:
+    - skill_jaccard
+    - skill_overlap_ratio_cv
+    - skill_overlap_ratio_job
+    - both_skills_empty
+  position:
+    - position_token_overlap
+    - target_position_norm
+  category:
+    - category_match
+    - inferred_category
+    - job_category
+  experience:
+    - years_experience
+
+evaluation:
+  query_unit: candidate_id        # 排序查询单位：为一个候选人对其候选岗位排序
+  ks: [5, 10]
+  min_group_size_for_ranking: 2
+  selection_metric: ndcg_at_5_ordinal   # 模型选择/早停只看 validation 的该指标
+  pairwise:
+    tie_eps: 0.001                # |Δfinal_score| < tie_eps 视为同分，不计入偏好对
+    per_query_equal_weight: true  # 每个查询先求准确率，再对查询取宏平均
+  bootstrap:
+    repeats: 1000
+    ci: 0.95
+    unit: query                   # 按查询组（candidate_id）重采样，不把 pair 当独立样本
+  auxiliary_metrics: [mae, rmse, spearman, kendall_tau_b]
+
+seeds:
+  global: 20261201
+  pair_sampling: 20261202
+  torch_init: 20261203
+  bootstrap: 20261204
+  random_baseline: 20261101       # 与第三阶段 baseline_random_ranking 一致，便于公平对照
+
+test_policy:
+  test_previously_used_for_baseline_comparison: true   # 第三阶段已用 test 比较 4 个零训练基线
+  selection_on_test: forbidden
+  hyperparam_search_on_test: forbidden
+  feature_changes_on_test_feedback: forbidden
+  note: "test 仅在模型方案与超参数按 validation 锁定后做一次确认评估；结果必须披露 test 已参与过零训练基线比较。"
+
+pair_sampling:
+  min_score_margin: 0.001         # 组内 final_score 差距小于该值不构成可靠偏好
+  max_pairs_per_group: 64
+  max_total_pairs: 400000
+  strategy: "group_all_pairs_then_cap"   # 小组全取，大组固定种子无放回抽样
+
+paths:
+  models_dir: "models/matching"
+  runs_dir: "reports/model-training/runs"
+  reports_dir: "reports/model-training"
+  logs_dir: "reports/model-training/logs"
+
+resources:
+  gpu_budget_mb: 4094
+  prefer_gpu: true
+  torch_num_threads: 4
+
+privacy:
+  forbid_in_logs: [resume_text, experience_text, education_text, job_description, job_text, user]
+  note: "训练日志与报告不得输出简历正文/JD 原文/联系方式；只允许 ID、特征值与统计量。"
