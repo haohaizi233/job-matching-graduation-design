@@ -1,0 +1,611 @@
+{
+  "manifest_version": "1.0",
+  "generated_at": "2026-10-28",
+  "project_root": "D:\\desktop\\毕业设计",
+  "purpose": "工作目录工程化整理的迁移映射与完整性基线，可用于逐条回滚",
+  "integrity_tool": "scripts/hash_datasets.py（流式 SHA-256，1 MB 分块）",
+  "verification_tool": "scripts/verify_data_integrity.py",
+  "hash_algorithm": "SHA-256",
+  "migration_method": "同一卷（D:）内 Move-Item 重命名，零复制、零内容改写",
+  "summary": {
+    "move_operations": 8,
+    "migrated_items": "6 个文件 + 2 个目录",
+    "files_in_scope": 29,
+    "total_bytes": 643343224,
+    "sha256_verified_equal": 27,
+    "sha256_mismatch": 0,
+    "no_pre_baseline": 2
+  },
+  "moves": [
+    {
+      "id": "M1",
+      "kind": "file",
+      "status": "MIGRATED",
+      "source": "D:\\desktop\\毕业设计\\cv.csv",
+      "target": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching",
+      "file_count": 13,
+      "total_bytes": 246669663,
+      "method": "Move-Item（同一卷 D: 内重命名，不复制）",
+      "rollback": "Move-Item -LiteralPath 'D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching' -Destination 'D:\\desktop\\毕业设计\\cv.csv'",
+      "notes": "与 M2-M6 同批原子迁移，保持 HF local_dir 快照内部相对布局不变",
+      "files": [
+        "data/raw/job-resume-matching/.cache/huggingface/.gitignore",
+        "data/raw/job-resume-matching/.cache/huggingface/CACHEDIR.TAG",
+        "data/raw/job-resume-matching/.cache/huggingface/download/.gitattributes.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/README.md.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/cv.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/job.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/matches.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+        "data/raw/job-resume-matching/.gitattributes",
+        "data/raw/job-resume-matching/README.md",
+        "data/raw/job-resume-matching/cv.csv",
+        "data/raw/job-resume-matching/job.csv",
+        "data/raw/job-resume-matching/matches.csv"
+      ]
+    },
+    {
+      "id": "M2",
+      "kind": "file",
+      "status": "MIGRATED",
+      "source": "D:\\desktop\\毕业设计\\job.csv",
+      "target": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching",
+      "file_count": 13,
+      "total_bytes": 246669663,
+      "method": "Move-Item（同一卷 D: 内重命名，不复制）",
+      "rollback": "Move-Item -LiteralPath 'D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching' -Destination 'D:\\desktop\\毕业设计\\job.csv'",
+      "notes": "同上",
+      "files": [
+        "data/raw/job-resume-matching/.cache/huggingface/.gitignore",
+        "data/raw/job-resume-matching/.cache/huggingface/CACHEDIR.TAG",
+        "data/raw/job-resume-matching/.cache/huggingface/download/.gitattributes.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/README.md.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/cv.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/job.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/matches.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+        "data/raw/job-resume-matching/.gitattributes",
+        "data/raw/job-resume-matching/README.md",
+        "data/raw/job-resume-matching/cv.csv",
+        "data/raw/job-resume-matching/job.csv",
+        "data/raw/job-resume-matching/matches.csv"
+      ]
+    },
+    {
+      "id": "M3",
+      "kind": "file",
+      "status": "MIGRATED",
+      "source": "D:\\desktop\\毕业设计\\matches.csv",
+      "target": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching",
+      "file_count": 13,
+      "total_bytes": 246669663,
+      "method": "Move-Item（同一卷 D: 内重命名，不复制）",
+      "rollback": "Move-Item -LiteralPath 'D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching' -Destination 'D:\\desktop\\毕业设计\\matches.csv'",
+      "notes": "同上",
+      "files": [
+        "data/raw/job-resume-matching/.cache/huggingface/.gitignore",
+        "data/raw/job-resume-matching/.cache/huggingface/CACHEDIR.TAG",
+        "data/raw/job-resume-matching/.cache/huggingface/download/.gitattributes.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/README.md.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/cv.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/job.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/matches.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+        "data/raw/job-resume-matching/.gitattributes",
+        "data/raw/job-resume-matching/README.md",
+        "data/raw/job-resume-matching/cv.csv",
+        "data/raw/job-resume-matching/job.csv",
+        "data/raw/job-resume-matching/matches.csv"
+      ]
+    },
+    {
+      "id": "M4",
+      "kind": "file",
+      "status": "MIGRATED",
+      "source": "D:\\desktop\\毕业设计\\README.md",
+      "target": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching",
+      "file_count": 13,
+      "total_bytes": 246669663,
+      "method": "Move-Item（同一卷 D: 内重命名，不复制）",
+      "rollback": "Move-Item -LiteralPath 'D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching' -Destination 'D:\\desktop\\毕业设计\\README.md'",
+      "notes": "HF 数据集卡片（非项目 README），受 .cache/huggingface/download/README.md.metadata 跟踪，必须随快照移动",
+      "files": [
+        "data/raw/job-resume-matching/.cache/huggingface/.gitignore",
+        "data/raw/job-resume-matching/.cache/huggingface/CACHEDIR.TAG",
+        "data/raw/job-resume-matching/.cache/huggingface/download/.gitattributes.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/README.md.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/cv.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/job.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/matches.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+        "data/raw/job-resume-matching/.gitattributes",
+        "data/raw/job-resume-matching/README.md",
+        "data/raw/job-resume-matching/cv.csv",
+        "data/raw/job-resume-matching/job.csv",
+        "data/raw/job-resume-matching/matches.csv"
+      ]
+    },
+    {
+      "id": "M5",
+      "kind": "file",
+      "status": "MIGRATED",
+      "source": "D:\\desktop\\毕业设计\\.gitattributes",
+      "target": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching",
+      "file_count": 13,
+      "total_bytes": 246669663,
+      "method": "Move-Item（同一卷 D: 内重命名，不复制）",
+      "rollback": "Move-Item -LiteralPath 'D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching' -Destination 'D:\\desktop\\毕业设计\\.gitattributes'",
+      "notes": "HF LFS 规则，受 .cache/huggingface/download/.gitattributes.metadata 跟踪，必须随快照移动",
+      "files": [
+        "data/raw/job-resume-matching/.cache/huggingface/.gitignore",
+        "data/raw/job-resume-matching/.cache/huggingface/CACHEDIR.TAG",
+        "data/raw/job-resume-matching/.cache/huggingface/download/.gitattributes.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/README.md.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/cv.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/job.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/matches.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+        "data/raw/job-resume-matching/.gitattributes",
+        "data/raw/job-resume-matching/README.md",
+        "data/raw/job-resume-matching/cv.csv",
+        "data/raw/job-resume-matching/job.csv",
+        "data/raw/job-resume-matching/matches.csv"
+      ]
+    },
+    {
+      "id": "M6",
+      "kind": "directory",
+      "status": "MIGRATED",
+      "source": "D:\\desktop\\毕业设计\\.cache",
+      "target": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching",
+      "file_count": 13,
+      "total_bytes": 246669663,
+      "method": "Move-Item（同一卷 D: 内重命名，不复制）",
+      "rollback": "Move-Item -LiteralPath 'D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching' -Destination 'D:\\desktop\\毕业设计\\.cache'",
+      "notes": "HF local_dir 下载元数据；与数据文件的相对位置保持不变，元数据继续有效",
+      "files": [
+        "data/raw/job-resume-matching/.cache/huggingface/.gitignore",
+        "data/raw/job-resume-matching/.cache/huggingface/CACHEDIR.TAG",
+        "data/raw/job-resume-matching/.cache/huggingface/download/.gitattributes.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/README.md.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/cv.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/job.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/download/matches.csv.metadata",
+        "data/raw/job-resume-matching/.cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+        "data/raw/job-resume-matching/.gitattributes",
+        "data/raw/job-resume-matching/README.md",
+        "data/raw/job-resume-matching/cv.csv",
+        "data/raw/job-resume-matching/job.csv",
+        "data/raw/job-resume-matching/matches.csv"
+      ]
+    },
+    {
+      "id": "M7",
+      "kind": "directory",
+      "status": "MIGRATED",
+      "source": "D:\\desktop\\毕业设计\\job-education",
+      "target": "D:\\desktop\\毕业设计\\data\\raw\\job-education",
+      "file_count": 15,
+      "total_bytes": 371761259,
+      "method": "Move-Item（同一卷 D: 内重命名，不复制）",
+      "rollback": "Move-Item -LiteralPath 'D:\\desktop\\毕业设计\\data\\raw\\job-education' -Destination 'D:\\desktop\\毕业设计\\job-education'",
+      "notes": "整目录移动，内部 .cache 相对布局不变；源目录名即目标目录名，故父目录为 data/raw/ 本身",
+      "files": [
+        "data/raw/job-education/.cache/huggingface/.gitignore",
+        "data/raw/job-education/.cache/huggingface/CACHEDIR.TAG",
+        "data/raw/job-education/.cache/huggingface/download/.gitattributes.metadata",
+        "data/raw/job-education/.cache/huggingface/download/README.md.metadata",
+        "data/raw/job-education/.cache/huggingface/download/annotated/2w_0716_eval.csv.metadata",
+        "data/raw/job-education/.cache/huggingface/download/default/test/2w_0716.csv.metadata",
+        "data/raw/job-education/.cache/huggingface/download/default/train/19w_0701.csv.metadata",
+        "data/raw/job-education/.cache/huggingface/download/default/validation/4w_0708.csv.metadata",
+        "data/raw/job-education/.cache/huggingface/trees/da1d0e3b2dc4ccd5b6315468f830a14f04b3e382.json",
+        "data/raw/job-education/.gitattributes",
+        "data/raw/job-education/README.md",
+        "data/raw/job-education/annotated/2w_0716_eval.csv",
+        "data/raw/job-education/default/test/2w_0716.csv",
+        "data/raw/job-education/default/train/19w_0701.csv",
+        "data/raw/job-education/default/validation/4w_0708.csv"
+      ]
+    },
+    {
+      "id": "M8",
+      "kind": "directory",
+      "status": "MIGRATED",
+      "source": "D:\\desktop\\毕业设计\\all_df.csv",
+      "target": "D:\\desktop\\毕业设计\\data\\raw\\other\\all_df.csv",
+      "file_count": 1,
+      "total_bytes": 24912302,
+      "method": "Move-Item（同一卷 D: 内重命名，不复制）",
+      "rollback": "Move-Item -LiteralPath 'D:\\desktop\\毕业设计\\data\\raw\\other\\all_df.csv' -Destination 'D:\\desktop\\毕业设计\\all_df.csv'",
+      "notes": "整目录移动，保留原始相对路径 all_df.csv/all_df.csv；该目录无 HF 缓存",
+      "files": [
+        "data/raw/other/all_df.csv/all_df.csv"
+      ]
+    }
+  ],
+  "file_inventory": [
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\.gitignore",
+      "relative_path": "data/raw/job-education/.cache/huggingface/.gitignore",
+      "previous_relative_path": "job-education/.cache/huggingface/.gitignore",
+      "bytes": 1,
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "pre_migration_sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\CACHEDIR.TAG",
+      "relative_path": "data/raw/job-education/.cache/huggingface/CACHEDIR.TAG",
+      "previous_relative_path": "job-education/.cache/huggingface/CACHEDIR.TAG",
+      "bytes": 195,
+      "sha256": "e8893e2dcb3f4545ef67a0a5b7b769113d38eef1aa61c7c7ba14659b02af955f",
+      "pre_migration_sha256": "e8893e2dcb3f4545ef67a0a5b7b769113d38eef1aa61c7c7ba14659b02af955f",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\download\\.gitattributes.metadata",
+      "relative_path": "data/raw/job-education/.cache/huggingface/download/.gitattributes.metadata",
+      "previous_relative_path": "job-education/.cache/huggingface/download/.gitattributes.metadata",
+      "bytes": 104,
+      "sha256": "5f2ce18cfbe3b506d1f48283b4a0352ff6a2772527cb6d8f07ad24313978c4b5",
+      "pre_migration_sha256": "5f2ce18cfbe3b506d1f48283b4a0352ff6a2772527cb6d8f07ad24313978c4b5",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\download\\README.md.metadata",
+      "relative_path": "data/raw/job-education/.cache/huggingface/download/README.md.metadata",
+      "previous_relative_path": "job-education/.cache/huggingface/download/README.md.metadata",
+      "bytes": 104,
+      "sha256": "ca679c9ac88d99e56edbbe0ab06979cd2bf1dbb01c65c4fb2aab1e22700692fc",
+      "pre_migration_sha256": "ca679c9ac88d99e56edbbe0ab06979cd2bf1dbb01c65c4fb2aab1e22700692fc",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\download\\annotated\\2w_0716_eval.csv.metadata",
+      "relative_path": "data/raw/job-education/.cache/huggingface/download/annotated/2w_0716_eval.csv.metadata",
+      "previous_relative_path": "job-education/.cache/huggingface/download/annotated/2w_0716_eval.csv.metadata",
+      "bytes": 127,
+      "sha256": "f3fe29abd3def9d71b3ac2efe48740eefb5be17d5e2bdae4be08bd92de0b7a34",
+      "pre_migration_sha256": "f3fe29abd3def9d71b3ac2efe48740eefb5be17d5e2bdae4be08bd92de0b7a34",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\download\\default\\test\\2w_0716.csv.metadata",
+      "relative_path": "data/raw/job-education/.cache/huggingface/download/default/test/2w_0716.csv.metadata",
+      "previous_relative_path": "job-education/.cache/huggingface/download/default/test/2w_0716.csv.metadata",
+      "bytes": 128,
+      "sha256": "9c91a88f0737cbca634315e943e14e26b60cde85b918551e7f026d6b7edf0165",
+      "pre_migration_sha256": "9c91a88f0737cbca634315e943e14e26b60cde85b918551e7f026d6b7edf0165",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\download\\default\\train\\19w_0701.csv.metadata",
+      "relative_path": "data/raw/job-education/.cache/huggingface/download/default/train/19w_0701.csv.metadata",
+      "previous_relative_path": "job-education/.cache/huggingface/download/default/train/19w_0701.csv.metadata",
+      "bytes": 128,
+      "sha256": "048bfaa82fb8d563901d609e30530463ef9d78e0479e8e689fab8bc0b725490b",
+      "pre_migration_sha256": "048bfaa82fb8d563901d609e30530463ef9d78e0479e8e689fab8bc0b725490b",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\download\\default\\validation\\4w_0708.csv.metadata",
+      "relative_path": "data/raw/job-education/.cache/huggingface/download/default/validation/4w_0708.csv.metadata",
+      "previous_relative_path": "job-education/.cache/huggingface/download/default/validation/4w_0708.csv.metadata",
+      "bytes": 128,
+      "sha256": "46a461d604c1c50e223876618636afdb1d5790a7ea056dfe62a9463eadaa7bc4",
+      "pre_migration_sha256": "46a461d604c1c50e223876618636afdb1d5790a7ea056dfe62a9463eadaa7bc4",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.cache\\huggingface\\trees\\da1d0e3b2dc4ccd5b6315468f830a14f04b3e382.json",
+      "relative_path": "data/raw/job-education/.cache/huggingface/trees/da1d0e3b2dc4ccd5b6315468f830a14f04b3e382.json",
+      "previous_relative_path": "job-education/.cache/huggingface/trees/da1d0e3b2dc4ccd5b6315468f830a14f04b3e382.json",
+      "bytes": 1520,
+      "sha256": "d16048b0315a4cc4b453df51f68b9ca3a0b17dab2ca9c21cb492205bb73c850b",
+      "pre_migration_sha256": "d16048b0315a4cc4b453df51f68b9ca3a0b17dab2ca9c21cb492205bb73c850b",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\.gitattributes",
+      "relative_path": "data/raw/job-education/.gitattributes",
+      "previous_relative_path": "job-education/.gitattributes",
+      "bytes": 2503,
+      "sha256": "7c5d1bedee5187bcc4e0b22bd6e870b9689c9f8fdc9a57be4ec929bc125604b0",
+      "pre_migration_sha256": "7c5d1bedee5187bcc4e0b22bd6e870b9689c9f8fdc9a57be4ec929bc125604b0",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\README.md",
+      "relative_path": "data/raw/job-education/README.md",
+      "previous_relative_path": "job-education/README.md",
+      "bytes": 1016,
+      "sha256": "3b0ef7e2bfd87e786bb0eeb9729dee66d0fb738e04edcd200d1a1062a1a17e22",
+      "pre_migration_sha256": "3b0ef7e2bfd87e786bb0eeb9729dee66d0fb738e04edcd200d1a1062a1a17e22",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\annotated\\2w_0716_eval.csv",
+      "relative_path": "data/raw/job-education/annotated/2w_0716_eval.csv",
+      "previous_relative_path": "job-education/annotated/2w_0716_eval.csv",
+      "bytes": 30251826,
+      "sha256": "b831ff788c44d86fdc28f4675593be5e9c0ab3cb5ee39a5a6aa0fc4feec437f2",
+      "pre_migration_sha256": "b831ff788c44d86fdc28f4675593be5e9c0ab3cb5ee39a5a6aa0fc4feec437f2",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\test\\2w_0716.csv",
+      "relative_path": "data/raw/job-education/default/test/2w_0716.csv",
+      "previous_relative_path": "job-education/default/test/2w_0716.csv",
+      "bytes": 30340189,
+      "sha256": "8a3be09a319a5b644b482054773252efbbc664852582d33c53cbf7b1cbeea39c",
+      "pre_migration_sha256": "8a3be09a319a5b644b482054773252efbbc664852582d33c53cbf7b1cbeea39c",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\train\\19w_0701.csv",
+      "relative_path": "data/raw/job-education/default/train/19w_0701.csv",
+      "previous_relative_path": "job-education/default/train/19w_0701.csv",
+      "bytes": 250645425,
+      "sha256": "c9daaed533f8aa72600ad24c9f4ef3227f2a42bacc63dfeac4418ec04d41d98a",
+      "pre_migration_sha256": "c9daaed533f8aa72600ad24c9f4ef3227f2a42bacc63dfeac4418ec04d41d98a",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\validation\\4w_0708.csv",
+      "relative_path": "data/raw/job-education/default/validation/4w_0708.csv",
+      "previous_relative_path": "job-education/default/validation/4w_0708.csv",
+      "bytes": 60517865,
+      "sha256": "f5b7c9b056e804d28076359da8d04b189f24b0da323e8c2bbf12704714295829",
+      "pre_migration_sha256": "f5b7c9b056e804d28076359da8d04b189f24b0da323e8c2bbf12704714295829",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.cache\\huggingface\\.gitignore",
+      "relative_path": "data/raw/job-resume-matching/.cache/huggingface/.gitignore",
+      "previous_relative_path": ".cache/huggingface/.gitignore",
+      "bytes": 1,
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "pre_migration_sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.cache\\huggingface\\CACHEDIR.TAG",
+      "relative_path": "data/raw/job-resume-matching/.cache/huggingface/CACHEDIR.TAG",
+      "previous_relative_path": ".cache/huggingface/CACHEDIR.TAG",
+      "bytes": 195,
+      "sha256": "e8893e2dcb3f4545ef67a0a5b7b769113d38eef1aa61c7c7ba14659b02af955f",
+      "pre_migration_sha256": "e8893e2dcb3f4545ef67a0a5b7b769113d38eef1aa61c7c7ba14659b02af955f",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.cache\\huggingface\\download\\.gitattributes.metadata",
+      "relative_path": "data/raw/job-resume-matching/.cache/huggingface/download/.gitattributes.metadata",
+      "previous_relative_path": ".cache/huggingface/download/.gitattributes.metadata",
+      "bytes": 103,
+      "sha256": "3bc03dc00bc1612afdb2fe34061abc3a1a6f948331fcc55f038f3eb054ae7f75",
+      "pre_migration_sha256": "3bc03dc00bc1612afdb2fe34061abc3a1a6f948331fcc55f038f3eb054ae7f75",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.cache\\huggingface\\download\\README.md.metadata",
+      "relative_path": "data/raw/job-resume-matching/.cache/huggingface/download/README.md.metadata",
+      "previous_relative_path": ".cache/huggingface/download/README.md.metadata",
+      "bytes": 103,
+      "sha256": "3847044e6f67cbf686900b198385d8c449e31af1f34e2654e6bd29050f7339ae",
+      "pre_migration_sha256": "3847044e6f67cbf686900b198385d8c449e31af1f34e2654e6bd29050f7339ae",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.cache\\huggingface\\download\\cv.csv.metadata",
+      "relative_path": "data/raw/job-resume-matching/.cache/huggingface/download/cv.csv.metadata",
+      "previous_relative_path": ".cache/huggingface/download/cv.csv.metadata",
+      "bytes": 127,
+      "sha256": "7ceaebb959f25c948d7eadcb909980874f580fb5add1d1bee5c18c0802d5eeff",
+      "pre_migration_sha256": "7ceaebb959f25c948d7eadcb909980874f580fb5add1d1bee5c18c0802d5eeff",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.cache\\huggingface\\download\\job.csv.metadata",
+      "relative_path": "data/raw/job-resume-matching/.cache/huggingface/download/job.csv.metadata",
+      "previous_relative_path": ".cache/huggingface/download/job.csv.metadata",
+      "bytes": 128,
+      "sha256": "c5f38fc56091d878598fd24a98437ffe872ec51430b5c9b81e38778e419c0e75",
+      "pre_migration_sha256": "c5f38fc56091d878598fd24a98437ffe872ec51430b5c9b81e38778e419c0e75",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.cache\\huggingface\\download\\matches.csv.metadata",
+      "relative_path": "data/raw/job-resume-matching/.cache/huggingface/download/matches.csv.metadata",
+      "previous_relative_path": ".cache/huggingface/download/matches.csv.metadata",
+      "bytes": 127,
+      "sha256": "0add0855ad360253fe70b46a3cd0ba98be26b49e65a9303b13a6cbb2d851a710",
+      "pre_migration_sha256": "0add0855ad360253fe70b46a3cd0ba98be26b49e65a9303b13a6cbb2d851a710",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.cache\\huggingface\\trees\\6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+      "relative_path": "data/raw/job-resume-matching/.cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+      "previous_relative_path": ".cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json",
+      "bytes": 1147,
+      "sha256": "e887ec2a48934a7cabb484f1b020279c76b76144f0b657f63398a10912747758",
+      "pre_migration_sha256": "e887ec2a48934a7cabb484f1b020279c76b76144f0b657f63398a10912747758",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\.gitattributes",
+      "relative_path": "data/raw/job-resume-matching/.gitattributes",
+      "previous_relative_path": ".gitattributes",
+      "bytes": 2639,
+      "sha256": "8112ea19544538569a4d8ec93cfd0b9cec8a7321c46f135298a987f5ed4f410a",
+      "pre_migration_sha256": null,
+      "sha256_match": null,
+      "pre_hash_note": "迁移前基线未覆盖该文件（它属于根目录 HF 快照的元文件）；同卷 Move-Item 为元数据重命名，不重写内容，迁移后 SHA-256 即当前权威值"
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\README.md",
+      "relative_path": "data/raw/job-resume-matching/README.md",
+      "previous_relative_path": "README.md",
+      "bytes": 9935,
+      "sha256": "5f0bece48a666e722f9780d349de60a6242297c46a2e78c83e4206dfc3852a2f",
+      "pre_migration_sha256": null,
+      "sha256_match": null,
+      "pre_hash_note": "迁移前基线未覆盖该文件（它属于根目录 HF 快照的元文件）；同卷 Move-Item 为元数据重命名，不重写内容，迁移后 SHA-256 即当前权威值"
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\cv.csv",
+      "relative_path": "data/raw/job-resume-matching/cv.csv",
+      "previous_relative_path": "cv.csv",
+      "bytes": 194020617,
+      "sha256": "67c81a4761516113dbebcd8c6acc1b692c4b20e54341187ff864d2d637099640",
+      "pre_migration_sha256": "67c81a4761516113dbebcd8c6acc1b692c4b20e54341187ff864d2d637099640",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\job.csv",
+      "relative_path": "data/raw/job-resume-matching/job.csv",
+      "previous_relative_path": "job.csv",
+      "bytes": 32930476,
+      "sha256": "301a382ebec72d574817cc3d4b9ee34cf08e7f8ecdfa3d373142767fe4f9f789",
+      "pre_migration_sha256": "301a382ebec72d574817cc3d4b9ee34cf08e7f8ecdfa3d373142767fe4f9f789",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\matches.csv",
+      "relative_path": "data/raw/job-resume-matching/matches.csv",
+      "previous_relative_path": "matches.csv",
+      "bytes": 19704065,
+      "sha256": "4ae60b5b134146235148557268c5e04f1fc5e7579b73c4ab59cb01073bce3338",
+      "pre_migration_sha256": "4ae60b5b134146235148557268c5e04f1fc5e7579b73c4ab59cb01073bce3338",
+      "sha256_match": true,
+      "pre_hash_note": null
+    },
+    {
+      "current_path": "D:\\desktop\\毕业设计\\data\\raw\\other\\all_df.csv\\all_df.csv",
+      "relative_path": "data/raw/other/all_df.csv/all_df.csv",
+      "previous_relative_path": "all_df.csv/all_df.csv",
+      "bytes": 24912302,
+      "sha256": "1375b216c20743f571ff8bd9ff654f5cfe82dd0304f0b3d763ecc62acb41ef5f",
+      "pre_migration_sha256": "1375b216c20743f571ff8bd9ff654f5cfe82dd0304f0b3d763ecc62acb41ef5f",
+      "sha256_match": true,
+      "pre_hash_note": null
+    }
+  ],
+  "not_moved": [
+    {
+      "path": "chinese-skillspan-benchmark/",
+      "reason": "完全独立的 Git 仓库（remote github.com/AlfredJamesLi/chinese-skillspan-benchmark，工作区 0 处未提交修改），属另一研究项目；移动会破坏其仓库语义与外部引用",
+      "action": "原地保留，未修改任何文件"
+    },
+    {
+      "path": "reports/environment-acceptance.md",
+      "reason": "历史实测结论，约束要求不得改写；其中记录的旧路径作为迁移前证据保留",
+      "action": "未修改"
+    },
+    {
+      "path": "reports/environment-acceptance.json",
+      "reason": "同上（datasets[].path 字段记录的是迁移前实测路径）",
+      "action": "未修改"
+    },
+    {
+      "path": "environment.yml",
+      "reason": "不含数据集路径，且 test_reproducibility.py 会校验其中不得出现本机绝对路径",
+      "action": "未修改"
+    },
+    {
+      "path": ".env.example",
+      "reason": "仅含环境变量名与注释，不含被迁移资源的路径",
+      "action": "未修改"
+    },
+    {
+      "path": "tests/environment/test_conda.py, test_gpu_training.py, test_nlp_dependencies.py, test_numpy_compat.py, test_reproducibility.py, test_torch_cuda.py",
+      "reason": "不引用任何数据集路径，无需改动",
+      "action": "未修改"
+    },
+    {
+      "path": "docs/environment-setup.md",
+      "reason": "历史搭建记录段落保留原样",
+      "action": "仅更新数据集路径表与只读目录清单，未改写历史结论"
+    }
+  ],
+  "reference_updates": [
+    {
+      "id": "R1",
+      "file": "tests/environment/test_dataset_loading.py",
+      "change": "新增 DATA_HOME/_DATA_PARENT/data_path(rel) 解析层；targets 的 key 与所有 found[...] 逻辑名、断言与输出格式保持不变",
+      "verification": "重跑 25 项全部 PASS（与历史报告逐项数一致）"
+    },
+    {
+      "id": "R2",
+      "file": "tests/environment/test_e2e_pipeline.py",
+      "change": "os.path.join(ROOT, \"matches.csv\") → os.path.join(ROOT, \"data\", \"raw\", \"job-resume-matching\", \"matches.csv\")",
+      "verification": "重跑 6 项全部 PASS"
+    },
+    {
+      "id": "R3",
+      "file": "docs/environment-setup.md",
+      "change": "更新数据集路径表前缀、只读目录清单、示例命令中的旧路径；历史搭建记录原样保留",
+      "verification": "全文检索无指向旧位置的失效数据集路径"
+    },
+    {
+      "id": "R4",
+      "file": ".gitignore",
+      "change": "新增 data/raw/、data/{interim,processed,splits}/*、models/**、experiments/**、*.safetensors、*.bin 忽略规则（按目录忽略，不用 *.csv 通配）",
+      "verification": "data/README.md 与 .gitkeep 仍可入库"
+    }
+  ],
+  "verification_record": {
+    "date": "2026-10-28",
+    "pre_hash_file": "C:\\WINDOWS\\TEMP\\gd_pre_hashes.json（迁移前基线，本清单已内联其值）",
+    "post_hash_file": "C:\\WINDOWS\\TEMP\\gd_post_hashes.json",
+    "pip_check": "No broken requirements found.（退出码 0）",
+    "tests": {
+      "test_conda.py": "6 项 / FAIL=0",
+      "test_torch_cuda.py": "10 项 / FAIL=0",
+      "test_gpu_training.py": "9 项 / FAIL=0",
+      "test_numpy_compat.py": "7 项 / FAIL=0",
+      "test_nlp_dependencies.py": "33 项 / FAIL=0",
+      "test_dataset_loading.py": "25 项 / FAIL=0",
+      "test_e2e_pipeline.py": "6 项 / FAIL=0",
+      "test_reproducibility.py": "8 项 / FAIL=0（含 1 项既存 WARN，非本次引入）"
+    },
+    "test_total_items": 104,
+    "test_total_with_pip_check": 105,
+    "csv_read_check": "cv/job/matches/all_df/job-education 8 个文件全部可读，关联键 candidate_id/job_id 100% 命中",
+    "row_counts_after_migration": {
+      "cv.csv": 9544,
+      "job.csv": 1167,
+      "matches.csv": 122560,
+      "other/all_df.csv/all_df.csv": 251381,
+      "job-education/default/train/19w_0701.csv": 197574,
+      "job-education/default/validation/4w_0708.csv": 45593,
+      "job-education/default/test/2w_0716.csv": 22730,
+      "job-education/annotated/2w_0716_eval.csv": 22730
+    }
+  }
+}

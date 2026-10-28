@@ -1,0 +1,272 @@
+{
+  "report": "environment-acceptance",
+  "generated_at": "2026-10-28",
+  "project_root": "D:\\desktop\\毕业设计",
+  "conclusion": "B",
+  "conclusion_text": "有条件通过：基本可用，但存在非阻断性问题",
+  "environment": {
+    "conda_env": "graduation-design",
+    "env_path": "C:\\Users\\MemoryLeak\\miniconda3\\envs\\graduation-design",
+    "conda_root": "C:\\Users\\MemoryLeak\\miniconda3",
+    "conda_version": "24.9.2",
+    "python": "3.11.18",
+    "python_arch": "64-bit",
+    "pip": "26.2.2",
+    "torch": "2.1.2+cu121",
+    "torch_cuda_runtime": "12.1",
+    "cudnn": "8.8.1 (8801)",
+    "gpu": "NVIDIA GeForce RTX 2050",
+    "gpu_capability": "(8, 6)",
+    "gpu_count": 1,
+    "gpu_memory_gb": 4.0,
+    "driver": "581.80",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "transformers": "4.40.2",
+    "tokenizers": "0.19.1",
+    "huggingface_hub": "0.26.2",
+    "scikit_learn": "1.5.2"
+  },
+  "tests": [
+    {
+      "name": "环境隔离与解释器一致性",
+      "script": "tests/environment/test_conda.py",
+      "command": "conda run -n graduation-design --no-capture-output python tests/environment/test_conda.py",
+      "exit_code": 0,
+      "items": 6,
+      "fail": 0,
+      "status": "PASS",
+      "evidence": [
+        "sys.executable=C:\\Users\\MemoryLeak\\miniconda3\\envs\\graduation-design\\python.exe",
+        "sys.prefix == sys.base_prefix == CONDA_PREFIX == 环境根",
+        "CONDA_DEFAULT_ENV=graduation-design",
+        "pip 26.2.2 属于同一环境 site-packages",
+        "site-packages 仅含环境自身路径，未混入全局路径"
+      ]
+    },
+    {
+      "name": "依赖完整性",
+      "script": "conda 内置检查",
+      "command": "conda run -n graduation-design --no-capture-output python -m pip check",
+      "exit_code": 0,
+      "items": 1,
+      "fail": 0,
+      "status": "PASS",
+      "evidence": ["No broken requirements found."]
+    },
+    {
+      "name": "PyTorch 与 CUDA 实测",
+      "script": "tests/environment/test_torch_cuda.py",
+      "command": "conda run -n graduation-design --no-capture-output python tests/environment/test_torch_cuda.py",
+      "exit_code": 0,
+      "items": 10,
+      "fail": 0,
+      "status": "PASS",
+      "evidence": [
+        "torch 2.1.2+cu121, torch.version.cuda=12.1, cuda.is_available()=True",
+        "torch.cuda.init() 成功，识别 NVIDIA GeForce RTX 2050，capability=(8,6)，1 块设备，4.00GB",
+        "cuDNN 可用，版本 8801（8.8.1）",
+        "GPU 矩阵乘法 512x512：0.095s，与 CPU 最大偏差 6.485e-05，全部有限，显存峰值 11.1MB",
+        "GPU 矩阵乘法 1024x1024：0.002s，与 CPU 最大偏差 1.602e-04，全部有限，显存峰值 20.1MB",
+        "CUDA Tensor→NumPy 往返 dtype=float32, sum=15.0"
+      ]
+    },
+    {
+      "name": "NumPy / PyTorch ABI 兼容",
+      "script": "tests/environment/test_numpy_compat.py",
+      "command": "conda run -n graduation-design --no-capture-output python tests/environment/test_numpy_compat.py",
+      "exit_code": 0,
+      "items": 7,
+      "fail": 0,
+      "status": "PASS",
+      "evidence": [
+        "numpy 1.26.4 + torch 2.1.2+cu121，未出现 _ARRAY_API not found / Numpy is not available",
+        "torch.tensor(numpy)、torch.from_numpy()、tensor.numpy() 全部正确",
+        "float16/float32/float64/int32/int64/bool_ 六种 dtype 双向转换一致",
+        "NumPy→CUDA→NumPy 全链路最大偏差 0.000e+00，全部有限",
+        "numpy.core._multiarray_umath 可正常加载"
+      ]
+    },
+    {
+      "name": "GPU 真实训练（模拟数据 MLP）",
+      "script": "tests/environment/test_gpu_training.py",
+      "command": "conda run -n graduation-design --no-capture-output python tests/environment/test_gpu_training.py",
+      "exit_code": 0,
+      "items": 9,
+      "fail": 0,
+      "status": "PASS",
+      "evidence": [
+        "模型参数与输入/标签均位于 cuda:0",
+        "MLP(32-64-64-4) + AdamW + CrossEntropy，连续 40 步前向/反向/step 全部成功",
+        "Loss 1.389322 → 0.725761（前5步均值 1.362062，后5步均值 0.773011，单步严格单调下降）",
+        "所有步骤梯度均有限，参数无 NaN/Inf，参数最大变化 4.640381e-02",
+        "torch.cuda.synchronize() 成功，耗时 0.313s，显存峰值 16.41MB"
+      ]
+    },
+    {
+      "name": "AI / NLP 依赖兼容性",
+      "script": "tests/environment/test_nlp_dependencies.py",
+      "command": "conda run -n graduation-design --no-capture-output python tests/environment/test_nlp_dependencies.py",
+      "exit_code": 0,
+      "items": 33,
+      "fail": 0,
+      "status": "PASS",
+      "evidence": [
+        "17 个组件真实 import 成功（含 sklearn/PyYAML 等分发名与导入名不一致的包）",
+        "版本约束：transformers 4.40.2 要求 tokenizers>=0.19,<0.20、huggingface_hub<1.0 → 实装 0.19.1 / 0.26.2，兼容",
+        "tokenizers 本地编码功能正常；BertModel 随机初始化前向输出 (2,8,32) 且全有限（全程未联网下载权重）",
+        "safetensors 保存/加载一致；scikit-learn 训练 accuracy=0.967；seqeval f1=1.00；torchcrf CRF 构造成功",
+        "jieba 中文分词：岗位/画像/与/简历/智能/匹配；PyYAML 解析正常",
+        "datasets / sentence_transformers / fastapi / python-docx 未安装且当前源码零引用 → NOT_APPLICABLE；accelerate 1.15.0（peft 传递依赖）→ OPTIONAL"
+      ],
+      "note": "首次运行出现 2 项假 FAIL，原因是测试脚本用分发包名 scikit-learn / PyYAML 去 import（实际导入名为 sklearn / yaml）；修正脚本后复测全部通过。属测试代码缺陷，非环境故障。"
+    },
+    {
+      "name": "本地数据集验收",
+      "script": "tests/environment/test_dataset_loading.py",
+      "command": "conda run -n graduation-design --no-capture-output python tests/environment/test_dataset_loading.py",
+      "exit_code": 0,
+      "items": 25,
+      "fail": 0,
+      "status": "PASS",
+      "evidence": [
+        "8 个数据文件全部存在且可按 UTF-8 完整解码（all_df.csv/all_df.csv 带 BOM，用 utf-8-sig 兼容）",
+        "cv.csv 9,544 行 / job.csv 1,167 行 / matches.csv 122,560 行，关键列零空值",
+        "关联键 100% 可用：matches 的 9,532 个 candidate_id 全部命中 cv.csv；1,164 个 job_id 全部命中 job.csv",
+        "label_strength 真实标签分布：medium_positive 70,636 / weak_positive 51,150 / strong_positive 774",
+        "embedding 列解析为 768 维 float32 向量",
+        "job-education 训练/验证/测试三个 CSV 结构有效（system/user/assistant 对话格式，无空值）"
+      ]
+    },
+    {
+      "name": "端到端训练链路冒烟（真实数据小样本）",
+      "script": "tests/environment/test_e2e_pipeline.py",
+      "command": "conda run -n graduation-design --no-capture-output python tests/environment/test_e2e_pipeline.py",
+      "exit_code": 0,
+      "items": 6,
+      "fail": 0,
+      "status": "PASS",
+      "evidence": [
+        "matches.csv 前 512 行真实读取 → 6 维打分特征 + 3 档标签（含义来自 README 数据字典，未做字段猜测）",
+        "特征矩阵 (512,6) 全部有限，标签取值 {0,1,2}",
+        "Tensor→CUDA→MLP 前向→CrossEntropy→backward→AdamW step 连续 20 步",
+        "Loss 1.037560 → 0.652925，耗时 0.141s，显存峰值 16.47MB",
+        "训练后训练集准确率 0.674（仅链路验证，不作为模型指标）"
+      ],
+      "note": "基础设施冒烟测试，不代表正式业务模型通过验收。"
+    },
+    {
+      "name": "环境可复现性",
+      "script": "tests/environment/test_reproducibility.py",
+      "command": "conda run -n graduation-design --no-capture-output python tests/environment/test_reproducibility.py",
+      "exit_code": 0,
+      "items": 8,
+      "fail": 0,
+      "warn": 1,
+      "status": "PASS_WITH_WARN",
+      "evidence": [
+        "environment.yml 存在，声明 python=3.11，与实装 3.11.18 一致",
+        "torch==2.1.2+cu121 与 --extra-index-url https://download.pytorch.org/whl/cu121 明确记录",
+        "无本机绝对路径，可在新机器复现",
+        "21 个直接依赖声明版本与实装版本逐项一致",
+        "WARN：chinese-skillspan-benchmark 子项目的冻结配方与统一环境存在 4 处差异（numpy 1.26.3/1.26.4/2.1.3、torch 2.1.2/2.1.2+cu121、transformers 4.37.1/4.40.2），取舍理由已记录在 docs/environment-setup.md"
+      ]
+    }
+  ],
+  "gpu_training_detail": {
+    "device": "cuda:0 (NVIDIA GeForce RTX 2050)",
+    "model": "MLP 32-64-64-4",
+    "optimizer": "AdamW(lr=1e-3)",
+    "loss_fn": "CrossEntropyLoss",
+    "steps": 40,
+    "batch": 64,
+    "loss_first": 1.389322,
+    "loss_last": 0.725761,
+    "loss_min": 0.725761,
+    "loss_max": 1.389322,
+    "grad_finite": true,
+    "params_updated": true,
+    "params_max_delta": 0.04640381,
+    "nan_inf": false,
+    "cuda_sync": true,
+    "peak_memory_mb": 16.41,
+    "elapsed_sec": 0.313
+  },
+  "datasets": [
+    {
+      "path": "D:\\desktop\\毕业设计\\cv.csv",
+      "size_mb": 185.0,
+      "encoding": "UTF-8 (no BOM)",
+      "columns": 11,
+      "rows": 9544,
+      "key_fields": ["candidate_id", "resume_text", "clean_skills", "education_text", "experience_text", "years_experience", "inferred_category", "embedding"],
+      "usable": "可用于画像特征与向量检索"
+    },
+    {
+      "path": "D:\\desktop\\毕业设计\\job.csv",
+      "size_mb": 31.4,
+      "encoding": "UTF-8 (no BOM)",
+      "columns": 10,
+      "rows": 1167,
+      "key_fields": ["job_id", "job_title", "category", "job_description", "clean_skills", "education_text", "years_required", "embedding"],
+      "usable": "可用于岗位画像建模"
+    },
+    {
+      "path": "D:\\desktop\\毕业设计\\matches.csv",
+      "size_mb": 18.8,
+      "encoding": "UTF-8 (no BOM)",
+      "columns": 13,
+      "rows": 122560,
+      "key_fields": ["candidate_id", "job_id", "final_score", "label_strength", "semantic_score", "skill_score", "position_score", "category_score", "experience_score", "education_score", "candidate_rank"],
+      "usable": "提供 3 档真实匹配标签与 6 维打分特征，可用于排序/分类；但仅含正样本，二分类与成对排序需自行采样负例（README 已声明）"
+    },
+    {
+      "path": "D:\\desktop\\毕业设计\\all_df.csv\\all_df.csv",
+      "size_mb": 23.8,
+      "encoding": "UTF-8 with BOM",
+      "columns": 8,
+      "rows": null,
+      "key_fields": ["job_name", "company_name", "job_salary", "work_experience", "educational_requirements", "company_address", "job_type", "scam_probability"],
+      "usable": "中文岗位-学历-经验结构化表，可用于岗位画像与学历要求抽取"
+    },
+    {
+      "path": "D:\\desktop\\毕业设计\\job-education\\",
+      "size_mb": 354.5,
+      "encoding": "UTF-8 (no BOM)",
+      "columns": 9,
+      "splits": {"train": "19w_0701.csv (~19万)", "validation": "4w_0708.csv (~4万)", "test": "2w_0716.csv (~2万)", "annotated_eval": "2w_0716_eval.csv"},
+      "key_fields": ["job_id", "system", "user", "assistant"],
+      "usable": "岗位描述→学历要求的指令微调数据，训练/验证/测试切分齐备"
+    },
+    {
+      "path": "D:\\desktop\\毕业设计\\chinese-skillspan-benchmark\\",
+      "size_mb": null,
+      "encoding": "UTF-8",
+      "columns": null,
+      "rows": null,
+      "key_fields": ["gold150 人工参考集", "Silver 训练/开发集", "scorer/score_lskt.py 评测器"],
+      "usable": "中文岗位技能跨度抽取基准（独立 Git 仓库，含自有 requirements 与评测脚本）"
+    }
+  ],
+  "dataset_provenance": {
+    "claimed_repo": "nonameee12233/job-resume-matching",
+    "local_evidence": "根目录为 Hugging Face 数据集快照：README.md 为 HF 数据集卡片、.gitattributes 为 LFS 规则、.cache/huggingface/download 下有 cv.csv/job.csv/matches.csv 的下载元数据",
+    "note": "本地元数据文件仅含 etag/sha/时间戳，不含 repo id 字符串，无法从本地文件自证仓库名；但文件清单与字段结构与该数据集 README 数据字典完全一致",
+    "conclusion": "高度一致，可认定为该数据集的本地快照"
+  },
+  "risks": {
+    "must_fix_now": [],
+    "can_defer": [
+      "子项目冻结配方（requirements-train.txt: torch 2.1.2 / transformers 4.37.1 / numpy 1.26.3）与统一环境存在差异，若需对 JobBERT 3M 0.4331 逐位复现，须另建严格配方环境",
+      "accelerate 1.15.0 作为 peft 传递依赖被安装但未在 environment.yml 显式声明，建议补记或按需卸载",
+      "环境无 requirements.lock.txt 精确锁文件，建议在版本稳定后导出"
+    ],
+    "future_training_phase": [
+      "RTX 2050 仅 4GB 显存：训练 RoBERTa-wwm-ext-large 级别模型需小 batch + 梯度累积 + fp16，或改用较小编码器",
+      "matches.csv 仅含正样本，二分类/成对排序需按 candidate_id 切分并采样负例",
+      "sentence-transformers / datasets / fastapi / python-docx 未安装，按实际业务需要再装",
+      "Hugging Face 权重下载需网络通畅，建议预先缓存并考虑 HF_HUB_OFFLINE 离线模式"
+    ]
+  },
+  "verdict_reason": "9 项核心验收项（环境隔离、依赖完整性、CUDA 初始化、GPU 计算、GPU 训练、NumPy 兼容、数据集、NLP 组件、环境可复现）全部 PASS，实测无任何功能故障，环境可立即用于模型开发；但存在 3 项非阻断性问题（子项目冻结配方与统一环境的版本差异、accelerate 未显式声明、显存与数据负样本限制），需在后续训练阶段处理，故定为 B 有条件通过。"
+}

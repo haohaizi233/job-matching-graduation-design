@@ -1,0 +1,165 @@
+{
+  "checks": [
+    {
+      "chunks": 1,
+      "columns": [
+        "candidate_id",
+        "clean_skills",
+        "clean_skills_json",
+        "education_text",
+        "embedding",
+        "experience_text",
+        "inferred_category",
+        "resume_text",
+        "source_row",
+        "target_position",
+        "years_experience"
+      ],
+      "hard_issue_count": 0,
+      "issues": [],
+      "ok": true,
+      "path": "data/raw/job-resume-matching/cv.csv",
+      "rows": 9544,
+      "schema": "Resume"
+    },
+    {
+      "chunks": 1,
+      "columns": [
+        "category",
+        "clean_skills",
+        "clean_skills_json",
+        "education_text",
+        "embedding",
+        "job_description",
+        "job_id",
+        "job_text",
+        "job_title",
+        "years_required"
+      ],
+      "hard_issue_count": 0,
+      "issues": [],
+      "ok": true,
+      "path": "data/raw/job-resume-matching/job.csv",
+      "rows": 1167,
+      "schema": "Job"
+    },
+    {
+      "chunks": 7,
+      "columns": [
+        "candidate_id",
+        "candidate_rank",
+        "candidate_rank_pct",
+        "category_score",
+        "education_score",
+        "experience_score",
+        "final_score",
+        "job_id",
+        "label_strength",
+        "position_score",
+        "raw_score",
+        "semantic_score",
+        "skill_score"
+      ],
+      "hard_issue_count": 0,
+      "issues": [],
+      "ok": true,
+      "path": "data/raw/job-resume-matching/matches.csv",
+      "rows": 122560,
+      "schema": "Match"
+    },
+    {
+      "chunks": 10,
+      "column_set_ok": true,
+      "columns": [
+        "ai",
+        "assistant",
+        "diff",
+        "id",
+        "job_id",
+        "system",
+        "user",
+        "user_short",
+        "user_short2"
+      ],
+      "hard_issue_count": 0,
+      "issues": [],
+      "ok": true,
+      "path": "data/raw/job-education/default/train/19w_0701.csv",
+      "rows": 197574,
+      "schema": "EducationSample",
+      "variant": "default"
+    },
+    {
+      "chunks": 3,
+      "column_set_ok": true,
+      "columns": [
+        "ai",
+        "assistant",
+        "diff",
+        "id",
+        "job_id",
+        "system",
+        "user",
+        "user_short",
+        "user_short2"
+      ],
+      "hard_issue_count": 0,
+      "issues": [],
+      "ok": true,
+      "path": "data/raw/job-education/default/validation/4w_0708.csv",
+      "rows": 45593,
+      "schema": "EducationSample",
+      "variant": "default"
+    },
+    {
+      "chunks": 2,
+      "column_set_ok": true,
+      "columns": [
+        "ai",
+        "assistant",
+        "diff",
+        "id",
+        "job_id",
+        "system",
+        "user",
+        "user_short",
+        "user_short2"
+      ],
+      "hard_issue_count": 0,
+      "issues": [],
+      "ok": true,
+      "path": "data/raw/job-education/default/test/2w_0716.csv",
+      "rows": 22730,
+      "schema": "EducationSample",
+      "variant": "default"
+    },
+    {
+      "chunks": 2,
+      "column_set_ok": true,
+      "columns": [
+        "assistant",
+        "diff",
+        "id",
+        "job_id",
+        "user",
+        "user_short",
+        "【模型结果-新的】是否正确",
+        "【线上学历-旧的】是否正确",
+        "人工正确结果",
+        "是否英文岗位",
+        "模型结果-新的",
+        "线上学历-旧的"
+      ],
+      "hard_issue_count": 0,
+      "issues": [],
+      "ok": true,
+      "path": "data/raw/job-education/annotated/2w_0716_eval.csv",
+      "rows": 22730,
+      "schema": "EducationSample",
+      "variant": "annotated"
+    }
+  ],
+  "column_set_ok": true,
+  "generated_by": "step_validate_schema",
+  "ok": true
+}

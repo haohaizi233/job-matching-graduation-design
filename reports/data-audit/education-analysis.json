@@ -1,0 +1,890 @@
+{
+  "generated_by": "scripts/data_audit/analyze_education.py",
+  "note": "只读审计；未修改任何原始文件。不输出岗位描述原文。",
+  "files": {
+    "train": {
+      "file": {
+        "path": "data/raw/job-education/default/train/19w_0701.csv",
+        "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\train\\19w_0701.csv",
+        "bytes": 250645425,
+        "mb": 239.034,
+        "encoding": "UTF-8"
+      },
+      "rows": 197574,
+      "columns": [
+        "job_id",
+        "system",
+        "user",
+        "assistant",
+        "id",
+        "user_short",
+        "ai",
+        "diff",
+        "user_short2"
+      ],
+      "user_text_len": {
+        "rows": 197574,
+        "min": 20,
+        "p25": 220,
+        "median": 324,
+        "p75": 449,
+        "max": 7694,
+        "mean": 375.2,
+        "empty_or_tiny_len_le3": 0
+      },
+      "user_tag_coverage": {
+        "has_岗位名称": 197542,
+        "has_岗位描述": 197573,
+        "has_学历描述": 197569,
+        "has_学历描述_pct": 99.997
+      },
+      "学历描述_field": {
+        "missing": 5,
+        "text_len": {
+          "rows": 197569,
+          "min": 0,
+          "p25": 2,
+          "median": 2,
+          "p75": 2,
+          "max": 18,
+          "mean": 2.1,
+          "empty_or_tiny_len_le3": 184371
+        },
+        "unique_values": 74,
+        "top_values": {
+          "本科": 97426,
+          "大专": 50194,
+          "硕士": 17979,
+          "": 14671,
+          "本科及以上": 5194,
+          "专科及以上": 3554,
+          "博士": 3345,
+          "硕士研究生": 1400,
+          "硕士及以上": 812,
+          "不限": 608,
+          "硕士研究生及以上": 542,
+          "大专及以上": 228,
+          "硕士研究生毕业": 222,
+          "博士研究生": 196,
+          "硕士、博士": 193,
+          "大学本科毕业": 124,
+          "大学本科": 98,
+          "学历不限": 95,
+          "本科及以上学历": 94,
+          "大学本科及以上": 94,
+          "大学": 54,
+          "博士及以上": 52,
+          "硕士及以上学历": 47,
+          "大学专科": 43,
+          "校招": 38
+        },
+        "contains_multiple_degree_words_pct": 0.122
+      },
+      "hard_chinese_expressions_in_user": {
+        "含_及以上": 91427,
+        "含_或以上": 4009,
+        "含_学历不限": 507,
+        "含_全日制": 7024,
+        "含_统招": 7154,
+        "含_学士学位": 195,
+        "含_硕士学位": 257,
+        "含_博士学位": 979,
+        "含_研究生学历": 1680,
+        "含_大专/专科混用": 56821,
+        "含_本科及以上_但未提其他层级": 53572,
+        "含_中专/中技/高中": 2501,
+        "含_应届/在校": 45774,
+        "含_英文学位词": 1270,
+        "含_数字层级如_985_211": 3772
+      },
+      "label_column_used": "assistant",
+      "label_missing": 0,
+      "label_missing_pct": 0.0,
+      "label_present_rows": 197574,
+      "label_unique_values": 13,
+      "label_value_counts": {
+        "博士、硕士、本科": 64359,
+        "本科": 41830,
+        "博士、硕士、本科、大专": 28721,
+        "大专": 25157,
+        "博士、硕士": 12075,
+        "硕士": 10682,
+        "硕士、本科": 5976,
+        "博士": 4044,
+        "学历不明": 2546,
+        "本科、大专": 1222,
+        "学历不限": 795,
+        "硕士、本科、大专": 114,
+        "博士、本科": 53
+      },
+      "label_token_count_dist": {
+        "1": 85054,
+        "2": 19326,
+        "3": 64473,
+        "4": 28721
+      },
+      "multi_label_rows": 112520,
+      "multi_label_pct": 56.951,
+      "empty_label_rows": 0,
+      "label_token_vocabulary": {
+        "本科": 142275,
+        "硕士": 121927,
+        "博士": 109252,
+        "大专": 55214,
+        "学历不明": 2546,
+        "学历不限": 795
+      },
+      "label_token_vocab_size": 6,
+      "no_education_requirement_tokens": [
+        "学历不限"
+      ],
+      "no_education_requirement_rows": 795,
+      "label_is_closed_small_set": true,
+      "col_ai": {
+        "dtype": "object",
+        "missing": 0,
+        "unique": 111
+      },
+      "col_diff": {
+        "dtype": "object",
+        "missing": 12,
+        "unique": 2
+      },
+      "col_user_short2": {
+        "dtype": "float64",
+        "missing": 197574,
+        "unique": 0
+      },
+      "col_id": {
+        "dtype": "float64",
+        "missing": 12,
+        "unique": 197562
+      },
+      "col_job_id": {
+        "dtype": "int64",
+        "missing": 0,
+        "unique": 197531
+      },
+      "ai_vs_assistant_agreement_pct": 97.0907,
+      "ai_vs_assistant_compared_rows": 197574
+    },
+    "validation": {
+      "file": {
+        "path": "data/raw/job-education/default/validation/4w_0708.csv",
+        "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\validation\\4w_0708.csv",
+        "bytes": 60517865,
+        "mb": 57.714,
+        "encoding": "UTF-8"
+      },
+      "rows": 45593,
+      "columns": [
+        "job_id",
+        "system",
+        "user",
+        "assistant",
+        "id",
+        "user_short",
+        "ai",
+        "diff",
+        "user_short2"
+      ],
+      "user_text_len": {
+        "rows": 45593,
+        "min": 43,
+        "p25": 245,
+        "median": 342,
+        "p75": 470,
+        "max": 6565,
+        "mean": 396.7,
+        "empty_or_tiny_len_le3": 0
+      },
+      "user_tag_coverage": {
+        "has_岗位名称": 45593,
+        "has_岗位描述": 45593,
+        "has_学历描述": 45593,
+        "has_学历描述_pct": 100.0
+      },
+      "学历描述_field": {
+        "missing": 0,
+        "text_len": {
+          "rows": 45593,
+          "min": 0,
+          "p25": 2,
+          "median": 2,
+          "p75": 2,
+          "max": 16,
+          "mean": 2.1,
+          "empty_or_tiny_len_le3": 43358
+        },
+        "unique_values": 45,
+        "top_values": {
+          "本科": 23933,
+          "大专": 12123,
+          "硕士": 4067,
+          "": 2329,
+          "本科及以上": 837,
+          "博士": 634,
+          "硕士及以上": 449,
+          "专科及以上": 291,
+          "不限": 215,
+          "硕士研究生": 185,
+          "硕士研究生及以上": 119,
+          "大专及以上": 77,
+          "博士研究生": 75,
+          "硕士研究生毕业及以上": 62,
+          "专科": 53,
+          "博士及以上": 32,
+          "学历不限": 19,
+          "大学本科": 16,
+          "大学专科": 10,
+          "博士研究生毕业": 8,
+          "博士研究生及以上": 7,
+          "全日制本科以上学历，理工科专业": 7,
+          "学士及以上": 6,
+          "研究生硕士": 5,
+          "普通高等教育五年制本科": 3
+        },
+        "contains_multiple_degree_words_pct": 0.015
+      },
+      "hard_chinese_expressions_in_user": {
+        "含_及以上": 21342,
+        "含_或以上": 809,
+        "含_学历不限": 164,
+        "含_全日制": 1676,
+        "含_统招": 1907,
+        "含_学士学位": 37,
+        "含_硕士学位": 31,
+        "含_博士学位": 143,
+        "含_研究生学历": 373,
+        "含_大专/专科混用": 13123,
+        "含_本科及以上_但未提其他层级": 12272,
+        "含_中专/中技/高中": 722,
+        "含_应届/在校": 10444,
+        "含_英文学位词": 405,
+        "含_数字层级如_985_211": 1165
+      },
+      "label_column_used": "assistant",
+      "label_missing": 0,
+      "label_missing_pct": 0.0,
+      "label_present_rows": 45593,
+      "label_unique_values": 15,
+      "label_value_counts": {
+        "博士、硕士、本科": 14630,
+        "本科": 9883,
+        "博士、硕士、本科、大专": 6647,
+        "大专": 5757,
+        "博士、硕士": 2794,
+        "硕士": 2223,
+        "硕士、本科": 1674,
+        "博士": 748,
+        "学历不明": 693,
+        "本科、大专": 352,
+        "学历不限": 149,
+        "硕士、本科、大专": 39,
+        "博士、本科": 2,
+        "博士、大专": 1,
+        "硕士、大专": 1
+      },
+      "label_token_count_dist": {
+        "1": 19453,
+        "2": 4824,
+        "3": 14669,
+        "4": 6647
+      },
+      "multi_label_rows": 26140,
+      "multi_label_pct": 57.333,
+      "empty_label_rows": 0,
+      "label_token_vocabulary": {
+        "本科": 33227,
+        "硕士": 28008,
+        "博士": 24822,
+        "大专": 12797,
+        "学历不明": 693,
+        "学历不限": 149
+      },
+      "label_token_vocab_size": 6,
+      "no_education_requirement_tokens": [
+        "学历不限"
+      ],
+      "no_education_requirement_rows": 149,
+      "label_is_closed_small_set": true,
+      "col_ai": {
+        "dtype": "object",
+        "missing": 0,
+        "unique": 19
+      },
+      "col_diff": {
+        "dtype": "bool",
+        "missing": 0,
+        "unique": 2
+      },
+      "col_user_short2": {
+        "dtype": "float64",
+        "missing": 45593,
+        "unique": 0
+      },
+      "col_id": {
+        "dtype": "int64",
+        "missing": 0,
+        "unique": 45593
+      },
+      "col_job_id": {
+        "dtype": "int64",
+        "missing": 0,
+        "unique": 45593
+      },
+      "ai_vs_assistant_agreement_pct": 91.5623,
+      "ai_vs_assistant_compared_rows": 45593
+    },
+    "test": {
+      "file": {
+        "path": "data/raw/job-education/default/test/2w_0716.csv",
+        "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\test\\2w_0716.csv",
+        "bytes": 30340189,
+        "mb": 28.935,
+        "encoding": "UTF-8"
+      },
+      "rows": 22730,
+      "columns": [
+        "job_id",
+        "system",
+        "user",
+        "assistant",
+        "id",
+        "user_short",
+        "ai",
+        "diff",
+        "user_short2"
+      ],
+      "user_text_len": {
+        "rows": 22730,
+        "min": 43,
+        "p25": 249,
+        "median": 348,
+        "p75": 474,
+        "max": 6565,
+        "mean": 404.9,
+        "empty_or_tiny_len_le3": 0
+      },
+      "user_tag_coverage": {
+        "has_岗位名称": 22730,
+        "has_岗位描述": 22730,
+        "has_学历描述": 22730,
+        "has_学历描述_pct": 100.0
+      },
+      "学历描述_field": {
+        "missing": 0,
+        "text_len": {
+          "rows": 22730,
+          "min": 0,
+          "p25": 2,
+          "median": 2,
+          "p75": 2,
+          "max": 10,
+          "mean": 2.0,
+          "empty_or_tiny_len_le3": 22066
+        },
+        "unique_values": 29,
+        "top_values": {
+          "本科": 12296,
+          "大专": 6509,
+          "硕士": 2194,
+          "": 819,
+          "本科及以上": 256,
+          "博士": 192,
+          "专科及以上": 106,
+          "硕士研究生及以上": 63,
+          "硕士研究生毕业及以上": 62,
+          "硕士及以上": 59,
+          "不限": 55,
+          "博士及以上": 28,
+          "硕士研究生": 22,
+          "博士研究生": 17,
+          "大专及以上": 15,
+          "博士研究生毕业": 8,
+          "研究生硕士": 5,
+          "博士研究生及以上": 4,
+          "学历不限": 4,
+          "大学本科": 3,
+          "本科,硕士": 3,
+          "硕士及以上学历": 2,
+          "硕士或博士": 2,
+          "大学本科毕业": 1,
+          "本科及以上学历": 1
+        },
+        "contains_multiple_degree_words_pct": 0.022
+      },
+      "hard_chinese_expressions_in_user": {
+        "含_及以上": 9956,
+        "含_或以上": 397,
+        "含_学历不限": 78,
+        "含_全日制": 874,
+        "含_统招": 789,
+        "含_学士学位": 17,
+        "含_硕士学位": 14,
+        "含_博士学位": 52,
+        "含_研究生学历": 205,
+        "含_大专/专科混用": 6940,
+        "含_本科及以上_但未提其他层级": 5600,
+        "含_中专/中技/高中": 313,
+        "含_应届/在校": 5147,
+        "含_英文学位词": 211,
+        "含_数字层级如_985_211": 504
+      },
+      "label_column_used": "assistant",
+      "label_missing": 21994,
+      "label_missing_pct": 96.762,
+      "label_present_rows": 736,
+      "label_unique_values": 12,
+      "label_value_counts": {
+        "博士、硕士": 238,
+        "博士、硕士、本科": 114,
+        "本科": 113,
+        "大专": 85,
+        "博士、硕士、本科、大专": 56,
+        "博士": 37,
+        "硕士": 35,
+        "硕士、本科": 33,
+        "本科、大专": 21,
+        "学历不明": 2,
+        "硕士、大四保研准硕士": 1,
+        "学历不限": 1
+      },
+      "label_token_count_dist": {
+        "1": 273,
+        "2": 293,
+        "3": 114,
+        "4": 56
+      },
+      "multi_label_rows": 463,
+      "multi_label_pct": 62.908,
+      "empty_label_rows": 0,
+      "label_token_vocabulary": {
+        "硕士": 477,
+        "博士": 445,
+        "本科": 337,
+        "大专": 162,
+        "学历不明": 2,
+        "大四保研准硕士": 1,
+        "学历不限": 1
+      },
+      "label_token_vocab_size": 7,
+      "no_education_requirement_tokens": [
+        "学历不限"
+      ],
+      "no_education_requirement_rows": 1,
+      "label_is_closed_small_set": true,
+      "col_ai": {
+        "dtype": "object",
+        "missing": 0,
+        "unique": 22
+      },
+      "col_diff": {
+        "dtype": "bool",
+        "missing": 0,
+        "unique": 2
+      },
+      "col_user_short2": {
+        "dtype": "float64",
+        "missing": 22730,
+        "unique": 0
+      },
+      "col_id": {
+        "dtype": "int64",
+        "missing": 0,
+        "unique": 22730
+      },
+      "col_job_id": {
+        "dtype": "int64",
+        "missing": 0,
+        "unique": 22730
+      },
+      "ai_vs_assistant_agreement_pct": 40.7609,
+      "ai_vs_assistant_compared_rows": 736
+    },
+    "annotated": {
+      "file": {
+        "path": "data/raw/job-education/annotated/2w_0716_eval.csv",
+        "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\annotated\\2w_0716_eval.csv",
+        "bytes": 30251826,
+        "mb": 28.85,
+        "encoding": "UTF-8"
+      },
+      "rows": 22730,
+      "columns": [
+        "job_id",
+        "user",
+        "assistant",
+        "线上学历-旧的",
+        "id",
+        "user_short",
+        "模型结果-新的",
+        "diff",
+        "人工正确结果",
+        "【线上学历-旧的】是否正确",
+        "【模型结果-新的】是否正确",
+        "是否英文岗位"
+      ],
+      "user_text_len": {
+        "rows": 22730,
+        "min": 43,
+        "p25": 249,
+        "median": 348,
+        "p75": 474,
+        "max": 6565,
+        "mean": 404.9,
+        "empty_or_tiny_len_le3": 0
+      },
+      "user_tag_coverage": {
+        "has_岗位名称": 22730,
+        "has_岗位描述": 22730,
+        "has_学历描述": 22730,
+        "has_学历描述_pct": 100.0
+      },
+      "学历描述_field": {
+        "missing": 0,
+        "text_len": {
+          "rows": 22730,
+          "min": 0,
+          "p25": 2,
+          "median": 2,
+          "p75": 2,
+          "max": 10,
+          "mean": 2.0,
+          "empty_or_tiny_len_le3": 22066
+        },
+        "unique_values": 29,
+        "top_values": {
+          "本科": 12296,
+          "大专": 6509,
+          "硕士": 2194,
+          "": 819,
+          "本科及以上": 256,
+          "博士": 192,
+          "专科及以上": 106,
+          "硕士研究生及以上": 63,
+          "硕士研究生毕业及以上": 62,
+          "硕士及以上": 59,
+          "不限": 55,
+          "博士及以上": 28,
+          "硕士研究生": 22,
+          "博士研究生": 17,
+          "大专及以上": 15,
+          "博士研究生毕业": 8,
+          "研究生硕士": 5,
+          "博士研究生及以上": 4,
+          "学历不限": 4,
+          "大学本科": 3,
+          "本科,硕士": 3,
+          "硕士及以上学历": 2,
+          "硕士或博士": 2,
+          "大学本科毕业": 1,
+          "本科及以上学历": 1
+        },
+        "contains_multiple_degree_words_pct": 0.022
+      },
+      "hard_chinese_expressions_in_user": {
+        "含_及以上": 9956,
+        "含_或以上": 397,
+        "含_学历不限": 78,
+        "含_全日制": 874,
+        "含_统招": 789,
+        "含_学士学位": 17,
+        "含_硕士学位": 14,
+        "含_博士学位": 52,
+        "含_研究生学历": 205,
+        "含_大专/专科混用": 6940,
+        "含_本科及以上_但未提其他层级": 5600,
+        "含_中专/中技/高中": 313,
+        "含_应届/在校": 5147,
+        "含_英文学位词": 211,
+        "含_数字层级如_985_211": 504
+      },
+      "label_column_used": "人工正确结果",
+      "label_missing": 21994,
+      "label_missing_pct": 96.762,
+      "label_present_rows": 736,
+      "label_unique_values": 12,
+      "label_value_counts": {
+        "博士、硕士": 238,
+        "博士、硕士、本科": 114,
+        "本科": 113,
+        "大专": 85,
+        "博士、硕士、本科、大专": 56,
+        "博士": 37,
+        "硕士": 35,
+        "硕士、本科": 33,
+        "本科、大专": 21,
+        "学历不明": 2,
+        "硕士、大四保研准硕士": 1,
+        "学历不限": 1
+      },
+      "label_token_count_dist": {
+        "1": 273,
+        "2": 293,
+        "3": 114,
+        "4": 56
+      },
+      "multi_label_rows": 463,
+      "multi_label_pct": 62.908,
+      "empty_label_rows": 0,
+      "label_token_vocabulary": {
+        "硕士": 477,
+        "博士": 445,
+        "本科": 337,
+        "大专": 162,
+        "学历不明": 2,
+        "大四保研准硕士": 1,
+        "学历不限": 1
+      },
+      "label_token_vocab_size": 7,
+      "no_education_requirement_tokens": [
+        "学历不限"
+      ],
+      "no_education_requirement_rows": 1,
+      "label_is_closed_small_set": true,
+      "col_diff": {
+        "dtype": "bool",
+        "missing": 0,
+        "unique": 2
+      },
+      "col_id": {
+        "dtype": "int64",
+        "missing": 0,
+        "unique": 22730
+      },
+      "col_job_id": {
+        "dtype": "int64",
+        "missing": 0,
+        "unique": 22730
+      }
+    }
+  },
+  "cross_split": {
+    "train__vs__validation": {
+      "user_text_unique_a": 184729,
+      "user_text_unique_b": 42837,
+      "user_text_overlap": 1,
+      "user_text_overlap_pct_of_b": 0.002,
+      "job_id_overlap": 0,
+      "job_id_unique_a": 197531,
+      "job_id_unique_b": 45593
+    },
+    "train__vs__test": {
+      "user_text_unique_a": 184729,
+      "user_text_unique_b": 21433,
+      "user_text_overlap": 1,
+      "user_text_overlap_pct_of_b": 0.005,
+      "job_id_overlap": 0,
+      "job_id_unique_a": 197531,
+      "job_id_unique_b": 22730
+    },
+    "train__vs__annotated": {
+      "user_text_unique_a": 184729,
+      "user_text_unique_b": 21433,
+      "user_text_overlap": 1,
+      "user_text_overlap_pct_of_b": 0.005,
+      "job_id_overlap": 0,
+      "job_id_unique_a": 197531,
+      "job_id_unique_b": 22730
+    },
+    "validation__vs__test": {
+      "user_text_unique_a": 42837,
+      "user_text_unique_b": 21433,
+      "user_text_overlap": 21433,
+      "user_text_overlap_pct_of_b": 100.0,
+      "job_id_overlap": 22730,
+      "job_id_unique_a": 45593,
+      "job_id_unique_b": 22730
+    },
+    "validation__vs__annotated": {
+      "user_text_unique_a": 42837,
+      "user_text_unique_b": 21433,
+      "user_text_overlap": 21433,
+      "user_text_overlap_pct_of_b": 100.0,
+      "job_id_overlap": 22730,
+      "job_id_unique_a": 45593,
+      "job_id_unique_b": 22730
+    },
+    "test__vs__annotated": {
+      "user_text_unique_a": 21433,
+      "user_text_unique_b": 21433,
+      "user_text_overlap": 21433,
+      "user_text_overlap_pct_of_b": 100.0,
+      "job_id_overlap": 22730,
+      "job_id_unique_a": 22730,
+      "job_id_unique_b": 22730
+    },
+    "internal_dup__train": {
+      "rows": 197574,
+      "unique_user_text": 184729,
+      "duplicate_user_text_rows": 12845,
+      "duplicate_user_text_pct": 6.501
+    },
+    "internal_dup__validation": {
+      "rows": 45593,
+      "unique_user_text": 42837,
+      "duplicate_user_text_rows": 2756,
+      "duplicate_user_text_pct": 6.045
+    },
+    "internal_dup__test": {
+      "rows": 22730,
+      "unique_user_text": 21433,
+      "duplicate_user_text_rows": 1297,
+      "duplicate_user_text_pct": 5.706
+    },
+    "internal_dup__annotated": {
+      "rows": 22730,
+      "unique_user_text": 21433,
+      "duplicate_user_text_rows": 1297,
+      "duplicate_user_text_pct": 5.706
+    }
+  },
+  "annotated_agreement": {
+    "rows": 22730,
+    "non_null_per_column": {
+      "job_id": 22730,
+      "user": 22730,
+      "assistant": 736,
+      "线上学历-旧的": 22730,
+      "id": 22730,
+      "user_short": 22729,
+      "模型结果-新的": 22730,
+      "diff": 22730,
+      "人工正确结果": 736,
+      "【线上学历-旧的】是否正确": 736,
+      "【模型结果-新的】是否正确": 736,
+      "是否英文岗位": 33
+    },
+    "human_labeled_rows": 736,
+    "string_equality_pct": {
+      "assistant_equals_人工正确结果": 100.0,
+      "线上学历旧_equals_人工正确结果": 45.9239,
+      "模型结果新_equals_人工正确结果": 40.7609,
+      "线上学历旧_equals_模型结果新": 0.0
+    },
+    "token_set_equality_pct": {
+      "线上学历旧_equals_人工正确结果": 45.9239,
+      "模型结果新_equals_人工正确结果": 40.7609,
+      "线上学历旧_equals_模型结果新": 0.0
+    },
+    "token_set_confusion": {
+      "old_correct_and_new_correct": 0,
+      "old_correct_and_new_wrong": 338,
+      "old_wrong_and_new_correct": 300,
+      "old_wrong_and_new_wrong": 98
+    },
+    "token_set_confusion_note": "old 与 new 在这 736 行上字符串/集合均无一相同，因此 'old 对且 new 对' 必为 0，这是数据组织造成的机械结果，不能解读为两个系统在统计上互斥。",
+    "new_error_direction": {
+      "new_tokens_more_than_gold": 72,
+      "new_tokens_fewer_than_gold": 314
+    },
+    "flag_【线上学历-旧的】是否正确": {
+      "False": 398,
+      "True": 338
+    },
+    "flag_【模型结果-新的】是否正确": {
+      "False": 436,
+      "True": 300
+    },
+    "是否英文岗位": {
+      "nan": 22697,
+      "1.0": 33
+    },
+    "人工正确结果_value_counts": {
+      "博士、硕士": 238,
+      "博士、硕士、本科": 114,
+      "本科": 113,
+      "大专": 85,
+      "博士、硕士、本科、大专": 56,
+      "博士": 37,
+      "硕士": 35,
+      "硕士、本科": 33,
+      "本科、大专": 21,
+      "学历不明": 2,
+      "硕士、大四保研准硕士": 1,
+      "学历不限": 1
+    },
+    "模型结果新_dirty_output_rows": 3,
+    "模型结果新_unique_values": 21,
+    "线上学历旧_unique_values": 13
+  },
+  "label_provenance": {
+    "level_fact": {
+      "validation_rows": 45593,
+      "annotated_rows": 22730,
+      "annotated_job_id_all_in_validation": true,
+      "user_text_identical_pct": 100.0,
+      "线上学历旧_equals_validation_assistant_pct": 100.0,
+      "模型结果新_equals_validation_assistant_pct": 96.762
+    },
+    "level_fact_human_labeled_subset": {
+      "rows": 736,
+      "人工正确结果_equals_validation_assistant_pct": 45.9239,
+      "annotated_assistant_equals_validation_assistant_pct": 45.9239
+    },
+    "conclusion": "validation 切分的 assistant 标签与 annotated 中的 '线上学历-旧的' 列 100% 一致，说明 default 三个切分的 assistant 是上游线上旧系统的输出（伪标签 / 远监督），不是人工标注。人工复核的 736 行中，人工金标准与该伪标签只有 45.92% 一致，即约 54.08% 的既有标签与人工结论不符。",
+    "must_not_claim": [
+      "不得把 default/train|validation|test 的 assistant 称为人工标注真值。",
+      "不得直接把这三份数据的标签当作'正确答案'训练后再用同源标签评估。"
+    ]
+  },
+  "split_containment": {
+    "rows": {
+      "train": 197574,
+      "validation": 45593,
+      "test": 22730
+    },
+    "job_id_unique": {
+      "train": 197531,
+      "validation": 45593,
+      "test": 22730
+    },
+    "job_id_overlap__train__vs__validation": {
+      "overlap": 0,
+      "pct_of_validation": 0.0,
+      "is_subset_validation_in_train": false
+    },
+    "job_id_overlap__train__vs__test": {
+      "overlap": 0,
+      "pct_of_test": 0.0,
+      "is_subset_test_in_train": false
+    },
+    "job_id_overlap__validation__vs__test": {
+      "overlap": 22730,
+      "pct_of_test": 100.0,
+      "is_subset_test_in_validation": true
+    },
+    "user_text_overlap__train__vs__validation": {
+      "overlap": 1,
+      "pct_of_validation": 0.002,
+      "is_subset_validation_in_train": false
+    },
+    "user_text_overlap__train__vs__test": {
+      "overlap": 1,
+      "pct_of_test": 0.005,
+      "is_subset_test_in_train": false
+    },
+    "user_text_overlap__validation__vs__test": {
+      "overlap": 21433,
+      "pct_of_test": 100.0,
+      "is_subset_test_in_validation": true
+    },
+    "risk": "若 test 的 job_id / user 文本被 validation 完全包含，则在 validation 上做模型选择后再报 test 指标等价于在测试集上调参，构成数据泄漏。"
+  },
+  "task_type_assessment": {
+    "label_structure_observed": "标签是 '学历' 的短字符串，常见形态为单值（如 '本科'）或多值枚举（如 '博士、硕士、本科'），不是 token 级 BIO/BIOS 序列标注，也不是 span 偏移。",
+    "input_structure_observed": "输入是 <岗位名称>/<岗位描述>/<学历描述> 三段 XML-like 拼接的长文本，其中 <学历描述> 已经是上游抽取结果，构成强先验线索。",
+    "conclusion": {
+      "most_natural": "信息抽取（生成式短答案抽取），输出为受限学历词表上的短序列",
+      "also_viable": [
+        "多标签分类（把 '博士、硕士、本科' 拆成 4~6 个学历层级的多标签）",
+        "有序多分类（映射为最低学历要求的一个层级）",
+        "规则 + 模型混合解析（<学历描述> 走规则，描述正文走模型兜底）"
+      ],
+      "not_supported_by_data": [
+        "序列标注 / NER：数据中不存在 token 级标注、span 起止偏移或 BIO 标签，不能直接做 NER 训练。"
+      ]
+    }
+  }
+}

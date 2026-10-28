@@ -1,0 +1,62 @@
+{
+  "dataset_version": "dv-0ce28fa6b560",
+  "files": [
+    {
+      "actual": "67c81a4761516113dbebcd8c6acc1b692c4b20e54341187ff864d2d637099640",
+      "bytes": 194020617,
+      "expected": "67c81a4761516113dbebcd8c6acc1b692c4b20e54341187ff864d2d637099640",
+      "ok": true,
+      "path": "data/raw/job-resume-matching/cv.csv"
+    },
+    {
+      "actual": "301a382ebec72d574817cc3d4b9ee34cf08e7f8ecdfa3d373142767fe4f9f789",
+      "bytes": 32930476,
+      "expected": "301a382ebec72d574817cc3d4b9ee34cf08e7f8ecdfa3d373142767fe4f9f789",
+      "ok": true,
+      "path": "data/raw/job-resume-matching/job.csv"
+    },
+    {
+      "actual": "4ae60b5b134146235148557268c5e04f1fc5e7579b73c4ab59cb01073bce3338",
+      "bytes": 19704065,
+      "expected": "4ae60b5b134146235148557268c5e04f1fc5e7579b73c4ab59cb01073bce3338",
+      "ok": true,
+      "path": "data/raw/job-resume-matching/matches.csv"
+    },
+    {
+      "actual": "1375b216c20743f571ff8bd9ff654f5cfe82dd0304f0b3d763ecc62acb41ef5f",
+      "bytes": 24912302,
+      "expected": "1375b216c20743f571ff8bd9ff654f5cfe82dd0304f0b3d763ecc62acb41ef5f",
+      "ok": true,
+      "path": "data/raw/other/all_df.csv/all_df.csv"
+    },
+    {
+      "actual": "c9daaed533f8aa72600ad24c9f4ef3227f2a42bacc63dfeac4418ec04d41d98a",
+      "bytes": 250645425,
+      "expected": "c9daaed533f8aa72600ad24c9f4ef3227f2a42bacc63dfeac4418ec04d41d98a",
+      "ok": true,
+      "path": "data/raw/job-education/default/train/19w_0701.csv"
+    },
+    {
+      "actual": "f5b7c9b056e804d28076359da8d04b189f24b0da323e8c2bbf12704714295829",
+      "bytes": 60517865,
+      "expected": "f5b7c9b056e804d28076359da8d04b189f24b0da323e8c2bbf12704714295829",
+      "ok": true,
+      "path": "data/raw/job-education/default/validation/4w_0708.csv"
+    },
+    {
+      "actual": "8a3be09a319a5b644b482054773252efbbc664852582d33c53cbf7b1cbeea39c",
+      "bytes": 30340189,
+      "expected": "8a3be09a319a5b644b482054773252efbbc664852582d33c53cbf7b1cbeea39c",
+      "ok": true,
+      "path": "data/raw/job-education/default/test/2w_0716.csv"
+    },
+    {
+      "actual": "b831ff788c44d86fdc28f4675593be5e9c0ab3cb5ee39a5a6aa0fc4feec437f2",
+      "bytes": 30251826,
+      "expected": "b831ff788c44d86fdc28f4675593be5e9c0ab3cb5ee39a5a6aa0fc4feec437f2",
+      "ok": true,
+      "path": "data/raw/job-education/annotated/2w_0716_eval.csv"
+    }
+  ],
+  "ok": true
+}

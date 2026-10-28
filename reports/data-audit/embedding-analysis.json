@@ -1,0 +1,166 @@
+{
+  "generated_by": "scripts/data_audit/analyze_embeddings.py",
+  "note": "只读审计；未修改任何原始文件。输出只含统计量，不含原始向量。",
+  "files": {
+    "cv.csv": {
+      "file": {
+        "path": "data/raw/job-resume-matching/cv.csv",
+        "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\cv.csv",
+        "bytes": 194020617,
+        "mb": 185.032,
+        "encoding": "UTF-8"
+      },
+      "column": "embedding",
+      "raw_dtype": "object",
+      "total_rows": 9544,
+      "parsed_ok": 9544,
+      "parse_failed": 0,
+      "parse_success_pct": 100.0,
+      "dims_seen": [
+        768
+      ],
+      "stats": {
+        "rows": 9544,
+        "dim": 768,
+        "dtype_after_parse": "float32",
+        "zero_vectors": 0,
+        "zero_vectors_pct": 0.0,
+        "rows_with_nan": 0,
+        "rows_with_inf": 0,
+        "norm": {
+          "min": 1.0,
+          "p25": 1.0,
+          "median": 1.0,
+          "p75": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "std": 0.0,
+          "unit_norm_atol_1e-3_pct": 100.0
+        },
+        "value_range": {
+          "global_min": -0.208133,
+          "global_max": 0.183417,
+          "global_mean": -8.8e-05,
+          "global_std": 0.036084
+        },
+        "duplicate_vectors": 0,
+        "duplicate_vectors_pct": 0.0
+      }
+    },
+    "job.csv": {
+      "file": {
+        "path": "data/raw/job-resume-matching/job.csv",
+        "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\job.csv",
+        "bytes": 32930476,
+        "mb": 31.405,
+        "encoding": "UTF-8"
+      },
+      "column": "embedding",
+      "raw_dtype": "object",
+      "total_rows": 1167,
+      "parsed_ok": 1167,
+      "parse_failed": 0,
+      "parse_success_pct": 100.0,
+      "dims_seen": [
+        768
+      ],
+      "stats": {
+        "rows": 1167,
+        "dim": 768,
+        "dtype_after_parse": "float32",
+        "zero_vectors": 0,
+        "zero_vectors_pct": 0.0,
+        "rows_with_nan": 0,
+        "rows_with_inf": 0,
+        "norm": {
+          "min": 1.0,
+          "p25": 1.0,
+          "median": 1.0,
+          "p75": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "std": 0.0,
+          "unit_norm_atol_1e-3_pct": 100.0
+        },
+        "value_range": {
+          "global_min": -0.213403,
+          "global_max": 0.179856,
+          "global_mean": -0.000236,
+          "global_std": 0.036084
+        },
+        "duplicate_vectors": 0,
+        "duplicate_vectors_pct": 0.0
+      }
+    }
+  },
+  "space_consistency": {
+    "cv_dim": 768,
+    "job_dim": 768,
+    "same_dim": true,
+    "cv_norm_mean": 1.0,
+    "job_norm_mean": 1.0,
+    "random_pair_cosine": {
+      "n": 1167,
+      "mean": 0.424421,
+      "std": 0.099092,
+      "min": 0.141726,
+      "p50": 0.421766,
+      "max": 0.76185
+    },
+    "matched_pair_cosine_vs_semantic_score": {
+      "n": 3000,
+      "cosine_mean": 0.564133,
+      "cosine_min": 0.215364,
+      "cosine_max": 0.835392,
+      "semantic_score_mean": 0.782067,
+      "pearson": 1.0,
+      "spearman": 1.0,
+      "linear_fit_semantic_vs_cosine": {
+        "slope": 0.49999999,
+        "intercept": 0.5,
+        "r2": 1.0,
+        "max_abs_residual": 2.4e-07
+      },
+      "linear_fit_cosine_vs_semantic": {
+        "slope": 2.00000002,
+        "intercept": -1.00000001,
+        "r2": 1.0,
+        "max_abs_residual": 4.8e-07
+      }
+    },
+    "hypothesis_semantic_is_affine_of_cosine": {
+      "affine": "semantic_score = 0.500000 * cosine + 0.500000",
+      "r2": 1.0,
+      "consistent_with_affine_transform": true
+    },
+    "within_candidate_rank_corr_mean": 1.0,
+    "within_candidate_groups_checked": 58,
+    "cosine_vs_skill_score_pearson": -0.229685,
+    "cosine_vs_final_score_pearson": 0.291124
+  },
+  "origin_assessment": {
+    "facts_from_data": [
+      "cv.csv 与 job.csv 的 embedding 列均可 100% 解析为 768 维 float32 向量。",
+      "两个表的向量维度一致（768）。",
+      "数据集 README 明确写明 embedding 为 'Precomputed 768-dimensional text embedding'，并在 Limitations 中写明 'The embedding model used to create the stored vectors is not specified in the dataset files.'"
+    ],
+    "evidence_based_inference": [
+      "若 matched_pair_cosine_vs_semantic_score 的 pearson 接近 1 且 affine R² 接近 1，则可推断 semantic_score 直接由这两个向量的余弦相似度经线性缩放得到，即 cv/job 向量处于同一语义空间、且 semantic_score 是其派生量。"
+    ],
+    "unknown_from_data": [
+      "无法从数据本身确定具体的编码模型（架构、训练语料、是否为 sentence-transformers 系列）。",
+      "无法确定向量是对 resume_text / job_text 原文编码，还是对清洗后拼接文本编码。",
+      "无法确定是否为单塔（共享编码器）或双塔（两个编码器）。"
+    ],
+    "do_not_infer": [
+      "不能仅凭维度为 768 就断定编码模型为 BERT/RoBERTa/MPNet 等任一具体模型。",
+      "不能把 embedding 当作独立于标签的'原始特征'——若 semantic_score 由它派生、而标签又由 semantic_score 参与生成，则 embedding 与标签之间存在派生链条。"
+    ]
+  },
+  "joint_representation_check": {
+    "cv_embedding_used_for": "候选人侧（resume）表示",
+    "job_embedding_used_for": "岗位侧（job）表示",
+    "is_joint_pair_embedding": false,
+    "basis": "两表各自持有独立的 embedding 列，matches.csv 不再单独持有 pair 级向量；pair 级的 semantic_score 由两侧向量相似度派生（待 space_consistency 数值证实）。"
+  }
+}

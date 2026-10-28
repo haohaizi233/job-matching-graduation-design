@@ -1,0 +1,227 @@
+{
+  "generated_by": "scripts/data_audit/reverse_label_formula.py",
+  "rows": 122560,
+  "note": "只读审计；未修改任何原始文件。",
+  "raw_score_formula": {
+    "level": "fact",
+    "formula": "raw_score = 0.25*semantic_score + 0.35*skill_score + 0.20*position_score + 0.10*category_score + 0.05*experience_score + 0.05*education_score",
+    "weights_semantic_skill_position_category_experience_education": [
+      0.25,
+      0.35,
+      0.2,
+      0.1,
+      0.05,
+      0.05
+    ],
+    "max_abs_error": 2.22e-16,
+    "mean_abs_error": 3.713e-17,
+    "exact_within_float64": true,
+    "lstsq_refit": {
+      "name": "raw_score ~ six features",
+      "weights": [
+        0.25,
+        0.35,
+        0.2,
+        0.1,
+        0.05,
+        0.05
+      ],
+      "bias": 0.0,
+      "r2": 1.0,
+      "max_abs_residual": 1.094e-14,
+      "residual_std": 5.381e-16
+    }
+  },
+  "label_strength_formula": {
+    "level": "fact",
+    "formula": "final_score < 0.58 -> weak_positive; 0.58 <= final_score < 0.68 -> medium_positive; final_score >= 0.68 -> strong_positive",
+    "thresholds": {
+      "lower": 0.58,
+      "upper": 0.68
+    },
+    "per_label_final_score_range": {
+      "weak_positive": {
+        "n": 51150,
+        "min": 0.4300091294377713,
+        "max": 0.5799999867178978
+      },
+      "medium_positive": {
+        "n": 70636,
+        "min": 0.5800003535589555,
+        "max": 0.6799985507975559
+      },
+      "strong_positive": {
+        "n": 774,
+        "min": 0.6800034370496336,
+        "max": 0.756098663109917
+      }
+    },
+    "reproduced_rows": 122560,
+    "total_rows": 122560,
+    "reproduce_rate": 1.0,
+    "exceptions": 0,
+    "tree_rule_depth2_accuracy": 1.0
+  },
+  "rank_fields_formula": {
+    "level": "fact",
+    "formula": "candidate_rank = 组内 final_score 降序名次（并列取最小名次）; candidate_rank_pct = (n - candidate_rank + 1) / n",
+    "candidate_groups_checked": 9532,
+    "rank_reproduced_groups": 9532,
+    "pct_reproduced_groups": 4,
+    "rank_reproduce_rate": 1.0
+  },
+  "final_vs_raw_monotonicity": {
+    "level": "fact",
+    "within_candidate_spearman_mean": 1.0,
+    "within_candidate_spearman_min": 1.0,
+    "groups_checked": 9242,
+    "global_pearson": 0.91380322,
+    "global_spearman": 0.91686299,
+    "same_candidate_same_raw_maps_to_single_final": true
+  },
+  "final_score_formula_search": {
+    "level": "inference",
+    "best_r2": 1.0,
+    "best_model": "raw_plus_rank_pct",
+    "candidates": {
+      "raw_only": {
+        "name": "final_score ~ raw_only",
+        "weights": [
+          0.88640058
+        ],
+        "bias": 0.19935062,
+        "r2": 0.8350363257,
+        "max_abs_residual": 0.1712,
+        "residual_std": 0.01463
+      },
+      "raw_plus_group_minmax": {
+        "name": "final_score ~ raw_plus_group_minmax",
+        "weights": [
+          0.76693669,
+          0.03148831
+        ],
+        "bias": 0.2392754,
+        "r2": 0.8938902067,
+        "max_abs_residual": 0.1555,
+        "residual_std": 0.01173
+      },
+      "raw_plus_rank_pct": {
+        "name": "final_score ~ raw_plus_rank_pct",
+        "weights": [
+          0.7,
+          0.3
+        ],
+        "bias": -0.0,
+        "r2": 1.0,
+        "max_abs_residual": 8.882e-16,
+        "residual_std": 1.356e-16
+      },
+      "raw_plus_group_mean_std": {
+        "name": "final_score ~ raw_plus_group_mean_std",
+        "weights": [
+          1.2572941,
+          -0.53972338,
+          -0.14161473
+        ],
+        "bias": 0.27584391,
+        "r2": 0.9079373428,
+        "max_abs_residual": 0.1471,
+        "residual_std": 0.01093
+      },
+      "raw_plus_group_min_max": {
+        "name": "final_score ~ raw_plus_group_min_max",
+        "weights": [
+          1.14953056,
+          -0.16358087,
+          -0.19247361
+        ],
+        "bias": 0.24418762,
+        "r2": 0.8859361739,
+        "max_abs_residual": 0.1591,
+        "residual_std": 0.01216
+      },
+      "raw_plus_group_stats_all": {
+        "name": "final_score ~ raw_plus_group_stats_all",
+        "weights": [
+          1.2572941,
+          -0.00081522,
+          0.0715173,
+          -0.55892017,
+          -0.14677678,
+          -0.00054017
+        ],
+        "bias": 0.25976374,
+        "r2": 0.9197404609,
+        "max_abs_residual": 0.142,
+        "residual_std": 0.0102
+      },
+      "raw_plus_rank_pct_plus_group": {
+        "name": "final_score ~ raw_plus_rank_pct_plus_group",
+        "weights": [
+          0.7,
+          0.3,
+          -0.0,
+          0.0,
+          0.0,
+          -0.0
+        ],
+        "bias": 0.0,
+        "r2": 1.0,
+        "max_abs_residual": 6.661e-16,
+        "residual_std": 1.12e-16
+      },
+      "six_feats_plus_group": {
+        "name": "final_score ~ six_feats_plus_group",
+        "weights": [
+          0.32988027,
+          0.43896412,
+          0.241333,
+          0.12532205,
+          0.06660458,
+          0.06438024,
+          -0.63976178,
+          0.30321274,
+          0.16982332,
+          -0.06319242
+        ],
+        "bias": 0.258503,
+        "r2": 0.9145881147,
+        "max_abs_residual": 0.1433,
+        "residual_std": 0.01052
+      }
+    },
+    "conclusion": "final_score 不是六维打分的全局线性组合（R²=0.840）；它在每个 candidate 分组内与 raw_score 严格同序（组内 spearman=1.0），说明 final_score 是 raw_score 的候选人内单调变换 + 可能的组内归一化。若上方所有候选式的 R² 均 < 0.999999，则精确生成式未能从数据反推出来，但其'完全由 raw_score 与候选人分组决定'这一点已由 same_candidate_same_raw_maps_to_single_final=True 证实。"
+  },
+  "leakage_verdict": {
+    "level": "fact",
+    "six_scores_or_scores_reproduce_label": true,
+    "evidence": [
+      "raw_score 由六维打分以固定权重精确线性组合得到（max|err| < 1e-12）。",
+      "label_strength 由 final_score 的两个固定阈值 0.58 / 0.68 完全决定（复现率 1.0，0 例外）。",
+      "final_score 在候选人分组内是 raw_score 的严格单调变换，同候选人同 raw_score 永远映射到同一 final_score。",
+      "决策树仅用 final_score 单特征、深度 2 即可 100% 复现 label_strength。"
+    ],
+    "conclusion": "把六维打分 / raw_score / final_score / candidate_rank / candidate_rank_pct 作为特征去预测 label_strength 属于典型的目标泄漏：模型只是在复现数据生成公式，不构成任何泛化能力证据。",
+    "leakage_feature_list": [
+      "semantic_score",
+      "skill_score",
+      "position_score",
+      "category_score",
+      "experience_score",
+      "education_score",
+      "raw_score",
+      "final_score",
+      "candidate_rank",
+      "candidate_rank_pct"
+    ]
+  },
+  "label_origin": {
+    "level_inference": "从数据本身可以证实 label_strength 是 final_score 的确定性阈值函数，raw_score 是六维打分的确定性加权和，semantic_score 是两侧 embedding 余弦的仿射变换（见 embedding-analysis.json）。整条标签链为规则/公式派生。",
+    "level_unknown": "无法从数据本身确定：六维打分本身（semantic/skill/position/category/experience/education）是人工评定、算法计算还是由第三方模型生成；亦无法确定最终 0.58 / 0.68 阈值的来源依据。",
+    "must_not_claim": [
+      "不得据此声称 label_strength 是人工标注的匹配结论。",
+      "不得据此声称 label_strength 来自真实招聘/投递/录用结果。",
+      "不得把 weak_positive 直接当作真实负例——它在 final_score 上是连续过渡的一档。"
+    ]
+  }
+}

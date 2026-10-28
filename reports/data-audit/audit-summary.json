@@ -1,0 +1,265 @@
+{
+  "generated_by": "scripts/data_audit/run_all.py",
+  "generated_at": "2026-10-28T17:14:43",
+  "project_root": "D:\\desktop\\毕业设计",
+  "conda_env": "graduation-design",
+  "scope": "第二阶段：数据集深度审计与建模可行性评估（只读，不训练模型）",
+  "constraints_observed": [
+    "未改写 data/raw 下任何文件",
+    "未创建正式训练集 / 未训练模型 / 未下载预训练权重",
+    "未安装或升级依赖",
+    "未联网调用外部 AI API",
+    "未修改 environment.yml 与既有环境验收报告",
+    "未触碰 chinese-skillspan-benchmark/ 独立仓库"
+  ],
+  "data_files": {
+    "cv.csv": {
+      "path": "data/raw/job-resume-matching/cv.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\cv.csv",
+      "bytes": 194020617,
+      "mb": 185.032,
+      "encoding": "UTF-8",
+      "sha256_first_1mb": "dad789575e3c0900ac69fdc3842d0be2ae99540a9623f40645250e9827db5518",
+      "sha256_full": "67c81a4761516113dbebcd8c6acc1b692c4b20e54341187ff864d2d637099640"
+    },
+    "job.csv": {
+      "path": "data/raw/job-resume-matching/job.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\job.csv",
+      "bytes": 32930476,
+      "mb": 31.405,
+      "encoding": "UTF-8",
+      "sha256_first_1mb": "ef1c5aaea6098975e5bff815f5743168df3d1e1c3a2e99269a6c2794f2f32cfa",
+      "sha256_full": "301a382ebec72d574817cc3d4b9ee34cf08e7f8ecdfa3d373142767fe4f9f789"
+    },
+    "matches.csv": {
+      "path": "data/raw/job-resume-matching/matches.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\matches.csv",
+      "bytes": 19704065,
+      "mb": 18.791,
+      "encoding": "UTF-8",
+      "sha256_first_1mb": "40fd15de489117668c9dd83a0594892d5cbb160a418ed17cc5dce0186689763c",
+      "sha256_full": "4ae60b5b134146235148557268c5e04f1fc5e7579b73c4ab59cb01073bce3338"
+    },
+    "all_df.csv": {
+      "path": "data/raw/other/all_df.csv/all_df.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\other\\all_df.csv\\all_df.csv",
+      "bytes": 24912302,
+      "mb": 23.758,
+      "encoding": "UTF-8 (BOM)",
+      "sha256_first_1mb": "594104487d830ed5730b2ca9dfe4963a50751d515d89b4556af24e1e6226eff2",
+      "sha256_full": "1375b216c20743f571ff8bd9ff654f5cfe82dd0304f0b3d763ecc62acb41ef5f"
+    },
+    "edu_train": {
+      "path": "data/raw/job-education/default/train/19w_0701.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\train\\19w_0701.csv",
+      "bytes": 250645425,
+      "mb": 239.034,
+      "encoding": "UTF-8",
+      "sha256_first_1mb": "d8549b6bc9a6d0a0d7990d691271fb12297d249079cd21d33d485b0465c3f926",
+      "sha256_full": "c9daaed533f8aa72600ad24c9f4ef3227f2a42bacc63dfeac4418ec04d41d98a"
+    },
+    "edu_validation": {
+      "path": "data/raw/job-education/default/validation/4w_0708.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\validation\\4w_0708.csv",
+      "bytes": 60517865,
+      "mb": 57.714,
+      "encoding": "UTF-8",
+      "sha256_first_1mb": "710c44ff51fc44c1863fbc6708d140639f176a539a92398685cd41259431cfe3",
+      "sha256_full": "f5b7c9b056e804d28076359da8d04b189f24b0da323e8c2bbf12704714295829"
+    },
+    "edu_test": {
+      "path": "data/raw/job-education/default/test/2w_0716.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\default\\test\\2w_0716.csv",
+      "bytes": 30340189,
+      "mb": 28.935,
+      "encoding": "UTF-8",
+      "sha256_first_1mb": "ac4afc0e54b3703c081bc0c0991c91b3ffe99563a4484fca297ed10040d2d4b8",
+      "sha256_full": "8a3be09a319a5b644b482054773252efbbc664852582d33c53cbf7b1cbeea39c"
+    },
+    "edu_annotated": {
+      "path": "data/raw/job-education/annotated/2w_0716_eval.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-education\\annotated\\2w_0716_eval.csv",
+      "bytes": 30251826,
+      "mb": 28.85,
+      "encoding": "UTF-8",
+      "sha256_first_1mb": "f8d56dba9bfe7f223ca637f20854e35525ae2fa7be3ea5b8e129f09a3513546a",
+      "sha256_full": "b831ff788c44d86fdc28f4675593be5e9c0ab3cb5ee39a5a6aa0fc4feec437f2"
+    }
+  },
+  "sub_reports": {
+    "dataset_profile": {
+      "path": "reports/data-audit/dataset-profile.json",
+      "bytes": 584516,
+      "top_level_keys": [
+        "generated_by",
+        "root",
+        "note",
+        "datasets",
+        "summary_table"
+      ]
+    },
+    "matching_analysis": {
+      "path": "reports/data-audit/matching-analysis.json",
+      "bytes": 13398,
+      "top_level_keys": [
+        "generated_by",
+        "note",
+        "files",
+        "relations",
+        "labels",
+        "rank_fields",
+        "negative_sampling",
+        "leakage"
+      ]
+    },
+    "label_formula": {
+      "path": "reports/data-audit/label-formula.json",
+      "bytes": 7832,
+      "top_level_keys": [
+        "generated_by",
+        "rows",
+        "note",
+        "raw_score_formula",
+        "label_strength_formula",
+        "rank_fields_formula",
+        "final_vs_raw_monotonicity",
+        "final_score_formula_search",
+        "leakage_verdict",
+        "label_origin"
+      ]
+    },
+    "embedding_analysis": {
+      "path": "reports/data-audit/embedding-analysis.json",
+      "bytes": 5801,
+      "top_level_keys": [
+        "generated_by",
+        "note",
+        "files",
+        "space_consistency",
+        "origin_assessment",
+        "joint_representation_check"
+      ]
+    },
+    "education_analysis": {
+      "path": "reports/data-audit/education-analysis.json",
+      "bytes": 27352,
+      "top_level_keys": [
+        "generated_by",
+        "note",
+        "files",
+        "cross_split",
+        "annotated_agreement",
+        "label_provenance",
+        "split_containment",
+        "task_type_assessment"
+      ]
+    },
+    "risk_analysis": {
+      "path": "reports/data-audit/risk-analysis.json",
+      "bytes": 8186,
+      "top_level_keys": [
+        "generated_by",
+        "file",
+        "note",
+        "table",
+        "scam_probability",
+        "merge_recommendation"
+      ]
+    }
+  },
+  "key_findings": {
+    "P1_supported_supervised_tasks": {
+      "answer": [
+        "岗位学历信息抽取（受限词表短答案生成 / 多标签分类）——数据量 19.7 万训练样本，可行",
+        "简历—岗位匹配强度回归或排序（弱监督，标签由公式派生）——需自建负例与冷启动划分",
+        "简历—岗位语义相似度（可用预计算 768 维向量与 semantic_score 作代理标签）",
+        "岗位推荐与排序（Learning-to-Rank，可用 candidate_rank 作组内序）",
+        "简历技能缺口分析（基于 clean_skills 集合差，无监督/规则）"
+      ],
+      "not_supported_without_new_labeling": [
+        "真实匹配结果二分类（数据中无真实投递/录用结果）",
+        "招聘诈骗识别的监督学习（scam_probability 非人工真值）",
+        "序列标注 / NER（学历数据无 token 级标注）"
+      ]
+    },
+    "P2_six_score_label_leakage": {
+      "answer": "存在完全确定的目标泄漏",
+      "chain": [
+        "semantic_score = 0.5 * cosine(cv_embedding, job_embedding) + 0.5   (R²=1.0, pearson=1.0)",
+        "raw_score = 0.25*semantic + 0.35*skill + 0.20*position + 0.10*category + 0.05*experience + 0.05*education   (max|err|=2.22e-16)",
+        "final_score = 0.7 * raw_score + 0.3 * candidate_rank_pct   (max|err|=8.88e-16, R²=1.0)",
+        "label_strength = weak(<0.58) / medium(0.58~0.68) / strong(>=0.68)   (复现率 1.0, 0 例外)",
+        "candidate_rank = 组内 final_score 降序名次   (9532/9532 组复现)"
+      ],
+      "verdict": "六维评分 + raw_score / final_score / candidate_rank / candidate_rank_pct 共同构成一条闭环派生链，直接预测 label_strength 等价于复现生成公式，属目标泄漏。",
+      "leakage_feature_list": [
+        "semantic_score",
+        "skill_score",
+        "position_score",
+        "category_score",
+        "experience_score",
+        "education_score",
+        "raw_score",
+        "final_score",
+        "candidate_rank",
+        "candidate_rank_pct"
+      ]
+    },
+    "P3_enough_data_for_evaluable_match_model": {
+      "answer": "有条件足够，但当前标签不能支撑'真实匹配'结论",
+      "facts": {
+        "matches_rows": 122560,
+        "candidates": 9532,
+        "jobs": 1164,
+        "observed_pair_ratio_pct": 1.1004,
+        "label_dist": {
+          "medium_positive": 70636,
+          "weak_positive": 51150,
+          "strong_positive": 774
+        },
+        "strong_positive_ratio_pct": 0.6315,
+        "pair_duplicated": 0,
+        "pair_label_conflict": 0
+      },
+      "verdict": "样本量（12.3 万 pair / 9532 人 / 1164 岗）足够训练与评估一个可复现的匹配/排序模型；但标签为公式派生、无真实负例、strong_positive 仅 774 条（0.63%），只能支撑'复现该评分体系'或'基于语义/技能的排序'这类目标，不能支撑'预测真实匹配结果'。"
+    },
+    "P4_must_fix_before_training": [
+      "matches.csv 无真实负例：weak_positive 是正例的一档，未观测组合也不等于负例，必须设计负采样方案。",
+      "strong_positive 仅 774 条（0.6315%），medium/strong 比 91.261:1，必须做分层采样或改用回归/排序目标。",
+      "标签链闭合：任何使用六维评分/分数/排名字段的特征集都构成目标泄漏，必须从特征中剔除。",
+      "job-education 的 default/train|validation|test 的 assistant 是线上旧系统输出（伪标签），与 736 条人工金标准只有 45.9239% 一致，必须先决定是用伪标签做弱监督还是只用人工 736 条。",
+      "job-education 的 test 完全被 validation 包含（job_id 与 user 文本均 100%% 重合），必须重新划分，否则在 validation 选模型后报 test 指标等价于测试集调参。",
+      "all_df.csv 有 25433 行整行重复（10.1173%），去重后才可建模。",
+      "matches.csv 仅覆盖全组合的 1.1004%，且同一候选人/岗位跨行高度重叠，行级随机划分必然泄漏。"
+    ],
+    "P5_next_stage_plan": {
+      "split_strategy": [
+        "主评估采用 candidate_id 分组切分（GroupShuffleSplit / GroupKFold），杜绝同人跨集合。",
+        "增加 job_id 冷启动切分（按 job_id 分组）评估对未见岗位的泛化。",
+        "增加 candidate_id × job_id 双冷启动（两组都互斥）作为最严指标。",
+        "job-education 重新切分：从 validation 中剥离 test 的 22730 个 job_id，或把 default 三份合并后按 job_id 重新做 8:1:1 分层切分。",
+        "所有切分固定随机种子并落盘到 data/splits/，切分清单写入 JSON 以便复现。"
+      ],
+      "preprocessing": [
+        "embedding 字段解析为 float32 矩阵并落盘 .npy，不再重复解析字符串向量。",
+        "clean_skills 字符串化列表还原为 list[str] 并做大小写/同义词归一。",
+        "学历标签统一为 6 个 token 的有序多标签（博士/硕士/本科/大专/学历不限/学历不明）。",
+        "all_df.csv 整行去重并保留去重映射。"
+      ],
+      "negative_sampling": [
+        "候选方案 A：按候选人做组内负采样——从该候选人未观测的岗位中随机抽 k 个作负例。",
+        "候选方案 B：按 final_score 分位做难负例挖掘——取 low-score 观测对作难负例。",
+        "候选方案 C：BPR 成对排序——只用组内序（candidate_rank）构造偏好对，不显式建负类。",
+        "本阶段不生成正式负例，上述方案留待第三阶段验证。"
+      ]
+    },
+    "open_questions": [
+      "六维评分（semantic/skill/position/category/experience/education）中除 semantic_score 外，其余 5 个的计算方法未知，数据未提供。",
+      "candidate_rank_pct 的确切定义未知（其分母在候选人/岗位两个方向上都不一致，无法从数据自证），只知道它是 final_score 的线性输入之一。",
+      "0.58 / 0.68 两个标签阈值的设定依据未知。",
+      "embedding 的编码模型未知（README 明确声明未指定），不能仅凭 768 维推断。",
+      "学历数据的 default 标签虽为线上系统输出，但该系统本身的准确率未知（人工 736 条显示约 45.9239%）。",
+      "scam_probability 的生成模型与校准含义未知。"
+    ]
+  }
+}

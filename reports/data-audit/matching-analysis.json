@@ -1,0 +1,472 @@
+{
+  "generated_by": "scripts/data_audit/analyze_matching.py",
+  "note": "只读审计；未修改、未移动、未重写任何原始文件。",
+  "files": {
+    "cv.csv": {
+      "path": "data/raw/job-resume-matching/cv.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\cv.csv",
+      "bytes": 194020617,
+      "mb": 185.032,
+      "encoding": "UTF-8"
+    },
+    "job.csv": {
+      "path": "data/raw/job-resume-matching/job.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\job.csv",
+      "bytes": 32930476,
+      "mb": 31.405,
+      "encoding": "UTF-8"
+    },
+    "matches.csv": {
+      "path": "data/raw/job-resume-matching/matches.csv",
+      "abs_path": "D:\\desktop\\毕业设计\\data\\raw\\job-resume-matching\\matches.csv",
+      "bytes": 19704065,
+      "mb": 18.791,
+      "encoding": "UTF-8"
+    }
+  },
+  "relations": {
+    "cv_rows": 9544,
+    "job_rows": 1167,
+    "matches_rows": 122560,
+    "candidate_id_unique_in_cv": true,
+    "candidate_id_dup_rows_in_cv": 0,
+    "job_id_unique_in_job": true,
+    "job_id_dup_rows_in_job": 0,
+    "matches_unique_candidate_id": 9532,
+    "matches_unique_job_id": 1164,
+    "matches_candidate_id_orphan": 0,
+    "matches_job_id_orphan": 0,
+    "cv_candidate_never_in_matches": 12,
+    "job_job_never_in_matches": 3,
+    "referential_integrity_complete": true,
+    "jobs_per_candidate": {
+      "min": 1,
+      "p25": 7.0,
+      "median": 11.0,
+      "p75": 18.0,
+      "max": 122,
+      "mean": 12.858,
+      "value_counts": {
+        "1": 60,
+        "2": 230,
+        "3": 406,
+        "4": 507,
+        "5": 542,
+        "6": 555,
+        "7": 544,
+        "8": 550,
+        "9": 511,
+        "10": 520,
+        "11": 492,
+        "12": 443,
+        "13": 430,
+        "14": 373,
+        "15": 360,
+        "16": 330,
+        "17": 247,
+        "18": 208,
+        "19": 154,
+        "20": 159,
+        "21": 153,
+        "22": 178,
+        "23": 226,
+        "24": 319,
+        "25": 527,
+        "26": 180,
+        "27": 82,
+        "28": 47,
+        "29": 33,
+        "30": 32,
+        "31": 17,
+        "32": 18,
+        "33": 9,
+        "34": 10,
+        "35": 6,
+        "36": 6,
+        "37": 4,
+        "38": 7,
+        "39": 7,
+        "40": 14,
+        "41": 8,
+        "42": 4,
+        "43": 3,
+        "44": 4,
+        "45": 2,
+        "46": 2,
+        "48": 1,
+        "49": 2,
+        "50": 1,
+        "53": 1,
+        "54": 1,
+        "55": 2,
+        "57": 1,
+        "60": 1,
+        "62": 1,
+        "83": 1,
+        "122": 1
+      }
+    },
+    "candidates_per_job": {
+      "min": 1,
+      "p25": 9.0,
+      "median": 19.0,
+      "p75": 122.25,
+      "max": 500,
+      "mean": 105.292
+    },
+    "pair_total": 122560,
+    "pair_duplicated": 0,
+    "pair_duplicated_rows": 0,
+    "pair_max_repeat": 1,
+    "pair_label_conflict": 0,
+    "pair_final_score_conflict": 0,
+    "full_cross_product_size": 11137848,
+    "observed_pair_ratio_pct": 1.1004
+  },
+  "labels": {
+    "label_strength_value_counts": {
+      "medium_positive": 70636,
+      "weak_positive": 51150,
+      "strong_positive": 774
+    },
+    "label_strength_pct": {
+      "medium_positive": 57.6338,
+      "weak_positive": 41.7347,
+      "strong_positive": 0.6315
+    },
+    "label_missing": 0,
+    "final_score_vs_6feats": {
+      "weights": [
+        0.227789,
+        0.310668,
+        0.16712,
+        0.088543,
+        0.0476,
+        0.051049
+      ],
+      "bias": 0.189018,
+      "r2": 0.84021535,
+      "max_abs_residual": 0.17051545,
+      "residual_std": 0.01439496
+    },
+    "raw_score_vs_6feats": {
+      "weights": [
+        0.25,
+        0.35,
+        0.2,
+        0.1,
+        0.05,
+        0.05
+      ],
+      "bias": 0.0,
+      "r2": 1.0,
+      "max_abs_residual": 0.0,
+      "residual_std": 0.0
+    },
+    "final_vs_raw": {
+      "weights": [
+        0.886401
+      ],
+      "bias": 0.199351,
+      "r2": 0.83503633,
+      "max_abs_residual": 0.17116253,
+      "residual_std": 0.01462639
+    },
+    "final_vs_raw_pearson": 0.91380322,
+    "final_vs_raw_spearman": 0.91686299,
+    "label_ordinal_encoding": {
+      "weak_positive": 0,
+      "medium_positive": 1,
+      "strong_positive": 2
+    },
+    "feature_correlations": {
+      "semantic_score": {
+        "pearson_with_final_score": 0.283934,
+        "pearson_with_raw_score": 0.313881,
+        "spearman_with_final_score": 0.301734,
+        "pearson_with_label_ordinal": 0.25026,
+        "spearman_with_label_ordinal": 0.252501
+      },
+      "skill_score": {
+        "pearson_with_final_score": 0.273132,
+        "pearson_with_raw_score": 0.287645,
+        "spearman_with_final_score": 0.177124,
+        "pearson_with_label_ordinal": 0.206927,
+        "spearman_with_label_ordinal": 0.146471
+      },
+      "position_score": {
+        "pearson_with_final_score": 0.271888,
+        "pearson_with_raw_score": 0.353389,
+        "spearman_with_final_score": 0.294602,
+        "pearson_with_label_ordinal": 0.183747,
+        "spearman_with_label_ordinal": 0.220887
+      },
+      "category_score": {
+        "pearson_with_final_score": 0.186092,
+        "pearson_with_raw_score": 0.181045,
+        "spearman_with_final_score": 0.166662,
+        "pearson_with_label_ordinal": 0.147008,
+        "spearman_with_label_ordinal": 0.147731
+      },
+      "experience_score": {
+        "pearson_with_final_score": 0.370245,
+        "pearson_with_raw_score": 0.373208,
+        "spearman_with_final_score": 0.365054,
+        "pearson_with_label_ordinal": 0.319849,
+        "spearman_with_label_ordinal": 0.316164
+      },
+      "education_score": {
+        "pearson_with_final_score": 0.131749,
+        "pearson_with_raw_score": 0.098018,
+        "spearman_with_final_score": 0.135334,
+        "pearson_with_label_ordinal": 0.125379,
+        "spearman_with_label_ordinal": 0.125489
+      },
+      "final_score": {
+        "pearson_with_label_ordinal": 0.786622,
+        "spearman_with_label_ordinal": 0.857827
+      },
+      "raw_score": {
+        "pearson_with_label_ordinal": 0.711485,
+        "spearman_with_label_ordinal": 0.769249
+      },
+      "candidate_rank_pct": {
+        "pearson_with_label_ordinal": 0.607996,
+        "spearman_with_label_ordinal": 0.692659
+      }
+    },
+    "label_score_intervals": {
+      "medium_positive": {
+        "n": 70636,
+        "final_score_min": 0.58,
+        "final_score_max": 0.679999,
+        "final_score_mean": 0.608124,
+        "raw_score_min": 0.400054,
+        "raw_score_max": 0.570369,
+        "raw_score_mean": 0.45615
+      },
+      "strong_positive": {
+        "n": 774,
+        "final_score_min": 0.680003,
+        "final_score_max": 0.756099,
+        "final_score_mean": 0.696293,
+        "raw_score_min": 0.543094,
+        "raw_score_max": 0.65157,
+        "raw_score_mean": 0.567723
+      },
+      "weak_positive": {
+        "n": 51150,
+        "final_score_min": 0.430009,
+        "final_score_max": 0.58,
+        "final_score_mean": 0.553157,
+        "raw_score_min": 0.305954,
+        "raw_score_max": 0.524448,
+        "raw_score_mean": 0.405961
+      }
+    },
+    "label_final_score_intervals_disjoint": false,
+    "tree_rule_fit": {
+      "final_score_only": {
+        "columns": [
+          "final_score"
+        ],
+        "train_accuracy_depth4": 1.0,
+        "tree_depth_actual": 2,
+        "leaves": 3,
+        "train_accuracy_depth2": 1.0,
+        "tree_depth2_actual": 2
+      },
+      "raw_score_only": {
+        "columns": [
+          "raw_score"
+        ],
+        "train_accuracy_depth4": 0.871271,
+        "tree_depth_actual": 4,
+        "leaves": 16,
+        "train_accuracy_depth2": 0.866319,
+        "tree_depth2_actual": 2
+      },
+      "six_features": {
+        "columns": [
+          "semantic_score",
+          "skill_score",
+          "position_score",
+          "category_score",
+          "experience_score",
+          "education_score"
+        ],
+        "train_accuracy_depth4": 0.764246,
+        "tree_depth_actual": 4,
+        "leaves": 16,
+        "train_accuracy_depth2": 0.691637,
+        "tree_depth2_actual": 2
+      },
+      "six_features_plus_scores": {
+        "columns": [
+          "semantic_score",
+          "skill_score",
+          "position_score",
+          "category_score",
+          "experience_score",
+          "education_score",
+          "final_score",
+          "raw_score"
+        ],
+        "train_accuracy_depth4": 1.0,
+        "tree_depth_actual": 2,
+        "leaves": 3,
+        "train_accuracy_depth2": 1.0,
+        "tree_depth2_actual": 2
+      },
+      "all_numeric_no_rank": {
+        "columns": [
+          "semantic_score",
+          "skill_score",
+          "position_score",
+          "category_score",
+          "experience_score",
+          "education_score",
+          "final_score",
+          "raw_score"
+        ],
+        "train_accuracy_depth4": 1.0,
+        "tree_depth_actual": 2,
+        "leaves": 3,
+        "train_accuracy_depth2": 1.0,
+        "tree_depth2_actual": 2
+      }
+    },
+    "threshold_gaps_final_score": {
+      "weak_positive->medium_positive": {
+        "prev_max": 0.58,
+        "next_min": 0.58,
+        "gap": 0.0,
+        "separable": true
+      },
+      "medium_positive->strong_positive": {
+        "prev_max": 0.679999,
+        "next_min": 0.680003,
+        "gap": 5e-06,
+        "separable": true
+      }
+    },
+    "identical_feature_vectors": 122557,
+    "identical_feature_vectors_with_label_conflict": 1,
+    "identical_final_score_values": 121952,
+    "identical_final_score_with_label_conflict": 0,
+    "strong_positive_count": 774,
+    "strong_positive_ratio_pct": 0.6315,
+    "imbalance_ratio_medium_to_strong": 91.261,
+    "imbalance_ratio_weak_to_strong": 66.085,
+    "strong_positive_unique_candidates": 499,
+    "strong_positive_unique_jobs": 75
+  },
+  "rank_fields": {
+    "candidate_groups_checked": 9532,
+    "candidate_rank_matches_score_desc_rank": 9532,
+    "candidate_rank_matches_pct": 4,
+    "candidate_rank_is_deterministic_from_score": true,
+    "candidate_rank_value_counts_top": {
+      "1": 9532,
+      "2": 9472,
+      "3": 9242,
+      "4": 8836,
+      "5": 8329,
+      "6": 7787,
+      "7": 7232,
+      "8": 6688,
+      "9": 6138,
+      "10": 5627,
+      "11": 5107,
+      "12": 4615,
+      "13": 4172,
+      "14": 3742,
+      "15": 3369
+    },
+    "candidate_rank_pct_summary": {
+      "count": 122560,
+      "missing": 0,
+      "missing_pct": 0.0,
+      "unique": 6393,
+      "min": 0.3832335329341317,
+      "max": 1.0,
+      "mean": 0.9353474640551285,
+      "std": 0.053936321200507044,
+      "quantiles": {
+        "p0": 0.383234,
+        "p1": 0.729445,
+        "p5": 0.859155,
+        "p25": 0.905983,
+        "p50": 0.94359,
+        "p75": 0.974277,
+        "p95": 1.0,
+        "p99": 1.0,
+        "p100": 1.0
+      }
+    },
+    "candidate_rank_summary": {
+      "count": 122560,
+      "missing": 0,
+      "missing_pct": 0.0,
+      "unique": 122,
+      "min": 1.0,
+      "max": 122.0,
+      "mean": 9.35705776762402,
+      "std": 7.338919494740374,
+      "quantiles": {
+        "p0": 1.0,
+        "p1": 1.0,
+        "p5": 1.0,
+        "p25": 4.0,
+        "p50": 8.0,
+        "p75": 13.0,
+        "p95": 23.0,
+        "p99": 30.0,
+        "p100": 122.0
+      }
+    }
+  },
+  "negative_sampling": {
+    "labels_present": [
+      "medium_positive",
+      "strong_positive",
+      "weak_positive"
+    ],
+    "has_explicit_negative_label": false,
+    "observed_pairs": 122560,
+    "all_possible_pairs": 11137848,
+    "unobserved_pairs": 11015288,
+    "observed_ratio_pct": 1.1004,
+    "weak_positive_semantic_score_mean": 0.768745,
+    "weak_positive_final_score_mean": 0.553157,
+    "medium_positive_semantic_score_mean": 0.78998,
+    "medium_positive_final_score_mean": 0.608124,
+    "strong_positive_semantic_score_mean": 0.802335,
+    "strong_positive_final_score_mean": 0.696293
+  },
+  "leakage": {
+    "candidates_with_multiple_rows": 9472,
+    "max_rows_per_candidate": 122,
+    "rows_in_multirow_candidates_pct": 99.951,
+    "jobs_with_multiple_rows": 1162,
+    "max_rows_per_job": 500,
+    "random_split_8_1_1_sim": {
+      "val_rows": 12256,
+      "val_candidates_seen_in_train_pct": 99.617,
+      "val_jobs_seen_in_train_pct": 100.0
+    },
+    "derived_fields": {
+      "final_score": "六维打分的函数（见 matching-analysis.json 中 final_score_vs_6feats）",
+      "raw_score": "六维打分的函数",
+      "candidate_rank": "组内按 final_score 降序的名次（确定性派生）",
+      "candidate_rank_pct": "组内名次的百分位（确定性派生）"
+    },
+    "high_leakage_features_for_label_prediction": [
+      "final_score",
+      "raw_score",
+      "candidate_rank",
+      "candidate_rank_pct"
+    ],
+    "note_on_derived_label": "若 label_strength 由 final_score/六维打分阈值生成，则用六维或分数预测标签属于目标泄漏（等价于复现生成公式），不能作为模型效果证据。"
+  }
+}

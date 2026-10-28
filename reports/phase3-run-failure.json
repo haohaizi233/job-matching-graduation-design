@@ -1,0 +1,6 @@
+{
+  "error": "任务 match_label_strength 特征列违反泄漏防护策略: [{'column': 'cv_skills_canonical_json', 'reason': '不在任务白名单内'}, {'column': 'job_skills_canonical_json', 'reason': '不在任务白名单内'}]",
+  "failed_step": "build_features",
+  "ok": false,
+  "traceback": "Traceback (most recent call last):\n  File \"D:\\desktop\\毕业设计\\scripts\\data_pipeline\\run_all.py\", line 56, in main\n    results[name] = fn()\n                    ^^^^\n  File \"D:\\desktop\\毕业设计\\src\\job_matching\\pipeline.py\", line 249, in step_build_features\n    check_feature_columns(\"match_label_strength\", feat_cols)\n  File \"D:\\desktop\\毕业设计\\src\\job_matching\\policy.py\", line 113, in check_feature_columns\n    raise LeakageError(f\"任务 {task} 特征列违反泄漏防护策略: {hard}\")\njob_matching.policy.LeakageError: 任务 match_label_strength 特征列违反泄漏防护策略: [{'column': 'cv_skills_canonical_json', 'reason': '不在任务白名单内'}, {'column': 'job_skills_canonical_json', 'reason': '不在任务白名单内'}]\n"
+}
