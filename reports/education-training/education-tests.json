@@ -1,0 +1,274 @@
+{
+  "generated_by": "tests/education_training/run_all.py",
+  "created_at": "2026-10-28T22:07:11",
+  "seconds": 9.19,
+  "ok": true,
+  "totals": {
+    "tests": 36,
+    "pass": 36,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "E1": {
+      "title": "原始数据哈希 / 切分互斥 / 金标准隔离",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "E2": {
+      "title": "六维标签映射 / 可逆 / 互斥规则",
+      "total": 7,
+      "pass": 7,
+      "fail": 0,
+      "skip": 0
+    },
+    "E3": {
+      "title": "TF-IDF 与字符词表只在 Train 上 fit",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "E4": {
+      "title": "正反向传播 / 参数更新 / 保存重载 / 可复现",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
+    },
+    "E5": {
+      "title": "推理接口 / 异常输入 / 无标签依赖",
+      "total": 9,
+      "pass": 9,
+      "fail": 0,
+      "skip": 0
+    },
+    "E6": {
+      "title": "实验关联 / 4.1 产物保护 / pip check",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "records": [
+    {
+      "group": "E1",
+      "test": "test_gold_isolated_from_dev (test_e1_data_integrity.E1DataIntegrity.test_gold_isolated_from_dev)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E1",
+      "test": "test_raw_hashes_match_phase2_baseline (test_e1_data_integrity.E1DataIntegrity.test_raw_hashes_match_phase2_baseline)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E1",
+      "test": "test_split_files_match_manifest_hashes (test_e1_data_integrity.E1DataIntegrity.test_split_files_match_manifest_hashes)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E1",
+      "test": "test_train_val_input_groups_disjoint (test_e1_data_integrity.E1DataIntegrity.test_train_val_input_groups_disjoint)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E2",
+      "test": "test_above_expansion_rule (test_e2_labels.E2Labels.test_above_expansion_rule)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E2",
+      "test": "test_label_order_matches_config (test_e2_labels.E2Labels.test_label_order_matches_config)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E2",
+      "test": "test_multi_hot_roundtrip_reversible (test_e2_labels.E2Labels.test_multi_hot_roundtrip_reversible)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E2",
+      "test": "test_multi_hot_string_roundtrip (test_e2_labels.E2Labels.test_multi_hot_string_roundtrip)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E2",
+      "test": "test_normalize_label_known_combinations (test_e2_labels.E2Labels.test_normalize_label_known_combinations)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E2",
+      "test": "test_predictor_conflict_resolution_never_mixes (test_e2_labels.E2Labels.test_predictor_conflict_resolution_never_mixes)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E2",
+      "test": "test_terminal_token_exclusivity_flagged (test_e2_labels.E2Labels.test_terminal_token_exclusivity_flagged)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E3",
+      "test": "test_char_vocab_excludes_validation_only_chars (test_e3_fit_scope.E3FitScope.test_char_vocab_excludes_validation_only_chars)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E3",
+      "test": "test_tfidf_vocabulary_excludes_validation_only_tokens (test_e3_fit_scope.E3FitScope.test_tfidf_vocabulary_excludes_validation_only_tokens)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E3",
+      "test": "test_thresholds_selected_without_gold (test_e3_fit_scope.E3FitScope.test_thresholds_selected_without_gold)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E3",
+      "test": "test_tokenizer_refuses_second_fit (test_e3_fit_scope.E3FitScope.test_tokenizer_refuses_second_fit)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E4",
+      "test": "test_charcnn_save_reload_consistent (test_e4_models.E4Models.test_charcnn_save_reload_consistent)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E4",
+      "test": "test_model_save_reload_consistent (test_e4_models.E4Models.test_model_save_reload_consistent)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E4",
+      "test": "test_neural_forward_backward_and_param_update (test_e4_models.E4Models.test_neural_forward_backward_and_param_update)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E4",
+      "test": "test_neural_training_record_complete (test_e4_models.E4Models.test_neural_training_record_complete)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E4",
+      "test": "test_reproducible_small_training (test_e4_models.E4Models.test_reproducible_small_training)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E4",
+      "test": "test_tfidf_train_predict (test_e4_models.E4Models.test_tfidf_train_predict)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_batch_equals_single (test_e5_inference.E5Inference.test_batch_equals_single)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_empty_input_handled (test_e5_inference.E5Inference.test_empty_input_handled)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_inference_has_no_label_dependency (test_e5_inference.E5Inference.test_inference_has_no_label_dependency)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_output_matches_label_vocabulary (test_e5_inference.E5Inference.test_output_matches_label_vocabulary)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_predictor_works_without_dataset_files (test_e5_inference.E5Inference.test_predictor_works_without_dataset_files)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_repeat_stability (test_e5_inference.E5Inference.test_repeat_stability)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_single_pair_independent_prediction (test_e5_inference.E5Inference.test_single_pair_independent_prediction)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_unicode_and_whitespace_normalization (test_e5_inference.E5Inference.test_unicode_and_whitespace_normalization)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E5",
+      "test": "test_unknown_expression_no_crash (test_e5_inference.E5Inference.test_unknown_expression_no_crash)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E6",
+      "test": "test_gold_never_used_for_selection (test_e6_experiments.E6Experiments.test_gold_never_used_for_selection)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E6",
+      "test": "test_matching_phase41_artifacts_untouched (test_e6_experiments.E6Experiments.test_matching_phase41_artifacts_untouched)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E6",
+      "test": "test_metrics_sets_are_labelled_with_provenance (test_e6_experiments.E6Experiments.test_metrics_sets_are_labelled_with_provenance)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E6",
+      "test": "test_pip_check_passes (test_e6_experiments.E6Experiments.test_pip_check_passes)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E6",
+      "test": "test_raw_data_not_written_by_education_training (test_e6_experiments.E6Experiments.test_raw_data_not_written_by_education_training)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "E6",
+      "test": "test_run_manifests_reference_config_and_data (test_e6_experiments.E6Experiments.test_run_manifests_reference_config_and_data)",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

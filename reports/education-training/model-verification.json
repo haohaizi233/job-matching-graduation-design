@@ -1,0 +1,1560 @@
+{
+  "created_at": "2026-10-28T22:03:57",
+  "generated_by": "scripts/education_training/verify_models.py",
+  "passed": 4,
+  "predictor_source_check": {
+    "file": "src/job_matching/education/predictor.py",
+    "forbidden_tokens_found": [],
+    "ok": true,
+    "scan_mode": "code_only(comments/docstrings stripped)"
+  },
+  "runs": [
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "大专"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不限"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 38988,
+          "sha256": "7f0ac44fd29c056879afdb9868cc4fce280a2a89e29b03dc51f1c6da549e5267"
+        },
+        "config.json": {
+          "bytes": 1812,
+          "sha256": "75eb6aafb34b94545904105278fba4e038ad4acd4b1d3c4b2d5cac87e38f1f01"
+        },
+        "evaluation.json": {
+          "bytes": 42620,
+          "sha256": "73fc52622a4fbe3c36926f4264b02c3bc2ef8da964d4bf8ffb9311b524ece896"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392"
+        },
+        "history.json": {
+          "bytes": 1390,
+          "sha256": "93891b0811c62a45badf8a418139f2790d9d629e557f81afdf93113cc7bd5c93"
+        },
+        "manifest.json": {
+          "bytes": 5415,
+          "sha256": "52fb2092750a9d7f22cd3e87ab93820d2841c5f8f4c25da188d6f6e1e4428c93"
+        },
+        "metrics.json": {
+          "bytes": 10649,
+          "sha256": "66e3f87518fdc1ec85d26abec9328315054f86cd492830a65bcbf0453326ac8b"
+        },
+        "model.pt": {
+          "bytes": 39052,
+          "sha256": "cca6d3c4c15d3cb827188c65d5bcbf48fd3421aa10df906817e1fc05f07d2177"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11560,
+          "sha256": "b275ff62f40dbce7e86db22079b7d66efa028efa49ee8b93343f46734f3f507c"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 600044,
+          "sha256": "4cf88132bbd4d6b9e2135c6f82214e4c33d06203bbd3aca4c253d36f56d45064"
+        },
+        "thresholds.json": {
+          "bytes": 628,
+          "sha256": "efb521667f7705331f6d16e4739734e7a15f57f0897940be039afc0c28821996"
+        },
+        "tokenizer.json": {
+          "bytes": 1118,
+          "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0203,
+      "model_dir": "models/education/charcnn/charcnn-final-20261028-212510",
+      "model_type": "char_cnn",
+      "ok": false,
+      "reload_consistency": {
+        "max_abs_diff": 8.630752563476562e-05,
+        "ok": false,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-final-20261028-212510",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不限"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不限"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 38988,
+          "sha256": "4eb190b845dc424e90b35873d303daca89ab5739f85026ff8542895fe43fdf30"
+        },
+        "config.json": {
+          "bytes": 1812,
+          "sha256": "75eb6aafb34b94545904105278fba4e038ad4acd4b1d3c4b2d5cac87e38f1f01"
+        },
+        "evaluation.json": {
+          "bytes": 42627,
+          "sha256": "2f69e9fa7e54115196218e44999af50d3ad8a1c3d103a04797cded054c0fe4af"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392"
+        },
+        "history.json": {
+          "bytes": 1389,
+          "sha256": "112080c002ba45ec5c4958f7afc7b2aa9e3164ee756760f6b18e641b83ef9231"
+        },
+        "manifest.json": {
+          "bytes": 5446,
+          "sha256": "0779c57c792474a7745ad7e425591a1961f7205138afdbfa8b5496a02477ee1e"
+        },
+        "metrics.json": {
+          "bytes": 10636,
+          "sha256": "c98ef68b171ac990d9dcdc4a176109490c734b3dd84c2a6b46ea90ba0d36e902"
+        },
+        "model.pt": {
+          "bytes": 39052,
+          "sha256": "98dc032de92bc856d567cf8599b0aecc94677e9ccd3c9aa8f426389020cbb259"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11565,
+          "sha256": "0a0a7d6a70ce721f244c227bda25e3b3203e4bb2d2d058f72306b220819494ad"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 600039,
+          "sha256": "749242d004dfee53bdc7a7af915675ed0380113b31366975b49f92ad45b13783"
+        },
+        "thresholds.json": {
+          "bytes": 633,
+          "sha256": "475baec04bf6cdd030be7b345b1dbb8b916e3c0beb5ffc53b8e8e50a1cc58741"
+        },
+        "tokenizer.json": {
+          "bytes": 1118,
+          "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0179,
+      "model_dir": "models/education/charcnn/charcnn-final-balanced-20261028-212534",
+      "model_type": "char_cnn",
+      "ok": false,
+      "reload_consistency": {
+        "max_abs_diff": 6.902217864990234e-05,
+        "ok": false,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-final-balanced-20261028-212534",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 38604,
+          "sha256": "b8b0d93e5e51e4125f59f7a6738a50e62b4cb234d3f92736baf31f53d678ebea"
+        },
+        "config.json": {
+          "bytes": 1812,
+          "sha256": "75eb6aafb34b94545904105278fba4e038ad4acd4b1d3c4b2d5cac87e38f1f01"
+        },
+        "evaluation.json": {
+          "bytes": 55931,
+          "sha256": "5ae240bdb9cb2bedea4da08ff0e8b57bf489c5017abff1fb1f5a03afa25a853a"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "e074b9d6803f3071279c70182f57fcb559f118ef14d570822682ec2f635c321b"
+        },
+        "history.json": {
+          "bytes": 2500,
+          "sha256": "680706c12630fcdb8c3619e2234f03d3553779adf9d9ebac356c407019df1ae7"
+        },
+        "manifest.json": {
+          "bytes": 7151,
+          "sha256": "777e61168371fa4dba8c80db173657142db0057e4e2f020e6a561dbbf356d06c"
+        },
+        "metrics.json": {
+          "bytes": 15885,
+          "sha256": "144d81cab412d9afe641eab6a6a70f4895faa16e50fdc7e7e0c0641e46c48c6c"
+        },
+        "model.pt": {
+          "bytes": 38668,
+          "sha256": "39ef505ff16a5d6b8c1563cf915e583ad2919f005c5e313352f7519271b9b6c9"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11597,
+          "sha256": "e98ee235a076244aed757b15f3efae98026d6914213322cd63cae369a9012fde"
+        },
+        "predictions_holdout_unseen_slots.npz": {
+          "bytes": 19850,
+          "sha256": "a5ac1b92d7d9d86574f4fc4aa8af9ae4580380a649afd6d44bddd9ac13e349b3"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 600059,
+          "sha256": "82c236a1ce5aba8659e6af963ff4c4e9af878210741ab5c3f0260f31692acfc1"
+        },
+        "thresholds.json": {
+          "bytes": 638,
+          "sha256": "b31db656e21ca1617ff081c88a508aef3cbba8a62bdcd4303bc245edd5256f09"
+        },
+        "tokenizer.json": {
+          "bytes": 1076,
+          "sha256": "739817651e32a5ed1b9e9fc575f48a67e1922945a35be2f5fc6c4e4e4f45d2f1"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0181,
+      "model_dir": "models/education/charcnn/charcnn-final-holdout-20261028-212622",
+      "model_type": "char_cnn",
+      "ok": false,
+      "reload_consistency": {
+        "max_abs_diff": 6.601214408874512e-05,
+        "ok": false,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-final-holdout-20261028-212622",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不限"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 38604,
+          "sha256": "ee7f37febb01e5627a5d403f972dba97b8f539e3cee087a439574a8f7abac5fb"
+        },
+        "config.json": {
+          "bytes": 1834,
+          "sha256": "1befb038456ece6e9027733b72b88714f16086ff48b94d7de03d4f800acf7090"
+        },
+        "evaluation.json": {
+          "bytes": 55941,
+          "sha256": "dc79c278c637e816d2e330a09271aab84fef17f552dfc6d7eb626ea526c5b0b2"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "e074b9d6803f3071279c70182f57fcb559f118ef14d570822682ec2f635c321b"
+        },
+        "history.json": {
+          "bytes": 2948,
+          "sha256": "bb20ac8fdbe29655dc2e012bc79c7f7e8464126acdc1394ac6fd1c4b4fd42b82"
+        },
+        "manifest.json": {
+          "bytes": 7611,
+          "sha256": "da6f3d8336dcfa7c999f247bd94649235378ddd647d426619122eaff226a7204"
+        },
+        "metrics.json": {
+          "bytes": 15874,
+          "sha256": "001742c0815b5e28fe5a0f32a86f39878b05f2dcddf8247fbdeb1bbff3cfd54d"
+        },
+        "model.pt": {
+          "bytes": 38732,
+          "sha256": "0640e786c6ad79f83b1ec8cb324de75c70bbc7ee4f9f2a4a3ec13a129d7580f4"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11594,
+          "sha256": "119dfdf350571311da8794ca2674916fd1b82bf924e4033dcbcb8e10515f57ff"
+        },
+        "predictions_holdout_unseen_slots.npz": {
+          "bytes": 19879,
+          "sha256": "a6224e9106dcdf4e246f4f832bfa87d30b0623734b26738384ec044dae40420c"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 600104,
+          "sha256": "d0b4a55504f91fba57404a892a76cc1b2a0ed2953ecd154931de3fba3e36084c"
+        },
+        "thresholds.json": {
+          "bytes": 638,
+          "sha256": "a2dab1d29ee926e39c40026faef03b54867f3f1bf028e690ea0bd875beb5b7dd"
+        },
+        "tokenizer.json": {
+          "bytes": 1076,
+          "sha256": "739817651e32a5ed1b9e9fc575f48a67e1922945a35be2f5fc6c4e4e4f45d2f1"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0351,
+      "model_dir": "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+      "model_type": "char_cnn",
+      "ok": false,
+      "reload_consistency": {
+        "max_abs_diff": 0.00011605024337768555,
+        "ok": false,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-final-holdout-vloss-20261028-213521",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不限"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 38988,
+          "sha256": "52a337c06a2bc3c9eae4a8132644e4352b22d4df45fe9e1421a2d5dd0fccff5a"
+        },
+        "config.json": {
+          "bytes": 1834,
+          "sha256": "1befb038456ece6e9027733b72b88714f16086ff48b94d7de03d4f800acf7090"
+        },
+        "evaluation.json": {
+          "bytes": 42615,
+          "sha256": "d3867db5852d79512efb8bbd023c0ef8086b32c6d71f7a753407da5a202c39c1"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392"
+        },
+        "history.json": {
+          "bytes": 1833,
+          "sha256": "d486622ee80d4bb7002b32265c31dece1fac0d774692f907646e94c6322c2740"
+        },
+        "manifest.json": {
+          "bytes": 5875,
+          "sha256": "756d0e9c845de1e8f99404207baea4447a62cc24acd88b6acb4ef96eb8643b1b"
+        },
+        "metrics.json": {
+          "bytes": 10615,
+          "sha256": "d31463301e53de2ddfbcfc2f5becb49d314c40e3c45b53ef829ca70df8549b44"
+        },
+        "model.pt": {
+          "bytes": 39052,
+          "sha256": "bafbd977a2c66dc647898e4c995168cd7525a0dd8457b9921262c4fc67671afa"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11601,
+          "sha256": "503e95038631b136fd2298d8d1f4571142d6f180f0a3b7dd3ca33be65cec3244"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 599975,
+          "sha256": "8eb369dacee91cdad20d0a39ef3d7a235956434dd0cabc5c6290f3b52282f31c"
+        },
+        "thresholds.json": {
+          "bytes": 633,
+          "sha256": "a8eebce03bad9927bbf22a1ef9b45a57e1bbfa5bee420775457808a8448da2ff"
+        },
+        "tokenizer.json": {
+          "bytes": 1118,
+          "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0182,
+      "model_dir": "models/education/charcnn/charcnn-final-vloss-20261028-213415",
+      "model_type": "char_cnn",
+      "ok": false,
+      "reload_consistency": {
+        "max_abs_diff": 8.767843246459961e-05,
+        "ok": false,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-final-vloss-20261028-213415",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不限"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不限"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 38988,
+          "sha256": "777e9ce06d1ac38cf8047779afe0d68a779b9ce6692f5949dc2e3f5cdc1ad0c9"
+        },
+        "config.json": {
+          "bytes": 1834,
+          "sha256": "1befb038456ece6e9027733b72b88714f16086ff48b94d7de03d4f800acf7090"
+        },
+        "evaluation.json": {
+          "bytes": 42622,
+          "sha256": "411cd19016246868fff67549329159dfdb569cc702ea0221f4aa8f1b200c6808"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392"
+        },
+        "history.json": {
+          "bytes": 1834,
+          "sha256": "becc1244191384cc510ac1b8913363fa3fe659cf37f10632b8408fbe2547c619"
+        },
+        "manifest.json": {
+          "bytes": 5905,
+          "sha256": "560254826428d17dcb5f74abcdbf03382d15125b7b68a537faa1bf16cd32d96b"
+        },
+        "metrics.json": {
+          "bytes": 10608,
+          "sha256": "966866d66c45bc7b5ef28b95a3510b88563201b1c693d3b0e83c757b7d26ab80"
+        },
+        "model.pt": {
+          "bytes": 39116,
+          "sha256": "9ba756e7b9ee9a8bf6b3a1869ba54ec7afc0a0ee6086803ced230289a66555a6"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11600,
+          "sha256": "d8e9cf06c0e7c720f9346bbfbb5e507552b3578870aee2806d7add78d75bd4cd"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 600124,
+          "sha256": "f92695c5185f8388ff4aa0adaadc2694184854e08968488ef7de92f9afd138aa"
+        },
+        "thresholds.json": {
+          "bytes": 635,
+          "sha256": "b164343ab3f3888d42f8249c4280adc8423557b11c43936d0f58fbf10798b2f8"
+        },
+        "tokenizer.json": {
+          "bytes": 1118,
+          "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.018,
+      "model_dir": "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+      "model_type": "char_cnn",
+      "ok": false,
+      "reload_consistency": {
+        "max_abs_diff": 8.410215377807617e-05,
+        "ok": false,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-final-vloss-balanced-20261028-213450",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "学历不限"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 31692,
+          "sha256": "e9bc6ea35d74a2058dca82e2990debeb2bff8e03b053151a6544646d1dc6bc90"
+        },
+        "config.json": {
+          "bytes": 1812,
+          "sha256": "75eb6aafb34b94545904105278fba4e038ad4acd4b1d3c4b2d5cac87e38f1f01"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "d9ae4906e9490f5d3a58a50fd1c33a9c6eef99a654412cb5f3163cba74083fce"
+        },
+        "history.json": {
+          "bytes": 3399,
+          "sha256": "a170e4fb746566e373f319ffdc59e08f93d356a7799a75ea6fca5fec6fb1afbe"
+        },
+        "manifest.json": {
+          "bytes": 5987,
+          "sha256": "fa566aec63d11c49d88930c9d826c29e2120fcd181abe0ba30dd4d3247e6fa71"
+        },
+        "metrics.json": {
+          "bytes": 10468,
+          "sha256": "6e207944289d6d0e1da24f3789b5df65a9f65987f15ab1518c6599557397885e"
+        },
+        "model.pt": {
+          "bytes": 31756,
+          "sha256": "77fdb7fea6699da75d4fff125566ee0426df823ccafd10658e149169bcfac5db"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11536,
+          "sha256": "2a52c49c5b0d9259e81996014633a75beec0d7f0262544f92c4609aa73bdbbd5"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 40973,
+          "sha256": "2fbdc321fe9586f832c8b1702c3567b0806acf33a26e229f220bb7e1b936f92d"
+        },
+        "thresholds.json": {
+          "bytes": 630,
+          "sha256": "03abe474ebf8bf3e80f30b461dd4d3c8c7eb52c0b19a05d5e61a91af89e0fa80"
+        },
+        "tokenizer.json": {
+          "bytes": 352,
+          "sha256": "ba8b2699b97761a2d6e8bfbfdfa1cd40019300c3f6f85e450dd4e97c3741a6bd"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0172,
+      "model_dir": "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+      "model_type": "char_cnn",
+      "ok": false,
+      "reload_consistency": {
+        "max_abs_diff": 5.227327346801758e-05,
+        "ok": false,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-smoke-charcnn-20261028-211941",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "config.json": {
+          "bytes": 1508,
+          "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b"
+        },
+        "evaluation.json": {
+          "bytes": 42626,
+          "sha256": "33cf6ccde6d554dbf7dd74f7ec7d6e085e6b5d58e767fc43e9f37eabdf0af616"
+        },
+        "feature_map.json": {
+          "bytes": 246,
+          "sha256": "b37e34221ed374a1bcaf150218f51a138a8effa8a2f25686428b3eeb3a8dd8a0"
+        },
+        "history.json": {
+          "bytes": 623,
+          "sha256": "85102bdb979d950fbebbefc6a1e17de8af0aa2731034517118589da3043a7aa3"
+        },
+        "manifest.json": {
+          "bytes": 4415,
+          "sha256": "a592d0238267cdf3acf91616805bdb24169ca12137e6e8452fa71e5d627a671b"
+        },
+        "metrics.json": {
+          "bytes": 10622,
+          "sha256": "5aa452c188b9fd593cccf10adf165732b1122115bf0447f52db2d4ac2257b8dc"
+        },
+        "model.pkl": {
+          "bytes": 27219,
+          "sha256": "8b0bee49272fb341868c1d2172da044ceafec455490d5c15aec46601264c6c5c"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11562,
+          "sha256": "733d6cd97e8ffe3609358230f280c41546b2d5afe26b4b028ba6d4553a95ec9d"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 596711,
+          "sha256": "deab3f739b2c550955d3bf35fcd1ae33a8ff06dd5daa3c3725e0592a7205bafc"
+        },
+        "thresholds.json": {
+          "bytes": 626,
+          "sha256": "58960d224c8e8ab06b7a1c79d87f7eacf8673b93e41cd008899299c7cc1173d3"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0187,
+      "model_dir": "models/education/tfidf/tfidf-final-20261028-212254",
+      "model_type": "tfidf_char_ovr_logreg",
+      "ok": true,
+      "reload_consistency": {
+        "max_abs_diff": 2.902403628546324e-08,
+        "ok": true,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "tfidf-final-20261028-212254",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "config.json": {
+          "bytes": 1508,
+          "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b"
+        },
+        "evaluation.json": {
+          "bytes": 42630,
+          "sha256": "f0b13f60169a6236f4cd60a16e44bd0010a375ed0611370cc2b7d7c9bb68a6ce"
+        },
+        "feature_map.json": {
+          "bytes": 246,
+          "sha256": "b37e34221ed374a1bcaf150218f51a138a8effa8a2f25686428b3eeb3a8dd8a0"
+        },
+        "history.json": {
+          "bytes": 621,
+          "sha256": "fd452ad107622aaa83130b80a3ea2d34cc9598fa5cfa05affceda903ccd98707"
+        },
+        "manifest.json": {
+          "bytes": 4440,
+          "sha256": "e99c0474830280c7b53a41af42a308d700145f8492905acc9b54b57d28b523b2"
+        },
+        "metrics.json": {
+          "bytes": 10612,
+          "sha256": "70bfbc706cf0fbd475d8e23ba962d12713b353cdaf9f5ed93702cb592baffe1c"
+        },
+        "model.pkl": {
+          "bytes": 27219,
+          "sha256": "02049419baa36d5511461adb39d98ccdff3b0d798ceaa9d14bdc7cab9f5f7101"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11566,
+          "sha256": "b4da61c9609ec8c42cad836c0cfa22dee1d462ba7afef3074fa0978e869e2945"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 596508,
+          "sha256": "e5ed92c361596d7a0b41205ea65d9762eb950b43446c4f5e70cbb5a17b33cc6e"
+        },
+        "thresholds.json": {
+          "bytes": 624,
+          "sha256": "e4fa50d619ef58f081564dfa00b07b449529535ce2f93eb42500584ed7d3a4ce"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0173,
+      "model_dir": "models/education/tfidf/tfidf-final-balanced-20261028-212312",
+      "model_type": "tfidf_char_ovr_logreg",
+      "ok": true,
+      "reload_consistency": {
+        "max_abs_diff": 2.9581429972225237e-08,
+        "ok": true,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "tfidf-final-balanced-20261028-212312",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "config.json": {
+          "bytes": 1508,
+          "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b"
+        },
+        "evaluation.json": {
+          "bytes": 55951,
+          "sha256": "f1722677a293b61ab4850edd7077754fa2b204c499af5483b048cd1544b592ff"
+        },
+        "feature_map.json": {
+          "bytes": 246,
+          "sha256": "64150b5488f8ffe8a37c545aa843d8bdc691be295d2ca4cc10d9a4ffd1a55095"
+        },
+        "history.json": {
+          "bytes": 623,
+          "sha256": "987221ec945ecc1d6a40c335c3fdf1497216633c514d6d75648b71e9d6529f57"
+        },
+        "manifest.json": {
+          "bytes": 5037,
+          "sha256": "432c5f55f56707446a45ba2716f8795e8674811a28878acf0e8edb799d3cef8f"
+        },
+        "metrics.json": {
+          "bytes": 15865,
+          "sha256": "0a31f9b3678875f2e6dbd1a64273204168110dd3f7d206b1e4a4b6f7dbc137a1"
+        },
+        "model.pkl": {
+          "bytes": 24400,
+          "sha256": "e07d0f9894fcfff3ab3b9fe9e1950c55149f29bf76a67cb9b95a1023d0d811ed"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11565,
+          "sha256": "7bea2c1df00045963ff2aa3e808288241c57eb37ef309b351acd1e2afeac2dd7"
+        },
+        "predictions_holdout_unseen_slots.npz": {
+          "bytes": 19798,
+          "sha256": "5d798974f8a5e2f44f4c54e65487749dea385120d3eed18b8961c7a302d74d40"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 596550,
+          "sha256": "b2b6c99300e7ba43c9a0a95814ed8f0e66f417f2b23bac87e0b775965843b51d"
+        },
+        "thresholds.json": {
+          "bytes": 633,
+          "sha256": "028da479d8332a88595808e11e19d43213b3a650ad809c5308cdb6d7616d0bfc"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0172,
+      "model_dir": "models/education/tfidf/tfidf-final-holdout-20261028-212556",
+      "model_type": "tfidf_char_ovr_logreg",
+      "ok": true,
+      "reload_consistency": {
+        "max_abs_diff": 2.9633809961460145e-08,
+        "ok": true,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "tfidf-final-holdout-20261028-212556",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "config.json": {
+          "bytes": 1508,
+          "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b"
+        },
+        "evaluation.json": {
+          "bytes": 42676,
+          "sha256": "ebfd5dd6323a8d3f4c01fe5be869b36a90fc1436ca2fc425a35c4bed112a4833"
+        },
+        "feature_map.json": {
+          "bytes": 272,
+          "sha256": "22197af379f73bd7aea724aba6a1f346f18f51e710116439b0a911788c1c032e"
+        },
+        "history.json": {
+          "bytes": 625,
+          "sha256": "6b2dc44bff5ff656245651e472836d65abd8fd84e27173635cd88a71e6cb5fb5"
+        },
+        "manifest.json": {
+          "bytes": 4444,
+          "sha256": "8972c35b038abc30c68ebc34f796adecc33495d89cb09979d34572ba20eeb969"
+        },
+        "metrics.json": {
+          "bytes": 10656,
+          "sha256": "43f295cd25f0da49b04a4440f74e55aecdab102459e1c0b866a806959cba3f97"
+        },
+        "model.pkl": {
+          "bytes": 20081257,
+          "sha256": "7ab39afd71cff89bd30b880f17de17c5467785cbb3ca4896950f775ac6c806ec"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 25526,
+          "sha256": "31816e13dd69d03cb03cf7cac210cbc9568c01635ef7fe463cd4f88537567f24"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 1511990,
+          "sha256": "946e214127bf6cc49f8bfffa5ed62bfe20433e8e93bc39aca0d317c94ef398ed"
+        },
+        "thresholds.json": {
+          "bytes": 628,
+          "sha256": "d262c9085d085e683785e366037b1902aa5013da7819ec24c74c96e2a7e251df"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0157,
+      "model_dir": "models/education/tfidf/tfidf-final-title-20261028-212332",
+      "model_type": "tfidf_char_ovr_logreg",
+      "ok": false,
+      "reload_consistency": {
+        "max_abs_diff": 0.9761794250421499,
+        "ok": false,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "tfidf-final-title-20261028-212332",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "config.json": {
+          "bytes": 1508,
+          "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "7a8d780a43b2ded7dc6b0449f430ab326089ec858fb50f13ebbdb2dc079b2d89"
+        },
+        "history.json": {
+          "bytes": 621,
+          "sha256": "089de06464ef6a3277ff33b4999fc9923ba9186b6d78c831089fcaba4ca50784"
+        },
+        "manifest.json": {
+          "bytes": 2980,
+          "sha256": "339eff7f5c85166908efabec7f7db202b079e17f9ab1f46afac7b3c06eb2a2ab"
+        },
+        "metrics.json": {
+          "bytes": 10450,
+          "sha256": "18ce322c3e1134bc5af43bd472c5f31634de3da66b9062fbcb820957982d2eff"
+        },
+        "model.pkl": {
+          "bytes": 8395,
+          "sha256": "cf39c23057a6b973347f6701f636771fc2c9377b015e7cbb363a5e935692998d"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11532,
+          "sha256": "e317fef271db7021f9c6ffb9cae08963c98171602fa2e4b59d202b6bec62af4a"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 40842,
+          "sha256": "6b423739e54045462c27c0a9baf0a4299689f7b5f4c26f1f54b5af850e2e5282"
+        },
+        "thresholds.json": {
+          "bytes": 621,
+          "sha256": "a4df7880e4991668e0e8e3f104675898f5a765c9099fce54280aa00ac9ec1e93"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.017,
+      "model_dir": "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+      "model_type": "tfidf_char_ovr_logreg",
+      "ok": true,
+      "reload_consistency": {
+        "max_abs_diff": 2.9694242287270356e-08,
+        "ok": true,
+        "rows_compared": 2000
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "tfidf-smoke-tfidf-20261028-211845",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    }
+  ],
+  "seconds": 78.42,
+  "total": 12
+}

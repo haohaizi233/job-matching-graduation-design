@@ -1,0 +1,214 @@
+{
+  "created_at": "2026-10-28T22:11:49",
+  "generated_by": "scripts/education_training/analyze_learnability.py",
+  "gold_labels_reference_only": {
+    "distinct_label_combos": 11,
+    "empty_label_rows": 0,
+    "exclusivity_check": {
+      "policy": "configs/education_labels.yaml：学历不限/学历不明 为互斥终态 token",
+      "rows_with_both_terminals": 0,
+      "rows_with_level_and_terminal": 0
+    },
+    "label_combo_distribution": {
+      "[\"博士\", \"硕士\", \"本科\", \"大专\"]": 56,
+      "[\"博士\", \"硕士\", \"本科\"]": 114,
+      "[\"博士\", \"硕士\"]": 238,
+      "[\"博士\"]": 37,
+      "[\"大专\"]": 85,
+      "[\"学历不明\"]": 2,
+      "[\"学历不限\"]": 1,
+      "[\"本科\", \"大专\"]": 21,
+      "[\"本科\"]": 113,
+      "[\"硕士\", \"本科\"]": 33,
+      "[\"硕士\"]": 36
+    },
+    "label_confidence": {
+      "human_gold": "high"
+    },
+    "label_cooccurrence_top": {
+      "博士+大专": 56,
+      "博士+学历不明": 0,
+      "博士+学历不限": 0,
+      "博士+本科": 170,
+      "博士+硕士": 408,
+      "本科+大专": 77,
+      "硕士+大专": 56,
+      "硕士+学历不明": 0,
+      "硕士+学历不限": 0,
+      "硕士+本科": 203
+    },
+    "label_provenance": {
+      "human_gold": 736
+    },
+    "multi_label_row_ratio": 0.627717,
+    "per_label_support": {
+      "博士": 445,
+      "大专": 162,
+      "学历不明": 2,
+      "学历不限": 1,
+      "本科": 337,
+      "硕士": 477
+    },
+    "rows": 736,
+    "single_label_rows": 274
+  },
+  "high_confidence_subset_definition": {
+    "chosen_rule": "label_status == 'ok' 且 槽位非空 且 P(标签组合|槽位) 众数占比 >= 0.90（只用 train 统计）",
+    "rationale": "置信度来自训练集内部的标签-槽位条件一致性，与任何模型预测无关；gold_holdout 不参与定义。"
+  },
+  "rule_vs_pseudo_bias": {
+    "note": "比较对象是**伪标签**（旧线上系统输出），不是人工真值；差值方向反映伪标签与确定性规则的系统性差异，可用于设计加权/清洗，不能解释为规则的错误率。",
+    "per_label": {
+      "博士": {
+        "agreement": 3787,
+        "pseudo_positive": 32841,
+        "rule_extra_vs_pseudo": 218,
+        "rule_missing_vs_pseudo": 29054,
+        "rule_over_pred": 4005
+      },
+      "大专": {
+        "agreement": 15852,
+        "pseudo_positive": 16675,
+        "rule_extra_vs_pseudo": 472,
+        "rule_missing_vs_pseudo": 823,
+        "rule_over_pred": 16324
+      },
+      "学历不明": {
+        "agreement": 806,
+        "pseudo_positive": 806,
+        "rule_extra_vs_pseudo": 3250,
+        "rule_missing_vs_pseudo": 0,
+        "rule_over_pred": 4056
+      },
+      "学历不限": {
+        "agreement": 169,
+        "pseudo_positive": 221,
+        "rule_extra_vs_pseudo": 67,
+        "rule_missing_vs_pseudo": 52,
+        "rule_over_pred": 236
+      },
+      "本科": {
+        "agreement": 32442,
+        "pseudo_positive": 43256,
+        "rule_extra_vs_pseudo": 485,
+        "rule_missing_vs_pseudo": 10814,
+        "rule_over_pred": 32927
+      },
+      "硕士": {
+        "agreement": 8891,
+        "pseudo_positive": 36895,
+        "rule_extra_vs_pseudo": 173,
+        "rule_missing_vs_pseudo": 28004,
+        "rule_over_pred": 9064
+      }
+    },
+    "sample_rows": 60000
+  },
+  "train_pseudo_labels": {
+    "distinct_label_combos": 13,
+    "empty_label_rows": 0,
+    "exclusivity_check": {
+      "policy": "configs/education_labels.yaml：学历不限/学历不明 为互斥终态 token",
+      "rows_with_both_terminals": 0,
+      "rows_with_level_and_terminal": 0
+    },
+    "label_combo_distribution": {
+      "[\"博士\", \"本科\"]": 40,
+      "[\"博士\", \"硕士\", \"本科\", \"大专\"]": 25824,
+      "[\"博士\", \"硕士\", \"本科\"]": 58271,
+      "[\"博士\", \"硕士\"]": 11189,
+      "[\"博士\"]": 3282,
+      "[\"大专\"]": 23245,
+      "[\"学历不明\"]": 2442,
+      "[\"学历不限\"]": 708,
+      "[\"本科\", \"大专\"]": 1099,
+      "[\"本科\"]": 39401,
+      "[\"硕士\", \"本科\", \"大专\"]": 104,
+      "[\"硕士\", \"本科\"]": 5779,
+      "[\"硕士\"]": 9519
+    },
+    "label_confidence": {
+      "pseudo_online": "low"
+    },
+    "label_cooccurrence_top": {
+      "博士+大专": 25824,
+      "博士+学历不明": 0,
+      "博士+学历不限": 0,
+      "博士+本科": 84135,
+      "博士+硕士": 95284,
+      "本科+大专": 27027,
+      "硕士+大专": 25928,
+      "硕士+学历不明": 0,
+      "硕士+学历不限": 0,
+      "硕士+本科": 89978
+    },
+    "label_provenance": {
+      "pseudo_online": 180903
+    },
+    "multi_label_row_ratio": 0.56553,
+    "per_label_support": {
+      "博士": 98606,
+      "大专": 50272,
+      "学历不明": 2442,
+      "学历不限": 708,
+      "本科": 130518,
+      "硕士": 110686
+    },
+    "rows": 180903,
+    "single_label_rows": 78597
+  },
+  "validation_pseudo_labels": {
+    "distinct_label_combos": 14,
+    "empty_label_rows": 0,
+    "exclusivity_check": {
+      "policy": "configs/education_labels.yaml：学历不限/学历不明 为互斥终态 token",
+      "rows_with_both_terminals": 0,
+      "rows_with_level_and_terminal": 0
+    },
+    "label_combo_distribution": {
+      "[\"博士\", \"本科\"]": 14,
+      "[\"博士\", \"硕士\", \"本科\", \"大专\"]": 6239,
+      "[\"博士\", \"硕士\", \"本科\"]": 14617,
+      "[\"博士\", \"硕士\"]": 2843,
+      "[\"博士\"]": 773,
+      "[\"大专\"]": 5867,
+      "[\"学历不明\"]": 623,
+      "[\"学历不限\"]": 194,
+      "[\"本科\", \"大专\"]": 309,
+      "[\"本科\"]": 9815,
+      "[\"硕士\", \"大专\"]": 1,
+      "[\"硕士\", \"本科\", \"大专\"]": 33,
+      "[\"硕士\", \"本科\"]": 1485,
+      "[\"硕士\"]": 2413
+    },
+    "label_confidence": {
+      "pseudo_online": "low"
+    },
+    "label_cooccurrence_top": {
+      "博士+大专": 6239,
+      "博士+学历不明": 0,
+      "博士+学历不限": 0,
+      "博士+本科": 20870,
+      "博士+硕士": 23699,
+      "本科+大专": 6581,
+      "硕士+大专": 6273,
+      "硕士+学历不明": 0,
+      "硕士+学历不限": 0,
+      "硕士+本科": 22374
+    },
+    "label_provenance": {
+      "pseudo_online": 45226
+    },
+    "multi_label_row_ratio": 0.564742,
+    "per_label_support": {
+      "博士": 24486,
+      "大专": 12449,
+      "学历不明": 623,
+      "学历不限": 194,
+      "本科": 32512,
+      "硕士": 27631
+    },
+    "rows": 45226,
+    "single_label_rows": 19685
+  }
+}
