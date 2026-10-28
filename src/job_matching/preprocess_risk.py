@@ -2,7 +2,8 @@
 """招聘风险数据（all_df.csv）的规范化与元数据登记（第三阶段，2.4）。
 
 本阶段只做：
-  * 整行去重（实测 25,433 行重复，10.12%），保留去重映射；
+  * 整行重复识别（实测 25,433 行重复，10.12%）——**只标记不删除**，
+    保留 duplicate_group_id 与 is_duplicate，原始观测不丢失；
   * 文本规范化；
   * 数值字段异常标记；
   * scam_probability 的性质登记（非人工真值）。
@@ -64,7 +65,10 @@ def normalize_risk(risk_path: Path) -> tuple[pd.DataFrame, dict]:
         "source": str(risk_path).replace("\\", "/"),
         "rows_before": n0,
         "rows_after": int(len(out)),
-        "rows_dropped_as_duplicate": int(df["is_duplicate"].sum()),
+        # 不删行：重复行保留在表内，用 is_duplicate + duplicate_group_id 标记
+        "rows_marked_duplicate": int(df["is_duplicate"].sum()),
+        "rows_removed": 0,
+        "duplicate_policy": "整行重复只标记不删除（is_duplicate + duplicate_group_id），原始观测不丢失",
         "duplicate_ratio": round(float(df["is_duplicate"].mean()), 6),
         "columns_before": list(USECOLS),
         "columns_after": out_cols,

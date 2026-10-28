@@ -70,6 +70,10 @@ def snapshot() -> dict:
         key = str(f.relative_to(ROOT)).replace("\\", "/")
         if key.endswith("manifest.json"):
             files[key] = _manifest_payload(json.loads(f.read_text("utf-8")))
+        elif f.suffix == ".json":
+            # 其它 JSON 产物（如 embeddings/metadata.json 含 created_at / build_seconds）
+            # 同样剔除时间字段后再比对，否则每次运行必然假差异。
+            files[key] = _strip_time(json.loads(f.read_text("utf-8")))
         else:
             files[key] = sha256_file(f)
     payload = {
@@ -89,7 +93,9 @@ def compare() -> dict:
     before = json.loads(SNAPSHOT.read_text("utf-8"))
     now = snapshot()
     diffs = []
-    keys = sorted(set(before["files"]) | set(now["files"]))
+    # baseline_metrics 是下面专门比对的项，不进通用循环（否则它只存在于 before 时
+    # 会被误报成差异）
+    keys = sorted((set(before["files"]) | set(now["files"])) - {"baseline_metrics"})
     for k in keys:
         a, b = before["files"].get(k), now["files"].get(k)
         if a != b:
@@ -103,13 +109,14 @@ def compare() -> dict:
                            "education": raw.get("education")})
         prev = before["files"].get(base_key)
         if prev is None:
-            now["files"][base_key] = cur
             baseline_note = "本次首次登记 Baseline 指标指纹"
         elif prev != cur:
             diffs.append({"artifact": base_key, "changed": True})
             baseline_note = "Baseline 指标与上次运行不一致"
         else:
             baseline_note = "Baseline 指标与上次运行逐值一致（剔除时间字段）"
+        # 三种分支都要把本次指纹写回快照，否则下一次比对会误判为"首次登记"
+        now["files"][base_key] = cur
         jdump(now, SNAPSHOT)
 
     ok = not diffs

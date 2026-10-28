@@ -22,15 +22,63 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from .config import get_config
 from .core import (PIPELINE_VERSION, get_logger, jdump, norm_text, rel,
                    sha256_file, sha256_text, write_csv)
 from .preprocess_education import normalize_label, parse_user_segments
 
 SPLIT_ORDER = ["train", "validation"]
 
+# education_normalized.csv 的确定性读取类型。
+# label_multi_hot 是 "001010" 形式的定宽 0/1 串，一旦被 pandas 按整数解析就会丢失前导 0
+# （实测误伤 13 万+ 行），record_key / user_hash 也必须保持字符串，因此这里集中声明
+# 读取 dtype，任何消费方都不得用裸 pd.read_csv 读这张表。
+EDU_NORMALIZED_DTYPES: dict[str, type] = {
+    "record_key": str,
+    "user_hash": str,
+    "job_id": str,
+    "user_len": "int64",
+    "slot_education_norm": str,
+    "job_title_norm": str,
+    "label_raw": str,
+    "label_tokens_json": str,
+    "label_multi_hot": str,
+    "label_status": str,
+    "unresolved_tokens_json": str,
+    "label_provenance": str,
+    "is_gold": "int64",
+    "source_file": str,
+    "source_split": str,
+    "线上学历-旧的": str,
+    "模型结果-新的": str,
+}
 
-def _record_key(job_id, user_hash: str) -> str:
-    return sha256_text(f"{str(job_id)}\x1f{user_hash}")[:16]
+
+def read_education_normalized(path) -> pd.DataFrame:
+    """按 EDU_NORMALIZED_DTYPES 读取规范化学历表，保证多热编码与主键不被类型推断破坏。"""
+    df = pd.read_csv(path, encoding="utf-8", low_memory=False,
+                     dtype={k: v for k, v in EDU_NORMALIZED_DTYPES.items()})
+    n = len(get_config().label_order)
+    widths = df["label_multi_hot"].astype(str).str.len()
+    bad = int((widths != n).sum())
+    if bad:
+        raise ValueError(f"{rel(path)}: {bad} 行 label_multi_hot 宽度不是 {n}，"
+                         f"读取 dtype 可能被绕过")
+    return df
+
+
+def _record_key(job_id, user_hash: str, source_split: str) -> str:
+    """记录级主键：来源 + 岗位 + 输入文本摘要。
+
+    加入 source_split 是必要的：同一 (job_id, 输入) 会同时出现在 default 与 annotated
+    两个来源中（实测 22,730 组跨来源重复），不加来源前缀会导致 record_key 撞车，
+    无法区分"同输入不同来源"的记录。输入同一性请使用 user_hash 判断。
+
+    "rk" 前缀是必要的：16 位十六进制串约有 0.05% 概率全为数字，裸读 CSV 会被 pandas
+    按整数解析并吃掉前导 0，实测 26 万行里会误伤上百行。加字母前缀后 record_key 不可能
+    被推断为数值，任何读取方都不需要额外指定 dtype。
+    """
+    return "rk" + sha256_text(f"{str(job_id)}\x1f{user_hash}\x1f{source_split}")[:16]
 
 
 def _read_labels(path: Path, label_col: str, provenance: str, is_gold: bool,
@@ -83,7 +131,7 @@ def build_education_table(cfg) -> tuple[pd.DataFrame, dict]:
     tr = _read_labels(cfg.src("education", "train"), "assistant", "pseudo_online", False)
     va = _read_labels(cfg.src("education", "validation"), "assistant", "pseudo_online", False)
     gold = _read_labels(cfg.src("education", "annotated"), "人工正确结果", "human_gold", True,
-                        extra_cols=("线上学历-旧的", "模型结果-新的"))
+                        only_gold=True, extra_cols=("线上学历-旧的", "模型结果-新的"))
     te = _read_labels(cfg.src("education", "test"), "assistant", "pseudo_online", False,
                       only_gold=True)
 
@@ -102,8 +150,17 @@ def build_education_table(cfg) -> tuple[pd.DataFrame, dict]:
     }
 
     table = pd.concat([tr, va, gold], ignore_index=True, sort=False)
-    table["record_key"] = [_record_key(j, h) for j, h in
-                           zip(table["job_id"], table["user_hash"])]
+    table["record_key"] = [_record_key(j, h, s) for j, h, s in
+                           zip(table["job_id"], table["user_hash"], table["source_split"])]
+
+    # 主键唯一性与多热编码宽度是硬约束：不满足就立即停止，绝不写出有歧义的产物
+    n_dup = int(table["record_key"].duplicated().sum())
+    if n_dup:
+        raise ValueError(f"record_key 仍有 {n_dup} 行重复，主键定义不成立")
+    width = len(get_config().label_order)
+    bad_w = int((table["label_multi_hot"].astype(str).str.len() != width).sum())
+    if bad_w:
+        raise ValueError(f"label_multi_hot 有 {bad_w} 行宽度不是 {width}")
 
     stats = {
         "source_rows": {
@@ -266,8 +323,11 @@ def build_education_splits(table: pd.DataFrame, cfg) -> tuple[dict, pd.DataFrame
         "seed": seed,
         "ratios": ratios,
         "group_key": "user_hash（规范化输入文本）",
-        "group_key_reason": "job_id 在 train 中并非严格唯一（43 行重复），而输入文本重复率 6.5%；"
-                            "按 user_hash 分组可同时保证输入文本与记录键在集合间互斥",
+        "group_key_reason": (
+            f"job_id 不是行级唯一键（实测重复 {dup['job_id_duplicated_rows']} 行），"
+            f"输入文本也有重复（重复 {dup['user_hash_duplicated_rows']} 行，"
+            f"占 {dup['user_hash_duplicated_rows'] / max(len(table), 1):.1%}）；"
+            "按 user_hash 分组可同时保证输入文本与记录键在集合间互斥"),
         "duplicate_analysis": {k: v for k, v in dup.items() if not k.startswith("_")},
         "splits": splits,
         "excluded": {

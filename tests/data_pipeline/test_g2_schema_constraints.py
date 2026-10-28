@@ -24,7 +24,10 @@ class G2FieldConstraints(unittest.TestCase):
         cls.features = read_csv(c.out("processed_matching") / "features_pairs.csv")
         cls.targets = read_csv(c.out("processed_matching") / "targets_pairs.csv")
         cls.edu_in = read_csv(c.out("processed_education") / "education_inputs.csv")
-        cls.edu_lab = read_csv(c.out("processed_education") / "education_labels.csv")
+        # label_multi_hot 是 "001010" 形式的定宽 0/1 串，必须按字符串读取，
+        # 否则 pandas 会按整数解析并丢失前导 0（实测会误伤 13 万+ 行）
+        cls.edu_lab = read_csv(c.out("processed_education") / "education_labels.csv",
+                               dtype={"label_multi_hot": str})
 
     # ---------------- 主键
     def test_resume_primary_key_unique(self):

@@ -141,9 +141,12 @@ def render_preprocessing() -> str:
     k = s.get("risk", {})
     L.append(_md_table(["项目", "值"], [
         ["输入行数", k.get("rows_before", "-")],
-        ["去重后行数", k.get("rows_after", "-")],
-        ["删除的重复行", k.get("rows_dropped_as_duplicate", "-")],
+        ["输出行数", k.get("rows_after", "-")],
+        ["整行重复（标记 is_duplicate，不删除）", k.get("rows_marked_duplicate",
+                                                     k.get("rows_dropped_as_duplicate", "-"))],
+        ["删除的行数", k.get("rows_removed", 0)],
         ["重复占比", k.get("duplicate_ratio", "-")],
+        ["重复处置", k.get("duplicate_policy", "-")],
         ["处置", k.get("task_decision", "-")],
     ]))
     scam = k.get("scam_probability", {})
@@ -336,11 +339,25 @@ def render_matching_baselines() -> str:
     L.append("- **标签定义**：`label_strength` ∈ {weak_positive, medium_positive, strong_positive}，"
              "由原评分系统 `final_score` 阈值切分得到。")
     L.append("- **代理相关性**：`gain = final_score`（score 模式）或标签序数 1/2/3（ordinal 模式）。")
+    # random_ranking 的 aggregate 只保留三个 scope 字典，组级统计（queries_total /
+    # group_size_distribution / binary_relevance_rule）在其它 Baseline 的 group_stats 里；
+    # 这里统一兜底取值，避免报告里出现 "-" 或空字典。
+    def _group_stats(entry: dict, gain_mode: str = "score") -> dict:
+        gain = entry.get("results", {}).get(gain_mode, {})
+        out: dict = {}
+        for name in gain:
+            blk = gain[name]
+            out.update(blk.get("group_stats") or {})
+            # group_size_distribution 是字典，会被 random_ranking 收进 aggregate
+            gd = (blk.get("aggregate") or {}).get("group_size_distribution")
+            if gd and "group_size_distribution" not in out:
+                out["group_size_distribution"] = gd
+        return out
+
     L.append("- **二值相关性**（用于 MRR / Recall）：" +
-             b.get("matching", {}).get("candidate_cold", {}).get("subsets", {})
-             .get("validation", {}).get("results", {}).get("score", {})
-             .get("random_ranking", {}).get("aggregate", {})
-             .get("size_ge_2", {}).get("binary_relevance_rule", "-"))
+             (_group_stats(mm.get("candidate_cold", {}).get("subsets", {})
+                           .get("validation", {})).get("binary_relevance_rule")
+              or "label_strength in {medium_positive, strong_positive}"))
     L.append("- **有效查询**：候选人拥有 ≥2 条观测匹配记录（组内可排序）；"
              "单记录组单独统计，不计入排序指标。")
     L.append("- **NDCG@K 截断**：`min(K, 组内候选数)`，与所有 Baseline 统一口径。")
@@ -394,8 +411,12 @@ def render_matching_baselines() -> str:
                 L.append(_md_table(["Baseline", "NDCG@5", "NDCG@10", "MRR@5", "MRR@10",
                                     "Recall@5", "Recall@10", "有效查询"], rows))
                 L.append("")
-            gs = entry.get("results", {}).get("score", {}).get("random_ranking", {})
-            L.append(f"查询候选数分布：{gs.get('aggregate', {}).get('size_ge_2', {})}")
+            gstats = _group_stats(entry)
+            L.append(f"查询组统计：查询总数 {gstats.get('queries_total', '-')}"
+                     f"，可评估（≥2）{gstats.get('queries_size_ge_2', '-')}"
+                     f"，单记录组 {gstats.get('queries_size_eq_1', '-')}"
+                     f"，组大小分布（每查询候选数）"
+                     f"{gstats.get('group_size_distribution', '-')}")
             L.append("")
 
     L.append("## 有效查询与候选数量分布")
@@ -406,10 +427,7 @@ def render_matching_baselines() -> str:
             e = mm.get(proto, {}).get("subsets", {}).get(subset, {})
             if not e.get("results"):
                 continue
-            g = (e.get("results", {}).get("score", {}).get("random_ranking", {})
-                 .get("group_stats") or
-                 e.get("results", {}).get("score", {}).get("embedding_cosine", {})
-                 .get("group_stats", {}))
+            g = _group_stats(e)
             rows.append([proto, subset, g.get("queries_total", "-"),
                          g.get("queries_size_ge_2", "-"), g.get("queries_size_eq_1", "-"),
                          g.get("group_size_distribution", {})])
@@ -555,12 +573,15 @@ def _acceptance_items() -> list[dict]:
 
     pa = feat.get("policy_audit", {})
     ep = feat.get("education_policy_check", {})
+    findings = pa.get("indirect_findings", []) or []
+    n_hard = sum(1 for f in findings if f.get("severity") != "warn")
+    n_warn = len(findings) - n_hard
     add("P3-03", "特征泄漏防护", "禁止字段无法进入对应模型输入",
         _gate_ok(gates, "G3") and bool(pa.get("ok", False)) and bool(ep.get("ok", False)),
         f"G3 门禁 {_gate_tests(gates, 'G3')} 通过；实际特征矩阵 "
         f"{feat.get('matrix_shape')} 逐列通过白名单检查；"
-        f"派生评分链 10 字段零命中；间接泄漏扫描（Spearman/R² 重建）"
-        f"发现 {len(pa.get('indirect_findings', []))} 条硬问题。")
+        f"派生评分链 10 个字段零命中；间接泄漏扫描（Spearman/R² 重建）"
+        f"硬问题 {n_hard} 条、分量级提示 {n_warn} 条（详见下方分级说明）。")
 
     ver = (s4.get("verification") or {})
     add("P3-04", "Embedding 缓存", "ID 映射和数值一致",
@@ -575,25 +596,44 @@ def _acceptance_items() -> list[dict]:
         f"education_text 重复判定、标签冲突），输出文件哈希已登记；"
         f"G5 门禁 {_gate_tests(gates, 'G5')} 复算一致。")
 
-    def overlap_ok(proto_key: str) -> tuple[bool, str]:
+    def overlap_ok(proto_key: str, required: tuple[str, ...],
+                   optional_note: tuple[str, ...] = ()) -> tuple[bool, str]:
+        """按协议定义检查互斥性：只强制要求该协议真正承诺互斥的键。
+
+        Candidate Cold-start 只承诺 candidate_id 互斥（岗位允许跨集合），
+        Job Cold-start 只承诺 job_id 互斥（候选人允许跨集合），
+        Double Cold-start 承诺两侧都互斥。不要把未承诺的键当成失败条件。
+        """
         man = (split.get("matching") or {}).get(proto_key, {})
         oc = man.get("overlap_check", {}) or {}
         vals = []
-        for k in ("candidate_overlap", "job_overlap", "pair_overlap"):
+        for k in required:
             d = oc.get(k) or {}
             vals.extend(d.values())
-        return all(v == 0 for v in vals), str(oc)
+        notes = []
+        for k in optional_note:
+            d = oc.get(k) or {}
+            notes.append(f"{k} 非互斥（协议允许）={d}")
+        ev = str({k: oc.get(k) for k in required})
+        if notes:
+            ev += "；" + "；".join(notes)
+        return all(v == 0 for v in vals), ev
 
-    ok_a, ev_a = overlap_ok("candidate_cold")
+    ok_a, ev_a = overlap_ok("candidate_cold",
+                            ("candidate_overlap", "pair_overlap"),
+                            ("job_overlap",))
     add("P3-06", "Candidate Cold-start", "候选人集合完全互斥",
         ok_a and _gate_ok(gates, "G4"),
         f"candidate_cold 互斥检查 {ev_a}；同一候选人的全部记录同集合；"
         f"G4 {_gate_tests(gates, 'G4')}。")
-    ok_b, ev_b = overlap_ok("job_cold")
+    ok_b, ev_b = overlap_ok("job_cold",
+                            ("job_overlap", "pair_overlap"),
+                            ("candidate_overlap",))
     add("P3-07", "Job Cold-start", "岗位集合完全互斥",
         ok_b and _gate_ok(gates, "G4"),
         f"job_cold 互斥检查 {ev_b}；G4 {_gate_tests(gates, 'G4')}。")
-    ok_c, ev_c = overlap_ok("double_cold")
+    ok_c, ev_c = overlap_ok("double_cold",
+                            ("candidate_overlap", "job_overlap", "pair_overlap"))
     cov = ((split.get("matching") or {}).get("double_cold", {}) or {}).get("coverage", {})
     add("P3-08", "Double Cold-start", "双侧实体互斥且记录覆盖率",
         ok_c and bool(cov.get("retention_ratio")),
@@ -603,11 +643,19 @@ def _acceptance_items() -> list[dict]:
 
     e = (split.get("education") or {})
     oc = e.get("overlap_check", {}) or {}
-    edu_ok = all(v == 0 for k, d in oc.items() for v in (d or {}).values())
+    # 分组键是规范化输入文本（user_hash），因此强制互斥的是 user_hash 与 record_key；
+    # job_id 允许跨集合（train&validation 实测 1 个岗位重合），只登记不判失败。
+    edu_key_ok = all(v == 0 for k in ("user_hash_overlap", "record_key_overlap")
+                     for v in ((oc.get(k) or {}).values()))
+    gi = e.get("gold_isolation", {}) or {}
+    gold_ok = (gi.get("dev_input_hashes_touching_gold_after_removal") == 0
+               and int(gi.get("gold_rows") or 0) == 736)
     add("P3-09", "学历数据切分", "重复检查与金标准隔离",
-        edu_ok and _gate_ok(gates, "G4"),
-        f"输入文本/记录键/岗位键三类交叉全部为 0；金标准 736 条隔离为 gold_holdout，"
-        f"与开发集输入交叉 {e.get('gold_isolation', {}).get('dev_input_hashes_touching_gold_after_removal')}；"
+        edu_key_ok and gold_ok and _gate_ok(gates, "G4"),
+        f"输入文本/记录键交叉全部为 0（{oc.get('user_hash_overlap')} / "
+        f"{oc.get('record_key_overlap')}）；岗位键允许跨集合（{oc.get('job_id_overlap')}），"
+        f"因分组键是输入文本而不判失败；金标准 {gi.get('gold_rows')} 条隔离为 gold_holdout，"
+        f"与开发集输入交叉 {gi.get('dev_input_hashes_touching_gold_after_removal')}；"
         f"因原 test ⊂ validation 且伪标签可信度低，未伪造独立 test（已在 manifest 记录理由）。")
 
     mc = ((base.get("matching") or {}).get("candidate_cold", {}) or {}).get("subsets", {})
@@ -696,6 +744,31 @@ def render_acceptance() -> str:
     L.append("目标字段与输入的物理隔离：匹配任务 `features_pairs.csv` / `targets_pairs.csv`、"
              "学历任务 `education_inputs.csv` / `education_labels.csv` 分文件落盘，"
              "仅共享关联键（`candidate_id`/`job_id`/`record_key`）。")
+    L.append("")
+    L.append("### 间接泄漏扫描（特征重建派生字段检测）")
+    L.append("")
+    findings = (( _load("reports/phase3-feature-build.json").get("policy_audit", {}) or {})
+                .get("indirect_findings", []) or [])
+    if not findings:
+        L.append("- 未发现任何特征能够近乎确定地重建派生字段。")
+    else:
+        L.append("严重度分级规则：能重建 `final_score` / `candidate_rank` / `candidate_rank_pct` "
+                 "（目标或其直接决定量）判为**硬泄漏**；与原公式**中间分量**"
+                 "（`semantic_score` … `raw_score`）一致判为**提示级**，"
+                 "必须查明构造来源并在报告中说明。")
+        L.append("")
+        L.append(_md_table(["参考字段", "级别", "特征", "检测", "数值", "严重度"],
+                           [[f.get("reference"), f.get("reference_level"),
+                             f.get("column", "-"), f.get("code"),
+                             f.get("abs_spearman", f.get("r2", "-")),
+                             f.get("severity")] for f in findings]))
+        L.append("")
+        L.append("来源核查：`category_match` 由 `cv.inferred_category` 与 `job.category` "
+                 "两个**原始字段**独立构造（`src/job_matching/pair_features.py`），"
+                 "未读取任何派生评分列；它与 `category_score` 数值完全一致，"
+                 "说明原系统的 `category_score` 本身就是「类别是否相同」的二值指示。"
+                 "这是对原公式一个分量的复刻，**不构成目标泄漏**，"
+                 "但说明该特征只提供原公式 0.10 权重那一部分信息，已如实登记。")
     L.append("")
 
     # ---- 风险与剩余问题

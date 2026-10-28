@@ -83,10 +83,12 @@ class G6Loadability(unittest.TestCase):
         self.assertIn("slot_education_norm", df.columns)
 
     def test_education_multihot_matrix_loadable(self):
-        lab = read_csv(self.c.out("processed_education") / "education_labels.csv")
+        lab = read_csv(self.c.out("processed_education") / "education_labels.csv",
+                       dtype={"label_multi_hot": str})
         order = self.c.label_order
         mat = np.zeros((len(lab), len(order)), dtype=np.int8)
         for i, s in enumerate(lab["label_multi_hot"].astype(str)):
+            self.assertEqual(len(s), len(order), f"多热向量长度错误: {s}")
             mat[i] = [1 if ch == "1" else 0 for ch in s]
         self.assertEqual(mat.shape[1], 6)
         self.assertTrue(set(np.unique(mat)) <= {0, 1})

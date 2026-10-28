@@ -64,6 +64,15 @@ def main() -> int:
                   Path("reports") / "phase3-run-failure.json")
             log.error("=== 流水线失败退出（耗时 %.1fs）===", time.time() - t0)
             return 2
+    # 全部成功后把历史失败记录归档，避免旧的失败标记被误读为当前状态
+    fail = Path("reports") / "phase3-run-failure.json"
+    if fail.exists():
+        archive = Path("reports") / "phase3-logs"
+        archive.mkdir(parents=True, exist_ok=True)
+        ts = time.strftime("%Y%m%d-%H%M%S")
+        target = archive / f"run-failure-archive-{ts}.json"
+        fail.replace(target)
+        log.info("[归档] 历史失败记录 -> %s", target)
     log.info("=== 流水线全部完成（耗时 %.1fs）===", time.time() - t0)
     return 0
 

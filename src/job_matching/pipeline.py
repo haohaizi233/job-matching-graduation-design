@@ -265,8 +265,8 @@ def step_build_features() -> dict:
                               raise_on_violation=False)
 
     # ---- 学历输入 / 标签物理隔离
-    edu = pd.read_csv(cfg.out("interim_education") / "education_normalized.csv",
-                      encoding="utf-8", low_memory=False)
+    from .education_data import read_education_normalized
+    edu = read_education_normalized(cfg.out("interim_education") / "education_normalized.csv")
     e_in = edu[["record_key", "user_hash", "job_title_norm", "slot_education_norm",
                 "slot_present", "user_len"]].copy()
     e_lab = edu[["record_key", "label_tokens_json", "label_multi_hot", "label_status",
@@ -333,8 +333,8 @@ def step_build_splits() -> dict:
                           low_memory=False)
     m = build_all_protocols(matches, cfg)
 
-    edu = pd.read_csv(cfg.out("interim_education") / "education_normalized.csv",
-                      encoding="utf-8", low_memory=False)
+    from .education_data import read_education_normalized
+    edu = read_education_normalized(cfg.out("interim_education") / "education_normalized.csv")
     manifest, excluded, dev, gold = build_education_splits(edu, cfg)
     saved = save_education_splits(manifest, excluded, dev, gold,
                                   cfg.out("splits_education"))
@@ -370,6 +370,8 @@ def step_run_baselines() -> dict:
                           low_memory=False)
     matches["candidate_id"] = matches["candidate_id"].astype(str)
     matches["job_id"] = matches["job_id"].astype("int64")
+    # pair_index = matches.csv 的原始行号，是切分索引与所有 pair 级产物的公共主键
+    matches["pair_index"] = np.arange(len(matches), dtype=np.int64)
 
     feats = pd.read_csv(cfg.out("processed_matching") / "features_pairs.csv",
                         encoding="utf-8", low_memory=False)
@@ -401,8 +403,8 @@ def step_run_baselines() -> dict:
     result["matching"] = matching
 
     # ---- 学历基线
-    edu = pd.read_csv(cfg.out("interim_education") / "education_normalized.csv",
-                      encoding="utf-8", low_memory=False)
+    from .education_data import read_education_normalized
+    edu = read_education_normalized(cfg.out("interim_education") / "education_normalized.csv")
     sdir = cfg.out("splits_education")
     tr_keys = set(pd.read_csv(sdir / "train.csv", encoding="utf-8")["record_key"].astype(str))
     va_keys = set(pd.read_csv(sdir / "validation.csv", encoding="utf-8")["record_key"].astype(str))

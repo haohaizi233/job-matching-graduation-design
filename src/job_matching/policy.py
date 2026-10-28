@@ -121,6 +121,27 @@ def check_feature_columns(task: str, columns: list[str],
 
 
 # ------------------------------------------------------------------ C 间接泄漏
+# 参考字段分级：
+#   * target  级（final_score / candidate_rank / candidate_rank_pct）——
+#     它们直接决定 label_strength，特征若能近乎重建它们，判定为硬泄漏；
+#   * component 级（semantic_score ... education_score / raw_score）——
+#     它们是原评分公式的中间分量，特征与之一致只说明"复刻了原公式的一个分量"，
+#     必须查明构造来源并记录，但不等同于目标泄漏（若构造确实只用原始字段）。
+TARGET_LEVEL_REFERENCES = {"final_score", "candidate_rank", "candidate_rank_pct",
+                           "label_strength", "label_ordinal"}
+COMPONENT_LEVEL_REFERENCES = {"semantic_score", "skill_score", "position_score",
+                              "category_score", "experience_score", "education_score",
+                              "raw_score"}
+
+
+def _finding_severity(ref_name: str) -> tuple[str, str]:
+    if ref_name in TARGET_LEVEL_REFERENCES:
+        return "hard", "target"
+    if ref_name in COMPONENT_LEVEL_REFERENCES:
+        return "warn", "component"
+    return "warn", "other"
+
+
 def _spearman(a: np.ndarray, b: np.ndarray) -> float:
     if a.size < 3 or np.std(a) == 0 or np.std(b) == 0:
         return 0.0
@@ -137,6 +158,11 @@ def detect_indirect_leakage(feature_df: pd.DataFrame,
     """检测特征是否近乎确定地重建了禁止字段（间接泄漏）。
 
     reference: {禁止字段名: 该字段在同一批样本上的数值数组}
+
+    严重度按参考字段分级：
+      * final_score / candidate_rank / candidate_rank_pct 等 target 级字段被重建 -> hard；
+      * semantic_score ... raw_score 等原公式中间分量被重建 -> warn（需查明构造来源，
+        若特征确实只由原始字段独立构造，则属于"复刻原公式分量"而非目标泄漏，必须记录）。
     """
     findings: list[dict] = []
     num = feature_df.select_dtypes(include=[np.number])
@@ -150,9 +176,11 @@ def detect_indirect_leakage(feature_df: pd.DataFrame,
         X = np.nan_to_num(X, nan=0.0, posinf=0.0, neginf=0.0)
 
     for ref_name, ref_arr in reference.items():
+        sev, level = _finding_severity(ref_name)
         y = np.asarray(ref_arr, dtype=np.float64).ravel()
         if y.size != X.shape[0]:
-            findings.append({"reference": ref_name, "code": "LENGTH_MISMATCH"})
+            findings.append({"reference": ref_name, "code": "LENGTH_MISMATCH",
+                             "severity": sev, "reference_level": level})
             continue
         # 1) 单列近乎完全单调相关
         for j, name in enumerate(names):
@@ -160,7 +188,8 @@ def detect_indirect_leakage(feature_df: pd.DataFrame,
             if rho >= spearman_threshold:
                 findings.append({"reference": ref_name, "column": name,
                                  "code": "NEAR_DETERMINISTIC_MONOTONIC",
-                                 "abs_spearman": round(rho, 6)})
+                                 "abs_spearman": round(rho, 6),
+                                 "severity": sev, "reference_level": level})
         # 2) 线性重建 R^2
         try:
             A = np.hstack([X, np.ones((X.shape[0], 1))])
@@ -171,9 +200,11 @@ def detect_indirect_leakage(feature_df: pd.DataFrame,
             r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
             if r2 >= r2_threshold:
                 findings.append({"reference": ref_name, "code": "LINEAR_RECONSTRUCTION",
-                                 "r2": round(r2, 6)})
+                                 "r2": round(r2, 6),
+                                 "severity": sev, "reference_level": level})
         except np.linalg.LinAlgError:
-            findings.append({"reference": ref_name, "code": "LSTSQ_FAILED", "severity": "warn"})
+            findings.append({"reference": ref_name, "code": "LSTSQ_FAILED",
+                             "severity": "warn", "reference_level": level})
     return findings
 
 

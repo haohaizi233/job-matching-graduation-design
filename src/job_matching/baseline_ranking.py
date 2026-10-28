@@ -53,7 +53,8 @@ def _subset_scores(name: str, df: pd.DataFrame, emb_scores: np.ndarray | None,
     if name == "random_ranking":
         return random_ranking_scores(len(df), rng_seed)
     if name == "embedding_cosine":
-        return emb_scores[df["row_in_all"].to_numpy()]
+        # emb_scores 按 matches.csv 原始行序存放，pair_index 即行号
+        return emb_scores[df["pair_index"].to_numpy(dtype=np.int64)]
     if name == "skill_jaccard":
         return df["skill_jaccard"].to_numpy(dtype=np.float64)
     if name == "position_token_overlap":
@@ -72,7 +73,9 @@ def run_matching_baselines(pairs: pd.DataFrame, features: pd.DataFrame,
 
     # 合并 pair 键与特征（行序对齐）
     merged = pairs.reset_index(drop=True).copy()
-    merged["row_in_all"] = np.arange(len(merged), dtype=np.int64)
+    if "pair_index" not in merged.columns:
+        raise ValueError("pairs 必须携带 pair_index（matches.csv 原始行号）")
+    merged["pair_index"] = merged["pair_index"].astype(np.int64)
     feat_cols = ["skill_jaccard", "position_token_overlap"]
     merged = merged.merge(features[["candidate_id", "job_id"] + feat_cols],
                           on=["candidate_id", "job_id"], how="left", validate="one_to_one")
