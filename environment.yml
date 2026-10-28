@@ -1,0 +1,56 @@
+# =====================================================================
+# graduation-design Conda 环境定义
+#
+# 创建（推荐）：
+#   conda env create -f environment.yml
+# 更新：
+#   conda env update -f environment.yml --prune
+# 仅创建基础环境（不装 pip 依赖，随后按 docs/environment-setup.md 安装）：
+#   conda create -n graduation-design python=3.11 pip -y
+#
+# 版本组合依据见 docs/environment-setup.md「依赖清单与版本依据」。
+# 该文件不依赖本机绝对路径，可在新的兼容机器上复现。
+# =====================================================================
+name: graduation-design
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      # ---- PyTorch（CUDA 12.1 构建，来源：PyTorch 官方 whl 索引）----
+      # 仅需 CPU 时改为：torch==2.1.2（PyPI 默认源即为 CPU 版），并删除下一行的 extra-index-url
+      - --extra-index-url https://download.pytorch.org/whl/cu121
+      - torch==2.1.2+cu121
+
+      # ---- 数值与数据处理（numpy 必须 <2，torch 2.1.x 以 numpy 1.x ABI 编译）----
+      - numpy==1.26.4
+      - pandas==2.2.3
+      - scipy==1.15.3
+      - scikit-learn==1.5.2
+
+      # ---- 可视化 / 文档输出 ----
+      - matplotlib==3.10.0
+      - Pillow==11.1.0
+      - reportlab==4.2.5
+
+      # ---- 文档解析（PDF 简历文本提取）----
+      - PyMuPDF==1.24.14
+
+      # ---- 中文分词与通用工具 ----
+      - jieba==0.42.1
+      - PyYAML==6.0.2
+      - requests==2.32.3
+      - tqdm==4.67.1
+
+      # ---- Hugging Face / Transformers（互相约束的一组版本）----
+      - huggingface_hub==0.26.2
+      - tokenizers==0.19.1
+      - transformers==4.40.2
+      - safetensors==0.4.3
+      - sentencepiece==0.2.0
+
+      # ---- 序列标注与参数高效微调 ----
+      - pytorch-crf==0.7.2
+      - seqeval==1.2.2
+      - peft==0.10.0

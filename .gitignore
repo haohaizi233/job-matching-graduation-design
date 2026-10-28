@@ -1,0 +1,70 @@
+# ---- Python 通用 ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# ---- 虚拟环境 / Conda 本地环境 ----
+.venv/
+venv/
+env/
+conda-envs/
+
+# ---- Jupyter / 测试 / 质量工具缓存 ----
+.ipynb_checkpoints/
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- 本地配置与密钥（切勿提交）----
+.env
+.env.local
+api_key.py
+*.pem
+*.key
+
+# ---- 模型训练与推理输出（体积大，默认不入库）----
+outputs/
+output/
+checkpoints/
+ckpt/
+runs/
+wandb/
+lightning_logs/
+*.ckpt
+*.pt
+*.pth
+
+# ---- 日志与临时文件 ----
+*.log
+tmp/
+temp/
+
+# ---- 数据集（体积大，默认不入库；索引与规则见 docs/datasets/README.md 与 data/README.md）----
+# 注意：这里按"目录"忽略，绝不用 *.csv / *.json 通配，避免误伤测试夹具、配置与元数据。
+data/raw/
+data/interim/*
+data/processed/*
+data/splits/*
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/splits/.gitkeep
+!data/README.md
+
+# ---- 模型权重与训练检查点（体积大，训练产物不入库）----
+models/**
+!models/README.md
+experiments/**
+!experiments/README.md
+*.safetensors
+*.bin
+
+# ---- 子项目：独立 git 仓库，已有自己的远端，不纳入本仓库 ----
+chinese-skillspan-benchmark/
+
+# ---- 操作系统 ----
+Thumbs.db
+Desktop.ini
+.DS_Store
