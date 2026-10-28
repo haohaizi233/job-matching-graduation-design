@@ -68,3 +68,6 @@ chinese-skillspan-benchmark/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# runtime lock files
+.run_all.lock

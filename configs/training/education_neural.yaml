@@ -1,0 +1,49 @@
+# Model B：轻量 PyTorch 字符模型（Embedding + CNN，6 logits）
+# 任务范围：<学历描述> 短槽位表达的规范化/多标签归一（不是端到端 JD 抽取）
+model:
+  name: education_charcnn
+  type: char_cnn
+  input_field: slot_education_norm
+  architecture:
+    embedding_dim: 32
+    n_filters: 64
+    kernel_size: 3
+    dropout: 0.1
+  tokenizer:
+    level: char
+    max_len: 32
+    fit_scope: train_only                # 字符词表只在 train 上 fit
+  loss: bce_with_logits
+  class_weight: pos_weight               # 按 train 标签频率计算
+  params:
+    batch_size: 512
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    epochs: 30
+    early_stopping_patience: 5
+    early_stopping_monitor: val_loss    # val_loss 稳定；fixed0.5 micro-F1 离散抖动大（实测会 1~6 epoch 早停）
+    grad_finite_check: true
+  sample_weight_strategy_grid: [none, slot_balanced, conflict_aware]
+  subset_grid: [all, high_conf]          # high_conf=高置信度子集（train 内部一致性筛选）
+  threshold:
+    grid: [0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
+    selection: per_label_f1_on_validation
+  selection_metric: micro_f1_on_validation
+  checkpoint:
+    monitor: val_loss
+    mode: min
+    keep_best: true
+data:
+  train: data/splits/education/train.csv
+  validation: data/splits/education/validation.csv
+  gold_holdout: data/splits/education/gold_holdout.csv
+  inputs: data/processed/education/education_inputs.csv
+  labels: data/processed/education/education_labels.csv
+seeds:
+  model: 20261031
+outputs:
+  artifacts: [model.pt, tokenizer.json, feature_map.json, config.json, metrics.json,
+              manifest.json, history.json, thresholds.json, checkpoint_best.pt]
+inference:
+  supports_cpu: true
+  requires_labels: false
