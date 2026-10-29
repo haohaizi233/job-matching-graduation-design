@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""简历与学生画像持久化（Phase5-2 / Batch 3）。
+"""简历与学生画像持久化（Phase5-2 / Batch 3，Phase5-2R 文件生命周期与来源修订）。
 
 流程（任务 5.1）：
   上传 -> 格式/大小/安全检查 -> 私有文件存储 -> 文本解析 -> 画像生成
@@ -16,6 +16,15 @@
   * 所有读写都在查询条件里带 user_id；越权访问一律 404（防资源枚举），
     角色不足（学生访问管理端）一律 403；
   * 管理员**不能**读取他人简历原文或原文解析结果（无后门）。
+
+Phase5-2R（P1-04 / P1-03）：
+  * **并发上传文件安全**：落库失败只补偿删除"本次操作独占且未被引用"的文件；
+    已被其它成功请求（数据库行）引用的文件**禁止删除**。核心不变量：
+    **请求失败不得删除其它成功请求正在引用的文件。**
+  * **失败语义登记**：见 file_store.delete_if_unreferenced 的 reason 枚举；
+    元数据删除后文件删除失败 -> file_cleanup="failed_pending"，由孤儿扫描兜底。
+  * **来源不漂移**：`data_source` 在上传时由数据来源层确定并固化；
+    重新解析**默认保持原来源**，只有显式声明才改写，并记审计。
 """
 from __future__ import annotations
 
@@ -27,6 +36,7 @@ from ..infra.persistence import (Resume, StudentProfile, User,
 from .contracts import FACT_SOURCES, Field, StudentProfile as StudentProfileContract
 from .errors import ServiceError
 from .file_store import PrivateFileStore, sha256_bytes
+from .job_store import DATA_SOURCES, resolve_data_source
 from .text_extract import MAX_UPLOAD_BYTES, extract_document_bytes
 
 # 允许人工编辑的画像字段（其余字段只读，避免伪造证据链）
@@ -55,8 +65,15 @@ class StudentDataService:
 
     # ============================================================ 简历
     def upload_resume(self, user: dict, *, filename: str, content: bytes,
-                      is_synthetic: bool = False) -> dict:
-        """上传简历：安全检查 -> 存储 -> 解析 -> 生成画像草稿版本。"""
+                      is_synthetic: bool | None = False,
+                      data_source: str | None = None) -> dict:
+        """上传简历：安全检查 -> 存储 -> 解析 -> 生成画像草稿版本。
+
+        `is_synthetic` 三态语义（P1-03）：
+          True  -> 显式声明合成；
+          False -> 显式声明非合成（上传者本人提供 -> user_provided）；
+          None  -> 未声明 -> unknown（不臆造来源）。
+        """
         content = bytes(content or b"")
         if len(content) > self.max_upload_bytes:
             raise ServiceError("PAYLOAD_TOO_LARGE",
@@ -75,6 +92,14 @@ class StudentDataService:
             raise ServiceError("EMPTY_INPUT", "上传文档正文为空，无法解析",
                                {"file_name": str(filename)[:255]})
 
+        resolved_source, declared = resolve_data_source(
+            is_synthetic=is_synthetic, source="upload",
+            source_license="", explicit=data_source)
+        audit = [{"at": _now().isoformat(),
+                  "by": str(user.get("id") or ""), "from": None, "to": resolved_source,
+                  "reason": ("explicit_declaration" if declared
+                             else "derived_from_upload_declaration")}]
+
         digest = sha256_bytes(content)
         session = self._session_factory()
         try:
@@ -87,8 +112,8 @@ class StudentDataService:
         finally:
             session.close()
 
-        # 2) 写私有存储（唯一允许落盘的时刻）
-        storage_key, _sha, size = self.store.save(
+        # 2) 写私有存储（唯一允许落盘的时刻）；created 标记本次请求是否独占该文件
+        storage_key, _sha, size, created = self.store.save(
             user_id=user["id"], original_filename=filename, content=content)
 
         profile_dict = None
@@ -98,21 +123,24 @@ class StudentDataService:
             try:
                 profile_dict = self._parse_profile(extracted["text"], user,
                                                    filename=filename,
-                                                   is_synthetic=is_synthetic)
+                                                   data_source=resolved_source)
                 parse_status = "ok" if profile_dict["profile"]["parse_status"] == "ok" else "partial"
             except ServiceError as e:
                 parse_status, parse_error = "failed", e.message[:500]
             except Exception as e:  # noqa: BLE001
                 parse_status, parse_error = "failed", str(e)[:500]
 
-        # 3) 落库（一个事务）；任何失败 -> 删除刚写入的文件（不留孤儿）
+        # 3) 落库（一个事务）；失败 -> **只**补偿删除本次独占且未被引用的文件
         try:
             with session_scope(self._session_factory) as s:
                 row = Resume(user_id=user["id"],
                              original_filename=str(filename)[:255],
                              storage_key=storage_key, file_sha256=digest,
                              file_size=size, parse_status=parse_status,
-                             parse_error=parse_error)
+                             parse_error=parse_error,
+                             data_source=resolved_source,
+                             data_source_declared=1 if declared else 0,
+                             source_audit=audit)
                 s.add(row)
                 s.flush()
                 if profile_dict is not None:
@@ -124,7 +152,7 @@ class StudentDataService:
                 s.refresh(row)
                 resume_out = self._resume_row(row)
         except Exception:
-            self.store.delete(storage_key)   # 上传失败不得留下无人关联的敏感文件
+            self._cleanup_failed_upload(storage_key, created=created)
             raise
 
         out = {"resume": resume_out, "created": True}
@@ -147,7 +175,14 @@ class StudentDataService:
         return self._resume_row(self._owned_resume(user, resume_id))
 
     def delete_resume(self, user: dict, resume_id: str) -> dict:
-        """删除自己的简历（数据库行 + 私有文件；画像版本保留可追溯）。"""
+        """删除自己的简历（数据库行 + 私有文件；画像版本保留可追溯）。
+
+        失败语义（P1-04）：
+          * 数据库删除失败 -> 整体回滚，文件不动；
+          * 数据库已提交、文件删除失败 -> **不回滚**元数据（已完成的删除不可撤销地生效），
+            报告 file_cleanup="failed_pending"，由孤儿扫描兜底清理；
+          * 文件仍被其它简历行引用 -> 保留文件（referenced_by_others）。
+        """
         session = self._session_factory()
         try:
             row = self._owned_resume(user, resume_id, session=session)
@@ -159,20 +194,41 @@ class StudentDataService:
             raise
         finally:
             session.close()
-        self.store.delete(storage_key)   # 文件删除失败不回滚已提交的元数据删除
+        cleanup = self.store.delete_if_unreferenced(
+            storage_key, is_referenced=self._is_storage_key_referenced)
         return {"deleted": True, "resume_id": resume_id,
+                "file_cleanup": cleanup.get("reason", "unknown"),
                 "note": "画像版本保留（历史推荐解释仍可追溯）"}
 
     def reparse_resume(self, user: dict, resume_id: str, *,
-                       is_synthetic: bool = False) -> dict:
-        """失败重试 / 重新解析：重新抽取文本并生成新画像版本。"""
+                       is_synthetic: bool | None = None,
+                       data_source: str | None = None) -> dict:
+        """失败重试 / 重新解析：重新抽取文本并生成新画像版本。
+
+        来源纪律（P1-03）：**默认保持既有 data_source**，重新解析不得静默改变数据来源；
+        只有显式声明（is_synthetic / data_source）才改写，并记审计。
+        """
         session = self._session_factory()
         try:
             row = self._owned_resume(user, resume_id, session=session)
             content = self.store.read_bytes(row.storage_key)
             filename = row.original_filename
+            stored_source = row.data_source
+            audit = list(row.source_audit or [])
         finally:
             session.close()
+
+        if is_synthetic is None and data_source is None:
+            resolved_source, declared = stored_source, False
+        else:
+            resolved_source, declared = resolve_data_source(
+                is_synthetic=is_synthetic, source="reparse",
+                source_license="", explicit=data_source)
+            if resolved_source != stored_source:
+                audit.append({"at": _now().isoformat(),
+                              "by": str(user.get("id") or ""),
+                              "from": stored_source, "to": resolved_source,
+                              "reason": "explicit_reparse_declaration"})
 
         extracted = extract_document_bytes(content, filename,
                                            max_bytes=self.max_upload_bytes)
@@ -183,15 +239,22 @@ class StudentDataService:
             try:
                 profile_dict = self._parse_profile(extracted["text"], user,
                                                    filename=filename,
-                                                   is_synthetic=is_synthetic)
+                                                   data_source=resolved_source)
                 parse_status = "ok" if profile_dict["profile"]["parse_status"] == "ok" else "partial"
             except ServiceError as e:
                 parse_status, parse_error = "failed", e.message[:500]
+            except Exception as e:  # noqa: BLE001
+                parse_status, parse_error = "failed", str(e)[:500]
 
         with session_scope(self._session_factory) as s:
             row = self._owned_resume(user, resume_id, session=s)
             row.parse_status = parse_status
             row.parse_error = parse_error
+            # 来源只在显式声明时改写（不静默漂移）
+            row.data_source = resolved_source
+            if declared:
+                row.data_source_declared = 1
+            row.source_audit = audit
             if profile_dict is not None:
                 prof = self._new_profile_row(s, user["id"], profile_dict,
                                              resume_id=row.id, confirmed=0)
@@ -239,7 +302,11 @@ class StudentDataService:
     def save_profile(self, user: dict, edits: dict | None = None, *,
                      confirm: bool = False, note: str | None = None,
                      expected_version: int | None = None) -> dict:
-        """保存画像版本：人工修改进 user_edits 覆盖层，抽取证据不被覆盖。"""
+        """保存画像版本：人工修改进 user_edits 覆盖层，抽取证据不被覆盖。
+
+        并发版本控制（P2）：`expected_version` 为乐观锁 —— 指定版本与当前版本不一致时
+        返回 CONFLICT（409），不允许两个并发保存互相覆盖。未指定时不锁（兼容既有调用）。
+        """
         edits = dict(edits or {})
         unknown = [k for k in edits if k not in EDITABLE_PROFILE_FIELDS]
         if unknown:
@@ -292,19 +359,44 @@ class StudentDataService:
             session.close()
 
     # ============================================================ 内部
+    def _is_storage_key_referenced(self, storage_key: str) -> bool:
+        """引用检查：任意用户/简历行仍引用该存储键 -> 视为被引用（禁止删除）。"""
+        session = self._session_factory()
+        try:
+            return (session.query(Resume.id)
+                    .filter(Resume.storage_key == str(storage_key))
+                    .first()) is not None
+        finally:
+            session.close()
+
+    def _cleanup_failed_upload(self, storage_key: str, *, created: bool) -> dict:
+        """落库失败的补偿清理（P1-04）。
+
+        * 本次未新建文件（created=False）-> 文件可能被其它请求引用，**不删除**；
+        * 本次新建 -> 只有在数据库无任何引用时才删除；
+        * 任何情况下都不做"无条件删除"。
+        """
+        if not created:
+            return {"deleted": False, "kept": True, "reason": "not_created_by_this_request"}
+        return self.store.delete_if_unreferenced(
+            storage_key, is_referenced=self._is_storage_key_referenced)
+
     def _parse_profile(self, text: str, user: dict, *, filename: str,
-                       is_synthetic: bool) -> dict:
+                       data_source: str) -> dict:
         from .resume_parser import parse_resume_text
         profile = parse_resume_text(
             text,
             profile_id=f"user_{user['id'][:8]}",
-            is_synthetic=bool(is_synthetic),
+            # P1-03：is_synthetic 由数据来源决定，不由解析器硬编码
+            is_synthetic=(data_source == "synthetic"),
             source_document=str(filename)[:255])
         d = profile.to_dict()
         return {"profile": d,
                 # 原始抽取快照（人工修改永不覆盖这里）
                 "extraction_snapshot": d,
-                "user_edits": {}}
+                "user_edits": {},
+                # 来源固化到画像快照（推荐快照可追溯）
+                "data_source": data_source}
 
     def _new_profile_row(self, session, user_id: str, data: dict, *,
                          resume_id: str | None, confirmed: int):
@@ -356,6 +448,9 @@ class StudentDataService:
                 "storage_key": r.storage_key, "file_sha256": r.file_sha256,
                 "file_size": r.file_size, "parse_status": r.parse_status,
                 "parse_error": r.parse_error, "profile_version": r.profile_version,
+                "data_source": r.data_source,
+                "data_source_declared": bool(r.data_source_declared),
+                "source_audit": list(r.source_audit or []),
                 "uploaded_at": _iso(r.uploaded_at), "updated_at": _iso(r.updated_at),
                 "note": "storage_key 为受控存储键，不含本机路径；原文不通过 API 返回"}
 
