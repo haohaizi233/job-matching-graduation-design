@@ -355,15 +355,16 @@ class MatchingService:
 
     def _rank_experimental(self, student, jobs, opts, deadline, warnings) -> dict:
         model_id = opts.model_id or self.default_model_id
-        reg = self.registry.get(model_id)
-        if opts.formal and not reg.formal_use_allowed:
-            raise ServiceError(
-                "MODEL_FORMAL_USE_FORBIDDEN",
-                f"模型 {model_id} 不允许正式模式：evaluation_status={reg.evaluation_status}，"
-                f"supported_languages={reg.supported_languages}（未通过中文正式用途验证）",
-                {"model_id": model_id, "evaluation_status": reg.evaluation_status,
-                 "supported_languages": reg.supported_languages})
         try:
+            # 注册表查询/加载都放在 try 内：模型未注册/文件缺失属于可降级错误（allow_fallback 语义）
+            reg = self.registry.get(model_id)
+            if opts.formal and not reg.formal_use_allowed:
+                raise ServiceError(
+                    "MODEL_FORMAL_USE_FORBIDDEN",
+                    f"模型 {model_id} 不允许正式模式：evaluation_status={reg.evaluation_status}，"
+                    f"supported_languages={reg.supported_languages}（未通过中文正式用途验证）",
+                    {"model_id": model_id, "evaluation_status": reg.evaluation_status,
+                     "supported_languages": reg.supported_languages})
             predictor = self.registry.load(model_id)
             resume_in, _ = LegacyMatchAdapter.build_inputs(student, jobs[0])
             LegacyMatchAdapter.check_feature_policy(
@@ -380,7 +381,15 @@ class MatchingService:
                 job_inputs.append(job_in)
             ranked = predictor.rank_jobs(resume_in, job_inputs)
         except ServiceError as e:
-            if e.code in self.DEGRADABLE_CODES and opts.allow_fallback:
+            # 降级策略（显式、可审计；绝不静默吞错）：
+            #  * 模型文件缺失/损坏/输入不适用 -> allow_fallback=True 即降级；
+            #  * 模型未注册 -> 仅当调用方**显式指定** model_id 时才按策略降级；
+            #    默认模型槽位未注册属于部署配置错误，一律显式失败（否则线上会长期
+            #    静默降级成启发式分而无人发现模型根本没部署）。
+            not_registered = (e.detail or {}).get("failure_kind") == "model_not_registered"
+            degradable = (e.code in self.DEGRADABLE_CODES and opts.allow_fallback
+                          and (not not_registered or opts.model_id is not None))
+            if degradable:
                 # 错误被识别并按策略降级，但降级来源必须显式返回（不静默吞错）
                 return self._degrade_to_baseline(student, jobs, opts, deadline, warnings,
                                                  code=e.code, model_id=model_id,

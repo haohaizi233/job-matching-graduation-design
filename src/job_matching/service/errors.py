@@ -30,6 +30,14 @@ ERROR_CODES: dict[str, tuple[int, str]] = {
     "FUTURE_MODEL_UNAVAILABLE": (503, "future_verified 模式暂无已验证中文模型"),
     "LEAKAGE_GUARD": (422, "输入携带目标值/派生评分等禁用字段"),
     "INTERNAL_ERROR": (500, "服务内部错误"),
+    # ---- Phase5-2 业务后端（Batch 2 认证与权限 / Batch 3-5 业务资源）----
+    "AUTH_REQUIRED": (401, "未认证：缺少或非法的访问令牌"),
+    "AUTH_INVALID_CREDENTIALS": (401, "认证失败，凭证无效"),
+    "AUTH_TOKEN_EXPIRED": (401, "访问令牌已过期"),
+    "AUTH_ACCOUNT_LOCKED": (423, "登录失败次数过多，账号已临时锁定"),
+    "FORBIDDEN": (403, "权限不足或资源不属于当前用户"),
+    "NOT_FOUND": (404, "资源不存在"),
+    "CONFLICT": (409, "资源冲突（重复创建/并发修改）"),
 }
 
 _ABS_PATH_RE = re.compile(r"[A-Za-z]:[\\/][^\s\"'，。；]*")

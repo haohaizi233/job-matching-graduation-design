@@ -270,8 +270,10 @@ def create_app(services: Services | None = None):
         try:
             response = await call_next(request)
         except Exception:
+            # 兜底：任何未处理异常统一转 500 INTERNAL_ERROR（错误信封；不裸奔、不泄露堆栈）
             log.exception("request_failed request_id=%s path=%s", rid, request.url.path)
-            raise
+            err = ServiceError("INTERNAL_ERROR", "服务内部错误")
+            response = JSONResponse(status_code=err.http_status, content=err.to_dict(rid))
         latency = (time.monotonic() - t0) * 1000
         # 只记录元信息，不记录请求正文（敏感内容不入日志）
         log.info("request request_id=%s method=%s path=%s status=%d latency_ms=%.1f",
