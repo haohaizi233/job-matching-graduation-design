@@ -1,0 +1,19 @@
+{
+  "annotation_quality": {
+    "agreement": {
+      "annotators": [],
+      "note": "缺少双人标注，一致性指标不可计算；不填充任何数值",
+      "reason": "no_annotations",
+      "status": "not_computable"
+    },
+    "annotation_status": "pending",
+    "open_disagreements": 0,
+    "synthetic_pairs_included": 0,
+    "unjudgeable_forced": 0
+  },
+  "created_at": "2026-10-29T10:22:06",
+  "note": "未满足冻结条件：评估集不允许冻结，更不允许静默修改",
+  "reason": "冻结所需文件缺失: final_labels -> D:\\desktop\\毕业设计\\data\\independent_eval\\annotation\\final_labels.csv",
+  "stage": "evalset",
+  "status": "blocked"
+}

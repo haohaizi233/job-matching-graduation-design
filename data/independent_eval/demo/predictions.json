@@ -1,0 +1,833 @@
+{
+  "created_at": "2026-10-29T10:22:08",
+  "label_source": "synthetic_demo",
+  "pair_order": [
+    "pair-c6806999a9fb",
+    "pair-aa7b329f1862",
+    "pair-49932f2b200f",
+    "pair-0f91ff3baa86",
+    "pair-308bfba35bb4",
+    "pair-003ed34f572b",
+    "pair-77933ae09bf6",
+    "pair-0da71624d5ee",
+    "pair-6bad8df3f0de",
+    "pair-e9a28f01ff11",
+    "pair-cb61a17a1e5a",
+    "pair-256e62b8482a",
+    "pair-a375f03edd8b",
+    "pair-1d5f0d85b245",
+    "pair-fb7949c93d43",
+    "pair-3c0db36efa0e",
+    "pair-be43dfc2be90",
+    "pair-70327e0442b4",
+    "pair-16f870a74533",
+    "pair-406d0df0d953",
+    "pair-8fe126e1c0ae",
+    "pair-a0300d8dfeae",
+    "pair-6d23120a9b55",
+    "pair-ecb75e0bfab4",
+    "pair-b1c5f74aaee3",
+    "pair-1d7b7bc92cb2",
+    "pair-fcc5c72b06a2",
+    "pair-ed1410384291",
+    "pair-2b632d2f2c51",
+    "pair-df5304214755",
+    "pair-80c7fc11ea80",
+    "pair-e2fdaec259fe",
+    "pair-c36f9616746a",
+    "pair-a7dc232bef79",
+    "pair-ebaba08e5790",
+    "pair-dbfc24635d54",
+    "pair-4f27fc7d232b",
+    "pair-e3db8762d99b",
+    "pair-5b8b84d214f9",
+    "pair-7394eb0ec27f",
+    "pair-271510ce7e9c",
+    "pair-7743ec366147",
+    "pair-ce425f86bd97",
+    "pair-a6cf9f4b167b",
+    "pair-e61f4a3197a0",
+    "pair-18c5f16d5e11",
+    "pair-5a798535fc62",
+    "pair-073e0d12147e",
+    "pair-4853e59e4e02",
+    "pair-539fa4b129bb",
+    "pair-4d941bb2b660",
+    "pair-f83a72dccc70",
+    "pair-a1409f35e2db",
+    "pair-2dbae81f4b51",
+    "pair-22bfdd4964fd",
+    "pair-a1e8fc7ab6c8",
+    "pair-b78e5434dbc5",
+    "pair-1be2751bbffc",
+    "pair-4948077ad4f5",
+    "pair-9aebba27d6d1",
+    "pair-95eebf50908f",
+    "pair-dc0804a530e4",
+    "pair-e9bbe19444ff",
+    "pair-6b541305bf1b",
+    "pair-1ac91d0f1eea",
+    "pair-6e7c83b3e17b",
+    "pair-bc4c48566bdd",
+    "pair-e77083cf3fa3",
+    "pair-e6f1d77bc573",
+    "pair-85bca5d31bbf",
+    "pair-532df4617607",
+    "pair-0bcf3fd45469",
+    "pair-a7c73671d9c5",
+    "pair-d959f6fc6506",
+    "pair-a7f162e79861"
+  ],
+  "predictions": [
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-c6806999a9fb",
+      "score": 0.75
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-aa7b329f1862",
+      "score": 0.42857142857142855
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-49932f2b200f",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-0f91ff3baa86",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-308bfba35bb4",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-003ed34f572b",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-77933ae09bf6",
+      "score": 0.25
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-0da71624d5ee",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-6bad8df3f0de",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-e9a28f01ff11",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-cb61a17a1e5a",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-256e62b8482a",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-a375f03edd8b",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-1d5f0d85b245",
+      "score": 0.25
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-fb7949c93d43",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-3c0db36efa0e",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-be43dfc2be90",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-70327e0442b4",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-16f870a74533",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-406d0df0d953",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-8fe126e1c0ae",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-a0300d8dfeae",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-6d23120a9b55",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-ecb75e0bfab4",
+      "score": 0.3333333333333333
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-b1c5f74aaee3",
+      "score": 0.3333333333333333
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-1d7b7bc92cb2",
+      "score": 0.3333333333333333
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-fcc5c72b06a2",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-ed1410384291",
+      "score": 0.25
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-2b632d2f2c51",
+      "score": 0.25
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-df5304214755",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-80c7fc11ea80",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-e2fdaec259fe",
+      "score": 0.3333333333333333
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-c36f9616746a",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-a7dc232bef79",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-ebaba08e5790",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-dbfc24635d54",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-4f27fc7d232b",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-e3db8762d99b",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-5b8b84d214f9",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-7394eb0ec27f",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-271510ce7e9c",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-7743ec366147",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-ce425f86bd97",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-a6cf9f4b167b",
+      "score": 0.3333333333333333
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-e61f4a3197a0",
+      "score": 0.375
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-18c5f16d5e11",
+      "score": 0.3333333333333333
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-5a798535fc62",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-073e0d12147e",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-4853e59e4e02",
+      "score": 0.2
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-539fa4b129bb",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-4d941bb2b660",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-f83a72dccc70",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-a1409f35e2db",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-2dbae81f4b51",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-22bfdd4964fd",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-a1e8fc7ab6c8",
+      "score": 0.3333333333333333
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-b78e5434dbc5",
+      "score": 0.6666666666666666
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-1be2751bbffc",
+      "score": 0.4
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-4948077ad4f5",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-9aebba27d6d1",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-95eebf50908f",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-dc0804a530e4",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-e9bbe19444ff",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-6b541305bf1b",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-1ac91d0f1eea",
+      "score": 0.3333333333333333
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-6e7c83b3e17b",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-bc4c48566bdd",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-e77083cf3fa3",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-e6f1d77bc573",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-85bca5d31bbf",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-532df4617607",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-0bcf3fd45469",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-a7c73671d9c5",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-d959f6fc6506",
+      "score": 0.0
+    },
+    {
+      "model": "keyword_skill",
+      "pair_id": "pair-a7f162e79861",
+      "score": 0.0
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-c6806999a9fb",
+      "score": 0.046116222493376324
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-aa7b329f1862",
+      "score": 0.04083494938358112
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-49932f2b200f",
+      "score": 0.016104738887027875
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-0f91ff3baa86",
+      "score": 0.019764690486732107
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-308bfba35bb4",
+      "score": 0.028676531823870362
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-003ed34f572b",
+      "score": 0.015539592564779683
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-77933ae09bf6",
+      "score": 0.021324620516577505
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-0da71624d5ee",
+      "score": 0.0013291857989436622
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-6bad8df3f0de",
+      "score": 0.0016431421768416075
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-e9a28f01ff11",
+      "score": 0.007714793638006579
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-cb61a17a1e5a",
+      "score": 0.01030680492820273
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-256e62b8482a",
+      "score": 0.03091219369951828
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-a375f03edd8b",
+      "score": 0.010755711539237014
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-1d5f0d85b245",
+      "score": 0.07752555483489448
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-fb7949c93d43",
+      "score": 0.0008400140409288918
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-3c0db36efa0e",
+      "score": 0.0024866083046194308
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-be43dfc2be90",
+      "score": 0.007901705874766723
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-70327e0442b4",
+      "score": 0.01055651581528209
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-16f870a74533",
+      "score": 0.0012760177359968069
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-406d0df0d953",
+      "score": 0.009046688413833971
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-8fe126e1c0ae",
+      "score": 0.006171999868090959
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-a0300d8dfeae",
+      "score": 0.002880580777235215
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-6d23120a9b55",
+      "score": 0.0007537079598924489
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-ecb75e0bfab4",
+      "score": 0.014580320675587533
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-b1c5f74aaee3",
+      "score": 0.0032984911871646212
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-1d7b7bc92cb2",
+      "score": 0.004436493775234236
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-fcc5c72b06a2",
+      "score": 0.007300230274067344
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-ed1410384291",
+      "score": 0.006509506134834042
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-2b632d2f2c51",
+      "score": 0.009137107661540118
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-df5304214755",
+      "score": 0.024526301822901345
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-80c7fc11ea80",
+      "score": 0.010006144525290772
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-e2fdaec259fe",
+      "score": 0.011664731548374097
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-c36f9616746a",
+      "score": 0.010716792946892893
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-a7dc232bef79",
+      "score": 0.00654526655299731
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-ebaba08e5790",
+      "score": 0.004853672732116107
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-dbfc24635d54",
+      "score": 0.00345087353096882
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-4f27fc7d232b",
+      "score": 0.02518423747465338
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-e3db8762d99b",
+      "score": 0.003481932094835682
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-5b8b84d214f9",
+      "score": 0.02445076364302141
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-7394eb0ec27f",
+      "score": 0.008209506669758788
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-271510ce7e9c",
+      "score": 0.001034950616861896
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-7743ec366147",
+      "score": 0.004772202957980803
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-ce425f86bd97",
+      "score": 0.001716170852606741
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-a6cf9f4b167b",
+      "score": 0.04109698159503215
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-e61f4a3197a0",
+      "score": 0.04840714671806832
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-18c5f16d5e11",
+      "score": 0.010020145134614132
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-5a798535fc62",
+      "score": 0.01705207172025312
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-073e0d12147e",
+      "score": 0.007559893859006959
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-4853e59e4e02",
+      "score": 0.01727328339838593
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-539fa4b129bb",
+      "score": 0.02406204094858854
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-4d941bb2b660",
+      "score": 0.027714586419660178
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-f83a72dccc70",
+      "score": 0.0033807220960732453
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-a1409f35e2db",
+      "score": 0.017957604069941215
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-2dbae81f4b51",
+      "score": 0.006815345397099649
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-22bfdd4964fd",
+      "score": 0.00034716683174701083
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-a1e8fc7ab6c8",
+      "score": 0.016158390746056114
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-b78e5434dbc5",
+      "score": 0.018488977891471962
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-1be2751bbffc",
+      "score": 0.04102994776450739
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-4948077ad4f5",
+      "score": 0.0040499721938470285
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-9aebba27d6d1",
+      "score": 0.010544092908069168
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-95eebf50908f",
+      "score": 0.00287025027434801
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-dc0804a530e4",
+      "score": 0.015381215698473009
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-e9bbe19444ff",
+      "score": 0.011258492277858712
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-6b541305bf1b",
+      "score": 0.016024315921535
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-1ac91d0f1eea",
+      "score": 0.013416792916994765
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-6e7c83b3e17b",
+      "score": 0.002265730757781584
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-bc4c48566bdd",
+      "score": 0.0004094705764490325
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-e77083cf3fa3",
+      "score": 0.01169865413027962
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-e6f1d77bc573",
+      "score": 0.00887353302777112
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-85bca5d31bbf",
+      "score": 0.010258512445162448
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-532df4617607",
+      "score": 0.02508419085694806
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-0bcf3fd45469",
+      "score": 0.0007740909291516309
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-a7c73671d9c5",
+      "score": 0.005682157568764514
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-d959f6fc6506",
+      "score": 0.00219696614629613
+    },
+    {
+      "model": "tfidf_cosine",
+      "pair_id": "pair-a7f162e79861",
+      "score": 0.0028206124757100366
+    }
+  ]
+}

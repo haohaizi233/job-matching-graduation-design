@@ -1,0 +1,121 @@
+{
+  "annotation_quality": {},
+  "dataset_version": "dv-fd3762f85658",
+  "extra": {
+    "pool_manifest": "data/independent_eval/pool/pool_manifest_v1.json"
+  },
+  "files": {
+    "job_pool": {
+      "bytes": 349213,
+      "path": "data/independent_eval/pool/job_pool_v1.jsonl",
+      "sha256": "13bf2581e8784041f83b7278ce88a5d94e8902d91a08232e52fba04149d28b81"
+    },
+    "pairs": {
+      "bytes": 0,
+      "path": "data/independent_eval/pairs/pairs_v1.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pairs_synthetic": {
+      "bytes": 185305,
+      "path": "data/independent_eval/pairs/pairs_synthetic_v1.jsonl",
+      "sha256": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8"
+    },
+    "pool_manifest": {
+      "bytes": 6587,
+      "path": "data/independent_eval/pool/pool_manifest_v1.json",
+      "sha256": "b074f04d7180d47de7c0c8e205ba2a388506e99baa512737760078f34efc5c95"
+    }
+  },
+  "frozen_at": "2026-10-29T10:20:54",
+  "generated_by": "src/job_matching/annotation/freeze.py",
+  "immutability_note": "冻结后禁止静默修改；任何变更必须生成新的 dataset_version",
+  "label_distribution": {
+    "unlabeled": 75
+  },
+  "manifest_sha256": "3a4545505dc0750131d2ebe5d68018a63fb879f35c668c5eb70c717dc76971fc",
+  "mutual_exclusivity": {
+    "pair_id_duplicates": 0,
+    "pair_id_unique": true,
+    "resume_job_unique": true,
+    "split_isolation_ok": true,
+    "split_resume_overlap": {},
+    "splits_present": []
+  },
+  "protocol_version": "phase4-3a-annotation-v1",
+  "responsibility": {
+    "annotation_status": "pending",
+    "data_sources": {
+      "job-education/annotated": "apache-2.0",
+      "job-education/default-test": "apache-2.0",
+      "other/all_df": "UNKNOWN"
+    },
+    "note": "候选池冻结不含人工标签；正式评估集冻结需 G2 条件"
+  },
+  "sample_counts": {
+    "jobs": 0,
+    "pairs": 0,
+    "resumes": 0,
+    "synthetic_pairs": 0
+  },
+  "source_stats": {
+    "category_distribution": {
+      "FINANCE": 8,
+      "HR": 12,
+      "INFORMATION-TECHNOLOGY": 88,
+      "MARKETING-OPS": 15,
+      "OTHER": 19,
+      "SALES": 8
+    },
+    "category_source": "heuristic_keyword_v1",
+    "duplicates_removed": {
+      "exact_dup": 23990,
+      "near_dup": 0,
+      "norm_dup": 184
+    },
+    "historical_gold_in_source": 736,
+    "jobs_read_total": 45342,
+    "jobs_selected": 150,
+    "jobs_unique": 21168,
+    "license_status": {
+      "job-education/annotated": "apache-2.0",
+      "job-education/default-test": "apache-2.0",
+      "other/all_df": "UNKNOWN"
+    },
+    "n_target": 150,
+    "protocol_version": "phase4-3a-annotation-v1",
+    "sampling": {
+      "seed": 20261210,
+      "strategy": "stratified_by_job_category(max_remainder, min_quota=2, rng_permutation)",
+      "stratum_key": "job_category"
+    },
+    "sources": [
+      {
+        "path": "data/raw/job-education/annotated/2w_0716_eval.csv",
+        "pii_hits": {
+          "email": 40,
+          "landline": 58,
+          "mobile_cn": 9,
+          "qq_wechat_id": 1015
+        },
+        "rows_kept": 22671,
+        "rows_read": 22730,
+        "rows_skipped_empty_description": 59,
+        "source": "job-education/annotated"
+      },
+      {
+        "path": "data/raw/job-education/default/test/2w_0716.csv",
+        "pii_hits": {
+          "email": 40,
+          "landline": 58,
+          "mobile_cn": 9,
+          "qq_wechat_id": 1015
+        },
+        "rows_kept": 22671,
+        "rows_read": 22730,
+        "rows_skipped_empty_description": 59,
+        "source": "job-education/default-test"
+      }
+    ]
+  },
+  "stage": "pool"
+}

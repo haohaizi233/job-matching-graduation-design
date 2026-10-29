@@ -1,0 +1,225 @@
+{
+  "coverage": {
+    "gaps": [
+      {
+        "count": 0,
+        "item": "真实中文简历",
+        "note": "本地无真实中文简历；英文简历不可充当中国大学生就业画像数据"
+      },
+      {
+        "count": 0,
+        "item": "真实中文简历-岗位配对",
+        "note": "依赖经授权脱敏中文简历导入后才能生成"
+      }
+    ],
+    "jobs_by_category": {
+      "FINANCE": 8,
+      "HR": 12,
+      "INFORMATION-TECHNOLOGY": 88,
+      "MARKETING-OPS": 15,
+      "OTHER": 19,
+      "SALES": 8
+    },
+    "jobs_in_pool": 150,
+    "pairs_by_category": {
+      "FINANCE": {
+        "cross_category_negative": 7,
+        "hard_requirement_gap": 1,
+        "high_skill_overlap": 1,
+        "medium_skill_overlap": 2
+      },
+      "HR": {
+        "cross_category_negative": 8,
+        "medium_skill_overlap": 4
+      },
+      "INFORMATION-TECHNOLOGY": {
+        "cross_category_negative": 1,
+        "hard_requirement_gap": 12,
+        "high_skill_overlap": 9,
+        "medium_skill_overlap": 14,
+        "same_direction_diff_duties": 7
+      },
+      "MARKETING-OPS": {
+        "hard_requirement_gap": 2,
+        "medium_skill_overlap": 4
+      },
+      "OTHER": {
+        "same_direction_diff_duties": 1
+      },
+      "SALES": {
+        "hard_requirement_gap": 1,
+        "high_skill_overlap": 1
+      }
+    },
+    "pairs_by_language": {
+      "mixed": {
+        "medium_skill_overlap": 1,
+        "same_direction_diff_duties": 1
+      },
+      "zh": {
+        "cross_category_negative": 16,
+        "hard_requirement_gap": 16,
+        "high_skill_overlap": 11,
+        "medium_skill_overlap": 23,
+        "same_direction_diff_duties": 7
+      }
+    },
+    "pairs_by_source": {
+      "job-education/annotated": {
+        "cross_category_negative": 16,
+        "hard_requirement_gap": 16,
+        "high_skill_overlap": 11,
+        "medium_skill_overlap": 24,
+        "same_direction_diff_duties": 8
+      }
+    },
+    "pairs_by_tier": {
+      "cross_category_negative": 16,
+      "hard_requirement_gap": 16,
+      "high_skill_overlap": 11,
+      "medium_skill_overlap": 24,
+      "same_direction_diff_duties": 8
+    },
+    "pairs_total": 75,
+    "resume_language_mix": {
+      "synthetic_fixture": {
+        "mixed": 2,
+        "zh": 73
+      }
+    }
+  },
+  "created_at": "2026-10-29T10:20:54",
+  "dataset_version": "dv-fd3762f85658",
+  "files": {
+    "job_pool": {
+      "bytes": 349213,
+      "path": "data/independent_eval/pool/job_pool_v1.jsonl",
+      "sha256": "13bf2581e8784041f83b7278ce88a5d94e8902d91a08232e52fba04149d28b81"
+    },
+    "pairs_real": {
+      "bytes": 0,
+      "path": "data/independent_eval/pairs/pairs_v1.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pairs_synthetic": {
+      "bytes": 185305,
+      "path": "data/independent_eval/pairs/pairs_synthetic_v1.jsonl",
+      "sha256": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8"
+    },
+    "template_annotations_a": {
+      "bytes": 4521,
+      "path": "data/independent_eval/annotation/templates/annotations_A.csv",
+      "sha256": "c31ff1c8a83c0f0d05d3c967c1f91dac152e56112a53dbbcb474554c4cfaac03"
+    },
+    "template_annotations_b": {
+      "bytes": 4521,
+      "path": "data/independent_eval/annotation/templates/annotations_B.csv",
+      "sha256": "2d6d51114a6cf99a6d86092fbf9acb901e70bd4e5812aad0673ce24ef725ce57"
+    },
+    "template_arbitration": {
+      "bytes": 109,
+      "path": "data/independent_eval/annotation/templates/arbitration.csv",
+      "sha256": "1214a3fd596c2c261296403328693c609f3c898c7bbfa214b3eb3a621f861cbc"
+    }
+  },
+  "generated_by": "scripts/phase4_3a/build_pool.py",
+  "job_pool": {
+    "category_distribution": {
+      "FINANCE": 8,
+      "HR": 12,
+      "INFORMATION-TECHNOLOGY": 88,
+      "MARKETING-OPS": 15,
+      "OTHER": 19,
+      "SALES": 8
+    },
+    "category_source": "heuristic_keyword_v1",
+    "duplicates_removed": {
+      "exact_dup": 23990,
+      "near_dup": 0,
+      "norm_dup": 184
+    },
+    "historical_gold_in_source": 736,
+    "jobs_read_total": 45342,
+    "jobs_selected": 150,
+    "jobs_unique": 21168,
+    "license_status": {
+      "job-education/annotated": "apache-2.0",
+      "job-education/default-test": "apache-2.0",
+      "other/all_df": "UNKNOWN"
+    },
+    "n_target": 150,
+    "protocol_version": "phase4-3a-annotation-v1",
+    "sampling": {
+      "seed": 20261210,
+      "strategy": "stratified_by_job_category(max_remainder, min_quota=2, rng_permutation)",
+      "stratum_key": "job_category"
+    },
+    "sources": [
+      {
+        "path": "data/raw/job-education/annotated/2w_0716_eval.csv",
+        "pii_hits": {
+          "email": 40,
+          "landline": 58,
+          "mobile_cn": 9,
+          "qq_wechat_id": 1015
+        },
+        "rows_kept": 22671,
+        "rows_read": 22730,
+        "rows_skipped_empty_description": 59,
+        "source": "job-education/annotated"
+      },
+      {
+        "path": "data/raw/job-education/default/test/2w_0716.csv",
+        "pii_hits": {
+          "email": 40,
+          "landline": 58,
+          "mobile_cn": 9,
+          "qq_wechat_id": 1015
+        },
+        "rows_kept": 22671,
+        "rows_read": 22730,
+        "rows_skipped_empty_description": 59,
+        "source": "job-education/default-test"
+      }
+    ]
+  },
+  "pair_pool": {
+    "real": {
+      "note": "无真实中文简历 -> 真实配对数 0（数据缺口）",
+      "pairs_built": 0,
+      "tier_counts": {}
+    },
+    "resume_import": {
+      "note": "未找到经授权的中文简历导入文件（data/independent_eval/resume_pool/resumes.csv）",
+      "rows": 0,
+      "source": null
+    },
+    "synthetic": {
+      "duplicate_pairs_skipped": 9,
+      "jobs_used": 55,
+      "pairs_built": 75,
+      "real_pairs": 0,
+      "resumes_used": 8,
+      "seed": 20261211,
+      "synthetic_pairs": 75,
+      "tier_counts": {
+        "cross_category_negative": 16,
+        "hard_requirement_gap": 16,
+        "high_skill_overlap": 11,
+        "medium_skill_overlap": 24,
+        "same_direction_diff_duties": 8
+      },
+      "tier_quotas": {
+        "cross_category_negative": 2,
+        "hard_requirement_gap": 2,
+        "high_skill_overlap": 3,
+        "medium_skill_overlap": 3,
+        "same_direction_diff_duties": 2
+      }
+    }
+  },
+  "pii_hit_counts": {},
+  "protocol_version": "phase4-3a-annotation-v1",
+  "sampling_strategy_recorded": true,
+  "synthetic_policy": "is_synthetic=true / eligible_for_gold=false；合成样本只用于验证标注-评估流水线，绝不冒充人工真值"
+}

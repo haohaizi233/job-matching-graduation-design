@@ -1,0 +1,207 @@
+{
+  "bootstrap_ndcg@5": {
+    "ci": 0.95,
+    "comparisons": {
+      "tfidf_cosine": {
+        "baseline": "keyword_skill",
+        "ci": 0.95,
+        "ci_high": -0.103337,
+        "ci_low": -0.389533,
+        "interpretation": "significant",
+        "mean_a": 0.760538,
+        "mean_b": 1.0,
+        "mean_diff": -0.239462,
+        "model": "tfidf_cosine",
+        "n_boot": 1000,
+        "p_bootstrap_le_zero": 1.0,
+        "queries": 6,
+        "seed": 20261205,
+        "significant_at_95": true,
+        "unit": "query(candidate_id)"
+      }
+    },
+    "k": 5,
+    "metric": "ndcg",
+    "n_boot": 1000,
+    "queries": 6,
+    "seed": 20261205,
+    "shared_resampling_guarantee": "重采样单位为查询组（resume_id）；bootstrap_diff 的重采样索引由 (排序后的 key 集合, n_boot, seed) 完全决定；本函数强制所有模型 key 集合一致，因此各对比使用同一批重采样组",
+    "stability_note": "有效查询组 6 < 20：统计不稳定，禁止声明显著优于 Baseline",
+    "statistical_stability": "unstable",
+    "status": "ok",
+    "unit": "query(resume_id)"
+  },
+  "formal": false,
+  "label_source": "synthetic_demo",
+  "metrics": {
+    "keyword_skill": {
+      "all": {
+        "mrr@10": 1.0,
+        "mrr@5": 1.0,
+        "ndcg@10": 1.0,
+        "ndcg@5": 1.0,
+        "precision@10": 0.513492,
+        "precision@10_with_zero_rel_groups": 0.385119,
+        "precision@5": 0.8,
+        "precision@5_with_zero_rel_groups": 0.6,
+        "queries_evaluated": 6,
+        "queries_skipped_zero_relevance": 2,
+        "recall@10": 1.0,
+        "recall@5": 0.909722
+      },
+      "binary_relevance_rule": "human relevance >= 1",
+      "effective_query_count": 6,
+      "gain_mode": "human_ordinal_0_1_2",
+      "group_size_distribution": {
+        "max": 12,
+        "mean": 9.375,
+        "median": 8.5,
+        "min": 7,
+        "p25": 7.75,
+        "p75": 12.0
+      },
+      "ks": [
+        5,
+        10
+      ],
+      "label_filter_stats": {
+        "invalid": 0,
+        "judgeable": 75,
+        "unjudgeable": 0,
+        "unlabeled": 0
+      },
+      "label_source": "human_gold",
+      "min_group_size": 2,
+      "precision_denominator": "min(k, group_size)",
+      "queries_evaluated": 6,
+      "queries_size_eq_1": 0,
+      "queries_size_ge_2": 8,
+      "queries_size_ge_min": 8,
+      "queries_skipped_zero_relevance": 2,
+      "queries_total": 8,
+      "relevance_threshold": 1,
+      "size_ge_2": {
+        "mrr@10": 1.0,
+        "mrr@5": 1.0,
+        "ndcg@10": 1.0,
+        "ndcg@5": 1.0,
+        "precision@10": 0.513492,
+        "precision@10_with_zero_rel_groups": 0.385119,
+        "precision@5": 0.8,
+        "precision@5_with_zero_rel_groups": 0.6,
+        "queries_evaluated": 6,
+        "queries_skipped_zero_relevance": 2,
+        "recall@10": 1.0,
+        "recall@5": 0.909722
+      },
+      "size_ge_maxk": {
+        "mrr@10": 1.0,
+        "mrr@5": 1.0,
+        "ndcg@10": 1.0,
+        "ndcg@5": 1.0,
+        "precision@10": 0.566667,
+        "precision@10_with_zero_rel_groups": 0.566667,
+        "precision@5": 0.933333,
+        "precision@5_with_zero_rel_groups": 0.933333,
+        "queries_evaluated": 3,
+        "queries_skipped_zero_relevance": 0,
+        "recall@10": 1.0,
+        "recall@5": 0.875
+      },
+      "underlying_gain_mode": "score（metrics_ranking 增益口径，传入人工 0/1/2 序数）",
+      "unjudgeable_policy": "excluded_from_gain_and_denominator"
+    },
+    "tfidf_cosine": {
+      "all": {
+        "mrr@10": 0.833333,
+        "mrr@5": 0.833333,
+        "ndcg@10": 0.850056,
+        "ndcg@5": 0.760538,
+        "precision@10": 0.480159,
+        "precision@10_with_zero_rel_groups": 0.360119,
+        "precision@5": 0.6,
+        "precision@5_with_zero_rel_groups": 0.45,
+        "queries_evaluated": 6,
+        "queries_skipped_zero_relevance": 2,
+        "recall@10": 0.958333,
+        "recall@5": 0.726389
+      },
+      "binary_relevance_rule": "human relevance >= 1",
+      "effective_query_count": 6,
+      "gain_mode": "human_ordinal_0_1_2",
+      "group_size_distribution": {
+        "max": 12,
+        "mean": 9.375,
+        "median": 8.5,
+        "min": 7,
+        "p25": 7.75,
+        "p75": 12.0
+      },
+      "ks": [
+        5,
+        10
+      ],
+      "label_filter_stats": {
+        "invalid": 0,
+        "judgeable": 75,
+        "unjudgeable": 0,
+        "unlabeled": 0
+      },
+      "label_source": "human_gold",
+      "min_group_size": 2,
+      "precision_denominator": "min(k, group_size)",
+      "queries_evaluated": 6,
+      "queries_size_eq_1": 0,
+      "queries_size_ge_2": 8,
+      "queries_size_ge_min": 8,
+      "queries_skipped_zero_relevance": 2,
+      "queries_total": 8,
+      "relevance_threshold": 1,
+      "size_ge_2": {
+        "mrr@10": 0.833333,
+        "mrr@5": 0.833333,
+        "ndcg@10": 0.850056,
+        "ndcg@5": 0.760538,
+        "precision@10": 0.480159,
+        "precision@10_with_zero_rel_groups": 0.360119,
+        "precision@5": 0.6,
+        "precision@5_with_zero_rel_groups": 0.45,
+        "queries_evaluated": 6,
+        "queries_skipped_zero_relevance": 2,
+        "recall@10": 0.958333,
+        "recall@5": 0.726389
+      },
+      "size_ge_maxk": {
+        "mrr@10": 0.833333,
+        "mrr@5": 0.833333,
+        "ndcg@10": 0.840599,
+        "ndcg@5": 0.660019,
+        "precision@10": 0.5,
+        "precision@10_with_zero_rel_groups": 0.5,
+        "precision@5": 0.533333,
+        "precision@5_with_zero_rel_groups": 0.533333,
+        "queries_evaluated": 3,
+        "queries_skipped_zero_relevance": 0,
+        "recall@10": 0.916667,
+        "recall@5": 0.508333
+      },
+      "underlying_gain_mode": "score（metrics_ranking 增益口径，传入人工 0/1/2 序数）",
+      "unjudgeable_policy": "excluded_from_gain_and_denominator"
+    }
+  },
+  "models": {
+    "keyword_skill": {
+      "status": "ok"
+    },
+    "tfidf_cosine": {
+      "status": "ok"
+    }
+  },
+  "queries": {
+    "groups": 8,
+    "pairs": 75
+  },
+  "recompute_files": {
+    "predictions": "data/independent_eval/demo/predictions.json"
+  }
+}
