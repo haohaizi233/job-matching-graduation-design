@@ -127,6 +127,11 @@ class Resume(Base):
     parse_status: Mapped[str] = mapped_column(String(32), nullable=False, default="pending")
     parse_error: Mapped[str | None] = mapped_column(String(512), nullable=True)
     profile_version: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # ---- P1-03 数据来源（Phase5-2R）：synthetic | user_provided | licensed_dataset | unknown
+    # 由上传/声明推导一次后固化；重新解析**不得**静默改写
+    data_source: Mapped[str] = mapped_column(String(24), nullable=False, default="unknown")
+    data_source_declared: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    source_audit: Mapped[list] = mapped_column(JSON_TYPE, nullable=False, default=list)
     uploaded_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_now)
     updated_at: Mapped[datetime] = mapped_column(DateTime, nullable=False,
                                                  default=_now, onupdate=_now)
@@ -135,6 +140,8 @@ class Resume(Base):
         # 同一用户重复上传同一文件 -> 幂等返回既有简历（不重复存文件）
         UniqueConstraint("user_id", "file_sha256", name="uq_resumes_user_sha256"),
         Index("ix_resumes_user_uploaded", "user_id", "uploaded_at"),
+        # 文件生命周期：孤儿扫描/引用检查按 storage_key 定位
+        Index("ix_resumes_storage_key", "storage_key"),
     )
 
 
@@ -156,6 +163,23 @@ class Job(Base):
     job_category: Mapped[str | None] = mapped_column(String(64), nullable=True)
     city: Mapped[str | None] = mapped_column(String(64), nullable=True)
     education_min: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    # ---- P0-01 岗位画像版本与失效（Phase5-2R）----
+    # job_content_hash：影响画像的原文指纹（title + job_description 规范化 SHA-256）
+    job_content_hash: Mapped[str] = mapped_column(String(64), nullable=False, default="")
+    # profile_source_hash：结构化画像**实际依据**的原文指纹；与 job_content_hash 不等即视为过期
+    profile_source_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    # unparsed | parsed | needs_reparse | failed
+    profile_status: Mapped[str] = mapped_column(String(16), nullable=False, default="unparsed")
+    profile_error: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    parser_version: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    # ---- P1-03 数据来源（Phase5-2R）：synthetic | user_provided | licensed_dataset | unknown
+    data_source: Mapped[str] = mapped_column(String(24), nullable=False, default="unknown")
+    # 来源是否由管理员显式声明（0=由来源/许可推导，1=显式声明）
+    data_source_declared: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    data_source_declared_by: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    data_source_declared_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    # 来源声明审计流水（只追加）：[{at, by, from, to, reason}]
+    source_audit: Mapped[list] = mapped_column(JSON_TYPE, nullable=False, default=list)
     created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_now)
     updated_at: Mapped[datetime] = mapped_column(DateTime, nullable=False,
                                                  default=_now, onupdate=_now)
@@ -164,6 +188,8 @@ class Job(Base):
         Index("ix_jobs_status_category", "status", "job_category"),
         Index("ix_jobs_status_city", "status", "city"),
         Index("ix_jobs_status_updated", "status", "updated_at"),
+        # 推荐取用"可匹配岗位"的过滤条件（status + profile_status + 哈希一致性）
+        Index("ix_jobs_status_profile_status", "status", "profile_status"),
     )
 
 
@@ -185,8 +211,18 @@ class RecommendationRun(Base):
                                                         default="scoring_config_v1")
     # 参与匹配的岗位集合快照：[{job_id, title, updated_at, profile_version}]
     job_set_snapshot: Mapped[list] = mapped_column(JSON_TYPE, nullable=False, default=list)
-    # 请求指纹（重复提交幂等）：同一用户相同画像版本 + 相同岗位集合 + 相同参数
+    # 请求指纹（自然去重）：**规范化 JSON 全量有效输入** 的 SHA-256
+    # （用户 / 画像版本与内容指纹 / 岗位集合与各岗位内容与画像版本 / 排序模式 /
+    #   模型 ID 与版本 / 评分配置版本 / top_k / 筛选条件 / allow_fallback）。
+    # 调用方提供 Idempotency-Key 时，指纹额外绑定幂等键命名空间（同 Key 同语义 = 同一请求）。
     request_fingerprint: Mapped[str] = mapped_column(String(64), nullable=False)
+    # 请求语义指纹：只反映有效输入，与是否携带 Idempotency-Key 无关
+    # （用于"同 Key 不同语义 -> 409"的冲突判定）
+    request_semantic_hash: Mapped[str] = mapped_column(String(64), nullable=False, default="")
+    # 调用方显式幂等键（可空）；同一用户下唯一，重复键但语义不同 -> 409 CONFLICT
+    idempotency_key: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    # 画像内容指纹（推荐时刻的画像不可变摘要；不是 updated_at）
+    profile_content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
     # completed | failed
     status: Mapped[str] = mapped_column(String(16), nullable=False, default="completed")
     error_detail: Mapped[str | None] = mapped_column(String(512), nullable=True)
@@ -197,6 +233,10 @@ class RecommendationRun(Base):
     __table_args__ = (
         # 重复提交处理：同一用户同一请求指纹只落一条运行记录
         UniqueConstraint("user_id", "request_fingerprint", name="uq_reco_runs_user_fingerprint"),
+        # 显式幂等键唯一：同 Key 不同语义不得静默合并（应用层判 409）。
+        # 用**唯一索引**表达（与迁移一致）：SQLite 的 ALTER TABLE 不支持 ADD CONSTRAINT，
+        # 而 batch 重建表存在被 recommendation_items 外键引用的结构风险。
+        Index("uq_reco_runs_user_idem_key", "user_id", "idempotency_key", unique=True),
         Index("ix_reco_runs_user_created", "user_id", "created_at"),
     )
 
@@ -218,8 +258,12 @@ class RecommendationItem(Base):
     score_type: Mapped[str] = mapped_column(String(32), nullable=False)
     # 匹配解释快照（运行时刻的解释，不随岗位后续修改而变）
     explanation_snapshot: Mapped[dict] = mapped_column(JSON_TYPE, nullable=False, default=dict)
-    # 岗位快照版本（岗位更新后历史解释仍可追溯）
+    # 岗位快照版本（岗位更新后历史解释仍可追溯）：
+    #   "{job_id}:{job_content_hash[:16]}" —— 内容哈希口径，不依赖 updated_at
     job_snapshot_version: Mapped[str] = mapped_column(String(64), nullable=False)
+    # 条目证据快照：当时岗位内容指纹 + 画像状态（历史可解释的最小证据，不复制 JD 原文）
+    job_content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    profile_status_at_run: Mapped[str | None] = mapped_column(String(16), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_now)
 
     __table_args__ = (
