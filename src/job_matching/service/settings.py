@@ -131,10 +131,23 @@ class ServiceSettings:
     def check_deployment_safety(self) -> list[str]:
         """外网部署前的安全检查（未通过项必须阻断发布，不得口头宣称生产就绪）。"""
         problems: list[str] = []
-        if self.api_env in ("prod", "staging") and not self.require_auth:
+        if self.api_env in ("prod", "production", "staging") and not self.require_auth:
             problems.append("外网/正式环境必须启用认证（JM_REQUIRE_AUTH=1 且网关侧鉴权）")
-        if self.api_env in ("prod", "staging") and self.allow_research_models:
+        if self.api_env in ("prod", "production", "staging") and self.allow_research_models:
             problems.append("正式环境不得启用 research_only 模型（JM_ALLOW_RESEARCH_MODELS=0）")
-        if self.api_env in ("prod", "staging") and "local_dev_only" in self.deployment_scope:
+        if self.api_env in ("prod", "production", "staging") and "local_dev_only" in self.deployment_scope:
             problems.append("deployment_scope 仍为 local_dev_only，未声明正式部署边界")
         return problems
+
+    def assert_deployment_safe(self) -> None:
+        """P1-09：production / staging 启动前的强制门禁（未通过即拒绝启动）。
+
+        在没有完整认证安全边界前，不得以生产模式启动未受保护的旧业务端点。
+        """
+        env = str(self.api_env or "").strip().lower()
+        if env not in ("prod", "production", "staging"):
+            return
+        problems = self.check_deployment_safety()
+        if problems:
+            raise ValueError("部署安全门禁未通过，拒绝以 production/staging 启动：" +
+                             "；".join(problems))

@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import os
+import threading
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
@@ -46,6 +47,11 @@ class DbSettings:
 
     @classmethod
     def from_env(cls, env: dict | None = None) -> "DbSettings":
+        """从环境变量构建配置（**配置构建边界**，业务方法不得随手改写环境）。
+
+        保留历史 `JM_DATABASE_URL` / `JM_DB_ECHO` 默认读取能力；
+        进程内多实例隔离请改用 `DbSettings.from_url(...)` 显式注入。
+        """
         e = dict(os.environ if env is None else env)
         raw = (e.get("JM_DATABASE_URL") or "").strip()
         if not raw:
@@ -60,19 +66,46 @@ class DbSettings:
         echo = str(e.get("JM_DB_ECHO", "")).strip().lower() in ("1", "true", "yes", "on")
         return cls(url=url, echo=echo)
 
+    @classmethod
+    def from_url(cls, url: str, *, echo: bool = False) -> "DbSettings":
+        """显式构造配置（P1-05）：**不读取、不修改任何环境变量**。
+
+        `make_business_services(database_url=...)` 等调用方必须走这里，
+        禁止用 `os.environ["JM_DATABASE_URL"] = ...` 传参（会污染进程全局配置，
+        并行测试 / 多应用实例 / 嵌入式调用会串库）。
+        """
+        raw = str(url or "").strip()
+        if not raw:
+            raise ValueError("DbSettings.from_url 需要非空 url")
+        if raw.startswith("sqlite:///") and not raw.startswith("sqlite:////"):
+            rel = raw[len("sqlite:///"):]
+            p = Path(rel)
+            raw = f"sqlite:///{p if p.is_absolute() else (ROOT / p)}"
+        return cls(url=raw, echo=bool(echo))
+
     @property
     def is_sqlite(self) -> bool:
         return self.url.startswith("sqlite:")
 
+    @property
+    def cache_key(self) -> tuple[str, bool]:
+        """Engine/SessionFactory 缓存键（P1-05）：url + echo 都参与，避免同 URL 不同 echo 串用。"""
+        return (self.url, bool(self.echo))
 
-_ENGINES: dict[str, Engine] = {}
-_FACTORIES: dict[str, sessionmaker] = {}
+
+_ENGINES: dict[tuple[str, bool], Engine] = {}
+_FACTORIES: dict[tuple[str, bool], sessionmaker] = {}
+# 可重入锁：get_session_factory 会在持锁状态下调用 get_engine
+_CACHE_LOCK = threading.RLock()
 
 
 def get_engine(settings: DbSettings | None = None) -> Engine:
     st = settings or DbSettings.from_env()
-    eng = _ENGINES.get(st.url)
-    if eng is None:
+    key = st.cache_key
+    with _CACHE_LOCK:
+        eng = _ENGINES.get(key)
+        if eng is not None:
+            return eng
         kwargs: dict = {"echo": st.echo, "future": True}
         if st.is_sqlite:
             # SQLite 多线程访问（FastAPI 线程池 + 测试并发）
@@ -92,8 +125,8 @@ def get_engine(settings: DbSettings | None = None) -> Engine:
                 cur = dbapi_conn.cursor()
                 cur.execute("PRAGMA foreign_keys=ON")
                 cur.close()
-        _ENGINES[st.url] = eng
-    return eng
+        _ENGINES[key] = eng
+        return eng
 
 
 def get_session_factory(settings: DbSettings | sessionmaker | Callable[[], Session] | None = None):
@@ -111,12 +144,15 @@ def get_session_factory(settings: DbSettings | sessionmaker | Callable[[], Sessi
             raise TypeError(f"session factory 必须可调用，收到 {type(settings).__name__}")
         return settings
     st = settings or DbSettings.from_env()
-    fac = _FACTORIES.get(st.url)
-    if fac is None:
+    key = st.cache_key
+    with _CACHE_LOCK:
+        fac = _FACTORIES.get(key)
+        if fac is not None:
+            return fac
         fac = sessionmaker(bind=get_engine(st), expire_on_commit=False,
                            class_=Session, future=True)
-        _FACTORIES[st.url] = fac
-    return fac
+        _FACTORIES[key] = fac
+        return fac
 
 
 def get_session(settings: DbSettings | sessionmaker | Callable[[], Session] | None = None) -> Session:
@@ -146,7 +182,9 @@ def init_db(settings: DbSettings | None = None) -> None:
 
 def dispose_engines() -> None:
     """释放连接池（测试隔离用）。"""
-    for eng in list(_ENGINES.values()):
+    with _CACHE_LOCK:
+        engines = list(_ENGINES.values())
+        _ENGINES.clear()
+        _FACTORIES.clear()
+    for eng in engines:
         eng.dispose()
-    _ENGINES.clear()
-    _FACTORIES.clear()
