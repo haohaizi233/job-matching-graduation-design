@@ -17,16 +17,21 @@
 
 ## 二、当前开发状态
 
-| 阶段 | 状态 | 说明 |
-|---|---|---|
-| Conda 环境搭建 | ✅ 完成 | `graduation-design`（Python 3.11.18 + torch 2.1.2+cu121 + CUDA 12.1 / RTX 2050 4 GB） |
-| 环境验收 | ✅ 完成 | 8 个测试脚本、104 项检查 + `pip check`，核心项 0 FAIL（见 `reports/environment-acceptance.md`） |
-| 数据集落地与盘点 | ✅ 完成 | 3 个数据源、8 个 CSV、约 613 MB（643,343,224 字节），索引见 `docs/datasets/README.md` |
-| 工作目录工程化整理 | ✅ 完成 | 见 `reports/workspace-reorganization.md` |
-| 数据清洗与特征工程 | ⬜ 未开始 | 产物写 `data/interim/`、`data/processed/` |
-| 模型训练与评估 | ⬜ 未开始 | — |
-| Agent 能力 | ⬜ 未开始 | 不提前造代码 |
-| 前后端实现 | ⬜ 未开始 | — |
+> 三个概念严格区分：**已执行的工程任务**（代码与产物存在）、**已通过的实验验收**（自动化测试与实验归档通过）、
+> **尚未验证的真实业务有效性**（模型在真实求职语境下的效果，必须靠独立人工评估集验证，见 Phase4-3A）。
+
+| 阶段 | 工程任务 | 实验验收 | 真实业务有效性 | 说明 |
+|---|---|---|---|---|
+| Conda 环境搭建 | ✅ | ✅ | — | `graduation-design`（Python 3.11.18 + torch 2.1.2+cu121 + CUDA 12.1 / RTX 2050 4 GB） |
+| 环境验收 | ✅ | ✅ | — | 8 个测试脚本、104 项检查 + `pip check`，核心项 0 FAIL（见 `reports/environment-acceptance.md`） |
+| 数据集落地与盘点 | ✅ | ✅ | — | 3 个数据源、8 个 CSV、约 613 MB（643,343,224 字节），索引见 `docs/datasets/README.md` |
+| 工作目录工程化整理 | ✅ | ✅ | — | 见 `reports/workspace-reorganization.md` |
+| 数据清洗与特征工程（Phase3） | ✅ | ✅ | ⬜ 未验证 | 产物在 `data/interim/`、`data/processed/`、`data/splits/`；G1–G7 数据质量门禁 74/74 通过（`reports/phase3-acceptance.md`） |
+| 人岗匹配模型训练与评估（Phase4-1） | ✅ | ✅ | ⬜ 未验证 | Ridge / Gradient Boosting / MLP / RankNet；80 项模型验证 + 25 项自动化测试通过（`reports/model-training/`）。⚠ 训练标签来自旧评分系统（`label_strength`/`final_score`），是**代理标签而非人工就业适配真值** |
+| 学历要求规范化（Phase4-2） | ✅ | ✅ | ⬜ 未验证 | 16 组实验、1000 次组级 Bootstrap、模型重载验证、36 项自动化测试通过（`reports/education-training/`）。⚠ 开发集含伪标签噪声；736 条历史 Gold 非全新盲测集 |
+| 独立人工评估体系（Phase4-3A） | ✅ | ✅（工程 G1） | ⬜ 等待人工标注 | 协议、标注工具、泄漏检查、冻结与可信评估流水线（`docs/evaluation/`、`reports/phase4-3a/`）；145 项自动化测试通过。`annotation_status=pending`、`blind_evaluation_status=blocked`（缺真实中文简历与人工标注） |
+| Agent 能力 | ⬜ 未开始 | — | — | 不提前造代码 |
+| 前后端实现 | ⬜ 未开始 | — | — | — |
 
 ## 三、快速开始
 
@@ -123,8 +128,12 @@ $py = "C:\Users\MemoryLeak\miniconda3\envs\graduation-design\python.exe"
 | `docs/project-overview.md` | 本文件：项目总览 |
 | `docs/project-structure.md` | 目录结构与路径约定 |
 | `docs/environment-setup.md` | 环境搭建、依赖依据、故障排查、维护约定 |
+| `docs/evaluation-protocol.md` | 人岗匹配/学历规范化既有实验评估口径 |
+| `docs/evaluation/phase4-3a-protocol.md` | Phase4-3A 独立人工评估协议（评价单位、标签、双人标注、指标、Bootstrap） |
+| `docs/evaluation/annotation-guidelines.md` | 人工标注操作指南 |
 | `docs/datasets/README.md` | 数据集索引 |
 | `data/README.md` | 数据管理规则 |
 | `reports/workspace-reorganization-plan.md` | 整理前迁移计划 |
 | `reports/workspace-reorganization.md` | 整理结果与验证 |
 | `reports/workspace-migration-manifest.json` | 迁移映射与 SHA-256 基线（回滚用） |
+| `reports/phase4-3a/phase4-3a-acceptance.md` | Phase4-3A 阶段验收（G1/G2 门禁） |

@@ -112,10 +112,21 @@ def slot_weights(df: pd.DataFrame) -> np.ndarray:
 
 
 def conflict_aware_weights(df: pd.DataFrame) -> np.ndarray:
-    """冲突感知样本权重：w_i = P(标签组合|槽位) 众数占比（只用传入集合统计，均值归一到 1）。
+    """冲突感知样本权重（逐行条件比例权重）：只用传入集合统计，均值归一到 1。
 
-    直觉：槽位内部标签越一致（众数占比越高）的样本越可信，权重越大；
-    处于 50/50 歧义区的槽位（如 `本科`、`大专`）权重被压低，避免噪声主导训练。
+    实现口径（历史实验基于此算法，不得静默更改）：
+      1) share_i = count(slot_i, label_combo_i) / count(slot_i)
+         —— 第 i 行**自身标签组合**在该槽位内的条件比例；
+      2) w_i = clip(share_i, 0.05, 1.0)；
+      3) 返回 w / w.mean()。
+
+    直觉：样本自身的标签组合在槽位内越常见（条件比例越高），权重越大；
+    处于 50/50 歧义区的槽位（如 `本科`、`大专`）里两派样本的条件比例都约为 0.5，
+    权重一起被压低，避免噪声主导训练。
+
+    注意：本函数计算的是「逐行自身标签组合的条件比例」，**不是**「槽位内众数占比」——
+    多数组合的样本恰好拿到众数占比，少数派组合的样本拿到的是更低的自身占比。
+    如需改为真正的众数占比加权，应作为新算法单独立项实验验证，不在本函数内修改。
     """
     pair = df.groupby(["slot", "label_tokens_json"])["label_tokens_json"].transform("size")
     total = df.groupby("slot")["label_tokens_json"].transform("size")

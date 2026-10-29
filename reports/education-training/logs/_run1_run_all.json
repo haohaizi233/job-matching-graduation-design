@@ -1,0 +1,216 @@
+{
+  "created_at": "2026-10-28T23:29:58",
+  "generated_by": "scripts/education_training/run_all.py",
+  "ok": false,
+  "seconds": 4694.87,
+  "steps": [
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\analyze_learnability.py"
+      ],
+      "index": 1,
+      "log": "reports/education-training/logs/step-01-analyze_learnability.log",
+      "returncode": 0,
+      "seconds": 6.2,
+      "title": "analyze_learnability"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\charcnn\\charcnn-final-20261028-212510"
+      ],
+      "index": 20,
+      "log": "reports/education-training/logs/step-20-evaluate_charcnn-final-20261028-212510.log",
+      "returncode": 0,
+      "seconds": 8.65,
+      "title": "evaluate_charcnn-final-20261028-212510"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\charcnn\\charcnn-final-balanced-20261028-212534"
+      ],
+      "index": 21,
+      "log": "reports/education-training/logs/step-21-evaluate_charcnn-final-balanced-20261028-212534.log",
+      "returncode": 0,
+      "seconds": 8.36,
+      "title": "evaluate_charcnn-final-balanced-20261028-212534"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\charcnn\\charcnn-final-confw-20261028-221032"
+      ],
+      "index": 22,
+      "log": "reports/education-training/logs/step-22-evaluate_charcnn-final-confw-20261028-221032.log",
+      "returncode": 0,
+      "seconds": 8.31,
+      "title": "evaluate_charcnn-final-confw-20261028-221032"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\charcnn\\charcnn-final-highconf-20261028-221117"
+      ],
+      "index": 23,
+      "log": "reports/education-training/logs/step-23-evaluate_charcnn-final-highconf-20261028-221117.log",
+      "returncode": 0,
+      "seconds": 8.5,
+      "title": "evaluate_charcnn-final-highconf-20261028-221117"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\charcnn\\charcnn-final-holdout-20261028-212622"
+      ],
+      "index": 24,
+      "log": "reports/education-training/logs/step-24-evaluate_charcnn-final-holdout-20261028-212622.log",
+      "returncode": 0,
+      "seconds": 17.86,
+      "title": "evaluate_charcnn-final-holdout-20261028-212622"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\charcnn\\charcnn-final-holdout-vloss-20261028-213521"
+      ],
+      "index": 25,
+      "log": "reports/education-training/logs/step-25-evaluate_charcnn-final-holdout-vloss-20261028-213521.log",
+      "returncode": 0,
+      "seconds": 16.35,
+      "title": "evaluate_charcnn-final-holdout-vloss-20261028-213521"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\charcnn\\charcnn-final-vloss-20261028-213415"
+      ],
+      "index": 26,
+      "log": "reports/education-training/logs/step-26-evaluate_charcnn-final-vloss-20261028-213415.log",
+      "returncode": 0,
+      "seconds": 8.22,
+      "title": "evaluate_charcnn-final-vloss-20261028-213415"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\charcnn\\charcnn-final-vloss-balanced-20261028-213450"
+      ],
+      "index": 27,
+      "log": "reports/education-training/logs/step-27-evaluate_charcnn-final-vloss-balanced-20261028-213450.log",
+      "returncode": 0,
+      "seconds": 8.45,
+      "title": "evaluate_charcnn-final-vloss-balanced-20261028-213450"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\tfidf\\tfidf-final-20261028-212254"
+      ],
+      "index": 28,
+      "log": "reports/education-training/logs/step-28-evaluate_tfidf-final-20261028-212254.log",
+      "returncode": 0,
+      "seconds": 6.51,
+      "title": "evaluate_tfidf-final-20261028-212254"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\tfidf\\tfidf-final-balanced-20261028-212312"
+      ],
+      "index": 29,
+      "log": "reports/education-training/logs/step-29-evaluate_tfidf-final-balanced-20261028-212312.log",
+      "returncode": 0,
+      "seconds": 15.36,
+      "title": "evaluate_tfidf-final-balanced-20261028-212312"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\tfidf\\tfidf-final-confw-20261028-220908"
+      ],
+      "index": 30,
+      "log": "reports/education-training/logs/step-30-evaluate_tfidf-final-confw-20261028-220908.log",
+      "returncode": 0,
+      "seconds": 12.39,
+      "title": "evaluate_tfidf-final-confw-20261028-220908"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\tfidf\\tfidf-final-highconf-20261028-221021"
+      ],
+      "index": 31,
+      "log": "reports/education-training/logs/step-31-evaluate_tfidf-final-highconf-20261028-221021.log",
+      "returncode": 0,
+      "seconds": 7.71,
+      "title": "evaluate_tfidf-final-highconf-20261028-221021"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\tfidf\\tfidf-final-holdout-20261028-212556"
+      ],
+      "index": 32,
+      "log": "reports/education-training/logs/step-32-evaluate_tfidf-final-holdout-20261028-212556.log",
+      "returncode": 0,
+      "seconds": 17.03,
+      "title": "evaluate_tfidf-final-holdout-20261028-212556"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\evaluate.py",
+        "--run-dir",
+        "D:\\desktop\\毕业设计\\models\\education\\tfidf\\tfidf-final-title-20261028-212332"
+      ],
+      "index": 33,
+      "log": "reports/education-training/logs/step-33-evaluate_tfidf-final-title-20261028-212332.log",
+      "returncode": 0,
+      "seconds": 7.16,
+      "title": "evaluate_tfidf-final-title-20261028-212332"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\compare_models.py"
+      ],
+      "index": 30,
+      "log": "reports/education-training/logs/step-30-compare_models.log",
+      "returncode": 0,
+      "seconds": 4452.02,
+      "title": "compare_models"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\scripts\\education_training\\verify_models.py"
+      ],
+      "index": 31,
+      "log": "reports/education-training/logs/step-31-verify_models.log",
+      "returncode": 1,
+      "seconds": 75.3,
+      "title": "verify_models"
+    },
+    {
+      "argv": [
+        "D:\\desktop\\毕业设计\\tests\\education_training\\run_all.py"
+      ],
+      "index": 32,
+      "log": "reports/education-training/logs/step-32-tests.log",
+      "returncode": 0,
+      "seconds": 10.43,
+      "title": "tests"
+    }
+  ]
+}

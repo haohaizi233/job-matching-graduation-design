@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import _bootstrap  # noqa: F401,E402
 
 from common import MODELS_DIR, REPORT_DIR, prepare_experiment_a, setup_train_logging  # noqa: E402
+from evaluate import _input_texts  # noqa: E402  与评估口径共用同一输入构造
 from job_matching.core import ROOT, jdump, rel, sha256_file  # noqa: E402
 from job_matching.education.predictor import EducationNormalizer  # noqa: E402
 
@@ -83,7 +84,9 @@ def verify_run(run_dir: Path) -> dict:
     nz = EducationNormalizer.from_model_dir(run_dir, fallback_to_rules=True)
     data = prepare_experiment_a()
     va = data["validation"]
-    texts = va["slot"].astype(str).tolist()[:2000]
+    # 输入构造必须与 evaluate.py::_input_texts 完全一致（按 manifest.input_mode），
+    # 否则 slot_title 模型会拿到缺少岗位名称的输入，与 predictions_*.npz 不可比。
+    texts = _input_texts(va, meta["input_mode"])[:2000]
 
     # 1) 重载一致性
     # 注意：神经网络训练时预测在 CUDA 上完成，重载验证在 CPU 上完成，

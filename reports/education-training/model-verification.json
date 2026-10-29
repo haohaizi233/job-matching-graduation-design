@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-28T22:03:57",
+  "created_at": "2026-10-29T00:29:17",
   "generated_by": "scripts/education_training/verify_models.py",
-  "passed": 4,
+  "passed": 16,
   "predictor_source_check": {
     "file": "src/job_matching/education/predictor.py",
     "forbidden_tokens_found": [],
@@ -85,7 +85,7 @@
         },
         "evaluation.json": {
           "bytes": 42620,
-          "sha256": "73fc52622a4fbe3c36926f4264b02c3bc2ef8da964d4bf8ffb9311b524ece896"
+          "sha256": "bf090c1d501a0ec1d836f27409adf0c5ff55d6026eb59ca6caf716750001a185"
         },
         "feature_map.json": {
           "bytes": 245,
@@ -124,14 +124,17 @@
           "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0203,
+      "latency_ms_per_sample_cpu": 0.0191,
       "model_dir": "models/education/charcnn/charcnn-final-20261028-212510",
       "model_type": "char_cnn",
-      "ok": false,
+      "ok": true,
       "reload_consistency": {
         "max_abs_diff": 8.630752563476562e-05,
-        "ok": false,
-        "rows_compared": 2000
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -215,7 +218,7 @@
         },
         "evaluation.json": {
           "bytes": 42627,
-          "sha256": "2f69e9fa7e54115196218e44999af50d3ad8a1c3d103a04797cded054c0fe4af"
+          "sha256": "4f9a61df10f527452643e91fb78073068fe9b6f39cbd9535afcb4db5451bfd03"
         },
         "feature_map.json": {
           "bytes": 245,
@@ -254,19 +257,294 @@
           "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0179,
+      "latency_ms_per_sample_cpu": 0.0186,
       "model_dir": "models/education/charcnn/charcnn-final-balanced-20261028-212534",
       "model_type": "char_cnn",
-      "ok": false,
+      "ok": true,
       "reload_consistency": {
         "max_abs_diff": 6.902217864990234e-05,
-        "ok": false,
-        "rows_compared": 2000
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
       },
       "repeat_stability": {
         "identical_labels": true
       },
       "run_id": "charcnn-final-balanced-20261028-212534",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 38988,
+          "sha256": "2b870ecf947ad2c58ced51e2516c33ea758a33738add0ad4a49f77399bc4152c"
+        },
+        "config.json": {
+          "bytes": 1917,
+          "sha256": "291008ad0cec8ef5a686e7a59c728ba404ed77b53b81bc0e4c9e4565ababaa0c"
+        },
+        "evaluation.json": {
+          "bytes": 42617,
+          "sha256": "e65900c581214fe563f30b8a49f36a74df450d9544126c2c8ef685a34fd08627"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392"
+        },
+        "history.json": {
+          "bytes": 2015,
+          "sha256": "eb703abf11e7d5c5bef72fa693dadfcef5c3bc0f269a4ed1cf42a47535e0bbda"
+        },
+        "manifest.json": {
+          "bytes": 6105,
+          "sha256": "096eafacc02290538bc0c68bf9d1d32220a260bb6cb9da3057c657a60d7ea4dc"
+        },
+        "metrics.json": {
+          "bytes": 10614,
+          "sha256": "01be0dc72ec411bc2e30d5d1059de3f69bd49ff6dffa0fc0c7fff4c5ebfa0273"
+        },
+        "model.pt": {
+          "bytes": 39052,
+          "sha256": "dadf0ddd545cc4417afee6497b82e079db32cfce38452b776e85d263d3264846"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11592,
+          "sha256": "8a3f0268946bdc3e8c967558c406c12683748bf93a06be41289abb992c8c841f"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 600030,
+          "sha256": "7cf3cb58e6fc5ab7a6da94aeafef0aef2c2322b2384cdce9cc845eb0b3b26d8a"
+        },
+        "thresholds.json": {
+          "bytes": 630,
+          "sha256": "5387086ea0e41527cdfbc8ce88ad1c30f2b595a735da48bb564cf2464af2399a"
+        },
+        "tokenizer.json": {
+          "bytes": 1118,
+          "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0203,
+      "model_dir": "models/education/charcnn/charcnn-final-confw-20261028-221032",
+      "model_type": "char_cnn",
+      "ok": true,
+      "reload_consistency": {
+        "max_abs_diff": 8.717179298400879e-05,
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-final-confw-20261028-221032",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "checkpoint_best.pt": {
+          "bytes": 38604,
+          "sha256": "5438366bad117a4ead36cd97d0ea29126ed4e2b819da6d0a9928119064750b4f"
+        },
+        "config.json": {
+          "bytes": 1917,
+          "sha256": "291008ad0cec8ef5a686e7a59c728ba404ed77b53b81bc0e4c9e4565ababaa0c"
+        },
+        "evaluation.json": {
+          "bytes": 42642,
+          "sha256": "c8983f61337649023cd9f5a69dc058e358fcbe9c8889d19b6683485aa1f48395"
+        },
+        "feature_map.json": {
+          "bytes": 245,
+          "sha256": "e074b9d6803f3071279c70182f57fcb559f118ef14d570822682ec2f635c321b"
+        },
+        "history.json": {
+          "bytes": 5910,
+          "sha256": "f94f5d6c9373426c68f2a03d26cbf39a86aee82391cdf39ceea141e1d1971971"
+        },
+        "manifest.json": {
+          "bytes": 10018,
+          "sha256": "ac1b5ea43c8979374e782e7663885658ffa9dcec3b34109de91f391c0f20b3cc"
+        },
+        "metrics.json": {
+          "bytes": 10622,
+          "sha256": "b414c51a4c8115f972bc615890e6780fdb0c0a637a0671a9c571381713253113"
+        },
+        "model.pt": {
+          "bytes": 38668,
+          "sha256": "6b94d2e9911612b72722c3ebac99f3ad239b6cbac1edc2a1757284baa6997aa3"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11616,
+          "sha256": "065415cf52b4d388fcb58b1980ec65e58d73dcad4a579b9246fb47cfa14fcd61"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 600641,
+          "sha256": "62f4a2c066864e5d31bb984b4f65b534751e9cf4852db9528c076ef36fba2194"
+        },
+        "thresholds.json": {
+          "bytes": 628,
+          "sha256": "9d92370b433e9eed79db81b9f9abd89f31edf746d8b710f42fb55e4e30b3f1d1"
+        },
+        "tokenizer.json": {
+          "bytes": 1076,
+          "sha256": "52ba9087ad83b6549cd7f710d106e7947f67f5988e6c4c2b66e34d77f758f45a"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.019,
+      "model_dir": "models/education/charcnn/charcnn-final-highconf-20261028-221117",
+      "model_type": "char_cnn",
+      "ok": true,
+      "reload_consistency": {
+        "max_abs_diff": 0.00010496377944946289,
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "charcnn-final-highconf-20261028-221117",
       "single_vs_batch": {
         "identical_labels": true
       }
@@ -345,7 +623,7 @@
         },
         "evaluation.json": {
           "bytes": 55931,
-          "sha256": "5ae240bdb9cb2bedea4da08ff0e8b57bf489c5017abff1fb1f5a03afa25a853a"
+          "sha256": "f224afe86576cb7701b553de5db4ef1b67907049117d1723334ee5e5740cff38"
         },
         "feature_map.json": {
           "bytes": 245,
@@ -388,14 +666,17 @@
           "sha256": "739817651e32a5ed1b9e9fc575f48a67e1922945a35be2f5fc6c4e4e4f45d2f1"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0181,
+      "latency_ms_per_sample_cpu": 0.017,
       "model_dir": "models/education/charcnn/charcnn-final-holdout-20261028-212622",
       "model_type": "char_cnn",
-      "ok": false,
+      "ok": true,
       "reload_consistency": {
         "max_abs_diff": 6.601214408874512e-05,
-        "ok": false,
-        "rows_compared": 2000
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -479,7 +760,7 @@
         },
         "evaluation.json": {
           "bytes": 55941,
-          "sha256": "dc79c278c637e816d2e330a09271aab84fef17f552dfc6d7eb626ea526c5b0b2"
+          "sha256": "12914e95b4b47c8807bf97f925700f0ca7109b5f47f6cea7c3aadbd75621980c"
         },
         "feature_map.json": {
           "bytes": 245,
@@ -522,14 +803,17 @@
           "sha256": "739817651e32a5ed1b9e9fc575f48a67e1922945a35be2f5fc6c4e4e4f45d2f1"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0351,
+      "latency_ms_per_sample_cpu": 0.0184,
       "model_dir": "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
       "model_type": "char_cnn",
-      "ok": false,
+      "ok": true,
       "reload_consistency": {
         "max_abs_diff": 0.00011605024337768555,
-        "ok": false,
-        "rows_compared": 2000
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -611,8 +895,8 @@
           "sha256": "1befb038456ece6e9027733b72b88714f16086ff48b94d7de03d4f800acf7090"
         },
         "evaluation.json": {
-          "bytes": 42615,
-          "sha256": "d3867db5852d79512efb8bbd023c0ef8086b32c6d71f7a753407da5a202c39c1"
+          "bytes": 42616,
+          "sha256": "10270faad92d6fe6512d65fc7decc5697db57458f90911abea479f8acbeb2b19"
         },
         "feature_map.json": {
           "bytes": 245,
@@ -651,14 +935,17 @@
           "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0182,
+      "latency_ms_per_sample_cpu": 0.0192,
       "model_dir": "models/education/charcnn/charcnn-final-vloss-20261028-213415",
       "model_type": "char_cnn",
-      "ok": false,
+      "ok": true,
       "reload_consistency": {
         "max_abs_diff": 8.767843246459961e-05,
-        "ok": false,
-        "rows_compared": 2000
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -740,8 +1027,8 @@
           "sha256": "1befb038456ece6e9027733b72b88714f16086ff48b94d7de03d4f800acf7090"
         },
         "evaluation.json": {
-          "bytes": 42622,
-          "sha256": "411cd19016246868fff67549329159dfdb569cc702ea0221f4aa8f1b200c6808"
+          "bytes": 42621,
+          "sha256": "dc9d25877980f6b1f0f1c38a66db2a27cae74c7c9142e8bfa17d16544ad956c2"
         },
         "feature_map.json": {
           "bytes": 245,
@@ -780,14 +1067,17 @@
           "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27"
         }
       },
-      "latency_ms_per_sample_cpu": 0.018,
+      "latency_ms_per_sample_cpu": 0.0203,
       "model_dir": "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
       "model_type": "char_cnn",
-      "ok": false,
+      "ok": true,
       "reload_consistency": {
         "max_abs_diff": 8.410215377807617e-05,
-        "ok": false,
-        "rows_compared": 2000
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -910,14 +1200,17 @@
           "sha256": "ba8b2699b97761a2d6e8bfbfdfa1cd40019300c3f6f85e450dd4e97c3741a6bd"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0172,
+      "latency_ms_per_sample_cpu": 0.017,
       "model_dir": "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941",
       "model_type": "char_cnn",
-      "ok": false,
+      "ok": true,
       "reload_consistency": {
         "max_abs_diff": 5.227327346801758e-05,
-        "ok": false,
-        "rows_compared": 2000
+        "numeric_tolerance": 0.001,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "训练时 CUDA / 验证时 CPU 浮点差异，数值容差 1e-3，阈值化标签要求完全一致"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -1001,7 +1294,7 @@
         },
         "evaluation.json": {
           "bytes": 42626,
-          "sha256": "33cf6ccde6d554dbf7dd74f7ec7d6e085e6b5d58e767fc43e9f37eabdf0af616"
+          "sha256": "2bd9132eee8697f1d283eac556961cbb8085ab4a3cb3ebcbc2fefd02d942d9fa"
         },
         "feature_map.json": {
           "bytes": 246,
@@ -1036,14 +1329,17 @@
           "sha256": "58960d224c8e8ab06b7a1c79d87f7eacf8673b93e41cd008899299c7cc1173d3"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0187,
+      "latency_ms_per_sample_cpu": 0.0183,
       "model_dir": "models/education/tfidf/tfidf-final-20261028-212254",
       "model_type": "tfidf_char_ovr_logreg",
       "ok": true,
       "reload_consistency": {
         "max_abs_diff": 2.902403628546324e-08,
+        "numeric_tolerance": 1e-05,
         "ok": true,
-        "rows_compared": 2000
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "同设备精确重算，容差 1e-5"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -1127,7 +1423,7 @@
         },
         "evaluation.json": {
           "bytes": 42630,
-          "sha256": "f0b13f60169a6236f4cd60a16e44bd0010a375ed0611370cc2b7d7c9bb68a6ce"
+          "sha256": "62d9a9ee05a736de3defd8ddedccb324710afe3faba868aae93a670c8518efc9"
         },
         "feature_map.json": {
           "bytes": 246,
@@ -1168,8 +1464,11 @@
       "ok": true,
       "reload_consistency": {
         "max_abs_diff": 2.9581429972225237e-08,
+        "numeric_tolerance": 1e-05,
         "ok": true,
-        "rows_compared": 2000
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "同设备精确重算，容差 1e-5"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -1248,12 +1547,270 @@
       "edge_inputs_all_ok": true,
       "files": {
         "config.json": {
+          "bytes": 1591,
+          "sha256": "25f585f5992beafe7ada1fc2fcaa71f62004b050f0f322aa94fdadbf56569618"
+        },
+        "evaluation.json": {
+          "bytes": 42625,
+          "sha256": "d7d350b2801dcff2022d52cf98f5b04efa1f4c406bb31de74de879b52d39731f"
+        },
+        "feature_map.json": {
+          "bytes": 246,
+          "sha256": "b37e34221ed374a1bcaf150218f51a138a8effa8a2f25686428b3eeb3a8dd8a0"
+        },
+        "history.json": {
+          "bytes": 623,
+          "sha256": "033936a6010dc7e6d7ba2a1169b3b03fe0385e695f5b3217ab6212e2dfe1f38e"
+        },
+        "manifest.json": {
+          "bytes": 4476,
+          "sha256": "808bb414e81c80322d228352046eed2009be7215516e4e7a5d48742fea7e2973"
+        },
+        "metrics.json": {
+          "bytes": 10610,
+          "sha256": "3574b7c0701c2c1588234818020c76602dc8fae3a37289de19a39b6a41574df2"
+        },
+        "model.pkl": {
+          "bytes": 27219,
+          "sha256": "7a6b1abc45c462a2dbf5489c3fd4cf2bb23399732c8f82f0a28ded59e8e1f327"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11565,
+          "sha256": "34a4eecf3ceaebb6632908804307d2d012b74d64b40e711b9491ed521ba2caca"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 596738,
+          "sha256": "53b832fd91cfe559c2292d6aa85996c4b49b984054525eb1ecc22961c2fa6a9e"
+        },
+        "thresholds.json": {
+          "bytes": 624,
+          "sha256": "c05931dcf51f92f65aa74c585bbc9581a30388190a0fa12591ea21a79a5fe714"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0179,
+      "model_dir": "models/education/tfidf/tfidf-final-confw-20261028-220908",
+      "model_type": "tfidf_char_ovr_logreg",
+      "ok": true,
+      "reload_consistency": {
+        "max_abs_diff": 2.9492817854581688e-08,
+        "numeric_tolerance": 1e-05,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "同设备精确重算，容差 1e-5"
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "tfidf-final-confw-20261028-220908",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "config.json": {
+          "bytes": 1591,
+          "sha256": "25f585f5992beafe7ada1fc2fcaa71f62004b050f0f322aa94fdadbf56569618"
+        },
+        "evaluation.json": {
+          "bytes": 42634,
+          "sha256": "e1cf5128345d6bfd77833a28fb52c6bce623bf04c3245ab4629d1285415cd4c4"
+        },
+        "feature_map.json": {
+          "bytes": 246,
+          "sha256": "e2457cf2bff34d19fe55109bde9dc138508cfd4c85944d55bb078af123dc0dfb"
+        },
+        "history.json": {
+          "bytes": 622,
+          "sha256": "20da1b0d81a639f17571afb1720536670eea9561732f4d6550fb59e500a2f92f"
+        },
+        "manifest.json": {
+          "bytes": 4495,
+          "sha256": "eb1a2a1d60494adfb8c9fe1e0932a22f9a8824fb167d3698934561c8ffc9a06f"
+        },
+        "metrics.json": {
+          "bytes": 10591,
+          "sha256": "8a9b0b0e18d2e5e537f059f064a54581d1ce05b79c23c0d58d06da7d00ae8042"
+        },
+        "model.pkl": {
+          "bytes": 23209,
+          "sha256": "17c38fa75dd826e3edc8b3aa401cb93831ab3efafe108873b077eda98acdd800"
+        },
+        "predictions_gold_holdout_human.npz": {
+          "bytes": 11493,
+          "sha256": "549a877c8a98b37713939fefb1bdbdcaf20237f4549474627eccba6c03a6e038"
+        },
+        "predictions_validation_pseudo.npz": {
+          "bytes": 594564,
+          "sha256": "de97ae6e9902208173d71b510effb422057a5b6f71ff7336b8165577bc7e412d"
+        },
+        "thresholds.json": {
+          "bytes": 624,
+          "sha256": "c3ce69ac052e1e4a60c49f1bceb1e3d4563e5e42919314960f79e246e060df4e"
+        }
+      },
+      "latency_ms_per_sample_cpu": 0.0184,
+      "model_dir": "models/education/tfidf/tfidf-final-highconf-20261028-221021",
+      "model_type": "tfidf_char_ovr_logreg",
+      "ok": true,
+      "reload_consistency": {
+        "max_abs_diff": 2.9534505952000245e-08,
+        "numeric_tolerance": 1e-05,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "同设备精确重算，容差 1e-5"
+      },
+      "repeat_stability": {
+        "identical_labels": true
+      },
+      "run_id": "tfidf-final-highconf-20261028-221021",
+      "single_vs_batch": {
+        "identical_labels": true
+      }
+    },
+    {
+      "edge_inputs": {
+        "emoji": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士"
+          ],
+          "ok": true
+        },
+        "empty_string": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "long_string": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士"
+          ],
+          "ok": true
+        },
+        "mixed_punct": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "none_value": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        },
+        "numeric": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "unknown_expr": {
+          "fallback_to_rule": false,
+          "labels": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "ok": true
+        },
+        "whitespace": {
+          "fallback_to_rule": true,
+          "labels": [
+            "学历不明"
+          ],
+          "ok": true
+        }
+      },
+      "edge_inputs_all_ok": true,
+      "files": {
+        "config.json": {
           "bytes": 1508,
           "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b"
         },
         "evaluation.json": {
           "bytes": 55951,
-          "sha256": "f1722677a293b61ab4850edd7077754fa2b204c499af5483b048cd1544b592ff"
+          "sha256": "e49799d82edfc2ca28561c370bbb7826b15888b2ba84c5a5adfd2435a7a1ef4c"
         },
         "feature_map.json": {
           "bytes": 246,
@@ -1292,14 +1849,17 @@
           "sha256": "028da479d8332a88595808e11e19d43213b3a650ad809c5308cdb6d7616d0bfc"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0172,
+      "latency_ms_per_sample_cpu": 0.0165,
       "model_dir": "models/education/tfidf/tfidf-final-holdout-20261028-212556",
       "model_type": "tfidf_char_ovr_logreg",
       "ok": true,
       "reload_consistency": {
         "max_abs_diff": 2.9633809961460145e-08,
+        "numeric_tolerance": 1e-05,
         "ok": true,
-        "rows_compared": 2000
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "同设备精确重算，容差 1e-5"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -1381,7 +1941,7 @@
         },
         "evaluation.json": {
           "bytes": 42676,
-          "sha256": "ebfd5dd6323a8d3f4c01fe5be869b36a90fc1436ca2fc425a35c4bed112a4833"
+          "sha256": "54e90fef95e6007763f92abe298a6aafa8317129d40762a94a1a9bb4877a5171"
         },
         "feature_map.json": {
           "bytes": 272,
@@ -1416,14 +1976,17 @@
           "sha256": "d262c9085d085e683785e366037b1902aa5013da7819ec24c74c96e2a7e251df"
         }
       },
-      "latency_ms_per_sample_cpu": 0.0157,
+      "latency_ms_per_sample_cpu": 0.041,
       "model_dir": "models/education/tfidf/tfidf-final-title-20261028-212332",
       "model_type": "tfidf_char_ovr_logreg",
-      "ok": false,
+      "ok": true,
       "reload_consistency": {
-        "max_abs_diff": 0.9761794250421499,
-        "ok": false,
-        "rows_compared": 2000
+        "max_abs_diff": 2.9801175083221665e-08,
+        "numeric_tolerance": 1e-05,
+        "ok": true,
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "同设备精确重算，容差 1e-5"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -1537,14 +2100,17 @@
           "sha256": "a4df7880e4991668e0e8e3f104675898f5a765c9099fce54280aa00ac9ec1e93"
         }
       },
-      "latency_ms_per_sample_cpu": 0.017,
+      "latency_ms_per_sample_cpu": 0.0817,
       "model_dir": "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845",
       "model_type": "tfidf_char_ovr_logreg",
       "ok": true,
       "reload_consistency": {
         "max_abs_diff": 2.9694242287270356e-08,
+        "numeric_tolerance": 1e-05,
         "ok": true,
-        "rows_compared": 2000
+        "rows_compared": 2000,
+        "thresholded_labels_identical": true,
+        "tolerance_note": "同设备精确重算，容差 1e-5"
       },
       "repeat_stability": {
         "identical_labels": true
@@ -1555,6 +2121,6 @@
       }
     }
   ],
-  "seconds": 78.42,
-  "total": 12
+  "seconds": 73.82,
+  "total": 16
 }

@@ -15,7 +15,7 @@
     "validation_rows": 45226,
     "validation_unique_slots": 52
   },
-  "created_at": "2026-10-28T22:11:48",
+  "created_at": "2026-10-28T23:35:32",
   "experiment_a_vs_b": {
     "gold_slot_seen_in_train_ratio": 1.0,
     "gold_unique_slots": 12,
