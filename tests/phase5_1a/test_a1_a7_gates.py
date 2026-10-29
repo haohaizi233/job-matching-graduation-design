@@ -27,6 +27,20 @@ for _p in (str(ROOT / "src"), str(HERE)):
         sys.path.insert(0, _p)
 
 SRC = ROOT / "src" / "job_matching"
+
+
+def _child_env() -> dict:
+    """子进程环境：强制 UTF-8 输出，避免中文控制台编码差异掩盖真实断言。"""
+    import os
+    e = dict(os.environ)
+    e["PYTHONUTF8"] = "1"
+    return e
+
+
+def _out(r) -> str:
+    return (r.stdout or "") + (r.stderr or "")
+
+
 HEAVY_LIBS = ("pandas", "torch", "sklearn", "fastapi", "pydantic", "joblib")
 RESEARCH_PKGS = ("annotation", "training", "independent_eval", "evaluation")
 
@@ -89,10 +103,10 @@ class A2DependencyDirection(unittest.TestCase):
                 "heavy=[m for m in ('pandas','torch','sklearn') if m in sys.modules]\n"
                 "print('HEAVY='+','.join(heavy))\n")
         r = subprocess.run([sys.executable, "-X", "utf8", "-c", code],
-                           capture_output=True, text=True, encoding="utf-8",
-                           timeout=180, cwd=str(ROOT))
+                           capture_output=True, text=True, encoding="utf-8", errors="replace",
+                           timeout=180, cwd=str(ROOT), env=_child_env())
         line = [ln for ln in r.stdout.splitlines() if ln.startswith("HEAVY=")]
-        self.assertTrue(line, f"探针无输出: {r.stderr[-500:]}")
+        self.assertTrue(line, f"探针无输出: {(r.stderr or '')[-500:]}")
         self.assertEqual(line[0], "HEAVY=", f"业务 API 导入不应加载重型研究依赖: {line}")
 
 
@@ -214,9 +228,9 @@ class A1RunnerTrust(unittest.TestCase):
 
     def test_unknown_group_rejected(self):
         r = subprocess.run([sys.executable, str(ROOT / "tests" / "phase5_1r" / "run_all.py"),
-                            "R9"], capture_output=True, text=True, encoding="utf-8",
-                           timeout=120, cwd=str(ROOT))
-        self.assertEqual(r.returncode, 2, r.stdout + r.stderr)
+                            "R9"], capture_output=True, text=True, encoding="utf-8", errors="replace",
+                           timeout=120, cwd=str(ROOT), env=_child_env())
+        self.assertEqual(r.returncode, 2, _out(r))
         self.assertIn("未知测试分组", r.stderr)
 
     def test_aggregation_consistency_enforced(self):
@@ -266,9 +280,9 @@ class A6HistoricalBaseline(unittest.TestCase):
     def test_model_runner_rejects_unknown_group(self):
         r = subprocess.run([sys.executable,
                             str(ROOT / "tests" / "model_training" / "run_all.py"), "T9"],
-                           capture_output=True, text=True, encoding="utf-8",
-                           timeout=120, cwd=str(ROOT))
-        self.assertEqual(r.returncode, 2, r.stdout + r.stderr)
+                           capture_output=True, text=True, encoding="utf-8", errors="replace",
+                           timeout=120, cwd=str(ROOT), env=_child_env())
+        self.assertEqual(r.returncode, 2, _out(r))
         self.assertIn("未知测试分组", r.stderr)
 
 
