@@ -65,19 +65,40 @@ def _precision_at_k(group_ids, pred_scores, gains, ks, min_group_size,
     return {k: (round(float(np.mean(v)), 6) if v else None) for k, v in out.items()}
 
 
+def _materialize_inputs(group_ids, pred_scores, relevance_labels) -> tuple[list, np.ndarray, list]:
+    """入口统一物化输入（Phase5-1R F-009）。
+
+    历史缺陷：函数内多次 list(relevance_labels)，传入生成器时第一次取到数据、
+    后续迭代为空，导致长度校验误判或样本被静默丢弃。
+
+    修复口径：三个输入（含 group_ids / pred_scores 生成器）各物化一次，
+    后续逻辑只使用物化结果；长度不一致、NaN/Inf 分数一律显式报错。
+    """
+    groups_all = list(group_ids)
+    scores_list = list(pred_scores)
+    labels_all = list(relevance_labels)
+    n = len(groups_all)
+    if len(scores_list) != n or len(labels_all) != n:
+        raise ValueError(
+            "group_ids / pred_scores / relevance_labels 长度不一致: "
+            f"{n} / {len(scores_list)} / {len(labels_all)}")
+    scores_all = np.asarray(scores_list, dtype=np.float64)
+    if not np.isfinite(scores_all).all():
+        raise ValueError("pred_scores 含 NaN/Inf，排序指标不可确定性计算（拒绝输入）")
+    return groups_all, scores_all, labels_all
+
+
 def evaluate_ranking_human(group_ids, pred_scores, relevance_labels,
                            ks=DEFAULT_KS, min_group_size: int = DEFAULT_MIN_GROUP_SIZE,
                            relevance_threshold: int = 1) -> dict:
     """人工 Gold 排序评估：Precision@K / Recall@K / NDCG@K / MRR@K / 有效查询组数量。"""
     ks = tuple(int(k) for k in ks)
-    groups_all = list(group_ids)
-    scores_all = np.asarray(pred_scores, dtype=np.float64)
-    if len(groups_all) != scores_all.size or len(groups_all) != len(list(relevance_labels)):
-        raise ValueError("group_ids / pred_scores / relevance_labels 长度不一致")
+    groups_all, scores_all, labels_all = _materialize_inputs(
+        group_ids, pred_scores, relevance_labels)
 
     keep_groups, keep_scores, keep_labels = [], [], []
     stats = {"unjudgeable": 0, "unlabeled": 0, "judgeable": 0, "invalid": 0}
-    for g, s, lab in zip(groups_all, scores_all, list(relevance_labels)):
+    for g, s, lab in zip(groups_all, scores_all, labels_all):
         txt = "" if lab is None else str(lab).strip()
         if txt == "unjudgeable":
             stats["unjudgeable"] += 1

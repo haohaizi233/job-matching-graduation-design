@@ -83,7 +83,9 @@ class ModelRegistry:
 
     def get(self, model_id: str) -> ModelRegistration:
         if model_id not in self._regs:
-            raise ServiceError("MODEL_MISSING", f"模型未注册: {model_id}", {"model_id": model_id})
+            raise ServiceError("MODEL_MISSING", f"模型未注册: {model_id}",
+                               {"model_id": model_id,
+                                "failure_kind": "model_not_registered"})
         return self._regs[model_id]
 
     def get_optional(self, model_id: str) -> ModelRegistration | None:
@@ -119,11 +121,14 @@ class ModelRegistry:
             raise
         except FileNotFoundError as e:
             raise ServiceError("MODEL_MISSING", f"模型权重缺失: {model_id} ({e})",
-                               {"model_id": model_id}) from e
+                               {"model_id": model_id,
+                                "failure_kind": "artifact_missing"}) from e
         except Exception as e:
-            raise ServiceError("MODEL_MISSING",
-                               f"模型加载失败: {model_id} ({type(e).__name__}: {e})",
-                               {"model_id": model_id}) from e
+            # 模型损坏/加载失败与「文件缺失」是不同失败类型，必须区分（链路 C）
+            raise ServiceError("MODEL_CORRUPT",
+                               f"模型文件损坏或加载失败: {model_id} ({type(e).__name__}: {e})",
+                               {"model_id": model_id,
+                                "failure_kind": "artifact_corrupt_or_load_failed"}) from e
         self._cache[model_id] = obj
         self.load_events.append({"model_id": model_id,
                                  "model_version": reg.model_version,

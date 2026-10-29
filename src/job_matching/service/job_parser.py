@@ -16,11 +16,13 @@ import re
 from pathlib import Path
 
 from ..annotation.pii import mask_matches
-from ..annotation.pool import (classify_job_category,
-                               parse_experience_requirement, preferred_segment)
+from ..annotation.pool import (classify_job_category, preferred_segment)
 from ..core import norm_text, sha256_text
-from .contracts import (EDU_CONFIDENCE_MEANING, EducationRequirement,
+from .contracts import (EDU_CONFIDENCE_MEANING, CohortRequirement,
+                        EducationRequirement,
                         ExperienceRequirement, Field, JobProfile, PROFILE_VERSION)
+from .requirements import (extract_cohort_clause, parse_cohort_requirement,
+                           parse_experience_requirement_detail)
 from .skills_normalize import (normalize_skill_terms, scan_skills_in_text,
                                skills_from_segment)
 from .text_extract import extract_document
@@ -316,6 +318,12 @@ def parse_job_text(text: str, *, job_id: str = "job_unknown",
         cohort_val, cohort_src, cohort_ev = m.group(1), "rule_parsed", m.group(0)
     elif "应届" in body:
         cohort_val, cohort_src, cohort_ev = "应届", "rule_parsed", "应届"
+    # Phase5-1R F-005：规范化届别约束（支持仅限某届/多届/区间/及以后/应届/往届/不限）
+    cohort_clause = extract_cohort_clause(body)
+    cohort_req = parse_cohort_requirement(cohort_clause, source=cohort_src,
+                                          evidence_text=cohort_ev or cohort_clause)
+    if cohort_req.rule != "unclear" and cohort_src == "unknown":
+        cohort_src = "rule_parsed"
 
     # ---- 类别（启发式，来源显式登记）
     category, category_src = classify_job_category(title_val or "", body)
@@ -377,17 +385,8 @@ def parse_job_text(text: str, *, job_id: str = "job_unknown",
         edu_req = EducationRequirement(raw="", tokens=[], status="unknown", source="absent",
                                        needs_human_review=True,
                                        note="JD 未提供学历要求，保留 unknown")
-    exp_raw = parse_experience_requirement(body)
-    if exp_raw.get("years_min") is not None:
-        exp_req = ExperienceRequirement(raw=exp_raw["raw"], years_min=exp_raw["years_min"],
-                                        status="ok", source=exp_raw["source"],
-                                        note="年限为规则解析结果，是否满足需人工确认")
-        if str(exp_raw["raw"]).strip() in ("经验不限", "应届", "应届毕业生", "无需经验", "不限"):
-            exp_req.status = "none_required"
-    else:
-        exp_req = ExperienceRequirement(raw="", years_min=None, status="unknown",
-                                        source="absent",
-                                        note="JD 未提供经验要求，保留 unknown")
+    # Phase5-1R F-006：服务层经验解析（先特殊状态后缺失值；"学历不限" 不得误读为经验不限）
+    exp_req = parse_experience_requirement_detail(body)
 
     responsibilities = [c for c in re.split(r"\n", duty_text) if c.strip()][:10] if duty_text else []
 
@@ -412,6 +411,7 @@ def parse_job_text(text: str, *, job_id: str = "job_unknown",
         graduation_cohort=Field(value=cohort_val, status="ok" if cohort_val else "unknown",
                                 fact_source=cohort_src, extraction_method="cohort_pattern_v1",
                                 evidence_text=cohort_ev),
+        cohort_requirement=cohort_req,
         salary=Field(value=salary_val, status="ok" if salary_val else "unknown",
                      fact_source=salary_src, extraction_method="salary_pattern_v1",
                      evidence_text=mask_matches(salary_ev)),

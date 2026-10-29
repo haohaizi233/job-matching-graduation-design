@@ -331,6 +331,28 @@ class MatchingService:
         }
 
     # ---------------------------------------------------------- experimental
+    # 可降级错误（策略显式）：模型文件缺失 / 模型损坏 / 输入不适用。
+    # 永不降级：正式模式门禁、future 槽位、推理超时、目标泄漏护栏、请求非法。
+    DEGRADABLE_CODES = ("MODEL_MISSING", "MODEL_CORRUPT", "MODEL_INAPPLICABLE")
+
+    def _degrade_to_baseline(self, student, jobs, opts, deadline, warnings, *,
+                             code: str, model_id: str, detail: dict | None = None) -> dict:
+        """显式降级到 Baseline：返回中必须写明降级来源，绝不伪装模型输出。"""
+        warnings.append(f"degraded_to_baseline:{code}:{model_id}")
+        scored = self._rank_baseline(student, jobs, opts, deadline)
+        result = self._assemble(student, jobs, scored, opts, "heuristic_score",
+                                "baseline_skill_text_v1",
+                                "baseline_skill_text_v1-20261029", warnings)
+        result["degradation"] = {
+            "degraded": True,
+            "reason_code": code,
+            "failure_kind": (detail or {}).get("failure_kind", ""),
+            "requested_model_id": model_id,
+            "actual_scoring_method": "baseline_skill_text_v1",
+            "policy": "allow_fallback=True（调用方可设 allow_fallback=False 改为拒绝）",
+        }
+        return result
+
     def _rank_experimental(self, student, jobs, opts, deadline, warnings) -> dict:
         model_id = opts.model_id or self.default_model_id
         reg = self.registry.get(model_id)
@@ -343,30 +365,28 @@ class MatchingService:
                  "supported_languages": reg.supported_languages})
         try:
             predictor = self.registry.load(model_id)
+            resume_in, _ = LegacyMatchAdapter.build_inputs(student, jobs[0])
+            LegacyMatchAdapter.check_feature_policy(
+                ["skill_jaccard", "skill_overlap_ratio_cv", "skill_overlap_ratio_job",
+                 "both_skills_empty", "position_token_overlap", "category_match",
+                 "years_experience", "target_position_norm", "inferred_category",
+                 "job_category"])
+            job_inputs = []
+            idx_by_input: dict[int, int] = {}
+            for pos, job in enumerate(jobs):
+                self._check_deadline(deadline)
+                _, job_in = LegacyMatchAdapter.build_inputs(student, job)
+                idx_by_input[id(job_in)] = pos
+                job_inputs.append(job_in)
+            ranked = predictor.rank_jobs(resume_in, job_inputs)
         except ServiceError as e:
-            if e.code == "MODEL_MISSING" and opts.allow_fallback:
-                warnings.append(f"degraded_to_baseline:MODEL_MISSING:{model_id}")
-                scored = self._rank_baseline(student, jobs, opts, deadline)
-                return self._assemble(student, jobs, scored, opts, "heuristic_score",
-                                      "baseline_skill_text_v1",
-                                      "baseline_skill_text_v1-20261029", warnings)
+            if e.code in self.DEGRADABLE_CODES and opts.allow_fallback:
+                # 错误被识别并按策略降级，但降级来源必须显式返回（不静默吞错）
+                return self._degrade_to_baseline(student, jobs, opts, deadline, warnings,
+                                                 code=e.code, model_id=model_id,
+                                                 detail=e.detail)
             raise
 
-        resume_in, _ = LegacyMatchAdapter.build_inputs(student, jobs[0])
-        LegacyMatchAdapter.check_feature_policy(
-            ["skill_jaccard", "skill_overlap_ratio_cv", "skill_overlap_ratio_job",
-             "both_skills_empty", "position_token_overlap", "category_match",
-             "years_experience", "target_position_norm", "inferred_category",
-             "job_category"])
-
-        job_inputs = []
-        idx_by_input: dict[int, int] = {}
-        for pos, job in enumerate(jobs):
-            self._check_deadline(deadline)
-            _, job_in = LegacyMatchAdapter.build_inputs(student, job)
-            idx_by_input[id(job_in)] = pos
-            job_inputs.append(job_in)
-        ranked = predictor.rank_jobs(resume_in, job_inputs)
         scored = []
         for row in ranked:
             pos = idx_by_input.get(id(row.get("job")))

@@ -141,6 +141,113 @@ class ExperienceEntry:
                    note=d.get("note", ""))
 
 
+# ------------------------------------------------------------------ 经验约束
+@dataclass
+class ExperienceRequirement:
+    """岗位经验要求。
+
+    status 语义（Phase5-1R F-006 统一口径）：
+      ok             —— 存在明确年限要求（years_min 为规则解析结果）
+      none_required  —— 明确表述经验不限/无经验要求/接受应届
+      preference_only —— 仅加分/偏好表述（如“实习经验优先”），无硬性年限要求
+      unknown        —— JD 未提供经验要求或无法解析
+    """
+    raw: str = ""
+    years_min: float | None = None
+    status: str = "unknown"   # ok | none_required | preference_only | unknown
+    source: str = "unknown"
+    note: str = ""
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "ExperienceRequirement":
+        return cls(raw=d.get("raw", ""), years_min=d.get("years_min"),
+                   status=d.get("status", "unknown"), source=d.get("source", "unknown"),
+                   note=d.get("note", ""))
+
+
+# ------------------------------------------------------------------ 毕业届别约束
+COHORT_RULES = ("exact_year", "year_set", "year_range", "year_and_after",
+                "fresh_graduate", "past_graduate", "unrestricted", "unclear")
+
+_COHORT_YEAR_MIN, _COHORT_YEAR_MAX = 2000, 2100
+
+
+@dataclass
+class CohortRequirement:
+    """规范化毕业届别约束（Phase5-1R F-005）。
+
+    rule 取值（COHORT_RULES）：
+      exact_year      —— 仅限某届（如“仅限2027届”）；years=[2027]
+      year_set        —— 多个指定届（如“2026届及2027届”）；years=[2026, 2027]
+      year_range      —— 届别区间（如“2026—2028届”）；year_min/year_max
+      year_and_after  —— 某届及以后（如“2027届及以后”）；year_min
+      fresh_graduate  —— 应届毕业生（未说明具体年度）
+      past_graduate   —— 往届毕业生
+      unrestricted    —— 不限毕业届别
+      unclear         —— 要求不明确 / 无法解析 / 年份非法
+
+    判定一律走 match_year()，禁止用字符串相等覆盖所有情况。
+    """
+    raw: str = ""
+    rule: str = "unclear"
+    years: list[int] = field(default_factory=list)
+    year_min: int | None = None
+    year_max: int | None = None
+    status: str = "unclear"       # ok | unclear
+    source: str = "unknown"       # rule | stated_in_source | human_corrected | absent
+    evidence_text: str = ""
+    note: str = ""
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "CohortRequirement":
+        return cls(raw=d.get("raw", ""), rule=d.get("rule", "unclear"),
+                   years=[int(y) for y in d.get("years") or []],
+                   year_min=d.get("year_min"), year_max=d.get("year_max"),
+                   status=d.get("status", "unclear"), source=d.get("source", "unknown"),
+                   evidence_text=d.get("evidence_text", ""), note=d.get("note", ""))
+
+    def match_year(self, graduation_year: int | None) -> str:
+        """返回 CONSTRAINT 状态之一：satisfied / not_satisfied /
+        insufficient_evidence / requirement_unclear。
+
+        硬性规则：
+          * 学生毕业年份缺失 -> insufficient_evidence（绝不猜测）；
+          * 应届/往届属于政策性身份，禁止只凭毕业年份推断校招资格
+            -> insufficient_evidence（需人工复核）；
+          * 要求不明确（rule=unclear）-> requirement_unclear（先于学生侧证据判断）；
+          * 不限届别 -> 恒 satisfied。
+        """
+        if self.rule == "unclear" or self.status != "ok":
+            return "requirement_unclear"
+        if self.rule == "unrestricted":
+            return "satisfied"
+        if graduation_year is None:
+            return "insufficient_evidence"
+        year = int(graduation_year)
+        if self.rule in ("fresh_graduate", "past_graduate"):
+            return "insufficient_evidence"
+        if self.rule == "exact_year":
+            return "satisfied" if year in self.years else "not_satisfied"
+        if self.rule == "year_set":
+            return "satisfied" if year in self.years else "not_satisfied"
+        if self.rule == "year_range":
+            if self.year_min is None or self.year_max is None:
+                return "requirement_unclear"
+            return ("satisfied" if self.year_min <= year <= self.year_max
+                    else "not_satisfied")
+        if self.rule == "year_and_after":
+            if self.year_min is None:
+                return "requirement_unclear"
+            return "satisfied" if year >= self.year_min else "not_satisfied"
+        return "requirement_unclear"  # pragma: no cover - COHORT_RULES 已穷举
+
+
 # ------------------------------------------------------------------ 学历约束
 @dataclass
 class EducationRequirement:
@@ -165,25 +272,6 @@ class EducationRequirement:
         known = {k: d.get(k) for k in cls.__dataclass_fields__}
         known["tokens"] = list(d.get("tokens") or [])
         return cls(**known)
-
-
-@dataclass
-class ExperienceRequirement:
-    """岗位经验要求。"""
-    raw: str = ""
-    years_min: float | None = None
-    status: str = "unknown"   # ok | none_required | unknown
-    source: str = "unknown"
-    note: str = ""
-
-    def to_dict(self) -> dict:
-        return asdict(self)
-
-    @classmethod
-    def from_dict(cls, d: dict) -> "ExperienceRequirement":
-        return cls(raw=d.get("raw", ""), years_min=d.get("years_min"),
-                   status=d.get("status", "unknown"), source=d.get("source", "unknown"),
-                   note=d.get("note", ""))
 
 
 # ------------------------------------------------------------------ 学生画像
@@ -261,6 +349,7 @@ class JobProfile:
     city: Field = field(default_factory=Field.unknown)
     employment_type: Field = field(default_factory=Field.unknown)
     graduation_cohort: Field = field(default_factory=Field.unknown)   # 如 "2027"
+    cohort_requirement: CohortRequirement = field(default_factory=CohortRequirement)
     salary: Field = field(default_factory=Field.unknown)
     education_requirement: EducationRequirement = field(default_factory=EducationRequirement)
     experience_requirement: ExperienceRequirement = field(default_factory=ExperienceRequirement)
@@ -297,7 +386,9 @@ class JobProfile:
             job_title=fld("job_title"), job_category=fld("job_category"),
             employer=fld("employer"), city=fld("city"),
             employment_type=fld("employment_type"),
-            graduation_cohort=fld("graduation_cohort"), salary=fld("salary"),
+            graduation_cohort=fld("graduation_cohort"),
+            cohort_requirement=CohortRequirement.from_dict(
+                d.get("cohort_requirement") or {}), salary=fld("salary"),
             education_requirement=EducationRequirement.from_dict(
                 d.get("education_requirement") or {}),
             experience_requirement=ExperienceRequirement.from_dict(

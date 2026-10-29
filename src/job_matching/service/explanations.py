@@ -14,9 +14,13 @@
 """
 from __future__ import annotations
 
+import re
+
 from ..pair_features import title_tokens
 from ..preprocess_skills import jaccard
-from .contracts import (ExperienceRequirement, Field, JobProfile, StudentProfile)
+from .contracts import (CohortRequirement, ExperienceRequirement, Field, JobProfile,
+                        StudentProfile)
+from .requirements import extract_cohort_clause, parse_cohort_requirement
 from .skills_normalize import match_skill_sets
 
 SCORE_TYPES = ("heuristic_score", "model_raw_score", "calibrated_score")
@@ -89,39 +93,76 @@ def experience_constraint(student: StudentProfile, job: JobProfile) -> dict:
         "student_experience_evidence": {
             "internship_count": len(student.internship_experiences),
             "project_count": len(student.project_experiences),
-            "note": "本阶段不推断工作年限，仅登记原文证据条目数",
+            "note": "本阶段不推断工作年限，仅登记原文证据条目数；"
+                    "禁止把项目/实习经历条数等同于工作年限",
         },
         "needs_human_review": True,
         "note": "经验适配需人工确认，不做硬性资格结论",
     }
-    if exp.status in ("unknown",) or exp.years_min is None:
-        base["status"] = "requirement_unclear"
-        return base
+    # Phase5-1R F-006：先处理语义明确的特殊状态，再处理缺失值。
+    # 历史缺陷：先判 years_min is None 提前返回 requirement_unclear，
+    # 导致 none_required + years_min=None 的合法表示被误判。
     if exp.status == "none_required":
         base["status"] = "satisfied"
-        base["note"] = "岗位标注经验不限/面向应届；仍需人工确认"
+        base["note"] = "岗位标注经验不限/无经验要求/接受应届；仍需人工确认"
         return base
-    base["status"] = "insufficient_evidence"
-    base["note"] = ("简历侧工作年限未提供（禁止凭空补齐），无法自动判断是否满足 "
-                    f"{exp.raw or str(exp.years_min) + ' 年'}，转人工确认")
+    if exp.status == "preference_only":
+        base["status"] = "requirement_unclear"
+        base["note"] = ("JD 仅表述偏好（如实习/项目经验优先），未给出硬性年限要求，"
+                        "不构成资格判断依据，需人工确认")
+        return base
+    if exp.status == "ok" and exp.years_min is not None:
+        base["status"] = "insufficient_evidence"
+        base["note"] = ("简历侧工作年限未提供（禁止凭项目/实习条数推断年限），"
+                        f"无法自动判断是否满足 {exp.raw or str(exp.years_min) + ' 年'}，"
+                        "转人工确认")
+        return base
+    base["status"] = "requirement_unclear"
+    base["note"] = "JD 经验要求缺失或无法解析，无法自动判断"
     return base
 
 
+def _student_graduation_year(student: StudentProfile) -> int | None:
+    """学生毕业年份 -> 合法整数年份；缺失/非法一律 None（绝不猜测）。"""
+    fld = student.graduation_year
+    if fld.status != "ok":
+        return None
+    m = re.search(r"(?<!\d)(20\d{2})(?!\d)", str(fld.value or ""))
+    if not m:
+        return None
+    y = int(m.group(1))
+    return y if 2000 <= y <= 2100 else None
+
+
 def cohort_constraint(student: StudentProfile, job: JobProfile) -> dict:
-    base = {
-        "job_requirement": job.graduation_cohort.to_dict(),
-        "student_graduation_year": student.graduation_year.to_dict(),
-        "needs_human_review": True,
-        "note": "毕业届别适配需人工确认",
+    """毕业届别约束判定（Phase5-1R F-005）：真正比较届别，而非见值即 satisfied。"""
+    req: CohortRequirement = job.cohort_requirement
+    if req.rule == "unclear" and not req.raw:
+        # 兼容旧契约（无 cohort_requirement）：从 graduation_cohort 字段回退解析
+        fld = job.graduation_cohort
+        req = parse_cohort_requirement(
+            extract_cohort_clause(fld.evidence_text or fld.value or ""),
+            source=str(fld.fact_source or "rule_parsed"),
+            evidence_text=str(fld.evidence_text or ""))
+    year = _student_graduation_year(student)
+    status = req.match_year(year)
+
+    notes = {
+        "satisfied": "毕业届别倾向匹配（自动推断，需人工确认）",
+        "not_satisfied": "毕业届别与岗位要求不一致（自动推断，需人工确认，不做资格否决）",
+        "insufficient_evidence": (
+            "学生毕业年份缺失或 JD 届别为应届/往届等政策性表述，"
+            "证据不足，需人工复核（禁止只凭毕业年份推断校招身份）"),
+        "requirement_unclear": "JD 毕业届别要求不明确或无法解析，需人工复核",
     }
-    if job.graduation_cohort.status != "ok" or not job.graduation_cohort.value:
-        base["status"] = "requirement_unclear"
-        return base
-    if student.graduation_year.status != "ok" or not student.graduation_year.value:
-        base["status"] = "insufficient_evidence"
-        return base
-    base["status"] = "satisfied"
-    base["note"] = "双方届别信息齐备，倾向匹配（自动推断，需人工确认）"
+    base = {
+        "job_requirement": req.to_dict(),
+        "student_graduation_year": student.graduation_year.to_dict(),
+        "student_graduation_year_resolved": year,
+        "needs_human_review": True,
+        "status": status,
+        "note": notes.get(status, ""),
+    }
     return base
 
 
