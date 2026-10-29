@@ -53,6 +53,15 @@ data/splits/*
 !data/splits/.gitkeep
 !data/README.md
 
+# ---- Phase4-3A-2：真实简历 / 授权记录 / 原始人工标注（含个人信息，仅限本地非公开目录）----
+# 仓库只保留：Schema、采集与导入代码、脱敏后的统计、使用说明、合成测试夹具、非敏感哈希与版本记录。
+data/private/
+data/independent_eval/pairs/pairs_real_*.jsonl
+data/independent_eval/annotation/imports/
+data/independent_eval/annotation/packets/
+data/independent_eval/annotation/final_labels.csv
+data/independent_eval/annotation/arbitration_filled*.csv
+
 # ---- 模型权重与训练检查点（体积大，训练产物不入库）----
 models/**
 !models/README.md
@@ -71,3 +80,8 @@ Desktop.ini
 
 # runtime lock files
 .run_all.lock
+
+# ---- 本地报告打包归档（体积超限，不入库）----
+reports.zip
+*.zip
+
