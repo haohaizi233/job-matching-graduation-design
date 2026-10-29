@@ -1,6 +1,6 @@
 {
   "generated_by": "tests/phase5_1r/run_all.py",
-  "created_at": "2026-10-29T12:25:13",
+  "created_at": "2026-10-29T13:28:16",
   "fixture_policy": "纯合成工程夹具 + 临时隔离目录；只证明软件流程可运行，不得作为真实 Gold / 真实 H2 通过证据",
   "real_h2_status": "BLOCKED（真实中文简历、人工标签与合法盲测集未完成）",
   "chains": {
