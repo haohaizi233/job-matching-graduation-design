@@ -85,3 +85,6 @@ Desktop.ini
 reports.zip
 *.zip
 
+
+# ---- 本地临时排查脚本 / 中间产物（不入库）----
+.tmp_*

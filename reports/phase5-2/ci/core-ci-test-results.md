@@ -1,0 +1,22 @@
+# Core CI 可移植门禁报告
+
+- 生成时间：2026-10-29T15:28:33 ｜ 模式：full
+- 总计 78 项：PASS=77 FAIL=1 SKIP=0 ｜ ok=False
+
+| 组 | 内容 | 总数 | 通过 | 失败 | 跳过 |
+|---|---|---|---|---|---|
+| C2 | 完整性检查器退出码语义 | 32 | 32 | 0 | 0 |
+| C3 | 测试运行器聚合一致性 | 12 | 11 | 1 | 0 |
+| C4 | 密钥与泄漏门禁 | 19 | 19 | 0 | 0 |
+| C5 | Core CI 工作流契约 | 15 | 15 | 0 | 0 |
+
+## 聚合一致性断言
+
+| 断言 | 结果 |
+|---|---|
+| sum_groups_total_eq_totals_tests | PASS |
+| sum_groups_pass_eq_totals_pass | PASS |
+| all_records_have_legal_group | PASS |
+| no_empty_run | PASS |
+| no_unexpected_skip_flood | PASS |
+| modules_registered_non_empty | PASS |

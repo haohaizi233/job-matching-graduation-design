@@ -1,0 +1,604 @@
+{
+  "generated_by": "tests/core_ci/run_all.py",
+  "created_at": "2026-10-29T15:28:33",
+  "seconds": 252.27,
+  "ok": false,
+  "mode": "full",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "153df7c8777f003e8c15756b3b1569c5f0372aa2"
+  },
+  "totals": {
+    "tests": 78,
+    "pass": 77,
+    "fail": 1,
+    "skip": 0
+  },
+  "groups": {
+    "C2": {
+      "title": "完整性检查器退出码语义",
+      "total": 32,
+      "pass": 32,
+      "fail": 0,
+      "skip": 0
+    },
+    "C3": {
+      "title": "测试运行器聚合一致性",
+      "total": 12,
+      "pass": 11,
+      "fail": 1,
+      "skip": 0
+    },
+    "C4": {
+      "title": "密钥与泄漏门禁",
+      "total": 19,
+      "pass": 19,
+      "fail": 0,
+      "skip": 0
+    },
+    "C5": {
+      "title": "Core CI 工作流契约",
+      "total": 15,
+      "pass": 15,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": true,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": true,
+    "no_empty_run": true,
+    "no_unexpected_skip_flood": true,
+    "modules_registered_non_empty": true
+  },
+  "records": [
+    {
+      "group": "C2",
+      "class": "C2ArtifactIntegrityGates",
+      "test_id": "test_c2_gates_negative.C2ArtifactIntegrityGates.test_complete_manifest_is_pass_and_exit_zero",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ArtifactIntegrityGates",
+      "test_id": "test_c2_gates_negative.C2ArtifactIntegrityGates.test_corrupt_manifest_json_is_fail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ArtifactIntegrityGates",
+      "test_id": "test_c2_gates_negative.C2ArtifactIntegrityGates.test_decide_status_matrix",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ArtifactIntegrityGates",
+      "test_id": "test_c2_gates_negative.C2ArtifactIntegrityGates.test_missing_manifest_when_optional_is_not_run_never_pass",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ArtifactIntegrityGates",
+      "test_id": "test_c2_gates_negative.C2ArtifactIntegrityGates.test_missing_manifest_when_required_is_fail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ArtifactIntegrityGates",
+      "test_id": "test_c2_gates_negative.C2ArtifactIntegrityGates.test_report_carries_run_identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ArtifactIntegrityGates",
+      "test_id": "test_c2_gates_negative.C2ArtifactIntegrityGates.test_tampered_manifest_content_is_fail_and_nonzero",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ArtifactIntegrityGates",
+      "test_id": "test_c2_gates_negative.C2ArtifactIntegrityGates.test_unlisted_file_is_fail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_build_run_identity_rejects_unknown_status",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_fresh_report_is_accepted",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_illegal_status_is_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_missing_run_id_env_blocks_reader",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_not_run_status_is_recorded_not_pass",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_old_execution_time_is_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_report_without_run_identity_is_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_stale_commit_is_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_stale_run_id_is_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_verifier_cli_accepts_fresh_pass",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_verifier_cli_allow_status_explicit",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_verifier_cli_rejects_not_run_by_default",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2RunIdentityGates",
+      "test_id": "test_c2_gates_negative.C2RunIdentityGates.test_verifier_cli_rejects_stale_report",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ModelCompatGates",
+      "test_id": "test_c2_gates_negative.C2ModelCompatGates.test_diagnose_without_run_id_env_refuses",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ModelCompatGates",
+      "test_id": "test_c2_gates_negative.C2ModelCompatGates.test_diagnosis_never_reuses_previous_report",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ModelCompatGates",
+      "test_id": "test_c2_gates_negative.C2ModelCompatGates.test_manifest_without_weights_is_skipped_not_pass",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ModelCompatGates",
+      "test_id": "test_c2_gates_negative.C2ModelCompatGates.test_no_checkpoint_is_not_run_not_pass",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ModelCompatGates",
+      "test_id": "test_c2_gates_negative.C2ModelCompatGates.test_report_carries_full_run_identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ValidationRegistryGates",
+      "test_id": "test_c2_gates_negative.C2ValidationRegistryGates.test_blockers_recorded_as_blocked_not_pass",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ValidationRegistryGates",
+      "test_id": "test_c2_gates_negative.C2ValidationRegistryGates.test_counts_do_not_fold_not_run_into_pass",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ValidationRegistryGates",
+      "test_id": "test_c2_gates_negative.C2ValidationRegistryGates.test_probe_mode_never_reports_pass_for_unrun_checks",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ValidationRegistryGates",
+      "test_id": "test_c2_gates_negative.C2ValidationRegistryGates.test_registry_rejects_illegal_status",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ValidationRegistryGates",
+      "test_id": "test_c2_gates_negative.C2ValidationRegistryGates.test_status_vocabulary_is_closed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C2",
+      "class": "C2ValidationRegistryGates",
+      "test_id": "test_c2_gates_negative.C2ValidationRegistryGates.test_strict_mode_fails_on_incomplete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_aggregation_consistency_helper_present",
+      "status": "FAIL",
+      "detail": "Traceback (most recent call last):\n  File \"D:\\desktop\\毕业设计\\tests\\core_ci\\test_c3_runner_trust.py\", line 124, in test_aggregation_consistency_helper_present\n    self.assertTrue(all(checks.values()), checks)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : {'checks': {'sum_groups_total_eq_totals_tests': True, 'sum_groups_pass_eq_totals_pass': True, 'sum_groups_fail_eq_totals_fail': True, 'sum_groups_skip_eq_totals_skip': True, 'all_records_have_legal_group': True, 'all_records_belong_to_loaded_module': True, 'loaded_modules_registered': False, 'no_empty_run': True}, 'ok': False}\n"
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_data_quality_gates_report_not_fabricated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_every_suite_runner_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_group_columns_are_legal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_registry_tables_are_unique_and_non_empty",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_reports_totals_match_records",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_undeclared_group_runners_still_have_unique_registry",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_unknown_group_is_rejected_nonzero",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3RunnerAggregation",
+      "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_zero_test_module_is_runner_error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3HistoricalBaselineProtection",
+      "test_id": "test_c3_runner_trust.C3HistoricalBaselineProtection.test_model_training_baseline_intact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3HistoricalBaselineProtection",
+      "test_id": "test_c3_runner_trust.C3HistoricalBaselineProtection.test_report_target_protects_baseline",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C3",
+      "class": "C3HistoricalBaselineProtection",
+      "test_id": "test_c3_runner_trust.C3HistoricalBaselineProtection.test_runners_declare_baseline_policy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4SecretsAndLeaks",
+      "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_env_file_ignored_and_untracked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4SecretsAndLeaks",
+      "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_gitignore_covers_sensitive_paths",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4SecretsAndLeaks",
+      "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_models_and_raw_data_untracked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4SecretsAndLeaks",
+      "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_no_hardcoded_local_absolute_path_in_service_layer",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4SecretsAndLeaks",
+      "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_no_local_username_in_tracked_python",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4SecretsAndLeaks",
+      "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_no_secret_material_in_tracked_files",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ResponseAndLoggingPrivacy",
+      "test_id": "test_c4_privacy_security.C4ResponseAndLoggingPrivacy.test_error_codes_do_not_expose_secrets",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ResponseAndLoggingPrivacy",
+      "test_id": "test_c4_privacy_security.C4ResponseAndLoggingPrivacy.test_error_payload_never_carries_password_or_token_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ResponseAndLoggingPrivacy",
+      "test_id": "test_c4_privacy_security.C4ResponseAndLoggingPrivacy.test_local_absolute_paths_redacted_in_error_detail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ResponseAndLoggingPrivacy",
+      "test_id": "test_c4_privacy_security.C4ResponseAndLoggingPrivacy.test_logging_utils_masks_pii",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ResponseAndLoggingPrivacy",
+      "test_id": "test_c4_privacy_security.C4ResponseAndLoggingPrivacy.test_no_secret_env_defaults_in_settings",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ResponseAndLoggingPrivacy",
+      "test_id": "test_c4_privacy_security.C4ResponseAndLoggingPrivacy.test_pii_masking_covers_phone_email_id",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ResponseAndLoggingPrivacy",
+      "test_id": "test_c4_privacy_security.C4ResponseAndLoggingPrivacy.test_service_settings_refuse_prod_without_auth",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ReportPrivacy",
+      "test_id": "test_c4_privacy_security.C4ReportPrivacy.test_no_resume_text_exported_to_reports",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ReportPrivacy",
+      "test_id": "test_c4_privacy_security.C4ReportPrivacy.test_reports_contain_no_pii_shaped_strings",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4ReportPrivacy",
+      "test_id": "test_c4_privacy_security.C4ReportPrivacy.test_synthetic_fixture_module_declares_no_real_data",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4DependencyHygiene",
+      "test_id": "test_c4_privacy_security.C4DependencyHygiene.test_ast_no_eval_or_exec_in_service",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4DependencyHygiene",
+      "test_id": "test_c4_privacy_security.C4DependencyHygiene.test_requirements_files_parse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4DependencyHygiene",
+      "test_id": "test_c4_privacy_security.C4DependencyHygiene.test_service_source_has_no_network_downloader",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_artifact_job_is_not_required_for_core",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_artifact_job_reports_explicit_status",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_artifact_validation_job_declared",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_core_ci_contains_no_download_commands",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_core_ci_does_not_greet_stale_model_report",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_core_ci_job_declared",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_core_ci_never_runs_artifact_only_suites",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_core_ci_runs_portable_suites",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_core_ci_writes_run_identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_workflow_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5CleanCheckoutContract",
+      "test_id": "test_c5_ci_contract.C5CleanCheckoutContract.test_clean_export_contains_portable_suite_sources",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5CleanCheckoutContract",
+      "test_id": "test_c5_ci_contract.C5CleanCheckoutContract.test_clean_export_has_no_forbidden_artifacts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5CleanCheckoutContract",
+      "test_id": "test_c5_ci_contract.C5CleanCheckoutContract.test_config_supports_data_root_override",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5CleanCheckoutContract",
+      "test_id": "test_c5_ci_contract.C5CleanCheckoutContract.test_registry_gate_report_schema",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5CleanCheckoutContract",
+      "test_id": "test_c5_ci_contract.C5CleanCheckoutContract.test_synthetic_fixtures_are_declared_synthetic",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}
