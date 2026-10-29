@@ -167,14 +167,22 @@ class AccountService:
                                    {"locked_until": user.locked_until.isoformat()})
 
             if not verify_password(user.password_hash, password):
-                user.failed_login_count = int(user.failed_login_count or 0) + 1
-                if user.failed_login_count >= MAX_FAILED_LOGINS:
-                    user.locked_until = now + timedelta(minutes=LOCK_MINUTES)
-                    user.failed_login_count = 0
+                # 原子自增（P1-09）：并发登录失败不得丢更新（读-改-写会互相覆盖）
+                from sqlalchemy import update as _sa_update
+                session.execute(_sa_update(User)
+                                .where(User.id == user.id)
+                                .values(failed_login_count=User.failed_login_count + 1))
+                session.commit()
+                session.refresh(user)
+                failed = int(user.failed_login_count or 0)
+                if failed >= MAX_FAILED_LOGINS:
+                    session.execute(_sa_update(User)
+                                    .where(User.id == user.id)
+                                    .values(locked_until=now + timedelta(minutes=LOCK_MINUTES),
+                                            failed_login_count=0))
                     session.commit()
                     raise ServiceError("AUTH_ACCOUNT_LOCKED",
                                        f"登录失败次数过多，账号锁定 {LOCK_MINUTES} 分钟")
-                session.commit()
                 raise ServiceError("AUTH_INVALID_CREDENTIALS", "认证失败，凭证无效")
 
             user.failed_login_count = 0
@@ -247,6 +255,31 @@ class AccountService:
             row.revoked_at = now
             session.commit()
             return True
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
+
+    def revoke_user_sessions(self, user_id: str, *,
+                             keep_token: str | None = None) -> int:
+        """撤销某用户的全部活跃会话（改密 / 风险处置时使用）。
+
+        返回确实撤销的会话数；`keep_token` 用于"改密后保留当前会话"。
+        """
+        now = self._clock()
+        session = self._session_factory()
+        try:
+            query = (session.query(AuthSession)
+                     .filter(AuthSession.user_id == user_id,
+                             AuthSession.revoked_at.is_(None)))
+            if keep_token:
+                query = query.filter(AuthSession.token_sha256 != _token_digest(keep_token))
+            rows = query.all()
+            for row in rows:
+                row.revoked_at = now
+            session.commit()
+            return len(rows)
         except Exception:
             session.rollback()
             raise

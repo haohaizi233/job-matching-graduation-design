@@ -36,6 +36,81 @@ from .settings import ServiceSettings
 API_VERSION = "v1"
 APP_VERSION = "phase5-2-0.1.0"
 
+# Phase5-1 遗留的**开发演示端点**（无业务认证）；production/staging 下必须阻断
+LEGACY_DEMO_PATH_PREFIXES = ("/api/v1/profiles/", "/api/v1/matching/")
+
+
+def read_upload_bounded(fileobj, *, max_bytes: int, field_name: str = "file") -> bytes:
+    """有上限的分块读取上传内容（P1-06）。
+
+    * 先读到 max_bytes + 1 字节就立刻拒绝，**不会**把超大对象整体读进内存；
+    * 不依赖 Content-Length —— 客户端不传 / chunked 分块同样受上限约束；
+    * 超限抛 PAYLOAD_TOO_LARGE，调用方无需再做整体大小判断。
+    """
+    limit = int(max_bytes)
+    if limit <= 0:
+        raise ServiceError("INVALID_REQUEST", "上传大小上限配置非法")
+    chunk_size = 64 * 1024
+    buf = bytearray()
+    while True:
+        chunk = fileobj.read(chunk_size)
+        if not chunk:
+            break
+        buf.extend(chunk)
+        if len(buf) > limit:
+            raise ServiceError("PAYLOAD_TOO_LARGE",
+                               f"{field_name} 超过上传大小上限 {limit} 字节",
+                               {"field": field_name, "limit_bytes": limit})
+    return bytes(buf)
+
+
+def decode_base64_bounded(content_base64: str, *, max_chars: int,
+                          max_bytes: int, field_name: str = "content_base64") -> bytes:
+    """Base64 上传的前置资源约束（P1-06）：**解码之前**先做三道上限检查。
+
+    1. 字符串长度上限（JSON 体积膨胀）；
+    2. 按 3/4 膨胀率预估解码后体积；
+    3. 解码后实际字节数上限。
+    任何一道超限立即拒绝，不把大对象解码进内存。
+    """
+    import base64 as _b64
+    raw_str = str(content_base64 or "")
+    if len(raw_str) > int(max_chars):
+        raise ServiceError("PAYLOAD_TOO_LARGE",
+                           f"{field_name} 长度 {len(raw_str)} 超过上限 {int(max_chars)}",
+                           {"field": field_name})
+    est = (len(raw_str) * 3) // 4
+    if est > int(max_bytes):
+        raise ServiceError("PAYLOAD_TOO_LARGE",
+                           f"{field_name} 预估解码后 {est} 字节超过上限 {int(max_bytes)}",
+                           {"field": field_name})
+    try:
+        raw = _b64.b64decode(raw_str, validate=True)
+    except Exception as e:  # noqa: BLE001
+        raise ServiceError("INVALID_REQUEST", f"{field_name} 非法: {e}") from e
+    if len(raw) > int(max_bytes):
+        raise ServiceError("PAYLOAD_TOO_LARGE",
+                           f"{field_name} 解码后 {len(raw)} 字节超过上限 {int(max_bytes)}",
+                           {"field": field_name})
+    return raw
+
+
+def assert_deployment_safety(settings: ServiceSettings) -> None:
+    """P1-09：production / staging 启动前的强制安全门禁。
+
+    在没有完整认证安全边界前，**不得**以生产模式启动未受保护的旧业务端点。
+    未通过即拒绝构建应用（不静默降级、不口头宣称生产就绪）。
+    """
+    env = str(settings.api_env or "").strip().lower()
+    if env not in ("prod", "production", "staging"):
+        return
+    problems = settings.check_deployment_safety()
+    if problems:
+        raise ServiceError(
+            "FORBIDDEN",
+            "部署安全门禁未通过，拒绝以 production/staging 启动：" + "；".join(problems),
+            {"api_env": env, "problems": problems})
+
 
 # ------------------------------------------------------------------ 服务容器
 @dataclass
@@ -58,12 +133,15 @@ def make_business_services(*, database_url: str | None = None,
                            settings: ServiceSettings | None = None,
                            core_services: Any = None,
                            session_factory: Callable | None = None) -> BusinessServices:
-    """构建业务服务容器（连接串/存储根全部可注入，禁止写死）。"""
-    import os
-    if database_url:
-        os.environ["JM_DATABASE_URL"] = str(database_url)
+    """构建业务服务容器（连接串/存储根全部可注入，禁止写死）。
+
+    Phase5-2R（P1-05）：数据库配置**以显式参数构造**（`DbSettings.from_url`），
+    不再用 `os.environ["JM_DATABASE_URL"] = ...` 改写进程全局环境 ——
+    后者会污染并行测试 / 多应用实例 / 嵌入式调用的配置，导致串库。
+    环境变量默认读取能力保留，但只发生在配置构建边界（`DbSettings.from_env`）。
+    """
     st = settings or ServiceSettings.from_env()
-    db = DbSettings.from_env()
+    db = (DbSettings.from_url(database_url) if database_url else DbSettings.from_env())
     sf = session_factory or get_session_factory(db)
     store = PrivateFileStore(storage_root or DEFAULT_STORAGE_ROOT)
 
@@ -88,6 +166,7 @@ def create_business_app(business: BusinessServices | None = None):
     """Phase5-1 服务 + Phase5-2 业务路由（单一 app，OpenAPI 合并输出）。"""
     from fastapi import (APIRouter, Body, Depends, File, Form, Header,
                          Request, UploadFile)
+    from fastapi.responses import JSONResponse
     from pydantic import BaseModel, ConfigDict, Field as PField
 
     from .api import _envelope, create_app, new_request_id
@@ -95,6 +174,24 @@ def create_business_app(business: BusinessServices | None = None):
     app = create_app()
     biz = business or make_business_services()
     app.state.business = biz
+
+    # ---- P1-09 部署安全门禁：production/staging 未达安全要求即拒绝启动 ----
+    assert_deployment_safety(biz.settings)
+
+    # ---- P1-09：正式环境阻断 Phase5-1 遗留的无认证演示端点 ----
+    _prod_like = str(biz.settings.api_env or "").strip().lower() in ("prod", "production", "staging")
+
+    if _prod_like:
+        @app.middleware("http")
+        async def _block_legacy_demo(request: Request, call_next):
+            path = request.url.path
+            if any(path.startswith(p) for p in LEGACY_DEMO_PATH_PREFIXES):
+                err = ServiceError("FORBIDDEN",
+                                   "正式环境已禁用未受保护的历史演示端点",
+                                   {"path": path})
+                return JSONResponse(status_code=err.http_status,
+                                    content=err.to_dict(getattr(request.state, "request_id", "")))
+            return await call_next(request)
 
     # ---------------------------------------------------------- 依赖
     def get_biz(request: Request) -> BusinessServices:
@@ -136,7 +233,8 @@ def create_business_app(business: BusinessServices | None = None):
     class ResumeJsonIn(BaseModel):
         file_name: str
         content_base64: str
-        is_synthetic: bool = False
+        is_synthetic: bool | None = None
+        data_source: str | None = None
 
     class JobCreateIn(BaseModel):
         model_config = ConfigDict(protected_namespaces=())
@@ -146,7 +244,9 @@ def create_business_app(business: BusinessServices | None = None):
         source_license: str = "UNKNOWN"
         status: str = "published"
         structured_profile: dict | None = None
-        is_synthetic: bool = False
+        # 三态：True=合成 / False=非合成 / None=未声明（P1-03，不臆造来源）
+        is_synthetic: bool | None = None
+        data_source: str | None = None
 
     class JobUpdateIn(BaseModel):
         model_config = ConfigDict(protected_namespaces=())
@@ -158,6 +258,7 @@ def create_business_app(business: BusinessServices | None = None):
         job_category: str | None = None
         city: str | None = None
         education_min: str | None = None
+        data_source: str | None = None
 
     class JobStatusIn(BaseModel):
         status: str
@@ -183,9 +284,30 @@ def create_business_app(business: BusinessServices | None = None):
     # ---------------------------------------------------------- 认证
     auth_router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
 
+    # 注册频率限制（P1-09）：单客户端固定窗口计数（内存实现，单进程有效；
+    # 多实例部署必须在网关侧再加一层限流）
+    _register_buckets: dict[str, list[float]] = {}
+    _REGISTER_LIMIT = 20      # 次 / 小时 / 客户端
+
+    def _register_rate_limited(client: str, now_ts: float) -> bool:
+        if len(_register_buckets) > 10000:   # pragma: no cover - 防内存膨胀
+            _register_buckets.clear()
+        window = _register_buckets.setdefault(client, [])
+        cutoff = now_ts - 3600.0
+        window[:] = [t for t in window if t > cutoff]
+        if len(window) >= _REGISTER_LIMIT:
+            return True
+        window.append(now_ts)
+        return False
+
     @auth_router.post("/register")
     def register(body: RegisterIn, request: Request,
                  biz: BusinessServices = Depends(get_biz)):
+        import time as _time
+        client = (request.client.host if request.client else "unknown") or "unknown"
+        if _register_rate_limited(client, _time.monotonic()):
+            raise ServiceError("RATE_LIMITED",
+                               f"注册频率超过限制（{_REGISTER_LIMIT}/小时）")
         # 公开注册只允许 student（管理员经内部种子创建，不开放公开注册）
         user = biz.accounts.register(username=body.username, password=body.password,
                                      email=body.email, role="student")
@@ -250,25 +372,37 @@ def create_business_app(business: BusinessServices | None = None):
                       biz: BusinessServices = Depends(get_biz),
                       user: dict = Depends(current_user),
                       file: UploadFile = File(...),
-                      is_synthetic: bool = Form(False)):
-        content = file.file.read()
+                      is_synthetic: bool | None = Form(None),
+                      data_source: str | None = Form(None)):
+        # P1-06：先按 Content-Length 预检（缺失/伪造也不影响 —— 下面用有上限的分块读取）
+        st = biz.settings
+        cl = (request.headers.get("content-length") or "").strip()
+        if cl.isdigit() and int(cl) > st.max_upload_bytes:
+            raise ServiceError("PAYLOAD_TOO_LARGE",
+                               f"上传文件 {cl} 字节超过上限 {st.max_upload_bytes}")
+        content = read_upload_bounded(file.file, max_bytes=st.max_upload_bytes,
+                                      field_name="file")
         out = biz.students.upload_resume(user, filename=file.filename or "upload.txt",
-                                         content=content, is_synthetic=is_synthetic)
+                                         content=content, is_synthetic=is_synthetic,
+                                         data_source=data_source)
         return _envelope(request.state.request_id, out)
 
     @resumes_router.post("/json")
     def upload_resume_json(body: ResumeJsonIn, request: Request,
                            biz: BusinessServices = Depends(get_biz),
                            user: dict = Depends(current_user)):
-        """JSON Base64 上传（无 multipart 的客户端使用；同样受大小/格式限制）。"""
-        import base64
-        try:
-            content = base64.b64decode(body.content_base64, validate=True)
-        except Exception as e:  # noqa: BLE001
-            raise ServiceError("INVALID_REQUEST", f"content_base64 非法: {e}") from e
+        """JSON Base64 上传（无 multipart 的客户端使用；同样受大小/格式限制）。
+
+        P1-06：**解码之前**先做长度/膨胀率上限检查，不把大对象解码进内存。
+        """
+        st = biz.settings
+        content = decode_base64_bounded(body.content_base64,
+                                        max_chars=st.max_base64_chars,
+                                        max_bytes=st.max_upload_bytes)
         out = biz.students.upload_resume(user, filename=body.file_name,
                                          content=content,
-                                         is_synthetic=body.is_synthetic)
+                                         is_synthetic=body.is_synthetic,
+                                         data_source=body.data_source)
         return _envelope(request.state.request_id, out)
 
     @resumes_router.get("")
@@ -296,10 +430,14 @@ def create_business_app(business: BusinessServices | None = None):
                        biz: BusinessServices = Depends(get_biz),
                        user: dict = Depends(current_user),
                        body: dict | None = Body(None)):
-        is_synthetic = bool((body or {}).get("is_synthetic", False))
+        b = body or {}
+        # 来源三态：未声明 -> 保持既有 data_source（重新解析不得静默改写来源）
+        is_synthetic = b.get("is_synthetic", None)
+        is_synthetic = bool(is_synthetic) if is_synthetic is not None else None
         return _envelope(request.state.request_id,
                          biz.students.reparse_resume(user, resume_id,
-                                                     is_synthetic=is_synthetic))
+                                                     is_synthetic=is_synthetic,
+                                                     data_source=b.get("data_source")))
 
     # ---------------------------------------------------------- 岗位
     jobs_router = APIRouter(prefix="/api/v1/jobs", tags=["jobs"])
@@ -336,7 +474,9 @@ def create_business_app(business: BusinessServices | None = None):
                                   source=body.source,
                                   source_license=body.source_license,
                                   status=body.status,
-                                  structured_profile=body.structured_profile)
+                                  structured_profile=body.structured_profile,
+                                  is_synthetic=body.is_synthetic,
+                                  data_source=body.data_source)
         return _envelope(request.state.request_id, {"job": out})
 
     @jobs_router.post("/import")

@@ -209,6 +209,10 @@ def create_app(services: Services | None = None):
     # 让端点签名里的 Request 注解可被 FastAPI 解析（保持顶层延迟导入）
     globals()["Request"] = Request
 
+    # ---- P1-09 部署边界：production/staging 未达安全要求即拒绝启动 ----
+    _settings = services.settings if services is not None else ServiceSettings.from_env()
+    _settings.assert_deployment_safe()
+
     app = FastAPI(
         title="大学生就业岗位画像与简历智能匹配 · 业务推理服务",
         version=APP_VERSION,
@@ -269,9 +273,12 @@ def create_app(services: Services | None = None):
         t0 = time.monotonic()
         try:
             response = await call_next(request)
-        except Exception:
+        except Exception as e:  # noqa: BLE001
             # 兜底：任何未处理异常统一转 500 INTERNAL_ERROR（错误信封；不裸奔、不泄露堆栈）
-            log.exception("request_failed request_id=%s path=%s", rid, request.url.path)
+            # 日志只记异常类型与被脱敏后的原因，**不记录请求正文**
+            from .logging_utils import scrub_sensitive_text
+            log.error("request_failed request_id=%s path=%s err_type=%s err=%s",
+                      rid, request.url.path, type(e).__name__, scrub_sensitive_text(str(e)))
             err = ServiceError("INTERNAL_ERROR", "服务内部错误")
             response = JSONResponse(status_code=err.http_status, content=err.to_dict(rid))
         latency = (time.monotonic() - t0) * 1000
@@ -300,7 +307,9 @@ def create_app(services: Services | None = None):
     @app.exception_handler(Exception)
     async def generic_error_handler(request: Request, exc: Exception):
         rid = getattr(request.state, "request_id", "")
-        log.exception("internal_error request_id=%s", rid)
+        from .logging_utils import scrub_sensitive_text
+        log.error("internal_error request_id=%s path=%s err_type=%s err=%s",
+                  rid, request.url.path, type(exc).__name__, scrub_sensitive_text(str(exc)))
         err = ServiceError("INTERNAL_ERROR", "服务内部错误")
         return JSONResponse(status_code=err.http_status, content=err.to_dict(rid))
 

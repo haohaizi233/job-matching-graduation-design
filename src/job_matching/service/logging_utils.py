@@ -9,22 +9,37 @@
 from __future__ import annotations
 
 import logging
+import re
 import uuid
 
 from ..domain.pii_masking import mask_matches
+from .errors import redact_local_paths
 
 LOGGER_NAME = "job_matching.service"
 
+# 错误/日志文本里的凭证样式片段（password=xxx / token: xxx）一律遮蔽
+_SECRET_TEXT_RE = re.compile(
+    r"(?i)\b(password|passwd|pwd|secret|token|api[_-]?key|authorization)\b"
+    r"(\s*[=:：]\s*)(\S+)")
+
+
+def scrub_sensitive_text(msg: str) -> str:
+    """日志/错误文本脱敏：PII 掩码 + 本地路径遮蔽 + 凭证片段遮蔽。"""
+    out = mask_matches(str(msg))
+    out = redact_local_paths(out)
+    out = _SECRET_TEXT_RE.sub(lambda m: f"{m.group(1)}{m.group(2)}***REDACTED***", out)
+    return out
+
 
 class PiiScrubFilter(logging.Filter):
-    """日志脱敏过滤器：命中片段替换为 ***，绝不输出原始号码/邮箱/身份证。"""
+    """日志脱敏过滤器：命中片段替换为 ***，绝不输出原始号码/邮箱/身份证/凭证/本机路径。"""
 
     def filter(self, record: logging.LogRecord) -> bool:
         try:
             msg = record.getMessage()
         except Exception:  # pragma: no cover - 日志格式化异常兜底
             return True
-        scrubbed = mask_matches(msg)
+        scrubbed = scrub_sensitive_text(msg)
         if scrubbed != msg:
             record.msg = scrubbed
             record.args = ()
