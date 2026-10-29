@@ -1,5 +1,12 @@
 {
-  "annotation_status": "waiting_real_pairs",
+  "annotation_status": "pending",
+  "annotation_status_vocabulary": [
+    "pending",
+    "in_progress",
+    "needs_review",
+    "blocked",
+    "complete"
+  ],
   "annotations_received": {
     "annotator_A": 0,
     "annotator_B": 0,
@@ -7,12 +14,20 @@
   },
   "arbitration": {
     "arbitrator": "arbitrator_1",
+    "no_disagreement_policy": "分歧为 0 时不强制要求人工仲裁文件，冻结 manifest 记录 not_required 原因",
     "pending_sheet": null,
+    "reasons": [],
     "records_keep_original_labels": true,
     "rows_valid": 0,
-    "status": "no_disagreements"
+    "status": "not_required",
+    "status_vocabulary": [
+      "not_required",
+      "pending",
+      "completed",
+      "invalid"
+    ]
   },
-  "created_at": "2026-10-29T11:14:58",
+  "created_at": "2026-10-29T12:04:24",
   "disagreements_total": 0,
   "generated_by": "scripts/phase4_3a_2/annotation_qa.py",
   "independence": {
@@ -30,6 +45,88 @@
   "pairs_missing_annotations": 0,
   "pairs_total": 0,
   "required_annotators": 2,
+  "status_assessment": {
+    "annotation_status": "pending",
+    "blocking": [],
+    "checks": {
+      "annotator_independence": {
+        "blocking_codes": [],
+        "ok": true,
+        "review_codes": [],
+        "status": "not_applicable",
+        "violations": []
+      },
+      "annotators_registered": {
+        "ok": true,
+        "value": [
+          "annotator_A",
+          "annotator_B"
+        ]
+      },
+      "arbitration_status": {
+        "ok": true,
+        "value": "not_required"
+      },
+      "dual_annotation": {
+        "missing_pair_ids": [],
+        "ok": true,
+        "pairs_missing": 0,
+        "pairs_total": 0,
+        "unknown_pair_ids": []
+      },
+      "final_label_integrity": {
+        "ok": true,
+        "problems": [],
+        "unfinalized_pair_ids": []
+      },
+      "import_reports": {
+        "errors": 0,
+        "files": {
+          "annotator_A": {
+            "errors": 0,
+            "status": "file_missing",
+            "warnings": 0
+          },
+          "annotator_B": {
+            "errors": 0,
+            "status": "file_missing",
+            "warnings": 0
+          }
+        },
+        "ok": true,
+        "warnings": 0
+      },
+      "protocol_version": {
+        "ok": true,
+        "value": []
+      },
+      "unjudgeable_forced": {
+        "ok": true,
+        "value": 0
+      }
+    },
+    "counts": {
+      "annotation_rows": 0,
+      "blocking_findings": 0,
+      "disagreements": 0,
+      "incomplete_findings": 0,
+      "pairs_total": 0,
+      "review_findings": 0
+    },
+    "incomplete": [],
+    "reason": "waiting_real_pairs：真实配对未到位，标注未开始",
+    "reasons": [],
+    "review": [],
+    "status": "pending",
+    "vocabulary": [
+      "pending",
+      "in_progress",
+      "needs_review",
+      "blocked",
+      "complete"
+    ]
+  },
+  "status_reason": "waiting_real_pairs：真实配对未到位，标注未开始",
   "unjudgeable_annotations": 0,
   "unjudgeable_forced_problems": [],
   "unjudgeable_policy": "unjudgeable 是独立状态，不得自动设为 0，不参与 Kappa"

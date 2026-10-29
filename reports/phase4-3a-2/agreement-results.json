@@ -5,14 +5,25 @@
     "reason": "no_annotations",
     "status": "not_computable"
   },
-  "annotation_status": "waiting_real_pairs",
+  "annotation_status": "pending",
   "arbitration": {
     "errors": [],
     "rows_valid": 0,
-    "status": "no_disagreements",
+    "status": "not_required",
+    "status_detail": {
+      "arbitrated_pairs": [],
+      "arbitration_rows": 0,
+      "disagreements_total": 0,
+      "import_errors": 0,
+      "import_warnings": 0,
+      "note": "分歧为 0 时不强制要求人工仲裁文件；分歧 > 0 时仲裁记录必须与分歧集合一一对应，禁止虚假仲裁记录绕过门禁",
+      "reasons": [],
+      "status": "not_required",
+      "unresolved_pairs": []
+    },
     "warnings": []
   },
-  "created_at": "2026-10-29T11:14:58",
+  "created_at": "2026-10-29T12:04:24",
   "disagreements": {
     "count": 0,
     "detail": [],
@@ -43,7 +54,8 @@
       "errors": [],
       "file": "D:\\desktop\\毕业设计\\data\\private\\annotations_raw\\annotations_annotator_A.csv",
       "rows_read": 0,
-      "status": "file_missing"
+      "status": "file_missing",
+      "warnings": []
     },
     "annotator_B": {
       "counts": {
@@ -52,7 +64,8 @@
       "errors": [],
       "file": "D:\\desktop\\毕业设计\\data\\private\\annotations_raw\\annotations_annotator_B.csv",
       "rows_read": 0,
-      "status": "file_missing"
+      "status": "file_missing",
+      "warnings": []
     }
   },
   "independence_check": {
@@ -66,5 +79,6 @@
   "quality_target": {
     "note": "0.60 是初步质量目标，不是通过线；不得为追求阈值修改标签。一致性不足时应分析指南歧义/题目不可判/理解差异，必要时修订指南并版本化后重新独立标注",
     "weighted_kappa_target": 0.6
-  }
+  },
+  "status_reason": "waiting_real_pairs：真实配对未到位，标注未开始"
 }

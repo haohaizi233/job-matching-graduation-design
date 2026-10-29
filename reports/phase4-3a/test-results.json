@@ -1,7 +1,7 @@
 {
   "generated_by": "tests/phase4_3a/run_all.py",
-  "created_at": "2026-10-29T11:38:25",
-  "seconds": 1.12,
+  "created_at": "2026-10-29T12:29:26",
+  "seconds": 0.84,
   "ok": true,
   "totals": {
     "tests": 237,

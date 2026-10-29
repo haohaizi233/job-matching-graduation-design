@@ -5,38 +5,125 @@
     "ok": true,
     "violations": []
   },
-  "created_at": "2026-10-29T11:15:06",
+  "blocked_stage": "pre_freeze",
+  "created_at": "2026-10-29T12:04:25",
   "facts": {
+    "annotator_independence_ok": true,
+    "arbitration_status": "not_required",
+    "blocking_findings": [],
     "consent_complete": false,
     "dual_annotation_complete": false,
     "freeze_verified": false,
-    "leakage_blocking_findings": [],
+    "freeze_written": false,
+    "independence_status": "not_applicable",
     "min_real_pairs": 300,
     "open_disagreements": 0,
     "real_pairs": 0,
     "real_resumes": 0,
+    "source_license_ok": true,
     "split_isolation_ok": false,
     "synthetic_pairs": 0,
+    "synthetic_pairs_included": 0,
     "unjudgeable_forced": 0
   },
-  "g2_status": {
+  "fixture_mode": false,
+  "freeze_verified": false,
+  "freeze_written": false,
+  "h2_status": "blocked",
+  "note": "未满足冻结条件：评估集不允许冻结，更不允许虚构人工数据补齐。blind_test 在冻结与哈希复验完成前不得标记正式通过",
+  "precheck": {
+    "checks": {
+      "annotator_independence_ok": {
+        "derived_from": "",
+        "missing": false,
+        "ok": true,
+        "value": true
+      },
+      "arbitration_status": {
+        "derived_from": "",
+        "missing": false,
+        "ok": true,
+        "value": "not_required"
+      },
+      "blocking_findings": {
+        "derived_from": "",
+        "missing": false,
+        "ok": true,
+        "value": 0
+      },
+      "consent_complete": {
+        "derived_from": "",
+        "missing": false,
+        "ok": false,
+        "value": false
+      },
+      "dual_annotation_complete": {
+        "derived_from": "",
+        "missing": false,
+        "ok": false,
+        "value": false
+      },
+      "open_disagreements": {
+        "derived_from": "",
+        "missing": false,
+        "ok": true,
+        "value": 0
+      },
+      "real_pairs": {
+        "derived_from": "",
+        "missing": false,
+        "ok": false,
+        "value": 0
+      },
+      "real_resumes": {
+        "derived_from": "",
+        "missing": false,
+        "ok": false,
+        "value": 0
+      },
+      "source_license_ok": {
+        "derived_from": "",
+        "missing": false,
+        "ok": true,
+        "value": true
+      },
+      "synthetic_pairs_included": {
+        "derived_from": "",
+        "missing": false,
+        "ok": true,
+        "value": 0
+      },
+      "unjudgeable_forced": {
+        "derived_from": "",
+        "missing": false,
+        "ok": true,
+        "value": 0
+      }
+    },
     "facts": {
       "min_real_pairs": 300,
       "real_pairs": 0,
       "real_resumes": 0,
       "synthetic_pairs": 0
     },
+    "precheck_passed": false,
     "reasons": [
+      "真实数据授权记录不完整（consent 未全部 granted/licensed）",
       "真实中文简历 0 份：无法建立真实人岗配对与人工 Gold",
       "真实有效配对 0 组：双盲标注与 Gold 冻结无对象",
-      "双人独立标注未完成（annotation_status != complete）",
-      "真实数据授权记录不完整（consent 未全部 granted/licensed）",
-      "dev_validation / blind_test 分组隔离检查未通过",
-      "评估集未冻结或哈希复验未通过"
+      "双人独立标注未完成（annotation_status != complete）"
     ],
+    "stage": "pre_freeze",
     "status": "blocked"
   },
-  "note": "未满足冻结条件：评估集不允许冻结，更不允许虚构人工数据补齐。blind_test 在冻结与哈希复验完成前不得标记正式通过",
+  "precheck_passed": false,
+  "reasons": [
+    "真实数据授权记录不完整（consent 未全部 granted/licensed）",
+    "真实中文简历 0 份：无法建立真实人岗配对与人工 Gold",
+    "真实有效配对 0 组：双盲标注与 Gold 冻结无对象",
+    "双人独立标注未完成（annotation_status != complete）"
+  ],
+  "split_validated": false,
   "stage": "evalset",
   "status": "blocked"
 }

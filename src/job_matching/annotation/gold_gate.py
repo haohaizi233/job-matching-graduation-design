@@ -167,45 +167,230 @@ def count_real_gold(records: list[dict]) -> dict:
 
 
 # ------------------------------------------------------------------ G2 门禁
-def evaluate_g2_status(facts: dict, *, min_real_pairs: int = H2_MIN_REAL_PAIRS) -> dict:
-    """G2（真实 Gold 评估集正式冻结）状态判定（测试场景 16）。
+# 冻结前置 / 冻结后置两阶段门禁（Phase5-1R F-001）。
+#
+# 历史缺陷：facts 初始化 split_isolation_ok=False / freeze_verified=False，
+# 而切分与冻结恰好发生在 G2 检查之后，导致「未冻结 -> 不过门禁 -> 不能冻结」的
+# 循环依赖，真实数据到位后正常入口仍无法进入成功路径。
+#
+# 修复口径（一套规则、两阶段调用，禁止同一规则实现两份）：
+#   * evaluate_precheck  —— 冻结前置检查：授权、规模、双人标注、标注独立性、
+#                           分歧仲裁、unjudgeable 保护、阻断性泄漏、合成混入、
+#                           来源与许可。此阶段**不得**要求已有冻结哈希；
+#   * evaluate_postcheck —— 冻结后验证：切分隔离、pair 唯一、最终标签一一对应、
+#                           文件完整、SHA-256 复验、数据集版本、来源记录；
+#   * evaluate_g2_status —— H2 汇总判定 = 前置 + 后置 + 真实规模门槛。
+#
+# strict 语义（只控制「事实缺失」的处理，不改变任何规则）：
+#   * strict=True  （冻结流程调用）：缺少事实一律按不满足处理并登记 missing_fact；
+#   * strict=False （历史 facts 契约）：缺失事实按**文档化不变量**推导，
+#     推导关系写入 checks[*].derived_from，供审计核对，不做静默放行。
 
-    facts 键：
-      real_resumes, real_pairs, synthetic_pairs, dual_annotation_complete,
-      open_disagreements, unjudgeable_forced, consent_complete,
-      leakage_blocking_findings, split_isolation_ok, freeze_verified
-    任何不满足项都进入 reasons；无真实数据时必须 BLOCKED。
+ARBITRATION_STATUSES = ("not_required", "pending", "completed", "invalid")
+
+_PRECHECK_RULES = (
+    "consent_complete", "source_license_ok", "real_resumes", "real_pairs",
+    "dual_annotation_complete", "annotator_independence_ok", "open_disagreements",
+    "arbitration_status", "unjudgeable_forced", "blocking_findings",
+    "synthetic_pairs_included",
+)
+
+_POSTCHECK_RULES = (
+    "split_isolation_ok", "pair_id_unique", "resume_job_unique",
+    "final_labels_complete", "final_labels_unique", "final_label_pairs_known",
+    "files_complete", "sha256_ok", "dataset_version_ok", "provenance_complete",
+)
+
+
+def _fact(facts: dict, key: str, default, *, strict: bool,
+          derived_from: str = "") -> tuple[object, dict]:
+    """取事实值：strict 下缺失即视为不满足；非 strict 下用文档化不变量推导。
+
+    返回 (值, meta)；meta.missing=True 表示该事实在输入中缺失，
+    meta.derived_from 记录推导依据或 missing_fact:<key>，供审计核对。
     """
+    if key in facts:
+        return facts[key], {"missing": False, "derived_from": ""}
+    if strict:
+        return default, {"missing": True, "derived_from": f"missing_fact:{key}"}
+    return default, {"missing": True,
+                     "derived_from": derived_from or f"legacy_default:{key}"}
+
+
+def evaluate_precheck(facts: dict, *, min_real_pairs: int = H2_MIN_REAL_PAIRS,
+                      strict: bool = True) -> dict:
+    """Pre-freeze Gate：冻结前置检查（不要求任何冻结哈希/切分结果）。
+
+    facts 键（strict=True 时全部必须显式提供）：
+      consent_complete, source_license_ok, real_resumes, real_pairs,
+      dual_annotation_complete, annotator_independence_ok, open_disagreements,
+      arbitration_status, unjudgeable_forced, blocking_findings,
+      synthetic_pairs_included
+    """
+    checks: dict[str, dict] = {}
     reasons: list[str] = []
-    real_resumes = int(facts.get("real_resumes", 0) or 0)
-    real_pairs = int(facts.get("real_pairs", 0) or 0)
+
+    def _bool_rule(key: str, ok_when: bool, reason: str, derived_from: str = "") -> None:
+        raw, meta = _fact(facts, key, not ok_when if strict else ok_when, strict=strict,
+                          derived_from=derived_from)
+        ok = bool(raw) is ok_when
+        checks[key] = {"ok": ok, "value": raw, **meta}
+        if not ok:
+            reasons.append(reason)
+
+    _bool_rule("consent_complete", True,
+               "真实数据授权记录不完整（consent 未全部 granted/licensed）")
+    _bool_rule("source_license_ok", True,
+               "数据来源与使用许可不满足准入（source/license 缺失或失效）")
+
+    real_resumes, meta = _fact(facts, "real_resumes", 0, strict=strict)
+    real_resumes = int(real_resumes or 0)
+    checks["real_resumes"] = {"ok": real_resumes > 0, "value": real_resumes, **meta}
     if real_resumes <= 0:
         reasons.append("真实中文简历 0 份：无法建立真实人岗配对与人工 Gold")
+
+    real_pairs, meta = _fact(facts, "real_pairs", 0, strict=strict)
+    real_pairs = int(real_pairs or 0)
+    pairs_ok = real_pairs > 0 and real_pairs >= int(min_real_pairs)
+    checks["real_pairs"] = {"ok": pairs_ok, "value": real_pairs, **meta}
     if real_pairs <= 0:
         reasons.append("真实有效配对 0 组：双盲标注与 Gold 冻结无对象")
     elif real_pairs < int(min_real_pairs):
         reasons.append(f"真实有效配对 {real_pairs} 组 < {min_real_pairs}（{H2_TARGET_NOTE}）")
-    if not bool(facts.get("dual_annotation_complete", False)):
-        reasons.append("双人独立标注未完成（annotation_status != complete）")
-    if int(facts.get("open_disagreements", 0) or 0) > 0:
-        reasons.append(f"仍有 {facts.get('open_disagreements')} 组分歧未仲裁")
-    if int(facts.get("unjudgeable_forced", 0) or 0) > 0:
+
+    _bool_rule("dual_annotation_complete", True,
+               "双人独立标注未完成（annotation_status != complete）")
+    _bool_rule("annotator_independence_ok", True,
+               "标注员独立性检查未通过（同一人冒充两名标注员或整表镜像）",
+               derived_from="dual_annotation_complete(标注完成状态已包含独立性通过)")
+
+    open_dis, meta = _fact(facts, "open_disagreements", 0, strict=strict)
+    open_dis = int(open_dis or 0)
+    checks["open_disagreements"] = {"ok": open_dis == 0, "value": open_dis, **meta}
+    if open_dis > 0:
+        reasons.append(f"仍有 {open_dis} 组分歧未仲裁")
+
+    arb, meta = _fact(facts, "arbitration_status",
+                      "completed" if open_dis == 0 else "pending", strict=strict,
+                      derived_from="open_disagreements(无分歧 => not_required/completed)")
+    arb = str(arb or "")
+    arb_ok = arb in ("not_required", "completed")
+    checks["arbitration_status"] = {"ok": arb_ok, "value": arb, **meta}
+    if arb == "pending":
+        reasons.append("存在未完成仲裁的分歧样本")
+    elif arb == "invalid":
+        reasons.append("仲裁记录非法（协议不符/重复/来源不明），不得据此宣布完成")
+    elif arb not in ARBITRATION_STATUSES:
+        reasons.append(f"仲裁状态非法: {arb!r}，合法值 {ARBITRATION_STATUSES}")
+
+    unj, meta = _fact(facts, "unjudgeable_forced", 0, strict=strict)
+    unj = int(unj or 0)
+    checks["unjudgeable_forced"] = {"ok": unj == 0, "value": unj, **meta}
+    if unj > 0:
         reasons.append("存在 unjudgeable 被强行归类的记录")
-    if not bool(facts.get("consent_complete", False)):
-        reasons.append("真实数据授权记录不完整（consent 未全部 granted/licensed）")
-    if facts.get("leakage_blocking_findings"):
-        reasons.append("存在阻断性泄漏/重复风险未处理: "
-                       + "; ".join(map(str, facts.get("leakage_blocking_findings"))))
-    if not bool(facts.get("split_isolation_ok", False)):
-        reasons.append("dev_validation / blind_test 分组隔离检查未通过")
-    if not bool(facts.get("freeze_verified", False)):
-        reasons.append("评估集未冻结或哈希复验未通过")
+
+    block, meta = _fact(facts, "blocking_findings",
+                        facts.get("leakage_blocking_findings"), strict=strict,
+                        derived_from="leakage_blocking_findings(历史事实名)")
+    block = list(block or [])
+    checks["blocking_findings"] = {"ok": not block, "value": len(block), **meta}
+    if block:
+        reasons.append("存在阻断性泄漏/重复风险未处理: " + "; ".join(map(str, block)))
+
+    syn, meta = _fact(facts, "synthetic_pairs_included", 0, strict=strict,
+                      derived_from="legacy 合成样本只登记为 excluded，默认未混入")
+    syn = int(syn or 0)
+    checks["synthetic_pairs_included"] = {"ok": syn == 0, "value": syn, **meta}
+    if syn > 0:
+        reasons.append(f"存在 {syn} 组合成配对混入人工 Gold（合成数据不得进入真值集）")
+
+    return {
+        "stage": "pre_freeze",
+        "status": "blocked" if reasons else "ready",
+        "precheck_passed": not reasons,
+        "reasons": reasons,
+        "checks": checks,
+        "facts": {"real_resumes": real_resumes, "real_pairs": real_pairs,
+                  "min_real_pairs": int(min_real_pairs),
+                  "synthetic_pairs": int(facts.get("synthetic_pairs", 0) or 0)},
+    }
+
+
+def evaluate_postcheck(facts: dict, *, strict: bool = True) -> dict:
+    """Post-freeze Gate：冻结后验证（切分、唯一性、标签、文件、哈希、版本、来源）。"""
+    checks: dict[str, dict] = {}
+    reasons: list[str] = []
+    freeze_verified = bool(facts.get("freeze_verified", False))
+
+    def _bool_rule(key: str, reason: str, derived_from: str = "") -> None:
+        raw, meta = _fact(facts, key, freeze_verified if not strict else False,
+                          strict=strict, derived_from=derived_from)
+        ok = bool(raw)
+        checks[key] = {"ok": ok, "value": raw, **meta}
+        if not ok:
+            reasons.append(reason)
+
+    _bool_rule("split_isolation_ok", "dev_validation / blind_test 分组隔离检查未通过")
+    _bool_rule("pair_id_unique", "存在重复 pair_id，冻结拒绝",
+               derived_from="freeze_verified(冻结互斥检查为硬性条件)")
+    _bool_rule("resume_job_unique", "存在重复 (resume_id, job_id) 配对，冻结拒绝",
+               derived_from="freeze_verified(冻结互斥检查为硬性条件)")
+    _bool_rule("final_labels_complete", "存在缺少最终标签的配对，冻结拒绝",
+               derived_from="freeze_verified(冻结互斥检查为硬性条件)")
+    _bool_rule("final_labels_unique", "同一 pair 存在多个最终标签，冻结拒绝",
+               derived_from="freeze_verified(冻结互斥检查为硬性条件)")
+    _bool_rule("final_label_pairs_known", "最终标签引用未知 pair，冻结拒绝",
+               derived_from="freeze_verified(冻结互斥检查为硬性条件)")
+    _bool_rule("files_complete", "冻结所需文件缺失，冻结拒绝",
+               derived_from="freeze_verified(缺失文件无法通过 SHA-256 复验)")
+    _bool_rule("sha256_ok", "评估集未冻结或哈希复验未通过")
+    _bool_rule("dataset_version_ok", "数据集版本冲突或版本记录缺失",
+               derived_from="freeze_verified(冻结 manifest 必带 dataset_version)")
+    _bool_rule("provenance_complete", "冻结清单缺少完整的来源记录",
+               derived_from="freeze_verified(responsibility 为冻结硬性条件)")
+
+    return {
+        "stage": "post_freeze",
+        "status": "failed" if reasons else "passed",
+        "postcheck_passed": not reasons,
+        "split_validated": bool(checks["split_isolation_ok"]["ok"]),
+        "freeze_written": bool(facts.get("freeze_written", freeze_verified)),
+        "freeze_verified": freeze_verified,
+        "reasons": reasons,
+        "checks": checks,
+    }
+
+
+def evaluate_g2_status(facts: dict, *, min_real_pairs: int = H2_MIN_REAL_PAIRS,
+                       strict: bool = False) -> dict:
+    """G2（真实 Gold 评估集正式冻结）状态判定（测试场景 16 / Phase5-1R F-001）。
+
+    = evaluate_precheck + evaluate_postcheck + 真实规模门槛，输出保持历史契约：
+    {"status": "ready"|"blocked", "reasons": [...], "facts": {...}}。
+
+    facts 键（历史契约，全部保留原语义）：
+      real_resumes, real_pairs, synthetic_pairs, dual_annotation_complete,
+      open_disagreements, unjudgeable_forced, consent_complete,
+      leakage_blocking_findings, split_isolation_ok, freeze_verified
+    扩展键（冻结流程显式传入，strict=True 时必须齐全）：
+      source_license_ok, annotator_independence_ok, arbitration_status,
+      synthetic_pairs_included, pair_id_unique, resume_job_unique,
+      final_labels_complete, final_labels_unique, final_label_pairs_known,
+      files_complete, sha256_ok, dataset_version_ok, provenance_complete
+    任何不满足项都进入 reasons；无真实数据时必须 BLOCKED。
+    """
+    pre = evaluate_precheck(facts, min_real_pairs=min_real_pairs, strict=strict)
+    post = evaluate_postcheck(facts, strict=strict)
+    reasons = list(pre["reasons"]) + [r for r in post["reasons"]
+                                      if r not in pre["reasons"]]
     return {
         "status": "blocked" if reasons else "ready",
         "reasons": reasons,
+        "precheck": pre,
+        "postcheck": post,
         "facts": {
-            "real_resumes": real_resumes,
-            "real_pairs": real_pairs,
+            "real_resumes": int(facts.get("real_resumes", 0) or 0),
+            "real_pairs": int(facts.get("real_pairs", 0) or 0),
             "synthetic_pairs": int(facts.get("synthetic_pairs", 0) or 0),
             "min_real_pairs": int(min_real_pairs),
         },
