@@ -1,0 +1,120 @@
+{
+  "generated_by": "tests/phase5_2/run_all.py",
+  "created_at": "2026-10-29T15:47:50",
+  "seconds": 8.04,
+  "ok": true,
+  "mode": "partial:T2",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "ecfadea842a50c6e4e167a51b7b7a45b6cc11b1c"
+  },
+  "totals": {
+    "tests": 12,
+    "pass": 12,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "T2": {
+      "title": "认证与权限（链路A）",
+      "total": 12,
+      "pass": 12,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": true,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": true,
+    "no_empty_run": true,
+    "modules_registered_non_empty": true
+  },
+  "records": [
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_admin_seed_can_login",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_duplicate_username_is_conflict",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_expired_token_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_invalid_credentials_401",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_link_a_full_auth_chain",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_login_failure_lockout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_missing_or_invalid_token_401",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_no_password_or_token_leak_in_responses",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_password_policy_rejects_weak_password",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_register_ignores_admin_role",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_student_cannot_use_admin_endpoints",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_token_not_written_to_logs",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

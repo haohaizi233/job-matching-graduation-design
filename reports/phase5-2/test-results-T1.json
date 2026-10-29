@@ -1,0 +1,92 @@
+{
+  "generated_by": "tests/phase5_2/run_all.py",
+  "created_at": "2026-10-29T15:47:05",
+  "seconds": 2.49,
+  "ok": true,
+  "mode": "partial:T1",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "ecfadea842a50c6e4e167a51b7b7a45b6cc11b1c"
+  },
+  "totals": {
+    "tests": 8,
+    "pass": 8,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "T1": {
+      "title": "数据库 Schema/约束/迁移/事务",
+      "total": 8,
+      "pass": 8,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": true,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": true,
+    "no_empty_run": true,
+    "modules_registered_non_empty": true
+  },
+  "records": [
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_downgrade_and_reupgrade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_foreign_key_enforcement_and_cascade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_fresh_upgrade_creates_all_tables",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_indexes_exist",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_json_columns_roundtrip",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_repeated_upgrade_preserves_existing_data",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_transaction_rollback_leaves_no_partial_rows",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_unique_constraints",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

@@ -1,18 +1,18 @@
 {
   "generated_by": "tests/core_ci/run_all.py",
-  "created_at": "2026-10-29T15:28:33",
-  "seconds": 252.27,
-  "ok": false,
+  "created_at": "2026-10-29T16:19:36",
+  "seconds": 144.52,
+  "ok": true,
   "mode": "full",
   "environment": {
     "python": "3.13.2",
     "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "153df7c8777f003e8c15756b3b1569c5f0372aa2"
+    "commit": "ecfadea842a50c6e4e167a51b7b7a45b6cc11b1c"
   },
   "totals": {
     "tests": 78,
-    "pass": 77,
-    "fail": 1,
+    "pass": 78,
+    "fail": 0,
     "skip": 0
   },
   "groups": {
@@ -26,8 +26,8 @@
     "C3": {
       "title": "测试运行器聚合一致性",
       "total": 12,
-      "pass": 11,
-      "fail": 1,
+      "pass": 12,
+      "fail": 0,
       "skip": 0
     },
     "C4": {
@@ -282,8 +282,8 @@
       "group": "C3",
       "class": "C3RunnerAggregation",
       "test_id": "test_c3_runner_trust.C3RunnerAggregation.test_aggregation_consistency_helper_present",
-      "status": "FAIL",
-      "detail": "Traceback (most recent call last):\n  File \"D:\\desktop\\毕业设计\\tests\\core_ci\\test_c3_runner_trust.py\", line 124, in test_aggregation_consistency_helper_present\n    self.assertTrue(all(checks.values()), checks)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : {'checks': {'sum_groups_total_eq_totals_tests': True, 'sum_groups_pass_eq_totals_pass': True, 'sum_groups_fail_eq_totals_fail': True, 'sum_groups_skip_eq_totals_skip': True, 'all_records_have_legal_group': True, 'all_records_belong_to_loaded_module': True, 'loaded_modules_registered': False, 'no_empty_run': True}, 'ok': False}\n"
+      "status": "PASS",
+      "detail": ""
     },
     {
       "group": "C3",

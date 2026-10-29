@@ -1,7 +1,7 @@
 {
   "generated_by": "tests/phase5_1r/run_all.py",
-  "created_at": "2026-10-29T14:25:30",
-  "seconds": 86.05,
+  "created_at": "2026-10-29T16:16:03",
+  "seconds": 87.99,
   "ok": true,
   "mode": "full",
   "requested_group": null,
@@ -30,7 +30,7 @@
       "torch": "2.12.0+cpu",
       "yaml": "6.0.2"
     },
-    "commit": "0225fcb91a17feec486afb81ae4de3d0e44b342d",
+    "commit": "ecfadea842a50c6e4e167a51b7b7a45b6cc11b1c",
     "worktree": "dirty"
   },
   "totals": {

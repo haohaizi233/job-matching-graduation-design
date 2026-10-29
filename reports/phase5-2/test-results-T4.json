@@ -1,0 +1,99 @@
+{
+  "generated_by": "tests/phase5_2/run_all.py",
+  "created_at": "2026-10-29T15:53:50",
+  "seconds": 21.81,
+  "ok": true,
+  "mode": "partial:T4",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "ecfadea842a50c6e4e167a51b7b7a45b6cc11b1c"
+  },
+  "totals": {
+    "tests": 9,
+    "pass": 9,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "T4": {
+      "title": "岗位与推荐闭环（链路C）",
+      "total": 9,
+      "pass": 9,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": true,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": true,
+    "no_empty_run": true,
+    "modules_registered_non_empty": true
+  },
+  "records": [
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_duplicate_submission_is_idempotent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_feedback_type_validation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_job_crud_and_offline_hidden_from_students",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_job_import_partial_errors",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_job_parse_missing_is_404",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_job_search_by_skills_and_city",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_link_c_full_recommendation_chain",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_recommend_requires_confirmed_profile",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_recommend_without_matchable_jobs_is_404",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

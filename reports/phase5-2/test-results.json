@@ -1,0 +1,470 @@
+{
+  "generated_by": "tests/phase5_2/run_all.py",
+  "created_at": "2026-10-29T16:17:10",
+  "seconds": 31.14,
+  "ok": true,
+  "mode": "full",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "ecfadea842a50c6e4e167a51b7b7a45b6cc11b1c"
+  },
+  "totals": {
+    "tests": 56,
+    "pass": 52,
+    "fail": 0,
+    "skip": 4
+  },
+  "groups": {
+    "T1": {
+      "title": "数据库 Schema/约束/迁移/事务",
+      "total": 8,
+      "pass": 8,
+      "fail": 0,
+      "skip": 0
+    },
+    "T2": {
+      "title": "认证与权限（链路A）",
+      "total": 12,
+      "pass": 12,
+      "fail": 0,
+      "skip": 0
+    },
+    "T3": {
+      "title": "简历与画像（链路B）",
+      "total": 10,
+      "pass": 10,
+      "fail": 0,
+      "skip": 0
+    },
+    "T4": {
+      "title": "岗位与推荐闭环（链路C）",
+      "total": 9,
+      "pass": 9,
+      "fail": 0,
+      "skip": 0
+    },
+    "T5": {
+      "title": "数据隔离（链路D）",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
+    },
+    "T6": {
+      "title": "异常事务（链路E）",
+      "total": 8,
+      "pass": 7,
+      "fail": 0,
+      "skip": 1
+    },
+    "T7": {
+      "title": "PostgreSQL 集成",
+      "total": 3,
+      "pass": 0,
+      "fail": 0,
+      "skip": 3
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": true,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": true,
+    "no_empty_run": true,
+    "modules_registered_non_empty": true
+  },
+  "records": [
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_downgrade_and_reupgrade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_foreign_key_enforcement_and_cascade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_fresh_upgrade_creates_all_tables",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_indexes_exist",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_json_columns_roundtrip",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_repeated_upgrade_preserves_existing_data",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_transaction_rollback_leaves_no_partial_rows",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "class": "T1MigrationGates",
+      "test_id": "test_t1_database.T1MigrationGates.test_unique_constraints",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_admin_seed_can_login",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_duplicate_username_is_conflict",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_expired_token_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_invalid_credentials_401",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_link_a_full_auth_chain",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_login_failure_lockout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_missing_or_invalid_token_401",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_no_password_or_token_leak_in_responses",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_password_policy_rejects_weak_password",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_register_ignores_admin_role",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_student_cannot_use_admin_endpoints",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "class": "T2AuthChain",
+      "test_id": "test_t2_auth.T2AuthChain.test_token_not_written_to_logs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_delete_resume_removes_file_and_row",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_duplicate_upload_is_idempotent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_empty_upload_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_link_b_upload_parse_save_reread_edit_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_oversize_upload_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_parse_failure_marks_resume_and_reparse_recovers",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_profile_edit_conflict_on_stale_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_profile_edit_rejects_unknown_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_resume_list_and_metadata_no_absolute_path",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "class": "T3ResumeAndProfile",
+      "test_id": "test_t3_profile.T3ResumeAndProfile.test_unsupported_format_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_duplicate_submission_is_idempotent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_feedback_type_validation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_job_crud_and_offline_hidden_from_students",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_job_import_partial_errors",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_job_parse_missing_is_404",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_job_search_by_skills_and_city",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_link_c_full_recommendation_chain",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_recommend_requires_confirmed_profile",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "class": "T4JobsAndRecommendations",
+      "test_id": "test_t4_jobs_reco.T4JobsAndRecommendations.test_recommend_without_matchable_jobs_is_404",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "class": "T5DataIsolation",
+      "test_id": "test_t5_isolation.T5DataIsolation.test_admin_has_no_resume_or_reco_backdoor",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "class": "T5DataIsolation",
+      "test_id": "test_t5_isolation.T5DataIsolation.test_cross_user_feedback_blocked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "class": "T5DataIsolation",
+      "test_id": "test_t5_isolation.T5DataIsolation.test_cross_user_recommendation_blocked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "class": "T5DataIsolation",
+      "test_id": "test_t5_isolation.T5DataIsolation.test_cross_user_resume_access_blocked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "class": "T5DataIsolation",
+      "test_id": "test_t5_isolation.T5DataIsolation.test_profile_is_self_scoped_only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T5",
+      "class": "T5DataIsolation",
+      "test_id": "test_t5_isolation.T5DataIsolation.test_resume_list_scoped_to_owner",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_db_unavailable_returns_error_not_partial",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_db_write_failure_after_file_save_leaves_no_orphan",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_duplicate_request_returns_same_run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_model_env_incompatible_is_registered_not_run",
+      "status": "SKIP",
+      "detail": "NOT_RUN: 需要旧依赖栈 checkpoint 才能真实复现 MODEL_ENV_INCOMPATIBLE；本地合成环境无法合法构造，留待 Artifact-dependent 流程验证"
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_model_missing_without_fallback_is_error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_parse_failure_keeps_resume_row_without_profile",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_recommendation_failure_leaves_no_rows",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_service_interruption_mid_items_rolls_back_all",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T7",
+      "class": "T7PostgreSQLIntegration",
+      "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_downgrade_reupgrade_on_postgresql",
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+    },
+    {
+      "group": "T7",
+      "class": "T7PostgreSQLIntegration",
+      "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_jsonb_query_and_constraints_on_postgresql",
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+    },
+    {
+      "group": "T7",
+      "class": "T7PostgreSQLIntegration",
+      "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_migrate_and_schema_on_postgresql",
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+    }
+  ]
+}

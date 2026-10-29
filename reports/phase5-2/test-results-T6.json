@@ -1,0 +1,92 @@
+{
+  "generated_by": "tests/phase5_2/run_all.py",
+  "created_at": "2026-10-29T16:16:31",
+  "seconds": 13.78,
+  "ok": true,
+  "mode": "partial:T6",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "ecfadea842a50c6e4e167a51b7b7a45b6cc11b1c"
+  },
+  "totals": {
+    "tests": 8,
+    "pass": 7,
+    "fail": 0,
+    "skip": 1
+  },
+  "groups": {
+    "T6": {
+      "title": "异常事务（链路E）",
+      "total": 8,
+      "pass": 7,
+      "fail": 0,
+      "skip": 1
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": true,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": true,
+    "no_empty_run": true,
+    "modules_registered_non_empty": true
+  },
+  "records": [
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_db_unavailable_returns_error_not_partial",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_db_write_failure_after_file_save_leaves_no_orphan",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_duplicate_request_returns_same_run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_model_env_incompatible_is_registered_not_run",
+      "status": "SKIP",
+      "detail": "NOT_RUN: 需要旧依赖栈 checkpoint 才能真实复现 MODEL_ENV_INCOMPATIBLE；本地合成环境无法合法构造，留待 Artifact-dependent 流程验证"
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_model_missing_without_fallback_is_error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_parse_failure_keeps_resume_row_without_profile",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_recommendation_failure_leaves_no_rows",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "class": "T6FailureTransactions",
+      "test_id": "test_t6_failures.T6FailureTransactions.test_service_interruption_mid_items_rolls_back_all",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}
