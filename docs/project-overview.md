@@ -39,6 +39,7 @@
 | Gold 冻结与标注质量门禁（Phase4-3A-2） | ✅ 冻结 CLI（前置/后置双门禁）、标注 QA、独立性检查、仲裁状态机 | ✅ 工程链路由 Phase5-1R R1/R2 覆盖（含 CLI 正向链路） | ✅ 临时隔离工作区可复跑 | ⬜ 等待人工标注 | 同 Phase4-3A：真实 Gold 未到位；无分歧场景已可合法冻结（工程侧不再阻断） |
 | 业务推理服务（Phase5-1） | ✅ 中文简历/JD 解析、业务画像、Baseline 排序、可解释结果、FastAPI | ✅ S01–S24 **92/92 PASS**（`reports/phase5-1/`） | ✅ 纯 CPU 合成夹具可复跑 | ⬜ 未验证（分数为启发式/研究分，非录用概率） | 中文人岗匹配模型缺失（`future_verified` 仅预留）；服务默认本地开发、无认证（外网部署为上线阻断项） |
 | 工程整改（Phase5-1R） | ✅ F-001–F-009 全部修复 + 二轮审计补漏（姓名 PII 脱敏缺口） | ✅ R1–R6 **151/151 PASS**（`reports/phase5-1r/`） | ✅ 纯 CPU 合成夹具可复跑（`python tests/phase5_1r/run_all.py`） | —（本阶段只做整改，不产生业务结论） | 无 P0/P1 遗留；剩余风险见 `reports/phase5-1r/phase5-1r-acceptance.md` |
+| 架构优化与工程质量治理（Phase5-1A） | ✅ 模块化单体分层（domain/infra 抽取 + 兼容 re-export）、类型化配置、模型加载失败三分类、测试运行器可信化、环境三分、最小 CI | ✅ 门禁自检 **26/26 PASS**（A1/A2/A4/A6/A7）+ 全套件回归（`reports/phase5-1a/`） | ✅ 纯 CPU 可复跑（`python tests/phase5_1a/run_all.py`） | —（本阶段只做架构治理，不产生业务结论） | 5 个 GBM checkpoint 跨 sklearn 版本不可加载（`MODEL_ENV_INCOMPATIBLE`，走 Legacy 环境，禁止重训）；`pip check` 环境冲突同上 |
 | Agent 能力 | ⬜ 未开始 | — | — | — | 不提前造代码 |
 | 前后端实现 | ⬜ 未开始 | — | — | — | — |
 
