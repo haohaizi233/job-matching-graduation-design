@@ -1,0 +1,760 @@
+{
+  "generated_by": "tests/phase5_1/run_all.py",
+  "created_at": "2026-10-29T11:35:30",
+  "seconds": 6.61,
+  "ok": true,
+  "totals": {
+    "tests": 92,
+    "pass": 92,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "S01": {
+      "title": "中文 TXT 简历解析",
+      "module": "test_s01_s04_documents",
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "skip": 0
+    },
+    "S02": {
+      "title": "中文 DOCX 简历解析",
+      "module": "test_s01_s04_documents",
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "skip": 0
+    },
+    "S03": {
+      "title": "可提取文本 PDF 解析",
+      "module": "test_s01_s04_documents",
+      "total": 1,
+      "pass": 1,
+      "fail": 0,
+      "skip": 0
+    },
+    "S04": {
+      "title": "扫描版 PDF / 空文本拒识",
+      "module": "test_s01_s04_documents",
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "skip": 0
+    },
+    "S05": {
+      "title": "技能归一化与来源标注",
+      "module": "test_s05_s07_profile",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
+    },
+    "S06": {
+      "title": "简历字段证据溯源",
+      "module": "test_s05_s07_profile",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "S07": {
+      "title": "岗位必要技能与加分技能区分",
+      "module": "test_s05_s07_profile",
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "skip": 0
+    },
+    "S08": {
+      "title": "学历规则回退与异常拒识",
+      "module": "test_s08_s09_education_validation",
+      "total": 8,
+      "pass": 8,
+      "fail": 0,
+      "skip": 0
+    },
+    "S09": {
+      "title": "缺字段与非法数据验证",
+      "module": "test_s08_s09_education_validation",
+      "total": 7,
+      "pass": 7,
+      "fail": 0,
+      "skip": 0
+    },
+    "S10": {
+      "title": "Baseline 稳定排序",
+      "module": "test_s10_s12_ranking",
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "skip": 0
+    },
+    "S11": {
+      "title": "重复岗位处理",
+      "module": "test_s10_s12_ranking",
+      "total": 1,
+      "pass": 1,
+      "fail": 0,
+      "skip": 0
+    },
+    "S12": {
+      "title": "同分稳定排序",
+      "module": "test_s10_s12_ranking",
+      "total": 1,
+      "pass": 1,
+      "fail": 0,
+      "skip": 0
+    },
+    "S13": {
+      "title": "MatchPredictor 合法输入适配",
+      "module": "test_s13_s16_model",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "S14": {
+      "title": "禁止模型目标值泄漏",
+      "module": "test_s13_s16_model",
+      "total": 5,
+      "pass": 5,
+      "fail": 0,
+      "skip": 0
+    },
+    "S15": {
+      "title": "模型权重缺失降级",
+      "module": "test_s13_s16_model",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "S16": {
+      "title": "中文不兼容模型拒绝正式模式",
+      "module": "test_s13_s16_model",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "S17": {
+      "title": "score_type 明确且正确",
+      "module": "test_s17_s18_results",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "S18": {
+      "title": "匹配解释与实际证据一致",
+      "module": "test_s17_s18_results",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
+    },
+    "S19": {
+      "title": "PII 日志脱敏",
+      "module": "test_s19_s22_api",
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "skip": 0
+    },
+    "S20": {
+      "title": "API 正常/异常/边界",
+      "module": "test_s19_s22_api",
+      "total": 11,
+      "pass": 11,
+      "fail": 0,
+      "skip": 0
+    },
+    "S21": {
+      "title": "模型加载仅在初始化或缓存失效时",
+      "module": "test_s19_s22_api",
+      "total": 2,
+      "pass": 2,
+      "fail": 0,
+      "skip": 0
+    },
+    "S22": {
+      "title": "同输入同模型版本确定性",
+      "module": "test_s19_s22_api",
+      "total": 1,
+      "pass": 1,
+      "fail": 0,
+      "skip": 0
+    },
+    "S23": {
+      "title": "离线闭环演示运行成功",
+      "module": "test_s23_s24_demo_guard",
+      "total": 2,
+      "pass": 2,
+      "fail": 0,
+      "skip": 0
+    },
+    "S24": {
+      "title": "不触碰历史模型与 Gold 盲测数据",
+      "module": "test_s23_s24_demo_guard",
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "records": [
+    {
+      "group": "S01",
+      "test": "test_txt_fields_extracted_with_status_ok (test_s01_s04_documents.S01ChineseTxtParse.test_txt_fields_extracted_with_status_ok)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S01",
+      "test": "test_txt_gbk_encoding_supported (test_s01_s04_documents.S01ChineseTxtParse.test_txt_gbk_encoding_supported)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S01",
+      "test": "test_unsupported_extension_rejected (test_s01_s04_documents.S01ChineseTxtParse.test_unsupported_extension_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S02",
+      "test": "test_broken_docx_rejected (test_s01_s04_documents.S02DocxParse.test_broken_docx_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S02",
+      "test": "test_docx_text_and_profile (test_s01_s04_documents.S02DocxParse.test_docx_text_and_profile)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S02",
+      "test": "test_upload_bytes_docx (test_s01_s04_documents.S02DocxParse.test_upload_bytes_docx)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S03",
+      "test": "test_pdf_text_layer_extracted (test_s01_s04_documents.S03PdfWithText.test_pdf_text_layer_extracted)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S04",
+      "test": "test_empty_text_status (test_s01_s04_documents.S04ScannedPdfRejection.test_empty_text_status)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S04",
+      "test": "test_scanned_pdf_returns_ocr_required (test_s01_s04_documents.S04ScannedPdfRejection.test_scanned_pdf_returns_ocr_required)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S04",
+      "test": "test_short_but_nonempty_resume_not_fabricated (test_s01_s04_documents.S04ScannedPdfRejection.test_short_but_nonempty_resume_not_fabricated)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S05",
+      "test": "test_alias_mapping (test_s05_s07_profile.S05SkillNormalization.test_alias_mapping)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S05",
+      "test": "test_confidence_meaning_declared (test_s05_s07_profile.S05SkillNormalization.test_confidence_meaning_declared)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S05",
+      "test": "test_dangerous_pairs_stay_distinct (test_s05_s07_profile.S05SkillNormalization.test_dangerous_pairs_stay_distinct)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S05",
+      "test": "test_segment_filters_non_skill_fragments (test_s05_s07_profile.S05SkillNormalization.test_segment_filters_non_skill_fragments)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S05",
+      "test": "test_unmapped_kept_with_needs_review (test_s05_s07_profile.S05SkillNormalization.test_unmapped_kept_with_needs_review)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S05",
+      "test": "test_verification_status_vocabulary (test_s05_s07_profile.S05SkillNormalization.test_verification_status_vocabulary)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S06",
+      "test": "test_every_field_carries_evidence_and_source (test_s05_s07_profile.S06EvidenceTrace.test_every_field_carries_evidence_and_source)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S06",
+      "test": "test_evidence_substring_traced_to_source (test_s05_s07_profile.S06EvidenceTrace.test_evidence_substring_traced_to_source)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S06",
+      "test": "test_experience_never_fabricates_achievements (test_s05_s07_profile.S06EvidenceTrace.test_experience_never_fabricates_achievements)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S06",
+      "test": "test_structured_self_report_and_rule_split (test_s05_s07_profile.S06EvidenceTrace.test_structured_self_report_and_rule_split)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S07",
+      "test": "test_match_skill_sets_reports_evidence_missing_not_incompetence (test_s05_s07_profile.S07RequiredVsPreferredSkills.test_match_skill_sets_reports_evidence_missing_not_incompetence)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S07",
+      "test": "test_preferred_marker_moves_requirement_to_preferred (test_s05_s07_profile.S07RequiredVsPreferredSkills.test_preferred_marker_moves_requirement_to_preferred)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S07",
+      "test": "test_required_and_preferred_split (test_s05_s07_profile.S07RequiredVsPreferredSkills.test_required_and_preferred_split)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S08",
+      "test": "test_anomalous_expression_rejected_for_human_review (test_s08_s09_education_validation.S08EducationFallbackAndRejection.test_anomalous_expression_rejected_for_human_review)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S08",
+      "test": "test_batch_supported (test_s08_s09_education_validation.S08EducationFallbackAndRejection.test_batch_supported)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S08",
+      "test": "test_empty_input_yields_unknown_degree_token (test_s08_s09_education_validation.S08EducationFallbackAndRejection.test_empty_input_yields_unknown_degree_token)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S08",
+      "test": "test_job_profile_education_flags_human_review (test_s08_s09_education_validation.S08EducationFallbackAndRejection.test_job_profile_education_flags_human_review)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S08",
+      "test": "test_missing_model_dir_degrades_to_rules_without_fake_output (test_s08_s09_education_validation.S08EducationFallbackAndRejection.test_missing_model_dir_degrades_to_rules_without_fake_output)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S08",
+      "test": "test_model_record_mapping_and_rule_fallback (test_s08_s09_education_validation.S08EducationFallbackAndRejection.test_model_record_mapping_and_rule_fallback)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S08",
+      "test": "test_rule_mode_declares_rules_only (test_s08_s09_education_validation.S08EducationFallbackAndRejection.test_rule_mode_declares_rules_only)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S08",
+      "test": "test_rule_mode_parses_above_expression (test_s08_s09_education_validation.S08EducationFallbackAndRejection.test_rule_mode_parses_above_expression)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S09",
+      "test": "test_empty_job_text_yields_empty_status (test_s08_s09_education_validation.S09ValidationAndIllegalInput.test_empty_job_text_yields_empty_status)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S09",
+      "test": "test_empty_resume_text_yields_empty_status (test_s08_s09_education_validation.S09ValidationAndIllegalInput.test_empty_resume_text_yields_empty_status)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S09",
+      "test": "test_job_profile_requires_job_id (test_s08_s09_education_validation.S09ValidationAndIllegalInput.test_job_profile_requires_job_id)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S09",
+      "test": "test_rank_options_rejects_illegal_mode (test_s08_s09_education_validation.S09ValidationAndIllegalInput.test_rank_options_rejects_illegal_mode)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S09",
+      "test": "test_skill_entry_requires_identity (test_s08_s09_education_validation.S09ValidationAndIllegalInput.test_skill_entry_requires_identity)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S09",
+      "test": "test_student_profile_requires_profile_id (test_s08_s09_education_validation.S09ValidationAndIllegalInput.test_student_profile_requires_profile_id)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S09",
+      "test": "test_unknown_field_kept_unknown_not_fabricated (test_s08_s09_education_validation.S09ValidationAndIllegalInput.test_unknown_field_kept_unknown_not_fabricated)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S10",
+      "test": "test_baseline_relevant_job_first (test_s10_s12_ranking.S10BaselineStableOrdering.test_baseline_relevant_job_first)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S10",
+      "test": "test_top_k_respected (test_s10_s12_ranking.S10BaselineStableOrdering.test_top_k_respected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S10",
+      "test": "test_two_runs_identical (test_s10_s12_ranking.S10BaselineStableOrdering.test_two_runs_identical)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S11",
+      "test": "test_duplicate_job_id_dropped_with_warning (test_s10_s12_ranking.S11DuplicateJobs.test_duplicate_job_id_dropped_with_warning)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S12",
+      "test": "test_equal_scores_keep_input_order (test_s10_s12_ranking.S12TieStability.test_equal_scores_keep_input_order)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S13",
+      "test": "test_build_inputs_matches_feature_contract (test_s13_s16_model.S13MatchPredictorAdaptation.test_build_inputs_matches_feature_contract)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S13",
+      "test": "test_experimental_rank_with_stub_predictor (test_s13_s16_model.S13MatchPredictorAdaptation.test_experimental_rank_with_stub_predictor)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S13",
+      "test": "test_feature_map_encodes_without_error (test_s13_s16_model.S13MatchPredictorAdaptation.test_feature_map_encodes_without_error)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S13",
+      "test": "test_model_inapplicable_when_intention_missing (test_s13_s16_model.S13MatchPredictorAdaptation.test_model_inapplicable_when_intention_missing)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S14",
+      "test": "test_built_inputs_contain_no_target_fields (test_s13_s16_model.S14NoTargetLeakage.test_built_inputs_contain_no_target_fields)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S14",
+      "test": "test_check_feature_policy_accepts_whitelist (test_s13_s16_model.S14NoTargetLeakage.test_check_feature_policy_accepts_whitelist)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S14",
+      "test": "test_forbidden_keys_rejected (test_s13_s16_model.S14NoTargetLeakage.test_forbidden_keys_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S14",
+      "test": "test_no_score_derived_fields_in_rank_results (test_s13_s16_model.S14NoTargetLeakage.test_no_score_derived_fields_in_rank_results)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S14",
+      "test": "test_policy_rejects_forbidden_columns (test_s13_s16_model.S14NoTargetLeakage.test_policy_rejects_forbidden_columns)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S15",
+      "test": "test_explicit_error_without_fallback (test_s13_s16_model.S15ModelMissingDegradation.test_explicit_error_without_fallback)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S15",
+      "test": "test_registry_load_raises_model_missing (test_s13_s16_model.S15ModelMissingDegradation.test_registry_load_raises_model_missing)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S15",
+      "test": "test_transparent_degradation_with_fallback (test_s13_s16_model.S15ModelMissingDegradation.test_transparent_degradation_with_fallback)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S15",
+      "test": "test_unregistered_model_raises (test_s13_s16_model.S15ModelMissingDegradation.test_unregistered_model_raises)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S16",
+      "test": "test_baseline_allowed_but_never_calibrated (test_s13_s16_model.S16FormalModeGate.test_baseline_allowed_but_never_calibrated)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S16",
+      "test": "test_english_proxy_model_rejected_in_formal_mode (test_s13_s16_model.S16FormalModeGate.test_english_proxy_model_rejected_in_formal_mode)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S16",
+      "test": "test_future_verified_slot_is_not_fabricated (test_s13_s16_model.S16FormalModeGate.test_future_verified_slot_is_not_fabricated)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S16",
+      "test": "test_research_only_zh_model_also_rejected (test_s13_s16_model.S16FormalModeGate.test_research_only_zh_model_also_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S17",
+      "test": "test_baseline_uses_heuristic_score (test_s17_s18_results.S17ScoreTypes.test_baseline_uses_heuristic_score)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S17",
+      "test": "test_calibrated_score_forbidden_without_gold (test_s17_s18_results.S17ScoreTypes.test_calibrated_score_forbidden_without_gold)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S17",
+      "test": "test_experimental_uses_model_raw_score (test_s17_s18_results.S17ScoreTypes.test_experimental_uses_model_raw_score)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S17",
+      "test": "test_no_hire_probability_fields (test_s17_s18_results.S17ScoreTypes.test_no_hire_probability_fields)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S18",
+      "test": "test_constraints_never_assert_hard_qualification (test_s17_s18_results.S18ExplanationConsistency.test_constraints_never_assert_hard_qualification)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S18",
+      "test": "test_evidence_section_is_traceable (test_s17_s18_results.S18ExplanationConsistency.test_evidence_section_is_traceable)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S18",
+      "test": "test_explanation_counts_match_skill_sets (test_s17_s18_results.S18ExplanationConsistency.test_explanation_counts_match_skill_sets)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S18",
+      "test": "test_matched_skills_traceable_to_student_evidence (test_s17_s18_results.S18ExplanationConsistency.test_matched_skills_traceable_to_student_evidence)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S18",
+      "test": "test_missing_skill_is_evidence_missing_not_incompetence (test_s17_s18_results.S18ExplanationConsistency.test_missing_skill_is_evidence_missing_not_incompetence)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S18",
+      "test": "test_skill_status_vocabulary (test_s17_s18_results.S18ExplanationConsistency.test_skill_status_vocabulary)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S19",
+      "test": "test_logger_scrubs_pii (test_s19_s22_api.S19PiiLogScrubbing.test_logger_scrubs_pii)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S19",
+      "test": "test_parse_endpoint_logs_no_raw_pii (test_s19_s22_api.S19PiiLogScrubbing.test_parse_endpoint_logs_no_raw_pii)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S19",
+      "test": "test_profile_evidence_masked (test_s19_s22_api.S19PiiLogScrubbing.test_profile_evidence_masked)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_bad_mode_returns_error_code (test_s19_s22_api.S20ApiNormalAndBoundary.test_bad_mode_returns_error_code)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_batch_limit_boundary (test_s19_s22_api.S20ApiNormalAndBoundary.test_batch_limit_boundary)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_empty_jobs_rejected (test_s19_s22_api.S20ApiNormalAndBoundary.test_empty_jobs_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_health (test_s19_s22_api.S20ApiNormalAndBoundary.test_health)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_invalid_base64_rejected (test_s19_s22_api.S20ApiNormalAndBoundary.test_invalid_base64_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_missing_text_is_empty_input (test_s19_s22_api.S20ApiNormalAndBoundary.test_missing_text_is_empty_input)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_models_endpoints (test_s19_s22_api.S20ApiNormalAndBoundary.test_models_endpoints)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_openapi_document (test_s19_s22_api.S20ApiNormalAndBoundary.test_openapi_document)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_request_id_passthrough (test_s19_s22_api.S20ApiNormalAndBoundary.test_request_id_passthrough)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_resume_and_job_parse_and_rank (test_s19_s22_api.S20ApiNormalAndBoundary.test_resume_and_job_parse_and_rank)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S20",
+      "test": "test_unsupported_format_rejected (test_s19_s22_api.S20ApiNormalAndBoundary.test_unsupported_format_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S21",
+      "test": "test_loaded_once_then_cached (test_s19_s22_api.S21ModelLoadCaching.test_loaded_once_then_cached)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S21",
+      "test": "test_registry_info_records_model_version (test_s19_s22_api.S21ModelLoadCaching.test_registry_info_records_model_version)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S22",
+      "test": "test_same_input_same_output (test_s19_s22_api.S22Determinism.test_same_input_same_output)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S23",
+      "test": "test_demo_output_is_not_gold_label (test_s23_s24_demo_guard.S23OfflineDemoPipeline.test_demo_output_is_not_gold_label)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S23",
+      "test": "test_demo_runs_end_to_end (test_s23_s24_demo_guard.S23OfflineDemoPipeline.test_demo_runs_end_to_end)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S24",
+      "test": "test_model_and_gold_files_unchanged (test_s23_s24_demo_guard.S24HistoryAssetsUntouched.test_model_and_gold_files_unchanged)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S24",
+      "test": "test_no_write_calls_targeting_history_assets (test_s23_s24_demo_guard.S24HistoryAssetsUntouched.test_no_write_calls_targeting_history_assets)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "S24",
+      "test": "test_service_never_writes_model_checkpoints (test_s23_s24_demo_guard.S24HistoryAssetsUntouched.test_service_never_writes_model_checkpoints)",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}
