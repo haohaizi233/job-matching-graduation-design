@@ -8,15 +8,16 @@
     不伪造模型输出；记录 model_version、表达式是否在训练中出现过、拒识/人工复核状态；
   * 每个字段带 fact_source：stated_in_source / rule_parsed / model_inferred / human_corrected。
 
-复用 annotation/pool 的中文启发式抽取（技能词表、类别、年限、加分段、学历字段）。
+复用 domain/job_rules、domain/pii_masking 与 service/requirements 的中文启发式抽取。
+类别/加分段/脱敏走 domain 层纯规则；届别/年限走 service/requirements（F-005/F-006 口径）。
 """
 from __future__ import annotations
 
 import re
 from pathlib import Path
 
-from ..annotation.pii import mask_matches
-from ..annotation.pool import (classify_job_category, preferred_segment)
+from ..domain.job_rules import classify_job_category, preferred_segment
+from ..domain.pii_masking import mask_matches
 from ..core import norm_text, sha256_text
 from .contracts import (EDU_CONFIDENCE_MEANING, CohortRequirement,
                         EducationRequirement,

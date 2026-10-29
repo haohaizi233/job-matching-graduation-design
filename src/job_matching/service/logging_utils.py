@@ -2,7 +2,7 @@
 """服务日志与请求 ID（模块 E：敏感内容不入日志）。
 
 约束：
-  * 所有业务日志先过 PII 掩码（复用 annotation/pii.mask_matches）再落盘/落控制台；
+  * 所有业务日志先过 PII 掩码（复用 domain/pii_masking.mask_matches）再落盘/落控制台；
   * 不记录请求正文，只记录 request_id / 路径 / 计数 / 耗时；
   * request_id 由调用方注入或随机生成，全链路可追踪。
 """
@@ -11,7 +11,7 @@ from __future__ import annotations
 import logging
 import uuid
 
-from ..annotation.pii import mask_matches
+from ..domain.pii_masking import mask_matches
 
 LOGGER_NAME = "job_matching.service"
 

@@ -21,12 +21,16 @@ import zipfile
 from pathlib import Path
 
 from ..core import norm_text
+from ..infra.documents import (  # noqa: F401  文本抽取适配器已下沉 infra
+    SUPPORTED_FORMATS,
+    ResumeIntakeError,
+    extract_text,
+)
 from . import dedup as dedup_mod
 from .consent import ConsentError, SOURCE_CLASSES, consent_index, gold_eligibility
 from .pii import scrub_record
 from .pool import detect_language
 
-SUPPORTED_FORMATS = ("pdf", "docx", "txt", "csv", "jsonl")
 
 INTAKE_FIELDS = (
     "resume_id", "resume_source", "source_class", "consent_id", "consent_status",
@@ -43,62 +47,7 @@ _STRUCTURED_OPTIONAL = (
 )
 
 
-class ResumeIntakeError(ValueError):
-    """简历导入非法（授权缺失、格式不支持、解析器缺失等）。"""
-    pass
-
-
-# ------------------------------------------------------------------ 文本抽取
-def _extract_txt(path: Path) -> str:
-    for enc in ("utf-8-sig", "utf-8", "gbk"):
-        try:
-            return path.read_text(encoding=enc)
-        except UnicodeDecodeError:
-            continue
-    raise ResumeIntakeError(f"TXT 编码无法识别（尝试 utf-8/gbk 均失败）: {path}")
-
-
-def _extract_docx(path: Path) -> str:
-    """最小 DOCX 适配器：读 word/document.xml 去标签（不引入 python-docx）。"""
-    try:
-        with zipfile.ZipFile(path) as z:
-            xml = z.read("word/document.xml").decode("utf-8", errors="ignore")
-    except (zipfile.BadZipFile, KeyError) as e:
-        raise ResumeIntakeError(f"DOCX 解析失败（不是合法 docx 或缺 document.xml）: {path} ({e})")
-    xml = re.sub(r"</w:p>", "\n", xml)
-    text = re.sub(r"<[^>]+>", "", xml)
-    return text
-
-
-def _extract_pdf(path: Path) -> str:
-    try:
-        import fitz  # PyMuPDF
-    except ImportError as e:  # pragma: no cover - 环境相关
-        raise ResumeIntakeError(
-            f"PDF 解析器不可用（需要 PyMuPDF/fitz）: {path}；"
-            "请先转成 TXT/DOCX 或安装 fitz，不静默跳过") from e
-    try:
-        with fitz.open(path) as doc:
-            return "\n".join(page.get_text() for page in doc)
-    except Exception as e:
-        raise ResumeIntakeError(f"PDF 解析失败: {path} ({e})")
-
-
-def extract_text(path: Path | str) -> dict:
-    """抽取文档正文。返回 {text, format, extractor}；不支持的格式显式报错。"""
-    p = Path(path)
-    if not p.exists():
-        raise ResumeIntakeError(f"简历文件不存在: {p}")
-    ext = p.suffix.lower().lstrip(".")
-    if ext == "txt":
-        return {"text": _extract_txt(p), "format": "txt", "extractor": "stdlib"}
-    if ext == "docx":
-        return {"text": _extract_docx(p), "format": "docx", "extractor": "zipfile+xml(minimal)"}
-    if ext == "pdf":
-        return {"text": _extract_pdf(p), "format": "pdf", "extractor": "fitz(PyMuPDF)"}
-    raise ResumeIntakeError(
-        f"不支持的简历格式: .{ext}（支持 {SUPPORTED_FORMATS}；"
-        "csv/jsonl 请走结构化导入 parse_structured）")
+# ResumeIntakeError / SUPPORTED_FORMATS / extract_text 由 ..infra.documents 提供（上方 re-export）。
 
 
 # ------------------------------------------------------------------ 结构化导入

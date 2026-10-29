@@ -19,7 +19,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from ..annotation.pii import detect_pii, mask_matches
+from ..domain.pii_masking import detect_pii, mask_matches
 from ..core import norm_text, sha256_text
 from .contracts import (ExperienceEntry, Field, StudentProfile)
 from .skills_normalize import (normalize_skill_terms, skills_from_segment,

@@ -4,8 +4,8 @@
 复用：
   * preprocess_skills.canonical_skill / canonicalize_skills —— 形式规范化 + 显式别名精确映射
     （铁律：禁止子串包含判断，Java != JavaScript，C != C++）；
-  * annotation/pool.SKILL_LEXICON —— 中英混合技能词表（启发式辅助，非真值）；
-  * annotation/pii.mask_matches —— 证据文本脱敏后再留存。
+  * domain/skills_lexicon.SKILL_LEXICON —— 中英混合技能词表（启发式辅助，非真值）；
+  * domain/pii_masking.mask_matches —— 证据文本脱敏后再留存。
 
 产出 SkillEntry：
   * confidence = 启发式抽取置信度（见 CONFIDENCE_MEANING），绝不是技能掌握概率；
@@ -17,8 +17,8 @@ from __future__ import annotations
 
 import re
 
-from ..annotation.pii import mask_matches
-from ..annotation.pool import SKILL_LEXICON
+from ..domain.pii_masking import mask_matches
+from ..domain.skills_lexicon import SKILL_LEXICON, boundary_regex
 from ..core import sha256_text
 from ..preprocess_skills import canonical_skill
 from .contracts import CONFIDENCE_MEANING, SkillEntry
@@ -65,9 +65,9 @@ def split_skill_terms(raw) -> list[str]:
 
 
 def _boundary_regex(term: str) -> re.Pattern:
-    if re.match(r"^[A-Za-z0-9+#]", term):
-        return re.compile(rf"(?<![A-Za-z0-9+#]){re.escape(term)}(?![A-Za-z0-9+#])")
-    return re.compile(re.escape(term))
+    # 单一实现：domain.skills_lexicon.boundary_regex（禁止在业务层重复实现边界规则，
+    # 避免 Java/JavaScript、C/C++、Spring/Spring Boot 判定口径漂移）
+    return boundary_regex(term)
 
 
 _LEXICON_RES = [(t, _boundary_regex(t)) for t in _WANTED]

@@ -102,7 +102,7 @@ def tfidf_cosine_scores(pairs: list[dict], ngram_max: int = 4) -> np.ndarray:
 
 def features_from_pair(pair: dict) -> tuple[dict, dict]:
     """pair 原始字段 -> MatchPredictor 输入（白名单字段，不接触派生分数）。"""
-    from ..annotation.pool import classify_job_category
+    from ..domain.job_rules import classify_job_category
     years = pair.get("resume_years_experience")
     try:
         years_v = float(years) if str(years).strip() != "" else float("nan")

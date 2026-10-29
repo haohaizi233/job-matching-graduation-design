@@ -23,8 +23,8 @@ import time
 from collections import Counter
 from dataclasses import dataclass, field
 
-from ..annotation.pool import classify_job_category
-from ..pair_features import title_tokens
+from ..domain.job_rules import classify_job_category
+from ..domain.job_rules import title_tokens
 from ..preprocess_skills import jaccard
 from .contracts import JobProfile, StudentProfile
 from .errors import ServiceError
@@ -144,7 +144,7 @@ class LegacyMatchAdapter:
       * resume.target_position_norm  <- student.employment_intention（必须非空）；
       * job.job_title_norm           <- job.job_title（必须非空）；
       * skills_canonical_json        <- 双方技能规范名（可为空列表，触发 both_skills_empty）；
-      * inferred_category / category <- pool.classify_job_category 规则映射；
+      * inferred_category / category <- domain.job_rules.classify_job_category 规则映射；
       * years_experience             <- 业务画像不采集工作年限 => 显式缺失(NaN)，
                                         由 FeatureMap 按 train 均值填充（既有合法行为），
                                         绝不编造年限。

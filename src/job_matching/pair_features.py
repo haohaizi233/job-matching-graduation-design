@@ -16,7 +16,8 @@ import pandas as pd
 from .config import get_config
 from .preprocess_skills import jaccard, overlap_ratio
 
-_TOKEN_RX = re.compile(r"[A-Za-z][A-Za-z0-9+#\.]*|[\u4e00-\u9fff]")
+# Phase5-1A：title_tokens / _TOKEN_RX 已下沉 domain.job_rules（纯文本规则，此处 re-export）
+from .domain.job_rules import title_tokens  # noqa: F401
 
 # 特征列 -> 角色（写入 feature_schema.json）
 FEATURE_ROLES = {
@@ -45,13 +46,6 @@ NUMERIC_FEATURE_COLUMNS = [
 ]
 
 SET_FEATURE_COLUMNS = ["cv_skills_canonical_json", "job_skills_canonical_json"]
-
-
-def title_tokens(s: str) -> set[str]:
-    """职位/岗位名称的独立词元化：ASCII 取单词，CJK 取单字。"""
-    if not isinstance(s, str) or not s:
-        return set()
-    return {t.lower() for t in _TOKEN_RX.findall(s) if len(t.strip()) >= 1}
 
 
 def _skill_sets(series: pd.Series) -> list[set[str]]:

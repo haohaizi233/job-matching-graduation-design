@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import re
 
-from ..pair_features import title_tokens
+from ..domain.job_rules import title_tokens
 from ..preprocess_skills import jaccard
 from .contracts import (CohortRequirement, ExperienceRequirement, Field, JobProfile,
                         StudentProfile)

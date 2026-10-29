@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """业务文档文本抽取（模块 A：中文 TXT / PDF / DOCX）。
 
-复用 annotation/resume_intake.extract_text 的格式识别与解析器；
+复用 infra/documents.extract_text 的格式识别与解析器（Phase5-1A 已下沉适配层）；
 补充业务层要求：
   * 扫描版 / 无文本层 PDF 必须显式返回 parse_status="ocr_required"，
     绝不允许用空文本伪装解析成功；
@@ -14,7 +14,7 @@ import tempfile
 import zipfile
 from pathlib import Path
 
-from ..annotation.resume_intake import ResumeIntakeError, extract_text
+from ..infra.documents import ResumeIntakeError, extract_text
 from .errors import ServiceError
 
 SUPPORTED_EXTENSIONS = ("txt", "docx", "pdf")

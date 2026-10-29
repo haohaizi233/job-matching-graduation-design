@@ -27,6 +27,18 @@ from ..pair_features import title_tokens
 from . import dedup as dedup_mod
 from .pii import detect_pii, scrub_record
 from .schema import DIFFICULTY_TIERS, PAIR_FIELDS, PROTOCOL_VERSION
+# ---- Phase5-1A：共用纯规则下沉到 job_matching.domain；本模块保留旧导入路径（re-export）
+from ..domain.job_rules import (  # noqa: F401
+    CATEGORY_KEYWORDS,
+    CATEGORY_OTHER,
+    PREFERRED_MARKERS as _PREFERRED_MARKERS,
+    SECTION_MARKERS as _SECTION_MARKERS,
+    classify_job_category,
+    detect_language,
+    preferred_segment,
+)
+from ..domain.skills_lexicon import SKILL_LEXICON, extract_skills  # noqa: F401
+
 
 # ------------------------------------------------------------------ 来源登记
 JOB_SOURCES = {
@@ -70,43 +82,7 @@ RESUME_SOURCES = {
     },
 }
 
-# 启发式技能词表（中英混合，仅用于抽样分层与标注辅助；非真值）
-SKILL_LEXICON = (
-    "python", "java", "c++", "c#", "go", "golang", "rust", "javascript", "typescript",
-    "sql", "mysql", "postgresql", "oracle", "redis", "mongodb", "hive", "spark",
-    "hadoop", "flink", "kafka", "etl", "tableau", "powerbi", "excel", "vba",
-    "pytorch", "tensorflow", "机器学习", "深度学习", "自然语言处理", "计算机视觉",
-    "数据分析", "数据挖掘", "数据治理", "数据仓库", "爬虫", "算法", "推荐系统",
-    "大模型", "llm", "prompt", "transformer", "bert",
-    "linux", "docker", "kubernetes", "k8s", "微服务", "spring", "django", "flask",
-    "前端", "后端", "全栈", "vue", "react", "android", "ios", "小程序",
-    "测试", "自动化测试", "运维", "网络安全", "信息安全",
-    "财务分析", "会计", "审计", "税务", "成本核算", "财务报表", "预算管理", "资金管理",
-    "投融资", "风控", "合规", "证券", "基金", "银行",
-    "人力资源规划", "招聘", "绩效管理", "薪酬管理", "培训", "劳动关系", "社保公积金",
-    "销售", "客户开发", "渠道管理", "商务谈判", "大客户", "招投标", "合同管理",
-    "市场推广", "品牌策划", "活动策划", "新媒体运营", "内容运营", "用户运营", "社群运营",
-    "电商运营", "文案策划", "平面设计", "ui设计", "ps", "pr", "ae", "剪辑",
-    "产品经理", "需求分析", "项目管理", "敏捷开发", "英语", "日语",
-)
-
-# 岗位类别启发式关键词（顺序即优先级）
-CATEGORY_KEYWORDS = (
-    ("INFORMATION-TECHNOLOGY",
-     ("工程师", "开发", "程序员", "算法", "数据", "运维", "测试", "前端", "后端",
-      "java", "python", "c++", "嵌入式", "信息安全", "网络安全", "架构师", "人工智能",
-      "机器学习", "产品经理", "技术支持")),
-    ("FINANCE",
-     ("财务", "会计", "金融", "审计", "税务", "出纳", "银行", "投资", "基金", "证券", "风控")),
-    ("HR",
-     ("人力", "招聘", "人事", "薪酬", "绩效", "培训专员", "劳动关系")),
-    ("SALES",
-     ("销售", "商务", "渠道", "客户经理", "业务员", "市场拓展", "招投标")),
-    ("MARKETING-OPS",
-     ("运营", "市场", "品牌", "策划", "文案", "新媒体", "内容", "编辑")),
-)
-CATEGORY_OTHER = "OTHER"
-
+# 技能词表 / 岗位类别 / JD 偏好段落 / 语言判定已下沉 domain.*（上方 re-export）。
 _EXPERIENCE_PATTERNS = (
     re.compile(r"(\d+)\s*[-~—至到]\s*(\d+)\s*年"),
     re.compile(r"(\d+)\s*年以上"),
@@ -115,57 +91,9 @@ _EXPERIENCE_PATTERNS = (
 )
 _NO_EXPERIENCE_PATTERNS = ("经验不限", "经验不限", "应届", "应届毕业生", "无需经验", "不限")
 
-_PREFERRED_MARKERS = ("优先", "加分", "更佳", "尤佳", "者优先")
-_SECTION_MARKERS = ("任职要求", "岗位要求", "任职资格", "岗位职责", "工作职责", "职位描述")
-
-
-# ------------------------------------------------------------------ 基础抽取
-def detect_language(text) -> str:
-    s = "" if text is None else str(text)
-    if not s.strip():
-        return "unknown"
-    cjk = len(re.findall(r"[\u4e00-\u9fff]", s))
-    latin = len(re.findall(r"[A-Za-z]", s))
-    total = max(1, cjk + latin)
-    zh_ratio = cjk / total
-    if zh_ratio >= 0.5:
-        return "zh"
-    if zh_ratio <= 0.1:
-        return "en"
-    return "mixed"
-
-
-_SKILL_RES = {s: re.compile(rf"(?<![A-Za-z0-9+#]){re.escape(s.lower())}(?![A-Za-z0-9+#])"
-                            if re.match(r"^[A-Za-z0-9+#]", s) else re.escape(s))
-              for s in SKILL_LEXICON}
-
-
-def extract_skills(text) -> list[str]:
-    """启发式技能词表命中（确定性、按词表顺序）。"""
-    s = "" if text is None else str(text).lower()
-    out = []
-    for term in SKILL_LEXICON:
-        if _SKILL_RES[term].search(s):
-            out.append(term)
-    return out
-
-
-def preferred_segment(text: str) -> str:
-    s = "" if text is None else str(text)
-    for marker in _PREFERRED_MARKERS:
-        i = s.find(marker)
-        if i >= 0:
-            return s[i:]
-    return ""
-
-
-def classify_job_category(title, description="") -> tuple[str, str]:
-    s = f"{title or ''} {description or ''}".lower()
-    for cat, kws in CATEGORY_KEYWORDS:
-        for kw in kws:
-            if kw.lower() in s:
-                return cat, "heuristic_keyword_v1"
-    return CATEGORY_OTHER, "heuristic_keyword_v1"
+# 基础抽取（detect_language / extract_skills / preferred_segment / classify_job_category）
+# 与 _PREFERRED_MARKERS / _SECTION_MARKERS / SKILL_LEXICON / CATEGORY_* 均已下沉 job_matching.domain，
+# 本文件顶部 re-export 以保持旧导入路径兼容。
 
 
 def parse_experience_requirement(text) -> dict:
