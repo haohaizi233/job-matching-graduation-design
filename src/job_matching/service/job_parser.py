@@ -30,6 +30,10 @@ from .text_extract import extract_document
 
 # 学历模型输入槽位（Phase4-2 口径）见 education/labels.py
 
+# 解析器版本（Phase5-2R P0-01）：结构化画像必须记录"由哪一版解析器产出"，
+# 解析规则变化时可判定旧画像是否需要重新解析。
+JOB_PARSER_VERSION = "job_parser_v1"
+
 _TITLE_KEYS = ("职位名称", "岗位名称", "职位", "岗位")
 _EMPLOYER_KEYS = ("公司名称", "公司", "用人单位", "单位")
 _CITY_KEYS = ("工作地点", "工作城市", "城市", "地点")
