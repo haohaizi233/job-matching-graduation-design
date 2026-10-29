@@ -35,6 +35,14 @@ TEST_MODULES = [
     ("P8", "test_p8_metrics", "评估指标正确性 / 小样本与空样本 / 模型缺失"),
     ("P9", "test_p9_bootstrap", "配对 Bootstrap 确定性与稳定性"),
     ("P10", "test_p10_pii", "个人信息脱敏与导出检查"),
+    ("P11", "test_p11_intake_consent", "授权门禁 / 中文简历判定 / 合成数据冒充防护"),
+    ("P12", "test_p12_pairs", "配对唯一性 / 组级切分隔离 / 训练交叉与近似重复"),
+    ("P13", "test_p13_blindness", "盲标视图白名单 / 标注员独立性"),
+    ("P14", "test_p14_annotation_integrity", "标签与协议版本校验 / unjudgeable 保护 / 仲裁留痕"),
+    ("P15", "test_p15_pii_export", "PII 字段不得进入公开导出"),
+    ("P16", "test_p16_freeze_blind", "盲测保护 / 冻结门禁 / SHA-256 复验"),
+    ("P17", "test_p17_g2_blocked", "G2 阻断判定 / 合成数据不计入真实 Gold"),
+    ("P18", "test_p18_reproducibility", "固定种子可复现输出"),
 ]
 
 
@@ -113,6 +121,30 @@ def main() -> int:
     with open(out_dir / "test-results.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
         f.write("\n")
+
+    # Phase4-3A-2 交付：JSON + Markdown 双报告（与 phase4-3a 同内容、独立留档）
+    out2 = ROOT / "reports" / "phase4-3a-2"
+    out2.mkdir(parents=True, exist_ok=True)
+    with open(out2 / "test-results.json", "w", encoding="utf-8", newline="\n") as f:
+        json.dump(out, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    lines = [
+        "# Phase4-3A-2 自动化测试报告", "",
+        f"- 生成时间：{out['created_at']} ｜ 耗时：{seconds}s",
+        f"- 总计 {out['totals']['tests']} 项：PASS={out['totals']['pass']} "
+        f"FAIL={out['totals']['fail']} SKIP={out['totals']['skip']} ｜ ok={ok}", "",
+        "| 组 | 场景 | 总数 | 通过 | 失败 | 跳过 |",
+        "|---|---|---|---|---|---|",
+    ]
+    for tag, mod, title in TEST_MODULES:
+        if tag in summary:
+            s = summary[tag]
+            lines.append(f"| {tag} | {s['title']} | {s['total']} | {s['pass']} | "
+                         f"{s['fail']} | {s['skip']} |")
+    lines += ["", "说明：P1–P10 为 Phase4-3A 既有 157 项测试（只扩展不重写）；",
+              "P11–P18 为 Phase4-3A-2 新增门禁场景测试。",
+              "严禁跳过失败测试或降低旧门禁标准。", ""]
+    (out2 / "test-results.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
     print(f"=== 测试完成 {seconds}s | PASS={out['totals']['pass']} "
           f"FAIL={out['totals']['fail']} SKIP={out['totals']['skip']} | ok={ok} ===")
     return 0 if ok else 1
