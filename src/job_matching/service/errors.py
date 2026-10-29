@@ -24,6 +24,7 @@ ERROR_CODES: dict[str, tuple[int, str]] = {
     "INFERENCE_TIMEOUT": (408, "推理超过时间预算"),
     "MODEL_MISSING": (503, "模型权重或清单缺失"),
     "MODEL_CORRUPT": (503, "模型文件损坏或加载失败"),
+    "MODEL_ENV_INCOMPATIBLE": (503, "模型与当前运行环境不兼容（历史 checkpoint 依赖旧版依赖栈）"),
     "MODEL_INAPPLICABLE": (422, "当前业务输入无法合法构建该模型所需特征"),
     "MODEL_FORMAL_USE_FORBIDDEN": (422, "该模型未通过中文正式用途验证，拒绝正式模式"),
     "FUTURE_MODEL_UNAVAILABLE": (503, "future_verified 模式暂无已验证中文模型"),

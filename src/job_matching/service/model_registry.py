@@ -37,6 +37,27 @@ EVALUATION_STATUSES = (
 FORMAL_OK_EVAL = ("not_a_trained_model", "verified")
 
 
+# ---- 加载失败分类（Phase5-1A：环境不兼容 ≠ 权重缺失 ≠ 文件损坏）----
+# 公开错误码与 failure_kind 的兼容映射见 docs/architecture/phase5-1a-dependency-rules.md。
+def classify_load_failure(exc: BaseException) -> tuple[str, str]:
+    """返回 (failure_kind, 说明)。
+
+    * env_incompatible              —— 历史 checkpoint 与当前依赖栈不兼容
+      （旧 scikit-learn 反序列化、C 扩展符号缺失、pickle 协议过高等）；
+      **不是**权重文件缺失，也**不是**权重文件损坏。
+    * artifact_corrupt_or_load_failed —— 文件确实损坏或加载逻辑失败。
+    """
+    msg = f"{type(exc).__name__}: {exc}"
+    if isinstance(exc, (ModuleNotFoundError, ImportError)):
+        return "env_incompatible", f"依赖缺失/结构变化: {msg}"
+    if isinstance(exc, AttributeError) and ("Can't get attribute" in str(exc)
+                                            or "__pyx_unpickle" in str(exc)):
+        return "env_incompatible", f"历史反序列化入口缺失（依赖版本变化）: {msg}"
+    if isinstance(exc, ValueError) and "unsupported pickle protocol" in str(exc):
+        return "env_incompatible", f"pickle 协议高于当前解释器: {msg}"
+    return "artifact_corrupt_or_load_failed", f"文件损坏或加载失败: {msg}"
+
+
 @dataclass
 class ModelRegistration:
     model_id: str
@@ -124,11 +145,19 @@ class ModelRegistry:
                                {"model_id": model_id,
                                 "failure_kind": "artifact_missing"}) from e
         except Exception as e:
-            # 模型损坏/加载失败与「文件缺失」是不同失败类型，必须区分（链路 C）
-            raise ServiceError("MODEL_CORRUPT",
-                               f"模型文件损坏或加载失败: {model_id} ({type(e).__name__}: {e})",
+            # 加载失败必须分类：环境不兼容 / 文件损坏 与「文件缺失」是不同失败类型（链路 C）
+            kind, why = classify_load_failure(e)
+            code = "MODEL_ENV_INCOMPATIBLE" if kind == "env_incompatible" else "MODEL_CORRUPT"
+            raise ServiceError(code,
+                               f"模型加载失败({kind}): {model_id} ({type(e).__name__}: {e})",
                                {"model_id": model_id,
-                                "failure_kind": "artifact_corrupt_or_load_failed"}) from e
+                                "failure_kind": kind,
+                                "cause": why,
+                                "hint": ("历史 checkpoint 需要匹配的训练环境"
+                                         "（见 models/*/manifest.json 的 environment 字段），"
+                                         "不得重训或改写历史权重"
+                                         if kind == "env_incompatible" else
+                                         "请核对权重文件与 manifest 校验和")}) from e
         self._cache[model_id] = obj
         self.load_events.append({"model_id": model_id,
                                  "model_version": reg.model_version,

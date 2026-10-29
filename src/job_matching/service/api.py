@@ -38,6 +38,7 @@ from .logging_utils import get_service_logger, new_request_id
 from .matching import MatchingService, RankOptions
 from .model_registry import ModelRegistry, register_builtin_models
 from .resume_parser import parse_resume_text
+from .settings import DEFAULT_DEPLOYMENT_NOTE, DEFAULT_MATCHING_RUN_DIR, ServiceSettings
 from .text_extract import (MAX_EXTRACT_TEXT_CHARS, MAX_UPLOAD_BYTES,
                            extract_document_bytes)
 
@@ -45,8 +46,6 @@ API_VERSION = "v1"
 APP_VERSION = "phase5-1-0.1.0"
 MAX_JOBS = 200
 MAX_TEXT_CHARS = MAX_EXTRACT_TEXT_CHARS
-DEFAULT_MATCHING_RUN_DIR = ("models/matching/ridge/double_cold/"
-                            "ridge-double_cold-final-20261028-203750")
 
 # ---- 请求边界与安全上限（Phase5-1R F-007，开发阶段必要防护）----
 MAX_REQUEST_BYTES = 8 * 1024 * 1024       # JSON 请求体上限（解析前检查）
@@ -66,11 +65,14 @@ class Services:
     matching: MatchingService
     education_resolver: JobEducationResolver
     config: dict = field(default_factory=dict)
+    settings: ServiceSettings | None = None   # 类型化配置（config 是其兼容视图）
 
 
 def make_services(*, matching_run_dir: str | Path | None = DEFAULT_MATCHING_RUN_DIR,
                   education_run_dir: str | Path | None = None,
-                  registry: ModelRegistry | None = None) -> Services:
+                  registry: ModelRegistry | None = None,
+                  settings: ServiceSettings | None = None) -> Services:
+    st = settings or ServiceSettings.from_env()
     reg = registry or ModelRegistry()
     register_builtin_models(
         reg,
@@ -81,13 +83,8 @@ def make_services(*, matching_run_dir: str | Path | None = DEFAULT_MATCHING_RUN_
         registry=reg,
         matching=MatchingService(reg),
         education_resolver=JobEducationResolver(education_run_dir),
-        config={"max_jobs": MAX_JOBS, "api_version": API_VERSION,
-                "max_request_bytes": MAX_REQUEST_BYTES,
-                "max_base64_chars": MAX_BASE64_CHARS,
-                "max_upload_bytes": MAX_UPLOAD_BYTES,
-                "max_text_chars": MAX_TEXT_CHARS,
-                "rate_limit_per_minute": DEFAULT_RATE_LIMIT_PER_MINUTE,
-                "deployment": "local_dev_only（无认证；外网部署必须先加认证与请求限制）"},
+        config=st.to_config_dict(),
+        settings=st,
     )
 
 
