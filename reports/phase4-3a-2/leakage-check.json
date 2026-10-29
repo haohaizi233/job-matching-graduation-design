@@ -1,0 +1,167 @@
+{
+  "blocking_findings": [],
+  "created_at": "2026-10-29T11:14:59",
+  "files": {
+    "job_pool_v2": {
+      "bytes": 526176,
+      "path": "data/independent_eval/pool/job_pool_v2.jsonl",
+      "sha256": "6650fbcac547e8d50ab2520608a750fb5e1d7c144dfee29a7de427095f18f900"
+    },
+    "pairs_real_v2": {
+      "bytes": 0,
+      "path": "data/independent_eval/pairs/pairs_real_v2.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "generated_by": "scripts/phase4_3a_2/leakage_gate.py",
+  "handled_findings": [
+    {
+      "item": "配对级重复",
+      "note": "近似重复在配对生成时按 gold_gate.quarantine_near_duplicates 隔离并登记",
+      "status": "无完全重复"
+    },
+    {
+      "item": "合成样本混入",
+      "note": "合成样本只在 pairs_synthetic_*.jsonl，永不进人工真值",
+      "status": "0 组"
+    },
+    {
+      "item": "历史 Gold 交叉",
+      "note": "逐条裁决=剔除出盲测集（quarantine_from_blind），保留用于 dev 与对照；见 job-candidate-audit.json -> historical_gold_cross_analysis",
+      "status": "5 个 job_id 已裁决"
+    },
+    {
+      "item": "学历训练语料重合",
+      "note": "仅对『要求模型未见过岗位文本』的任务构成污染；人岗匹配排序模型（英文语料训练）无直接文本泄漏；详见 job-candidate-audit.json -> contamination_by_task",
+      "status": "已逐岗标记并禁入盲测"
+    },
+    {
+      "item": "导出 PII 检查",
+      "note": "文本脱敏掩码 + 字段名白名单双重拦截（pii.check_export）",
+      "status": "无字段残留"
+    }
+  ],
+  "historical_gold_cross": {
+    "decisions": [
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7881740",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      },
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7891020",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      },
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7891194",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      },
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7911845",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      },
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7926209",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      }
+    ],
+    "overlap_job_ids": [
+      "7881740",
+      "7891020",
+      "7891194",
+      "7911845",
+      "7926209"
+    ],
+    "policy": "交叉岗位剔除出最终盲测集；不得作为全新独立盲测样本"
+  },
+  "license_and_consent": {
+    "job_sources": "见 reports/phase4-3a-2/source-audit.json",
+    "resume_consent": "见 reports/phase4-3a-2/resume-intake-audit.json（授权逐条可核）"
+  },
+  "pii_export_scan": {
+    "files": [
+      {
+        "file": "pairs_real_v2.jsonl",
+        "records": 0
+      },
+      {
+        "file": "job_pool_v2.jsonl",
+        "records": 150
+      }
+    ],
+    "pii_field_violations": [],
+    "pii_text_hits": {
+      "job_pool_v2.jsonl": {
+        "qq_wechat_id": 3
+      },
+      "pairs_real_v2.jsonl": {}
+    }
+  },
+  "pool_internal_duplicates": {
+    "job_level": {
+      "detail": [],
+      "jobs_checked": 150,
+      "same_job_different_id": 0
+    },
+    "pair_level": {
+      "exact_duplicate_pairs": [],
+      "exact_duplicates": 0,
+      "near_duplicate_pairs": [],
+      "near_duplicates": 0,
+      "near_threshold": 0.9,
+      "pairs_checked": 0
+    },
+    "resume_level": {
+      "detail": [],
+      "resumes_checked": 0,
+      "same_resume_different_id": 0
+    }
+  },
+  "pretraining_contamination": {
+    "checkable": [
+      "本地训练语料文本重合",
+      "历史 Gold 交叉",
+      "池内重复",
+      "PII 残留"
+    ],
+    "not_checkable": [
+      "外部预训练模型语料",
+      "原始数据集上游采集范围"
+    ],
+    "statement": "预训练语料来源不可知，无法完全排除预训练污染；本报告只能声明『未发现已知泄漏』，不能声称绝对无泄漏"
+  },
+  "scope": "Phase4-3A-2 真实配对池 / 岗位准入池 / 标注材料",
+  "synthetic_in_real_pairs": {
+    "count": 0,
+    "pair_ids": []
+  },
+  "training_data_overlap": {
+    "education_corpus": {
+      "contamination_by_task": {
+        "education_extraction_models": "训练语料与候选 JD 文本哈希/近似重合的岗位，对学历抽取组件不是零样本；涉及其学历字段输出的评估任务必须剔除重合岗位",
+        "matching_ranking_models": "人岗匹配排序模型训练语料为英文 matches，与中文 JD 无文本重合，无直接文本泄漏（其训练标签为英文代理标签，属口径限制而非泄漏）",
+        "pretraining_contamination": "外部预训练语料不可知，只能声明『未发现已知泄漏』，不能声称绝对无泄漏",
+        "strict_unseen_jd_tasks": "要求『模型完全未见过岗位文本』的任务必须排除全部 edu 重合岗位；若重合覆盖整个候选池，则该类任务不能使用本岗位池，需另行采集岗位（外部依赖）"
+      },
+      "jobs_with_hash_overlap": 150,
+      "jobs_with_near_overlap": 150,
+      "scan": {
+        "cache_reused": false,
+        "files_scanned": [
+          "data/raw/job-education/default/train/19w_0701.csv",
+          "data/raw/job-education/default/validation/4w_0708.csv"
+        ],
+        "hash_overlap_rows_total": 250,
+        "near_check_limitation": "近似重复跨语料检查在确定性等距抽样子集上执行（默认 8 万行），可能漏检抽样外近似重复；哈希检查覆盖全量语料",
+        "near_check_reference_limit": 80000,
+        "near_overlap_pairs_total": 255,
+        "rows_scanned": 241560
+      }
+    }
+  },
+  "unresolved_blocking_findings": []
+}

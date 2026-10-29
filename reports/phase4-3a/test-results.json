@@ -1,11 +1,11 @@
 {
   "generated_by": "tests/phase4_3a/run_all.py",
-  "created_at": "2026-10-29T10:19:01",
-  "seconds": 0.4,
+  "created_at": "2026-10-29T11:35:51",
+  "seconds": 0.94,
   "ok": true,
   "totals": {
-    "tests": 157,
-    "pass": 157,
+    "tests": 237,
+    "pass": 237,
     "fail": 0,
     "skip": 0
   },
@@ -77,6 +77,62 @@
       "title": "个人信息脱敏与导出检查",
       "total": 12,
       "pass": 12,
+      "fail": 0,
+      "skip": 0
+    },
+    "P11": {
+      "title": "授权门禁 / 中文简历判定 / 合成数据冒充防护",
+      "total": 13,
+      "pass": 13,
+      "fail": 0,
+      "skip": 0
+    },
+    "P12": {
+      "title": "配对唯一性 / 组级切分隔离 / 训练交叉与近似重复",
+      "total": 10,
+      "pass": 10,
+      "fail": 0,
+      "skip": 0
+    },
+    "P13": {
+      "title": "盲标视图白名单 / 标注员独立性",
+      "total": 9,
+      "pass": 9,
+      "fail": 0,
+      "skip": 0
+    },
+    "P14": {
+      "title": "标签与协议版本校验 / unjudgeable 保护 / 仲裁留痕",
+      "total": 12,
+      "pass": 12,
+      "fail": 0,
+      "skip": 0
+    },
+    "P15": {
+      "title": "PII 字段不得进入公开导出",
+      "total": 7,
+      "pass": 7,
+      "fail": 0,
+      "skip": 0
+    },
+    "P16": {
+      "title": "盲测保护 / 冻结门禁 / SHA-256 复验",
+      "total": 10,
+      "pass": 10,
+      "fail": 0,
+      "skip": 0
+    },
+    "P17": {
+      "title": "G2 阻断判定 / 合成数据不计入真实 Gold",
+      "total": 11,
+      "pass": 11,
+      "fail": 0,
+      "skip": 0
+    },
+    "P18": {
+      "title": "固定种子可复现输出",
+      "total": 8,
+      "pass": 8,
       "fail": 0,
       "skip": 0
     }
@@ -1021,6 +1077,486 @@
     {
       "group": "P10",
       "test": "test_p10_scrub_record_masks_text_fields (test_p10_pii.P10TestPiiMasking.test_p10_scrub_record_masks_text_fields)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_english_resume_not_real_gold (test_p11_intake_consent.P11TestChineseResumeGate.test_p11_english_resume_not_real_gold)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_english_resume_quarantined (test_p11_intake_consent.P11TestChineseResumeGate.test_p11_english_resume_quarantined)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_mixed_language_allowed (test_p11_intake_consent.P11TestChineseResumeGate.test_p11_mixed_language_allowed)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_denied_record_not_gold (test_p11_intake_consent.P11TestConsentGate.test_p11_denied_record_not_gold)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_granted_real_chinese_accepted (test_p11_intake_consent.P11TestConsentGate.test_p11_granted_real_chinese_accepted)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_missing_consent_rejected (test_p11_intake_consent.P11TestConsentGate.test_p11_missing_consent_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_missing_withdrawal_method_rejected (test_p11_intake_consent.P11TestConsentGate.test_p11_missing_withdrawal_method_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_withdrawn_consent_rejected (test_p11_intake_consent.P11TestConsentGate.test_p11_withdrawn_consent_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_resume_id_deterministic_and_unnamed (test_p11_intake_consent.P11TestStableResumeId.test_p11_resume_id_deterministic_and_unnamed)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_synthetic_claiming_real_source_rejected (test_p11_intake_consent.P11TestSyntheticIsolation.test_p11_synthetic_claiming_real_source_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_synthetic_consent_status_must_be_not_applicable (test_p11_intake_consent.P11TestSyntheticIsolation.test_p11_synthetic_consent_status_must_be_not_applicable)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_synthetic_never_counted_in_real_gold (test_p11_intake_consent.P11TestSyntheticIsolation.test_p11_synthetic_never_counted_in_real_gold)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P11",
+      "test": "test_p11_synthetic_source_quarantined_never_gold (test_p11_intake_consent.P11TestSyntheticIsolation.test_p11_synthetic_source_quarantined_never_gold)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_distinct_pairs_kept (test_p12_pairs.P12TestNearDuplicateQuarantine.test_p12_distinct_pairs_kept)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_near_duplicate_pair_quarantined (test_p12_pairs.P12TestNearDuplicateQuarantine.test_p12_near_duplicate_pair_quarantined)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_cross_split_resume_detected (test_p12_pairs.P12TestSplitIsolation.test_p12_cross_split_resume_detected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_group_split_never_breaks_resume (test_p12_pairs.P12TestSplitIsolation.test_p12_group_split_never_breaks_resume)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_job_isolated_mode_flags_job_overlap (test_p12_pairs.P12TestSplitIsolation.test_p12_job_isolated_mode_flags_job_overlap)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_overlap_job_flagged_and_blind_excluded (test_p12_pairs.P12TestTrainingOverlap.test_p12_overlap_job_flagged_and_blind_excluded)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_task_separated_rationale_preserved (test_p12_pairs.P12TestTrainingOverlap.test_p12_task_separated_rationale_preserved)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_duplicate_pair_id_rejected (test_p12_pairs.P12TestUniquePairs.test_p12_duplicate_pair_id_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_duplicate_resume_job_rejected (test_p12_pairs.P12TestUniquePairs.test_p12_duplicate_resume_job_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P12",
+      "test": "test_p12_unique_pairs_pass (test_p12_pairs.P12TestUniquePairs.test_p12_unique_pairs_pass)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_final_label_same_person_rejected (test_p13_blindness.P13TestAnnotatorIndependence.test_p13_final_label_same_person_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_independent_annotators_pass (test_p13_blindness.P13TestAnnotatorIndependence.test_p13_independent_annotators_pass)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_mirrored_annotations_rejected (test_p13_blindness.P13TestAnnotatorIndependence.test_p13_mirrored_annotations_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_shared_annotator_id_rejected (test_p13_blindness.P13TestAnnotatorIndependence.test_p13_shared_annotator_id_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_packet_columns_reject_hidden_columns (test_p13_blindness.P13TestBlindView.test_p13_packet_columns_reject_hidden_columns)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_packet_columns_reject_model_output (test_p13_blindness.P13TestBlindView.test_p13_packet_columns_reject_model_output)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_view_check_flags_model_columns (test_p13_blindness.P13TestBlindView.test_p13_view_check_flags_model_columns)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_view_drops_pipeline_metadata (test_p13_blindness.P13TestBlindView.test_p13_view_drops_pipeline_metadata)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P13",
+      "test": "test_p13_view_hides_sampling_and_split_columns (test_p13_blindness.P13TestBlindView.test_p13_view_hides_sampling_and_split_columns)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_arbitration_only_for_disputed (test_p14_annotation_integrity.P14TestArbitrationRecords.test_p14_arbitration_only_for_disputed)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_duplicate_arbitration_rejected (test_p14_annotation_integrity.P14TestArbitrationRecords.test_p14_duplicate_arbitration_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_final_labels_keep_original_annotations (test_p14_annotation_integrity.P14TestArbitrationRecords.test_p14_final_labels_keep_original_annotations)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_conflicting_duplicate_not_silently_deduped (test_p14_annotation_integrity.P14TestLabelAndProtocolValidation.test_p14_conflicting_duplicate_not_silently_deduped)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_invalid_relevance_rejected (test_p14_annotation_integrity.P14TestLabelAndProtocolValidation.test_p14_invalid_relevance_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_model_output_column_rejects_file (test_p14_annotation_integrity.P14TestLabelAndProtocolValidation.test_p14_model_output_column_rejects_file)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_protocol_version_mix_rejected (test_p14_annotation_integrity.P14TestLabelAndProtocolValidation.test_p14_protocol_version_mix_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_unknown_pair_rejected (test_p14_annotation_integrity.P14TestLabelAndProtocolValidation.test_p14_unknown_pair_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_arbitration_cannot_force_numeric_on_unjudgeable (test_p14_annotation_integrity.P14TestUnjudgeableProtection.test_p14_arbitration_cannot_force_numeric_on_unjudgeable)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_both_unjudgeable_stays_unjudgeable (test_p14_annotation_integrity.P14TestUnjudgeableProtection.test_p14_both_unjudgeable_stays_unjudgeable)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_forced_numeric_flagged (test_p14_annotation_integrity.P14TestUnjudgeableProtection.test_p14_forced_numeric_flagged)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P14",
+      "test": "test_p14_unjudgeable_vs_numeric_goes_to_arbitration (test_p14_annotation_integrity.P14TestUnjudgeableProtection.test_p14_unjudgeable_vs_numeric_goes_to_arbitration)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P15",
+      "test": "test_p15_annotation_view_rejects_pii_fields (test_p15_pii_export.P15TestExportGate.test_p15_annotation_view_rejects_pii_fields)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P15",
+      "test": "test_p15_detection_reports_counts_not_raw_values (test_p15_pii_export.P15TestExportGate.test_p15_detection_reports_counts_not_raw_values)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P15",
+      "test": "test_p15_pii_column_blocked_even_in_whitelist (test_p15_pii_export.P15TestExportGate.test_p15_pii_column_blocked_even_in_whitelist)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P15",
+      "test": "test_p15_pii_structured_fields_detected (test_p15_pii_export.P15TestExportGate.test_p15_pii_structured_fields_detected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P15",
+      "test": "test_p15_raw_pii_in_text_blocks_export (test_p15_pii_export.P15TestExportGate.test_p15_raw_pii_in_text_blocks_export)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P15",
+      "test": "test_p15_scrubbed_record_passes_export (test_p15_pii_export.P15TestExportGate.test_p15_scrubbed_record_passes_export)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P15",
+      "test": "test_p15_whitelist_enforced_for_extra_columns (test_p15_pii_export.P15TestExportGate.test_p15_whitelist_enforced_for_extra_columns)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test16_blind_pass_after_freeze_allowed (test_p16_freeze_blind.P16TestBlindProtection.test16_blind_pass_after_freeze_allowed)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_blind_pass_before_freeze_rejected (test_p16_freeze_blind.P16TestBlindProtection.test_p16_blind_pass_before_freeze_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_not_claimed_needs_no_freeze (test_p16_freeze_blind.P16TestBlindProtection.test_p16_not_claimed_needs_no_freeze)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_evalset_freeze_rejected_when_annotation_incomplete (test_p16_freeze_blind.P16TestFreezeGate.test_p16_evalset_freeze_rejected_when_annotation_incomplete)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_evalset_freeze_rejected_with_open_disagreements (test_p16_freeze_blind.P16TestFreezeGate.test_p16_evalset_freeze_rejected_with_open_disagreements)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_evalset_freeze_rejected_with_synthetic (test_p16_freeze_blind.P16TestFreezeGate.test_p16_evalset_freeze_rejected_with_synthetic)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_freeze_then_verify_passes (test_p16_freeze_blind.P16TestHashVerification.test_p16_freeze_then_verify_passes)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_manifest_records_sha256_for_every_file (test_p16_freeze_blind.P16TestHashVerification.test_p16_manifest_records_sha256_for_every_file)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_mutual_exclusivity_detects_split_overlap (test_p16_freeze_blind.P16TestHashVerification.test_p16_mutual_exclusivity_detects_split_overlap)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P16",
+      "test": "test_p16_tampering_detected_after_freeze (test_p16_freeze_blind.P16TestHashVerification.test_p16_tampering_detected_after_freeze)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_leakage_findings_block (test_p17_g2_blocked.P17TestG2Blocked.test_p17_leakage_findings_block)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_no_real_annotation_blocked (test_p17_g2_blocked.P17TestG2Blocked.test_p17_no_real_annotation_blocked)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_no_real_data_blocked (test_p17_g2_blocked.P17TestG2Blocked.test_p17_no_real_data_blocked)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_open_disagreements_block (test_p17_g2_blocked.P17TestG2Blocked.test_p17_open_disagreements_block)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_ready_only_when_all_conditions_met (test_p17_g2_blocked.P17TestG2Blocked.test_p17_ready_only_when_all_conditions_met)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_real_scale_below_target_blocks (test_p17_g2_blocked.P17TestG2Blocked.test_p17_real_scale_below_target_blocks)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_unverified_freeze_blocks (test_p17_g2_blocked.P17TestG2Blocked.test_p17_unverified_freeze_blocks)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_synthetic_do_not_inflate_counts (test_p17_g2_blocked.P17TestSyntheticNeverRealGold.test_p17_synthetic_do_not_inflate_counts)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_synthetic_pairs_do_not_satisfy_scale (test_p17_g2_blocked.P17TestSyntheticNeverRealGold.test_p17_synthetic_pairs_do_not_satisfy_scale)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_synthetic_record_not_real_gold (test_p17_g2_blocked.P17TestSyntheticNeverRealGold.test_p17_synthetic_record_not_real_gold)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P17",
+      "test": "test_p17_unconsented_or_non_chinese_not_real_gold (test_p17_g2_blocked.P17TestSyntheticNeverRealGold.test_p17_unconsented_or_non_chinese_not_real_gold)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P18",
+      "test": "test_p18_different_seed_may_differ (test_p18_reproducibility.P18TestPairBuildReproducible.test_p18_different_seed_may_differ)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P18",
+      "test": "test_p18_pair_id_stable_from_content_hash (test_p18_reproducibility.P18TestPairBuildReproducible.test_p18_pair_id_stable_from_content_hash)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P18",
+      "test": "test_p18_pairs_not_auto_labeled (test_p18_reproducibility.P18TestPairBuildReproducible.test_p18_pairs_not_auto_labeled)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P18",
+      "test": "test_p18_same_seed_same_pairs (test_p18_reproducibility.P18TestPairBuildReproducible.test_p18_same_seed_same_pairs)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P18",
+      "test": "test_p18_assign_splits_deterministic (test_p18_reproducibility.P18TestSplitAndIdReproducible.test_p18_assign_splits_deterministic)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P18",
+      "test": "test_p18_assign_splits_group_level_stable (test_p18_reproducibility.P18TestSplitAndIdReproducible.test_p18_assign_splits_group_level_stable)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P18",
+      "test": "test_p18_near_dup_quarantine_deterministic (test_p18_reproducibility.P18TestSplitAndIdReproducible.test_p18_near_dup_quarantine_deterministic)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "P18",
+      "test": "test_p18_resume_id_deterministic_per_content (test_p18_reproducibility.P18TestSplitAndIdReproducible.test_p18_resume_id_deterministic_per_content)",
       "status": "PASS",
       "detail": ""
     }

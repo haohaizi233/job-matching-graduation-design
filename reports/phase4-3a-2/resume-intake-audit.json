@@ -1,0 +1,53 @@
+{
+  "accepted_file": "data/private/accepted/resumes_accepted_synthetic-fixture.jsonl",
+  "accepted_file_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "accepted_real_gold": 0,
+  "accepted_synthetic_not_gold": 0,
+  "consent_file": null,
+  "consent_records_read": 0,
+  "created_at": "2026-10-29T11:14:44",
+  "data_protection": {
+    "accepted_records_location": "data/private/accepted/（不入库）",
+    "id_policy": "resume_id 由内容哈希+种子派生，禁用真实姓名",
+    "pii_handling": "导入即脱敏掩码；报告只登记命中类型与数量",
+    "raw_resume_location": "data/private/（不入库）"
+  },
+  "formats": {
+    "docx": 1,
+    "row": 3,
+    "txt": 1
+  },
+  "generated_by": "scripts/phase4_3a_2/intake_resumes.py",
+  "items_read": 5,
+  "note": "真实简历收集未完成",
+  "pii_hits_masked": {},
+  "quarantine_reasons": {
+    "synthetic_not_gold": 5
+  },
+  "quarantined": 5,
+  "resume_files": [
+    {
+      "bytes": 267,
+      "file": "tests/fixtures/synthetic_resumes/resume_synth_01.txt",
+      "sha256": "9552030af439df0301ef2c9539d0919d2acaf02156f1a6ac2c9385db521d313a"
+    },
+    {
+      "bytes": 657,
+      "file": "tests/fixtures/synthetic_resumes/resume_synth_02.csv",
+      "sha256": "0d8e1b523bcc2569cc41459344aab00ff2c046efbd6cf9b0b43beeec7e4878ab"
+    },
+    {
+      "bytes": 444,
+      "file": "tests/fixtures/synthetic_resumes/resume_synth_03.jsonl",
+      "sha256": "08ae7d90501bf49622a4f86641cc819cf11e779869e899fe6bd0be4d0508446c"
+    },
+    {
+      "bytes": 861,
+      "file": "tests/fixtures/synthetic_resumes/resume_synth_04.docx",
+      "sha256": "d0b8b4420ef6e2282c4357c3190985561314fb51e16d8624799bad2fb9330105"
+    }
+  ],
+  "source_class": "C_synthetic",
+  "source_name": "synthetic-fixture",
+  "status": "no_resumes_collected"
+}

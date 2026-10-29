@@ -1,6 +1,7 @@
 {
   "adjudication_summary": {
-    "quarantine_from_blind": 150
+    "keep_with_edu_text_overlap": 145,
+    "quarantine_from_blind": 5
   },
   "admission_fields": [
     "job_id",
@@ -31,18 +32,24 @@
     "source_record_count": "251,381 行（docs/datasets/README.md 登记）"
   },
   "blind_eligibility": {
-    "blind_eligible_jobs": 0,
-    "blind_excluded_jobs": 150,
-    "note": "blind_eligible=false 的岗位可用于 dev；进入 blind_test 的配对必须岗位盲测合格"
+    "blind_eligible_jobs_ranking_gold": 144,
+    "blind_excluded_jobs": 6,
+    "note": "blind_eligible=false 的岗位可用于 dev；进入 blind_test 的配对必须岗位盲测合格",
+    "policy": {
+      "ranking_gold_default": "排名 Gold 默认口径：仅历史 Gold 交叉与近似重复岗位禁入盲测；学历语料重合对英文语料训练的排序模型不构成文本泄漏",
+      "strict_unseen_jd": "要求模型完全未见过岗位文本的任务：排除全部学历语料重合岗位；若 strict 可用岗位为 0，该类任务不得使用本岗位池"
+    },
+    "strict_unseen_jd_eligible_jobs": 0
   },
   "candidates_admitted": 150,
   "candidates_read": 150,
-  "created_at": "2026-10-29T11:01:07",
+  "created_at": "2026-10-29T11:07:31",
   "education_corpus_overlap": {
     "contamination_by_task": {
       "education_extraction_models": "训练语料与候选 JD 文本哈希/近似重合的岗位，对学历抽取组件不是零样本；涉及其学历字段输出的评估任务必须剔除重合岗位",
       "matching_ranking_models": "人岗匹配排序模型训练语料为英文 matches，与中文 JD 无文本重合，无直接文本泄漏（其训练标签为英文代理标签，属口径限制而非泄漏）",
-      "pretraining_contamination": "外部预训练语料不可知，只能声明『未发现已知泄漏』，不能声称绝对无泄漏"
+      "pretraining_contamination": "外部预训练语料不可知，只能声明『未发现已知泄漏』，不能声称绝对无泄漏",
+      "strict_unseen_jd_tasks": "要求『模型完全未见过岗位文本』的任务必须排除全部 edu 重合岗位；若重合覆盖整个候选池，则该类任务不能使用本岗位池，需另行采集岗位（外部依赖）"
     },
     "corpus": "job-education default/train + default/validation（学历抽取模型训练语料）",
     "jobs_with_hash_overlap": 150,
@@ -57,6 +64,2596 @@
       "near_check_limitation": "近似重复跨语料检查在确定性等距抽样子集上执行（默认 8 万行），可能漏检抽样外近似重复；哈希检查覆盖全量语料",
       "near_check_reference_limit": 80000,
       "near_overlap_pairs_total": 255,
+      "per_job": {
+        "7876624": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:83",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:83",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7878702": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:889",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:889",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:41667",
+              "kind": "near",
+              "similarity": 0.977528
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7879571": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:1177",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:1177",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7880539": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:1556",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:1556",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7880655": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "19w_0701.csv:86740",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:86742",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:86745",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:86746",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:86782",
+              "kind": "hash"
+            }
+          ],
+          "edu_train_hash_overlap_rows": 15,
+          "edu_train_near_overlap_rows": 10
+        },
+        "7881140": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "19w_0701.csv:79788",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:79789",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:79793",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:79800",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:1773",
+              "kind": "hash"
+            }
+          ],
+          "edu_train_hash_overlap_rows": 6,
+          "edu_train_near_overlap_rows": 4
+        },
+        "7881376": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:1858",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:1858",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7881740": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:2007",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:2007",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:9850",
+              "kind": "near",
+              "similarity": 0.962567
+            },
+            {
+              "edu_row": "4w_0708.csv:15207",
+              "kind": "near",
+              "similarity": 0.935484
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 3
+        },
+        "7881879": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:2068",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:2071",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:2992",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:132888",
+              "kind": "near",
+              "similarity": 0.917695
+            },
+            {
+              "edu_row": "4w_0708.csv:2068",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 3,
+          "edu_train_near_overlap_rows": 4
+        },
+        "7883170": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:2880",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:2880",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7883668": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:3102",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:3102",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7884460": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:3480",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:3480",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7884535": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:3518",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:3519",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:3518",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:3519",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7884664": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:3605",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:3605",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7884771": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:3666",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:3666",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7885015": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:3778",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:3778",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7885325": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:3960",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:3960",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7885451": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4021",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4021",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7885645": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4102",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4102",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7885662": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4111",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4111",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7885792": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4170",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4170",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7885909": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4227",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4227",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7885948": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4249",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4249",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7886328": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4471",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4471",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7886652": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4613",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4613",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7886845": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4692",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4692",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7887069": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4796",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4545",
+              "kind": "near",
+              "similarity": 0.924915
+            },
+            {
+              "edu_row": "4w_0708.csv:4796",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:5038",
+              "kind": "near",
+              "similarity": 0.978723
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 3
+        },
+        "7887291": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4923",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4923",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7887347": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:4960",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4960",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7887495": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:5038",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4545",
+              "kind": "near",
+              "similarity": 0.937716
+            },
+            {
+              "edu_row": "4w_0708.csv:4796",
+              "kind": "near",
+              "similarity": 0.978723
+            },
+            {
+              "edu_row": "4w_0708.csv:5038",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 3
+        },
+        "7888295": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:5439",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:5439",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7888297": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:5440",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6113",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:4690",
+              "kind": "near",
+              "similarity": 0.990123
+            },
+            {
+              "edu_row": "4w_0708.csv:5440",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:6113",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 3
+        },
+        "7888423": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:5514",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:5514",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7888710": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:5701",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:5701",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7888850": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:5770",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:5770",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7889283": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:6026",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6026",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7889404": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:6101",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6101",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7889693": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "19w_0701.csv:117849",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:138283",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6256",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6256",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 3,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7889950": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:6396",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6396",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7890538": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:6655",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7411",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7856",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:16873",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6655",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 4,
+          "edu_train_near_overlap_rows": 4
+        },
+        "7890675": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:6750",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6750",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7890835": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:6836",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6836",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7891020": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:6920",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6920",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7891023": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:6922",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:6922",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7891188": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7024",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7024",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7891194": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7026",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7026",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7891565": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7204",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:30668",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7204",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:30668",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7891826": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7359",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7359",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7891873": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7386",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7386",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7892014": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7485",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7707",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7485",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:7707",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7892614": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7826",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7826",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7892746": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7902",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7902",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7892767": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7920",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7920",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7892782": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7934",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:22272",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7934",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:22272",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7892860": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:7979",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:7979",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7893064": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:8117",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:8117",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7893381": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:8326",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:8326",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7893477": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:8394",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:8394",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7893527": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:8425",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:8425",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7893730": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:8560",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:8560",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7893828": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:8614",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:8614",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7894695": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "19w_0701.csv:193926",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:9011",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:40486",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:9011",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:40486",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 3,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7894847": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:9066",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:9066",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7895516": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:9345",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:9345",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7895896": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:9509",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:9509",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7896276": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:9645",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:9645",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7896304": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:9661",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:9661",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7898314": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:10085",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10085",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7898473": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:10151",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10151",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7898561": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:10194",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10194",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7899085": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:10434",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10437",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10444",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10446",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10447",
+              "kind": "hash"
+            }
+          ],
+          "edu_train_hash_overlap_rows": 6,
+          "edu_train_near_overlap_rows": 7
+        },
+        "7899086": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:10435",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10481",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10435",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:10481",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7899138": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:10478",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10478",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7899280": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:10357",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10359",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10362",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10363",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10366",
+              "kind": "hash"
+            }
+          ],
+          "edu_train_hash_overlap_rows": 19,
+          "edu_train_near_overlap_rows": 19
+        },
+        "7900773": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:11142",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11158",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11200",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11142",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:11158",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 3,
+          "edu_train_near_overlap_rows": 3
+        },
+        "7900836": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:11174",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11174",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7901014": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:11271",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11271",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7901229": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:11396",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11396",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7901398": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:11445",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11445",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7902109": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:11641",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11641",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7902600": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:11822",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11822",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7902652": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:11840",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:11840",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7903624": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:12226",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:12226",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7904616": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:12710",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:12710",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7904703": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:12760",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:12760",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7904910": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:12869",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:12879",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13031",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:12869",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:12879",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 3,
+          "edu_train_near_overlap_rows": 3
+        },
+        "7904969": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:12901",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:12901",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7905086": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:12957",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:12957",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7905759": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:13339",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13339",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7905820": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:13375",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13375",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7905979": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:13415",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13416",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13426",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13427",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13439",
+              "kind": "hash"
+            }
+          ],
+          "edu_train_hash_overlap_rows": 7,
+          "edu_train_near_overlap_rows": 11
+        },
+        "7906480": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:13709",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13732",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:14060",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:24105",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13709",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 4,
+          "edu_train_near_overlap_rows": 4
+        },
+        "7906657": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:13785",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13785",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7907060": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:13964",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13964",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7907132": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:14002",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:14002",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7907774": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:14361",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:109487",
+              "kind": "near",
+              "similarity": 0.960474
+            },
+            {
+              "edu_row": "19w_0701.csv:125013",
+              "kind": "near",
+              "similarity": 0.9375
+            },
+            {
+              "edu_row": "4w_0708.csv:14335",
+              "kind": "near",
+              "similarity": 0.9375
+            },
+            {
+              "edu_row": "4w_0708.csv:14339",
+              "kind": "near",
+              "similarity": 0.9375
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 8
+        },
+        "7908122": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "19w_0701.csv:148063",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:148072",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:148076",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:148080",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:148081",
+              "kind": "hash"
+            }
+          ],
+          "edu_train_hash_overlap_rows": 12,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7908180": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "19w_0701.csv:178971",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:178982",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:10209",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:14253",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:14314",
+              "kind": "hash"
+            }
+          ],
+          "edu_train_hash_overlap_rows": 13,
+          "edu_train_near_overlap_rows": 14
+        },
+        "7908233": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:14573",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:14573",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7908950": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:14939",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:14939",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7909033": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:14977",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:14977",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7909239": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:15075",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:15075",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7909577": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:15282",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:15282",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7909661": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:15327",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:15327",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7910019": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:15494",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:15494",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7910527": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:15751",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:15751",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7910956": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:16000",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "19w_0701.csv:111132",
+              "kind": "near",
+              "similarity": 0.976608
+            },
+            {
+              "edu_row": "4w_0708.csv:16000",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7910990": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:16027",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:16027",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7911264": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:16205",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:16205",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7911845": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:16474",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:16474",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7911853": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:16479",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:16479",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7912281": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:16719",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:16719",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7912616": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:16953",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:16953",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7912707": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:16999",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:16999",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7913215": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:17261",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:17261",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7913321": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:17313",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:44643",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:17313",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:44643",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7915056": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:18096",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:25781",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:18096",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:25781",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7915335": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:18265",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:18265",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7915583": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:18375",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:1557",
+              "kind": "near",
+              "similarity": 0.901235
+            },
+            {
+              "edu_row": "4w_0708.csv:18375",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7915836": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:18488",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:18488",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7916681": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:18791",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:18791",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7918430": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:19344",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:19344",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7919481": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:19800",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:19800",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7919906": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:19977",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:19977",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7919923": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:19982",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:19982",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7920016": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:20015",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:20015",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7920445": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:20132",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:20132",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7920623": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:20185",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:20185",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7921059": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:20321",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:20321",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7921787": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:20534",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:20534",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7922557": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:20791",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:20791",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7922746": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:20851",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:20851",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7923323": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21075",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21075",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7923336": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21082",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21082",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7923518": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21148",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21148",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7923731": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21235",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21245",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21247",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21235",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:21245",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 3,
+          "edu_train_near_overlap_rows": 3
+        },
+        "7923837": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21311",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21311",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7923843": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21316",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21316",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7923852": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21322",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21322",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7924364": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21545",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21545",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7925090": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "19w_0701.csv:137994",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21802",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21802",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:38381",
+              "kind": "near",
+              "similarity": 0.901701
+            }
+          ],
+          "edu_train_hash_overlap_rows": 2,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7925166": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21824",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21824",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7925191": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21837",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:13992",
+              "kind": "near",
+              "similarity": 0.974048
+            },
+            {
+              "edu_row": "4w_0708.csv:21837",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 2
+        },
+        "7925323": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21868",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21868",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7925394": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21877",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21877",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7925657": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:21972",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:21972",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7926209": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:22193",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:22193",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7926227": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:22210",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:22210",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        },
+        "7928478": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:22496",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:32912",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:35920",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:22496",
+              "kind": "near",
+              "similarity": 1.0
+            },
+            {
+              "edu_row": "4w_0708.csv:32912",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 3,
+          "edu_train_near_overlap_rows": 3
+        },
+        "7928916": {
+          "edu_overlap_samples": [
+            {
+              "edu_row": "4w_0708.csv:22553",
+              "kind": "hash"
+            },
+            {
+              "edu_row": "4w_0708.csv:22553",
+              "kind": "near",
+              "similarity": 1.0
+            }
+          ],
+          "edu_train_hash_overlap_rows": 1,
+          "edu_train_near_overlap_rows": 1
+        }
+      },
       "rows_scanned": 241560
     }
   },

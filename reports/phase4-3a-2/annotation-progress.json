@@ -1,0 +1,36 @@
+{
+  "annotation_status": "waiting_real_pairs",
+  "annotations_received": {
+    "annotator_A": 0,
+    "annotator_B": 0,
+    "total": 0
+  },
+  "arbitration": {
+    "arbitrator": "arbitrator_1",
+    "pending_sheet": null,
+    "records_keep_original_labels": true,
+    "rows_valid": 0,
+    "status": "no_disagreements"
+  },
+  "created_at": "2026-10-29T11:14:58",
+  "disagreements_total": 0,
+  "generated_by": "scripts/phase4_3a_2/annotation_qa.py",
+  "independence": {
+    "annotators_a": [],
+    "annotators_b": [],
+    "mirrored_pairs": 0,
+    "shared_pairs": 0,
+    "status": "not_applicable",
+    "violations": []
+  },
+  "missing_detail_sample": [],
+  "note": "真实人工标注未开始",
+  "open_disagreements": 0,
+  "pairs_fully_annotated": 0,
+  "pairs_missing_annotations": 0,
+  "pairs_total": 0,
+  "required_annotators": 2,
+  "unjudgeable_annotations": 0,
+  "unjudgeable_forced_problems": [],
+  "unjudgeable_policy": "unjudgeable 是独立状态，不得自动设为 0，不参与 Kappa"
+}
