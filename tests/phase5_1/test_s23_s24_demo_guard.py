@@ -75,6 +75,7 @@ class S24HistoryAssetsUntouched(unittest.TestCase):
 
     def test_no_write_calls_targeting_history_assets(self):
         sources = [DEMO_SCRIPT,
+                   *(ROOT / "scripts" / "phase5_1").glob("*.py"),
                    *(ROOT / "src" / "job_matching" / "service").glob("*.py"),
                    *(HERE).glob("*.py")]
         problems = find_protected_write_calls(sources)

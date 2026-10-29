@@ -122,6 +122,19 @@
       "required_skills": [
         {
           "aliases": [],
+          "canonical_name": "java",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+          "extraction_method": "explicit_field",
+          "needs_review": false,
+          "raw_form": "Java",
+          "skill_id": "skill_38a0963a6364",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
           "canonical_name": "mysql",
           "confidence": 0.9,
           "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
@@ -157,19 +170,6 @@
           "needs_review": true,
           "raw_form": "spring",
           "skill_id": "skill_622a494d3ea8",
-          "verification_status": "extracted_from_resume"
-        },
-        {
-          "aliases": [],
-          "canonical_name": "java",
-          "confidence": 0.7,
-          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
-          "evidence_source": "rule_parsed",
-          "evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot",
-          "extraction_method": "lexicon_hit",
-          "needs_review": false,
-          "raw_form": "java",
-          "skill_id": "skill_38a0963a6364",
           "verification_status": "extracted_from_resume"
         }
       ],
@@ -306,13 +306,13 @@
         {
           "aliases": [],
           "canonical_name": "tableau",
-          "confidence": 0.7,
+          "confidence": 0.9,
           "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
           "evidence_source": "rule_parsed",
           "evidence_text": "1. 熟悉 Tableau、机器学习 者优先",
-          "extraction_method": "lexicon_hit",
+          "extraction_method": "explicit_field",
           "needs_review": true,
-          "raw_form": "tableau",
+          "raw_form": "Tableau",
           "skill_id": "skill_5f0974ee455c",
           "verification_status": "extracted_from_resume"
         },
@@ -332,6 +332,19 @@
       ],
       "profile_version": "phase5-1-profile-v1",
       "required_skills": [
+        {
+          "aliases": [],
+          "canonical_name": "python",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+          "extraction_method": "explicit_field",
+          "needs_review": false,
+          "raw_form": "Python",
+          "skill_id": "skill_11a4a60b518b",
+          "verification_status": "extracted_from_resume"
+        },
         {
           "aliases": [],
           "canonical_name": "sql",
@@ -356,19 +369,6 @@
           "needs_review": true,
           "raw_form": "Excel",
           "skill_id": "skill_faba1e00af8e",
-          "verification_status": "extracted_from_resume"
-        },
-        {
-          "aliases": [],
-          "canonical_name": "python",
-          "confidence": 0.7,
-          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
-          "evidence_source": "rule_parsed",
-          "evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
-          "extraction_method": "lexicon_hit",
-          "needs_review": false,
-          "raw_form": "python",
-          "skill_id": "skill_11a4a60b518b",
           "verification_status": "extracted_from_resume"
         }
       ],
@@ -507,6 +507,19 @@
       "required_skills": [
         {
           "aliases": [],
+          "canonical_name": "财务分析",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+          "extraction_method": "explicit_field",
+          "needs_review": true,
+          "raw_form": "财务分析",
+          "skill_id": "skill_ae98f475dbcf",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
           "canonical_name": "会计",
           "confidence": 0.9,
           "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
@@ -529,19 +542,6 @@
           "needs_review": true,
           "raw_form": "Excel",
           "skill_id": "skill_faba1e00af8e",
-          "verification_status": "extracted_from_resume"
-        },
-        {
-          "aliases": [],
-          "canonical_name": "财务分析",
-          "confidence": 0.7,
-          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
-          "evidence_source": "rule_parsed",
-          "evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
-          "extraction_method": "lexicon_hit",
-          "needs_review": true,
-          "raw_form": "财务分析",
-          "skill_id": "skill_ae98f475dbcf",
           "verification_status": "extracted_from_resume"
         }
       ],
@@ -754,7 +754,7 @@
     "evaluation_status": "not_a_trained_model",
     "formal_evaluation": false,
     "label_source": "synthetic_or_unlabeled",
-    "latency_ms": 1.293,
+    "latency_ms": 0.825,
     "mode": "baseline",
     "model_version": "baseline_skill_text_v1-20261029",
     "options": {
@@ -802,6 +802,12 @@
         "evidence": [
           {
             "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+            "skill": "java",
+            "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "type": "skill_matched"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
             "skill": "mysql",
             "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
             "type": "skill_matched"
@@ -815,12 +821,6 @@
           {
             "jd_evidence_text": "以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot",
             "skill": "spring",
-            "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
-            "type": "skill_matched"
-          },
-          {
-            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot",
-            "skill": "java",
             "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
             "type": "skill_matched"
           },
@@ -878,6 +878,13 @@
         "job_id": "demo_job_001",
         "matched_skills": [
           {
+            "canonical_name": "java",
+            "evidence_source": "stated_in_source",
+            "evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+            "verification_status": "self_reported"
+          },
+          {
             "canonical_name": "mysql",
             "evidence_source": "stated_in_source",
             "evidence_text": "Java、MySQL、Spring Boot、Redis",
@@ -899,13 +906,6 @@
             "verification_status": "self_reported"
           },
           {
-            "canonical_name": "java",
-            "evidence_source": "stated_in_source",
-            "evidence_text": "Java、MySQL、Spring Boot、Redis",
-            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot",
-            "verification_status": "self_reported"
-          },
-          {
             "canonical_name": "redis",
             "evidence_source": "stated_in_source",
             "evidence_text": "Java、MySQL、Spring Boot、Redis",
@@ -917,7 +917,7 @@
         "model_version": "baseline_skill_text_v1-20261029",
         "preferred_skills_missing": [],
         "rank": 1,
-        "score": 0.90990962,
+        "score": 0.91051744,
         "score_type": "heuristic_score",
         "scoring_method": "baseline_skill_text_v1",
         "skill_constraint_status": "satisfied",
@@ -961,6 +961,12 @@
           {
             "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
             "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "python",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
             "skill": "sql",
             "type": "skill_evidence_missing"
           },
@@ -968,12 +974,6 @@
             "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
             "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
             "skill": "excel",
-            "type": "skill_evidence_missing"
-          },
-          {
-            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
-            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
-            "skill": "python",
             "type": "skill_evidence_missing"
           },
           {
@@ -1025,6 +1025,12 @@
         "matched_skills": [],
         "missing_required_skills": [
           {
+            "canonical_name": "python",
+            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          },
+          {
             "canonical_name": "sql",
             "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
             "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
@@ -1032,12 +1038,6 @@
           },
           {
             "canonical_name": "excel",
-            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
-            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
-            "status": "evidence_missing"
-          },
-          {
-            "canonical_name": "python",
             "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
             "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
             "status": "evidence_missing"
@@ -1103,6 +1103,12 @@
           {
             "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
             "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "财务分析",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
             "skill": "会计",
             "type": "skill_evidence_missing"
           },
@@ -1110,12 +1116,6 @@
             "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
             "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
             "skill": "excel",
-            "type": "skill_evidence_missing"
-          },
-          {
-            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
-            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
-            "skill": "财务分析",
             "type": "skill_evidence_missing"
           },
           {
@@ -1167,6 +1167,12 @@
         "matched_skills": [],
         "missing_required_skills": [
           {
+            "canonical_name": "财务分析",
+            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          },
+          {
             "canonical_name": "会计",
             "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
             "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
@@ -1174,12 +1180,6 @@
           },
           {
             "canonical_name": "excel",
-            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
-            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
-            "status": "evidence_missing"
-          },
-          {
-            "canonical_name": "财务分析",
             "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
             "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
             "status": "evidence_missing"
@@ -1317,6 +1317,7 @@
     "score_type": "heuristic_score",
     "scoring_method": "baseline_skill_text_v1",
     "warnings": [
+      "heuristic_baseline_unvalidated:启发式基线未经 Gold 验证",
       "score_semantics:排序参考分，不是录用概率"
     ]
   },

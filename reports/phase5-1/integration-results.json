@@ -114,15 +114,15 @@
       "experience_constraint": "requirement_unclear",
       "job_id": "demo_job_001",
       "matched": [
+        "java",
         "mysql",
         "spring boot",
         "spring",
-        "java",
         "redis"
       ],
       "missing_required": [],
       "rank": 1,
-      "score": 0.90990962,
+      "score": 0.91051744,
       "score_type": "heuristic_score"
     },
     {
@@ -131,9 +131,9 @@
       "job_id": "demo_job_002",
       "matched": [],
       "missing_required": [
+        "python",
         "sql",
-        "excel",
-        "python"
+        "excel"
       ],
       "rank": 2,
       "score": 0.15445797,
@@ -145,9 +145,9 @@
       "job_id": "demo_job_003",
       "matched": [],
       "missing_required": [
+        "财务分析",
         "会计",
-        "excel",
-        "财务分析"
+        "excel"
       ],
       "rank": 3,
       "score": 0.00529991,

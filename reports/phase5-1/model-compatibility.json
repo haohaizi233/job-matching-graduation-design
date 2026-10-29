@@ -1,0 +1,2017 @@
+{
+  "by_family": {
+    "education": {
+      "error": 0,
+      "incompatible": 0,
+      "loadable": 16,
+      "total": 16
+    },
+    "matching": {
+      "error": 0,
+      "incompatible": 5,
+      "loadable": 21,
+      "total": 26
+    }
+  },
+  "created_at": "2026-10-29T11:41:19",
+  "disclaimer": "探测只读加载归档模型，不重新训练、不覆盖 checkpoint、不修改历史实验指标；探测结论只说明工程可加载性，不代表模型效果验收。",
+  "environment": {
+    "environment_yml_pins": {
+      "numpy": "1.26.4",
+      "python": "3.11",
+      "scikit-learn": "1.5.2",
+      "torch": "2.1.2+cu121"
+    },
+    "note": "当前解释器与 environment.yml 声明版本存在偏差时，旧 checkpoint 的 pickle/joblib 兼容性可能受损（只读探测如实登记）",
+    "numpy": "2.2.6",
+    "platform": "win32",
+    "python": "3.13.2",
+    "scikit_learn": "1.8.0",
+    "torch": "2.12.0+cpu"
+  },
+  "generated_by": "scripts/phase5_1/model_compatibility_report.py",
+  "phase5_1_mode_conclusions": {
+    "baseline": "不依赖归档模型，中文合成输入上可运行（heuristic_score）",
+    "experimental_model": "可加载的 run 直接用于研究/诊断；不可加载的 run 一律 MODEL_MISSING/降级 baseline，禁止伪造输出",
+    "future_verified": "无已验证中文模型，返回 FUTURE_MODEL_UNAVAILABLE（不伪称存在）"
+  },
+  "read_only": true,
+  "runs": [
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-20261028-212510",
+          "thresholds": {
+            "博士": 0.25,
+            "大专": 0.4,
+            "学历不明": 0.4,
+            "学历不限": 0.7,
+            "本科": 0.2,
+            "硕士": 0.3
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-final-20261028-212510",
+      "run_id": "charcnn-final-20261028-212510",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-balanced-20261028-212534",
+          "thresholds": {
+            "博士": 0.4,
+            "大专": 0.65,
+            "学历不明": 0.2,
+            "学历不限": 0.55,
+            "本科": 0.2,
+            "硕士": 0.45
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-final-balanced-20261028-212534",
+      "run_id": "charcnn-final-balanced-20261028-212534",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-confw-20261028-221032",
+          "thresholds": {
+            "博士": 0.4,
+            "大专": 0.55,
+            "学历不明": 0.2,
+            "学历不限": 0.25,
+            "本科": 0.2,
+            "硕士": 0.3
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-final-confw-20261028-221032",
+      "run_id": "charcnn-final-confw-20261028-221032",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": false,
+          "学历不限": false,
+          "本科及以上学历": true,
+          "硕士研究生": false
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-highconf-20261028-221117",
+          "thresholds": {
+            "博士": 0.2,
+            "大专": 0.7,
+            "学历不明": 0.2,
+            "学历不限": 0.55,
+            "本科": 0.4,
+            "硕士": 0.3
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-final-highconf-20261028-221117",
+      "run_id": "charcnn-final-highconf-20261028-221117",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": false,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-holdout-20261028-212622",
+          "thresholds": {
+            "博士": 0.4,
+            "大专": 0.7,
+            "学历不明": 0.2,
+            "学历不限": 0.6,
+            "本科": 0.2,
+            "硕士": 0.25
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-final-holdout-20261028-212622",
+      "run_id": "charcnn-final-holdout-20261028-212622",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": false,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-holdout-vloss-20261028-213521",
+          "thresholds": {
+            "博士": 0.4,
+            "大专": 0.2,
+            "学历不明": 0.2,
+            "学历不限": 0.5,
+            "本科": 0.25,
+            "硕士": 0.2
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+      "run_id": "charcnn-final-holdout-vloss-20261028-213521",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-vloss-20261028-213415",
+          "thresholds": {
+            "博士": 0.4,
+            "大专": 0.5,
+            "学历不明": 0.2,
+            "学历不限": 0.45,
+            "本科": 0.25,
+            "硕士": 0.35
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-final-vloss-20261028-213415",
+      "run_id": "charcnn-final-vloss-20261028-213415",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-vloss-balanced-20261028-213450",
+          "thresholds": {
+            "博士": 0.25,
+            "大专": 0.5,
+            "学历不明": 0.2,
+            "学历不限": 0.55,
+            "本科": 0.25,
+            "硕士": 0.25
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+      "run_id": "charcnn-final-vloss-balanced-20261028-213450",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": null,
+      "model_type": "char_cnn",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "char_cnn",
+          "model_version": "charcnn-smoke-charcnn-20261028-211941",
+          "thresholds": {
+            "博士": 0.2,
+            "大专": 0.55,
+            "学历不明": 0.2,
+            "学历不限": 0.5,
+            "本科": 0.25,
+            "硕士": 0.2
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+      "run_id": "charcnn-smoke-charcnn-20261028-211941",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": true
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator LogisticRegression from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nh",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhtt",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttp"
+      ],
+      "model_name": null,
+      "model_type": "tfidf_char_ovr_logreg",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "tfidf_char_ovr_logreg",
+          "model_version": "tfidf-final-20261028-212254",
+          "thresholds": {
+            "博士": 0.45,
+            "大专": 0.3,
+            "学历不明": 0.2,
+            "学历不限": 0.2,
+            "本科": 0.45,
+            "硕士": 0.4
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/tfidf/tfidf-final-20261028-212254",
+      "run_id": "tfidf-final-20261028-212254",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator LogisticRegression from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nh",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhtt",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttp"
+      ],
+      "model_name": null,
+      "model_type": "tfidf_char_ovr_logreg",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "tfidf_char_ovr_logreg",
+          "model_version": "tfidf-final-balanced-20261028-212312",
+          "thresholds": {
+            "博士": 0.2,
+            "大专": 0.2,
+            "学历不明": 0.2,
+            "学历不限": 0.2,
+            "本科": 0.25,
+            "硕士": 0.3
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/tfidf/tfidf-final-balanced-20261028-212312",
+      "run_id": "tfidf-final-balanced-20261028-212312",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator LogisticRegression from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nh",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhtt",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttp"
+      ],
+      "model_name": null,
+      "model_type": "tfidf_char_ovr_logreg",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "tfidf_char_ovr_logreg",
+          "model_version": "tfidf-final-confw-20261028-220908",
+          "thresholds": {
+            "博士": 0.3,
+            "大专": 0.6,
+            "学历不明": 0.2,
+            "学历不限": 0.2,
+            "本科": 0.3,
+            "硕士": 0.35
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/tfidf/tfidf-final-confw-20261028-220908",
+      "run_id": "tfidf-final-confw-20261028-220908",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator LogisticRegression from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nh",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhtt",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttp"
+      ],
+      "model_name": null,
+      "model_type": "tfidf_char_ovr_logreg",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": false,
+          "学历不限": false,
+          "本科及以上学历": true,
+          "硕士研究生": false
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "tfidf_char_ovr_logreg",
+          "model_version": "tfidf-final-highconf-20261028-221021",
+          "thresholds": {
+            "博士": 0.2,
+            "大专": 0.8,
+            "学历不明": 0.2,
+            "学历不限": 0.2,
+            "本科": 0.25,
+            "硕士": 0.4
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/tfidf/tfidf-final-highconf-20261028-221021",
+      "run_id": "tfidf-final-highconf-20261028-221021",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator LogisticRegression from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nh",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhtt",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttp"
+      ],
+      "model_name": null,
+      "model_type": "tfidf_char_ovr_logreg",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": false,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "tfidf_char_ovr_logreg",
+          "model_version": "tfidf-final-holdout-20261028-212556",
+          "thresholds": {
+            "博士": 0.45,
+            "大专": 0.3,
+            "学历不明": 0.2,
+            "学历不限": 0.2,
+            "本科": 0.3,
+            "硕士": 0.4
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/tfidf/tfidf-final-holdout-20261028-212556",
+      "run_id": "tfidf-final-holdout-20261028-212556",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator LogisticRegression from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nh",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhtt",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttp"
+      ],
+      "model_name": null,
+      "model_type": "tfidf_char_ovr_logreg",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "tfidf_char_ovr_logreg",
+          "model_version": "tfidf-final-title-20261028-212332",
+          "thresholds": {
+            "博士": 0.35,
+            "大专": 0.4,
+            "学历不明": 0.2,
+            "学历不限": 0.2,
+            "本科": 0.5,
+            "硕士": 0.4
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "大专"
+          ],
+          "学历不限": [
+            "学历不限"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/tfidf/tfidf-final-title-20261028-212332",
+      "run_id": "tfidf-final-title-20261028-212332",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "education",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator LogisticRegression from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nh",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfTransformer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhtt",
+        "InconsistentVersionWarning: Trying to unpickle estimator TfidfVectorizer from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttp"
+      ],
+      "model_name": null,
+      "model_type": "tfidf_char_ovr_logreg",
+      "probe": {
+        "expression_seen_in_train": {
+          "大专": true,
+          "学历不限": true,
+          "本科及以上学历": true,
+          "硕士研究生": true
+        },
+        "normalizer": {
+          "fallback_to_rules": true,
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "model_type": "tfidf_char_ovr_logreg",
+          "model_version": "tfidf-smoke-tfidf-20261028-211845",
+          "thresholds": {
+            "博士": 0.4,
+            "大专": 0.2,
+            "学历不明": 0.2,
+            "学历不限": 0.2,
+            "本科": 0.35,
+            "硕士": 0.45
+          }
+        },
+        "probe_labels": {
+          "大专": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专"
+          ],
+          "学历不限": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "本科及以上学历": [
+            "博士",
+            "硕士",
+            "本科"
+          ],
+          "硕士研究生": [
+            "博士",
+            "硕士"
+          ]
+        }
+      },
+      "run_dir": "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+      "run_id": "tfidf-smoke-tfidf-20261028-211845",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": {
+        "message": "Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+        "type": "AttributeError"
+      },
+      "family": "matching",
+      "load_status": "incompatible",
+      "model_name": "gradient_boosting",
+      "model_type": null,
+      "run_dir": "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750",
+      "run_id": "gradient_boosting-candidate_cold-final-20261028-203750",
+      "traceback_tail": "256, in load\n    dispatch[key[0]](self)\n    ~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1581, in load_stack_global\n    self.append(self.find_class(module, name))\n                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1624, in find_class\n    return _getattribute(sys.modules[module], name)[0]\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 326, in _getattribute\n    raise AttributeError(\"Can't get attribute {!r} on {!r}\"\n                         .format(name, top)) from None\nAttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>\n",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": {
+        "message": "Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+        "type": "AttributeError"
+      },
+      "family": "matching",
+      "load_status": "incompatible",
+      "model_name": "gradient_boosting",
+      "model_type": null,
+      "run_dir": "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750",
+      "run_id": "gradient_boosting-candidate_cold-smoke-20261028-203750",
+      "traceback_tail": "256, in load\n    dispatch[key[0]](self)\n    ~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1581, in load_stack_global\n    self.append(self.find_class(module, name))\n                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1624, in find_class\n    return _getattribute(sys.modules[module], name)[0]\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 326, in _getattribute\n    raise AttributeError(\"Can't get attribute {!r} on {!r}\"\n                         .format(name, top)) from None\nAttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>\n",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": {
+        "message": "Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+        "type": "AttributeError"
+      },
+      "family": "matching",
+      "load_status": "incompatible",
+      "model_name": "gradient_boosting",
+      "model_type": null,
+      "run_dir": "models/matching/gradient_boosting/candidate_cold/smoke-gb-002",
+      "run_id": "smoke-gb-002",
+      "traceback_tail": "256, in load\n    dispatch[key[0]](self)\n    ~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1581, in load_stack_global\n    self.append(self.find_class(module, name))\n                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1624, in find_class\n    return _getattribute(sys.modules[module], name)[0]\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 326, in _getattribute\n    raise AttributeError(\"Can't get attribute {!r} on {!r}\"\n                         .format(name, top)) from None\nAttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>\n",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": {
+        "message": "Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+        "type": "AttributeError"
+      },
+      "family": "matching",
+      "load_status": "incompatible",
+      "model_name": "gradient_boosting",
+      "model_type": null,
+      "run_dir": "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750",
+      "run_id": "gradient_boosting-double_cold-final-20261028-203750",
+      "traceback_tail": "256, in load\n    dispatch[key[0]](self)\n    ~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1581, in load_stack_global\n    self.append(self.find_class(module, name))\n                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1624, in find_class\n    return _getattribute(sys.modules[module], name)[0]\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 326, in _getattribute\n    raise AttributeError(\"Can't get attribute {!r} on {!r}\"\n                         .format(name, top)) from None\nAttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>\n",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": {
+        "message": "Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+        "type": "AttributeError"
+      },
+      "family": "matching",
+      "load_status": "incompatible",
+      "model_name": "gradient_boosting",
+      "model_type": null,
+      "run_dir": "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750",
+      "run_id": "gradient_boosting-job_cold-final-20261028-203750",
+      "traceback_tail": "256, in load\n    dispatch[key[0]](self)\n    ~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1581, in load_stack_global\n    self.append(self.find_class(module, name))\n                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1624, in find_class\n    return _getattribute(sys.modules[module], name)[0]\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 326, in _getattribute\n    raise AttributeError(\"Can't get attribute {!r} on {!r}\"\n                         .format(name, top)) from None\nAttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>\n",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "mlp",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "mlp",
+          "n_features": 49,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "mlp-candidate_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.6672731637954712
+      },
+      "run_dir": "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750",
+      "run_id": "mlp-candidate_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "mlp",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "mlp",
+          "n_features": 47,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "mlp-candidate_cold-smoke-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": -0.042624734342098236
+      },
+      "run_dir": "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750",
+      "run_id": "mlp-candidate_cold-smoke-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "mlp",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "mlp",
+          "n_features": 47,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "smoke-mlp-001",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": -0.042624734342098236
+      },
+      "run_dir": "models/matching/mlp/candidate_cold/smoke-mlp-001",
+      "run_id": "smoke-mlp-001",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "mlp",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "mlp",
+          "n_features": 49,
+          "protocol": "double_cold",
+          "requires_labels": false,
+          "run_id": "mlp-double_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.6465032696723938
+      },
+      "run_dir": "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750",
+      "run_id": "mlp-double_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "mlp",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "mlp",
+          "n_features": 49,
+          "protocol": "job_cold",
+          "requires_labels": false,
+          "run_id": "mlp-job_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.6677429676055908
+      },
+      "run_dir": "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750",
+      "run_id": "mlp-job_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "ranknet",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "experience"
+          ],
+          "model_name": "ranknet",
+          "n_features": 35,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ranknet-candidate_cold-ablation-category-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 2.505173683166504
+      },
+      "run_dir": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750",
+      "run_id": "ranknet-candidate_cold-ablation-category-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "ranknet",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "category",
+            "experience"
+          ],
+          "model_name": "ranknet",
+          "n_features": 19,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ranknet-candidate_cold-ablation-position-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 2.364284038543701
+      },
+      "run_dir": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750",
+      "run_id": "ranknet-candidate_cold-ablation-position-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "ranknet",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ranknet",
+          "n_features": 45,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ranknet-candidate_cold-ablation-skill-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 2.610851764678955
+      },
+      "run_dir": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750",
+      "run_id": "ranknet-candidate_cold-ablation-skill-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "ranknet",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ranknet",
+          "n_features": 49,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ranknet-candidate_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": -2.2272913455963135
+      },
+      "run_dir": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750",
+      "run_id": "ranknet-candidate_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "ranknet",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ranknet",
+          "n_features": 47,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ranknet-candidate_cold-smoke-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": -0.06685907393693924
+      },
+      "run_dir": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750",
+      "run_id": "ranknet-candidate_cold-smoke-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "ranknet",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ranknet",
+          "n_features": 47,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "smoke-ranknet-002",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": -0.06685907393693924
+      },
+      "run_dir": "models/matching/ranknet/candidate_cold/smoke-ranknet-002",
+      "run_id": "smoke-ranknet-002",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "ranknet",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ranknet",
+          "n_features": 49,
+          "protocol": "double_cold",
+          "requires_labels": false,
+          "run_id": "ranknet-double_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 2.1023058891296387
+      },
+      "run_dir": "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750",
+      "run_id": "ranknet-double_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [],
+      "model_name": "ranknet",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ranknet",
+          "n_features": 49,
+          "protocol": "job_cold",
+          "requires_labels": false,
+          "run_id": "ranknet-job_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 3.6104249954223633
+      },
+      "run_dir": "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750",
+      "run_id": "ranknet-job_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": false,
+        "model.pt": true,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator Ridge from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit"
+      ],
+      "model_name": "ridge",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "experience"
+          ],
+          "model_name": "ridge",
+          "n_features": 35,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ridge-candidate_cold-ablation-category-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.6661872863769531
+      },
+      "run_dir": "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750",
+      "run_id": "ridge-candidate_cold-ablation-category-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator Ridge from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit"
+      ],
+      "model_name": "ridge",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "category",
+            "experience"
+          ],
+          "model_name": "ridge",
+          "n_features": 19,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ridge-candidate_cold-ablation-position-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.5936984419822693
+      },
+      "run_dir": "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750",
+      "run_id": "ridge-candidate_cold-ablation-position-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator Ridge from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit"
+      ],
+      "model_name": "ridge",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ridge",
+          "n_features": 45,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ridge-candidate_cold-ablation-skill-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.6211650371551514
+      },
+      "run_dir": "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750",
+      "run_id": "ridge-candidate_cold-ablation-skill-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator Ridge from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit"
+      ],
+      "model_name": "ridge",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ridge",
+          "n_features": 49,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ridge-candidate_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.7397201061248779
+      },
+      "run_dir": "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750",
+      "run_id": "ridge-candidate_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator Ridge from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit"
+      ],
+      "model_name": "ridge",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ridge",
+          "n_features": 47,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "ridge-candidate_cold-smoke-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.7770453691482544
+      },
+      "run_dir": "models/matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750",
+      "run_id": "ridge-candidate_cold-smoke-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator Ridge from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit"
+      ],
+      "model_name": "ridge",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ridge",
+          "n_features": 47,
+          "protocol": "candidate_cold",
+          "requires_labels": false,
+          "run_id": "smoke-ridge-001",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.7770453691482544
+      },
+      "run_dir": "models/matching/ridge/candidate_cold/smoke-ridge-001",
+      "run_id": "smoke-ridge-001",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator Ridge from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit"
+      ],
+      "model_name": "ridge",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ridge",
+          "n_features": 49,
+          "protocol": "double_cold",
+          "requires_labels": false,
+          "run_id": "ridge-double_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.7541792392730713
+      },
+      "run_dir": "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750",
+      "run_id": "ridge-double_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    },
+    {
+      "error": null,
+      "family": "matching",
+      "load_status": "ok",
+      "load_warnings": [
+        "InconsistentVersionWarning: Trying to unpickle estimator Ridge from version 1.5.2 when using version 1.8.0. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit"
+      ],
+      "model_name": "ridge",
+      "model_type": null,
+      "probe": {
+        "predictor_info": {
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "model_name": "ridge",
+          "n_features": 49,
+          "protocol": "job_cold",
+          "requires_labels": false,
+          "run_id": "ridge-job_cold-final-20261028-203750",
+          "supports_cpu": true
+        },
+        "probe_rank_job_ids": [
+          1,
+          2
+        ],
+        "probe_score": 0.7382490038871765
+      },
+      "run_dir": "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750",
+      "run_id": "ridge-job_cold-final-20261028-203750",
+      "weights_present": {
+        "feature_map.json": true,
+        "model.pkl": true,
+        "model.pt": false,
+        "tokenizer.json": false
+      }
+    }
+  ],
+  "totals": {
+    "loadable": 37,
+    "problematic": 5,
+    "runs": 42
+  }
+}

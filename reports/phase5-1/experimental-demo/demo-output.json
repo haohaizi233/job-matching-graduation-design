@@ -1,0 +1,1544 @@
+{
+  "demo": true,
+  "disclaimer": "Phase5-1 演示仅验证服务链路可运行；分数为排序参考分（heuristic_score / model_raw_score），不是录用概率；不代表中文人岗匹配模型真实效果验收通过。",
+  "education_resolver": {
+    "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+    "fallback_to_rules": true,
+    "load_error": null,
+    "mode": "rules_only",
+    "model_dir": null,
+    "model_version": null
+  },
+  "formal_evaluation": false,
+  "input": {
+    "jobs_are_synthetic_or_unlabeled": true,
+    "jobs_count": 4,
+    "jobs_file": "scripts/phase5_1/fixtures/synthetic_jobs_zh.jsonl",
+    "resume_file": "scripts/phase5_1/fixtures/synthetic_resume_zh.txt",
+    "resume_is_synthetic": true
+  },
+  "job_profiles": [
+    {
+      "city": {
+        "evidence_text": "工作地点：上海",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "上海"
+      },
+      "demo": true,
+      "education_requirement": {
+        "confidence": null,
+        "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+        "expression_seen_in_train": null,
+        "model_version": null,
+        "needs_human_review": false,
+        "note": "规则模式（模型不可用），未生成任何模型输出",
+        "raw": "本科及以上学历",
+        "rule": "rule_predict:above_expand:本科",
+        "source": "rule",
+        "status": "rules_only",
+        "tokens": [
+          "博士",
+          "硕士",
+          "本科"
+        ]
+      },
+      "employer": {
+        "evidence_text": "示例科技有限公司",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "示例科技有限公司"
+      },
+      "employment_type": {
+        "evidence_text": "",
+        "extraction_method": "key_value_v1",
+        "fact_source": "unknown",
+        "model_version": null,
+        "note": "",
+        "status": "unknown",
+        "value": null
+      },
+      "experience_requirement": {
+        "note": "JD 未提供经验要求，保留 unknown",
+        "raw": "",
+        "source": "absent",
+        "status": "unknown",
+        "years_min": null
+      },
+      "formal_evaluation": false,
+      "graduation_cohort": {
+        "evidence_text": "",
+        "extraction_method": "cohort_pattern_v1",
+        "fact_source": "unknown",
+        "model_version": null,
+        "note": "",
+        "status": "unknown",
+        "value": null
+      },
+      "is_synthetic": true,
+      "job_category": {
+        "evidence_text": "Java开发工程师 职位名称：Java开发工程师\n公司名称：示例科技有限公司\n工作地点：上海\n薪资：15-25K\n任职要求：\n1. 本科及以",
+        "extraction_method": "heuristic_keyword_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "INFORMATION-TECHNOLOGY"
+      },
+      "job_id": "demo_job_001",
+      "job_title": {
+        "evidence_text": "职位名称：Java开发工程师",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "Java开发工程师"
+      },
+      "label_source": "synthetic_or_unlabeled",
+      "parse_status": "ok",
+      "preferred_skills": [
+        {
+          "aliases": [],
+          "canonical_name": "redis",
+          "confidence": 0.7,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "3. 熟悉 Redis 者优先",
+          "extraction_method": "lexicon_hit",
+          "needs_review": false,
+          "raw_form": "redis",
+          "skill_id": "skill_34fb46c847bb",
+          "verification_status": "extracted_from_resume"
+        }
+      ],
+      "profile_version": "phase5-1-profile-v1",
+      "required_skills": [
+        {
+          "aliases": [],
+          "canonical_name": "java",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+          "extraction_method": "explicit_field",
+          "needs_review": false,
+          "raw_form": "Java",
+          "skill_id": "skill_38a0963a6364",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "mysql",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+          "extraction_method": "explicit_field",
+          "needs_review": false,
+          "raw_form": "MySQL",
+          "skill_id": "skill_430005175c4c",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "spring boot",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+          "extraction_method": "explicit_field",
+          "needs_review": false,
+          "raw_form": "Spring Boot",
+          "skill_id": "skill_9c3c0544259a",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "spring",
+          "confidence": 0.7,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot",
+          "extraction_method": "lexicon_hit",
+          "needs_review": true,
+          "raw_form": "spring",
+          "skill_id": "skill_622a494d3ea8",
+          "verification_status": "extracted_from_resume"
+        }
+      ],
+      "responsibilities": {
+        "evidence_text": "1. 负责核心业务系统开发\n2. 参与接口设计与性能优化",
+        "extraction_method": "section_excerpt_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": [
+          "1. 负责核心业务系统开发",
+          "2. 参与接口设计与性能优化"
+        ]
+      },
+      "salary": {
+        "evidence_text": "薪资：15-25K",
+        "extraction_method": "salary_pattern_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "15-25K"
+      },
+      "source": "scripts/phase5_1/fixtures/synthetic_jobs_zh.jsonl",
+      "source_evidence": {
+        "education_resolver": {
+          "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+          "fallback_to_rules": true,
+          "load_error": null,
+          "mode": "rules_only",
+          "model_dir": null,
+          "model_version": null
+        },
+        "extraction_pipeline": "job_parser_v1",
+        "profile_version": "phase5-1-profile-v1",
+        "sections_detected": [
+          "__head__",
+          "任职要求",
+          "岗位职责"
+        ],
+        "text_length": 152,
+        "text_sha256": "c319eb752c83755cf98c93bc1f049f8fc9c86ede50ba81cbddfea855575222b9"
+      },
+      "source_license": "synthetic-generated-local",
+      "warnings": []
+    },
+    {
+      "city": {
+        "evidence_text": "工作地点：上海",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "上海"
+      },
+      "demo": true,
+      "education_requirement": {
+        "confidence": null,
+        "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+        "expression_seen_in_train": null,
+        "model_version": null,
+        "needs_human_review": false,
+        "note": "规则模式（模型不可用），未生成任何模型输出",
+        "raw": "本科及以上学历",
+        "rule": "rule_predict:above_expand:本科",
+        "source": "rule",
+        "status": "rules_only",
+        "tokens": [
+          "博士",
+          "硕士",
+          "本科"
+        ]
+      },
+      "employer": {
+        "evidence_text": "示例数据服务公司",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "示例数据服务公司"
+      },
+      "employment_type": {
+        "evidence_text": "实习",
+        "extraction_method": "key_value_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "实习"
+      },
+      "experience_requirement": {
+        "note": "JD 未提供经验要求，保留 unknown",
+        "raw": "",
+        "source": "absent",
+        "status": "unknown",
+        "years_min": null
+      },
+      "formal_evaluation": false,
+      "graduation_cohort": {
+        "evidence_text": "",
+        "extraction_method": "cohort_pattern_v1",
+        "fact_source": "unknown",
+        "model_version": null,
+        "note": "",
+        "status": "unknown",
+        "value": null
+      },
+      "is_synthetic": true,
+      "job_category": {
+        "evidence_text": "数据分析实习生 职位名称：数据分析实习生\n公司名称：示例数据服务公司\n工作地点：上海\n任职要求：\n1. 本科及以上学历，统计学或数学相关",
+        "extraction_method": "heuristic_keyword_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "INFORMATION-TECHNOLOGY"
+      },
+      "job_id": "demo_job_002",
+      "job_title": {
+        "evidence_text": "职位名称：数据分析实习生",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "数据分析实习生"
+      },
+      "label_source": "synthetic_or_unlabeled",
+      "parse_status": "ok",
+      "preferred_skills": [
+        {
+          "aliases": [],
+          "canonical_name": "tableau",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 熟悉 Tableau、机器学习 者优先",
+          "extraction_method": "explicit_field",
+          "needs_review": true,
+          "raw_form": "Tableau",
+          "skill_id": "skill_5f0974ee455c",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "机器学习",
+          "confidence": 0.7,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 熟悉 Tableau、机器学习 者优先",
+          "extraction_method": "lexicon_hit",
+          "needs_review": true,
+          "raw_form": "机器学习",
+          "skill_id": "skill_e0ab0981aba5",
+          "verification_status": "extracted_from_resume"
+        }
+      ],
+      "profile_version": "phase5-1-profile-v1",
+      "required_skills": [
+        {
+          "aliases": [],
+          "canonical_name": "python",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+          "extraction_method": "explicit_field",
+          "needs_review": false,
+          "raw_form": "Python",
+          "skill_id": "skill_11a4a60b518b",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "sql",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+          "extraction_method": "explicit_field",
+          "needs_review": true,
+          "raw_form": "SQL",
+          "skill_id": "skill_4ec7c53222c8",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "excel",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+          "extraction_method": "explicit_field",
+          "needs_review": true,
+          "raw_form": "Excel",
+          "skill_id": "skill_faba1e00af8e",
+          "verification_status": "extracted_from_resume"
+        }
+      ],
+      "responsibilities": {
+        "evidence_text": "1. 负责业务数据提取与分析\n2. 输出数据分析报告",
+        "extraction_method": "section_excerpt_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": [
+          "1. 负责业务数据提取与分析",
+          "2. 输出数据分析报告"
+        ]
+      },
+      "salary": {
+        "evidence_text": "",
+        "extraction_method": "salary_pattern_v1",
+        "fact_source": "unknown",
+        "model_version": null,
+        "note": "",
+        "status": "unknown",
+        "value": null
+      },
+      "source": "scripts/phase5_1/fixtures/synthetic_jobs_zh.jsonl",
+      "source_evidence": {
+        "education_resolver": {
+          "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+          "fallback_to_rules": true,
+          "load_error": null,
+          "mode": "rules_only",
+          "model_dir": null,
+          "model_version": null
+        },
+        "extraction_pipeline": "job_parser_v1",
+        "profile_version": "phase5-1-profile-v1",
+        "sections_detected": [
+          "__head__",
+          "任职要求",
+          "加分项",
+          "岗位职责"
+        ],
+        "text_length": 161,
+        "text_sha256": "e823783ea2105ec8b40b635d698b7e1f799fe79f49fa758bce51bd648a830754"
+      },
+      "source_license": "synthetic-generated-local",
+      "warnings": []
+    },
+    {
+      "city": {
+        "evidence_text": "工作地点：北京",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "北京"
+      },
+      "demo": true,
+      "education_requirement": {
+        "confidence": null,
+        "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+        "expression_seen_in_train": null,
+        "model_version": null,
+        "needs_human_review": false,
+        "note": "规则模式（模型不可用），未生成任何模型输出",
+        "raw": "本科及以上学历",
+        "rule": "rule_predict:above_expand:本科",
+        "source": "rule",
+        "status": "rules_only",
+        "tokens": [
+          "博士",
+          "硕士",
+          "本科"
+        ]
+      },
+      "employer": {
+        "evidence_text": "示例集团",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "示例集团"
+      },
+      "employment_type": {
+        "evidence_text": "应届",
+        "extraction_method": "key_value_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "应届"
+      },
+      "experience_requirement": {
+        "note": "年限为规则解析结果，是否满足需人工确认",
+        "raw": "应届",
+        "source": "heuristic_keyword_v1",
+        "status": "none_required",
+        "years_min": 0.0
+      },
+      "formal_evaluation": false,
+      "graduation_cohort": {
+        "evidence_text": "2027届",
+        "extraction_method": "cohort_pattern_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "2027"
+      },
+      "is_synthetic": true,
+      "job_category": {
+        "evidence_text": "财务管培生 职位名称：财务管培生\n公司名称：示例集团\n工作地点：北京\n任职要求：\n1. 本科及以上学历，财务、会计相关专业\n2. 熟",
+        "extraction_method": "heuristic_keyword_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "FINANCE"
+      },
+      "job_id": "demo_job_003",
+      "job_title": {
+        "evidence_text": "职位名称：财务管培生",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "财务管培生"
+      },
+      "label_source": "synthetic_or_unlabeled",
+      "parse_status": "ok",
+      "preferred_skills": [],
+      "profile_version": "phase5-1-profile-v1",
+      "required_skills": [
+        {
+          "aliases": [],
+          "canonical_name": "财务分析",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+          "extraction_method": "explicit_field",
+          "needs_review": true,
+          "raw_form": "财务分析",
+          "skill_id": "skill_ae98f475dbcf",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "会计",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+          "extraction_method": "explicit_field",
+          "needs_review": true,
+          "raw_form": "会计",
+          "skill_id": "skill_d649e95568ca",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "excel",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+          "extraction_method": "explicit_field",
+          "needs_review": true,
+          "raw_form": "Excel",
+          "skill_id": "skill_faba1e00af8e",
+          "verification_status": "extracted_from_resume"
+        }
+      ],
+      "responsibilities": {
+        "evidence_text": "1. 参与财务核算与预算管理",
+        "extraction_method": "section_excerpt_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": [
+          "1. 参与财务核算与预算管理"
+        ]
+      },
+      "salary": {
+        "evidence_text": "",
+        "extraction_method": "salary_pattern_v1",
+        "fact_source": "unknown",
+        "model_version": null,
+        "note": "",
+        "status": "unknown",
+        "value": null
+      },
+      "source": "scripts/phase5_1/fixtures/synthetic_jobs_zh.jsonl",
+      "source_evidence": {
+        "education_resolver": {
+          "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+          "fallback_to_rules": true,
+          "load_error": null,
+          "mode": "rules_only",
+          "model_dir": null,
+          "model_version": null
+        },
+        "extraction_pipeline": "job_parser_v1",
+        "profile_version": "phase5-1-profile-v1",
+        "sections_detected": [
+          "__head__",
+          "任职要求",
+          "加分项",
+          "岗位职责"
+        ],
+        "text_length": 134,
+        "text_sha256": "4019f4d17d20572136942dd02c0b2f2e8d3d9f8cd497693da36df72e09111b23"
+      },
+      "source_license": "synthetic-generated-local",
+      "warnings": []
+    },
+    {
+      "city": {
+        "evidence_text": "工作地点：上海",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "上海"
+      },
+      "demo": true,
+      "education_requirement": {
+        "confidence": null,
+        "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+        "expression_seen_in_train": null,
+        "model_version": null,
+        "needs_human_review": false,
+        "note": "规则模式（模型不可用），未生成任何模型输出",
+        "raw": "本科及以上学历",
+        "rule": "rule_predict:above_expand:本科",
+        "source": "rule",
+        "status": "rules_only",
+        "tokens": [
+          "博士",
+          "硕士",
+          "本科"
+        ]
+      },
+      "employer": {
+        "evidence_text": "示例人力资源公司",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "示例人力资源公司"
+      },
+      "employment_type": {
+        "evidence_text": "应届",
+        "extraction_method": "key_value_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "应届"
+      },
+      "experience_requirement": {
+        "note": "年限为规则解析结果，是否满足需人工确认",
+        "raw": "经验不限",
+        "source": "heuristic_keyword_v1",
+        "status": "none_required",
+        "years_min": 0.0
+      },
+      "formal_evaluation": false,
+      "graduation_cohort": {
+        "evidence_text": "应届",
+        "extraction_method": "cohort_pattern_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "应届"
+      },
+      "is_synthetic": true,
+      "job_category": {
+        "evidence_text": "人力资源专员 职位名称：人力资源专员\n公司名称：示例人力资源公司\n工作地点：上海\n任职要求：\n1. 本科及以上学历，人力资源管理相关专",
+        "extraction_method": "heuristic_keyword_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "HR"
+      },
+      "job_id": "demo_job_004",
+      "job_title": {
+        "evidence_text": "职位名称：人力资源专员",
+        "extraction_method": "key_value_v1",
+        "fact_source": "stated_in_source",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": "人力资源专员"
+      },
+      "label_source": "synthetic_or_unlabeled",
+      "parse_status": "ok",
+      "preferred_skills": [],
+      "profile_version": "phase5-1-profile-v1",
+      "required_skills": [
+        {
+          "aliases": [],
+          "canonical_name": "绩效管理",
+          "confidence": 0.9,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，人力资源管理相关专业\n2. 熟悉 招聘、绩效管理\n3. 经验不限，欢迎应届生",
+          "extraction_method": "explicit_field",
+          "needs_review": true,
+          "raw_form": "绩效管理",
+          "skill_id": "skill_c93f4359235f",
+          "verification_status": "extracted_from_resume"
+        },
+        {
+          "aliases": [],
+          "canonical_name": "招聘",
+          "confidence": 0.7,
+          "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+          "evidence_source": "rule_parsed",
+          "evidence_text": "1. 本科及以上学历，人力资源管理相关专业\n2. 熟悉 招聘、绩效管理\n3. 经验不限，欢迎应届生",
+          "extraction_method": "lexicon_hit",
+          "needs_review": true,
+          "raw_form": "招聘",
+          "skill_id": "skill_e671efe43010",
+          "verification_status": "extracted_from_resume"
+        }
+      ],
+      "responsibilities": {
+        "evidence_text": "1. 负责招聘渠道维护与面试安排",
+        "extraction_method": "section_excerpt_v1",
+        "fact_source": "rule_parsed",
+        "model_version": null,
+        "note": "",
+        "status": "ok",
+        "value": [
+          "1. 负责招聘渠道维护与面试安排"
+        ]
+      },
+      "salary": {
+        "evidence_text": "",
+        "extraction_method": "salary_pattern_v1",
+        "fact_source": "unknown",
+        "model_version": null,
+        "note": "",
+        "status": "unknown",
+        "value": null
+      },
+      "source": "scripts/phase5_1/fixtures/synthetic_jobs_zh.jsonl",
+      "source_evidence": {
+        "education_resolver": {
+          "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+          "fallback_to_rules": true,
+          "load_error": null,
+          "mode": "rules_only",
+          "model_dir": null,
+          "model_version": null
+        },
+        "extraction_pipeline": "job_parser_v1",
+        "profile_version": "phase5-1-profile-v1",
+        "sections_detected": [
+          "__head__",
+          "任职要求",
+          "岗位职责"
+        ],
+        "text_length": 113,
+        "text_sha256": "d378acae48c084417ab934e94bfa927a50cf288503ede5a4828532170559ec9d"
+      },
+      "source_license": "synthetic-generated-local",
+      "warnings": []
+    }
+  ],
+  "label_source": "synthetic_or_unlabeled",
+  "ranking": {
+    "demo": true,
+    "evaluation_status": "research_only_proxy_labels",
+    "formal_evaluation": false,
+    "label_source": "synthetic_or_unlabeled",
+    "latency_ms": 10161.642,
+    "mode": "experimental_model",
+    "model_version": "ridge-double_cold-final-20261028-203750",
+    "options": {
+      "allow_fallback": true,
+      "formal": false,
+      "max_jobs": 200,
+      "mode": "experimental_model",
+      "model_id": "legacy_match_proxy_v1",
+      "timeout_ms": 30000,
+      "top_k": 10
+    },
+    "results": [
+      {
+        "education_constraint": {
+          "job_requirement": {
+            "confidence": null,
+            "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+            "expression_seen_in_train": null,
+            "model_version": null,
+            "needs_human_review": false,
+            "note": "规则模式（模型不可用），未生成任何模型输出",
+            "raw": "本科及以上学历",
+            "rule": "rule_predict:above_expand:本科",
+            "source": "rule",
+            "status": "rules_only",
+            "tokens": [
+              "博士",
+              "硕士",
+              "本科"
+            ]
+          },
+          "needs_human_review": true,
+          "note": "学历倾向满足岗位要求（自动推断，需人工确认）",
+          "status": "satisfied",
+          "student_education": {
+            "evidence_text": "2027届 本科 计算机科学与技术\n主修课程：数据结构、操作系统、计算机",
+            "extraction_method": "degree_token_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "本科"
+          }
+        },
+        "evidence": [
+          {
+            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+            "skill": "java",
+            "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "type": "skill_matched"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+            "skill": "mysql",
+            "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "type": "skill_matched"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+            "skill": "spring boot",
+            "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "type": "skill_matched"
+          },
+          {
+            "jd_evidence_text": "以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot",
+            "skill": "spring",
+            "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "type": "skill_matched"
+          },
+          {
+            "jd_evidence_text": "3. 熟悉 Redis 者优先",
+            "skill": "redis",
+            "student_evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "type": "skill_matched"
+          },
+          {
+            "excerpt": "['1. 负责核心业务系统开发', '2. 参与接口设计与性能优化']",
+            "type": "job_responsibilities"
+          }
+        ],
+        "experience_constraint": {
+          "job_requirement": {
+            "note": "JD 未提供经验要求，保留 unknown",
+            "raw": "",
+            "source": "absent",
+            "status": "unknown",
+            "years_min": null
+          },
+          "needs_human_review": true,
+          "note": "经验适配需人工确认，不做硬性资格结论",
+          "status": "requirement_unclear",
+          "student_experience_evidence": {
+            "internship_count": 1,
+            "note": "本阶段不推断工作年限，仅登记原文证据条目数",
+            "project_count": 2
+          }
+        },
+        "graduation_cohort_constraint": {
+          "job_requirement": {
+            "evidence_text": "",
+            "extraction_method": "cohort_pattern_v1",
+            "fact_source": "unknown",
+            "model_version": null,
+            "note": "",
+            "status": "unknown",
+            "value": null
+          },
+          "needs_human_review": true,
+          "note": "毕业届别适配需人工确认",
+          "status": "requirement_unclear",
+          "student_graduation_year": {
+            "evidence_text": "2027届",
+            "extraction_method": "year_pattern_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "2027"
+          }
+        },
+        "job_id": "demo_job_001",
+        "matched_skills": [
+          {
+            "canonical_name": "java",
+            "evidence_source": "stated_in_source",
+            "evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+            "verification_status": "self_reported"
+          },
+          {
+            "canonical_name": "mysql",
+            "evidence_source": "stated_in_source",
+            "evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+            "verification_status": "self_reported"
+          },
+          {
+            "canonical_name": "spring boot",
+            "evidence_source": "stated_in_source",
+            "evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "jd_evidence_text": "1. 本科及以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot\n",
+            "verification_status": "self_reported"
+          },
+          {
+            "canonical_name": "spring",
+            "evidence_source": "stated_in_source",
+            "evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "jd_evidence_text": "以上学历，计算机相关专业\n2. 熟悉 Java、MySQL、Spring Boot",
+            "verification_status": "self_reported"
+          },
+          {
+            "canonical_name": "redis",
+            "evidence_source": "stated_in_source",
+            "evidence_text": "Java、MySQL、Spring Boot、Redis",
+            "jd_evidence_text": "3. 熟悉 Redis 者优先",
+            "verification_status": "self_reported"
+          }
+        ],
+        "missing_required_skills": [],
+        "model_version": "ridge-double_cold-final-20261028-203750",
+        "preferred_skills_missing": [],
+        "rank": 1,
+        "score": 0.82048649,
+        "score_type": "model_raw_score",
+        "scoring_method": "match_predictor.ridge",
+        "skill_constraint_status": "satisfied",
+        "warnings": []
+      },
+      {
+        "education_constraint": {
+          "job_requirement": {
+            "confidence": null,
+            "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+            "expression_seen_in_train": null,
+            "model_version": null,
+            "needs_human_review": false,
+            "note": "规则模式（模型不可用），未生成任何模型输出",
+            "raw": "本科及以上学历",
+            "rule": "rule_predict:above_expand:本科",
+            "source": "rule",
+            "status": "rules_only",
+            "tokens": [
+              "博士",
+              "硕士",
+              "本科"
+            ]
+          },
+          "needs_human_review": true,
+          "note": "学历倾向满足岗位要求（自动推断，需人工确认）",
+          "status": "satisfied",
+          "student_education": {
+            "evidence_text": "2027届 本科 计算机科学与技术\n主修课程：数据结构、操作系统、计算机",
+            "extraction_method": "degree_token_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "本科"
+          }
+        },
+        "evidence": [
+          {
+            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "python",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "sql",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "excel",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "excerpt": "['1. 负责业务数据提取与分析', '2. 输出数据分析报告']",
+            "type": "job_responsibilities"
+          }
+        ],
+        "experience_constraint": {
+          "job_requirement": {
+            "note": "JD 未提供经验要求，保留 unknown",
+            "raw": "",
+            "source": "absent",
+            "status": "unknown",
+            "years_min": null
+          },
+          "needs_human_review": true,
+          "note": "经验适配需人工确认，不做硬性资格结论",
+          "status": "requirement_unclear",
+          "student_experience_evidence": {
+            "internship_count": 1,
+            "note": "本阶段不推断工作年限，仅登记原文证据条目数",
+            "project_count": 2
+          }
+        },
+        "graduation_cohort_constraint": {
+          "job_requirement": {
+            "evidence_text": "",
+            "extraction_method": "cohort_pattern_v1",
+            "fact_source": "unknown",
+            "model_version": null,
+            "note": "",
+            "status": "unknown",
+            "value": null
+          },
+          "needs_human_review": true,
+          "note": "毕业届别适配需人工确认",
+          "status": "requirement_unclear",
+          "student_graduation_year": {
+            "evidence_text": "2027届",
+            "extraction_method": "year_pattern_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "2027"
+          }
+        },
+        "job_id": "demo_job_002",
+        "matched_skills": [],
+        "missing_required_skills": [
+          {
+            "canonical_name": "python",
+            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          },
+          {
+            "canonical_name": "sql",
+            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          },
+          {
+            "canonical_name": "excel",
+            "jd_evidence_text": "1. 本科及以上学历，统计学或数学相关专业\n2. 熟悉 Python、SQL、Excel\n3. 每周到岗 4 天以上",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          }
+        ],
+        "model_version": "ridge-double_cold-final-20261028-203750",
+        "preferred_skills_missing": [
+          {
+            "canonical_name": "tableau",
+            "jd_evidence_text": "1. 熟悉 Tableau、机器学习 者优先",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          },
+          {
+            "canonical_name": "机器学习",
+            "jd_evidence_text": "1. 熟悉 Tableau、机器学习 者优先",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          }
+        ],
+        "rank": 2,
+        "score": 0.56620306,
+        "score_type": "model_raw_score",
+        "scoring_method": "match_predictor.ridge",
+        "skill_constraint_status": "insufficient_evidence",
+        "warnings": []
+      },
+      {
+        "education_constraint": {
+          "job_requirement": {
+            "confidence": null,
+            "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+            "expression_seen_in_train": null,
+            "model_version": null,
+            "needs_human_review": false,
+            "note": "规则模式（模型不可用），未生成任何模型输出",
+            "raw": "本科及以上学历",
+            "rule": "rule_predict:above_expand:本科",
+            "source": "rule",
+            "status": "rules_only",
+            "tokens": [
+              "博士",
+              "硕士",
+              "本科"
+            ]
+          },
+          "needs_human_review": true,
+          "note": "学历倾向满足岗位要求（自动推断，需人工确认）",
+          "status": "satisfied",
+          "student_education": {
+            "evidence_text": "2027届 本科 计算机科学与技术\n主修课程：数据结构、操作系统、计算机",
+            "extraction_method": "degree_token_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "本科"
+          }
+        },
+        "evidence": [
+          {
+            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "财务分析",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "会计",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "excel",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "excerpt": "['1. 参与财务核算与预算管理']",
+            "type": "job_responsibilities"
+          }
+        ],
+        "experience_constraint": {
+          "job_requirement": {
+            "note": "年限为规则解析结果，是否满足需人工确认",
+            "raw": "应届",
+            "source": "heuristic_keyword_v1",
+            "status": "none_required",
+            "years_min": 0.0
+          },
+          "needs_human_review": true,
+          "note": "岗位标注经验不限/面向应届；仍需人工确认",
+          "status": "satisfied",
+          "student_experience_evidence": {
+            "internship_count": 1,
+            "note": "本阶段不推断工作年限，仅登记原文证据条目数",
+            "project_count": 2
+          }
+        },
+        "graduation_cohort_constraint": {
+          "job_requirement": {
+            "evidence_text": "2027届",
+            "extraction_method": "cohort_pattern_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "2027"
+          },
+          "needs_human_review": true,
+          "note": "双方届别信息齐备，倾向匹配（自动推断，需人工确认）",
+          "status": "satisfied",
+          "student_graduation_year": {
+            "evidence_text": "2027届",
+            "extraction_method": "year_pattern_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "2027"
+          }
+        },
+        "job_id": "demo_job_003",
+        "matched_skills": [],
+        "missing_required_skills": [
+          {
+            "canonical_name": "财务分析",
+            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          },
+          {
+            "canonical_name": "会计",
+            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          },
+          {
+            "canonical_name": "excel",
+            "jd_evidence_text": "1. 本科及以上学历，财务、会计相关专业\n2. 熟悉 财务分析、会计、Excel\n3. 2027届应届毕业生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          }
+        ],
+        "model_version": "ridge-double_cold-final-20261028-203750",
+        "preferred_skills_missing": [],
+        "rank": 3,
+        "score": 0.51339597,
+        "score_type": "model_raw_score",
+        "scoring_method": "match_predictor.ridge",
+        "skill_constraint_status": "insufficient_evidence",
+        "warnings": []
+      },
+      {
+        "education_constraint": {
+          "job_requirement": {
+            "confidence": null,
+            "confidence_meaning": "学历模型 confidence 是模型分数在预测标签上的均值，未经校准，不是真实正确概率。",
+            "expression_seen_in_train": null,
+            "model_version": null,
+            "needs_human_review": false,
+            "note": "规则模式（模型不可用），未生成任何模型输出",
+            "raw": "本科及以上学历",
+            "rule": "rule_predict:above_expand:本科",
+            "source": "rule",
+            "status": "rules_only",
+            "tokens": [
+              "博士",
+              "硕士",
+              "本科"
+            ]
+          },
+          "needs_human_review": true,
+          "note": "学历倾向满足岗位要求（自动推断，需人工确认）",
+          "status": "satisfied",
+          "student_education": {
+            "evidence_text": "2027届 本科 计算机科学与技术\n主修课程：数据结构、操作系统、计算机",
+            "extraction_method": "degree_token_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "本科"
+          }
+        },
+        "evidence": [
+          {
+            "jd_evidence_text": "1. 本科及以上学历，人力资源管理相关专业\n2. 熟悉 招聘、绩效管理\n3. 经验不限，欢迎应届生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "绩效管理",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "jd_evidence_text": "1. 本科及以上学历，人力资源管理相关专业\n2. 熟悉 招聘、绩效管理\n3. 经验不限，欢迎应届生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "skill": "招聘",
+            "type": "skill_evidence_missing"
+          },
+          {
+            "excerpt": "['1. 负责招聘渠道维护与面试安排']",
+            "type": "job_responsibilities"
+          }
+        ],
+        "experience_constraint": {
+          "job_requirement": {
+            "note": "年限为规则解析结果，是否满足需人工确认",
+            "raw": "经验不限",
+            "source": "heuristic_keyword_v1",
+            "status": "none_required",
+            "years_min": 0.0
+          },
+          "needs_human_review": true,
+          "note": "岗位标注经验不限/面向应届；仍需人工确认",
+          "status": "satisfied",
+          "student_experience_evidence": {
+            "internship_count": 1,
+            "note": "本阶段不推断工作年限，仅登记原文证据条目数",
+            "project_count": 2
+          }
+        },
+        "graduation_cohort_constraint": {
+          "job_requirement": {
+            "evidence_text": "应届",
+            "extraction_method": "cohort_pattern_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "应届"
+          },
+          "needs_human_review": true,
+          "note": "双方届别信息齐备，倾向匹配（自动推断，需人工确认）",
+          "status": "satisfied",
+          "student_graduation_year": {
+            "evidence_text": "2027届",
+            "extraction_method": "year_pattern_v1",
+            "fact_source": "rule_parsed",
+            "model_version": null,
+            "note": "",
+            "status": "ok",
+            "value": "2027"
+          }
+        },
+        "job_id": "demo_job_004",
+        "matched_skills": [],
+        "missing_required_skills": [
+          {
+            "canonical_name": "绩效管理",
+            "jd_evidence_text": "1. 本科及以上学历，人力资源管理相关专业\n2. 熟悉 招聘、绩效管理\n3. 经验不限，欢迎应届生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          },
+          {
+            "canonical_name": "招聘",
+            "jd_evidence_text": "1. 本科及以上学历，人力资源管理相关专业\n2. 熟悉 招聘、绩效管理\n3. 经验不限，欢迎应届生",
+            "note": "当前简历证据未覆盖该技能，不代表候选人不具备该技能",
+            "status": "evidence_missing"
+          }
+        ],
+        "model_version": "ridge-double_cold-final-20261028-203750",
+        "preferred_skills_missing": [],
+        "rank": 4,
+        "score": 0.50338662,
+        "score_type": "model_raw_score",
+        "scoring_method": "match_predictor.ridge",
+        "skill_constraint_status": "insufficient_evidence",
+        "warnings": []
+      }
+    ],
+    "score_type": "model_raw_score",
+    "scoring_method": "match_predictor.ridge",
+    "warnings": [
+      "experimental_model:旧英文代理标签模型，仅供研究/诊断",
+      "not_a_chinese_validated_model:禁止表述为中文人岗适配度或录用概率",
+      "score_semantics:排序参考分，不是录用概率"
+    ]
+  },
+  "student_profile": {
+    "certificates": [
+      {
+        "entry_id": "certificate_00",
+        "excerpt": "1. CET-6",
+        "extraction_method": "section_excerpt_v1",
+        "fact_source": "stated_in_source",
+        "kind": "certificate",
+        "note": "quantified_achievements 本阶段只接受原文出现的量化表述，禁止推断补齐",
+        "period": "",
+        "quantified_achievements": [],
+        "title": ""
+      }
+    ],
+    "demo": true,
+    "education_level": {
+      "evidence_text": "2027届 本科 计算机科学与技术\n主修课程：数据结构、操作系统、计算机",
+      "extraction_method": "degree_token_v1",
+      "fact_source": "rule_parsed",
+      "model_version": null,
+      "note": "",
+      "status": "ok",
+      "value": "本科"
+    },
+    "employment_intention": {
+      "evidence_text": "求职意向：Java开发工程师（校招）",
+      "extraction_method": "key_value_v1",
+      "fact_source": "stated_in_source",
+      "model_version": null,
+      "note": "",
+      "status": "ok",
+      "value": "Java开发工程师（校招）"
+    },
+    "employment_type": {
+      "evidence_text": "校招",
+      "extraction_method": "keyword_v1",
+      "fact_source": "rule_parsed",
+      "model_version": null,
+      "note": "",
+      "status": "ok",
+      "value": "校招"
+    },
+    "formal_evaluation": false,
+    "graduation_year": {
+      "evidence_text": "2027届",
+      "extraction_method": "year_pattern_v1",
+      "fact_source": "rule_parsed",
+      "model_version": null,
+      "note": "",
+      "status": "ok",
+      "value": "2027"
+    },
+    "internship_experiences": [
+      {
+        "entry_id": "internship_00",
+        "excerpt": "1. 某软件公司后端开发实习生（2026.06-2026.09），参与微服务接口开发",
+        "extraction_method": "section_excerpt_v1",
+        "fact_source": "stated_in_source",
+        "kind": "internship",
+        "note": "quantified_achievements 本阶段只接受原文出现的量化表述，禁止推断补齐",
+        "period": "",
+        "quantified_achievements": [],
+        "title": ""
+      }
+    ],
+    "is_synthetic": true,
+    "label_source": "synthetic_or_unlabeled",
+    "major": {
+      "evidence_text": "",
+      "extraction_method": "",
+      "fact_source": "unknown",
+      "model_version": null,
+      "note": "",
+      "status": "unknown",
+      "value": null
+    },
+    "parse_status": "ok",
+    "preferred_cities": {
+      "evidence_text": "",
+      "extraction_method": "",
+      "fact_source": "unknown",
+      "model_version": null,
+      "note": "",
+      "status": "unknown",
+      "value": null
+    },
+    "profile_id": "synthetic_student_001",
+    "profile_version": "phase5-1-profile-v1",
+    "project_experiences": [
+      {
+        "entry_id": "project_00",
+        "excerpt": "1. 校园电商后端：基于 Spring Boot 与 MySQL 开发订单模块，接口响应时间优化 30%",
+        "extraction_method": "section_excerpt_v1",
+        "fact_source": "stated_in_source",
+        "kind": "project",
+        "note": "quantified_achievements 本阶段只接受原文出现的量化表述，禁止推断补齐",
+        "period": "",
+        "quantified_achievements": [
+          "优化 30%"
+        ],
+        "title": ""
+      },
+      {
+        "entry_id": "project_01",
+        "excerpt": "学生选课系统：使用 Java 与 MySQL 完成选课与成绩模块",
+        "extraction_method": "section_excerpt_v1",
+        "fact_source": "stated_in_source",
+        "kind": "project",
+        "note": "quantified_achievements 本阶段只接受原文出现的量化表述，禁止推断补齐",
+        "period": "",
+        "quantified_achievements": [],
+        "title": ""
+      }
+    ],
+    "skills": [
+      {
+        "aliases": [],
+        "canonical_name": "java",
+        "confidence": 0.9,
+        "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+        "evidence_source": "stated_in_source",
+        "evidence_text": "Java、MySQL、Spring Boot、Redis",
+        "extraction_method": "explicit_field",
+        "needs_review": false,
+        "raw_form": "Java",
+        "skill_id": "skill_38a0963a6364",
+        "verification_status": "self_reported"
+      },
+      {
+        "aliases": [],
+        "canonical_name": "mysql",
+        "confidence": 0.9,
+        "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+        "evidence_source": "stated_in_source",
+        "evidence_text": "Java、MySQL、Spring Boot、Redis",
+        "extraction_method": "explicit_field",
+        "needs_review": false,
+        "raw_form": "MySQL",
+        "skill_id": "skill_430005175c4c",
+        "verification_status": "self_reported"
+      },
+      {
+        "aliases": [],
+        "canonical_name": "spring boot",
+        "confidence": 0.9,
+        "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+        "evidence_source": "stated_in_source",
+        "evidence_text": "Java、MySQL、Spring Boot、Redis",
+        "extraction_method": "explicit_field",
+        "needs_review": false,
+        "raw_form": "Spring Boot",
+        "skill_id": "skill_9c3c0544259a",
+        "verification_status": "self_reported"
+      },
+      {
+        "aliases": [],
+        "canonical_name": "redis",
+        "confidence": 0.9,
+        "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+        "evidence_source": "stated_in_source",
+        "evidence_text": "Java、MySQL、Spring Boot、Redis",
+        "extraction_method": "explicit_field",
+        "needs_review": false,
+        "raw_form": "Redis",
+        "skill_id": "skill_34fb46c847bb",
+        "verification_status": "self_reported"
+      },
+      {
+        "aliases": [],
+        "canonical_name": "spring",
+        "confidence": 0.7,
+        "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+        "evidence_source": "stated_in_source",
+        "evidence_text": "Java、MySQL、Spring Boot、Redis",
+        "extraction_method": "lexicon_hit",
+        "needs_review": true,
+        "raw_form": "spring",
+        "skill_id": "skill_622a494d3ea8",
+        "verification_status": "self_reported"
+      },
+      {
+        "aliases": [],
+        "canonical_name": "微服务",
+        "confidence": 0.7,
+        "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+        "evidence_source": "rule_parsed",
+        "evidence_text": "件公司后端开发实习生（2026.06-2026.09），参与微服务接口开发\n证书\n1. CET-6\n自我评价\n具备良好的学习能",
+        "extraction_method": "lexicon_hit",
+        "needs_review": true,
+        "raw_form": "微服务",
+        "skill_id": "skill_13bb8f38d69f",
+        "verification_status": "extracted_from_resume"
+      },
+      {
+        "aliases": [],
+        "canonical_name": "后端",
+        "confidence": 0.7,
+        "confidence_meaning": "confidence 是抽取/归一化过程的启发式置信度（词典命中强度、键值显式程度、证据长度的组合），仅用于排序参考；它不是技能掌握概率、不是模型校准后的正确概率、不是录用成功概率。",
+        "evidence_source": "rule_parsed",
+        "evidence_text": "Spring Boot、Redis\n项目经历\n1. 校园电商后端：基于 Spring Boot 与 MySQL 开发订单模块",
+        "extraction_method": "lexicon_hit",
+        "needs_review": true,
+        "raw_form": "后端",
+        "skill_id": "skill_9b826346239e",
+        "verification_status": "extracted_from_resume"
+      }
+    ],
+    "source_document": "scripts/phase5_1/fixtures/synthetic_resume_zh.txt",
+    "source_evidence": {
+      "extraction_pipeline": "resume_parser_v1",
+      "pii_hit_kinds": [],
+      "pii_masked": false,
+      "profile_version": "phase5-1-profile-v1",
+      "sections_detected": [
+        "__head__",
+        "专业技能",
+        "实习经历",
+        "教育背景",
+        "自我评价",
+        "证书",
+        "项目经历"
+      ],
+      "text_length": 274,
+      "text_sha256": "9e779ef57b704b4d3b9400bb1ffe4040f777d25253c86728e08da89f2eaa5073"
+    },
+    "warnings": []
+  }
+}

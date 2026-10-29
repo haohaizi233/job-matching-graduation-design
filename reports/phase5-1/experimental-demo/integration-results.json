@@ -1,0 +1,205 @@
+{
+  "demo": true,
+  "demo_output_file": "reports/phase5-1/experimental-demo/demo-output.json",
+  "disclaimer": "Phase5-1 演示仅验证服务链路可运行；分数为排序参考分（heuristic_score / model_raw_score），不是录用概率；不代表中文人岗匹配模型真实效果验收通过。",
+  "formal_evaluation": false,
+  "generated_by": "scripts/phase5_1/demo_offline.py",
+  "h2_status": "BLOCKED（真实中文简历与人工 Gold 未到位，继承 Phase4-3A）",
+  "label_source": "synthetic_or_unlabeled",
+  "model_registry": [
+    {
+      "artifacts": [],
+      "checksum": "none",
+      "evaluation_status": "not_a_trained_model",
+      "formal_use_allowed": true,
+      "input_schema_version": "phase5-1-input-v1",
+      "limitations": [
+        "启发式规则（技能覆盖率/类别/文本相关性），未在任何 Gold 数据上验证精度",
+        "score_type 恒为 heuristic_score，不得表述为录用概率或校准分数",
+        "技能识别受词表覆盖率限制，未命中技能一律按证据不足处理"
+      ],
+      "load_state": "not_loaded",
+      "loader": "none",
+      "loader_kwargs": {},
+      "model_id": "baseline_skill_text_v1",
+      "model_version": "baseline_skill_text_v1-20261029",
+      "supported_languages": [
+        "zh",
+        "en"
+      ],
+      "task_type": "heuristic_ranking",
+      "training_data_version": "none_zero_training"
+    },
+    {
+      "artifacts": [],
+      "checksum": "",
+      "evaluation_status": "pending_phase4_3b",
+      "formal_use_allowed": false,
+      "input_schema_version": "phase5-1-input-v1",
+      "limitations": [
+        "仅为 Phase4-3B 验证完成后的中文模型预留注册与适配接口",
+        "当前无可加载权重，任何加载请求返回 FUTURE_MODEL_UNAVAILABLE"
+      ],
+      "load_state": "not_loaded",
+      "loader": "future",
+      "loader_kwargs": {},
+      "model_id": "chinese_match_future_v1",
+      "model_version": "reserved",
+      "supported_languages": [
+        "zh"
+      ],
+      "task_type": "match_ranking",
+      "training_data_version": "pending"
+    },
+    {
+      "artifacts": [
+        {
+          "bytes": 2664,
+          "path": "D:\\desktop\\毕业设计\\models\\matching\\ridge\\double_cold\\ridge-double_cold-final-20261028-203750\\manifest.json",
+          "sha256": "12d01dad8a7450902f080409e3d77422bfd4daf78764c66c73e6aa91e332d59b"
+        },
+        {
+          "bytes": 2833,
+          "path": "D:\\desktop\\毕业设计\\models\\matching\\ridge\\double_cold\\ridge-double_cold-final-20261028-203750\\model.pkl",
+          "sha256": "ccec869a6e168aef3345f2e52718527b3f8c01f9130d08c4bbb441174eff2fb2"
+        }
+      ],
+      "checksum": "model.pkl:ccec869a6e168aef3345f2e52718527b3f8c01f9130d08c4bbb441174eff2",
+      "evaluation_status": "research_only_proxy_labels",
+      "formal_use_allowed": false,
+      "input_schema_version": "phase5-1-input-v1",
+      "limitations": [
+        "训练标签 label_strength/final_score 由旧评分系统公式派生，是代理标签",
+        "训练词表与类别分布来自英文简历/岗位，中文输入类别与职位全部落 OOV",
+        "仅允许 experimental_model 模式做研究/诊断，禁止正式模式与录用概率表述"
+      ],
+      "load_state": "loaded",
+      "loader": "legacy_match",
+      "loader_kwargs": {
+        "run_dir": "D:\\desktop\\毕业设计\\models\\matching\\ridge\\double_cold\\ridge-double_cold-final-20261028-203750"
+      },
+      "model_id": "legacy_match_proxy_v1",
+      "model_version": "ridge-double_cold-final-20261028-203750",
+      "supported_languages": [
+        "en"
+      ],
+      "task_type": "match_ranking",
+      "training_data_version": "dv-english-proxy-labels(phase4-1)"
+    }
+  ],
+  "phase": "phase5-1",
+  "pipeline": [
+    {
+      "fields_extracted": {
+        "certificates": 1,
+        "education_level": {
+          "fact_source": "rule_parsed",
+          "status": "ok"
+        },
+        "employment_intention": {
+          "fact_source": "stated_in_source",
+          "status": "ok"
+        },
+        "employment_type": {
+          "fact_source": "rule_parsed",
+          "status": "ok"
+        },
+        "graduation_year": {
+          "fact_source": "rule_parsed",
+          "status": "ok"
+        },
+        "internship_experiences": 1,
+        "major": {
+          "fact_source": "unknown",
+          "status": "unknown"
+        },
+        "preferred_cities": {
+          "fact_source": "unknown",
+          "status": "unknown"
+        },
+        "project_experiences": 2,
+        "skills": 7
+      },
+      "status": "ok",
+      "step": "resume_parse"
+    },
+    {
+      "education_mode": "rules_only",
+      "jobs_parsed": 4,
+      "status": "ok",
+      "step": "job_parse"
+    },
+    {
+      "mode": "experimental_model",
+      "model_version": "ridge-double_cold-final-20261028-203750",
+      "score_type": "model_raw_score",
+      "scoring_method": "match_predictor.ridge",
+      "status": "ok",
+      "step": "rank"
+    },
+    {
+      "results_with_evidence": 4,
+      "status": "ok",
+      "step": "explain"
+    }
+  ],
+  "ranking_head": [
+    {
+      "education_constraint": "satisfied",
+      "experience_constraint": "requirement_unclear",
+      "job_id": "demo_job_001",
+      "matched": [
+        "java",
+        "mysql",
+        "spring boot",
+        "spring",
+        "redis"
+      ],
+      "missing_required": [],
+      "rank": 1,
+      "score": 0.82048649,
+      "score_type": "model_raw_score"
+    },
+    {
+      "education_constraint": "satisfied",
+      "experience_constraint": "requirement_unclear",
+      "job_id": "demo_job_002",
+      "matched": [],
+      "missing_required": [
+        "python",
+        "sql",
+        "excel"
+      ],
+      "rank": 2,
+      "score": 0.56620306,
+      "score_type": "model_raw_score"
+    },
+    {
+      "education_constraint": "satisfied",
+      "experience_constraint": "satisfied",
+      "job_id": "demo_job_003",
+      "matched": [],
+      "missing_required": [
+        "财务分析",
+        "会计",
+        "excel"
+      ],
+      "rank": 3,
+      "score": 0.51339597,
+      "score_type": "model_raw_score"
+    },
+    {
+      "education_constraint": "satisfied",
+      "experience_constraint": "satisfied",
+      "job_id": "demo_job_004",
+      "matched": [],
+      "missing_required": [
+        "绩效管理",
+        "招聘"
+      ],
+      "rank": 4,
+      "score": 0.50338662,
+      "score_type": "model_raw_score"
+    }
+  ]
+}

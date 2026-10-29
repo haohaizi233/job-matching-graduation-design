@@ -147,11 +147,12 @@
 | 编号 | 项 | 状态 | 说明 |
 |---|---|---|---|
 | R1 | 真实中文简历 + 人工 Gold 未到位 | **BLOCKED（继承）** | Phase4-3A 的 H2 仍 BLOCKED；本阶段不创建 Gold、不伪造中文训练数据 |
-| R2 | 中文人岗匹配模型缺失 | 已知限制 | `future_verified` 模式仅预留注册接口，`evaluation_status=empty`，本轮不伪称存在已验证中文模型 |
+| R2 | 中文人岗匹配模型缺失 | 已知限制 | `future_verified` 模式仅预留注册接口，`evaluation_status=pending_phase4_3b`，本轮不伪称存在已验证中文模型 |
 | R3 | 旧匹配模型中文不适配 | 已适配 | experimental 模式默认拒绝中文正式用途（`formal_use_allowed=false`），仅研究输出 |
 | R4 | 扫描版 PDF 无 OCR | 已处理 | 明确返回 `ocr_required` 状态，不用空文本伪装成功 |
 | R5 | `environment.yml` 缺 Web 依赖 | 已登记 | 见 §8；API 层延迟导入 + 文档登记 |
 | R6 | 未提交的 Phase4-3A-2 工作区修改 | 不触碰 | 本轮所有新文件均为新增路径，不 `git add` 他人文件、不 push |
+| R7 | 归档 GBM checkpoint 与当前 sklearn 不兼容 | **BLOCKED（登记）** | 只读探测（`scripts/phase5_1/model_compatibility_report.py`，2026-10-29）：42 个 run 中 37 个可加载；5 个 `gradient_boosting` run 在 sklearn 1.8.0 下反序列化失败（`__pyx_unpickle_CyHalfSquaredError`，checkpoint 为 environment.yml 声明的 sklearn 1.5.2 训练）。**不通过重训/覆盖 checkpoint 修复**；业务侧已按 §6 走 `MODEL_MISSING`/透明降级。同一根因导致 `tests/model_training` 的 T5 在当前解释器报 setUpClass ERROR（`any_run_dir()` 命中 GBM run），按 environment.yml（python 3.11 + sklearn 1.5.2）运行即可恢复 |
 
 ## 10. 结论
 
