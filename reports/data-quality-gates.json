@@ -1,7 +1,6 @@
 {
-  "console_output": "\n========================================================================\n[PASS] G1 ԭʼ���ݲ���: 3/3 ͨ��\n[PASS] G2 �ֶ�Լ��: 14/14 ͨ��\n[PASS] G3 Ŀ��й©����: 14/14 ͨ��\n[PASS] G4 �зֻ���: 17/17 ͨ��\n[PASS] G5 ����ɸ�����: 10/10 ͨ��\n[PASS] G6 ���ݿɼ���: 9/9 ͨ��\n[PASS] G7 ��ԴԼ��: 7/7 ͨ��\n========================================================================\n�ܼ� 74 �ʧ�� 0������ 0����ʱ 21.35s -> D:\\desktop\\��ҵ���\\reports\\data-quality-gates.json\n",
-  "created_at": "2026-10-28T20:14:42",
-  "elapsed_seconds": 21.35,
+  "created_at": "2026-10-29T12:26:50",
+  "elapsed_seconds": 39.14,
   "errors": 0,
   "failures": 0,
   "gates": {
@@ -515,7 +514,6 @@
   },
   "generated_by": "tests/data_pipeline/run_all.py",
   "ok": true,
-  "returncode": 0,
   "skipped": 0,
   "tests_run": 74
 }
