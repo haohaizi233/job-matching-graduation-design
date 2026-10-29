@@ -1,0 +1,2166 @@
+{
+  "generated_by": "scripts/phase5_1a/diagnose_model_compat.py",
+  "created_at": "2026-10-29T14:22:06",
+  "runtime_environment": {
+    "python": "3.13.2",
+    "numpy": "2.2.6",
+    "pandas": "3.0.0rc1",
+    "sklearn": "1.8.0",
+    "joblib": "1.5.3",
+    "torch": "2.12.0+cpu"
+  },
+  "policy": "只读诊断；不重训、不改写历史 checkpoint；env_incompatible 属环境问题，不得记为权重缺失或模型业务失败",
+  "summary": {
+    "loaded": 22,
+    "loaded_with_version_warning": 15,
+    "env_incompatible": 5
+  },
+  "models": [
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-final-20261028-212510",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-final-20261028-212510",
+      "weight_file": "model.pt",
+      "weight_bytes": 39052,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:25:29"
+    },
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-final-balanced-20261028-212534",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-final-balanced-20261028-212534",
+      "weight_file": "model.pt",
+      "weight_bytes": 39052,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:25:52"
+    },
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-final-confw-20261028-221032",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-final-confw-20261028-221032",
+      "weight_file": "model.pt",
+      "weight_bytes": 39052,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T22:11:07"
+    },
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-final-highconf-20261028-221117",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-final-highconf-20261028-221117",
+      "weight_file": "model.pt",
+      "weight_bytes": 38668,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T22:11:31"
+    },
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-final-holdout-20261028-212622",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-final-holdout-20261028-212622",
+      "weight_file": "model.pt",
+      "weight_bytes": 38668,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:27:02"
+    },
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-final-holdout-vloss-20261028-213521",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-final-holdout-vloss-20261028-213521",
+      "weight_file": "model.pt",
+      "weight_bytes": 38732,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:36:09"
+    },
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-final-vloss-20261028-213415",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-final-vloss-20261028-213415",
+      "weight_file": "model.pt",
+      "weight_bytes": 39052,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:34:43"
+    },
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-final-vloss-balanced-20261028-213450",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-final-vloss-balanced-20261028-213450",
+      "weight_file": "model.pt",
+      "weight_bytes": 39116,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:35:16"
+    },
+    {
+      "run_dir": "models\\education\\charcnn\\charcnn-smoke-charcnn-20261028-211941",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "charcnn-smoke-charcnn-20261028-211941",
+      "weight_file": "model.pt",
+      "weight_bytes": 31756,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:19:52"
+    },
+    {
+      "run_dir": "models\\education\\tfidf\\tfidf-final-20261028-212254",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "tfidf-final-20261028-212254",
+      "weight_file": "model.pkl",
+      "weight_bytes": 27219,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:23:07"
+    },
+    {
+      "run_dir": "models\\education\\tfidf\\tfidf-final-balanced-20261028-212312",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "tfidf-final-balanced-20261028-212312",
+      "weight_file": "model.pkl",
+      "weight_bytes": 27219,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:23:27"
+    },
+    {
+      "run_dir": "models\\education\\tfidf\\tfidf-final-confw-20261028-220908",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "tfidf-final-confw-20261028-220908",
+      "weight_file": "model.pkl",
+      "weight_bytes": 27219,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T22:10:15"
+    },
+    {
+      "run_dir": "models\\education\\tfidf\\tfidf-final-highconf-20261028-221021",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "tfidf-final-highconf-20261028-221021",
+      "weight_file": "model.pkl",
+      "weight_bytes": 23209,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T22:10:28"
+    },
+    {
+      "run_dir": "models\\education\\tfidf\\tfidf-final-holdout-20261028-212556",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "tfidf-final-holdout-20261028-212556",
+      "weight_file": "model.pkl",
+      "weight_bytes": 24400,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:26:18"
+    },
+    {
+      "run_dir": "models\\education\\tfidf\\tfidf-final-title-20261028-212332",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "tfidf-final-title-20261028-212332",
+      "weight_file": "model.pkl",
+      "weight_bytes": 20081257,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:25:05"
+    },
+    {
+      "run_dir": "models\\education\\tfidf\\tfidf-smoke-tfidf-20261028-211845",
+      "model_name": null,
+      "protocol": null,
+      "run_id": "tfidf-smoke-tfidf-20261028-211845",
+      "weight_file": "model.pkl",
+      "weight_bytes": 8395,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {},
+      "environment_drift": {
+        "numpy": {
+          "trained_with": null,
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": null,
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": null,
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": null,
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": null,
+          "current": "2.12.0+cpu"
+        }
+      },
+      "dataset_version": null,
+      "created_at": "2026-10-28T21:18:55"
+    },
+    {
+      "run_dir": "models\\matching\\gradient_boosting\\candidate_cold\\gradient_boosting-candidate_cold-final-20261028-203750",
+      "model_name": "gradient_boosting",
+      "protocol": "candidate_cold",
+      "run_id": "gradient_boosting-candidate_cold-final-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 376567,
+      "status": "env_incompatible",
+      "note": "历史反序列化入口缺失（依赖版本变化）: AttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:38:34"
+    },
+    {
+      "run_dir": "models\\matching\\gradient_boosting\\candidate_cold\\gradient_boosting-candidate_cold-smoke-20261028-203750",
+      "model_name": "gradient_boosting",
+      "protocol": "candidate_cold",
+      "run_id": "gradient_boosting-candidate_cold-smoke-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 372932,
+      "status": "env_incompatible",
+      "note": "历史反序列化入口缺失（依赖版本变化）: AttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:38:03"
+    },
+    {
+      "run_dir": "models\\matching\\gradient_boosting\\candidate_cold\\smoke-gb-002",
+      "model_name": "gradient_boosting",
+      "protocol": "candidate_cold",
+      "run_id": "smoke-gb-002",
+      "weight_file": "model.pkl",
+      "weight_bytes": 372932,
+      "status": "env_incompatible",
+      "note": "历史反序列化入口缺失（依赖版本变化）: AttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:33:57"
+    },
+    {
+      "run_dir": "models\\matching\\gradient_boosting\\double_cold\\gradient_boosting-double_cold-final-20261028-203750",
+      "model_name": "gradient_boosting",
+      "protocol": "double_cold",
+      "run_id": "gradient_boosting-double_cold-final-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 376487,
+      "status": "env_incompatible",
+      "note": "历史反序列化入口缺失（依赖版本变化）: AttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:47:28"
+    },
+    {
+      "run_dir": "models\\matching\\gradient_boosting\\job_cold\\gradient_boosting-job_cold-final-20261028-203750",
+      "model_name": "gradient_boosting",
+      "protocol": "job_cold",
+      "run_id": "gradient_boosting-job_cold-final-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 376455,
+      "status": "env_incompatible",
+      "note": "历史反序列化入口缺失（依赖版本变化）: AttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:42:01"
+    },
+    {
+      "run_dir": "models\\matching\\mlp\\candidate_cold\\mlp-candidate_cold-final-20261028-203750",
+      "model_name": "mlp",
+      "protocol": "candidate_cold",
+      "run_id": "mlp-candidate_cold-final-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 26944,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:39:35"
+    },
+    {
+      "run_dir": "models\\matching\\mlp\\candidate_cold\\mlp-candidate_cold-smoke-20261028-203750",
+      "model_name": "mlp",
+      "protocol": "candidate_cold",
+      "run_id": "mlp-candidate_cold-smoke-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 26304,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:38:10"
+    },
+    {
+      "run_dir": "models\\matching\\mlp\\candidate_cold\\smoke-mlp-001",
+      "model_name": "mlp",
+      "protocol": "candidate_cold",
+      "run_id": "smoke-mlp-001",
+      "weight_file": "model.pt",
+      "weight_bytes": 26304,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:33:24"
+    },
+    {
+      "run_dir": "models\\matching\\mlp\\double_cold\\mlp-double_cold-final-20261028-203750",
+      "model_name": "mlp",
+      "protocol": "double_cold",
+      "run_id": "mlp-double_cold-final-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 26944,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:47:48"
+    },
+    {
+      "run_dir": "models\\matching\\mlp\\job_cold\\mlp-job_cold-final-20261028-203750",
+      "model_name": "mlp",
+      "protocol": "job_cold",
+      "run_id": "mlp-job_cold-final-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 26944,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:45:03"
+    },
+    {
+      "run_dir": "models\\matching\\ranknet\\candidate_cold\\ranknet-candidate_cold-ablation-category-20261028-203750",
+      "model_name": "ranknet",
+      "protocol": "candidate_cold",
+      "run_id": "ranknet-candidate_cold-ablation-category-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 22912,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:55:52"
+    },
+    {
+      "run_dir": "models\\matching\\ranknet\\candidate_cold\\ranknet-candidate_cold-ablation-position-20261028-203750",
+      "model_name": "ranknet",
+      "protocol": "candidate_cold",
+      "run_id": "ranknet-candidate_cold-ablation-position-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 17600,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:54:42"
+    },
+    {
+      "run_dir": "models\\matching\\ranknet\\candidate_cold\\ranknet-candidate_cold-ablation-skill-20261028-203750",
+      "model_name": "ranknet",
+      "protocol": "candidate_cold",
+      "run_id": "ranknet-candidate_cold-ablation-skill-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 25792,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:52:49"
+    },
+    {
+      "run_dir": "models\\matching\\ranknet\\candidate_cold\\ranknet-candidate_cold-final-20261028-203750",
+      "model_name": "ranknet",
+      "protocol": "candidate_cold",
+      "run_id": "ranknet-candidate_cold-final-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 26944,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:41:29"
+    },
+    {
+      "run_dir": "models\\matching\\ranknet\\candidate_cold\\ranknet-candidate_cold-smoke-20261028-203750",
+      "model_name": "ranknet",
+      "protocol": "candidate_cold",
+      "run_id": "ranknet-candidate_cold-smoke-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 26304,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:38:17"
+    },
+    {
+      "run_dir": "models\\matching\\ranknet\\candidate_cold\\smoke-ranknet-002",
+      "model_name": "ranknet",
+      "protocol": "candidate_cold",
+      "run_id": "smoke-ranknet-002",
+      "weight_file": "model.pt",
+      "weight_bytes": 26304,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:33:03"
+    },
+    {
+      "run_dir": "models\\matching\\ranknet\\double_cold\\ranknet-double_cold-final-20261028-203750",
+      "model_name": "ranknet",
+      "protocol": "double_cold",
+      "run_id": "ranknet-double_cold-final-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 26944,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:48:33"
+    },
+    {
+      "run_dir": "models\\matching\\ranknet\\job_cold\\ranknet-job_cold-final-20261028-203750",
+      "model_name": "ranknet",
+      "protocol": "job_cold",
+      "run_id": "ranknet-job_cold-final-20261028-203750",
+      "weight_file": "model.pt",
+      "weight_bytes": 26944,
+      "status": "loaded",
+      "note": "当前环境可加载",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:47:12"
+    },
+    {
+      "run_dir": "models\\matching\\ridge\\candidate_cold\\ridge-candidate_cold-ablation-category-20261028-203750",
+      "model_name": "ridge",
+      "protocol": "candidate_cold",
+      "run_id": "ridge-candidate_cold-ablation-category-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 2384,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:51:12"
+    },
+    {
+      "run_dir": "models\\matching\\ridge\\candidate_cold\\ridge-candidate_cold-ablation-position-20261028-203750",
+      "model_name": "ridge",
+      "protocol": "candidate_cold",
+      "run_id": "ridge-candidate_cold-ablation-position-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 1160,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:50:56"
+    },
+    {
+      "run_dir": "models\\matching\\ridge\\candidate_cold\\ridge-candidate_cold-ablation-skill-20261028-203750",
+      "model_name": "ridge",
+      "protocol": "candidate_cold",
+      "run_id": "ridge-candidate_cold-ablation-skill-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 2730,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:50:41"
+    },
+    {
+      "run_dir": "models\\matching\\ridge\\candidate_cold\\ridge-candidate_cold-final-20261028-203750",
+      "model_name": "ridge",
+      "protocol": "candidate_cold",
+      "run_id": "ridge-candidate_cold-final-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 2833,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:38:25"
+    },
+    {
+      "run_dir": "models\\matching\\ridge\\candidate_cold\\ridge-candidate_cold-smoke-20261028-203750",
+      "model_name": "ridge",
+      "protocol": "candidate_cold",
+      "run_id": "ridge-candidate_cold-smoke-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 2686,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:37:57"
+    },
+    {
+      "run_dir": "models\\matching\\ridge\\candidate_cold\\smoke-ridge-001",
+      "model_name": "ridge",
+      "protocol": "candidate_cold",
+      "run_id": "smoke-ridge-001",
+      "weight_file": "model.pkl",
+      "weight_bytes": 2734,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:33:13"
+    },
+    {
+      "run_dir": "models\\matching\\ridge\\double_cold\\ridge-double_cold-final-20261028-203750",
+      "model_name": "ridge",
+      "protocol": "double_cold",
+      "run_id": "ridge-double_cold-final-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 2833,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:47:20"
+    },
+    {
+      "run_dir": "models\\matching\\ridge\\job_cold\\ridge-job_cold-final-20261028-203750",
+      "model_name": "ridge",
+      "protocol": "job_cold",
+      "run_id": "ridge-job_cold-final-20261028-203750",
+      "weight_file": "model.pkl",
+      "weight_bytes": 2833,
+      "status": "loaded_with_version_warning",
+      "note": "可加载，但存在依赖版本漂移警告（如 scikit-learn 反序列化版本不一致）；输出不保证与训练时逐位一致，正式口径需在 Legacy 兼容环境复核",
+      "training_environment": {
+        "cuda_available": true,
+        "gpu": "NVIDIA GeForce RTX 2050",
+        "gpu_total_memory_mb": 4096,
+        "numpy": "1.26.4",
+        "pandas": "2.2.3",
+        "python": "3.11.18",
+        "sklearn": "1.5.2",
+        "torch": "2.1.2+cu121",
+        "torch_cuda": "12.1"
+      },
+      "environment_drift": {
+        "cuda_available": {
+          "trained_with": true,
+          "current": null
+        },
+        "gpu": {
+          "trained_with": "NVIDIA GeForce RTX 2050",
+          "current": null
+        },
+        "gpu_total_memory_mb": {
+          "trained_with": 4096,
+          "current": null
+        },
+        "numpy": {
+          "trained_with": "1.26.4",
+          "current": "2.2.6"
+        },
+        "pandas": {
+          "trained_with": "2.2.3",
+          "current": "3.0.0rc1"
+        },
+        "python": {
+          "trained_with": "3.11.18",
+          "current": "3.13.2"
+        },
+        "sklearn": {
+          "trained_with": "1.5.2",
+          "current": "1.8.0"
+        },
+        "torch": {
+          "trained_with": "2.1.2+cu121",
+          "current": "2.12.0+cpu"
+        },
+        "torch_cuda": {
+          "trained_with": "12.1",
+          "current": null
+        }
+      },
+      "dataset_version": "dv-0ce28fa6b560",
+      "created_at": "2026-10-28T20:41:45"
+    }
+  ]
+}

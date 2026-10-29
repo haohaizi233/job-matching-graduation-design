@@ -1,0 +1,224 @@
+{
+  "generated_by": "tests/model_training/run_all.py",
+  "created_at": "2026-10-29T14:32:58",
+  "seconds": 17.92,
+  "ok": false,
+  "mode": "full",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "numpy": "2.2.6",
+      "scipy": "1.17.0rc1",
+      "sklearn": "1.8.0",
+      "joblib": "1.5.3",
+      "pandas": "3.0.0rc1",
+      "torch": "2.12.0+cpu",
+      "yaml": "6.0.2"
+    },
+    "commit": "0225fcb91a17feec486afb81ae4de3d0e44b342d"
+  },
+  "totals": {
+    "tests": 21,
+    "pass": 20,
+    "fail": 1,
+    "skip": 0
+  },
+  "groups": {
+    "T1": {
+      "title": "特征黑名单 / 无标签依赖",
+      "module": "test_t1_feature_policy",
+      "total": 5,
+      "pass": 5,
+      "fail": 0,
+      "skip": 0,
+      "errors": 0
+    },
+    "T2": {
+      "title": "切分不变 / 协议合规 / 不碰 test",
+      "module": "test_t2_split_protocol",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0,
+      "errors": 0
+    },
+    "T3": {
+      "title": "模型训练 / GPU 反传 / 重载 / 可复现",
+      "module": "test_t3_models",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0,
+      "errors": 0
+    },
+    "T4": {
+      "title": "RankNet 偏好对方向与同分处理",
+      "module": "test_t4_ranknet_pairs",
+      "total": 5,
+      "pass": 5,
+      "fail": 0,
+      "skip": 0,
+      "errors": 0
+    },
+    "T6": {
+      "title": "原始数据哈希 / 日志隐私",
+      "module": "test_t6_integrity_privacy",
+      "total": 2,
+      "pass": 2,
+      "fail": 0,
+      "skip": 0,
+      "errors": 0
+    }
+  },
+  "consistency_ok": false,
+  "records": [
+    {
+      "group": "T1",
+      "test": "test_config_whitelist_excludes_forbidden (test_t1_feature_policy.T1FeaturePolicy.test_config_whitelist_excludes_forbidden)",
+      "test_id": "test_t1_feature_policy.T1FeaturePolicy.test_config_whitelist_excludes_forbidden",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "test": "test_feature_map_fit_rejects_forbidden (test_t1_feature_policy.T1FeaturePolicy.test_feature_map_fit_rejects_forbidden)",
+      "test_id": "test_t1_feature_policy.T1FeaturePolicy.test_feature_map_fit_rejects_forbidden",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "test": "test_inference_features_have_no_label_fields (test_t1_feature_policy.T1FeaturePolicy.test_inference_features_have_no_label_fields)",
+      "test_id": "test_t1_feature_policy.T1FeaturePolicy.test_inference_features_have_no_label_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "test": "test_model_matrix_values_are_finite (test_t1_feature_policy.T1FeaturePolicy.test_model_matrix_values_are_finite)",
+      "test_id": "test_t1_feature_policy.T1FeaturePolicy.test_model_matrix_values_are_finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T1",
+      "test": "test_trained_model_inputs_exclude_forbidden (test_t1_feature_policy.T1FeaturePolicy.test_trained_model_inputs_exclude_forbidden)",
+      "test_id": "test_t1_feature_policy.T1FeaturePolicy.test_trained_model_inputs_exclude_forbidden",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "test": "test_protocol_overlap_rules (test_t2_split_protocol.T2SplitProtocol.test_protocol_overlap_rules)",
+      "test_id": "test_t2_split_protocol.T2SplitProtocol.test_protocol_overlap_rules",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "test": "test_run_records_mark_test_unused (test_t2_split_protocol.T2SplitProtocol.test_run_records_mark_test_unused)",
+      "test_id": "test_t2_split_protocol.T2SplitProtocol.test_run_records_mark_test_unused",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "test": "test_split_files_unchanged_since_phase3 (test_t2_split_protocol.T2SplitProtocol.test_split_files_unchanged_since_phase3)",
+      "test_id": "test_t2_split_protocol.T2SplitProtocol.test_split_files_unchanged_since_phase3",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T2",
+      "test": "test_training_pipeline_never_reads_test (test_t2_split_protocol.T2SplitProtocol.test_training_pipeline_never_reads_test)",
+      "test_id": "test_t2_split_protocol.T2SplitProtocol.test_training_pipeline_never_reads_test",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "test": "test_mlp_forward_backward_updates (test_t3_models.T3Models.test_mlp_forward_backward_updates)",
+      "test_id": "test_t3_models.T3Models.test_mlp_forward_backward_updates",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "test": "test_regression_models_train_and_predict (test_t3_models.T3Models.test_regression_models_train_and_predict)",
+      "test_id": "test_t3_models.T3Models.test_regression_models_train_and_predict",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "test": "test_reproducibility_fixed_seed (test_t3_models.T3Models.test_reproducibility_fixed_seed)",
+      "test_id": "test_t3_models.T3Models.test_reproducibility_fixed_seed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T3",
+      "test": "test_save_reload_consistency (test_t3_models.T3Models.test_save_reload_consistency)",
+      "test_id": "test_t3_models.T3Models.test_save_reload_consistency",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_caps_and_empty_group (test_t4_ranknet_pairs.T4RankNetPairs.test_caps_and_empty_group)",
+      "test_id": "test_t4_ranknet_pairs.T4RankNetPairs.test_caps_and_empty_group",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_pairwise_loss_pushes_correct_direction (test_t4_ranknet_pairs.T4RankNetPairs.test_pairwise_loss_pushes_correct_direction)",
+      "test_id": "test_t4_ranknet_pairs.T4RankNetPairs.test_pairwise_loss_pushes_correct_direction",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_preference_direction_and_grouping (test_t4_ranknet_pairs.T4RankNetPairs.test_preference_direction_and_grouping)",
+      "test_id": "test_t4_ranknet_pairs.T4RankNetPairs.test_preference_direction_and_grouping",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_ties_and_near_ties_dropped (test_t4_ranknet_pairs.T4RankNetPairs.test_ties_and_near_ties_dropped)",
+      "test_id": "test_t4_ranknet_pairs.T4RankNetPairs.test_ties_and_near_ties_dropped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T4",
+      "test": "test_train_pairwise_end_to_end (test_t4_ranknet_pairs.T4RankNetPairs.test_train_pairwise_end_to_end)",
+      "test_id": "test_t4_ranknet_pairs.T4RankNetPairs.test_train_pairwise_end_to_end",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "UNKNOWN",
+      "test": "setUpClass (test_t5_inference.T5Inference)",
+      "test_id": "setUpClass (test_t5_inference.T5Inference)",
+      "status": "ERROR",
+      "detail": "()\n                 ~~~~~~~~~~~~~~~~^^\n  File \"D:\\desktop\\毕业设计\\src\\job_matching\\inference\\predictor.py\", line 44, in _load_model\n    return cls.load(self.run_dir)\n           ~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\desktop\\毕业设计\\src\\job_matching\\models\\gradient_boosting.py\", line 50, in load\n    blob = joblib.load(Path(run_dir) / \"model.pkl\")\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\joblib\\numpy_pickle.py\", line 749, in load\n    obj = _unpickle(\n        fobj,\n    ...<2 lines>...\n        mmap_mode=validated_mmap_mode,\n    )\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\joblib\\numpy_pickle.py\", line 626, in _unpickle\n    obj = unpickler.load()\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1256, in load\n    dispatch[key[0]](self)\n    ~~~~~~~~~~~~~~~~^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1581, in load_stack_global\n    self.append(self.find_class(module, name))\n                ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 1624, in find_class\n    return _getattribute(sys.modules[module], name)[0]\n           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\pickle.py\", line 326, in _getattribute\n    raise AttributeError(\"Can't get attribute {!r} on {!r}\"\n                         .format(name, top)) from None\nAttributeError: Can't get attribute '__pyx_unpickle_CyHalfSquaredError' on <module 'sklearn._loss._loss' from 'D:\\\\APP\\\\python 3.13.2\\\\Lib\\\\site-packages\\\\sklearn\\\\_loss\\\\_loss.cp313-win_amd64.pyd'>\n"
+    },
+    {
+      "group": "T6",
+      "test": "test_raw_data_hashes_unchanged (test_t6_integrity_privacy.T6IntegrityPrivacy.test_raw_data_hashes_unchanged)",
+      "test_id": "test_t6_integrity_privacy.T6IntegrityPrivacy.test_raw_data_hashes_unchanged",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T6",
+      "test": "test_training_logs_have_no_sensitive_info (test_t6_integrity_privacy.T6IntegrityPrivacy.test_training_logs_have_no_sensitive_info)",
+      "test_id": "test_t6_integrity_privacy.T6IntegrityPrivacy.test_training_logs_have_no_sensitive_info",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

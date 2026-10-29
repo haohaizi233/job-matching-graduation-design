@@ -1,0 +1,245 @@
+{
+  "generated_by": "tests/phase5_1a/run_all.py",
+  "created_at": "2026-10-29T14:39:58",
+  "seconds": 6.96,
+  "ok": true,
+  "mode": "full",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "0225fcb91a17feec486afb81ae4de3d0e44b342d"
+  },
+  "totals": {
+    "tests": 26,
+    "pass": 26,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "A1": {
+      "title": "测试可信性：分组 / 0 测试 / 聚合一致性",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    },
+    "A2": {
+      "title": "架构边界：依赖方向守卫",
+      "total": 9,
+      "pass": 9,
+      "fail": 0,
+      "skip": 0
+    },
+    "A4": {
+      "title": "模型兼容：加载失败分类与历史权重保护",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
+    },
+    "A6": {
+      "title": "测试回归：历史基线保护与旧套件运行器可信性",
+      "total": 3,
+      "pass": 3,
+      "fail": 0,
+      "skip": 0
+    },
+    "A7": {
+      "title": "文档交付：配置默认值与部署安全声明",
+      "total": 4,
+      "pass": 4,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": true,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": true,
+    "no_empty_run": true
+  },
+  "records": [
+    {
+      "group": "A1",
+      "class": "A1RunnerTrust",
+      "test_id": "test_a1_a7_gates.A1RunnerTrust.test_aggregation_consistency_enforced",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A1",
+      "class": "A1RunnerTrust",
+      "test_id": "test_a1_a7_gates.A1RunnerTrust.test_empty_module_is_runner_error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A1",
+      "class": "A1RunnerTrust",
+      "test_id": "test_a1_a7_gates.A1RunnerTrust.test_full_report_matches_records",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A1",
+      "class": "A1RunnerTrust",
+      "test_id": "test_a1_a7_gates.A1RunnerTrust.test_unknown_group_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2DependencyDirection",
+      "test_id": "test_a1_a7_gates.A2DependencyDirection.test_domain_does_not_import_infra_or_service",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2DependencyDirection",
+      "test_id": "test_a1_a7_gates.A2DependencyDirection.test_domain_modules_are_pure",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2DependencyDirection",
+      "test_id": "test_a1_a7_gates.A2DependencyDirection.test_service_import_does_not_load_pandas_or_torch",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2DependencyDirection",
+      "test_id": "test_a1_a7_gates.A2DependencyDirection.test_service_modules_do_not_import_annotation_layer",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2SharedRules",
+      "test_id": "test_a1_a7_gates.A2SharedRules.test_canonical_skill_keeps_java_javascript_distinct",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2SharedRules",
+      "test_id": "test_a1_a7_gates.A2SharedRules.test_legacy_import_paths_still_work",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2SharedRules",
+      "test_id": "test_a1_a7_gates.A2SharedRules.test_pii_mask_is_not_anonymization",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2SharedRules",
+      "test_id": "test_a1_a7_gates.A2SharedRules.test_single_boundary_regex_used_everywhere",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A2",
+      "class": "A2SharedRules",
+      "test_id": "test_a1_a7_gates.A2SharedRules.test_skill_boundary_prevents_substring_confusion",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A4",
+      "class": "A4ModelErrorTaxonomy",
+      "test_id": "test_a1_a7_gates.A4ModelErrorTaxonomy.test_env_incompatible_error_code_registered",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A4",
+      "class": "A4ModelErrorTaxonomy",
+      "test_id": "test_a1_a7_gates.A4ModelErrorTaxonomy.test_file_not_found_stays_missing",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A4",
+      "class": "A4ModelErrorTaxonomy",
+      "test_id": "test_a1_a7_gates.A4ModelErrorTaxonomy.test_generic_corrupt_stays_corrupt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A4",
+      "class": "A4ModelErrorTaxonomy",
+      "test_id": "test_a1_a7_gates.A4ModelErrorTaxonomy.test_history_checkpoints_untouched",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A4",
+      "class": "A4ModelErrorTaxonomy",
+      "test_id": "test_a1_a7_gates.A4ModelErrorTaxonomy.test_legacy_sklearn_unpickle_is_env_incompatible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A4",
+      "class": "A4ModelErrorTaxonomy",
+      "test_id": "test_a1_a7_gates.A4ModelErrorTaxonomy.test_missing_dependency_is_env_incompatible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A6",
+      "class": "A6HistoricalBaseline",
+      "test_id": "test_a1_a7_gates.A6HistoricalBaseline.test_failing_or_partial_run_never_overwrites_baseline",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A6",
+      "class": "A6HistoricalBaseline",
+      "test_id": "test_a1_a7_gates.A6HistoricalBaseline.test_model_runner_rejects_unknown_group",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A6",
+      "class": "A6HistoricalBaseline",
+      "test_id": "test_a1_a7_gates.A6HistoricalBaseline.test_model_training_baseline_report_intact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A7",
+      "class": "A7ConfigAndDocs",
+      "test_id": "test_a1_a7_gates.A7ConfigAndDocs.test_defaults_match_history",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A7",
+      "class": "A7ConfigAndDocs",
+      "test_id": "test_a1_a7_gates.A7ConfigAndDocs.test_env_overrides",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A7",
+      "class": "A7ConfigAndDocs",
+      "test_id": "test_a1_a7_gates.A7ConfigAndDocs.test_no_hardcoded_local_absolute_path_in_service",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "A7",
+      "class": "A7ConfigAndDocs",
+      "test_id": "test_a1_a7_gates.A7ConfigAndDocs.test_prod_without_auth_blocked",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

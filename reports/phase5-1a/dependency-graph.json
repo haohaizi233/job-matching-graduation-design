@@ -1,0 +1,682 @@
+{
+ "generated_by": "scripts/phase5_1a (depgraph)",
+ "edges": {
+  "job_matching.__init__": [
+   "job_matching.core"
+  ],
+  "job_matching.annotation.__init__": [
+   "job_matching.annotation.schema"
+  ],
+  "job_matching.annotation.agreement": [
+   "ext:__future__",
+   "ext:collections",
+   "job_matching.annotation.schema"
+  ],
+  "job_matching.annotation.arbitration": [
+   "ext:__future__",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching.annotation.schema"
+  ],
+  "job_matching.annotation.blind_guard": [
+   "ext:__future__",
+   "job_matching.annotation.pii",
+   "job_matching.annotation.schema"
+  ],
+  "job_matching.annotation.completion": [
+   "ext:__future__",
+   "job_matching.annotation.schema"
+  ],
+  "job_matching.annotation.consent": [
+   "ext:__future__",
+   "ext:re"
+  ],
+  "job_matching.annotation.dedup": [
+   "ext:__future__",
+   "ext:collections",
+   "ext:hashlib",
+   "ext:math",
+   "ext:re",
+   "ext:unicodedata"
+  ],
+  "job_matching.annotation.freeze": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "ext:shutil",
+   "ext:time",
+   "job_matching.annotation.schema",
+   "job_matching.core"
+  ],
+  "job_matching.annotation.gold_gate": [
+   "ext:__future__",
+   "job_matching.annotation"
+  ],
+  "job_matching.annotation.importer": [
+   "ext:__future__",
+   "ext:json",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching.annotation.schema"
+  ],
+  "job_matching.annotation.pii": [
+   "ext:__future__",
+   "job_matching.domain.pii_masking"
+  ],
+  "job_matching.annotation.pool": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "ext:re",
+   "job_matching.annotation",
+   "job_matching.annotation.pii",
+   "job_matching.annotation.schema",
+   "job_matching.core",
+   "job_matching.domain.job_rules",
+   "job_matching.domain.skills_lexicon",
+   "job_matching.pair_features",
+   "job_matching.preprocess_education"
+  ],
+  "job_matching.annotation.resume_intake": [
+   "ext:__future__",
+   "ext:csv",
+   "ext:json",
+   "ext:pathlib",
+   "ext:re",
+   "ext:zipfile",
+   "job_matching.annotation",
+   "job_matching.annotation.consent",
+   "job_matching.annotation.pii",
+   "job_matching.annotation.pool",
+   "job_matching.core",
+   "job_matching.infra.documents"
+  ],
+  "job_matching.annotation.schema": [
+   "ext:__future__",
+   "ext:datetime",
+   "ext:re"
+  ],
+  "job_matching.baseline_education": [
+   "ext:__future__",
+   "ext:collections",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:re",
+   "ext:time",
+   "job_matching.config",
+   "job_matching.core",
+   "job_matching.metrics_classification",
+   "job_matching.preprocess_education"
+  ],
+  "job_matching.baseline_ranking": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:time",
+   "job_matching.config",
+   "job_matching.core",
+   "job_matching.metrics_ranking"
+  ],
+  "job_matching.config": [
+   "ext:__future__",
+   "ext:pathlib",
+   "ext:yaml",
+   "job_matching.core"
+  ],
+  "job_matching.core": [
+   "ext:__future__",
+   "ext:hashlib",
+   "ext:json",
+   "ext:logging",
+   "ext:numpy",
+   "ext:os",
+   "ext:pathlib",
+   "ext:sys",
+   "ext:time",
+   "ext:unicodedata"
+  ],
+  "job_matching.domain.__init__": [
+   "job_matching.domain.job_rules",
+   "job_matching.domain.pii_masking",
+   "job_matching.domain.skills_lexicon"
+  ],
+  "job_matching.domain.job_rules": [
+   "ext:__future__",
+   "ext:re"
+  ],
+  "job_matching.domain.pii_masking": [
+   "ext:__future__",
+   "ext:re"
+  ],
+  "job_matching.domain.skills_lexicon": [
+   "ext:__future__",
+   "ext:re"
+  ],
+  "job_matching.education.__init__": [
+   "job_matching.education.labels",
+   "job_matching.education.rules"
+  ],
+  "job_matching.education.dataset": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching.core",
+   "job_matching.education.labels"
+  ],
+  "job_matching.education.evaluator": [
+   "ext:__future__",
+   "ext:numpy",
+   "job_matching.education.labels",
+   "job_matching.metrics_classification"
+  ],
+  "job_matching.education.labels": [
+   "ext:__future__",
+   "ext:numpy",
+   "job_matching.config",
+   "job_matching.preprocess_education"
+  ],
+  "job_matching.education.neural_model": [
+   "ext:__future__",
+   "ext:pathlib",
+   "ext:torch",
+   "job_matching.education.labels"
+  ],
+  "job_matching.education.predictor": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:torch",
+   "job_matching.core",
+   "job_matching.education.labels",
+   "job_matching.education.neural_model",
+   "job_matching.education.rules",
+   "job_matching.education.tfidf_model",
+   "job_matching.education.tokenizer"
+  ],
+  "job_matching.education.rules": [
+   "ext:__future__",
+   "ext:numpy",
+   "job_matching.baseline_education",
+   "job_matching.education.labels"
+  ],
+  "job_matching.education.tfidf_model": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:pickle",
+   "ext:sklearn",
+   "job_matching.education.labels"
+  ],
+  "job_matching.education.tokenizer": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pathlib"
+  ],
+  "job_matching.education.trainer": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:random",
+   "ext:time",
+   "ext:torch",
+   "job_matching.education.labels",
+   "job_matching.education.neural_model"
+  ],
+  "job_matching.education_data": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "ext:time",
+   "job_matching.config",
+   "job_matching.core",
+   "job_matching.preprocess_education"
+  ],
+  "job_matching.embeddings": [
+   "ext:__future__",
+   "ext:ast",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "ext:time",
+   "job_matching.core"
+  ],
+  "job_matching.evaluation.__init__": [],
+  "job_matching.evaluation.error_analysis": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pandas"
+  ],
+  "job_matching.evaluation.metrics": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:scipy",
+   "job_matching.metrics_ranking"
+  ],
+  "job_matching.evaluation.statistical_tests": [
+   "ext:__future__",
+   "ext:numpy",
+   "job_matching.metrics_ranking"
+  ],
+  "job_matching.independent_eval.__init__": [
+   "job_matching.independent_eval.dataset",
+   "job_matching.independent_eval.metrics"
+  ],
+  "job_matching.independent_eval.baselines": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:sklearn",
+   "job_matching.core",
+   "job_matching.domain.job_rules",
+   "job_matching.independent_eval.metrics",
+   "job_matching.inference.predictor"
+  ],
+  "job_matching.independent_eval.bootstrap": [
+   "ext:__future__",
+   "ext:numpy",
+   "job_matching.evaluation.statistical_tests",
+   "job_matching.metrics_ranking"
+  ],
+  "job_matching.independent_eval.dataset": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching.annotation.freeze",
+   "job_matching.core"
+  ],
+  "job_matching.independent_eval.metrics": [
+   "ext:__future__",
+   "ext:numpy",
+   "job_matching.metrics_ranking"
+  ],
+  "job_matching.inference.__init__": [],
+  "job_matching.inference.predictor": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pathlib",
+   "job_matching.models.gradient_boosting",
+   "job_matching.models.mlp",
+   "job_matching.models.ranknet",
+   "job_matching.models.ridge",
+   "job_matching.training.feature_map"
+  ],
+  "job_matching.infra.__init__": [
+   "job_matching.infra.documents"
+  ],
+  "job_matching.infra.documents": [
+   "ext:__future__",
+   "ext:fitz",
+   "ext:pathlib",
+   "ext:re",
+   "ext:zipfile"
+  ],
+  "job_matching.metrics_classification": [
+   "ext:__future__",
+   "ext:numpy"
+  ],
+  "job_matching.metrics_ranking": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pandas"
+  ],
+  "job_matching.models.__init__": [],
+  "job_matching.models.base": [
+   "ext:__future__",
+   "ext:importlib",
+   "ext:numpy",
+   "ext:torch",
+   "job_matching.evaluation.metrics"
+  ],
+  "job_matching.models.gradient_boosting": [
+   "ext:__future__",
+   "ext:itertools",
+   "ext:joblib",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:sklearn",
+   "ext:time",
+   "job_matching.evaluation.metrics",
+   "job_matching.models.base"
+  ],
+  "job_matching.models.mlp": [
+   "ext:__future__",
+   "ext:itertools",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:time",
+   "ext:torch",
+   "job_matching.evaluation.metrics",
+   "job_matching.models.base",
+   "job_matching.training"
+  ],
+  "job_matching.models.ranknet": [
+   "ext:__future__",
+   "ext:itertools",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:time",
+   "ext:torch",
+   "job_matching.core",
+   "job_matching.evaluation.metrics",
+   "job_matching.models.base",
+   "job_matching.training",
+   "job_matching.training.pair_sampler"
+  ],
+  "job_matching.models.ridge": [
+   "ext:__future__",
+   "ext:itertools",
+   "ext:joblib",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:sklearn",
+   "ext:time",
+   "job_matching.evaluation.metrics",
+   "job_matching.models.base"
+  ],
+  "job_matching.pair_features": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:re",
+   "job_matching.config",
+   "job_matching.domain.job_rules",
+   "job_matching.preprocess_skills"
+  ],
+  "job_matching.pipeline": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "ext:subprocess",
+   "ext:sys",
+   "ext:time",
+   "ext:torch",
+   "job_matching",
+   "job_matching.baseline_education",
+   "job_matching.baseline_ranking",
+   "job_matching.config",
+   "job_matching.core",
+   "job_matching.education_data",
+   "job_matching.embeddings",
+   "job_matching.pair_features",
+   "job_matching.policy",
+   "job_matching.preprocess_education",
+   "job_matching.preprocess_job",
+   "job_matching.preprocess_resume",
+   "job_matching.preprocess_risk",
+   "job_matching.reporting",
+   "job_matching.schema",
+   "job_matching.split_matching"
+  ],
+  "job_matching.policy": [
+   "ext:__future__",
+   "ext:dataclasses",
+   "ext:numpy",
+   "ext:pandas",
+   "job_matching.config"
+  ],
+  "job_matching.preprocess_education": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:re",
+   "ext:unicodedata",
+   "job_matching.config"
+  ],
+  "job_matching.preprocess_job": [
+   "ext:__future__",
+   "ext:json",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching.core",
+   "job_matching.preprocess_skills"
+  ],
+  "job_matching.preprocess_resume": [
+   "ext:__future__",
+   "ext:json",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching.core",
+   "job_matching.preprocess_skills"
+  ],
+  "job_matching.preprocess_risk": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching.core"
+  ],
+  "job_matching.preprocess_skills": [
+   "ext:__future__",
+   "ext:ast",
+   "ext:json",
+   "ext:re",
+   "ext:unicodedata",
+   "job_matching.config"
+  ],
+  "job_matching.reporting": [
+   "ext:__future__",
+   "ext:pathlib",
+   "ext:time",
+   "job_matching.config",
+   "job_matching.core"
+  ],
+  "job_matching.schema": [
+   "ext:__future__",
+   "ext:dataclasses",
+   "ext:numpy",
+   "ext:pandas"
+  ],
+  "job_matching.service.__init__": [
+   "job_matching.service.contracts",
+   "job_matching.service.errors",
+   "job_matching.service.explanations",
+   "job_matching.service.job_parser",
+   "job_matching.service.matching",
+   "job_matching.service.model_registry",
+   "job_matching.service.resume_parser",
+   "job_matching.service.skills_normalize",
+   "job_matching.service.text_extract"
+  ],
+  "job_matching.service.api": [
+   "ext:__future__",
+   "ext:base64",
+   "ext:dataclasses",
+   "ext:fastapi",
+   "ext:pathlib",
+   "ext:pydantic",
+   "ext:re",
+   "ext:time",
+   "ext:typing",
+   "ext:uvicorn",
+   "job_matching.core",
+   "job_matching.service.contracts",
+   "job_matching.service.errors",
+   "job_matching.service.job_parser",
+   "job_matching.service.logging_utils",
+   "job_matching.service.matching",
+   "job_matching.service.model_registry",
+   "job_matching.service.resume_parser",
+   "job_matching.service.settings",
+   "job_matching.service.text_extract"
+  ],
+  "job_matching.service.contracts": [
+   "ext:__future__",
+   "ext:dataclasses",
+   "ext:typing"
+  ],
+  "job_matching.service.errors": [
+   "ext:__future__",
+   "ext:re",
+   "job_matching.core"
+  ],
+  "job_matching.service.explanations": [
+   "ext:__future__",
+   "ext:re",
+   "job_matching.domain.job_rules",
+   "job_matching.preprocess_skills",
+   "job_matching.service.contracts",
+   "job_matching.service.requirements",
+   "job_matching.service.skills_normalize"
+  ],
+  "job_matching.service.job_parser": [
+   "ext:__future__",
+   "ext:pathlib",
+   "ext:re",
+   "job_matching.core",
+   "job_matching.domain.job_rules",
+   "job_matching.domain.pii_masking",
+   "job_matching.education.predictor",
+   "job_matching.education.rules",
+   "job_matching.service.contracts",
+   "job_matching.service.requirements",
+   "job_matching.service.skills_normalize",
+   "job_matching.service.text_extract"
+  ],
+  "job_matching.service.logging_utils": [
+   "ext:__future__",
+   "ext:logging",
+   "ext:uuid",
+   "job_matching.domain.pii_masking"
+  ],
+  "job_matching.service.matching": [
+   "ext:__future__",
+   "ext:collections",
+   "ext:dataclasses",
+   "ext:json",
+   "ext:time",
+   "job_matching",
+   "job_matching.domain.job_rules",
+   "job_matching.preprocess_skills",
+   "job_matching.service.contracts",
+   "job_matching.service.errors",
+   "job_matching.service.explanations",
+   "job_matching.service.logging_utils",
+   "job_matching.service.model_registry"
+  ],
+  "job_matching.service.model_registry": [
+   "ext:__future__",
+   "ext:dataclasses",
+   "ext:pathlib",
+   "ext:typing",
+   "job_matching.core",
+   "job_matching.education.predictor",
+   "job_matching.inference.predictor",
+   "job_matching.service.errors"
+  ],
+  "job_matching.service.requirements": [
+   "ext:__future__",
+   "ext:re",
+   "job_matching.service.contracts"
+  ],
+  "job_matching.service.resume_parser": [
+   "ext:__future__",
+   "ext:pathlib",
+   "ext:re",
+   "job_matching.core",
+   "job_matching.domain.pii_masking",
+   "job_matching.service.contracts",
+   "job_matching.service.skills_normalize",
+   "job_matching.service.text_extract"
+  ],
+  "job_matching.service.settings": [
+   "ext:__future__",
+   "ext:dataclasses",
+   "ext:os",
+   "ext:pathlib",
+   "job_matching.core"
+  ],
+  "job_matching.service.skills_normalize": [
+   "ext:__future__",
+   "ext:re",
+   "job_matching.core",
+   "job_matching.domain.pii_masking",
+   "job_matching.domain.skills_lexicon",
+   "job_matching.preprocess_skills",
+   "job_matching.service.contracts"
+  ],
+  "job_matching.service.text_extract": [
+   "ext:__future__",
+   "ext:pathlib",
+   "ext:tempfile",
+   "ext:zipfile",
+   "job_matching.infra.documents",
+   "job_matching.service.errors"
+  ],
+  "job_matching.split_matching": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "ext:time",
+   "job_matching.core"
+  ],
+  "job_matching.training.__init__": [],
+  "job_matching.training.checkpoints": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "ext:platform",
+   "ext:sklearn",
+   "ext:time",
+   "ext:torch",
+   "job_matching.core"
+  ],
+  "job_matching.training.config_train": [
+   "ext:__future__",
+   "ext:pathlib",
+   "ext:yaml",
+   "job_matching.core"
+  ],
+  "job_matching.training.dataset": [
+   "ext:__future__",
+   "ext:dataclasses",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching.core"
+  ],
+  "job_matching.training.feature_map": [
+   "ext:__future__",
+   "ext:json",
+   "ext:numpy",
+   "ext:pandas",
+   "ext:pathlib",
+   "job_matching",
+   "job_matching.pair_features",
+   "job_matching.preprocess_skills"
+  ],
+  "job_matching.training.pair_sampler": [
+   "ext:__future__",
+   "ext:dataclasses",
+   "ext:numpy"
+  ],
+  "job_matching.training.trainer": [
+   "ext:__future__",
+   "ext:numpy",
+   "ext:pathlib",
+   "ext:random",
+   "ext:time",
+   "ext:torch",
+   "job_matching.core"
+  ]
+ }
+}

@@ -1,0 +1,141 @@
+[
+  {
+    "module": "job_matching.domain",
+    "heavy": [
+      "numpy"
+    ]
+  },
+  {
+    "module": "job_matching.domain.skills_lexicon",
+    "heavy": [
+      "numpy"
+    ]
+  },
+  {
+    "module": "job_matching.domain.job_rules",
+    "heavy": [
+      "numpy"
+    ]
+  },
+  {
+    "module": "job_matching.domain.pii_masking",
+    "heavy": [
+      "numpy"
+    ]
+  },
+  {
+    "module": "job_matching.infra.documents",
+    "heavy": [
+      "numpy"
+    ]
+  },
+  {
+    "module": "job_matching.service.errors",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.contracts",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.requirements",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.skills_normalize",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.job_parser",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.resume_parser",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.text_extract",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.logging_utils",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.explanations",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.matching",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.model_registry",
+    "heavy": [
+      "numpy",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.service.api",
+    "heavy": [
+      "numpy",
+      "pydantic",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.annotation.pool",
+    "heavy": [
+      "numpy",
+      "pandas",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.annotation.resume_intake",
+    "heavy": [
+      "numpy",
+      "pandas",
+      "yaml"
+    ]
+  },
+  {
+    "module": "job_matching.training.feature_map",
+    "heavy": [
+      "numpy",
+      "pandas",
+      "yaml"
+    ]
+  }
+]

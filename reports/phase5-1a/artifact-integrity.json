@@ -1,0 +1,76 @@
+{
+  "generated_by": "scripts/phase5_1a/check_artifact_integrity.py",
+  "created_at": "2026-10-29T14:36:04",
+  "capability_boundary": "普通哈希完整性自检：可发现非预期变化（误改/误删/清单外新增），不等于可信签名防篡改；不得据此声称数据已防恶意篡改或已匿名化",
+  "manifests_checked": 1,
+  "manifests_ok": 1,
+  "results": [
+    {
+      "manifest": "data\\independent_eval\\frozen\\pool_v1\\manifest.json",
+      "stage": "pool",
+      "dataset_version": "dv-fd3762f85658",
+      "frozen_at": "2026-10-29T10:20:54",
+      "canonical_manifest_digest": "sha256:7c954cbf4b1dee0cfb7c6fa2d7274cb1a49cbe6ba1e69b6580423dc5cbbf1715",
+      "metadata_digest": "sha256:734214b40b5bafaa772d0761f0030b7c382d37688bc0e8d81f08378c8e43b7d2",
+      "metadata_fields": [
+        "annotation_quality",
+        "dataset_version",
+        "extra",
+        "frozen_at",
+        "generated_by",
+        "immutability_note",
+        "label_distribution",
+        "manifest_sha256",
+        "mutual_exclusivity",
+        "protocol_version",
+        "responsibility",
+        "sample_counts",
+        "source_stats",
+        "stage"
+      ],
+      "files_listed": 4,
+      "files_ok": 4,
+      "unlisted_files": [],
+      "files": [
+        {
+          "key": "job_pool",
+          "path": "data/independent_eval/pool/job_pool_v1.jsonl",
+          "exists": true,
+          "match": true,
+          "expected": "13bf2581e8784041f83b7278ce88a5d94e8902d91a08232e52fba04149d28b81",
+          "actual": "13bf2581e8784041f83b7278ce88a5d94e8902d91a08232e52fba04149d28b81",
+          "resolved": "data\\independent_eval\\pool\\job_pool_v1.jsonl"
+        },
+        {
+          "key": "pairs",
+          "path": "data/independent_eval/pairs/pairs_v1.jsonl",
+          "exists": true,
+          "match": true,
+          "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resolved": "data\\independent_eval\\pairs\\pairs_v1.jsonl"
+        },
+        {
+          "key": "pairs_synthetic",
+          "path": "data/independent_eval/pairs/pairs_synthetic_v1.jsonl",
+          "exists": true,
+          "match": true,
+          "expected": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8",
+          "actual": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8",
+          "resolved": "data\\independent_eval\\pairs\\pairs_synthetic_v1.jsonl"
+        },
+        {
+          "key": "pool_manifest",
+          "path": "data/independent_eval/pool/pool_manifest_v1.json",
+          "exists": true,
+          "match": true,
+          "expected": "b074f04d7180d47de7c0c8e205ba2a388506e99baa512737760078f34efc5c95",
+          "actual": "b074f04d7180d47de7c0c8e205ba2a388506e99baa512737760078f34efc5c95",
+          "resolved": "data\\independent_eval\\pool\\pool_manifest_v1.json"
+        }
+      ],
+      "problems": [],
+      "ok": true
+    }
+  ]
+}
