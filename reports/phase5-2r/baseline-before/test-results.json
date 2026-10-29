@@ -1,0 +1,99 @@
+{
+  "generated_by": "tests/phase5_2/run_all.py",
+  "created_at": "2026-10-29T16:55:07",
+  "seconds": 5.23,
+  "ok": false,
+  "mode": "full",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "fce73e7e45c2e192797be4e197ff75be2e5ce9ab"
+  },
+  "totals": {
+    "tests": 9,
+    "pass": 0,
+    "fail": 6,
+    "skip": 3
+  },
+  "groups": {
+    "T7": {
+      "title": "PostgreSQL 集成",
+      "total": 3,
+      "pass": 0,
+      "fail": 0,
+      "skip": 3
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": false,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": false,
+    "no_empty_run": true,
+    "modules_registered_non_empty": true
+  },
+  "records": [
+    {
+      "group": "UNKNOWN",
+      "class": "_ErrorHolder",
+      "test_id": "setUpClass (test_t1_database.T1MigrationGates)",
+      "status": "ERROR",
+      "detail": "^\n                                ['user_id', 'idempotency_key'])\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 8, in create_unique_constraint\n  File \"<string>\", line 3, in create_unique_constraint\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\ops.py\", line 498, in create_unique_constraint\n    return operations.invoke(op)\n           ~~~~~~~~~~~~~~~~~^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\base.py\", line 454, in invoke\n    return fn(self, operation)\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\toimpl.py\", line 202, in create_constraint\n    operations.impl.add_constraint(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        operation.to_constraint(operations.migration_context)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\ddl\\sqlite.py\", line 81, in add_constraint\n    raise NotImplementedError(\n    ...<3 lines>...\n    )\nNotImplementedError: No support for ALTER of constraints in SQLite dialect. Please refer to the batch mode feature which allows for SQLite migrations using a copy-and-move strategy.\n"
+    },
+    {
+      "group": "UNKNOWN",
+      "class": "_ErrorHolder",
+      "test_id": "setUpClass (test_t2_auth.T2AuthChain)",
+      "status": "ERROR",
+      "detail": "^\n                                ['user_id', 'idempotency_key'])\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 8, in create_unique_constraint\n  File \"<string>\", line 3, in create_unique_constraint\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\ops.py\", line 498, in create_unique_constraint\n    return operations.invoke(op)\n           ~~~~~~~~~~~~~~~~~^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\base.py\", line 454, in invoke\n    return fn(self, operation)\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\toimpl.py\", line 202, in create_constraint\n    operations.impl.add_constraint(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        operation.to_constraint(operations.migration_context)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\ddl\\sqlite.py\", line 81, in add_constraint\n    raise NotImplementedError(\n    ...<3 lines>...\n    )\nNotImplementedError: No support for ALTER of constraints in SQLite dialect. Please refer to the batch mode feature which allows for SQLite migrations using a copy-and-move strategy.\n"
+    },
+    {
+      "group": "UNKNOWN",
+      "class": "_ErrorHolder",
+      "test_id": "setUpClass (test_t3_profile.T3ResumeAndProfile)",
+      "status": "ERROR",
+      "detail": "^\n                                ['user_id', 'idempotency_key'])\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 8, in create_unique_constraint\n  File \"<string>\", line 3, in create_unique_constraint\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\ops.py\", line 498, in create_unique_constraint\n    return operations.invoke(op)\n           ~~~~~~~~~~~~~~~~~^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\base.py\", line 454, in invoke\n    return fn(self, operation)\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\toimpl.py\", line 202, in create_constraint\n    operations.impl.add_constraint(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        operation.to_constraint(operations.migration_context)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\ddl\\sqlite.py\", line 81, in add_constraint\n    raise NotImplementedError(\n    ...<3 lines>...\n    )\nNotImplementedError: No support for ALTER of constraints in SQLite dialect. Please refer to the batch mode feature which allows for SQLite migrations using a copy-and-move strategy.\n"
+    },
+    {
+      "group": "UNKNOWN",
+      "class": "_ErrorHolder",
+      "test_id": "setUpClass (test_t4_jobs_reco.T4JobsAndRecommendations)",
+      "status": "ERROR",
+      "detail": "^\n                                ['user_id', 'idempotency_key'])\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 8, in create_unique_constraint\n  File \"<string>\", line 3, in create_unique_constraint\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\ops.py\", line 498, in create_unique_constraint\n    return operations.invoke(op)\n           ~~~~~~~~~~~~~~~~~^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\base.py\", line 454, in invoke\n    return fn(self, operation)\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\toimpl.py\", line 202, in create_constraint\n    operations.impl.add_constraint(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        operation.to_constraint(operations.migration_context)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\ddl\\sqlite.py\", line 81, in add_constraint\n    raise NotImplementedError(\n    ...<3 lines>...\n    )\nNotImplementedError: No support for ALTER of constraints in SQLite dialect. Please refer to the batch mode feature which allows for SQLite migrations using a copy-and-move strategy.\n"
+    },
+    {
+      "group": "UNKNOWN",
+      "class": "_ErrorHolder",
+      "test_id": "setUpClass (test_t5_isolation.T5DataIsolation)",
+      "status": "ERROR",
+      "detail": "^\n                                ['user_id', 'idempotency_key'])\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 8, in create_unique_constraint\n  File \"<string>\", line 3, in create_unique_constraint\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\ops.py\", line 498, in create_unique_constraint\n    return operations.invoke(op)\n           ~~~~~~~~~~~~~~~~~^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\base.py\", line 454, in invoke\n    return fn(self, operation)\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\toimpl.py\", line 202, in create_constraint\n    operations.impl.add_constraint(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        operation.to_constraint(operations.migration_context)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\ddl\\sqlite.py\", line 81, in add_constraint\n    raise NotImplementedError(\n    ...<3 lines>...\n    )\nNotImplementedError: No support for ALTER of constraints in SQLite dialect. Please refer to the batch mode feature which allows for SQLite migrations using a copy-and-move strategy.\n"
+    },
+    {
+      "group": "UNKNOWN",
+      "class": "_ErrorHolder",
+      "test_id": "setUpClass (test_t6_failures.T6FailureTransactions)",
+      "status": "ERROR",
+      "detail": "^\n                                ['user_id', 'idempotency_key'])\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 8, in create_unique_constraint\n  File \"<string>\", line 3, in create_unique_constraint\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\ops.py\", line 498, in create_unique_constraint\n    return operations.invoke(op)\n           ~~~~~~~~~~~~~~~~~^^^^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\base.py\", line 454, in invoke\n    return fn(self, operation)\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\operations\\toimpl.py\", line 202, in create_constraint\n    operations.impl.add_constraint(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        operation.to_constraint(operations.migration_context)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"D:\\APP\\python 3.13.2\\Lib\\site-packages\\alembic\\ddl\\sqlite.py\", line 81, in add_constraint\n    raise NotImplementedError(\n    ...<3 lines>...\n    )\nNotImplementedError: No support for ALTER of constraints in SQLite dialect. Please refer to the batch mode feature which allows for SQLite migrations using a copy-and-move strategy.\n"
+    },
+    {
+      "group": "T7",
+      "class": "T7PostgreSQLIntegration",
+      "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_downgrade_reupgrade_on_postgresql",
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+    },
+    {
+      "group": "T7",
+      "class": "T7PostgreSQLIntegration",
+      "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_jsonb_query_and_constraints_on_postgresql",
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+    },
+    {
+      "group": "T7",
+      "class": "T7PostgreSQLIntegration",
+      "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_migrate_and_schema_on_postgresql",
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+    }
+  ]
+}
