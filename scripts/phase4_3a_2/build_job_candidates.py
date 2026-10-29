@@ -442,7 +442,7 @@ def main() -> int:
         },
         "education_corpus_overlap": {
             "corpus": "job-education default/train + default/validation（学历抽取模型训练语料）",
-            "scan": {k: v for k, v in edu_scan.items() if k != "per_job"},
+            "scan": edu_scan,
             "jobs_with_hash_overlap": sum(1 for r in admitted if r["audit_flags"]["edu_train_hash_overlap"]),
             "jobs_with_near_overlap": sum(1 for r in admitted if r["audit_flags"]["edu_train_near_overlap"]),
             "contamination_by_task": {
