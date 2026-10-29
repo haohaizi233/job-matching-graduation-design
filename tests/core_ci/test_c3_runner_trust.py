@@ -114,15 +114,23 @@ class C3RunnerAggregation(unittest.TestCase):
         """提供聚合一致性函数的运行器必须能对"记录 -> 分组汇总"做自检。"""
         for name in ("phase5_1r", "core_ci"):
             mod = _load(RUNNERS[name])
-            self.assertTrue(hasattr(mod, "_aggregate") or hasattr(mod, "aggregate"),
-                            f"{name} 运行器缺少聚合一致性函数")
-            agg, checks = mod._aggregate(
-                [{"group": "R1" if name == "phase5_1r" else "C2", "module": "m",
-                  "class": "C", "test": "t", "test_id": "m.C.t",
-                  "status": "PASS", "detail": ""}],
-                ["m"])
-            self.assertTrue(all(checks.values()), checks)
-            self.assertEqual(agg["totals"]["tests"], 1)
+            fn = getattr(mod, "_aggregate", None) or getattr(mod, "aggregate", None)
+            self.assertIsNotNone(fn, f"{name} 运行器缺少聚合一致性函数")
+            table = getattr(mod, "TEST_MODULES", None) or getattr(mod, "GATE_MODULES", None)
+            tag, target = table[0][0], table[0][1]
+            first, second = fn(
+                [{"group": tag, "module": target, "class": "C", "test": "t",
+                  "test_id": f"{target}.C.t", "status": "PASS", "detail": ""}],
+                [target])
+            # 兼容两种返回形态：(汇总, {"checks": {...}, "ok": ...}) 与 (汇总, 扁平 checks)
+            checks = second.get("checks", second) if isinstance(second, dict) else {}
+            self.assertTrue(checks, f"{name}: 聚合一致性断言为空")
+            self.assertTrue(all(checks.values()), f"{name}: {checks}")
+            # 汇总形态兼容：{"groups","totals"} 或 纯 groups（totals 由运行器另行复算）
+            if isinstance(first, dict) and "totals" in first:
+                self.assertEqual(first["totals"]["tests"], 1, f"{name}: {first['totals']}")
+            else:
+                self.assertEqual(first[tag]["total"], 1, f"{name}: {first.get(tag)}")
 
     def test_reports_totals_match_records(self):
         """已生成的报告：分组之和 == 总计，且总数 > 0。"""
