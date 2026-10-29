@@ -1,0 +1,439 @@
+{
+  "blocking_findings": [
+    "候选池与原历史 Gold 存在 job_id 交叉（需在评估时登记并降级解释）"
+  ],
+  "created_at": "2026-10-29T10:20:54",
+  "files": {
+    "job_pool": {
+      "bytes": 349213,
+      "path": "data/independent_eval/pool/job_pool_v1.jsonl",
+      "sha256": "13bf2581e8784041f83b7278ce88a5d94e8902d91a08232e52fba04149d28b81"
+    },
+    "pairs_real": {
+      "bytes": 0,
+      "path": "data/independent_eval/pairs/pairs_v1.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pairs_synthetic": {
+      "bytes": 185305,
+      "path": "data/independent_eval/pairs/pairs_synthetic_v1.jsonl",
+      "sha256": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8"
+    }
+  },
+  "generated_by": "scripts/phase4_3a/leakage_check.py",
+  "historical_gold_cross": {
+    "gold_records": 736,
+    "gold_unique_job_ids": 736,
+    "overlap_job_id_sample": [
+      "7881740",
+      "7891020",
+      "7891194",
+      "7911845",
+      "7926209"
+    ],
+    "overlap_job_ids": 5,
+    "policy": "历史 Gold 曾参与 Phase4-2 规则研究与基线分析，与之交叉的样本必须登记；不得作为全新独立盲测样本",
+    "pool_jobs": 150,
+    "status": "checked"
+  },
+  "license_and_provenance": {
+    "all_df_license": "UNKNOWN（本地无证据，补齐前不得进入正式评估集）",
+    "job_education_license": "apache-2.0（README front-matter 可核）",
+    "job_resume_matching_license": "unverified（front-matter mit 与正文 License 节不一致）",
+    "jobs_with_unknown_license": 0,
+    "pool_jobs_by_source": {
+      "job-education/annotated": 150
+    },
+    "resume_sources": {
+      "job-resume-matching/cv": {
+        "license": "unverified",
+        "usable_for_chinese_eval": false
+      }
+    }
+  },
+  "pii_export_scan": {
+    "files": [
+      {
+        "file": "data/independent_eval/pairs/pairs_synthetic_v1.jsonl",
+        "pii_text_hits": {},
+        "records": 75
+      },
+      {
+        "file": "data/independent_eval/pairs/pairs_v1.jsonl",
+        "pii_text_hits": {},
+        "records": 0
+      },
+      {
+        "file": "data/independent_eval/pool/job_pool_v1.jsonl",
+        "pii_text_hits": {
+          "qq_wechat_id": 3
+        },
+        "records": 150
+      }
+    ],
+    "pii_field_violations": [],
+    "pii_text_hits": {
+      "job_pool_v1.jsonl": {
+        "qq_wechat_id": 3
+      },
+      "pairs_synthetic_v1.jsonl": {},
+      "pairs_v1.jsonl": {}
+    }
+  },
+  "pool_internal_duplicates": {
+    "job_level": {
+      "detail": [],
+      "jobs_checked": 150,
+      "same_job_different_id": 0
+    },
+    "pair_level": {
+      "exact_duplicate_pairs": [],
+      "exact_duplicates": 0,
+      "near_duplicate_pairs": [
+        {
+          "a": "pair-0f91ff3baa86",
+          "b": "pair-ce425f86bd97",
+          "similarity": 0.912879
+        },
+        {
+          "a": "pair-3c0db36efa0e",
+          "b": "pair-6d23120a9b55",
+          "similarity": 0.97351
+        },
+        {
+          "a": "pair-4853e59e4e02",
+          "b": "pair-e77083cf3fa3",
+          "similarity": 0.908257
+        },
+        {
+          "a": "pair-4d941bb2b660",
+          "b": "pair-4f27fc7d232b",
+          "similarity": 0.952055
+        },
+        {
+          "a": "pair-532df4617607",
+          "b": "pair-5b8b84d214f9",
+          "similarity": 0.978836
+        },
+        {
+          "a": "pair-539fa4b129bb",
+          "b": "pair-6b541305bf1b",
+          "similarity": 0.914209
+        },
+        {
+          "a": "pair-6e7c83b3e17b",
+          "b": "pair-c6806999a9fb",
+          "similarity": 0.901639
+        },
+        {
+          "a": "pair-70327e0442b4",
+          "b": "pair-cb61a17a1e5a",
+          "similarity": 0.983471
+        },
+        {
+          "a": "pair-be43dfc2be90",
+          "b": "pair-e9a28f01ff11",
+          "similarity": 0.980723
+        }
+      ],
+      "near_duplicates": 9,
+      "near_threshold": 0.9,
+      "pairs_checked": 75
+    },
+    "resume_level": {
+      "detail": [],
+      "resumes_checked": 8,
+      "same_resume_different_id": 0
+    }
+  },
+  "pretraining_contamination": {
+    "checkable": [
+      "本地训练语料文本重合",
+      "历史 Gold 交叉",
+      "池内重复"
+    ],
+    "not_checkable": [
+      "外部预训练模型语料",
+      "原始数据集上游采集范围"
+    ],
+    "statement": "预训练语料来源不可知，无法完全排除预训练污染；本报告只能声明『未发现已知泄漏』，不能声称绝对无泄漏"
+  },
+  "training_data_overlap": {
+    "education_training_corpus": {
+      "exact_or_norm_hash_overlap": 250,
+      "files": [
+        "data/raw/job-education/default/train/19w_0701.csv",
+        "data/raw/job-education/default/validation/4w_0708.csv"
+      ],
+      "near_check_limitation": "近似重复跨语料检查在确定性等距抽样子集上执行（默认 8 万行），可能漏检抽样外的近似重复；完全/规范化哈希检查覆盖全量语料",
+      "near_check_reference_limit": 80000,
+      "near_duplicate_overlap": 255,
+      "near_duplicate_sample": [
+        {
+          "a": "7908180",
+          "b": "19w_0701.csv:62426",
+          "similarity": 0.969957
+        },
+        {
+          "a": "7881140",
+          "b": "19w_0701.csv:79793",
+          "similarity": 1.0
+        },
+        {
+          "a": "7881140",
+          "b": "19w_0701.csv:79800",
+          "similarity": 1.0
+        },
+        {
+          "a": "7907774",
+          "b": "19w_0701.csv:109487",
+          "similarity": 0.960474
+        },
+        {
+          "a": "7910956",
+          "b": "19w_0701.csv:111132",
+          "similarity": 0.976608
+        },
+        {
+          "a": "7907774",
+          "b": "19w_0701.csv:125013",
+          "similarity": 0.9375
+        },
+        {
+          "a": "7881879",
+          "b": "19w_0701.csv:132888",
+          "similarity": 0.917695
+        },
+        {
+          "a": "7876624",
+          "b": "4w_0708.csv:83",
+          "similarity": 1.0
+        },
+        {
+          "a": "7878702",
+          "b": "4w_0708.csv:889",
+          "similarity": 1.0
+        },
+        {
+          "a": "7879571",
+          "b": "4w_0708.csv:1177",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880539",
+          "b": "4w_0708.csv:1556",
+          "similarity": 1.0
+        },
+        {
+          "a": "7915583",
+          "b": "4w_0708.csv:1557",
+          "similarity": 0.901235
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1609",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1610",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1611",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1612",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1614",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1615",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1616",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1617",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1618",
+          "similarity": 1.0
+        },
+        {
+          "a": "7881140",
+          "b": "4w_0708.csv:1773",
+          "similarity": 1.0
+        },
+        {
+          "a": "7881376",
+          "b": "4w_0708.csv:1858",
+          "similarity": 1.0
+        },
+        {
+          "a": "7880655",
+          "b": "4w_0708.csv:1982",
+          "similarity": 1.0
+        },
+        {
+          "a": "7881740",
+          "b": "4w_0708.csv:2007",
+          "similarity": 1.0
+        },
+        {
+          "a": "7881879",
+          "b": "4w_0708.csv:2068",
+          "similarity": 1.0
+        },
+        {
+          "a": "7881879",
+          "b": "4w_0708.csv:2071",
+          "similarity": 1.0
+        },
+        {
+          "a": "7883170",
+          "b": "4w_0708.csv:2880",
+          "similarity": 1.0
+        },
+        {
+          "a": "7881879",
+          "b": "4w_0708.csv:2992",
+          "similarity": 1.0
+        },
+        {
+          "a": "7883668",
+          "b": "4w_0708.csv:3102",
+          "similarity": 1.0
+        },
+        {
+          "a": "7884460",
+          "b": "4w_0708.csv:3480",
+          "similarity": 1.0
+        },
+        {
+          "a": "7884535",
+          "b": "4w_0708.csv:3518",
+          "similarity": 1.0
+        },
+        {
+          "a": "7884535",
+          "b": "4w_0708.csv:3519",
+          "similarity": 1.0
+        },
+        {
+          "a": "7884664",
+          "b": "4w_0708.csv:3605",
+          "similarity": 1.0
+        },
+        {
+          "a": "7884771",
+          "b": "4w_0708.csv:3666",
+          "similarity": 1.0
+        },
+        {
+          "a": "7885015",
+          "b": "4w_0708.csv:3778",
+          "similarity": 1.0
+        },
+        {
+          "a": "7885325",
+          "b": "4w_0708.csv:3960",
+          "similarity": 1.0
+        },
+        {
+          "a": "7885451",
+          "b": "4w_0708.csv:4021",
+          "similarity": 1.0
+        },
+        {
+          "a": "7885645",
+          "b": "4w_0708.csv:4102",
+          "similarity": 1.0
+        },
+        {
+          "a": "7885662",
+          "b": "4w_0708.csv:4111",
+          "similarity": 1.0
+        },
+        {
+          "a": "7885792",
+          "b": "4w_0708.csv:4170",
+          "similarity": 1.0
+        },
+        {
+          "a": "7885909",
+          "b": "4w_0708.csv:4227",
+          "similarity": 1.0
+        },
+        {
+          "a": "7885948",
+          "b": "4w_0708.csv:4249",
+          "similarity": 1.0
+        },
+        {
+          "a": "7886328",
+          "b": "4w_0708.csv:4471",
+          "similarity": 1.0
+        },
+        {
+          "a": "7887069",
+          "b": "4w_0708.csv:4545",
+          "similarity": 0.924915
+        },
+        {
+          "a": "7887495",
+          "b": "4w_0708.csv:4545",
+          "similarity": 0.937716
+        },
+        {
+          "a": "7886652",
+          "b": "4w_0708.csv:4613",
+          "similarity": 1.0
+        },
+        {
+          "a": "7888297",
+          "b": "4w_0708.csv:4690",
+          "similarity": 0.990123
+        },
+        {
+          "a": "7886845",
+          "b": "4w_0708.csv:4692",
+          "similarity": 1.0
+        },
+        {
+          "a": "7887069",
+          "b": "4w_0708.csv:4796",
+          "similarity": 1.0
+        }
+      ],
+      "rows_scanned": 241560
+    },
+    "english_matching_corpus": {
+      "exact_or_norm_hash_overlap": 0,
+      "files": [
+        "data/raw/job-resume-matching/cv.csv",
+        "data/raw/job-resume-matching/job.csv"
+      ],
+      "note": "英文语料与中文评估池语言不同，按规范化哈希比对；英文简历/岗位禁止充当中国大学生就业画像数据",
+      "rows_scanned": 10711
+    },
+    "split_indices": {
+      "data/splits/education/*": "学历切分清单按 record_key/user_hash 组织，交叉检查见 historical_gold 与 edu 语料检查",
+      "data/splits/matching/*": "切分索引只含 pair_index/candidate_id/job_id，指向英文 matches.csv；与中文评估池无文本重合可能"
+    }
+  }
+}

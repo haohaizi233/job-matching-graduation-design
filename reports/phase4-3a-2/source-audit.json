@@ -1,0 +1,84 @@
+{
+  "admission_checklist": [
+    {
+      "item": "来源可追溯",
+      "note": "job-education 有 HF 数据卡（@wangzihaogithub）；具体 repo id 与下载日期本地无证据",
+      "status": "partial"
+    },
+    {
+      "item": "许可明确",
+      "note": "job-education apache-2.0（卡片 front-matter 可核）",
+      "status": "ok"
+    },
+    {
+      "item": "岗位准入字段齐全",
+      "note": "缺失显式 unknown（employer_name/source_url/collection_time 等）",
+      "status": "ok"
+    },
+    {
+      "item": "中文 JD 文本可评估",
+      "note": "150 条候选均含 JD 正文",
+      "status": "ok"
+    },
+    {
+      "item": "PII 检查",
+      "note": "岗位文本导入时经 pii.scrub_record 脱敏",
+      "status": "ok"
+    }
+  ],
+  "created_at": "2026-10-29T11:01:07",
+  "generated_by": "scripts/phase4_3a_2/build_job_candidates.py",
+  "quarantine_list": [
+    {
+      "decision": "quarantine",
+      "item": "other/all_df（251,381 行）",
+      "reason": "来源与许可 UNKNOWN，补齐前不进入正式 Gold 池"
+    },
+    {
+      "decision": "quarantine",
+      "item": "job-resume-matching/cv.csv（9,544 份英文简历）",
+      "reason": "英文简历禁止充当中文就业画像数据；许可状态 unverified"
+    }
+  ],
+  "resume_source_summary": "见 reports/phase4-3a-2/resume-intake-audit.json",
+  "sources": {
+    "job-education/annotated": {
+      "collection_time": "unknown",
+      "decision": "admitted",
+      "license": "apache-2.0",
+      "license_evidence": "data/raw/job-education/README.md front-matter license: apache-2.0",
+      "provenance": "HuggingFace 数据集 job-educational-parser（@wangzihaogithub）",
+      "records_in_pool_v2": 150,
+      "source_url": "unknown",
+      "source_url_note": "HF 具体 repo id 本地无证据（docs/datasets/README.md），不推断编造"
+    },
+    "job-education/default-test": {
+      "collection_time": "unknown",
+      "decision": "admitted",
+      "license": "apache-2.0",
+      "license_evidence": "data/raw/job-education/README.md front-matter license: apache-2.0",
+      "provenance": "同上；default/* 的 assistant 为线上旧系统伪标注",
+      "records_in_pool_v2": 0,
+      "source_url": "unknown",
+      "source_url_note": "HF 具体 repo id 本地无证据（docs/datasets/README.md），不推断编造"
+    },
+    "other/all_df": {
+      "collection_time": "unknown",
+      "decision": "quarantined",
+      "license": "UNKNOWN",
+      "license_evidence": "本地无 README / 许可证证据（docs/datasets/README.md 已登记）",
+      "provenance": "UNKNOWN（本地无证据）",
+      "records_in_pool_v2": 0,
+      "source_url": "unknown",
+      "source_url_note": "HF 具体 repo id 本地无证据（docs/datasets/README.md），不推断编造"
+    },
+    "resume:job-resume-matching/cv": {
+      "decision": "quarantined",
+      "language": "en",
+      "license": "unverified",
+      "license_evidence": "卡片 front-matter license: mit 与正文 License 节不一致（见 docs/datasets/README.md）",
+      "reason": "英文简历禁止充当中国大学生就业画像数据",
+      "usable_for_chinese_eval": false
+    }
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "annotation_status": "pending",
+  "blind_evaluation_status": "blocked",
+  "blocking_reasons": [
+    "annotation_status=pending（双人标注未完成）",
+    "没有任何可判定的人工 Gold 标签",
+    "正式评估集尚未冻结（data/independent_eval/frozen/evalset_v1）"
+  ],
+  "created_at": "2026-10-29T10:22:06",
+  "evaluation_protocol": {
+    "bootstrap": {
+      "n_boot": 1000,
+      "seed": 20261205,
+      "shared_resampling": true,
+      "stability_rule": "有效查询组 < 20 报告 unstable，禁止声明显著优于 Baseline",
+      "unit": "query(resume_id)"
+    },
+    "metrics": [
+      "precision@5",
+      "recall@10",
+      "ndcg@5",
+      "ndcg@10",
+      "mrr",
+      "effective_query_count"
+    ],
+    "min_group_size": 2,
+    "query_unit": "resume_id（同一简历下的岗位为一个查询组）",
+    "relevance_threshold": 1,
+    "unjudgeable_policy": "不计入增益与分母，单独统计"
+  },
+  "formal_evaluation": {
+    "note": "无真实人工 Gold：禁止输出正式性能数值（任务书第十节第 9 条）",
+    "status": "blocked"
+  },
+  "formal_metrics_allowed": false,
+  "frozen_evalset": null,
+  "generated_by": "scripts/phase4_3a/run_eval.py",
+  "gold": {
+    "final_labels": 0,
+    "judgeable": 0,
+    "unjudgeable": 0
+  },
+  "model_applicability": {
+    "caveat": "已归档模型的训练标签是英文代理标签（docs/evaluation-protocol.md 第〇节），其在中文人工 Gold 上的分数只能作参考，不得作为中文真实适配结论",
+    "models": {
+      "embedding_cosine": {
+        "applicable": false,
+        "needs": [
+          "embedding(resume)",
+          "embedding(job)"
+        ],
+        "note": "预计算 embedding 仅覆盖英文 job-resume-matching 数据集，编码器未知（docs/evaluation-protocol.md 第〇节第 4 条）；无法为真实中文 pair 生成同源 embedding",
+        "usable_for_formal_chinese_gold": false
+      },
+      "gradient_boosting": {
+        "applicable": "conditional",
+        "archived_run_dir": "D:\\desktop\\毕业设计\\models\\matching\\gradient_boosting\\candidate_cold\\gradient_boosting-candidate_cold-final-20261028-203750",
+        "loadable": true,
+        "needs": [
+          "同上"
+        ],
+        "note": "同 ridge",
+        "usable_for_formal_chinese_gold": false
+      },
+      "keyword_skill": {
+        "applicable": true,
+        "needs": [
+          "resume_skills",
+          "required_skills"
+        ],
+        "note": "技能重合基线，从 pair 原始字段直接计算",
+        "usable_for_formal_chinese_gold": true
+      },
+      "mlp": {
+        "applicable": "conditional",
+        "archived_run_dir": "D:\\desktop\\毕业设计\\models\\matching\\mlp\\candidate_cold\\mlp-candidate_cold-final-20261028-203750",
+        "loadable": true,
+        "needs": [
+          "同上"
+        ],
+        "note": "同 ridge",
+        "usable_for_formal_chinese_gold": false
+      },
+      "ranknet": {
+        "applicable": "conditional",
+        "archived_run_dir": "D:\\desktop\\毕业设计\\models\\matching\\ranknet\\candidate_cold\\ranknet-candidate_cold-final-20261028-203750",
+        "loadable": true,
+        "needs": [
+          "同上"
+        ],
+        "note": "同 ridge",
+        "usable_for_formal_chinese_gold": false
+      },
+      "ridge": {
+        "applicable": "conditional",
+        "archived_run_dir": "D:\\desktop\\毕业设计\\models\\matching\\ridge\\candidate_cold\\ridge-candidate_cold-final-20261028-203750",
+        "loadable": true,
+        "needs": [
+          "MatchPredictor 白名单原始字段"
+        ],
+        "note": "训练标签为英文代理标签、技能规范化词表为英文；结果只作参考",
+        "usable_for_formal_chinese_gold": false
+      },
+      "tfidf_cosine": {
+        "applicable": true,
+        "needs": [
+          "resume_text",
+          "job_text"
+        ],
+        "note": "字符 n-gram TF-IDF 余弦；IDF 在评估池文本上拟合（无监督，不接触标签）",
+        "usable_for_formal_chinese_gold": true
+      }
+    },
+    "policy": "不允许为了让某个模型参加对比而制造不可获得的线上输入；特征无法从真实 pair 原始字段重建的方法登记为 applicable=false 并显式报错"
+  },
+  "model_selection": {
+    "blind_split": "blind_test",
+    "dev_split": "dev_validation",
+    "final_model_selection_status": "BLOCKED",
+    "note": "不得依据历史伪标签 NDCG 宣布最终生产模型"
+  },
+  "synthetic_demo": {
+    "bootstrap_ndcg@5": {
+      "ci": 0.95,
+      "comparisons": {
+        "tfidf_cosine": {
+          "baseline": "keyword_skill",
+          "ci": 0.95,
+          "ci_high": -0.103337,
+          "ci_low": -0.389533,
+          "interpretation": "significant",
+          "mean_a": 0.760538,
+          "mean_b": 1.0,
+          "mean_diff": -0.239462,
+          "model": "tfidf_cosine",
+          "n_boot": 1000,
+          "p_bootstrap_le_zero": 1.0,
+          "queries": 6,
+          "seed": 20261205,
+          "significant_at_95": true,
+          "unit": "query(candidate_id)"
+        }
+      },
+      "k": 5,
+      "metric": "ndcg",
+      "n_boot": 1000,
+      "queries": 6,
+      "seed": 20261205,
+      "shared_resampling_guarantee": "重采样单位为查询组（resume_id）；bootstrap_diff 的重采样索引由 (排序后的 key 集合, n_boot, seed) 完全决定；本函数强制所有模型 key 集合一致，因此各对比使用同一批重采样组",
+      "stability_note": "有效查询组 6 < 20：统计不稳定，禁止声明显著优于 Baseline",
+      "statistical_stability": "unstable",
+      "status": "ok",
+      "unit": "query(resume_id)"
+    },
+    "formal": false,
+    "label_source": "synthetic_demo",
+    "metrics": {
+      "keyword_skill": {
+        "all": {
+          "mrr@10": 1.0,
+          "mrr@5": 1.0,
+          "ndcg@10": 1.0,
+          "ndcg@5": 1.0,
+          "precision@10": 0.513492,
+          "precision@10_with_zero_rel_groups": 0.385119,
+          "precision@5": 0.8,
+          "precision@5_with_zero_rel_groups": 0.6,
+          "queries_evaluated": 6,
+          "queries_skipped_zero_relevance": 2,
+          "recall@10": 1.0,
+          "recall@5": 0.909722
+        },
+        "binary_relevance_rule": "human relevance >= 1",
+        "effective_query_count": 6,
+        "gain_mode": "human_ordinal_0_1_2",
+        "group_size_distribution": {
+          "max": 12,
+          "mean": 9.375,
+          "median": 8.5,
+          "min": 7,
+          "p25": 7.75,
+          "p75": 12.0
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "label_filter_stats": {
+          "invalid": 0,
+          "judgeable": 75,
+          "unjudgeable": 0,
+          "unlabeled": 0
+        },
+        "label_source": "human_gold",
+        "min_group_size": 2,
+        "precision_denominator": "min(k, group_size)",
+        "queries_evaluated": 6,
+        "queries_size_eq_1": 0,
+        "queries_size_ge_2": 8,
+        "queries_size_ge_min": 8,
+        "queries_skipped_zero_relevance": 2,
+        "queries_total": 8,
+        "relevance_threshold": 1,
+        "size_ge_2": {
+          "mrr@10": 1.0,
+          "mrr@5": 1.0,
+          "ndcg@10": 1.0,
+          "ndcg@5": 1.0,
+          "precision@10": 0.513492,
+          "precision@10_with_zero_rel_groups": 0.385119,
+          "precision@5": 0.8,
+          "precision@5_with_zero_rel_groups": 0.6,
+          "queries_evaluated": 6,
+          "queries_skipped_zero_relevance": 2,
+          "recall@10": 1.0,
+          "recall@5": 0.909722
+        },
+        "size_ge_maxk": {
+          "mrr@10": 1.0,
+          "mrr@5": 1.0,
+          "ndcg@10": 1.0,
+          "ndcg@5": 1.0,
+          "precision@10": 0.566667,
+          "precision@10_with_zero_rel_groups": 0.566667,
+          "precision@5": 0.933333,
+          "precision@5_with_zero_rel_groups": 0.933333,
+          "queries_evaluated": 3,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 1.0,
+          "recall@5": 0.875
+        },
+        "underlying_gain_mode": "score（metrics_ranking 增益口径，传入人工 0/1/2 序数）",
+        "unjudgeable_policy": "excluded_from_gain_and_denominator"
+      },
+      "tfidf_cosine": {
+        "all": {
+          "mrr@10": 0.833333,
+          "mrr@5": 0.833333,
+          "ndcg@10": 0.850056,
+          "ndcg@5": 0.760538,
+          "precision@10": 0.480159,
+          "precision@10_with_zero_rel_groups": 0.360119,
+          "precision@5": 0.6,
+          "precision@5_with_zero_rel_groups": 0.45,
+          "queries_evaluated": 6,
+          "queries_skipped_zero_relevance": 2,
+          "recall@10": 0.958333,
+          "recall@5": 0.726389
+        },
+        "binary_relevance_rule": "human relevance >= 1",
+        "effective_query_count": 6,
+        "gain_mode": "human_ordinal_0_1_2",
+        "group_size_distribution": {
+          "max": 12,
+          "mean": 9.375,
+          "median": 8.5,
+          "min": 7,
+          "p25": 7.75,
+          "p75": 12.0
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "label_filter_stats": {
+          "invalid": 0,
+          "judgeable": 75,
+          "unjudgeable": 0,
+          "unlabeled": 0
+        },
+        "label_source": "human_gold",
+        "min_group_size": 2,
+        "precision_denominator": "min(k, group_size)",
+        "queries_evaluated": 6,
+        "queries_size_eq_1": 0,
+        "queries_size_ge_2": 8,
+        "queries_size_ge_min": 8,
+        "queries_skipped_zero_relevance": 2,
+        "queries_total": 8,
+        "relevance_threshold": 1,
+        "size_ge_2": {
+          "mrr@10": 0.833333,
+          "mrr@5": 0.833333,
+          "ndcg@10": 0.850056,
+          "ndcg@5": 0.760538,
+          "precision@10": 0.480159,
+          "precision@10_with_zero_rel_groups": 0.360119,
+          "precision@5": 0.6,
+          "precision@5_with_zero_rel_groups": 0.45,
+          "queries_evaluated": 6,
+          "queries_skipped_zero_relevance": 2,
+          "recall@10": 0.958333,
+          "recall@5": 0.726389
+        },
+        "size_ge_maxk": {
+          "mrr@10": 0.833333,
+          "mrr@5": 0.833333,
+          "ndcg@10": 0.840599,
+          "ndcg@5": 0.660019,
+          "precision@10": 0.5,
+          "precision@10_with_zero_rel_groups": 0.5,
+          "precision@5": 0.533333,
+          "precision@5_with_zero_rel_groups": 0.533333,
+          "queries_evaluated": 3,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.916667,
+          "recall@5": 0.508333
+        },
+        "underlying_gain_mode": "score（metrics_ranking 增益口径，传入人工 0/1/2 序数）",
+        "unjudgeable_policy": "excluded_from_gain_and_denominator"
+      }
+    },
+    "models": {
+      "keyword_skill": {
+        "status": "ok"
+      },
+      "tfidf_cosine": {
+        "status": "ok"
+      }
+    },
+    "queries": {
+      "groups": 8,
+      "pairs": 75
+    },
+    "recompute_files": {
+      "predictions": "data/independent_eval/demo/predictions.json"
+    },
+    "warning": "合成演示结果：label_source=synthetic_demo，仅验证评估流水线可运行，不是模型性能结论，禁止写入任何正式报告"
+  }
+}

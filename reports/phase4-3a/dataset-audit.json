@@ -1,0 +1,247 @@
+{
+  "all_df_profile": {
+    "columns": [
+      "job_name",
+      "company_name",
+      "job_salary",
+      "work_experience",
+      "educational_requirements",
+      "company_address",
+      "job_type",
+      "scam_probability"
+    ],
+    "license": "UNKNOWN",
+    "license_evidence": "本地无 README / 许可证证据（docs/datasets/README.md 已登记）",
+    "note": "来源与许可 UNKNOWN，且无 JD 正文；补齐授权前不得进入正式评估集",
+    "path": "data/raw/other/all_df.csv/all_df.csv",
+    "rows": 251381,
+    "rows_structured_only": 251381,
+    "rows_with_jd_text": 0,
+    "unique_job_name": 106326
+  },
+  "availability": {
+    "chinese_jobs": {
+      "count_unique_ids": 243124,
+      "rows_with_jd_text": 286902,
+      "status": "available"
+    },
+    "chinese_resumes": {
+      "count": 0,
+      "note": "本地无真实中文简历；英文简历不得充当中国大学生就业画像数据",
+      "status": "GAP"
+    },
+    "english_jobs": {
+      "count_unique_ids": 1167,
+      "note": "来自 Indeed，语言 en",
+      "status": "available"
+    },
+    "english_resumes": {
+      "count": 9544,
+      "note": "仅用于流程验证，禁止进入中文人工真值",
+      "status": "available"
+    },
+    "records_label_only_no_text_evidence": {
+      "all_df_structured_only": 251381,
+      "matches_csv": 122560
+    },
+    "records_missing_source_or_license": {
+      "count": 384652,
+      "detail": {
+        "job-resume-matching (license unverified)": 133271,
+        "other/all_df (license UNKNOWN)": 251381
+      }
+    },
+    "records_with_full_jd_text": 288069,
+    "resume_job_links": {
+      "chinese_links": 0,
+      "english_links": 122560,
+      "note": "matches.csv 全部为正样本代理标签；中文简历-岗位配对需简历导入后生成"
+    }
+  },
+  "capability_audit": {
+    "newly_built": [
+      {
+        "item": "人工标注数据模式与校验",
+        "where": "src/job_matching/annotation/schema.py, importer.py"
+      },
+      {
+        "item": "PII 检测/脱敏/导出检查",
+        "where": "src/job_matching/annotation/pii.py"
+      },
+      {
+        "item": "三级重复检测（完全/规范化/近似）",
+        "where": "src/job_matching/annotation/dedup.py"
+      },
+      {
+        "item": "候选池构建与分层采样",
+        "where": "src/job_matching/annotation/pool.py"
+      },
+      {
+        "item": "双人标注一致性（Kappa/Weighted Kappa）",
+        "where": "src/job_matching/annotation/agreement.py"
+      },
+      {
+        "item": "仲裁与最终标签留痕",
+        "where": "src/job_matching/annotation/arbitration.py"
+      },
+      {
+        "item": "数据集冻结与 SHA-256 复验",
+        "where": "src/job_matching/annotation/freeze.py"
+      },
+      {
+        "item": "人工 Gold 评估口径与护栏",
+        "where": "src/job_matching/independent_eval/"
+      },
+      {
+        "item": "评估集泄漏检查",
+        "where": "scripts/phase4_3a/leakage_check.py"
+      }
+    ],
+    "not_reused_reason": {
+      "existing_annotation_code": "仓库内不存在人工标注/独立评估相关代码（已全仓库检索确认）",
+      "metrics_ranking.precision": "原实现不含 Precision@K，本阶段在 independent_eval/metrics.py 补充并复用其余指标"
+    },
+    "reusable": [
+      {
+        "item": "文本规范化与哈希",
+        "use": "pair content_hash、去重、冻结清单",
+        "where": "src/job_matching/core.py (norm_text/sha256_file/short_hash)"
+      },
+      {
+        "item": "排序指标 NDCG/MRR/Recall + 稳定 tie-breaking",
+        "use": "独立评估指标主体（Precision@K 为本阶段补充）",
+        "where": "src/job_matching/metrics_ranking.py (evaluate_ranking)"
+      },
+      {
+        "item": "查询级配对 Bootstrap",
+        "use": "模型差值 95% CI，共享重采样组",
+        "where": "src/job_matching/evaluation/statistical_tests.py (bootstrap_diff)"
+      },
+      {
+        "item": "模型加载与前向推理",
+        "use": "Ridge/GBDT/MLP/RankNet 在真实 pair 上打分",
+        "where": "src/job_matching/inference/predictor.py (MatchPredictor)"
+      },
+      {
+        "item": "零训练基线打分口径",
+        "use": "对照第三阶段基线口径",
+        "where": "src/job_matching/baseline_ranking.py / evaluation/statistical_tests.local_baseline_scores"
+      },
+      {
+        "item": "学历要求规范化",
+        "use": "岗位学历要求字段解析",
+        "where": "src/job_matching/preprocess_education.py (normalize_label/parse_user_segments)"
+      },
+      {
+        "item": "隐私约束与日志规范",
+        "use": "导出脱敏检查、特征黑名单",
+        "where": "src/job_matching/core.py / policy.py"
+      },
+      {
+        "item": "测试与报告机制",
+        "use": "tests/phase4_3a 沿用同一风格",
+        "where": "tests/*/run_all.py (stdlib unittest + JSON 报告)"
+      }
+    ]
+  },
+  "created_at": "2026-10-29T10:19:32",
+  "data_gaps": [
+    {
+      "current": 0,
+      "impact": "G2 阻断：无法建立真实中文简历-岗位人工评估配对",
+      "item": "经授权脱敏的真实中文简历（目标 30–50 份）"
+    },
+    {
+      "current": 0,
+      "impact": "G2 阻断：blind_evaluation_status=blocked",
+      "item": "真实中文简历-岗位人工标注（目标 300–600 对）"
+    },
+    {
+      "current": "UNKNOWN",
+      "impact": "补齐前不得进入正式评估集",
+      "item": "other/all_df 来源与授权说明"
+    }
+  ],
+  "generated_by": "scripts/phase4_3a/audit_data.py",
+  "job_education_profiles": [
+    {
+      "jd_text_len_max": 7623,
+      "jd_text_len_median": 272,
+      "license": "apache-2.0",
+      "license_evidence": "data/raw/job-education/README.md front-matter",
+      "path": "data/raw/job-education/default/train/19w_0701.csv",
+      "rows": 197574,
+      "rows_human_gold_labels": 0,
+      "rows_language_zh": 195345,
+      "rows_with_jd_text": 196466,
+      "rows_without_jd_text": 1108,
+      "unique_job_id": 197531
+    },
+    {
+      "jd_text_len_max": 6512,
+      "jd_text_len_median": 293,
+      "license": "apache-2.0",
+      "license_evidence": "data/raw/job-education/README.md front-matter",
+      "path": "data/raw/job-education/default/validation/4w_0708.csv",
+      "rows": 45593,
+      "rows_human_gold_labels": 0,
+      "rows_language_zh": 44956,
+      "rows_with_jd_text": 45094,
+      "rows_without_jd_text": 499,
+      "unique_job_id": 45593
+    },
+    {
+      "jd_text_len_max": 6512,
+      "jd_text_len_median": 297,
+      "license": "apache-2.0",
+      "license_evidence": "data/raw/job-education/README.md front-matter",
+      "path": "data/raw/job-education/default/test/2w_0716.csv",
+      "rows": 22730,
+      "rows_human_gold_labels": 0,
+      "rows_language_zh": 22405,
+      "rows_with_jd_text": 22671,
+      "rows_without_jd_text": 59,
+      "unique_job_id": 22730
+    },
+    {
+      "jd_text_len_max": 6512,
+      "jd_text_len_median": 297,
+      "license": "apache-2.0",
+      "license_evidence": "data/raw/job-education/README.md front-matter",
+      "path": "data/raw/job-education/annotated/2w_0716_eval.csv",
+      "rows": 22730,
+      "rows_human_gold_labels": 736,
+      "rows_language_zh": 22405,
+      "rows_with_jd_text": 22671,
+      "rows_without_jd_text": 59,
+      "unique_job_id": 22730
+    }
+  ],
+  "matching_profile": {
+    "jobs_language_en": 1167,
+    "jobs_language_zh": 0,
+    "jobs_rows": 1167,
+    "jobs_unique_id": 1167,
+    "jobs_with_jd_text": 1167,
+    "license": "unverified",
+    "license_evidence": "卡片 front-matter license: mit 与正文 License 节『Please update the dataset license』不一致",
+    "matches_label_distribution": {
+      "medium_positive": 70636,
+      "strong_positive": 774,
+      "weak_positive": 51150
+    },
+    "matches_rows": 122560,
+    "matches_text_evidence": "跨表可回链 cv.csv/job.csv 文本，但记录本身只有评分字段",
+    "matches_unique_candidates": 9532,
+    "matches_unique_jobs": 1164,
+    "path": "data/raw/job-resume-matching",
+    "pii_email_hits_in_resume_text": 0,
+    "pii_mobile_hits_in_resume_text": 0,
+    "resumes_language_en": 9544,
+    "resumes_language_zh": 0,
+    "resumes_rows": 9544,
+    "resumes_unique_id": 9544,
+    "resumes_with_full_text": 9544,
+    "usable_for_chinese_eval": false
+  }
+}

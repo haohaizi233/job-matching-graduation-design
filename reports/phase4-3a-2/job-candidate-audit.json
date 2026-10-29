@@ -1,0 +1,235 @@
+{
+  "adjudication_summary": {
+    "quarantine_from_blind": 150
+  },
+  "admission_fields": [
+    "job_id",
+    "job_title",
+    "employer_name",
+    "job_description",
+    "required_skills",
+    "preferred_skills",
+    "education_requirement",
+    "experience_requirement",
+    "employment_type",
+    "graduation_cohort",
+    "city",
+    "source",
+    "source_url",
+    "source_license",
+    "collection_time",
+    "content_hash"
+  ],
+  "all_df_isolation": {
+    "decision": "quarantine",
+    "fields_available": "job_name/company_name/job_salary/work_experience/educational_requirements/company_address/job_type/scam_probability",
+    "license": "UNKNOWN（本地无 README / 许可证证据，docs/datasets/README.md 已登记）",
+    "reason": "来源与使用许可未确认，禁止进入正式 Gold 池；补齐 license + license_evidence 并经准入检查后方可解隔离",
+    "record_ids_in_pool_v2": [],
+    "records_in_pool_v2": 0,
+    "source": "other/all_df",
+    "source_record_count": "251,381 行（docs/datasets/README.md 登记）"
+  },
+  "blind_eligibility": {
+    "blind_eligible_jobs": 0,
+    "blind_excluded_jobs": 150,
+    "note": "blind_eligible=false 的岗位可用于 dev；进入 blind_test 的配对必须岗位盲测合格"
+  },
+  "candidates_admitted": 150,
+  "candidates_read": 150,
+  "created_at": "2026-10-29T11:01:07",
+  "education_corpus_overlap": {
+    "contamination_by_task": {
+      "education_extraction_models": "训练语料与候选 JD 文本哈希/近似重合的岗位，对学历抽取组件不是零样本；涉及其学历字段输出的评估任务必须剔除重合岗位",
+      "matching_ranking_models": "人岗匹配排序模型训练语料为英文 matches，与中文 JD 无文本重合，无直接文本泄漏（其训练标签为英文代理标签，属口径限制而非泄漏）",
+      "pretraining_contamination": "外部预训练语料不可知，只能声明『未发现已知泄漏』，不能声称绝对无泄漏"
+    },
+    "corpus": "job-education default/train + default/validation（学历抽取模型训练语料）",
+    "jobs_with_hash_overlap": 150,
+    "jobs_with_near_overlap": 150,
+    "scan": {
+      "cache_reused": false,
+      "files_scanned": [
+        "data/raw/job-education/default/train/19w_0701.csv",
+        "data/raw/job-education/default/validation/4w_0708.csv"
+      ],
+      "hash_overlap_rows_total": 250,
+      "near_check_limitation": "近似重复跨语料检查在确定性等距抽样子集上执行（默认 8 万行），可能漏检抽样外近似重复；哈希检查覆盖全量语料",
+      "near_check_reference_limit": 80000,
+      "near_overlap_pairs_total": 255,
+      "rows_scanned": 241560
+    }
+  },
+  "field_completeness": {
+    "explicit_unknown_counts": {
+      "city": 150,
+      "collection_time": 150,
+      "employer_name": 150,
+      "employment_type": 72,
+      "graduation_cohort": 141,
+      "source_url": 150
+    },
+    "policy": "缺失字段显式 unknown，不推断编造；field_sources 登记每个字段的取值口径"
+  },
+  "generated_by": "scripts/phase4_3a_2/build_job_candidates.py",
+  "historical_gold_cross_analysis": {
+    "decisions": [
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7881740",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      },
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7891020",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      },
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7891194",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      },
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7911845",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      },
+      {
+        "decision": "quarantine_from_blind",
+        "job_id": "7926209",
+        "reason": "岗位曾带人工正确结果参与 Phase4-2 规则研究；保留用于 dev_validation，剔除出最终盲测集"
+      }
+    ],
+    "gold_holdout_records": 736,
+    "overlap_job_ids": [
+      "7881740",
+      "7891020",
+      "7891194",
+      "7911845",
+      "7926209"
+    ]
+  },
+  "job_family_distribution": {
+    "algo_ai": 10,
+    "data_analysis": 16,
+    "devops": 2,
+    "java_backend": 5,
+    "non_tech": 70,
+    "other_tech": 35,
+    "python_dev": 7,
+    "software_test": 3,
+    "web_frontend": 2
+  },
+  "job_pool_v2_file": "data/independent_eval/pool/job_pool_v2.jsonl",
+  "near_duplicate_analysis": {
+    "job_level_pairs": [
+      {
+        "a": "7887069",
+        "b": "7887495",
+        "decision": "quarantine_later",
+        "job_titles": [
+          "初中数理化答疑实习生(无销售)",
+          "初中数学答疑讲解实习生(无销售)"
+        ],
+        "keep_job_id": "7887069",
+        "quarantined_job_id": "7887495",
+        "reason": "岗位 JD 近似重复（Jaccard=0.94），保留 7887069、隔离 7887495，避免同 JD 不同 ID 造成配对重复与指标虚高",
+        "similarity": 0.94
+      }
+    ],
+    "pair_level_from_phase4_3a": [
+      {
+        "a": "pair-0f91ff3baa86",
+        "b": "pair-ce425f86bd97",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.912879
+      },
+      {
+        "a": "pair-3c0db36efa0e",
+        "b": "pair-6d23120a9b55",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.97351
+      },
+      {
+        "a": "pair-4853e59e4e02",
+        "b": "pair-e77083cf3fa3",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.908257
+      },
+      {
+        "a": "pair-4d941bb2b660",
+        "b": "pair-4f27fc7d232b",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.952055
+      },
+      {
+        "a": "pair-532df4617607",
+        "b": "pair-5b8b84d214f9",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.978836
+      },
+      {
+        "a": "pair-539fa4b129bb",
+        "b": "pair-6b541305bf1b",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.914209
+      },
+      {
+        "a": "pair-6e7c83b3e17b",
+        "b": "pair-c6806999a9fb",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.901639
+      },
+      {
+        "a": "pair-70327e0442b4",
+        "b": "pair-cb61a17a1e5a",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.983471
+      },
+      {
+        "a": "pair-be43dfc2be90",
+        "b": "pair-e9a28f01ff11",
+        "decision": "quarantine_from_gold",
+        "reason": "配对级近似重复且均位于合成测试配对（is_synthetic=true）：只用于流程验证，绝不进人工真值；真实配对生成时同文本副本按 gold_gate.quarantine_near_duplicates 隔离，不得重复计数",
+        "similarity": 0.980723
+      }
+    ],
+    "policy": "近似重复一律保留首条、隔离其余，禁止同文本重复计数",
+    "threshold": 0.9
+  },
+  "pool_source_file": {
+    "path": "data/independent_eval/pool/job_pool_v1.jsonl",
+    "sha256": "13bf2581e8784041f83b7278ce88a5d94e8902d91a08232e52fba04149d28b81"
+  },
+  "target_family_coverage": {
+    "covered": [
+      "algo_ai",
+      "data_analysis",
+      "devops",
+      "java_backend",
+      "python_dev",
+      "software_test",
+      "web_frontend"
+    ],
+    "gaps": [],
+    "note": "非技术岗位保留作跨类别负例来源（配对多样性），不占技术族配额",
+    "target_families": [
+      "java_backend",
+      "python_dev",
+      "web_frontend",
+      "software_test",
+      "data_analysis",
+      "algo_ai",
+      "devops"
+    ]
+  },
+  "target_range": "100–200 条合规中文 JD"
+}

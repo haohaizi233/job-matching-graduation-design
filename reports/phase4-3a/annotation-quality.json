@@ -1,0 +1,406 @@
+{
+  "agreement": {
+    "annotators": [],
+    "note": "缺少双人标注，一致性指标不可计算；不填充任何数值",
+    "reason": "no_annotations",
+    "status": "not_computable"
+  },
+  "annotation_counts": {
+    "annotator_A": 0,
+    "annotator_B": 0,
+    "pair_pool": 75
+  },
+  "annotation_status": "pending",
+  "created_at": "2026-10-29T10:22:06",
+  "disagreements": {
+    "count": 0,
+    "detail": [],
+    "pairs": []
+  },
+  "generated_by": "scripts/phase4_3a/check_agreement.py",
+  "missing_annotations": {
+    "missing_detail": [
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-003ed34f572b"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-073e0d12147e"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-0bcf3fd45469"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-0da71624d5ee"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-0f91ff3baa86"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-16f870a74533"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-18c5f16d5e11"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-1ac91d0f1eea"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-1be2751bbffc"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-1d5f0d85b245"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-1d7b7bc92cb2"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-22bfdd4964fd"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-256e62b8482a"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-271510ce7e9c"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-2b632d2f2c51"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-2dbae81f4b51"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-308bfba35bb4"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-3c0db36efa0e"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-406d0df0d953"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-4853e59e4e02"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-4948077ad4f5"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-49932f2b200f"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-4d941bb2b660"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-4f27fc7d232b"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-532df4617607"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-539fa4b129bb"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-5a798535fc62"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-5b8b84d214f9"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-6b541305bf1b"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-6bad8df3f0de"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-6d23120a9b55"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-6e7c83b3e17b"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-70327e0442b4"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-7394eb0ec27f"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-7743ec366147"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-77933ae09bf6"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-80c7fc11ea80"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-85bca5d31bbf"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-8fe126e1c0ae"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-95eebf50908f"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-9aebba27d6d1"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-a0300d8dfeae"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-a1409f35e2db"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-a1e8fc7ab6c8"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-a375f03edd8b"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-a6cf9f4b167b"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-a7c73671d9c5"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-a7dc232bef79"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-a7f162e79861"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-aa7b329f1862"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-b1c5f74aaee3"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-b78e5434dbc5"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-bc4c48566bdd"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-be43dfc2be90"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-c36f9616746a"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-c6806999a9fb"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-cb61a17a1e5a"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-ce425f86bd97"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-d959f6fc6506"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-dbfc24635d54"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-dc0804a530e4"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-df5304214755"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-e2fdaec259fe"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-e3db8762d99b"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-e61f4a3197a0"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-e6f1d77bc573"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-e77083cf3fa3"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-e9a28f01ff11"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-e9bbe19444ff"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-ebaba08e5790"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-ecb75e0bfab4"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-ed1410384291"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-f83a72dccc70"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-fb7949c93d43"
+      },
+      {
+        "annotations_received": 0,
+        "annotations_required": 2,
+        "pair_id": "pair-fcc5c72b06a2"
+      }
+    ],
+    "note": "缺失标注只登记不填补；无标注样本不得进入任何指标分母",
+    "pairs_fully_annotated": 0,
+    "pairs_missing_annotations": 75,
+    "pairs_total": 75,
+    "required_annotators": 2
+  },
+  "unjudgeable_policy": "unjudgeable 不参与 Kappa；双方 unjudgeable 计入独立状态统计"
+}
