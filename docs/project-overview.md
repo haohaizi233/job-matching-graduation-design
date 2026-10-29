@@ -15,23 +15,36 @@
 - **智能匹配**：基于语义相似度、技能重合、岗位/类别/经验/学历六维打分做匹配与排序
 - 后续将扩展智能体（Agent）交互与前后端展示
 
-## 二、当前开发状态
+## 二、当前开发状态（统一阶段状态清单）
 
 > 三个概念严格区分：**已执行的工程任务**（代码与产物存在）、**已通过的实验验收**（自动化测试与实验归档通过）、
 > **尚未验证的真实业务有效性**（模型在真实求职语境下的效果，必须靠独立人工评估集验证，见 Phase4-3A）。
+>
+> **本表是全仓唯一的阶段状态清单**，其他文档（README、project-structure、各架构审计）
+> 一律引用本表，不再各自维护完成率/测试数，避免多处口径不一致。
+> 测试数为 2026-10-29 Phase5-1R 整改轮实测；"独立复现"指能否在当前审计环境
+> （Python 3.13.2 / numpy 2.2.6 / scikit-learn 1.8.0 / torch 2.12.0+cpu）独立复跑，
+> 与项目原训练环境（conda `graduation-design`，Python 3.11 + sklearn 1.5.2 + CUDA）严格区分。
 
-| 阶段 | 工程任务 | 实验验收 | 真实业务有效性 | 说明 |
-|---|---|---|---|---|
-| Conda 环境搭建 | ✅ | ✅ | — | `graduation-design`（Python 3.11.18 + torch 2.1.2+cu121 + CUDA 12.1 / RTX 2050 4 GB） |
-| 环境验收 | ✅ | ✅ | — | 8 个测试脚本、104 项检查 + `pip check`，核心项 0 FAIL（见 `reports/environment-acceptance.md`） |
-| 数据集落地与盘点 | ✅ | ✅ | — | 3 个数据源、8 个 CSV、约 613 MB（643,343,224 字节），索引见 `docs/datasets/README.md` |
-| 工作目录工程化整理 | ✅ | ✅ | — | 见 `reports/workspace-reorganization.md` |
-| 数据清洗与特征工程（Phase3） | ✅ | ✅ | ⬜ 未验证 | 产物在 `data/interim/`、`data/processed/`、`data/splits/`；G1–G7 数据质量门禁 74/74 通过（`reports/phase3-acceptance.md`） |
-| 人岗匹配模型训练与评估（Phase4-1） | ✅ | ✅ | ⬜ 未验证 | Ridge / Gradient Boosting / MLP / RankNet；80 项模型验证 + 25 项自动化测试通过（`reports/model-training/`）。⚠ 训练标签来自旧评分系统（`label_strength`/`final_score`），是**代理标签而非人工就业适配真值** |
-| 学历要求规范化（Phase4-2） | ✅ | ✅ | ⬜ 未验证 | 16 组实验、1000 次组级 Bootstrap、模型重载验证、36 项自动化测试通过（`reports/education-training/`）。⚠ 开发集含伪标签噪声；736 条历史 Gold 非全新盲测集 |
-| 独立人工评估体系（Phase4-3A） | ✅ | ✅（工程 G1） | ⬜ 等待人工标注 | 协议、标注工具、泄漏检查、冻结与可信评估流水线（`docs/evaluation/`、`reports/phase4-3a/`）；145 项自动化测试通过。`annotation_status=pending`、`blind_evaluation_status=blocked`（缺真实中文简历与人工标注） |
-| Agent 能力 | ⬜ 未开始 | — | — | 不提前造代码 |
-| 前后端实现 | ⬜ 未开始 | — | — | — |
+| 阶段 | 工程实现 | 自动化测试 | 独立复现 | 真实业务有效性 | 未解决阻断项 |
+|---|---|---|---|---|---|
+| Conda 环境搭建 | ✅ `graduation-design`（Python 3.11.18 + torch 2.1.2+cu121 + CUDA 12.1 / RTX 2050 4 GB） | ✅ | ⚠ 本机无 conda，训练环境未复建 | — | 无 |
+| 环境验收 | ✅ 8 个测试脚本、104 项检查 + `pip check` | ✅ 历史核心项 0 FAIL（`reports/environment-acceptance.md`） | ⚠ 依赖训练环境 | — | `pip check` 在当前共享 Python 环境有三方依赖版本冲突（非项目依赖） |
+| 数据集落地与盘点 | ✅ 3 个数据源、8 个 CSV、约 613 MB | ✅ | — | — | 无（索引见 `docs/datasets/README.md`） |
+| 工作目录工程化整理 | ✅ | ✅ | — | — | 无（见 `reports/workspace-reorganization.md`） |
+| 数据工程（Phase3） | ✅ 产物在 `data/interim/`、`data/processed/`、`data/splits/` | ✅ G1–G7 数据质量门禁 **74/74 PASS**（`reports/data-quality-gates.json`） | ✅ 纯 CPU 可复跑 | ⬜ 未验证 | 无（数据侧） |
+| 人岗匹配模型训练与评估（Phase4-1） | ✅ Ridge / GBM / MLP / RankNet 归档权重零改动 | ✅（训练环境）**25/25 PASS**；⚠ 当前审计环境 **20 PASS + T5 5 项 UNVERIFIED** | ⚠ 部分：T5 独立推理依赖 sklearn 1.5.2 反序列化，1.8.0 下 GBM checkpoint 加载失败（见 `docs/architecture/phase5-1-integration-audit.md` R7） | ⬜ 未验证 | 标签为旧评分系统代理标签，非人工真值；GBM checkpoint 跨 sklearn 版本不可加载（登记为 R7，禁止重训修复） |
+| 学历要求规范化（Phase4-2） | ✅ 16 组实验 + 1000 次组级 Bootstrap 归档 | ✅ **35/36 PASS**；1 项 `pip check` 为当前共享 Python 环境的三方依赖版本冲突（adalflow/f2），非项目代码缺陷 | ✅ 纯 CPU 可复跑（pip check 除外） | ⬜ 未验证 | 开发集含伪标签噪声；736 条历史 Gold 非全新盲测集；`pip check` 环境依赖冲突（登记） |
+| 独立人工评估体系（Phase4-3A） | ✅ 协议、标注工具、泄漏检查、导入、一致性、仲裁、冻结、指标流水线 | ✅ P1–P18 **237/237 PASS**（`reports/phase4-3a/`） | ✅ 纯 CPU 合成夹具可复跑 | ⬜ 等待人工标注 | `annotation_status=pending`；**H2 BLOCKED**（缺真实中文简历与人工 Gold，禁止伪造补齐） |
+| Gold 冻结与标注质量门禁（Phase4-3A-2） | ✅ 冻结 CLI（前置/后置双门禁）、标注 QA、独立性检查、仲裁状态机 | ✅ 工程链路由 Phase5-1R R1/R2 覆盖（含 CLI 正向链路） | ✅ 临时隔离工作区可复跑 | ⬜ 等待人工标注 | 同 Phase4-3A：真实 Gold 未到位；无分歧场景已可合法冻结（工程侧不再阻断） |
+| 业务推理服务（Phase5-1） | ✅ 中文简历/JD 解析、业务画像、Baseline 排序、可解释结果、FastAPI | ✅ S01–S24 **92/92 PASS**（`reports/phase5-1/`） | ✅ 纯 CPU 合成夹具可复跑 | ⬜ 未验证（分数为启发式/研究分，非录用概率） | 中文人岗匹配模型缺失（`future_verified` 仅预留）；服务默认本地开发、无认证（外网部署为上线阻断项） |
+| 工程整改（Phase5-1R） | ✅ F-001–F-009 全部修复 + 二轮审计补漏（姓名 PII 脱敏缺口） | ✅ R1–R6 **151/151 PASS**（`reports/phase5-1r/`） | ✅ 纯 CPU 合成夹具可复跑（`python tests/phase5_1r/run_all.py`） | —（本阶段只做整改，不产生业务结论） | 无 P0/P1 遗留；剩余风险见 `reports/phase5-1r/phase5-1r-acceptance.md` |
+| Agent 能力 | ⬜ 未开始 | — | — | — | 不提前造代码 |
+| 前后端实现 | ⬜ 未开始 | — | — | — | — |
+
+> **H2 口径提示**：Phase5-1R 通过只代表冻结/标注/推理软件流程在工程夹具下可正确运行，
+> **不代表 Phase4-3A 的真实 Gold H2 通过**。H2 维持 BLOCKED，直到真实中文简历、
+> 人工标签与合法盲测集真正完成。
 
 ## 三、快速开始
 
