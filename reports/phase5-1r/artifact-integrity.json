@@ -1,0 +1,2643 @@
+{
+  "generated_by": "scripts/phase5_1r/artifact_integrity.py",
+  "created_at": "2026-10-29T12:30:23",
+  "purpose": "Phase5-1R 差异测试：历史数据/权重/归档指标完整性证据",
+  "data_raw": {
+    "files": 29,
+    "combined_digest": "5d9977611a07ebba84fe6ffb89add08574858d04dbca8d8af357bc88a51305ec",
+    "detail": {
+      "data/raw/job-education/.cache/huggingface/.gitignore": {
+        "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "bytes": 1
+      },
+      "data/raw/job-education/.cache/huggingface/CACHEDIR.TAG": {
+        "sha256": "e8893e2dcb3f4545ef67a0a5b7b769113d38eef1aa61c7c7ba14659b02af955f",
+        "bytes": 195
+      },
+      "data/raw/job-education/.cache/huggingface/download/.gitattributes.metadata": {
+        "sha256": "5f2ce18cfbe3b506d1f48283b4a0352ff6a2772527cb6d8f07ad24313978c4b5",
+        "bytes": 104
+      },
+      "data/raw/job-education/.cache/huggingface/download/annotated/2w_0716_eval.csv.metadata": {
+        "sha256": "f3fe29abd3def9d71b3ac2efe48740eefb5be17d5e2bdae4be08bd92de0b7a34",
+        "bytes": 127
+      },
+      "data/raw/job-education/.cache/huggingface/download/default/test/2w_0716.csv.metadata": {
+        "sha256": "9c91a88f0737cbca634315e943e14e26b60cde85b918551e7f026d6b7edf0165",
+        "bytes": 128
+      },
+      "data/raw/job-education/.cache/huggingface/download/default/train/19w_0701.csv.metadata": {
+        "sha256": "048bfaa82fb8d563901d609e30530463ef9d78e0479e8e689fab8bc0b725490b",
+        "bytes": 128
+      },
+      "data/raw/job-education/.cache/huggingface/download/default/validation/4w_0708.csv.metadata": {
+        "sha256": "46a461d604c1c50e223876618636afdb1d5790a7ea056dfe62a9463eadaa7bc4",
+        "bytes": 128
+      },
+      "data/raw/job-education/.cache/huggingface/download/README.md.metadata": {
+        "sha256": "ca679c9ac88d99e56edbbe0ab06979cd2bf1dbb01c65c4fb2aab1e22700692fc",
+        "bytes": 104
+      },
+      "data/raw/job-education/.cache/huggingface/trees/da1d0e3b2dc4ccd5b6315468f830a14f04b3e382.json": {
+        "sha256": "d16048b0315a4cc4b453df51f68b9ca3a0b17dab2ca9c21cb492205bb73c850b",
+        "bytes": 1520
+      },
+      "data/raw/job-education/.gitattributes": {
+        "sha256": "7c5d1bedee5187bcc4e0b22bd6e870b9689c9f8fdc9a57be4ec929bc125604b0",
+        "bytes": 2503
+      },
+      "data/raw/job-education/annotated/2w_0716_eval.csv": {
+        "sha256": "b831ff788c44d86fdc28f4675593be5e9c0ab3cb5ee39a5a6aa0fc4feec437f2",
+        "bytes": 30251826
+      },
+      "data/raw/job-education/default/test/2w_0716.csv": {
+        "sha256": "8a3be09a319a5b644b482054773252efbbc664852582d33c53cbf7b1cbeea39c",
+        "bytes": 30340189
+      },
+      "data/raw/job-education/default/train/19w_0701.csv": {
+        "sha256": "c9daaed533f8aa72600ad24c9f4ef3227f2a42bacc63dfeac4418ec04d41d98a",
+        "bytes": 250645425
+      },
+      "data/raw/job-education/default/validation/4w_0708.csv": {
+        "sha256": "f5b7c9b056e804d28076359da8d04b189f24b0da323e8c2bbf12704714295829",
+        "bytes": 60517865
+      },
+      "data/raw/job-education/README.md": {
+        "sha256": "3b0ef7e2bfd87e786bb0eeb9729dee66d0fb738e04edcd200d1a1062a1a17e22",
+        "bytes": 1016
+      },
+      "data/raw/job-resume-matching/.cache/huggingface/.gitignore": {
+        "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1",
+        "bytes": 1
+      },
+      "data/raw/job-resume-matching/.cache/huggingface/CACHEDIR.TAG": {
+        "sha256": "e8893e2dcb3f4545ef67a0a5b7b769113d38eef1aa61c7c7ba14659b02af955f",
+        "bytes": 195
+      },
+      "data/raw/job-resume-matching/.cache/huggingface/download/.gitattributes.metadata": {
+        "sha256": "3bc03dc00bc1612afdb2fe34061abc3a1a6f948331fcc55f038f3eb054ae7f75",
+        "bytes": 103
+      },
+      "data/raw/job-resume-matching/.cache/huggingface/download/cv.csv.metadata": {
+        "sha256": "7ceaebb959f25c948d7eadcb909980874f580fb5add1d1bee5c18c0802d5eeff",
+        "bytes": 127
+      },
+      "data/raw/job-resume-matching/.cache/huggingface/download/job.csv.metadata": {
+        "sha256": "c5f38fc56091d878598fd24a98437ffe872ec51430b5c9b81e38778e419c0e75",
+        "bytes": 128
+      },
+      "data/raw/job-resume-matching/.cache/huggingface/download/matches.csv.metadata": {
+        "sha256": "0add0855ad360253fe70b46a3cd0ba98be26b49e65a9303b13a6cbb2d851a710",
+        "bytes": 127
+      },
+      "data/raw/job-resume-matching/.cache/huggingface/download/README.md.metadata": {
+        "sha256": "3847044e6f67cbf686900b198385d8c449e31af1f34e2654e6bd29050f7339ae",
+        "bytes": 103
+      },
+      "data/raw/job-resume-matching/.cache/huggingface/trees/6186dded39f983b96a1a2eb4d1ecf365a90a46f9.json": {
+        "sha256": "e887ec2a48934a7cabb484f1b020279c76b76144f0b657f63398a10912747758",
+        "bytes": 1147
+      },
+      "data/raw/job-resume-matching/.gitattributes": {
+        "sha256": "8112ea19544538569a4d8ec93cfd0b9cec8a7321c46f135298a987f5ed4f410a",
+        "bytes": 2639
+      },
+      "data/raw/job-resume-matching/cv.csv": {
+        "sha256": "67c81a4761516113dbebcd8c6acc1b692c4b20e54341187ff864d2d637099640",
+        "bytes": 194020617
+      },
+      "data/raw/job-resume-matching/job.csv": {
+        "sha256": "301a382ebec72d574817cc3d4b9ee34cf08e7f8ecdfa3d373142767fe4f9f789",
+        "bytes": 32930476
+      },
+      "data/raw/job-resume-matching/matches.csv": {
+        "sha256": "4ae60b5b134146235148557268c5e04f1fc5e7579b73c4ab59cb01073bce3338",
+        "bytes": 19704065
+      },
+      "data/raw/job-resume-matching/README.md": {
+        "sha256": "5f0bece48a666e722f9780d349de60a6242297c46a2e78c83e4206dfc3852a2f",
+        "bytes": 9935
+      },
+      "data/raw/other/all_df.csv/all_df.csv": {
+        "sha256": "1375b216c20743f571ff8bd9ff654f5cfe82dd0304f0b3d763ecc62acb41ef5f",
+        "bytes": 24912302
+      }
+    }
+  },
+  "models": {
+    "files": 361,
+    "combined_digest": "97ad9e7bbf165b97f44ed09646628473d48bad548935489716f35767646d2d4c",
+    "manifest_verification": [
+      {
+        "manifest": "models/education/charcnn/charcnn-final-20261028-212510/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/charcnn/charcnn-final-balanced-20261028-212534/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/charcnn/charcnn-final-confw-20261028-221032/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/charcnn/charcnn-final-highconf-20261028-221117/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/charcnn/charcnn-final-holdout-20261028-212622/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/charcnn/charcnn-final-vloss-20261028-213415/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/tfidf/tfidf-final-20261028-212254/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/tfidf/tfidf-final-balanced-20261028-212312/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/tfidf/tfidf-final-confw-20261028-220908/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/tfidf/tfidf-final-highconf-20261028-221021/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/tfidf/tfidf-final-holdout-20261028-212556/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/tfidf/tfidf-final-title-20261028-212332/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845/manifest.json",
+        "readable": true,
+        "artifact_checks": [],
+        "all_match": null
+      },
+      {
+        "manifest": "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "37d590d97976b8df6246b42d39d9e82f9a04c04b82d2f775a9b652896e862389"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "9bd0b391aa95d5c581714efee7ffd7d1fd5d312d6c7a92c604169906138a0569"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "3bdfe2e6a16cba3dfc34aa9fdae4fce3fd730182afe286d07dbcc35ad9cfd8a7"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "1810ff896bb74e9c13e212a72be6e65a616448760d7926a60ba918df42422b54"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "80cdf46109c597f5483ddb7dfeb564d8b40e8bdb4514e7d03e03d70f62757f26"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "3202cb12c643c5b39cc06151671956227a2309a5e685332f6037d13645debb4f"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "47717dadc18c93f1d76bab798032f0092209e001f8d035f47256266ff4abf368"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/gradient_boosting/candidate_cold/smoke-gb-002/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "80cdf46109c597f5483ddb7dfeb564d8b40e8bdb4514e7d03e03d70f62757f26"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "3202cb12c643c5b39cc06151671956227a2309a5e685332f6037d13645debb4f"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "47717dadc18c93f1d76bab798032f0092209e001f8d035f47256266ff4abf368"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "37d590d97976b8df6246b42d39d9e82f9a04c04b82d2f775a9b652896e862389"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "c7913c8d78208b5d97d139e99c663e5ca99f342092668ec42f57cb6b2e173ee7"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "1147bac8fee417bf9f065fab4dd53e4fa62dc2b96c9a4efe5181fe683fa2cc76"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "68ec3e62c68067c2c662956485f93cbdd3abd2370afd0b8b753aebdb811d7313"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "37d590d97976b8df6246b42d39d9e82f9a04c04b82d2f775a9b652896e862389"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "87eadab455e85e2a1602e9b1023907983105ce4343baf44a4b574f09abbc8cdf"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "517127a1648053bb5bc4a96be9c3c5506c414d6a7f778bdebfc15efb06d9a2d0"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "450e1a4bb9e9a082c00b11da5fe08d24957b806feb01123d4420f795f3638c18"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "3699dff24a315df46b1c6d13306f8563f37890bec151db23576bf2dfe1e0f44e"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "bd9db0913985244e65ca4defa96748cb59586424726b06d5fc9dae2f540f3698"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "9bd0b391aa95d5c581714efee7ffd7d1fd5d312d6c7a92c604169906138a0569"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "167851439a002985ab22eb7b86533deb9d092b36a1c7c65a9d5f86112cdb4d27"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "4f231e5c7d9fa71b694cb95a486cd05e624619f4a3e0fda1bc052b561ae7ce0a"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "ea8b2e6208128fb1aacfd188be76cae11cf813f97034ccfbd7a70b6acc04ae4f"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "343645350ea9d435a67011f15b11a5395b437a50db5a982801a4b299ea90c368"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "0a59fcff7349eb43ba08225648af7da9c660af82ce93d526453806e710a991e7"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "2b29280a90e7f66abe3397a42abae0ed0b7ae50b8c6ae8a38124f12b2323db44"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "09006598c330a8fb2de673b819925e5a545434a192e2bee101cab26906301b6d"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "2e1df7d895d905e2fe9c2bf2531dfc80e418b222ec4d23a6e7842e785b37e541"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "2beba372535b65bed07d2bfa40c46f87c4dc16a6262a3f0f6495a5592f4dfcd2"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/mlp/candidate_cold/smoke-mlp-001/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "343645350ea9d435a67011f15b11a5395b437a50db5a982801a4b299ea90c368"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "0a59fcff7349eb43ba08225648af7da9c660af82ce93d526453806e710a991e7"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "2b29280a90e7f66abe3397a42abae0ed0b7ae50b8c6ae8a38124f12b2323db44"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "db22a826473361f044ddf79ab54f5b420c5d564c3c116a8d31a25dcef24d51da"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "8c98fb22e0e0001db47db35aa66d6d0858346a56583b4a92394aae6a7762dcfb"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "2beba372535b65bed07d2bfa40c46f87c4dc16a6262a3f0f6495a5592f4dfcd2"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "66ef7831c7798da291a6ae15c826b6b3b2e2b243235f04763537d294d21b0f32"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "895dd5fbc44cc86ededdac13880a4e87c3d4437d9eae820d10a184daff4e500d"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "bd9db0913985244e65ca4defa96748cb59586424726b06d5fc9dae2f540f3698"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "c7913c8d78208b5d97d139e99c663e5ca99f342092668ec42f57cb6b2e173ee7"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "c1af679612c9a2bd0b7db7c2e1b6f8b290d9eae9dea2b53cb4bb49980880eded"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "bc920915f67ae845b543a9e4b2596a154028b3fde4ab7810404aea3f28d76326"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "3a90bc79ed434b172445bfe32a778b61ac44b66c8f0ccf1eb2c5f85a6131a7f8"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "20eef2a4ca4bae0c34de85afc6c5cc807e80de6a06106fb0dabac571fa7e838b"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "dd00dee7655674b0df194c61e50f37a483748411699dd7b407a33ccb227fcebd"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "bd9db0913985244e65ca4defa96748cb59586424726b06d5fc9dae2f540f3698"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "5395c1d1be5be7f27af68e00d3b0d14f20a639b15cd0367389f09fd3ee3ed934"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "1df436b9f44a0aab2018d4a070f051ad308ba34253f419e9ad4d95e96e5191be"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "c76f4eae9f5f8e917412f9f530282659c1a1790c82d09ba3be80cde004cd5d6a"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "c74899fd725423cd06bf4a9afee77a12cffdd38432f7c00cb889be4b28190d29"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "b04da1e4990d7ef45dbbfda7211734731d46c9606486dd063a8840bcb14d2020"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "0eab87e7e013432b60a64428e6cd782497f4f78bdc86724d2a8aab229f0dc0b9"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "a2ec7b995da1f859b7cfe9a7f48d80230e63bfb7a78e89aa51cc488d906c0c90"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "192aef5e46c3801da073230cada9b636dafeb2ecfac00b11f28acbd0a9c2a0d1"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "f7ad50846202e041c070c9b02c1ce6bcc91d048883c8b9c5ecdeaf9edc114c59"
+          },
+          {
+            "artifact": "pair_stats.json",
+            "status": "match",
+            "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "7728bbc1f2fc94a587d94c2d0f9ed694a8232916dd4ee25b58cbe464275cb6d5"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "385e08457365ee2c206910798499fc569a5560f08f91e16eadd9e96f7c2e39c5"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "86187300fdbf65fc20bf8cce62c5c95bb5be9a1c12116ee8aae8b52620a2c150"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "d4dbe0f8ec3bce144a934391701dd0e2bb1504b360c8b1587912f1ad332c4600"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "a4eb15e83aeb161d8536649a4208fab7afdeb3c6dd2a020a20c5beca03510621"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "eeafc326100e718438dacb5a764bdd9d5695e20e09d231e14a48a09dc423b0eb"
+          },
+          {
+            "artifact": "pair_stats.json",
+            "status": "match",
+            "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "01e5bfce81be17d58cb6df553086669de191e4e309049903d2b66f37c765fe3a"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "b4fb54b7fbf8699ee5157eedec06f8c9b01d02e7ee4e8925518799d22a89c2d2"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "9cb3dd2f35a1b1d52c2379720ea73abba9caa6ed429a5aefaad587eb1be59bf5"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "ea16fb9e581e4fcbf3688f2b4615dc6c99f7a2b82e842df8a5d01219892ef87d"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "f3416b1aa0c20fc7fb3ce61b68ada8540a52e1cc8deda629d4cc8ee40bda6ae1"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "4be0bcc156a1cd70d8a15fc2d4d9652bdc1b0f94d0c6bea5ad96f74edf82a960"
+          },
+          {
+            "artifact": "pair_stats.json",
+            "status": "match",
+            "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "4083af92047670006c1380df3ddad47d58c126ce535df6b373f10610b83f8d65"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "1ec5f9829a90247457fa3b9484e5540e23dba21e3130a47019771a40d55e75b2"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "9bd0b391aa95d5c581714efee7ffd7d1fd5d312d6c7a92c604169906138a0569"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "ced37c0cd17e8b159a566ecbc0e334cada5c01c17c6012a916cfeb5f43ce7a6c"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "813d780494fffbbb20aaa543db8a78ad60601410a348ed5b08545c7d9eb34d45"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "5e6841b8d450542392dd991128fdacc65acd0d34cfe5f0f12c72a75614d30aaa"
+          },
+          {
+            "artifact": "pair_stats.json",
+            "status": "match",
+            "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "7e4c73842e9c960bdf2b13614442cacb86b02a8b1a770fd05b5439d142cd2ce4"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "86f7457ce3c004a1a162a0690934a2a86405076d696b577f1b0f442b406fa0ba"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "540362de52d89275e0c56d716906684484e9f877fcb792cdb6f553a4341c7f96"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "0ed3d018ea14be636ed0468c7e56a1c8a7aadedd7ca82f9e9c70f494b90b7d3f"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "1829e1c44a8f93b8951a7f0dd5c1d0ddebfddcf932ee2aa556e67f2ea273c467"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "974339450a2af546ae75316083dcb96381b1db3f15116d364318cfd6153030fa"
+          },
+          {
+            "artifact": "pair_stats.json",
+            "status": "match",
+            "sha256": "3a6e2613bc86939cf62c3a74ed8594cbba43511c6e35ea5a4eef7e0e934b442b"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ranknet/candidate_cold/smoke-ranknet-002/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "7e4c73842e9c960bdf2b13614442cacb86b02a8b1a770fd05b5439d142cd2ce4"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "86f7457ce3c004a1a162a0690934a2a86405076d696b577f1b0f442b406fa0ba"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "540362de52d89275e0c56d716906684484e9f877fcb792cdb6f553a4341c7f96"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "ee1af7b32cea2a33c93b13fb067e98eba8667eb7b6fc17fca9001493bbcd58b4"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "b502fbba0de788e538b63532746c2259342a69c70e3d376dff85927102f96f8b"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "974339450a2af546ae75316083dcb96381b1db3f15116d364318cfd6153030fa"
+          },
+          {
+            "artifact": "pair_stats.json",
+            "status": "match",
+            "sha256": "3a6e2613bc86939cf62c3a74ed8594cbba43511c6e35ea5a4eef7e0e934b442b"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "527d6282f19407f83eb13112b244e430ff833e8d3c4b2e90cf8a83a294057d31"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "0405614525e25c8df4c3da6ceeb762a84dde778df7b781a20f25c7f3333d7abd"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "c7913c8d78208b5d97d139e99c663e5ca99f342092668ec42f57cb6b2e173ee7"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "83cd5f5368973ced581a55b5e89edce237f6544ac3c0f441884ec536b6315395"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "5df7a913affd4f528f498d013421712fda0754e88183f787baffbbe522c84145"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "0c469bd681a94a05996b2dd205799f2c4ab9c1da0b5aaa40dd8ac1bc9257c1d3"
+          },
+          {
+            "artifact": "pair_stats.json",
+            "status": "match",
+            "sha256": "06893a889893519e2930ac686de236ccc715fe93d2c7853b38f82cb041000c6d"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "checkpoint_best.pt",
+            "status": "match",
+            "sha256": "f29476db833e21979069595680455b5c7d8f6f3ed952587439b34ffeb14d2fd5"
+          },
+          {
+            "artifact": "checkpoint_search_0.pt",
+            "status": "match",
+            "sha256": "d02d3d398823736f7c205b829c447af08c2903d25492ffaf6b9f5916c2d5b596"
+          },
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1"
+          },
+          {
+            "artifact": "history.json",
+            "status": "match",
+            "sha256": "9f7bf468ab46bd878fe745e9c3225f2c8eca5c7a6cd93af7296907033dd3234f"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "156c07c5248ef415817f27acf99d86aedcf4a4822d6c9be1a062f2989761a674"
+          },
+          {
+            "artifact": "model.pt",
+            "status": "match",
+            "sha256": "77b1ac699ed8363f4b65b6ecc59db1a634d0436f3747552521a959717d35cfc1"
+          },
+          {
+            "artifact": "pair_stats.json",
+            "status": "match",
+            "sha256": "40e3b90005a622fccf258052e8547f1b6779ff9b39a79303b522facfb6250dbf"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "0eab87e7e013432b60a64428e6cd782497f4f78bdc86724d2a8aab229f0dc0b9"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "9825ecb1006b845121aa37fa91c6d1a633b5c0e7749feaef53780fd14209f7b0"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "28753dc15211a57ee16db51c76b9ae00f24e6c151f97bb1067c58ffc62ce9878"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "86187300fdbf65fc20bf8cce62c5c95bb5be9a1c12116ee8aae8b52620a2c150"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "c4d0832fe2f9c387ef0caaa3f53f0f7d767b684da0880172a93912c498a6a496"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "e8e66f61290d53087d1467c8382646cf525c912c87904e421be1bd0e475204d4"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "9cb3dd2f35a1b1d52c2379720ea73abba9caa6ed429a5aefaad587eb1be59bf5"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "13ff7f5ae1ba76fbe43ee7908ffd7d6c348f1a48955951e90f9657394605765f"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "032309d2a85a192461e64c5e5d19b61420bb6a84655f73c5cc9aabeb7cc2fb01"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "9bd0b391aa95d5c581714efee7ffd7d1fd5d312d6c7a92c604169906138a0569"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "e221be9b019c9602814e9ba34ab41e366de6d428b01520ab3f362a4528e2711b"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "a61559290f82be0cc2e97d6ed44356c3e17f26b3a76e5bcedb1fb350e81f0691"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "31f72addc343e0ad5ac79ffd5a20c59adc15f84d904b2f775538b534db570a35"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "553dc61a8a17cca6abab740a3d0b11cba1e8b6594e2a890a28d78b25e85a3a9c"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "21ad1f5522373a0ddc7c5ced4bdec736c898d622ecaded0f55bb7737d45ff590"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ridge/candidate_cold/smoke-ridge-001/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a2cebefaae808dd4ede85cacdd0a727912475b283a17d420847f243e7237d07c"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "553dc61a8a17cca6abab740a3d0b11cba1e8b6594e2a890a28d78b25e85a3a9c"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "77c4c62ea86a0b5ebcb45d8d2cf56e547b84084f0268b9303350cc17aaba2458"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "c7913c8d78208b5d97d139e99c663e5ca99f342092668ec42f57cb6b2e173ee7"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "11862af8142bb98ee6ab16d936971ab79433e3c946495f968eaa05a19d17359a"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "ccec869a6e168aef3345f2e52718527b3f8c01f9130d08c4bbb441174eff2fb2"
+          }
+        ],
+        "all_match": true
+      },
+      {
+        "manifest": "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/manifest.json",
+        "readable": true,
+        "artifact_checks": [
+          {
+            "artifact": "config.json",
+            "status": "match",
+            "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289"
+          },
+          {
+            "artifact": "feature_map.json",
+            "status": "match",
+            "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1"
+          },
+          {
+            "artifact": "metrics.json",
+            "status": "match",
+            "sha256": "076513b00ec81c1e1d52d7c34ef422e730da7c8700c1abb3635d8d71ae7953e8"
+          },
+          {
+            "artifact": "model.pkl",
+            "status": "match",
+            "sha256": "e196581320a8699067331801bc871e62f06bc70a2f2fcf9a9eccc3075b88be26"
+          }
+        ],
+        "all_match": true
+      }
+    ],
+    "detail": {
+      "models/education/charcnn/charcnn-final-20261028-212510/checkpoint_best.pt": {
+        "sha256": "7f0ac44fd29c056879afdb9868cc4fce280a2a89e29b03dc51f1c6da549e5267",
+        "bytes": 38988
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/config.json": {
+        "sha256": "75eb6aafb34b94545904105278fba4e038ad4acd4b1d3c4b2d5cac87e38f1f01",
+        "bytes": 1812
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/evaluation.json": {
+        "sha256": "bf090c1d501a0ec1d836f27409adf0c5ff55d6026eb59ca6caf716750001a185",
+        "bytes": 42620
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/feature_map.json": {
+        "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/history.json": {
+        "sha256": "93891b0811c62a45badf8a418139f2790d9d629e557f81afdf93113cc7bd5c93",
+        "bytes": 1390
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/manifest.json": {
+        "sha256": "52fb2092750a9d7f22cd3e87ab93820d2841c5f8f4c25da188d6f6e1e4428c93",
+        "bytes": 5415
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/metrics.json": {
+        "sha256": "66e3f87518fdc1ec85d26abec9328315054f86cd492830a65bcbf0453326ac8b",
+        "bytes": 10649
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/model.pt": {
+        "sha256": "cca6d3c4c15d3cb827188c65d5bcbf48fd3421aa10df906817e1fc05f07d2177",
+        "bytes": 39052
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/thresholds.json": {
+        "sha256": "efb521667f7705331f6d16e4739734e7a15f57f0897940be039afc0c28821996",
+        "bytes": 628
+      },
+      "models/education/charcnn/charcnn-final-20261028-212510/tokenizer.json": {
+        "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27",
+        "bytes": 1118
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/checkpoint_best.pt": {
+        "sha256": "4eb190b845dc424e90b35873d303daca89ab5739f85026ff8542895fe43fdf30",
+        "bytes": 38988
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/config.json": {
+        "sha256": "75eb6aafb34b94545904105278fba4e038ad4acd4b1d3c4b2d5cac87e38f1f01",
+        "bytes": 1812
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/evaluation.json": {
+        "sha256": "4f9a61df10f527452643e91fb78073068fe9b6f39cbd9535afcb4db5451bfd03",
+        "bytes": 42627
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/feature_map.json": {
+        "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/history.json": {
+        "sha256": "112080c002ba45ec5c4958f7afc7b2aa9e3164ee756760f6b18e641b83ef9231",
+        "bytes": 1389
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/manifest.json": {
+        "sha256": "0779c57c792474a7745ad7e425591a1961f7205138afdbfa8b5496a02477ee1e",
+        "bytes": 5446
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/metrics.json": {
+        "sha256": "c98ef68b171ac990d9dcdc4a176109490c734b3dd84c2a6b46ea90ba0d36e902",
+        "bytes": 10636
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/model.pt": {
+        "sha256": "98dc032de92bc856d567cf8599b0aecc94677e9ccd3c9aa8f426389020cbb259",
+        "bytes": 39052
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/thresholds.json": {
+        "sha256": "475baec04bf6cdd030be7b345b1dbb8b916e3c0beb5ffc53b8e8e50a1cc58741",
+        "bytes": 633
+      },
+      "models/education/charcnn/charcnn-final-balanced-20261028-212534/tokenizer.json": {
+        "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27",
+        "bytes": 1118
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/checkpoint_best.pt": {
+        "sha256": "2b870ecf947ad2c58ced51e2516c33ea758a33738add0ad4a49f77399bc4152c",
+        "bytes": 38988
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/config.json": {
+        "sha256": "291008ad0cec8ef5a686e7a59c728ba404ed77b53b81bc0e4c9e4565ababaa0c",
+        "bytes": 1917
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/evaluation.json": {
+        "sha256": "e65900c581214fe563f30b8a49f36a74df450d9544126c2c8ef685a34fd08627",
+        "bytes": 42617
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/feature_map.json": {
+        "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/history.json": {
+        "sha256": "eb703abf11e7d5c5bef72fa693dadfcef5c3bc0f269a4ed1cf42a47535e0bbda",
+        "bytes": 2015
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/manifest.json": {
+        "sha256": "096eafacc02290538bc0c68bf9d1d32220a260bb6cb9da3057c657a60d7ea4dc",
+        "bytes": 6105
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/metrics.json": {
+        "sha256": "01be0dc72ec411bc2e30d5d1059de3f69bd49ff6dffa0fc0c7fff4c5ebfa0273",
+        "bytes": 10614
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/model.pt": {
+        "sha256": "dadf0ddd545cc4417afee6497b82e079db32cfce38452b776e85d263d3264846",
+        "bytes": 39052
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/thresholds.json": {
+        "sha256": "5387086ea0e41527cdfbc8ce88ad1c30f2b595a735da48bb564cf2464af2399a",
+        "bytes": 630
+      },
+      "models/education/charcnn/charcnn-final-confw-20261028-221032/tokenizer.json": {
+        "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27",
+        "bytes": 1118
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/checkpoint_best.pt": {
+        "sha256": "5438366bad117a4ead36cd97d0ea29126ed4e2b819da6d0a9928119064750b4f",
+        "bytes": 38604
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/config.json": {
+        "sha256": "291008ad0cec8ef5a686e7a59c728ba404ed77b53b81bc0e4c9e4565ababaa0c",
+        "bytes": 1917
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/evaluation.json": {
+        "sha256": "c8983f61337649023cd9f5a69dc058e358fcbe9c8889d19b6683485aa1f48395",
+        "bytes": 42642
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/feature_map.json": {
+        "sha256": "e074b9d6803f3071279c70182f57fcb559f118ef14d570822682ec2f635c321b",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/history.json": {
+        "sha256": "f94f5d6c9373426c68f2a03d26cbf39a86aee82391cdf39ceea141e1d1971971",
+        "bytes": 5910
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/manifest.json": {
+        "sha256": "ac1b5ea43c8979374e782e7663885658ffa9dcec3b34109de91f391c0f20b3cc",
+        "bytes": 10018
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/metrics.json": {
+        "sha256": "b414c51a4c8115f972bc615890e6780fdb0c0a637a0671a9c571381713253113",
+        "bytes": 10622
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/model.pt": {
+        "sha256": "6b94d2e9911612b72722c3ebac99f3ad239b6cbac1edc2a1757284baa6997aa3",
+        "bytes": 38668
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/thresholds.json": {
+        "sha256": "9d92370b433e9eed79db81b9f9abd89f31edf746d8b710f42fb55e4e30b3f1d1",
+        "bytes": 628
+      },
+      "models/education/charcnn/charcnn-final-highconf-20261028-221117/tokenizer.json": {
+        "sha256": "52ba9087ad83b6549cd7f710d106e7947f67f5988e6c4c2b66e34d77f758f45a",
+        "bytes": 1076
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/checkpoint_best.pt": {
+        "sha256": "b8b0d93e5e51e4125f59f7a6738a50e62b4cb234d3f92736baf31f53d678ebea",
+        "bytes": 38604
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/config.json": {
+        "sha256": "75eb6aafb34b94545904105278fba4e038ad4acd4b1d3c4b2d5cac87e38f1f01",
+        "bytes": 1812
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/evaluation.json": {
+        "sha256": "f224afe86576cb7701b553de5db4ef1b67907049117d1723334ee5e5740cff38",
+        "bytes": 55931
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/feature_map.json": {
+        "sha256": "e074b9d6803f3071279c70182f57fcb559f118ef14d570822682ec2f635c321b",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/history.json": {
+        "sha256": "680706c12630fcdb8c3619e2234f03d3553779adf9d9ebac356c407019df1ae7",
+        "bytes": 2500
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/manifest.json": {
+        "sha256": "777e61168371fa4dba8c80db173657142db0057e4e2f020e6a561dbbf356d06c",
+        "bytes": 7151
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/metrics.json": {
+        "sha256": "144d81cab412d9afe641eab6a6a70f4895faa16e50fdc7e7e0c0641e46c48c6c",
+        "bytes": 15885
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/model.pt": {
+        "sha256": "39ef505ff16a5d6b8c1563cf915e583ad2919f005c5e313352f7519271b9b6c9",
+        "bytes": 38668
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/thresholds.json": {
+        "sha256": "b31db656e21ca1617ff081c88a508aef3cbba8a62bdcd4303bc245edd5256f09",
+        "bytes": 638
+      },
+      "models/education/charcnn/charcnn-final-holdout-20261028-212622/tokenizer.json": {
+        "sha256": "739817651e32a5ed1b9e9fc575f48a67e1922945a35be2f5fc6c4e4e4f45d2f1",
+        "bytes": 1076
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/checkpoint_best.pt": {
+        "sha256": "ee7f37febb01e5627a5d403f972dba97b8f539e3cee087a439574a8f7abac5fb",
+        "bytes": 38604
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/config.json": {
+        "sha256": "1befb038456ece6e9027733b72b88714f16086ff48b94d7de03d4f800acf7090",
+        "bytes": 1834
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/evaluation.json": {
+        "sha256": "12914e95b4b47c8807bf97f925700f0ca7109b5f47f6cea7c3aadbd75621980c",
+        "bytes": 55941
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/feature_map.json": {
+        "sha256": "e074b9d6803f3071279c70182f57fcb559f118ef14d570822682ec2f635c321b",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/history.json": {
+        "sha256": "bb20ac8fdbe29655dc2e012bc79c7f7e8464126acdc1394ac6fd1c4b4fd42b82",
+        "bytes": 2948
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/manifest.json": {
+        "sha256": "da6f3d8336dcfa7c999f247bd94649235378ddd647d426619122eaff226a7204",
+        "bytes": 7611
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/metrics.json": {
+        "sha256": "001742c0815b5e28fe5a0f32a86f39878b05f2dcddf8247fbdeb1bbff3cfd54d",
+        "bytes": 15874
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/model.pt": {
+        "sha256": "0640e786c6ad79f83b1ec8cb324de75c70bbc7ee4f9f2a4a3ec13a129d7580f4",
+        "bytes": 38732
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/thresholds.json": {
+        "sha256": "a2dab1d29ee926e39c40026faef03b54867f3f1bf028e690ea0bd875beb5b7dd",
+        "bytes": 638
+      },
+      "models/education/charcnn/charcnn-final-holdout-vloss-20261028-213521/tokenizer.json": {
+        "sha256": "739817651e32a5ed1b9e9fc575f48a67e1922945a35be2f5fc6c4e4e4f45d2f1",
+        "bytes": 1076
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/checkpoint_best.pt": {
+        "sha256": "52a337c06a2bc3c9eae4a8132644e4352b22d4df45fe9e1421a2d5dd0fccff5a",
+        "bytes": 38988
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/config.json": {
+        "sha256": "1befb038456ece6e9027733b72b88714f16086ff48b94d7de03d4f800acf7090",
+        "bytes": 1834
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/evaluation.json": {
+        "sha256": "10270faad92d6fe6512d65fc7decc5697db57458f90911abea479f8acbeb2b19",
+        "bytes": 42616
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/feature_map.json": {
+        "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/history.json": {
+        "sha256": "d486622ee80d4bb7002b32265c31dece1fac0d774692f907646e94c6322c2740",
+        "bytes": 1833
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/manifest.json": {
+        "sha256": "756d0e9c845de1e8f99404207baea4447a62cc24acd88b6acb4ef96eb8643b1b",
+        "bytes": 5875
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/metrics.json": {
+        "sha256": "d31463301e53de2ddfbcfc2f5becb49d314c40e3c45b53ef829ca70df8549b44",
+        "bytes": 10615
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/model.pt": {
+        "sha256": "bafbd977a2c66dc647898e4c995168cd7525a0dd8457b9921262c4fc67671afa",
+        "bytes": 39052
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/thresholds.json": {
+        "sha256": "a8eebce03bad9927bbf22a1ef9b45a57e1bbfa5bee420775457808a8448da2ff",
+        "bytes": 633
+      },
+      "models/education/charcnn/charcnn-final-vloss-20261028-213415/tokenizer.json": {
+        "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27",
+        "bytes": 1118
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/checkpoint_best.pt": {
+        "sha256": "777e9ce06d1ac38cf8047779afe0d68a779b9ce6692f5949dc2e3f5cdc1ad0c9",
+        "bytes": 38988
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/config.json": {
+        "sha256": "1befb038456ece6e9027733b72b88714f16086ff48b94d7de03d4f800acf7090",
+        "bytes": 1834
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/evaluation.json": {
+        "sha256": "dc9d25877980f6b1f0f1c38a66db2a27cae74c7c9142e8bfa17d16544ad956c2",
+        "bytes": 42621
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/feature_map.json": {
+        "sha256": "c85f25056be4aaaf437fd04ff74183cfcef61776bb8e0c613087e2684ddd2392",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/history.json": {
+        "sha256": "becc1244191384cc510ac1b8913363fa3fe659cf37f10632b8408fbe2547c619",
+        "bytes": 1834
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/manifest.json": {
+        "sha256": "560254826428d17dcb5f74abcdbf03382d15125b7b68a537faa1bf16cd32d96b",
+        "bytes": 5905
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/metrics.json": {
+        "sha256": "966866d66c45bc7b5ef28b95a3510b88563201b1c693d3b0e83c757b7d26ab80",
+        "bytes": 10608
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/model.pt": {
+        "sha256": "9ba756e7b9ee9a8bf6b3a1869ba54ec7afc0a0ee6086803ced230289a66555a6",
+        "bytes": 39116
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/thresholds.json": {
+        "sha256": "b164343ab3f3888d42f8249c4280adc8423557b11c43936d0f58fbf10798b2f8",
+        "bytes": 635
+      },
+      "models/education/charcnn/charcnn-final-vloss-balanced-20261028-213450/tokenizer.json": {
+        "sha256": "a60c7f3cc2e7bf519e1e66def29cfc416505f6b4d10c06eab70cc28cd4f2ad27",
+        "bytes": 1118
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211911/checkpoint_best.pt": {
+        "sha256": "eeecf48e74757393ed59b496f432bef58f7860ed137a7f6a9742d4a796784885",
+        "bytes": 31692
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211911/model.pt": {
+        "sha256": "5584e77c7432e7133b251da68911e692c0ac0686223401fceb993934005a2d37",
+        "bytes": 31756
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211911/tokenizer.json": {
+        "sha256": "ba8b2699b97761a2d6e8bfbfdfa1cd40019300c3f6f85e450dd4e97c3741a6bd",
+        "bytes": 352
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/checkpoint_best.pt": {
+        "sha256": "e9bc6ea35d74a2058dca82e2990debeb2bff8e03b053151a6544646d1dc6bc90",
+        "bytes": 31692
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/config.json": {
+        "sha256": "75eb6aafb34b94545904105278fba4e038ad4acd4b1d3c4b2d5cac87e38f1f01",
+        "bytes": 1812
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/feature_map.json": {
+        "sha256": "d9ae4906e9490f5d3a58a50fd1c33a9c6eef99a654412cb5f3163cba74083fce",
+        "bytes": 245
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/history.json": {
+        "sha256": "a170e4fb746566e373f319ffdc59e08f93d356a7799a75ea6fca5fec6fb1afbe",
+        "bytes": 3399
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/manifest.json": {
+        "sha256": "fa566aec63d11c49d88930c9d826c29e2120fcd181abe0ba30dd4d3247e6fa71",
+        "bytes": 5987
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/metrics.json": {
+        "sha256": "6e207944289d6d0e1da24f3789b5df65a9f65987f15ab1518c6599557397885e",
+        "bytes": 10468
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/model.pt": {
+        "sha256": "77fdb7fea6699da75d4fff125566ee0426df823ccafd10658e149169bcfac5db",
+        "bytes": 31756
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/thresholds.json": {
+        "sha256": "03abe474ebf8bf3e80f30b461dd4d3c8c7eb52c0b19a05d5e61a91af89e0fa80",
+        "bytes": 630
+      },
+      "models/education/charcnn/charcnn-smoke-charcnn-20261028-211941/tokenizer.json": {
+        "sha256": "ba8b2699b97761a2d6e8bfbfdfa1cd40019300c3f6f85e450dd4e97c3741a6bd",
+        "bytes": 352
+      },
+      "models/education/tfidf/tfidf-final-20261028-212254/config.json": {
+        "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b",
+        "bytes": 1508
+      },
+      "models/education/tfidf/tfidf-final-20261028-212254/evaluation.json": {
+        "sha256": "2bd9132eee8697f1d283eac556961cbb8085ab4a3cb3ebcbc2fefd02d942d9fa",
+        "bytes": 42626
+      },
+      "models/education/tfidf/tfidf-final-20261028-212254/feature_map.json": {
+        "sha256": "b37e34221ed374a1bcaf150218f51a138a8effa8a2f25686428b3eeb3a8dd8a0",
+        "bytes": 246
+      },
+      "models/education/tfidf/tfidf-final-20261028-212254/history.json": {
+        "sha256": "85102bdb979d950fbebbefc6a1e17de8af0aa2731034517118589da3043a7aa3",
+        "bytes": 623
+      },
+      "models/education/tfidf/tfidf-final-20261028-212254/manifest.json": {
+        "sha256": "a592d0238267cdf3acf91616805bdb24169ca12137e6e8452fa71e5d627a671b",
+        "bytes": 4415
+      },
+      "models/education/tfidf/tfidf-final-20261028-212254/metrics.json": {
+        "sha256": "5aa452c188b9fd593cccf10adf165732b1122115bf0447f52db2d4ac2257b8dc",
+        "bytes": 10622
+      },
+      "models/education/tfidf/tfidf-final-20261028-212254/model.pkl": {
+        "sha256": "8b0bee49272fb341868c1d2172da044ceafec455490d5c15aec46601264c6c5c",
+        "bytes": 27219
+      },
+      "models/education/tfidf/tfidf-final-20261028-212254/thresholds.json": {
+        "sha256": "58960d224c8e8ab06b7a1c79d87f7eacf8673b93e41cd008899299c7cc1173d3",
+        "bytes": 626
+      },
+      "models/education/tfidf/tfidf-final-balanced-20261028-212312/config.json": {
+        "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b",
+        "bytes": 1508
+      },
+      "models/education/tfidf/tfidf-final-balanced-20261028-212312/evaluation.json": {
+        "sha256": "62d9a9ee05a736de3defd8ddedccb324710afe3faba868aae93a670c8518efc9",
+        "bytes": 42630
+      },
+      "models/education/tfidf/tfidf-final-balanced-20261028-212312/feature_map.json": {
+        "sha256": "b37e34221ed374a1bcaf150218f51a138a8effa8a2f25686428b3eeb3a8dd8a0",
+        "bytes": 246
+      },
+      "models/education/tfidf/tfidf-final-balanced-20261028-212312/history.json": {
+        "sha256": "fd452ad107622aaa83130b80a3ea2d34cc9598fa5cfa05affceda903ccd98707",
+        "bytes": 621
+      },
+      "models/education/tfidf/tfidf-final-balanced-20261028-212312/manifest.json": {
+        "sha256": "e99c0474830280c7b53a41af42a308d700145f8492905acc9b54b57d28b523b2",
+        "bytes": 4440
+      },
+      "models/education/tfidf/tfidf-final-balanced-20261028-212312/metrics.json": {
+        "sha256": "70bfbc706cf0fbd475d8e23ba962d12713b353cdaf9f5ed93702cb592baffe1c",
+        "bytes": 10612
+      },
+      "models/education/tfidf/tfidf-final-balanced-20261028-212312/model.pkl": {
+        "sha256": "02049419baa36d5511461adb39d98ccdff3b0d798ceaa9d14bdc7cab9f5f7101",
+        "bytes": 27219
+      },
+      "models/education/tfidf/tfidf-final-balanced-20261028-212312/thresholds.json": {
+        "sha256": "e4fa50d619ef58f081564dfa00b07b449529535ce2f93eb42500584ed7d3a4ce",
+        "bytes": 624
+      },
+      "models/education/tfidf/tfidf-final-confw-20261028-220908/config.json": {
+        "sha256": "25f585f5992beafe7ada1fc2fcaa71f62004b050f0f322aa94fdadbf56569618",
+        "bytes": 1591
+      },
+      "models/education/tfidf/tfidf-final-confw-20261028-220908/evaluation.json": {
+        "sha256": "d7d350b2801dcff2022d52cf98f5b04efa1f4c406bb31de74de879b52d39731f",
+        "bytes": 42625
+      },
+      "models/education/tfidf/tfidf-final-confw-20261028-220908/feature_map.json": {
+        "sha256": "b37e34221ed374a1bcaf150218f51a138a8effa8a2f25686428b3eeb3a8dd8a0",
+        "bytes": 246
+      },
+      "models/education/tfidf/tfidf-final-confw-20261028-220908/history.json": {
+        "sha256": "033936a6010dc7e6d7ba2a1169b3b03fe0385e695f5b3217ab6212e2dfe1f38e",
+        "bytes": 623
+      },
+      "models/education/tfidf/tfidf-final-confw-20261028-220908/manifest.json": {
+        "sha256": "808bb414e81c80322d228352046eed2009be7215516e4e7a5d48742fea7e2973",
+        "bytes": 4476
+      },
+      "models/education/tfidf/tfidf-final-confw-20261028-220908/metrics.json": {
+        "sha256": "3574b7c0701c2c1588234818020c76602dc8fae3a37289de19a39b6a41574df2",
+        "bytes": 10610
+      },
+      "models/education/tfidf/tfidf-final-confw-20261028-220908/model.pkl": {
+        "sha256": "7a6b1abc45c462a2dbf5489c3fd4cf2bb23399732c8f82f0a28ded59e8e1f327",
+        "bytes": 27219
+      },
+      "models/education/tfidf/tfidf-final-confw-20261028-220908/thresholds.json": {
+        "sha256": "c05931dcf51f92f65aa74c585bbc9581a30388190a0fa12591ea21a79a5fe714",
+        "bytes": 624
+      },
+      "models/education/tfidf/tfidf-final-highconf-20261028-221021/config.json": {
+        "sha256": "25f585f5992beafe7ada1fc2fcaa71f62004b050f0f322aa94fdadbf56569618",
+        "bytes": 1591
+      },
+      "models/education/tfidf/tfidf-final-highconf-20261028-221021/evaluation.json": {
+        "sha256": "e1cf5128345d6bfd77833a28fb52c6bce623bf04c3245ab4629d1285415cd4c4",
+        "bytes": 42634
+      },
+      "models/education/tfidf/tfidf-final-highconf-20261028-221021/feature_map.json": {
+        "sha256": "e2457cf2bff34d19fe55109bde9dc138508cfd4c85944d55bb078af123dc0dfb",
+        "bytes": 246
+      },
+      "models/education/tfidf/tfidf-final-highconf-20261028-221021/history.json": {
+        "sha256": "20da1b0d81a639f17571afb1720536670eea9561732f4d6550fb59e500a2f92f",
+        "bytes": 622
+      },
+      "models/education/tfidf/tfidf-final-highconf-20261028-221021/manifest.json": {
+        "sha256": "eb1a2a1d60494adfb8c9fe1e0932a22f9a8824fb167d3698934561c8ffc9a06f",
+        "bytes": 4495
+      },
+      "models/education/tfidf/tfidf-final-highconf-20261028-221021/metrics.json": {
+        "sha256": "8a9b0b0e18d2e5e537f059f064a54581d1ce05b79c23c0d58d06da7d00ae8042",
+        "bytes": 10591
+      },
+      "models/education/tfidf/tfidf-final-highconf-20261028-221021/model.pkl": {
+        "sha256": "17c38fa75dd826e3edc8b3aa401cb93831ab3efafe108873b077eda98acdd800",
+        "bytes": 23209
+      },
+      "models/education/tfidf/tfidf-final-highconf-20261028-221021/thresholds.json": {
+        "sha256": "c3ce69ac052e1e4a60c49f1bceb1e3d4563e5e42919314960f79e246e060df4e",
+        "bytes": 624
+      },
+      "models/education/tfidf/tfidf-final-holdout-20261028-212556/config.json": {
+        "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b",
+        "bytes": 1508
+      },
+      "models/education/tfidf/tfidf-final-holdout-20261028-212556/evaluation.json": {
+        "sha256": "e49799d82edfc2ca28561c370bbb7826b15888b2ba84c5a5adfd2435a7a1ef4c",
+        "bytes": 55951
+      },
+      "models/education/tfidf/tfidf-final-holdout-20261028-212556/feature_map.json": {
+        "sha256": "64150b5488f8ffe8a37c545aa843d8bdc691be295d2ca4cc10d9a4ffd1a55095",
+        "bytes": 246
+      },
+      "models/education/tfidf/tfidf-final-holdout-20261028-212556/history.json": {
+        "sha256": "987221ec945ecc1d6a40c335c3fdf1497216633c514d6d75648b71e9d6529f57",
+        "bytes": 623
+      },
+      "models/education/tfidf/tfidf-final-holdout-20261028-212556/manifest.json": {
+        "sha256": "432c5f55f56707446a45ba2716f8795e8674811a28878acf0e8edb799d3cef8f",
+        "bytes": 5037
+      },
+      "models/education/tfidf/tfidf-final-holdout-20261028-212556/metrics.json": {
+        "sha256": "0a31f9b3678875f2e6dbd1a64273204168110dd3f7d206b1e4a4b6f7dbc137a1",
+        "bytes": 15865
+      },
+      "models/education/tfidf/tfidf-final-holdout-20261028-212556/model.pkl": {
+        "sha256": "e07d0f9894fcfff3ab3b9fe9e1950c55149f29bf76a67cb9b95a1023d0d811ed",
+        "bytes": 24400
+      },
+      "models/education/tfidf/tfidf-final-holdout-20261028-212556/thresholds.json": {
+        "sha256": "028da479d8332a88595808e11e19d43213b3a650ad809c5308cdb6d7616d0bfc",
+        "bytes": 633
+      },
+      "models/education/tfidf/tfidf-final-title-20261028-212332/config.json": {
+        "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b",
+        "bytes": 1508
+      },
+      "models/education/tfidf/tfidf-final-title-20261028-212332/evaluation.json": {
+        "sha256": "54e90fef95e6007763f92abe298a6aafa8317129d40762a94a1a9bb4877a5171",
+        "bytes": 42676
+      },
+      "models/education/tfidf/tfidf-final-title-20261028-212332/feature_map.json": {
+        "sha256": "22197af379f73bd7aea724aba6a1f346f18f51e710116439b0a911788c1c032e",
+        "bytes": 272
+      },
+      "models/education/tfidf/tfidf-final-title-20261028-212332/history.json": {
+        "sha256": "6b2dc44bff5ff656245651e472836d65abd8fd84e27173635cd88a71e6cb5fb5",
+        "bytes": 625
+      },
+      "models/education/tfidf/tfidf-final-title-20261028-212332/manifest.json": {
+        "sha256": "8972c35b038abc30c68ebc34f796adecc33495d89cb09979d34572ba20eeb969",
+        "bytes": 4444
+      },
+      "models/education/tfidf/tfidf-final-title-20261028-212332/metrics.json": {
+        "sha256": "43f295cd25f0da49b04a4440f74e55aecdab102459e1c0b866a806959cba3f97",
+        "bytes": 10656
+      },
+      "models/education/tfidf/tfidf-final-title-20261028-212332/model.pkl": {
+        "sha256": "7ab39afd71cff89bd30b880f17de17c5467785cbb3ca4896950f775ac6c806ec",
+        "bytes": 20081257
+      },
+      "models/education/tfidf/tfidf-final-title-20261028-212332/thresholds.json": {
+        "sha256": "d262c9085d085e683785e366037b1902aa5013da7819ec24c74c96e2a7e251df",
+        "bytes": 628
+      },
+      "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845/config.json": {
+        "sha256": "0d5d96ca3ee83f4feac81b288a1b57352973f44049112d80d0d4d5a7326e161b",
+        "bytes": 1508
+      },
+      "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845/feature_map.json": {
+        "sha256": "7a8d780a43b2ded7dc6b0449f430ab326089ec858fb50f13ebbdb2dc079b2d89",
+        "bytes": 245
+      },
+      "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845/history.json": {
+        "sha256": "089de06464ef6a3277ff33b4999fc9923ba9186b6d78c831089fcaba4ca50784",
+        "bytes": 621
+      },
+      "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845/manifest.json": {
+        "sha256": "339eff7f5c85166908efabec7f7db202b079e17f9ab1f46afac7b3c06eb2a2ab",
+        "bytes": 2980
+      },
+      "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845/metrics.json": {
+        "sha256": "18ce322c3e1134bc5af43bd472c5f31634de3da66b9062fbcb820957982d2eff",
+        "bytes": 10450
+      },
+      "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845/model.pkl": {
+        "sha256": "cf39c23057a6b973347f6701f636771fc2c9377b015e7cbb363a5e935692998d",
+        "bytes": 8395
+      },
+      "models/education/tfidf/tfidf-smoke-tfidf-20261028-211845/thresholds.json": {
+        "sha256": "a4df7880e4991668e0e8e3f104675898f5a765c9099fce54280aa00ac9ec1e93",
+        "bytes": 621
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/config.json": {
+        "sha256": "37d590d97976b8df6246b42d39d9e82f9a04c04b82d2f775a9b652896e862389",
+        "bytes": 4439
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "9bd0b391aa95d5c581714efee7ffd7d1fd5d312d6c7a92c604169906138a0569",
+        "bytes": 4913
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/manifest.json": {
+        "sha256": "f5036ae77e48ee3a987572485eaa2b44b920dfc1044569f0de7e7e53cf3ce615",
+        "bytes": 2703
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/metrics.json": {
+        "sha256": "3bdfe2e6a16cba3dfc34aa9fdae4fce3fd730182afe286d07dbcc35ad9cfd8a7",
+        "bytes": 4016
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "dbac6b1405d58d0a16865324a85a2d6cf4db79d824f5060240f437037b49c64c",
+        "bytes": 3577
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "35bdf632e9c93cd491eebf8afc8f0d20422f4aa81a4ac20a9554508dd1f18063",
+        "bytes": 3587
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/model.pkl": {
+        "sha256": "1810ff896bb74e9c13e212a72be6e65a616448760d7926a60ba918df42422b54",
+        "bytes": 376567
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750/config.json": {
+        "sha256": "80cdf46109c597f5483ddb7dfeb564d8b40e8bdb4514e7d03e03d70f62757f26",
+        "bytes": 4462
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750/feature_map.json": {
+        "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa",
+        "bytes": 4637
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750/manifest.json": {
+        "sha256": "c7dec96578529856d8b29d514ec0b170417ba14b5efcce75f9be4daf81eaf550",
+        "bytes": 2700
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750/metrics.json": {
+        "sha256": "3202cb12c643c5b39cc06151671956227a2309a5e685332f6037d13645debb4f",
+        "bytes": 4013
+      },
+      "models/matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750/model.pkl": {
+        "sha256": "47717dadc18c93f1d76bab798032f0092209e001f8d035f47256266ff4abf368",
+        "bytes": 372932
+      },
+      "models/matching/gradient_boosting/candidate_cold/smoke-gb-002/config.json": {
+        "sha256": "80cdf46109c597f5483ddb7dfeb564d8b40e8bdb4514e7d03e03d70f62757f26",
+        "bytes": 4462
+      },
+      "models/matching/gradient_boosting/candidate_cold/smoke-gb-002/feature_map.json": {
+        "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa",
+        "bytes": 4637
+      },
+      "models/matching/gradient_boosting/candidate_cold/smoke-gb-002/manifest.json": {
+        "sha256": "f40e22ebb569a67b46d2b31497e393c46bd318ac5c0e23b2de9386a8675e6583",
+        "bytes": 2658
+      },
+      "models/matching/gradient_boosting/candidate_cold/smoke-gb-002/metrics.json": {
+        "sha256": "3202cb12c643c5b39cc06151671956227a2309a5e685332f6037d13645debb4f",
+        "bytes": 4013
+      },
+      "models/matching/gradient_boosting/candidate_cold/smoke-gb-002/model.pkl": {
+        "sha256": "47717dadc18c93f1d76bab798032f0092209e001f8d035f47256266ff4abf368",
+        "bytes": 372932
+      },
+      "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/config.json": {
+        "sha256": "37d590d97976b8df6246b42d39d9e82f9a04c04b82d2f775a9b652896e862389",
+        "bytes": 4439
+      },
+      "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "c7913c8d78208b5d97d139e99c663e5ca99f342092668ec42f57cb6b2e173ee7",
+        "bytes": 4912
+      },
+      "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/manifest.json": {
+        "sha256": "b10378b51b982ae055b5dc20639b0702379f116a816ceb01c66b9afb82111ea6",
+        "bytes": 2693
+      },
+      "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/metrics.json": {
+        "sha256": "1147bac8fee417bf9f065fab4dd53e4fa62dc2b96c9a4efe5181fe683fa2cc76",
+        "bytes": 3950
+      },
+      "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "6f85dc11ae755714c458a766c6369301d207c6cae16aab37f03af37d86da75fd",
+        "bytes": 3511
+      },
+      "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "0351e0a8e1ac414af5264f818d18e4cedab208e595d51de12921b9934f9aa248",
+        "bytes": 3518
+      },
+      "models/matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/model.pkl": {
+        "sha256": "68ec3e62c68067c2c662956485f93cbdd3abd2370afd0b8b753aebdb811d7313",
+        "bytes": 376487
+      },
+      "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/config.json": {
+        "sha256": "37d590d97976b8df6246b42d39d9e82f9a04c04b82d2f775a9b652896e862389",
+        "bytes": 4439
+      },
+      "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1",
+        "bytes": 4912
+      },
+      "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/manifest.json": {
+        "sha256": "36af6a1953f626bb7682947f0ce0e7a824172998ae359809c2284938830ce96f",
+        "bytes": 2686
+      },
+      "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/metrics.json": {
+        "sha256": "87eadab455e85e2a1602e9b1023907983105ce4343baf44a4b574f09abbc8cdf",
+        "bytes": 3970
+      },
+      "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "bf6d6b4ca019958ef10f6dbb90135f43ec3ff89b7528b8cb3709f3f0afdd9d3f",
+        "bytes": 3547
+      },
+      "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "aab994610b25a4bbaf40f849334268284f02bfa2909c857514d94b4f4a996d25",
+        "bytes": 3535
+      },
+      "models/matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/model.pkl": {
+        "sha256": "517127a1648053bb5bc4a96be9c3c5506c414d6a7f778bdebfc15efb06d9a2d0",
+        "bytes": 376455
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/checkpoint_best.pt": {
+        "sha256": "450e1a4bb9e9a082c00b11da5fe08d24957b806feb01123d4420f795f3638c18",
+        "bytes": 24704
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "3699dff24a315df46b1c6d13306f8563f37890bec151db23576bf2dfe1e0f44e",
+        "bytes": 74806
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/config.json": {
+        "sha256": "bd9db0913985244e65ca4defa96748cb59586424726b06d5fc9dae2f540f3698",
+        "bytes": 4807
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "9bd0b391aa95d5c581714efee7ffd7d1fd5d312d6c7a92c604169906138a0569",
+        "bytes": 4913
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/history.json": {
+        "sha256": "167851439a002985ab22eb7b86533deb9d092b36a1c7c65a9d5f86112cdb4d27",
+        "bytes": 3711
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/manifest.json": {
+        "sha256": "45877c967016353fdae52d6393b322d9bd1a6941edc18e78c0a05e78bf066ee0",
+        "bytes": 3131
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/metrics.json": {
+        "sha256": "4f231e5c7d9fa71b694cb95a486cd05e624619f4a3e0fda1bc052b561ae7ce0a",
+        "bytes": 4215
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "3376549054d9fa871e29cb5ec98a8114b795e485031c9301cd8b6c29a08837dc",
+        "bytes": 3577
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "4412d6c292673a9cbc470c79bbe29c71b31c60fa7a8facfe6353e26f47bfb9a8",
+        "bytes": 3577
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/model.pt": {
+        "sha256": "ea8b2e6208128fb1aacfd188be76cae11cf813f97034ccfbd7a70b6acc04ae4f",
+        "bytes": 26944
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/checkpoint_best.pt": {
+        "sha256": "343645350ea9d435a67011f15b11a5395b437a50db5a982801a4b299ea90c368",
+        "bytes": 24192
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "0a59fcff7349eb43ba08225648af7da9c660af82ce93d526453806e710a991e7",
+        "bytes": 73270
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/config.json": {
+        "sha256": "2b29280a90e7f66abe3397a42abae0ed0b7ae50b8c6ae8a38124f12b2323db44",
+        "bytes": 4907
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/feature_map.json": {
+        "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa",
+        "bytes": 4637
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/history.json": {
+        "sha256": "09006598c330a8fb2de673b819925e5a545434a192e2bee101cab26906301b6d",
+        "bytes": 218
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/manifest.json": {
+        "sha256": "54e66ddc151b63e63389b897e2ca9c2d8df499a45350260f7d195384f8a921bc",
+        "bytes": 3125
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/metrics.json": {
+        "sha256": "2e1df7d895d905e2fe9c2bf2531dfc80e418b222ec4d23a6e7842e785b37e541",
+        "bytes": 4218
+      },
+      "models/matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/model.pt": {
+        "sha256": "2beba372535b65bed07d2bfa40c46f87c4dc16a6262a3f0f6495a5592f4dfcd2",
+        "bytes": 26304
+      },
+      "models/matching/mlp/candidate_cold/smoke-mlp-001/checkpoint_best.pt": {
+        "sha256": "343645350ea9d435a67011f15b11a5395b437a50db5a982801a4b299ea90c368",
+        "bytes": 24192
+      },
+      "models/matching/mlp/candidate_cold/smoke-mlp-001/checkpoint_search_0.pt": {
+        "sha256": "0a59fcff7349eb43ba08225648af7da9c660af82ce93d526453806e710a991e7",
+        "bytes": 73270
+      },
+      "models/matching/mlp/candidate_cold/smoke-mlp-001/config.json": {
+        "sha256": "2b29280a90e7f66abe3397a42abae0ed0b7ae50b8c6ae8a38124f12b2323db44",
+        "bytes": 4907
+      },
+      "models/matching/mlp/candidate_cold/smoke-mlp-001/feature_map.json": {
+        "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa",
+        "bytes": 4637
+      },
+      "models/matching/mlp/candidate_cold/smoke-mlp-001/history.json": {
+        "sha256": "db22a826473361f044ddf79ab54f5b420c5d564c3c116a8d31a25dcef24d51da",
+        "bytes": 218
+      },
+      "models/matching/mlp/candidate_cold/smoke-mlp-001/manifest.json": {
+        "sha256": "bb0eb931080e2ae5711de9862232a598c8cba7c94f059304f26b5a9ed0628023",
+        "bytes": 3098
+      },
+      "models/matching/mlp/candidate_cold/smoke-mlp-001/metrics.json": {
+        "sha256": "8c98fb22e0e0001db47db35aa66d6d0858346a56583b4a92394aae6a7762dcfb",
+        "bytes": 4191
+      },
+      "models/matching/mlp/candidate_cold/smoke-mlp-001/model.pt": {
+        "sha256": "2beba372535b65bed07d2bfa40c46f87c4dc16a6262a3f0f6495a5592f4dfcd2",
+        "bytes": 26304
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/checkpoint_best.pt": {
+        "sha256": "66ef7831c7798da291a6ae15c826b6b3b2e2b243235f04763537d294d21b0f32",
+        "bytes": 24704
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "895dd5fbc44cc86ededdac13880a4e87c3d4437d9eae820d10a184daff4e500d",
+        "bytes": 74806
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/config.json": {
+        "sha256": "bd9db0913985244e65ca4defa96748cb59586424726b06d5fc9dae2f540f3698",
+        "bytes": 4807
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "c7913c8d78208b5d97d139e99c663e5ca99f342092668ec42f57cb6b2e173ee7",
+        "bytes": 4912
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/history.json": {
+        "sha256": "c1af679612c9a2bd0b7db7c2e1b6f8b290d9eae9dea2b53cb4bb49980880eded",
+        "bytes": 1739
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/manifest.json": {
+        "sha256": "7d6b9416c86d0c78f38a51caadfb66e43499446de321d569c4872f07ae3fb5a7",
+        "bytes": 3120
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/metrics.json": {
+        "sha256": "bc920915f67ae845b543a9e4b2596a154028b3fde4ab7810404aea3f28d76326",
+        "bytes": 4169
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "c193d074140d7e2959f019a3dbac497bacc9f8080645ba3255ce4e912dc7a824",
+        "bytes": 3502
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "2779a6dc349495085ceb06cf7feba13fa91cc943b72bcc93c978e47648718c6a",
+        "bytes": 3534
+      },
+      "models/matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/model.pt": {
+        "sha256": "3a90bc79ed434b172445bfe32a778b61ac44b66c8f0ccf1eb2c5f85a6131a7f8",
+        "bytes": 26944
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/checkpoint_best.pt": {
+        "sha256": "20eef2a4ca4bae0c34de85afc6c5cc807e80de6a06106fb0dabac571fa7e838b",
+        "bytes": 24704
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "dd00dee7655674b0df194c61e50f37a483748411699dd7b407a33ccb227fcebd",
+        "bytes": 74806
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/config.json": {
+        "sha256": "bd9db0913985244e65ca4defa96748cb59586424726b06d5fc9dae2f540f3698",
+        "bytes": 4807
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1",
+        "bytes": 4912
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/history.json": {
+        "sha256": "5395c1d1be5be7f27af68e00d3b0d14f20a639b15cd0367389f09fd3ee3ed934",
+        "bytes": 3842
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/manifest.json": {
+        "sha256": "c757a8f5486e3119c3f61af2c3fef4f8be1d4951247fdea37b11ac7d5e1a918e",
+        "bytes": 3114
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/metrics.json": {
+        "sha256": "1df436b9f44a0aab2018d4a070f051ad308ba34253f419e9ad4d95e96e5191be",
+        "bytes": 4164
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "3e05406390aa3a33158c5b7348d95972b7026ed07e1fe86b3a22d17d08ad9770",
+        "bytes": 3545
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "a47ad0e5f50e87c29ed793ed48444c79376123f4c87cb2a8421c0c115fc8d325",
+        "bytes": 3532
+      },
+      "models/matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/model.pt": {
+        "sha256": "c76f4eae9f5f8e917412f9f530282659c1a1790c82d09ba3be80cde004cd5d6a",
+        "bytes": 26944
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/checkpoint_best.pt": {
+        "sha256": "c74899fd725423cd06bf4a9afee77a12cffdd38432f7c00cb889be4b28190d29",
+        "bytes": 21120
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "b04da1e4990d7ef45dbbfda7211734731d46c9606486dd063a8840bcb14d2020",
+        "bytes": 64054
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/config.json": {
+        "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50",
+        "bytes": 5291
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/feature_map.json": {
+        "sha256": "0eab87e7e013432b60a64428e6cd782497f4f78bdc86724d2a8aab229f0dc0b9",
+        "bytes": 3976
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/history.json": {
+        "sha256": "a2ec7b995da1f859b7cfe9a7f48d80230e63bfb7a78e89aa51cc488d906c0c90",
+        "bytes": 1964
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/manifest.json": {
+        "sha256": "d2d462cf261b5f2f54c9020b5cdfd4fa934b2d49f041b82aa35110ebe7d41bfa",
+        "bytes": 3248
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/metrics.json": {
+        "sha256": "192aef5e46c3801da073230cada9b636dafeb2ecfac00b11f28acbd0a9c2a0d1",
+        "bytes": 4239
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/metrics_test.json": {
+        "sha256": "e3584358e59ed7cd999b46b93a8315607699173338843ea7b60f18e847ae25eb",
+        "bytes": 3572
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/metrics_validation.json": {
+        "sha256": "e21ccfb30b52ec3153642bcf525785668a6260c5870eb89e37488aa821fbff5b",
+        "bytes": 3585
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/model.pt": {
+        "sha256": "f7ad50846202e041c070c9b02c1ce6bcc91d048883c8b9c5ecdeaf9edc114c59",
+        "bytes": 22912
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/pair_stats.json": {
+        "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f",
+        "bytes": 680
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/checkpoint_best.pt": {
+        "sha256": "7728bbc1f2fc94a587d94c2d0f9ed694a8232916dd4ee25b58cbe464275cb6d5",
+        "bytes": 17024
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "385e08457365ee2c206910798499fc569a5560f08f91e16eadd9e96f7c2e39c5",
+        "bytes": 51766
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/config.json": {
+        "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50",
+        "bytes": 5291
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/feature_map.json": {
+        "sha256": "86187300fdbf65fc20bf8cce62c5c95bb5be9a1c12116ee8aae8b52620a2c150",
+        "bytes": 1903
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/history.json": {
+        "sha256": "d4dbe0f8ec3bce144a934391701dd0e2bb1504b360c8b1587912f1ad332c4600",
+        "bytes": 4264
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/manifest.json": {
+        "sha256": "60110e7c4f63886f450b43a7c4e05f0c5bd53669f8973871d152b6ea5252c7e9",
+        "bytes": 3260
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/metrics.json": {
+        "sha256": "a4eb15e83aeb161d8536649a4208fab7afdeb3c6dd2a020a20c5beca03510621",
+        "bytes": 4249
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/metrics_test.json": {
+        "sha256": "47b8f06cd7574e59fb8263e5d7070b12108a2509fb72590f417a337046923f52",
+        "bytes": 3582
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/metrics_validation.json": {
+        "sha256": "780fdbc18e3fbfb4674d9152302786e6445b08f0beddbccd0fcc14fb4e6adc1a",
+        "bytes": 3589
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/model.pt": {
+        "sha256": "eeafc326100e718438dacb5a764bdd9d5695e20e09d231e14a48a09dc423b0eb",
+        "bytes": 17600
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/pair_stats.json": {
+        "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f",
+        "bytes": 680
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/checkpoint_best.pt": {
+        "sha256": "01e5bfce81be17d58cb6df553086669de191e4e309049903d2b66f37c765fe3a",
+        "bytes": 23680
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "b4fb54b7fbf8699ee5157eedec06f8c9b01d02e7ee4e8925518799d22a89c2d2",
+        "bytes": 71734
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/config.json": {
+        "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50",
+        "bytes": 5291
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/feature_map.json": {
+        "sha256": "9cb3dd2f35a1b1d52c2379720ea73abba9caa6ed429a5aefaad587eb1be59bf5",
+        "bytes": 4399
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/history.json": {
+        "sha256": "ea16fb9e581e4fcbf3688f2b4615dc6c99f7a2b82e842df8a5d01219892ef87d",
+        "bytes": 4039
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/manifest.json": {
+        "sha256": "d3703d15f6eaf87daa7c2607159d1ab3c6bb7411a01c00255400bcccfb564928",
+        "bytes": 3201
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/metrics.json": {
+        "sha256": "f3416b1aa0c20fc7fb3ce61b68ada8540a52e1cc8deda629d4cc8ee40bda6ae1",
+        "bytes": 4235
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/metrics_test.json": {
+        "sha256": "0385445c73a57df44beac0f85c2645f20bb1e4ade93843635c4ca340c1f68e65",
+        "bytes": 3579
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/metrics_validation.json": {
+        "sha256": "46621f099866530c0f6535f1297267187b2963c57d6d40a9e3a6e86ab1912fc8",
+        "bytes": 3581
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/model.pt": {
+        "sha256": "4be0bcc156a1cd70d8a15fc2d4d9652bdc1b0f94d0c6bea5ad96f74edf82a960",
+        "bytes": 25792
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/pair_stats.json": {
+        "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f",
+        "bytes": 680
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/checkpoint_best.pt": {
+        "sha256": "4083af92047670006c1380df3ddad47d58c126ce535df6b373f10610b83f8d65",
+        "bytes": 24704
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "1ec5f9829a90247457fa3b9484e5540e23dba21e3130a47019771a40d55e75b2",
+        "bytes": 74806
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/config.json": {
+        "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50",
+        "bytes": 5291
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "9bd0b391aa95d5c581714efee7ffd7d1fd5d312d6c7a92c604169906138a0569",
+        "bytes": 4913
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/history.json": {
+        "sha256": "ced37c0cd17e8b159a566ecbc0e334cada5c01c17c6012a916cfeb5f43ce7a6c",
+        "bytes": 4263
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/manifest.json": {
+        "sha256": "4ed7295ecce2846048db51588ade5a8a4405677b9d726efea0127a9562941f11",
+        "bytes": 3288
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/metrics.json": {
+        "sha256": "813d780494fffbbb20aaa543db8a78ad60601410a348ed5b08545c7d9eb34d45",
+        "bytes": 4233
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "f625cb376960e83341119519e239880660be096b321b063cff845406de895c31",
+        "bytes": 3581
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "28897a3612e139840a06b380f5e65d4400706e91583210a0b61f6db41e71bda7",
+        "bytes": 3587
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/model.pt": {
+        "sha256": "5e6841b8d450542392dd991128fdacc65acd0d34cfe5f0f12c72a75614d30aaa",
+        "bytes": 26944
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/pair_stats.json": {
+        "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f",
+        "bytes": 680
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/checkpoint_best.pt": {
+        "sha256": "7e4c73842e9c960bdf2b13614442cacb86b02a8b1a770fd05b5439d142cd2ce4",
+        "bytes": 24192
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "86f7457ce3c004a1a162a0690934a2a86405076d696b577f1b0f442b406fa0ba",
+        "bytes": 73270
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/config.json": {
+        "sha256": "540362de52d89275e0c56d716906684484e9f877fcb792cdb6f553a4341c7f96",
+        "bytes": 5391
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/feature_map.json": {
+        "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa",
+        "bytes": 4637
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/history.json": {
+        "sha256": "0ed3d018ea14be636ed0468c7e56a1c8a7aadedd7ca82f9e9c70f494b90b7d3f",
+        "bytes": 217
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/manifest.json": {
+        "sha256": "10deba55c6e222144dccd778d34f4d5f0045bfbd2146cb15d25f96a6ed716bc2",
+        "bytes": 3282
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/metrics.json": {
+        "sha256": "1829e1c44a8f93b8951a7f0dd5c1d0ddebfddcf932ee2aa556e67f2ea273c467",
+        "bytes": 4228
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/model.pt": {
+        "sha256": "974339450a2af546ae75316083dcb96381b1db3f15116d364318cfd6153030fa",
+        "bytes": 26304
+      },
+      "models/matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/pair_stats.json": {
+        "sha256": "3a6e2613bc86939cf62c3a74ed8594cbba43511c6e35ea5a4eef7e0e934b442b",
+        "bytes": 673
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-001/pair_stats.json": {
+        "sha256": "3a6e2613bc86939cf62c3a74ed8594cbba43511c6e35ea5a4eef7e0e934b442b",
+        "bytes": 673
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/checkpoint_best.pt": {
+        "sha256": "7e4c73842e9c960bdf2b13614442cacb86b02a8b1a770fd05b5439d142cd2ce4",
+        "bytes": 24192
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/checkpoint_search_0.pt": {
+        "sha256": "86f7457ce3c004a1a162a0690934a2a86405076d696b577f1b0f442b406fa0ba",
+        "bytes": 73270
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/config.json": {
+        "sha256": "540362de52d89275e0c56d716906684484e9f877fcb792cdb6f553a4341c7f96",
+        "bytes": 5391
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/feature_map.json": {
+        "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa",
+        "bytes": 4637
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/history.json": {
+        "sha256": "ee1af7b32cea2a33c93b13fb067e98eba8667eb7b6fc17fca9001493bbcd58b4",
+        "bytes": 218
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/manifest.json": {
+        "sha256": "88a6554147011787c11d29938a77981adeec0a6f0da5d6e0bb60e81edaf0cc5f",
+        "bytes": 3255
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/metrics.json": {
+        "sha256": "b502fbba0de788e538b63532746c2259342a69c70e3d376dff85927102f96f8b",
+        "bytes": 4201
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/model.pt": {
+        "sha256": "974339450a2af546ae75316083dcb96381b1db3f15116d364318cfd6153030fa",
+        "bytes": 26304
+      },
+      "models/matching/ranknet/candidate_cold/smoke-ranknet-002/pair_stats.json": {
+        "sha256": "3a6e2613bc86939cf62c3a74ed8594cbba43511c6e35ea5a4eef7e0e934b442b",
+        "bytes": 673
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/checkpoint_best.pt": {
+        "sha256": "527d6282f19407f83eb13112b244e430ff833e8d3c4b2e90cf8a83a294057d31",
+        "bytes": 24704
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "0405614525e25c8df4c3da6ceeb762a84dde778df7b781a20f25c7f3333d7abd",
+        "bytes": 74806
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/config.json": {
+        "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50",
+        "bytes": 5291
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "c7913c8d78208b5d97d139e99c663e5ca99f342092668ec42f57cb6b2e173ee7",
+        "bytes": 4912
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/history.json": {
+        "sha256": "83cd5f5368973ced581a55b5e89edce237f6544ac3c0f441884ec536b6315395",
+        "bytes": 2838
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/manifest.json": {
+        "sha256": "33150ecf23b0d1b7758f59f6c1a8e984b218311b53b75e95640e9ee30ea0bc34",
+        "bytes": 3278
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/metrics.json": {
+        "sha256": "5df7a913affd4f528f498d013421712fda0754e88183f787baffbbe522c84145",
+        "bytes": 4180
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "bf09238ba1210523baa66117ee1af79962deb3c375d3415b988da3aff5ac77d7",
+        "bytes": 3513
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "0b56cb4ceb22b6d1033dea19075131eae9c1a71d30a588366b6f85d492a37dce",
+        "bytes": 3537
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/model.pt": {
+        "sha256": "0c469bd681a94a05996b2dd205799f2c4ab9c1da0b5aaa40dd8ac1bc9257c1d3",
+        "bytes": 26944
+      },
+      "models/matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/pair_stats.json": {
+        "sha256": "06893a889893519e2930ac686de236ccc715fe93d2c7853b38f82cb041000c6d",
+        "bytes": 681
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/checkpoint_best.pt": {
+        "sha256": "f29476db833e21979069595680455b5c7d8f6f3ed952587439b34ffeb14d2fd5",
+        "bytes": 24704
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/checkpoint_search_0.pt": {
+        "sha256": "d02d3d398823736f7c205b829c447af08c2903d25492ffaf6b9f5916c2d5b596",
+        "bytes": 74806
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/config.json": {
+        "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50",
+        "bytes": 5291
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1",
+        "bytes": 4912
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/history.json": {
+        "sha256": "9f7bf468ab46bd878fe745e9c3225f2c8eca5c7a6cd93af7296907033dd3234f",
+        "bytes": 1857
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/manifest.json": {
+        "sha256": "52d8066a76be0cb069792929dbfdcf51acae39ef4fc7229c2495df3472159e25",
+        "bytes": 3269
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/metrics.json": {
+        "sha256": "156c07c5248ef415817f27acf99d86aedcf4a4822d6c9be1a062f2989761a674",
+        "bytes": 4169
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "d3f8783498c14a5ee3216abc78eaf1ab948254600c43f489b0fc2452ea949821",
+        "bytes": 3544
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "34fd23c9865ad420e906fb12572f89d27ce5ea95a27ea17c73400e5c9816670b",
+        "bytes": 3530
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/model.pt": {
+        "sha256": "77b1ac699ed8363f4b65b6ecc59db1a634d0436f3747552521a959717d35cfc1",
+        "bytes": 26944
+      },
+      "models/matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/pair_stats.json": {
+        "sha256": "40e3b90005a622fccf258052e8547f1b6779ff9b39a79303b522facfb6250dbf",
+        "bytes": 681
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/config.json": {
+        "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289",
+        "bytes": 4322
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/feature_map.json": {
+        "sha256": "0eab87e7e013432b60a64428e6cd782497f4f78bdc86724d2a8aab229f0dc0b9",
+        "bytes": 3976
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/manifest.json": {
+        "sha256": "04f5f40d66346ad3ed80595235003696342a7052d323d97b6edb6e072c4e35ad",
+        "bytes": 2636
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/metrics.json": {
+        "sha256": "9825ecb1006b845121aa37fa91c6d1a633b5c0e7749feaef53780fd14209f7b0",
+        "bytes": 4036
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/metrics_test.json": {
+        "sha256": "70a495b56ddcf3775f61afdefcccbd3fe48df74dc74bd0c1f5436082a176fe8f",
+        "bytes": 3578
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/metrics_validation.json": {
+        "sha256": "799c223cfc5f043acfda3adf7d17b1bd2d20f4c0b65a605de6e36498620ded7a",
+        "bytes": 3584
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/model.pkl": {
+        "sha256": "28753dc15211a57ee16db51c76b9ae00f24e6c151f97bb1067c58ffc62ce9878",
+        "bytes": 2384
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/config.json": {
+        "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289",
+        "bytes": 4322
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/feature_map.json": {
+        "sha256": "86187300fdbf65fc20bf8cce62c5c95bb5be9a1c12116ee8aae8b52620a2c150",
+        "bytes": 1903
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/manifest.json": {
+        "sha256": "6a4341e9ab4635cd766e96410b09fe38f9fa58448ff140862ffcedc869363442",
+        "bytes": 2647
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/metrics.json": {
+        "sha256": "c4d0832fe2f9c387ef0caaa3f53f0f7d767b684da0880172a93912c498a6a496",
+        "bytes": 4031
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/metrics_test.json": {
+        "sha256": "46bb40ebe7c5ffdb6f9879827d04032886dc91b08f0d2fa562ad0b17e8fae65c",
+        "bytes": 3567
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/metrics_validation.json": {
+        "sha256": "ea6c270b8df6fed8832a3bccf0dedb2fdf136aac88163e5e172e0079e9354d7a",
+        "bytes": 3577
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/model.pkl": {
+        "sha256": "e8e66f61290d53087d1467c8382646cf525c912c87904e421be1bd0e475204d4",
+        "bytes": 1160
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/config.json": {
+        "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289",
+        "bytes": 4322
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/feature_map.json": {
+        "sha256": "9cb3dd2f35a1b1d52c2379720ea73abba9caa6ed429a5aefaad587eb1be59bf5",
+        "bytes": 4399
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/manifest.json": {
+        "sha256": "b835f91eab28d5b6c253fa2bd6bd3a2db297597cc438ce8268183f36b87f408d",
+        "bytes": 2588
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/metrics.json": {
+        "sha256": "13ff7f5ae1ba76fbe43ee7908ffd7d6c348f1a48955951e90f9657394605765f",
+        "bytes": 4026
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/metrics_test.json": {
+        "sha256": "df2efdb8494d534e0299cae4e206ad3be38f955fa7e5d8de0438d9d25ab3dcc0",
+        "bytes": 3581
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/metrics_validation.json": {
+        "sha256": "550eff5bd962b19f158dd03a4148ccd0e55180e5cf7f5691bb3baddfe0a3e05d",
+        "bytes": 3574
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/model.pkl": {
+        "sha256": "032309d2a85a192461e64c5e5d19b61420bb6a84655f73c5cc9aabeb7cc2fb01",
+        "bytes": 2730
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/config.json": {
+        "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289",
+        "bytes": 4322
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "9bd0b391aa95d5c581714efee7ffd7d1fd5d312d6c7a92c604169906138a0569",
+        "bytes": 4913
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/manifest.json": {
+        "sha256": "024d2e8506ca762b36451b6910373b848a4314dedcdefe78962bb193b359f335",
+        "bytes": 2675
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/metrics.json": {
+        "sha256": "e221be9b019c9602814e9ba34ab41e366de6d428b01520ab3f362a4528e2711b",
+        "bytes": 4036
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "cc0395b5d5ff5983aae4c9e9229772033a70a7ec1f4a5b53dff0abe0ad7cb325",
+        "bytes": 3580
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "0a720ce2d3e8dd5002cdf8c56f92a85f4ca3c3825c5edecb5c9d191f15889987",
+        "bytes": 3586
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/model.pkl": {
+        "sha256": "a61559290f82be0cc2e97d6ed44356c3e17f26b3a76e5bcedb1fb350e81f0691",
+        "bytes": 2833
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750/config.json": {
+        "sha256": "31f72addc343e0ad5ac79ffd5a20c59adc15f84d904b2f775538b534db570a35",
+        "bytes": 4345
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750/feature_map.json": {
+        "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa",
+        "bytes": 4637
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750/manifest.json": {
+        "sha256": "5b399a4603bf2b7613f3960e13063117256b3a089b2e76febdcdd4457dead3ef",
+        "bytes": 2672
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750/metrics.json": {
+        "sha256": "553dc61a8a17cca6abab740a3d0b11cba1e8b6594e2a890a28d78b25e85a3a9c",
+        "bytes": 4027
+      },
+      "models/matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750/model.pkl": {
+        "sha256": "21ad1f5522373a0ddc7c5ced4bdec736c898d622ecaded0f55bb7737d45ff590",
+        "bytes": 2686
+      },
+      "models/matching/ridge/candidate_cold/smoke-ridge-001/config.json": {
+        "sha256": "a2cebefaae808dd4ede85cacdd0a727912475b283a17d420847f243e7237d07c",
+        "bytes": 4422
+      },
+      "models/matching/ridge/candidate_cold/smoke-ridge-001/feature_map.json": {
+        "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa",
+        "bytes": 4637
+      },
+      "models/matching/ridge/candidate_cold/smoke-ridge-001/manifest.json": {
+        "sha256": "e91621b24fbf73027ec0779777cb70528e8a4f42b5abf5c88534b6e71e0b4ff3",
+        "bytes": 2644
+      },
+      "models/matching/ridge/candidate_cold/smoke-ridge-001/metrics.json": {
+        "sha256": "553dc61a8a17cca6abab740a3d0b11cba1e8b6594e2a890a28d78b25e85a3a9c",
+        "bytes": 4027
+      },
+      "models/matching/ridge/candidate_cold/smoke-ridge-001/model.pkl": {
+        "sha256": "77c4c62ea86a0b5ebcb45d8d2cf56e547b84084f0268b9303350cc17aaba2458",
+        "bytes": 2734
+      },
+      "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/config.json": {
+        "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289",
+        "bytes": 4322
+      },
+      "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "c7913c8d78208b5d97d139e99c663e5ca99f342092668ec42f57cb6b2e173ee7",
+        "bytes": 4912
+      },
+      "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/manifest.json": {
+        "sha256": "12d01dad8a7450902f080409e3d77422bfd4daf78764c66c73e6aa91e332d59b",
+        "bytes": 2664
+      },
+      "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/metrics.json": {
+        "sha256": "11862af8142bb98ee6ab16d936971ab79433e3c946495f968eaa05a19d17359a",
+        "bytes": 3987
+      },
+      "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "7878e9836cdbdcdcbe69a126de593d8f918637a26bfb1da784e4bc35d551cf49",
+        "bytes": 3503
+      },
+      "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "cd775c2ced62a2c01557f7910b58495a9238f698db6b4607c18c64e3a63706b2",
+        "bytes": 3534
+      },
+      "models/matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/model.pkl": {
+        "sha256": "ccec869a6e168aef3345f2e52718527b3f8c01f9130d08c4bbb441174eff2fb2",
+        "bytes": 2833
+      },
+      "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/config.json": {
+        "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289",
+        "bytes": 4322
+      },
+      "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/feature_map.json": {
+        "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1",
+        "bytes": 4912
+      },
+      "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/manifest.json": {
+        "sha256": "b4c47634cd3356b61ba9ba70470abeb1900b0b51decfa9c6e4e996611fbcbaec",
+        "bytes": 2657
+      },
+      "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/metrics.json": {
+        "sha256": "076513b00ec81c1e1d52d7c34ef422e730da7c8700c1abb3635d8d71ae7953e8",
+        "bytes": 3988
+      },
+      "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/metrics_test.json": {
+        "sha256": "c635a26d84f7a946ad2d7e30389659a5c72178df9e2ff21491755f98e1227195",
+        "bytes": 3544
+      },
+      "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/metrics_validation.json": {
+        "sha256": "f336ae3c0d6d6d5c744f9369dc8b3dbf50a12a0d6e9903facc4701b0a3eaad6a",
+        "bytes": 3528
+      },
+      "models/matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/model.pkl": {
+        "sha256": "e196581320a8699067331801bc871e62f06bc70a2f2fcf9a9eccc3075b88be26",
+        "bytes": 2833
+      }
+    }
+  },
+  "frozen_eval": {
+    "files": 3,
+    "combined_digest": "ab6f5a84e5886f806d2ba023d2f192f5e9b4af41ece28debaf31b8737afcbbed",
+    "detail": {
+      "data/independent_eval/frozen/evalset_v1/freeze_blocked.json": {
+        "sha256": "cb6520528a881ec226a7d7ca729502a237434924175109eec4fce7e8e5476f81",
+        "bytes": 679
+      },
+      "data/independent_eval/frozen/evalset_v2/freeze_blocked.json": {
+        "sha256": "94f67509560111f0df9ef4715b60f41419ac7a75541518ac9fc0ae2821f46fff",
+        "bytes": 3524
+      },
+      "data/independent_eval/frozen/pool_v1/manifest.json": {
+        "sha256": "f91cc137966dc48c6b8fcc422fed02ce21913c3e8cf662a8b4136cecfa8a2890",
+        "bytes": 3628
+      }
+    }
+  },
+  "git": {
+    "head": "ec198289cdb3811bdd986b9ae57c53c0f5bb9eb5",
+    "branch": "main",
+    "historical_reports_status": {
+      "reports/model-training/model-tests.json": "clean",
+      "reports/model-training/results.json": "clean",
+      "reports/education-training/education-tests.json": "M reports/education-training/education-tests.json",
+      "reports/phase4-3a/test-results.json": "M reports/phase4-3a/test-results.json",
+      "reports/phase4-3a-2/test-results.json": "M reports/phase4-3a-2/test-results.json",
+      "reports/phase5-1/test-results.json": "M reports/phase5-1/test-results.json",
+      "reports/data-quality-gates.json": "M reports/data-quality-gates.json"
+    }
+  }
+}

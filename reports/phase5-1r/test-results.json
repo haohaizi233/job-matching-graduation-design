@@ -1,0 +1,1105 @@
+{
+  "generated_by": "tests/phase5_1r/run_all.py",
+  "created_at": "2026-10-29T12:25:13",
+  "seconds": 48.54,
+  "ok": true,
+  "totals": {
+    "tests": 151,
+    "pass": 151,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "R1": {
+      "title": "Gold 冻结循环门禁修复（F-001，兼 F-003/F-004 CLI 链路）",
+      "module": "test_r1_gold_freeze",
+      "total": 15,
+      "pass": 15,
+      "fail": 0,
+      "skip": 0
+    },
+    "R2": {
+      "title": "标注独立性 / 仲裁 / 完成状态门禁（F-002、F-003）",
+      "module": "test_r2_annotation_quality",
+      "total": 33,
+      "pass": 33,
+      "fail": 0,
+      "skip": 0
+    },
+    "R3": {
+      "title": "毕业届别 / 工作经验约束判定（F-005、F-006）",
+      "module": "test_r3_business_constraints",
+      "total": 39,
+      "pass": 39,
+      "fail": 0,
+      "skip": 0
+    },
+    "R4": {
+      "title": "API 边界与安全加固（F-007）",
+      "module": "test_r4_api_boundary",
+      "total": 21,
+      "pass": 21,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "records": [
+    {
+      "group": "R1",
+      "class": "R1FreezeCliChain",
+      "test": "test_blocked_without_annotations (test_r1_gold_freeze.R1FreezeCliChain.test_blocked_without_annotations)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1FreezeCliChain",
+      "test": "test_fixture_mode_rejected_in_real_workspace (test_r1_gold_freeze.R1FreezeCliChain.test_fixture_mode_rejected_in_real_workspace)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1FreezeCliChain",
+      "test": "test_positive_chain_engineering_success (test_r1_gold_freeze.R1FreezeCliChain.test_positive_chain_engineering_success)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1FreezeCliChain",
+      "test": "test_split_is_resume_group_level (test_r1_gold_freeze.R1FreezeCliChain.test_split_is_resume_group_level)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1FreezeCliChain",
+      "test": "test_tamper_detected_on_reverify (test_r1_gold_freeze.R1FreezeCliChain.test_tamper_detected_on_reverify)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1FreezeCliChain",
+      "test": "test_verify_subcommand_reports_each_file (test_r1_gold_freeze.R1FreezeCliChain.test_verify_subcommand_reports_each_file)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PostFreezeGate",
+      "test": "test_blind_protection_requires_freeze (test_r1_gold_freeze.R1PostFreezeGate.test_blind_protection_requires_freeze)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PostFreezeGate",
+      "test": "test_g2_blocked_without_real_data (test_r1_gold_freeze.R1PostFreezeGate.test_g2_blocked_without_real_data)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PostFreezeGate",
+      "test": "test_g2_never_passes_without_postcheck (test_r1_gold_freeze.R1PostFreezeGate.test_g2_never_passes_without_postcheck)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PostFreezeGate",
+      "test": "test_postcheck_passes_with_full_facts (test_r1_gold_freeze.R1PostFreezeGate.test_postcheck_passes_with_full_facts)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PostFreezeGate",
+      "test": "test_postcheck_rejects_each_failed_check (test_r1_gold_freeze.R1PostFreezeGate.test_postcheck_rejects_each_failed_check)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PreFreezeGate",
+      "test": "test_precheck_blocks_when_data_incomplete (test_r1_gold_freeze.R1PreFreezeGate.test_precheck_blocks_when_data_incomplete)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PreFreezeGate",
+      "test": "test_precheck_does_not_require_freeze_hash (test_r1_gold_freeze.R1PreFreezeGate.test_precheck_does_not_require_freeze_hash)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PreFreezeGate",
+      "test": "test_precheck_enforces_min_real_pairs (test_r1_gold_freeze.R1PreFreezeGate.test_precheck_enforces_min_real_pairs)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R1",
+      "class": "R1PreFreezeGate",
+      "test": "test_precheck_strict_requires_explicit_facts (test_r1_gold_freeze.R1PreFreezeGate.test_precheck_strict_requires_explicit_facts)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_arbitration_completed_enables_freeze (test_r2_annotation_quality.R2AnnotationCliChain.test_arbitration_completed_enables_freeze)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_disagreement_needs_arbitration_before_freeze (test_r2_annotation_quality.R2AnnotationCliChain.test_disagreement_needs_arbitration_before_freeze)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_fake_arbitration_cannot_override_agreement (test_r2_annotation_quality.R2AnnotationCliChain.test_fake_arbitration_cannot_override_agreement)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_import_error_rows_block_completion (test_r2_annotation_quality.R2AnnotationCliChain.test_import_error_rows_block_completion)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_invalid_arbitration_rows_block (test_r2_annotation_quality.R2AnnotationCliChain.test_invalid_arbitration_rows_block)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_mirrored_annotations_blocked (test_r2_annotation_quality.R2AnnotationCliChain.test_mirrored_annotations_blocked)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_no_disagreement_freezes_without_arbitration_file (test_r2_annotation_quality.R2AnnotationCliChain.test_no_disagreement_freezes_without_arbitration_file)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_partial_arbitration_not_complete (test_r2_annotation_quality.R2AnnotationCliChain.test_partial_arbitration_not_complete)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_shared_annotator_id_blocked (test_r2_annotation_quality.R2AnnotationCliChain.test_shared_annotator_id_blocked)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2AnnotationCliChain",
+      "test": "test_unjudgeable_stays_unjudgeable (test_r2_annotation_quality.R2AnnotationCliChain.test_unjudgeable_stays_unjudgeable)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2ArbitrationStatus",
+      "test": "test_all_disputes_arbitrated_completed (test_r2_annotation_quality.R2ArbitrationStatus.test_all_disputes_arbitrated_completed)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2ArbitrationStatus",
+      "test": "test_illegal_status_value_rejected (test_r2_annotation_quality.R2ArbitrationStatus.test_illegal_status_value_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2ArbitrationStatus",
+      "test": "test_invalid_rows_make_arbitration_invalid (test_r2_annotation_quality.R2ArbitrationStatus.test_invalid_rows_make_arbitration_invalid)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2ArbitrationStatus",
+      "test": "test_no_disagreement_not_required (test_r2_annotation_quality.R2ArbitrationStatus.test_no_disagreement_not_required)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2ArbitrationStatus",
+      "test": "test_no_disagreement_with_rows_keeps_record_but_no_rewrite (test_r2_annotation_quality.R2ArbitrationStatus.test_no_disagreement_with_rows_keeps_record_but_no_rewrite)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2ArbitrationStatus",
+      "test": "test_override_attempt_is_invalid_with_disagreement (test_r2_annotation_quality.R2ArbitrationStatus.test_override_attempt_is_invalid_with_disagreement)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2ArbitrationStatus",
+      "test": "test_override_attempt_is_invalid_without_disagreement (test_r2_annotation_quality.R2ArbitrationStatus.test_override_attempt_is_invalid_without_disagreement)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2ArbitrationStatus",
+      "test": "test_partial_arbitration_pending (test_r2_annotation_quality.R2ArbitrationStatus.test_partial_arbitration_pending)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_arbitration_invalid_blocks (test_r2_annotation_quality.R2CompletionStatus.test_arbitration_invalid_blocks)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_arbitration_pending_keeps_in_progress (test_r2_annotation_quality.R2CompletionStatus.test_arbitration_pending_keeps_in_progress)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_complete_when_all_checks_pass (test_r2_annotation_quality.R2CompletionStatus.test_complete_when_all_checks_pass)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_empty_inputs_are_pending (test_r2_annotation_quality.R2CompletionStatus.test_empty_inputs_are_pending)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_final_label_problems_block (test_r2_annotation_quality.R2CompletionStatus.test_final_label_problems_block)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_fully_mirrored_annotations_block (test_r2_annotation_quality.R2CompletionStatus.test_fully_mirrored_annotations_block)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_import_errors_block_completion (test_r2_annotation_quality.R2CompletionStatus.test_import_errors_block_completion)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_missing_annotations_in_progress (test_r2_annotation_quality.R2CompletionStatus.test_missing_annotations_in_progress)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_partially_mirrored_needs_review (test_r2_annotation_quality.R2CompletionStatus.test_partially_mirrored_needs_review)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_same_label_is_not_a_violation (test_r2_annotation_quality.R2CompletionStatus.test_same_label_is_not_a_violation)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_shared_annotator_id_blocks (test_r2_annotation_quality.R2CompletionStatus.test_shared_annotator_id_blocks)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2CompletionStatus",
+      "test": "test_unjudgeable_forced_blocks (test_r2_annotation_quality.R2CompletionStatus.test_unjudgeable_forced_blocks)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2UnjudgeableAndIntegrity",
+      "test": "test_final_label_integrity (test_r2_annotation_quality.R2UnjudgeableAndIntegrity.test_final_label_integrity)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2UnjudgeableAndIntegrity",
+      "test": "test_missing_annotation_statistics (test_r2_annotation_quality.R2UnjudgeableAndIntegrity.test_missing_annotation_statistics)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R2",
+      "class": "R2UnjudgeableAndIntegrity",
+      "test": "test_unjudgeable_not_forced (test_r2_annotation_quality.R2UnjudgeableAndIntegrity.test_unjudgeable_not_forced)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_2027_and_after (test_r3_business_constraints.R3CohortConstraint.test_2027_and_after)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_2027_in_range_2026_2028 (test_r3_business_constraints.R3CohortConstraint.test_2027_in_range_2026_2028)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_2027_matches_2027 (test_r3_business_constraints.R3CohortConstraint.test_2027_matches_2027)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_2027_out_of_range (test_r3_business_constraints.R3CohortConstraint.test_2027_out_of_range)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_2027_rejects_only_2026 (test_r3_business_constraints.R3CohortConstraint.test_2027_rejects_only_2026)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_chinese_variants (test_r3_business_constraints.R3CohortConstraint.test_chinese_variants)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_fresh_graduate_policy_is_insufficient (test_r3_business_constraints.R3CohortConstraint.test_fresh_graduate_policy_is_insufficient)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_invalid_year_treated_as_unclear (test_r3_business_constraints.R3CohortConstraint.test_invalid_year_treated_as_unclear)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_legacy_field_fallback (test_r3_business_constraints.R3CohortConstraint.test_legacy_field_fallback)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_missing_jd_cohort_unclear (test_r3_business_constraints.R3CohortConstraint.test_missing_jd_cohort_unclear)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_missing_student_year_insufficient (test_r3_business_constraints.R3CohortConstraint.test_missing_student_year_insufficient)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_no_auto_veto_but_status_accurate (test_r3_business_constraints.R3CohortConstraint.test_no_auto_veto_but_status_accurate)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_unrestricted_always_satisfied (test_r3_business_constraints.R3CohortConstraint.test_unrestricted_always_satisfied)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortConstraint",
+      "test": "test_year_set_membership (test_r3_business_constraints.R3CohortConstraint.test_year_set_membership)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_exact_year (test_r3_business_constraints.R3CohortParsing.test_exact_year)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_extract_cohort_clause (test_r3_business_constraints.R3CohortParsing.test_extract_cohort_clause)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_fresh_and_past_graduate (test_r3_business_constraints.R3CohortParsing.test_fresh_and_past_graduate)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_range_reversed_normalized (test_r3_business_constraints.R3CohortParsing.test_range_reversed_normalized)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_unclear_cases (test_r3_business_constraints.R3CohortParsing.test_unclear_cases)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_unrestricted (test_r3_business_constraints.R3CohortParsing.test_unrestricted)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_year_and_after (test_r3_business_constraints.R3CohortParsing.test_year_and_after)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_year_range_variants (test_r3_business_constraints.R3CohortParsing.test_year_range_variants)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3CohortParsing",
+      "test": "test_year_set (test_r3_business_constraints.R3CohortParsing.test_year_set)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceConstraint",
+      "test": "test_accept_fresh_graduate (test_r3_business_constraints.R3ExperienceConstraint.test_accept_fresh_graduate)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceConstraint",
+      "test": "test_evidence_only_counts_entries (test_r3_business_constraints.R3ExperienceConstraint.test_evidence_only_counts_entries)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceConstraint",
+      "test": "test_missing_requirement_unclear (test_r3_business_constraints.R3ExperienceConstraint.test_missing_requirement_unclear)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceConstraint",
+      "test": "test_none_required_with_null_years_is_satisfied (test_r3_business_constraints.R3ExperienceConstraint.test_none_required_with_null_years_is_satisfied)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceConstraint",
+      "test": "test_preference_only_unclear (test_r3_business_constraints.R3ExperienceConstraint.test_preference_only_unclear)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceConstraint",
+      "test": "test_unknown_status_with_years_is_unclear (test_r3_business_constraints.R3ExperienceConstraint.test_unknown_status_with_years_is_unclear)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceConstraint",
+      "test": "test_years_required_insufficient_evidence (test_r3_business_constraints.R3ExperienceConstraint.test_years_required_insufficient_evidence)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceParsing",
+      "test": "test_education_unlimited_not_experience (test_r3_business_constraints.R3ExperienceParsing.test_education_unlimited_not_experience)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceParsing",
+      "test": "test_missing_is_unknown (test_r3_business_constraints.R3ExperienceParsing.test_missing_is_unknown)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceParsing",
+      "test": "test_mixed_clauses_isolated (test_r3_business_constraints.R3ExperienceParsing.test_mixed_clauses_isolated)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceParsing",
+      "test": "test_none_required (test_r3_business_constraints.R3ExperienceParsing.test_none_required)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceParsing",
+      "test": "test_preference_only (test_r3_business_constraints.R3ExperienceParsing.test_preference_only)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceParsing",
+      "test": "test_project_count_never_years (test_r3_business_constraints.R3ExperienceParsing.test_project_count_never_years)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3ExperienceParsing",
+      "test": "test_years_min (test_r3_business_constraints.R3ExperienceParsing.test_years_min)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3StatusContract",
+      "test": "test_all_paths_human_review (test_r3_business_constraints.R3StatusContract.test_all_paths_human_review)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R3",
+      "class": "R3StatusContract",
+      "test": "test_requirement_serialized (test_r3_business_constraints.R3StatusContract.test_requirement_serialized)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4DeploymentScope",
+      "test": "test_deployment_declared_local_dev_only (test_r4_api_boundary.R4DeploymentScope.test_deployment_declared_local_dev_only)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4DeploymentScope",
+      "test": "test_limits_exposed_in_config (test_r4_api_boundary.R4DeploymentScope.test_limits_exposed_in_config)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4DeploymentScope",
+      "test": "test_openapi_documented (test_r4_api_boundary.R4DeploymentScope.test_openapi_documented)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4ErrorHygiene",
+      "test": "test_error_catalog_complete (test_r4_api_boundary.R4ErrorHygiene.test_error_catalog_complete)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4ErrorHygiene",
+      "test": "test_error_envelope_no_paths (test_r4_api_boundary.R4ErrorHygiene.test_error_envelope_no_paths)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4ErrorHygiene",
+      "test": "test_local_paths_redacted (test_r4_api_boundary.R4ErrorHygiene.test_local_paths_redacted)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4ErrorHygiene",
+      "test": "test_unknown_model_error_is_explicit (test_r4_api_boundary.R4ErrorHygiene.test_unknown_model_error_is_explicit)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4RequestTracking",
+      "test": "test_logs_record_metadata_not_body (test_r4_api_boundary.R4RequestTracking.test_logs_record_metadata_not_body)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4RequestTracking",
+      "test": "test_malicious_request_id_replaced (test_r4_api_boundary.R4RequestTracking.test_malicious_request_id_replaced)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4RequestTracking",
+      "test": "test_rate_limit (test_r4_api_boundary.R4RequestTracking.test_rate_limit)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4RequestTracking",
+      "test": "test_rate_limit_returns_error_code (test_r4_api_boundary.R4RequestTracking.test_rate_limit_returns_error_code)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4RequestTracking",
+      "test": "test_valid_request_id_passthrough (test_r4_api_boundary.R4RequestTracking.test_valid_request_id_passthrough)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_api_rejects_unsupported_format (test_r4_api_boundary.R4UploadLimits.test_api_rejects_unsupported_format)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_base64_length_limit_unit (test_r4_api_boundary.R4UploadLimits.test_base64_length_limit_unit)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_decoded_bytes_limit (test_r4_api_boundary.R4UploadLimits.test_decoded_bytes_limit)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_estimated_decoded_size_checked_before_decode (test_r4_api_boundary.R4UploadLimits.test_estimated_decoded_size_checked_before_decode)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_format_whitelist (test_r4_api_boundary.R4UploadLimits.test_format_whitelist)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_parse_after_all_preliminary_checks (test_r4_api_boundary.R4UploadLimits.test_parse_after_all_preliminary_checks)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_request_body_limit (test_r4_api_boundary.R4UploadLimits.test_request_body_limit)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_text_length_limit (test_r4_api_boundary.R4UploadLimits.test_text_length_limit)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R4",
+      "class": "R4UploadLimits",
+      "test": "test_upload_requires_file_name (test_r4_api_boundary.R4UploadLimits.test_upload_requires_file_name)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9DeterminismAndContract",
+      "test": "test_archived_contract_fields_unchanged (test_r5_metrics_input.R9DeterminismAndContract.test_archived_contract_fields_unchanged)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9DeterminismAndContract",
+      "test": "test_scope_fields_present (test_r5_metrics_input.R9DeterminismAndContract.test_scope_fields_present)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9DeterminismAndContract",
+      "test": "test_tie_scores_deterministic (test_r5_metrics_input.R9DeterminismAndContract.test_tie_scores_deterministic)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9FilteringSemantics",
+      "test": "test_empty_inputs_not_filled (test_r5_metrics_input.R9FilteringSemantics.test_empty_inputs_not_filled)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9FilteringSemantics",
+      "test": "test_label_filter_stats_sum (test_r5_metrics_input.R9FilteringSemantics.test_label_filter_stats_sum)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9FilteringSemantics",
+      "test": "test_min_group_size_filter (test_r5_metrics_input.R9FilteringSemantics.test_min_group_size_filter)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9FilteringSemantics",
+      "test": "test_single_item_group_can_be_evaluated_when_min_size_1 (test_r5_metrics_input.R9FilteringSemantics.test_single_item_group_can_be_evaluated_when_min_size_1)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9FilteringSemantics",
+      "test": "test_unjudgeable_excluded_from_denominator (test_r5_metrics_input.R9FilteringSemantics.test_unjudgeable_excluded_from_denominator)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9FilteringSemantics",
+      "test": "test_unlabeled_excluded (test_r5_metrics_input.R9FilteringSemantics.test_unlabeled_excluded)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9FilteringSemantics",
+      "test": "test_zero_relevance_group_skipped (test_r5_metrics_input.R9FilteringSemantics.test_zero_relevance_group_skipped)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9GeneratorMaterialization",
+      "test": "test_all_three_generators_equal_lists (test_r5_metrics_input.R9GeneratorMaterialization.test_all_three_generators_equal_lists)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9GeneratorMaterialization",
+      "test": "test_generator_of_relevance_not_consumed_twice (test_r5_metrics_input.R9GeneratorMaterialization.test_generator_of_relevance_not_consumed_twice)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9GeneratorMaterialization",
+      "test": "test_lazy_generator_with_maps (test_r5_metrics_input.R9GeneratorMaterialization.test_lazy_generator_with_maps)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9GeneratorMaterialization",
+      "test": "test_result_reproducible (test_r5_metrics_input.R9GeneratorMaterialization.test_result_reproducible)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9InputValidation",
+      "test": "test_inf_score_rejected (test_r5_metrics_input.R9InputValidation.test_inf_score_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9InputValidation",
+      "test": "test_invalid_label_rejected (test_r5_metrics_input.R9InputValidation.test_invalid_label_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9InputValidation",
+      "test": "test_length_mismatch_rejected (test_r5_metrics_input.R9InputValidation.test_length_mismatch_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9InputValidation",
+      "test": "test_length_mismatch_with_generators_rejected (test_r5_metrics_input.R9InputValidation.test_length_mismatch_with_generators_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9InputValidation",
+      "test": "test_nan_score_rejected (test_r5_metrics_input.R9InputValidation.test_nan_score_rejected)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R9",
+      "class": "R9InputValidation",
+      "test": "test_prepare_human_labels_contract (test_r5_metrics_input.R9InputValidation.test_prepare_human_labels_contract)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainBResumeToRanking",
+      "test": "test_chain_reproducible (test_r6_e2e_chains.ChainBResumeToRanking.test_chain_reproducible)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainBResumeToRanking",
+      "test": "test_cohort_mismatch_reported (test_r6_e2e_chains.ChainBResumeToRanking.test_cohort_mismatch_reported)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainBResumeToRanking",
+      "test": "test_direct_service_chain_matches_api (test_r6_e2e_chains.ChainBResumeToRanking.test_direct_service_chain_matches_api)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainBResumeToRanking",
+      "test": "test_no_pii_in_response_or_logs (test_r6_e2e_chains.ChainBResumeToRanking.test_no_pii_in_response_or_logs)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainBResumeToRanking",
+      "test": "test_profile_extracted_from_uploaded_document (test_r6_e2e_chains.ChainBResumeToRanking.test_profile_extracted_from_uploaded_document)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainBResumeToRanking",
+      "test": "test_qualification_judgements (test_r6_e2e_chains.ChainBResumeToRanking.test_qualification_judgements)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainBResumeToRanking",
+      "test": "test_score_type_and_identity (test_r6_e2e_chains.ChainBResumeToRanking.test_score_type_and_identity)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainBResumeToRanking",
+      "test": "test_skill_evidence_consistent (test_r6_e2e_chains.ChainBResumeToRanking.test_skill_evidence_consistent)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_artifact_missing_degrades_with_source (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_artifact_missing_degrades_with_source)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_artifact_missing_refused_when_fallback_disabled (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_artifact_missing_refused_when_fallback_disabled)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_corrupt_model_distinct_from_missing (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_corrupt_model_distinct_from_missing)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_degraded_result_never_claims_model_output (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_degraded_result_never_claims_model_output)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_formal_mode_rejects_unverified_model (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_formal_mode_rejects_unverified_model)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_future_mode_never_degrades_silently (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_future_mode_never_degrades_silently)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_future_model_unavailable (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_future_model_unavailable)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_inapplicable_input_degrades_or_refuses (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_inapplicable_input_degrades_or_refuses)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_load_only_on_init_or_cache_invalidation (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_load_only_on_init_or_cache_invalidation)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_registered_statuses_valid (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_registered_statuses_valid)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_timeout_does_not_mark_degraded (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_timeout_does_not_mark_degraded)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_timeout_is_error_not_silent_fallback (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_timeout_is_error_not_silent_fallback)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_unregistered_future_slot_rejected_on_load (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_unregistered_future_slot_rejected_on_load)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_unregistered_model_explicit_error (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_unregistered_model_explicit_error)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R?",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_working_model_keeps_model_identity (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_working_model_keeps_model_identity)",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}
