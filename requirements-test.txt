@@ -1,0 +1,8 @@
+# 测试依赖（可选依赖组）——Phase5-1A
+# 用法：pip install -r requirements-test.txt
+# 原则：沿用仓库既有 stdlib unittest 体系，不迁移测试框架。
+#
+# 运行服务/API 契约测试还需要 serving 环境依赖（见 environment-service.yml）。
+
+httpx==0.28.1          # FastAPI TestClient 传输层
+pytest==8.3.4          # 仅用于部分历史环境探测脚本；主测试入口是各 tests/*/run_all.py

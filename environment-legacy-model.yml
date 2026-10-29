@@ -1,0 +1,25 @@
+# 旧模型兼容环境（Legacy Model Compatibility Environment）——Phase5-1A
+#
+# 用途：仅在确有需要时启用，用于运行/验证历史 checkpoint（旧 scikit-learn 反序列化）。
+# 不作为业务服务环境，不引入微服务；通过独立 Conda 环境或单独进程隔离即可。
+#
+# 版本依据：models/*/manifest.json 的 environment 字段
+#   python 3.11.18 / scikit-learn 1.5.2 / numpy 1.26.4 / pandas 2.2.3 / torch 2.1.2+cu121
+# 与当前开发机（python 3.13 / sklearn 1.8.0 / numpy 2.2.6）不兼容的根因见
+#   reports/phase5-1a/model-compatibility.md
+#
+# 纪律：历史权重一律不动、不重训；本环境只做加载与历史指标复算。
+name: job-matching-legacy-model
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.18
+  - numpy=1.26.4
+  - pandas=2.2.3
+  - scikit-learn=1.5.2
+  - joblib=1.4.2
+  - scipy=1.13.1
+  - pyyaml=6.0.2
+  - pip
+  - pip:
+      - torch==2.1.2          # CPU 轮子即可；GPU 复现另按 training 环境执行

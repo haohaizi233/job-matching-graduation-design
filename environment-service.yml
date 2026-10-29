@@ -1,0 +1,27 @@
+# 服务运行环境（Serving Environment）——Phase5-1A 依赖拆分
+#
+# 用途：FastAPI 业务推理 / 开发演示 / CI 纯 Python 质量门禁。
+# 与 environment.yml（历史训练环境，冻结不动）分离：
+#   * Training Environment               -> environment.yml（Python 3.11 / sklearn 1.5.2 / torch 2.1.2+cu121）
+#   * Serving Environment                -> 本文件
+#   * Legacy Model Compatibility Env     -> environment-legacy-model.yml（仅必要时启用）
+#
+# 原则：优先可复现，不追求最新版本；任何环境变更不得改变历史训练成果。
+name: job-matching-service
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy=1.26.4        # 与训练环境一致，降低反序列化漂移
+  - pandas=2.2.3
+  - scikit-learn=1.5.2  # 历史 checkpoint 依赖（见 models/*/manifest.json environment 字段）
+  - joblib=1.4.2
+  - scipy=1.13.1
+  - pyyaml=6.0.2
+  - pip
+  - pip:
+      - fastapi==0.115.6
+      - pydantic==2.10.4
+      - uvicorn==0.34.0
+      - httpx==0.28.1        # 测试客户端
+      - pymupdf==1.24.14     # PDF 文本抽取（缺失时显式报错，不静默跳过）
