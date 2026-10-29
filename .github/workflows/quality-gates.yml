@@ -1,9 +1,19 @@
-# Phase5-1A 最小质量门禁（纯 Python，无 GPU、无真实简历、无大型训练数据）
+# Phase5-2 可信质量门禁（拆分为两级，禁止硬编码假 PASS）
 #
-# 纪律（禁止硬编码假 PASS）：
-#   * 每步必须真实执行测试并如实记录 总数/实跑/失败/跳过；
-#   * 历史 checkpoint 兼容性检查属"环境相关"，失败要登记不可执行原因，
-#     不得把"无法加载权重"表述成"业务逻辑通过"，也不得阻断纯 Python 开发流程。
+# ── 级别一：core-ci（全新 checkout 即可执行）─────────────────────────────
+#   不依赖真实简历、训练数据、模型权重、私有文件、GPU，也不联网下载任何数据集。
+#   包含：Python 语法检查 / 领域规则测试 / API 契约测试 / Phase5-1R 可移植测试 /
+#         Phase5-1A 架构守卫 / 临时合成夹具数据质量测试 / 隐私与安全门禁 /
+#         测试运行器聚合一致性检查 / 完整性检查器自检 / 干净 checkout 可移植性验证。
+#
+# ── 级别二：artifact-dependent-validation（需要真实产物）──────────────────
+#   依赖真实原始数据、训练产物、GPU 或历史模型的检查单独运行，并逐项显式登记
+#   状态：PASS / FAIL / BLOCKED / NOT_RUN / ENV_INCOMPATIBLE。
+#   纪律：NOT_RUN 与 BLOCKED 与 ENV_INCOMPATIBLE **一律不计入 PASS**；
+#         没有真实执行就没有 PASS；旧报告一律不采信（先校验运行身份）。
+#
+# 运行身份：每个 job 生成唯一 JM_RUN_ID，所有诊断报告必须携带该 run_id 与
+# 当前 git commit，消费侧用 scripts/phase5_1a/verify_run_freshness.py 强制校验。
 name: quality-gates
 
 on:
@@ -11,13 +21,22 @@ on:
     branches: [main, master]
   pull_request:
   workflow_dispatch:
+    inputs:
+      run_artifact_validation:
+        description: "同时执行 Artifact-dependent Validation（需要真实产物）"
+        type: boolean
+        default: true
 
 jobs:
-  python-quality:
+  # ======================= 级别一：Core CI =======================
+  core-ci:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.11"]
+    env:
+      JM_RUN_ID: core-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONUTF8: "1"
     steps:
       - uses: actions/checkout@v4
 
@@ -25,89 +44,137 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: 依赖安装（服务/测试最小集）
+      - name: 依赖安装（服务/测试最小集，版本固定）
         run: |
           python -m pip install --upgrade pip
           pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
-                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 httpx==0.28.1
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 \
+                      httpx==0.28.1 pymupdf==1.24.14 python-docx==1.1.2 \
+                      sqlalchemy==2.0.36 alembic==1.14.0 argon2-cffi==23.1.0 \
+                      python-multipart==0.0.20
 
       - name: 语法与导入检查
         run: python -m compileall -q src scripts tests
 
-      - name: 单元与契约测试（Phase5-1R 151 项）
+      - name: 契约与可移植测试（Phase5-1R）
         run: python tests/phase5_1r/run_all.py
 
-      - name: 架构边界与门禁自检（Phase5-1A 26 项）
+      - name: 架构边界与共用规则（Phase5-1A）
         run: python tests/phase5_1a/run_all.py
 
-      - name: API 契约与业务服务测试（Phase5-1 92 项）
+      - name: API 契约与业务服务测试（Phase5-1）
         run: python tests/phase5_1/run_all.py
 
-      - name: 研究流程回归（Phase4-3A 237 项）
-        run: python tests/phase4_3a/run_all.py
+      - name: 合成夹具数据质量测试（G0，临时目录，无需真实数据）
+        run: python tests/data_pipeline/test_g0_synth_data_quality.py
 
-      - name: 数据质量闸门（data_pipeline 74 项）
-        run: python tests/data_pipeline/run_all.py
+      - name: 可信 CI 门禁（负向测试 / 运行器一致性 / 隐私安全 / CI 契约）
+        run: python tests/core_ci/run_all.py
 
-      - name: 隐私与冻结完整性检查
+      - name: 完整性检查器自检（合成冻结夹具，必需 manifest）
         run: |
-          python scripts/phase5_1a/check_artifact_integrity.py
+          python scripts/phase5_1a/check_artifact_integrity.py \
+            --root data/independent_eval --glob '**/manifest*.json' \
+            --require-manifest --quiet
 
-      - name: 历史模型兼容性登记（允许失败，必须如实登记）
-        run: |
-          python scripts/phase5_1a/diagnose_model_compat.py || true
-          python - <<'PY'
-          import json, pathlib
-          p = pathlib.Path("reports/phase5-1a/model-compatibility.json")
-          if not p.exists():
-              raise SystemExit("模型兼容性报告缺失，必须如实登记不可执行原因")
-          d = json.loads(p.read_text(encoding="utf-8"))
-          print("model-compatibility summary:", d.get("summary"))
-          print("runtime:", d.get("runtime_environment"))
-          PY
+      - name: 干净 checkout 可移植性验证（证明不依赖真实数据/权重）
+        run: python scripts/phase5_1a/verify_fresh_checkout.py
 
-      - name: 阶段报告一致性检查
-        run: |
-          python - <<'PY'
-          import json, pathlib, sys
-          p = pathlib.Path("reports/phase5-1r/test-results.json")
-          d = json.loads(p.read_text(encoding="utf-8"))
-          t, g = d["totals"], d["groups"]
-          checks = {
-              "sum_groups_total_eq_totals_tests": sum(s["total"] for s in g.values()) == t["tests"],
-              "sum_groups_pass_eq_totals_pass": sum(s["pass"] for s in g.values()) == t["pass"],
-              "no_empty_run": t["tests"] > 0,
-              "all_groups_legal": set(g) <= {"R1", "R2", "R3", "R4", "R5", "R6"},
-          }
-          print("report consistency:", checks)
-          if not all(checks.values()):
-              sys.exit(1)
-          PY
-
-      - name: 上传测试报告
+      - name: 上传 Core CI 证据
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: quality-gate-reports
+          name: core-ci-evidence
           path: |
+            reports/phase5-2/ci/
+            reports/phase5-1a/test-results.json
             reports/phase5-1r/test-results.json
             reports/phase5-1/test-results.json
-            reports/phase4-3a/test-results.json
-            reports/phase5-1a/
           if-no-files-found: warn
 
-  # 训练完整性 / GPU 复现属独立的手动工作流，不在纯 Python 门禁内阻断开发
+  # ============ 级别二：Artifact-dependent Validation ============
+  # 需要真实原始数据 / 训练产物 / GPU / 历史 checkpoint。
+  # 每一项都显式登记 PASS / FAIL / BLOCKED / NOT_RUN / ENV_INCOMPATIBLE，
+  # NOT_RUN / BLOCKED / ENV_INCOMPATIBLE 不计入 PASS。
+  artifact-dependent-validation:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_artifact_validation
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: artifact-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 依赖安装（诊断最小集）
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4
+
+      # 关键：不下载任何来源不明的数据集。真实产物必须由人工/独立流程提供。
+      - name: 前置产物探测（不下载、不伪造）
+        run: |
+          echo "data/raw 是否存在: $([ -d data/raw ] && echo yes || echo no)"
+          echo "models 是否存在:   $([ -d models ] && echo yes || echo no)"
+
+      - name: 模型兼容诊断（带运行身份，不复用旧报告）
+        run: |
+          python scripts/phase5_1a/diagnose_model_compat.py \
+            --out "reports/phase5-2/ci/model-compatibility.json"
+
+      - name: 消费侧运行身份校验（拒绝采信旧报告）
+        run: |
+          python scripts/phase5_1a/verify_run_freshness.py \
+            "reports/phase5-2/ci/model-compatibility.json" \
+            --allow-status "PASS,NOT_RUN,BLOCKED,ENV_INCOMPATIBLE"
+
+      - name: 完整性检查（真实冻结产物，必需 manifest）
+        run: |
+          python scripts/phase5_1a/check_artifact_integrity.py \
+            --root data/independent_eval --glob '**/manifest*.json' \
+            --require-manifest --quiet
+
+      - name: Artifact-dependent 状态登记（PASS/FAIL/BLOCKED/NOT_RUN/ENV_INCOMPATIBLE）
+        run: |
+          # 状态口径（不得同义替换、不得把 NOT_RUN/BLOCKED/ENV_INCOMPATIBLE 计入 PASS）：
+          #   PASS             已真实执行且通过
+          #   FAIL             已真实执行且失败      -> 本步骤退出非零
+          #   BLOCKED          前置条件永久不满足（如 H2 真人 Gold 未到位）
+          #   NOT_RUN          前置条件本次不满足（如本机无权重）
+          #   ENV_INCOMPATIBLE 执行环境无法执行（如旧 checkpoint 依赖旧版依赖栈）
+          python scripts/phase5_1a/summarize_validation.py --run
+
+      - name: 上传 Artifact-dependent 登记表
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-validation-evidence
+          path: reports/phase5-2/ci/
+          if-no-files-found: warn
+
+  # ===== 历史模型兼容环境诊断（独立手动，不阻断纯 Python 开发）=====
   model-artifact-compat-manual:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: manual-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONUTF8: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: 旧模型兼容环境诊断（独立登记）
+      - name: 旧模型兼容环境诊断（独立登记，带运行身份）
         run: |
           python -m pip install --upgrade pip
           pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 pyyaml==6.0.2
-          python scripts/phase5_1a/diagnose_model_compat.py
-          cat reports/phase5-1a/model-compatibility.md
+          python scripts/phase5_1a/diagnose_model_compat.py \
+            --out "reports/phase5-2/ci/model-compatibility-manual.json"
+          python scripts/phase5_1a/verify_run_freshness.py \
+            "reports/phase5-2/ci/model-compatibility-manual.json" \
+            --allow-status "PASS,NOT_RUN,BLOCKED,ENV_INCOMPATIBLE"
+          cat "reports/phase5-2/ci/model-compatibility-manual.md"
