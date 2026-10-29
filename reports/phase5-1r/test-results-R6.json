@@ -1,0 +1,273 @@
+{
+  "generated_by": "tests/phase5_1r/run_all.py",
+  "created_at": "2026-10-29T14:26:18",
+  "seconds": 2.36,
+  "ok": true,
+  "mode": "partial:R6",
+  "requested_group": "R6",
+  "loaded_modules": [
+    "test_r6_e2e_chains"
+  ],
+  "environment": {
+    "python": "3.13.2",
+    "python_full": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "fastapi": "0.120.3",
+      "pydantic": "2.9.2",
+      "httpx": "0.28.1",
+      "uvicorn": "0.35.0",
+      "numpy": "2.2.6",
+      "scipy": "1.17.0rc1",
+      "sklearn": "1.8.0",
+      "joblib": "1.5.3",
+      "pandas": "3.0.0rc1",
+      "torch": "2.12.0+cpu",
+      "yaml": "6.0.2"
+    },
+    "commit": "0225fcb91a17feec486afb81ae4de3d0e44b342d",
+    "worktree": "dirty"
+  },
+  "totals": {
+    "tests": 23,
+    "pass": 23,
+    "fail": 0,
+    "errors": 0,
+    "failures": 0,
+    "skip": 0
+  },
+  "groups": {
+    "R6": {
+      "title": "端到端正向链路 B 简历岗位推荐 / 链路 C 模型错误与降级",
+      "module": "test_r6_e2e_chains",
+      "total": 23,
+      "pass": 23,
+      "fail": 0,
+      "skip": 0,
+      "errors": 0,
+      "failures": 0
+    }
+  },
+  "consistency": {
+    "checks": {
+      "sum_groups_total_eq_totals_tests": true,
+      "sum_groups_pass_eq_totals_pass": true,
+      "sum_groups_fail_eq_totals_fail": true,
+      "sum_groups_skip_eq_totals_skip": true,
+      "all_records_have_legal_group": true,
+      "all_records_belong_to_loaded_module": true,
+      "loaded_modules_registered": true,
+      "no_empty_run": true
+    },
+    "ok": true
+  },
+  "records": [
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainBResumeToRanking",
+      "test": "test_chain_reproducible (test_r6_e2e_chains.ChainBResumeToRanking.test_chain_reproducible)",
+      "test_id": "test_r6_e2e_chains.ChainBResumeToRanking.test_chain_reproducible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainBResumeToRanking",
+      "test": "test_cohort_mismatch_reported (test_r6_e2e_chains.ChainBResumeToRanking.test_cohort_mismatch_reported)",
+      "test_id": "test_r6_e2e_chains.ChainBResumeToRanking.test_cohort_mismatch_reported",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainBResumeToRanking",
+      "test": "test_direct_service_chain_matches_api (test_r6_e2e_chains.ChainBResumeToRanking.test_direct_service_chain_matches_api)",
+      "test_id": "test_r6_e2e_chains.ChainBResumeToRanking.test_direct_service_chain_matches_api",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainBResumeToRanking",
+      "test": "test_no_pii_in_response_or_logs (test_r6_e2e_chains.ChainBResumeToRanking.test_no_pii_in_response_or_logs)",
+      "test_id": "test_r6_e2e_chains.ChainBResumeToRanking.test_no_pii_in_response_or_logs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainBResumeToRanking",
+      "test": "test_profile_extracted_from_uploaded_document (test_r6_e2e_chains.ChainBResumeToRanking.test_profile_extracted_from_uploaded_document)",
+      "test_id": "test_r6_e2e_chains.ChainBResumeToRanking.test_profile_extracted_from_uploaded_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainBResumeToRanking",
+      "test": "test_qualification_judgements (test_r6_e2e_chains.ChainBResumeToRanking.test_qualification_judgements)",
+      "test_id": "test_r6_e2e_chains.ChainBResumeToRanking.test_qualification_judgements",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainBResumeToRanking",
+      "test": "test_score_type_and_identity (test_r6_e2e_chains.ChainBResumeToRanking.test_score_type_and_identity)",
+      "test_id": "test_r6_e2e_chains.ChainBResumeToRanking.test_score_type_and_identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainBResumeToRanking",
+      "test": "test_skill_evidence_consistent (test_r6_e2e_chains.ChainBResumeToRanking.test_skill_evidence_consistent)",
+      "test_id": "test_r6_e2e_chains.ChainBResumeToRanking.test_skill_evidence_consistent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_artifact_missing_degrades_with_source (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_artifact_missing_degrades_with_source)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_artifact_missing_degrades_with_source",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_artifact_missing_refused_when_fallback_disabled (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_artifact_missing_refused_when_fallback_disabled)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_artifact_missing_refused_when_fallback_disabled",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_corrupt_model_distinct_from_missing (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_corrupt_model_distinct_from_missing)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_corrupt_model_distinct_from_missing",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_degraded_result_never_claims_model_output (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_degraded_result_never_claims_model_output)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_degraded_result_never_claims_model_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_formal_mode_rejects_unverified_model (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_formal_mode_rejects_unverified_model)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_formal_mode_rejects_unverified_model",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_future_mode_never_degrades_silently (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_future_mode_never_degrades_silently)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_future_mode_never_degrades_silently",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_future_model_unavailable (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_future_model_unavailable)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_future_model_unavailable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_inapplicable_input_degrades_or_refuses (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_inapplicable_input_degrades_or_refuses)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_inapplicable_input_degrades_or_refuses",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_load_only_on_init_or_cache_invalidation (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_load_only_on_init_or_cache_invalidation)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_load_only_on_init_or_cache_invalidation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_registered_statuses_valid (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_registered_statuses_valid)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_registered_statuses_valid",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_timeout_does_not_mark_degraded (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_timeout_does_not_mark_degraded)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_timeout_does_not_mark_degraded",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_timeout_is_error_not_silent_fallback (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_timeout_is_error_not_silent_fallback)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_timeout_is_error_not_silent_fallback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_unregistered_future_slot_rejected_on_load (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_unregistered_future_slot_rejected_on_load)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_unregistered_future_slot_rejected_on_load",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_unregistered_model_explicit_error (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_unregistered_model_explicit_error)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_unregistered_model_explicit_error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R6",
+      "module": "test_r6_e2e_chains",
+      "class": "ChainCModelErrorsAndDegradation",
+      "test": "test_working_model_keeps_model_identity (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_working_model_keeps_model_identity)",
+      "test_id": "test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_working_model_keeps_model_identity",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

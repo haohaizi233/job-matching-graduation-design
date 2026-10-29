@@ -1,0 +1,246 @@
+{
+  "generated_by": "tests/phase5_1r/run_all.py",
+  "created_at": "2026-10-29T14:26:05",
+  "seconds": 0.11,
+  "ok": true,
+  "mode": "partial:R5",
+  "requested_group": "R5",
+  "loaded_modules": [
+    "test_r5_metrics_input"
+  ],
+  "environment": {
+    "python": "3.13.2",
+    "python_full": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependencies": {
+      "fastapi": "0.120.3",
+      "pydantic": "2.9.2",
+      "httpx": "0.28.1",
+      "uvicorn": "0.35.0",
+      "numpy": "2.2.6",
+      "scipy": "1.17.0rc1",
+      "sklearn": "1.8.0",
+      "joblib": "1.5.3",
+      "pandas": "3.0.0rc1",
+      "torch": "2.12.0+cpu",
+      "yaml": "6.0.2"
+    },
+    "commit": "0225fcb91a17feec486afb81ae4de3d0e44b342d",
+    "worktree": "dirty"
+  },
+  "totals": {
+    "tests": 20,
+    "pass": 20,
+    "fail": 0,
+    "errors": 0,
+    "failures": 0,
+    "skip": 0
+  },
+  "groups": {
+    "R5": {
+      "title": "独立评估输入物化与非法输入拒绝（F-009）",
+      "module": "test_r5_metrics_input",
+      "total": 20,
+      "pass": 20,
+      "fail": 0,
+      "skip": 0,
+      "errors": 0,
+      "failures": 0
+    }
+  },
+  "consistency": {
+    "checks": {
+      "sum_groups_total_eq_totals_tests": true,
+      "sum_groups_pass_eq_totals_pass": true,
+      "sum_groups_fail_eq_totals_fail": true,
+      "sum_groups_skip_eq_totals_skip": true,
+      "all_records_have_legal_group": true,
+      "all_records_belong_to_loaded_module": true,
+      "loaded_modules_registered": true,
+      "no_empty_run": true
+    },
+    "ok": true
+  },
+  "records": [
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9DeterminismAndContract",
+      "test": "test_archived_contract_fields_unchanged (test_r5_metrics_input.R9DeterminismAndContract.test_archived_contract_fields_unchanged)",
+      "test_id": "test_r5_metrics_input.R9DeterminismAndContract.test_archived_contract_fields_unchanged",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9DeterminismAndContract",
+      "test": "test_scope_fields_present (test_r5_metrics_input.R9DeterminismAndContract.test_scope_fields_present)",
+      "test_id": "test_r5_metrics_input.R9DeterminismAndContract.test_scope_fields_present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9DeterminismAndContract",
+      "test": "test_tie_scores_deterministic (test_r5_metrics_input.R9DeterminismAndContract.test_tie_scores_deterministic)",
+      "test_id": "test_r5_metrics_input.R9DeterminismAndContract.test_tie_scores_deterministic",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9FilteringSemantics",
+      "test": "test_empty_inputs_not_filled (test_r5_metrics_input.R9FilteringSemantics.test_empty_inputs_not_filled)",
+      "test_id": "test_r5_metrics_input.R9FilteringSemantics.test_empty_inputs_not_filled",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9FilteringSemantics",
+      "test": "test_label_filter_stats_sum (test_r5_metrics_input.R9FilteringSemantics.test_label_filter_stats_sum)",
+      "test_id": "test_r5_metrics_input.R9FilteringSemantics.test_label_filter_stats_sum",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9FilteringSemantics",
+      "test": "test_min_group_size_filter (test_r5_metrics_input.R9FilteringSemantics.test_min_group_size_filter)",
+      "test_id": "test_r5_metrics_input.R9FilteringSemantics.test_min_group_size_filter",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9FilteringSemantics",
+      "test": "test_single_item_group_can_be_evaluated_when_min_size_1 (test_r5_metrics_input.R9FilteringSemantics.test_single_item_group_can_be_evaluated_when_min_size_1)",
+      "test_id": "test_r5_metrics_input.R9FilteringSemantics.test_single_item_group_can_be_evaluated_when_min_size_1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9FilteringSemantics",
+      "test": "test_unjudgeable_excluded_from_denominator (test_r5_metrics_input.R9FilteringSemantics.test_unjudgeable_excluded_from_denominator)",
+      "test_id": "test_r5_metrics_input.R9FilteringSemantics.test_unjudgeable_excluded_from_denominator",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9FilteringSemantics",
+      "test": "test_unlabeled_excluded (test_r5_metrics_input.R9FilteringSemantics.test_unlabeled_excluded)",
+      "test_id": "test_r5_metrics_input.R9FilteringSemantics.test_unlabeled_excluded",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9FilteringSemantics",
+      "test": "test_zero_relevance_group_skipped (test_r5_metrics_input.R9FilteringSemantics.test_zero_relevance_group_skipped)",
+      "test_id": "test_r5_metrics_input.R9FilteringSemantics.test_zero_relevance_group_skipped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9GeneratorMaterialization",
+      "test": "test_all_three_generators_equal_lists (test_r5_metrics_input.R9GeneratorMaterialization.test_all_three_generators_equal_lists)",
+      "test_id": "test_r5_metrics_input.R9GeneratorMaterialization.test_all_three_generators_equal_lists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9GeneratorMaterialization",
+      "test": "test_generator_of_relevance_not_consumed_twice (test_r5_metrics_input.R9GeneratorMaterialization.test_generator_of_relevance_not_consumed_twice)",
+      "test_id": "test_r5_metrics_input.R9GeneratorMaterialization.test_generator_of_relevance_not_consumed_twice",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9GeneratorMaterialization",
+      "test": "test_lazy_generator_with_maps (test_r5_metrics_input.R9GeneratorMaterialization.test_lazy_generator_with_maps)",
+      "test_id": "test_r5_metrics_input.R9GeneratorMaterialization.test_lazy_generator_with_maps",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9GeneratorMaterialization",
+      "test": "test_result_reproducible (test_r5_metrics_input.R9GeneratorMaterialization.test_result_reproducible)",
+      "test_id": "test_r5_metrics_input.R9GeneratorMaterialization.test_result_reproducible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9InputValidation",
+      "test": "test_inf_score_rejected (test_r5_metrics_input.R9InputValidation.test_inf_score_rejected)",
+      "test_id": "test_r5_metrics_input.R9InputValidation.test_inf_score_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9InputValidation",
+      "test": "test_invalid_label_rejected (test_r5_metrics_input.R9InputValidation.test_invalid_label_rejected)",
+      "test_id": "test_r5_metrics_input.R9InputValidation.test_invalid_label_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9InputValidation",
+      "test": "test_length_mismatch_rejected (test_r5_metrics_input.R9InputValidation.test_length_mismatch_rejected)",
+      "test_id": "test_r5_metrics_input.R9InputValidation.test_length_mismatch_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9InputValidation",
+      "test": "test_length_mismatch_with_generators_rejected (test_r5_metrics_input.R9InputValidation.test_length_mismatch_with_generators_rejected)",
+      "test_id": "test_r5_metrics_input.R9InputValidation.test_length_mismatch_with_generators_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9InputValidation",
+      "test": "test_nan_score_rejected (test_r5_metrics_input.R9InputValidation.test_nan_score_rejected)",
+      "test_id": "test_r5_metrics_input.R9InputValidation.test_nan_score_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "R5",
+      "module": "test_r5_metrics_input",
+      "class": "R9InputValidation",
+      "test": "test_prepare_human_labels_contract (test_r5_metrics_input.R9InputValidation.test_prepare_human_labels_contract)",
+      "test_id": "test_r5_metrics_input.R9InputValidation.test_prepare_human_labels_contract",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}
