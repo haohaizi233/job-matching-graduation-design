@@ -34,6 +34,31 @@ ERROR_CODES: dict[str, tuple[int, str]] = {
 
 _ABS_PATH_RE = re.compile(r"[A-Za-z]:[\\/][^\s\"'，。；]*")
 
+# 敏感字段名（小写比较，前缀/子串命中即视为敏感）：这些键的**取值**一律不回显。
+SENSITIVE_KEY_TOKENS = ("password", "passwd", "pwd", "secret", "token", "api_key",
+                        "apikey", "access_key", "authorization", "session",
+                        "cookie", "private_key", "credential", "otp")
+REDACTED = "***REDACTED***"
+
+
+def _is_sensitive_key(key) -> bool:
+    k = str(key).strip().lower()
+    return any(t in k for t in SENSITIVE_KEY_TOKENS)
+
+
+def redact_secrets(value):
+    """敏感字段取值脱敏（Phase5-2 / Batch 0：响应过滤）。
+
+    只遮蔽**取值**，保留字段名，便于调用方定位问题；
+    与 redact_local_paths 互补，两者都必须在错误响应与日志上生效。
+    """
+    if isinstance(value, dict):
+        return {k: (REDACTED if _is_sensitive_key(k) else redact_secrets(v))
+                for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [redact_secrets(v) for v in value]
+    return value
+
 
 def redact_local_paths(value):
     """错误详情脱敏：本地绝对路径不得进入错误响应（Phase5-1R F-007）。"""
@@ -45,6 +70,11 @@ def redact_local_paths(value):
     if isinstance(value, (list, tuple)):
         return [redact_local_paths(v) for v in value]
     return value
+
+
+def redact_all(value):
+    """完整脱敏链：先遮敏感字段取值，再遮本地绝对路径。"""
+    return redact_local_paths(redact_secrets(value))
 
 
 class ServiceError(Exception):
@@ -61,9 +91,9 @@ class ServiceError(Exception):
 
     def to_dict(self, request_id: str = "") -> dict:
         return {"error": {"code": self.code,
-                          "message": redact_local_paths(self.message),
+                          "message": redact_all(self.message),
                           "request_id": request_id,
-                          "detail": redact_local_paths(self.detail)}}
+                          "detail": redact_all(self.detail)}}
 
 
 def error_catalog() -> list[dict]:

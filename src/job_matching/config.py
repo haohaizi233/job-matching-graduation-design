@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
-"""配置加载：configs/*.yaml -> 强类型访问器。所有随机种子与路径只从这里取。"""
+"""配置加载：configs/*.yaml -> 强类型访问器。所有随机种子与路径只从这里取。
+
+数据根目录重定向（Phase5-2 / Batch 0）：
+  环境变量 `JM_DATA_ROOT` 非空时，所有 data/ 路径改从该根目录解析。
+  用途只有一个——让"使用临时合成夹具的数据质量测试"能在干净临时目录里
+  验证门禁逻辑本身，而不需要真实原始数据 / 训练产物。
+  默认（未设置）行为与历史完全一致：解析到项目根。配置文件本身始终读取
+  项目内 configs/，不随数据根重定向。
+"""
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import yaml
@@ -17,6 +26,12 @@ def _load(name: str) -> dict:
         return yaml.safe_load(f)
 
 
+def data_root() -> Path:
+    """数据根目录：JM_DATA_ROOT 优先，否则项目根。"""
+    override = os.environ.get("JM_DATA_ROOT", "").strip()
+    return Path(override).resolve() if override else ROOT
+
+
 class Config:
     """集中式配置对象。缺键立即抛错，避免参数散落在代码里。"""
 
@@ -30,16 +45,16 @@ class Config:
     # ---------------- 路径
     @property
     def root(self) -> Path:
-        return ROOT
+        return data_root()
 
     def path(self, key: str) -> Path:
-        return ROOT / self.pipeline["paths"][key]
+        return self.root / self.pipeline["paths"][key]
 
     def src(self, group: str, key: str) -> Path:
-        return ROOT / self.pipeline["sources"][group][key]
+        return self.root / self.pipeline["sources"][group][key]
 
     def out(self, key: str) -> Path:
-        return ROOT / self.pipeline["outputs"][key]
+        return self.root / self.pipeline["outputs"][key]
 
     # ---------------- 种子
     def seed(self, key: str) -> int:
@@ -102,10 +117,20 @@ class Config:
 
 
 _CFG: Config | None = None
+_CFG_KEY: str | None = None
+
+
+def reset_config() -> None:
+    """清空配置缓存（合成夹具测试在切换 JM_DATA_ROOT 后必须调用）。"""
+    global _CFG, _CFG_KEY
+    _CFG = None
+    _CFG_KEY = None
 
 
 def get_config() -> Config:
-    global _CFG
-    if _CFG is None:
+    global _CFG, _CFG_KEY
+    key = os.environ.get("JM_DATA_ROOT", "").strip()
+    if _CFG is None or _CFG_KEY != key:
         _CFG = Config()
+        _CFG_KEY = key
     return _CFG
