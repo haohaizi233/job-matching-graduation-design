@@ -1,24 +1,92 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
+import { dateTime } from '@/api/mappers'
+import {
+  mapProfileEducation,
+  mapProfileInternships,
+  mapProfileProjects,
+  mapProfileSkills,
+} from '@/api/mappers'
+import { fieldValue, getProfile } from '@/api/profile'
+import type { ProfileRow } from '@/api/types'
+import { useAuth } from '@/composables/useAuth'
 import { useToast } from '@/composables/useToast'
 import {
-  coreSkills,
-  education,
   evidenceSources,
-  internships,
-  jobIntention,
-  profileBasic,
   profileHeroCopy,
   profileTags,
-  profileVersion,
-  projects,
   radarData,
 } from '@/data/profile'
 
 const { show } = useToast()
+const { state: authState } = useAuth()
+
+// 画像来自业务 API（简历解析 + 人工修订的版本化画像）
+const profile = ref<ProfileRow | null>(null)
+const loading = ref(true)
+
+async function refresh() {
+  profile.value = await getProfile()
+}
+
+onMounted(async () => {
+  try {
+    await refresh()
+  } catch (e) {
+    show(e instanceof Error ? e.message : '画像加载失败')
+  } finally {
+    loading.value = false
+  }
+})
+
+function valueOf(key: string): unknown {
+  return fieldValue(profile.value, key)
+}
+
+function textOf(key: string, fallback = '—'): string {
+  const v = valueOf(key)
+  return v === null || v === undefined || v === '' ? fallback : String(v)
+}
+
+function citiesText(): string {
+  const v = valueOf('preferred_cities')
+  if (Array.isArray(v)) return v.map(String).join(' · ') || '—'
+  return v ? String(v) : '—'
+}
+
+const profileBasic = computed(() => ({
+  name: authState.user?.username || '我的画像',
+  gender: '—',
+  age: '—',
+  birth: '—',
+  phone: '—',
+  email: authState.user?.email || '—',
+  location: citiesText(),
+  status: profile.value ? (profile.value.confirmed ? '已完善' : '待确认') : '待上传简历',
+}))
+
+const profileVersion = computed(() => ({
+  version: profile.value ? `v${profile.value.profile_version}` : 'v—',
+  status: profile.value?.confirmed ? '当前版本' : '待确认',
+  updateTime: dateTime(profile.value?.created_at) || '—',
+  desc: '基于简历解析生成，人工修订保留证据快照\n确认后可用于智能匹配',
+}))
+
+const jobIntention = computed(() => ({
+  targetPosition: textOf('employment_intention'),
+  industry: '—',
+  city: citiesText(),
+  salary: '—',
+  entryTime: textOf('graduation_year') === '—' ? '—' : `${textOf('graduation_year')} 届`,
+}))
+
+const coreSkills = computed(() => mapProfileSkills(profile.value))
+const education = computed(() => mapProfileEducation(profile.value))
+const projects = computed(() => mapProfileProjects(profile.value))
+const internships = computed(() => mapProfileInternships(profile.value))
 
 const radarPoints = computed(() => {
   const cx = 100

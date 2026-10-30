@@ -1,8 +1,16 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import { useToast } from '@/composables/useToast'
-import { faqList, heroCopy, parseWorkflow, resumeList, resumeStats } from '@/data/resume'
+import { mapResumeToItem } from '@/api/mappers'
+import {
+  deleteResume,
+  fileToBase64,
+  listResumes,
+  reparseResume,
+  uploadResumeJson,
+} from '@/api/resumes'
+import { faqList, heroCopy, parseWorkflow, resumeStats } from '@/data/resume'
 import type { ResumeItem } from '@/types'
 
 import TopBar from '@/components/dashboard/TopBar.vue'
@@ -10,11 +18,31 @@ import SideNav from '@/components/dashboard/SideNav.vue'
 
 const { show } = useToast()
 
+// 联调：简历列表来自业务 API（上传即解析出学生画像）
+const resumeList = ref<ResumeItem[]>([])
+const loading = ref(true)
+const uploading = ref(false)
+
+async function refresh() {
+  const rows = await listResumes()
+  resumeList.value = rows.map(mapResumeToItem)
+}
+
+onMounted(async () => {
+  try {
+    await refresh()
+  } catch (e) {
+    show(e instanceof Error ? e.message : '简历列表加载失败')
+  } finally {
+    loading.value = false
+  }
+})
+
 const stats = computed(() => {
-  const total = resumeList.length
-  const done = resumeList.filter((r) => r.status === 'done' || r.status === 'partial').length
-  const parsing = resumeList.filter((r) => r.status === 'running').length
-  const attention = resumeList.filter((r) => r.status === 'retry').length
+  const total = resumeList.value.length
+  const done = resumeList.value.filter((r) => r.status === 'done' || r.status === 'partial').length
+  const parsing = resumeList.value.filter((r) => r.status === 'running').length
+  const attention = resumeList.value.filter((r) => r.status === 'retry').length
 
   return resumeStats.map((s) => {
     if (s.key === 'total') return { ...s, value: String(total) }
@@ -60,7 +88,7 @@ function handleFileSelect(e: Event) {
   input.value = ''
 }
 
-function handleFileUpload(file: File) {
+async function handleFileUpload(file: File) {
   const ext = file.name.split('.').pop()?.toLowerCase()
   if (!ext || !['pdf', 'docx', 'txt'].includes(ext)) {
     show('仅支持 PDF、DOCX、TXT 格式')
@@ -70,7 +98,18 @@ function handleFileUpload(file: File) {
     show('单个简历文件不能超过 10MB')
     return
   }
-  show('文件已添加，演示解析中…')
+  uploading.value = true
+  show('文件已添加，正在上传解析…')
+  try {
+    const contentBase64 = await fileToBase64(file)
+    await uploadResumeJson({ fileName: file.name, contentBase64 })
+    await refresh()
+    show('上传成功，已生成学生画像，请到「我的画像」核对并确认')
+  } catch (e) {
+    show(e instanceof Error ? e.message : '简历上传失败')
+  } finally {
+    uploading.value = false
+  }
 }
 
 function toggleFaq(id: number | string) {
@@ -83,22 +122,35 @@ function toggleMenu(id: number | string) {
 
 function handleViewDetail(item: ResumeItem) {
   openMenu.value = null
-  show(`查看《${item.filename}》详情（演示）`)
+  show(`《${item.filename}》解析状态：${item.statusText}${item.statusNote ? `（${item.statusNote}）` : ''}`)
 }
 
-function handleRetry(item: ResumeItem) {
+async function handleRetry(item: ResumeItem) {
   openMenu.value = null
-  show(`重新解析《${item.filename}》（演示）`)
+  show(`正在重新解析《${item.filename}》…`)
+  try {
+    await reparseResume(String(item.id))
+    await refresh()
+    show(`《${item.filename}》重新解析完成`)
+  } catch (e) {
+    show(e instanceof Error ? e.message : '重新解析失败')
+  }
 }
 
-function handleDownload(item: ResumeItem) {
+function handleDownload(_item: ResumeItem) {
   openMenu.value = null
-  show(`下载《${item.filename}》（演示）`)
+  show('简历文件下载接口暂未开放（文件为私有存储）')
 }
 
-function handleDelete(item: ResumeItem) {
+async function handleDelete(item: ResumeItem) {
   openMenu.value = null
-  show(`删除《${item.filename}》（演示）`)
+  try {
+    await deleteResume(String(item.id))
+    await refresh()
+    show(`已删除《${item.filename}》`)
+  } catch (e) {
+    show(e instanceof Error ? e.message : '删除失败')
+  }
 }
 
 function handleDemo(name: string) {
