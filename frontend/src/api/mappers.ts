@@ -333,6 +333,8 @@ export function mapRecoToMatchItem(item: RecoItem, job?: JobRow | null): MatchJo
     location: v?.city || '全国',
     salary: v?.salary || '面议',
     months: 0,
+    education: v?.education || '学历要求未标注',
+    experience: v?.experience || '经验不限',
     match,
     potential,
     tags: (v ? [...v.requiredSkills, ...v.preferredSkills] : matched).slice(0, 5),

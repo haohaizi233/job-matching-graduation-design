@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, reactive, ref, watch } from 'vue'
 
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
@@ -140,6 +140,60 @@ function handleEdit(section: string) {
 
 function handleDemo(name: string) {
   show(`「${name}」功能开发中`)
+}
+
+// ------------------------------------------------ 人工修订（真实保存为新版本）
+// 可编辑字段与后端 EDITABLE_PROFILE_FIELDS 同源；修改进 user_edits 覆盖层，
+// 原始抽取证据保留（不静默覆盖）；保存后产生新版本，确认后才锁定用于推荐。
+const editForm = reactive<Record<string, string>>({
+  education_level: '',
+  major: '',
+  graduation_year: '',
+  employment_intention: '',
+  preferred_cities: '',
+  employment_type: '',
+})
+const savingEdits = ref(false)
+
+function fillEditForm() {
+  for (const f of Object.keys(editForm)) {
+    const v = fieldValue(profile.value, f)
+    editForm[f] = v === undefined || v === null ? '' : String(v)
+  }
+}
+
+watch(profile, fillEditForm, { immediate: true })
+
+function handleCancelEdit() {
+  fillEditForm()
+  show('已还原为当前画像内容')
+}
+
+async function handleSaveEdits() {
+  if (!profile.value || savingEdits.value) return
+  const edits: Record<string, string> = {}
+  for (const [f, v] of Object.entries(editForm)) {
+    const next = String(v).trim()
+    const prev = String(fieldValue(profile.value, f) ?? '')
+    if (next && next !== prev) edits[f] = next
+  }
+  if (!Object.keys(edits).length) {
+    show('没有需要保存的修改')
+    return
+  }
+  savingEdits.value = true
+  try {
+    profile.value = await saveProfile({
+      edits,
+      note: '画像页人工修订',
+      expectedVersion: profile.value.profile_version,
+    })
+    show('画像修改已保存为新版本（确认后用于智能匹配）')
+  } catch (e) {
+    show(e instanceof Error ? e.message : '画像修改保存失败')
+  } finally {
+    savingEdits.value = false
+  }
 }
 
 // 确认当前画像：调用业务 API 保存修订并标记 confirmed
@@ -542,13 +596,51 @@ async function handleViewVersion(version: number) {
           <h2>编辑我的画像</h2>
           <span class="version-tag">当前编辑基于版本 {{ profileVersion.version }}</span>
           <div class="bar-actions">
-            <button type="button" class="btn-cancel" @click="handleDemo('取消')">取消</button>
+            <button type="button" class="btn-cancel" @click="handleCancelEdit">取消</button>
+            <button
+              type="button"
+              class="btn-outline"
+              :disabled="savingEdits || !profile"
+              @click="handleSaveEdits"
+            >
+              {{ savingEdits ? '保存中…' : '保存修改' }}
+            </button>
             <button type="button" class="btn-confirm" :disabled="confirming" @click="handleConfirmProfile">
               {{ confirming ? '确认中…' : '确认当前画像' }}
             </button>
           </div>
         </div>
         <div class="bar-content">
+          <div class="bar-item">
+            <h4>人工修订（可编辑字段）</h4>
+            <div class="edit-grid">
+              <label class="edit-field">
+                <span>学历层次</span>
+                <input v-model="editForm.education_level" placeholder="如：本科" />
+              </label>
+              <label class="edit-field">
+                <span>专业</span>
+                <input v-model="editForm.major" placeholder="如：软件工程" />
+              </label>
+              <label class="edit-field">
+                <span>毕业年份</span>
+                <input v-model="editForm.graduation_year" placeholder="如：2027" />
+              </label>
+              <label class="edit-field">
+                <span>求职意向</span>
+                <input v-model="editForm.employment_intention" placeholder="如：后端开发工程师" />
+              </label>
+              <label class="edit-field">
+                <span>期望城市</span>
+                <input v-model="editForm.preferred_cities" placeholder="如：杭州、上海" />
+              </label>
+              <label class="edit-field">
+                <span>工作性质</span>
+                <input v-model="editForm.employment_type" placeholder="如：全职" />
+              </label>
+            </div>
+            <p class="edit-note">修改会保存为新的画像版本并保留原始抽取证据；点击「确认当前画像」后才用于智能匹配</p>
+          </div>
           <div class="bar-item">
             <h4>自我介绍</h4>
             <p>{{ profileTags.selfIntro }}</p>
@@ -1128,7 +1220,7 @@ async function handleViewVersion(version: number) {
 }
 .bar-content {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
   gap: 15px;
 }
 .bar-item h4 {
@@ -1142,6 +1234,52 @@ async function handleViewVersion(version: number) {
   color: #4b5563;
   line-height: 1.6;
   margin: 0;
+}
+/* 人工修订表单（Phase5-3：真实保存为新画像版本） */
+.edit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.edit-field {
+  display: grid;
+  gap: 4px;
+}
+.edit-field span {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+}
+.edit-field input {
+  border: 1px solid #d7e0f2;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  color: #1c2d55;
+}
+.edit-field input:focus {
+  outline: 2px solid #c7d8f8;
+  border-color: #9db9f0;
+}
+.edit-note {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: #7686a8;
+  line-height: 1.6;
+}
+.btn-outline {
+  background: white;
+  border: 1px solid #c9d6ef;
+  color: #2168ff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-outline:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 .tag-list {
   display: flex;

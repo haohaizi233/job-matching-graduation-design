@@ -5,16 +5,20 @@ import { useRouter } from 'vue-router'
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
 import { listJobs } from '@/api/jobs'
-import { mapRecoToMatchItem } from '@/api/mappers'
+import { dateTime, mapRecoToMatchItem } from '@/api/mappers'
 import { createRecommendation, getRun, listRuns } from '@/api/recommendations'
 import type { JobRow, RecoItem } from '@/api/types'
 import { useToast } from '@/composables/useToast'
 import {
   categoryOptions,
   cityOptions,
+  distributionBands,
   heroCopy,
   matchModes,
+  missingTipText,
+  noticeLines,
   profileOptions,
+  profileUpdateNote,
   topKOptions,
 } from '@/data/matching'
 import type {
@@ -22,16 +26,21 @@ import type {
   MatchDistributionSlice,
   MatchJobItem,
   MatchMode,
-  MatchOverview,
+  MatchReason,
 } from '@/types/matching'
 
+import bannerArt from '@/assets/art/banner-campus-art.png'
 import bookmarkIcon from '@/assets/icons/match/bookmark-star.png'
-import resetIcon from '@/assets/icons/action/reset-filter.png'
 import startMatchIcon from '@/assets/icons/match/start-match.png'
+import profileVersionIcon from '@/assets/icons/match/profile-version.png'
 import educationIcon from '@/assets/icons/match/education-match.png'
 import intentIcon from '@/assets/icons/match/intent-aligned.png'
 import projectIcon from '@/assets/icons/match/project-relevance.png'
 import skillIcon from '@/assets/icons/match/skill-coverage.png'
+import skillAddIcon from '@/assets/icons/common/skill-add-orange.png'
+import megaphoneIcon from '@/assets/icons/common/megaphone-orange.png'
+import checkCircleIcon from '@/assets/icons/common/check-circle-mint.png'
+import locationIcon from '@/assets/icons/job/location.png'
 
 const reasonIcons = {
   skill: skillIcon,
@@ -43,35 +52,41 @@ const reasonIcons = {
 const router = useRouter()
 const { show } = useToast()
 
-const profile = ref('v2')
-const mode = ref<MatchMode>('综合排序')
-const topK = ref('10')
-const city = ref('all')
-const category = ref('all')
+const profile = ref(profileOptions[0]?.value ?? 'v2.3')
+const mode = ref<MatchMode>('综合推荐')
+const topK = ref('20')
+const city = ref('')
+const category = ref('')
 const bookmarks = ref<Array<number | string>>([])
 const running = ref(false)
-const runCount = ref(0)
+const showDetails = ref(false)
 
 // 联调：推荐结果来自业务 API（baseline 打分 + 解释快照）
 const matchJobs = ref<MatchJobItem[]>([])
 const recoItems = ref<RecoItem[]>([])
 const jobsMap = ref<Map<string, JobRow>>(new Map())
-const currentRunId = ref('')
-const loaded = ref(false)
-
-/** 打分参考说明（后端 score 为排序参考分，不是录用概率） */
-const noticeText =
-  '匹配度与四维评分来自后端匹配服务的排序参考分（heuristic_score），仅用于岗位排序与求职参考，不代表企业录用概率。'
+const runMeta = ref<{ profileVersion: string; modelVersion: string; createdAt: string }>({
+  profileVersion: '—',
+  modelVersion: '—',
+  createdAt: '—',
+})
+const loading = ref(true)
+const loadError = ref('')
 
 async function loadJobsMap() {
   const rows = await listJobs()
   jobsMap.value = new Map(rows.map((row) => [row.id, row]))
 }
 
-function applyRunItems(runId: string, items: RecoItem[]) {
-  currentRunId.value = runId
+function applyRunItems(
+  runId: string,
+  items: RecoItem[],
+  meta: { profileVersion: string; modelVersion: string; createdAt: string },
+) {
   recoItems.value = items
   matchJobs.value = items.map((item) => mapRecoToMatchItem(item, jobsMap.value.get(item.job_id)))
+  runMeta.value = meta
+  void runId
 }
 
 async function loadLatestRun() {
@@ -80,23 +95,31 @@ async function loadLatestRun() {
   const latest = page.items[0]
   if (!latest) return
   const run = await getRun(latest.id)
-  applyRunItems(run.id, run.items || [])
+  applyRunItems(run.id, run.items || [], {
+    profileVersion: run.profile_version != null ? `v${run.profile_version}` : '未生成画像',
+    modelVersion: run.model_version || '—',
+    createdAt: dateTime(run.created_at) || '—',
+  })
 }
 
 onMounted(async () => {
   try {
     await loadLatestRun()
   } catch (e) {
-    show(e instanceof Error ? e.message : '推荐记录加载失败')
+    loadError.value = e instanceof Error ? e.message : '推荐记录加载失败'
+    show(loadError.value)
   } finally {
-    loaded.value = true
+    loading.value = false
   }
 })
 
 const visibleJobs = computed(() => {
   let list = [...matchJobs.value]
-  if (category.value !== 'all') {
+  if (category.value) {
     list = list.filter((job) => job.category === category.value)
+  }
+  if (city.value) {
+    list = list.filter((job) => job.location.includes(city.value))
   }
   if (mode.value === '高匹配优先') {
     list.sort((a, b) => b.match - a.match)
@@ -106,47 +129,77 @@ const visibleJobs = computed(() => {
   return list.slice(0, Number(topK.value))
 })
 
-const displayedAvg = computed(() => {
-  const list = visibleJobs.value
-  if (list.length === 0) return 0
-  return Math.round(list.reduce((sum, job) => sum + job.match, 0) / list.length)
-})
-
-/** 概览统计由真实推荐项计算 */
-const matchOverview = computed<MatchOverview>(() => {
-  const items = recoItems.value
-  const covered = new Set<string>()
-  const missing = new Set<string>()
-  for (const item of items) {
-    for (const s of item.explanation_snapshot?.matched_skills ?? []) covered.add(String(s))
-    for (const s of item.explanation_snapshot?.missing_required_skills ?? []) missing.add(String(s))
-  }
-  return {
-    avgMatch: displayedAvg.value,
-    highMatchCount: items.filter((i) => i.score * 100 >= 85).length,
-    coveredSkills: covered.size,
-    totalSkills: covered.size + missing.size,
-  }
-})
-
-/** 匹配度分段分布（环形图） */
+/** 匹配结果分布（按当前展示的岗位分数段统计） */
 const distribution = computed<MatchDistributionSlice[]>(() => {
-  const scores = recoItems.value.map((i) => i.score * 100)
-  return [
-    { label: '高匹配 85%+', value: scores.filter((s) => s >= 85).length, color: '#2168ff' },
-    { label: '中匹配 70-84%', value: scores.filter((s) => s >= 70 && s < 85).length, color: '#03b58c' },
-    { label: '待观察 <70%', value: scores.filter((s) => s < 70).length, color: '#ffb020' },
-  ]
+  const scores = visibleJobs.value.map((job) => job.match)
+  return distributionBands
+    .map((band) => ({
+      label: band.label,
+      color: band.color,
+      value: scores.filter((s) => s >= band.min && s < band.max).length,
+    }))
+    .filter((slice) => slice.value > 0)
 })
 
-/** 岗位类别分布 */
+/** TOP5 岗位类别（按行业标签聚合） */
 const categoryStats = computed<MatchCategoryStat[]>(() => {
+  const total = visibleJobs.value.length || 1
   const counts = new Map<string, number>()
-  for (const job of matchJobs.value) {
+  for (const job of visibleJobs.value) {
     counts.set(job.industry, (counts.get(job.industry) || 0) + 1)
   }
-  return [...counts.entries()].map(([label, value]) => ({ label, value }))
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([label, value]) => ({ label, value, percent: Math.round((value / total) * 100) }))
 })
+
+const filterSummary = computed(() => {
+  const cityLabel = cityOptions.find((opt) => opt.value === city.value)?.label ?? '全部城市'
+  const categoryLabel = categoryOptions.find((opt) => opt.value === category.value)?.label ?? '全部类别'
+  return `${cityLabel} · ${categoryLabel}`
+})
+
+const donutSlices = computed(() => {
+  const slices = distribution.value
+  const total = slices.reduce((sum, s) => sum + s.value, 0) || 1
+  const circumference = 2 * Math.PI * 46
+  let accumulated = 0
+  return slices.map((slice) => {
+    const length = (slice.value / total) * circumference
+    const offset = -accumulated
+    accumulated += length
+    return {
+      label: slice.label,
+      color: slice.color,
+      dash: `${length} ${circumference - length}`,
+      offset,
+    }
+  })
+})
+
+function ringDash(score: number) {
+  const circumference = 2 * Math.PI * 34
+  return `${(score / 100) * circumference} ${circumference}`
+}
+
+/** 匹配原因说明（由岗位画像与解释快照派生） */
+function reasonDesc(job: MatchJobItem, key: MatchReason['key']): string {
+  switch (key) {
+    case 'skill': {
+      const skills = job.tags.slice(0, 2).join('、')
+      return skills ? `掌握 ${skills} 等核心技能，与岗位要求较为匹配` : '技能与岗位要求较为匹配'
+    }
+    case 'education':
+      return `${job.education ?? '学历要求未标注'}，与简历学历基本符合`
+    case 'project':
+      return `项目方向贴近${job.industry}业务场景，具备相关实践`
+    case 'intent':
+      return `期望城市：${job.location}，岗位方向与求职意向较为一致`
+    default:
+      return ''
+  }
+}
 
 function isBookmarked(id: number | string) {
   return bookmarks.value.includes(id)
@@ -172,8 +225,11 @@ async function handleStart() {
       topK: Number(topK.value),
     })
     const run = await getRun(result.run.id)
-    applyRunItems(run.id, run.items || [])
-    runCount.value += 1
+    applyRunItems(run.id, run.items || [], {
+      profileVersion: run.profile_version != null ? `v${run.profile_version}` : '未生成画像',
+      modelVersion: run.model_version || '—',
+      createdAt: dateTime(run.created_at) || '—',
+    })
     show(`匹配完成，共为你找到 ${matchJobs.value.length} 个岗位`)
   } catch (e) {
     show(e instanceof Error ? e.message : '匹配执行失败')
@@ -183,34 +239,16 @@ async function handleStart() {
 }
 
 function handleReset() {
-  profile.value = 'v2'
-  mode.value = '综合排序'
-  topK.value = '10'
-  city.value = 'all'
-  category.value = 'all'
+  profile.value = profileOptions[0]?.value ?? 'v2.3'
+  mode.value = '综合推荐'
+  topK.value = '20'
+  city.value = ''
+  category.value = ''
   show('匹配参数已重置')
 }
 
 function handleViewDetail(job: MatchJobItem) {
   router.push(`/job/${job.id}`)
-}
-
-const donutSlices = computed(() => {
-  const slices = distribution.value
-  const total = slices.reduce((sum, s) => sum + s.value, 0) || 1
-  const circumference = 2 * Math.PI * 46
-  let accumulated = 0
-  return slices.map((slice) => {
-    const length = (slice.value / total) * circumference
-    const offset = -accumulated
-    accumulated += length
-    return { label: slice.label, color: slice.color, dash: `${length} ${circumference - length}`, offset }
-  })
-})
-
-function ringDash(score: number) {
-  const circumference = 2 * Math.PI * 26
-  return `${(score / 100) * circumference} ${circumference}`
 }
 </script>
 
@@ -221,204 +259,264 @@ function ringDash(score: number) {
 
     <main class="workspace">
       <section class="hero">
-        <div class="hero-content">
+        <img class="hero-art" :src="bannerArt" alt="蓝天校园与纸飞机插画" />
+        <div class="hero-copy">
           <h1>{{ heroCopy.title }}</h1>
-          <p v-for="(line, i) in heroCopy.lines" :key="i">{{ line }}</p>
+          <p>{{ heroCopy.lead }}</p>
+          <small>{{ heroCopy.sub }}</small>
         </div>
       </section>
 
       <section class="panel settings-panel">
-        <h2 class="panel-title">匹配设置</h2>
+        <div class="setting-heading">
+          <h2>匹配设置</h2>
+          <span>选择匹配参数，定制你的专属推荐结果</span>
+        </div>
         <div class="setting-row">
-          <div class="setting-item">
-            <span class="setting-label">画像版本</span>
-            <select v-model="profile" class="select-shell">
-              <option v-for="opt in profileOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
-            </select>
+          <div class="setting-field version-field">
+            <label>选择画像版本 <i class="info-dot">i</i></label>
+            <div class="version-select">
+              <img class="version-icon" :src="profileVersionIcon" alt="" aria-hidden="true" />
+              <select v-model="profile" aria-label="选择画像版本">
+                <option v-for="opt in profileOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+              </select>
+            </div>
+            <small>{{ profileUpdateNote }}</small>
           </div>
-          <div class="setting-item">
-            <span class="setting-label">匹配模式</span>
-            <div class="mode-tabs">
+
+          <div class="setting-field strategy-field">
+            <label>推荐模式 <i class="info-dot">i</i></label>
+            <div class="strategy-options">
               <button
                 v-for="m in matchModes"
-                :key="m"
+                :key="m.key"
                 type="button"
-                class="mode-tab"
-                :class="{ active: mode === m }"
-                @click="mode = m"
+                class="strategy"
+                :class="{ active: mode === m.key }"
+                @click="mode = m.key"
               >
-                {{ m }}
+                <strong><span class="radio-dot" />{{ m.label }}</strong>
+                <small>{{ m.desc }}</small>
               </button>
             </div>
           </div>
-          <div class="setting-item">
-            <span class="setting-label">推荐数量</span>
-            <select v-model="topK" class="select-shell">
+
+          <div class="setting-field">
+            <label>推荐数量 Top K</label>
+            <select v-model="topK" class="select-shell" aria-label="推荐数量 Top K">
               <option v-for="opt in topKOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
             </select>
           </div>
-          <div class="setting-item">
-            <span class="setting-label">城市</span>
-            <select v-model="city" class="select-shell">
+
+          <div class="setting-field">
+            <label>城市 <em>（可选）</em></label>
+            <select v-model="city" class="select-shell" aria-label="城市">
               <option v-for="opt in cityOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
             </select>
           </div>
-          <div class="setting-item">
-            <span class="setting-label">岗位类别</span>
-            <select v-model="category" class="select-shell">
+
+          <div class="setting-field">
+            <label>岗位类别 <em>（可选）</em></label>
+            <select v-model="category" class="select-shell" aria-label="岗位类别">
               <option v-for="opt in categoryOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
             </select>
           </div>
-          <div class="setting-actions">
-            <button type="button" class="btn-primary" :disabled="running" @click="handleStart">
-              <img class="btn-icon" :src="startMatchIcon" alt="" aria-hidden="true" />
-              {{ running ? '匹配中…' : '开始匹配' }}
-            </button>
-            <button type="button" class="btn-ghost" @click="handleReset">
-              <img class="btn-icon" :src="resetIcon" alt="" aria-hidden="true" />
-              重置参数
-            </button>
-          </div>
+
+          <button type="button" class="start-btn" :disabled="running" @click="handleStart">
+            <img class="btn-icon" :src="startMatchIcon" alt="" aria-hidden="true" />
+            {{ running ? '匹配中…' : '开始匹配' }}
+          </button>
         </div>
       </section>
 
-      <div class="content-grid">
-        <section class="panel result-panel">
-          <div class="panel-head">
-            <h2 class="panel-title">匹配结果</h2>
-            <span class="panel-note">共 {{ visibleJobs.length }} 个岗位 · 平均匹配度 {{ displayedAvg }}%</span>
-          </div>
-
-          <article v-for="(job, index) in visibleJobs" :key="job.id" class="match-card">
-            <div class="rank-badge" :class="{ top3: index < 3 }">NO.{{ index + 1 }}</div>
-            <div class="match-card-main">
-              <div class="job-head">
-                <img class="job-logo" :src="job.logo" :alt="job.logoAlt" />
-                <div class="job-head-text">
-                  <h3>{{ job.title }}</h3>
-                  <div class="job-company">{{ job.company }} <i /> {{ job.industry }} <i /> {{ job.location }}</div>
-                </div>
-                <div class="job-salary">{{ job.salary }} · {{ job.months }}薪</div>
-              </div>
-
-              <div class="reason-grid">
-                <div v-for="reason in job.reasons" :key="reason.key" class="reason-item">
-                  <div class="reason-label">
-                    <img class="reason-icon" :src="reasonIcons[reason.key]" alt="" aria-hidden="true" />
-                    {{ reason.label }}
-                  </div>
-                  <div class="reason-bar">
-                    <span class="reason-fill" :style="{ width: reason.score + '%' }" />
-                  </div>
-                  <div class="reason-score">{{ reason.score }}%</div>
-                </div>
-              </div>
-
-              <div class="job-tags">
-                <span v-for="tag in job.tags" :key="tag" class="tag">{{ tag }}</span>
-              </div>
-              <div class="missing">
-                <span class="missing-label">待补充技能</span>
-                <span v-for="skill in job.missingSkills" :key="skill" class="missing-chip">{{ skill }}</span>
-              </div>
+      <div class="columns">
+        <section class="panel results-panel">
+          <header class="results-heading">
+            <div class="results-title">
+              <h2>匹配结果</h2>
+              <span>共为你找到 <b>{{ visibleJobs.length }}</b> 个匹配岗位</span>
             </div>
+            <div class="score-note"><span class="warn-ico">!</span>匹配分仅用于排序参考，不代表录用概率</div>
+          </header>
 
-            <div class="match-card-side">
-              <div class="ring-wrap">
-                <svg viewBox="0 0 60 60" class="ring">
-                  <circle cx="30" cy="30" r="26" class="ring-track" />
-                  <circle
-                    cx="30"
-                    cy="30"
-                    r="26"
-                    class="ring-value"
-                    :style="{ strokeDasharray: ringDash(job.match) }"
-                  />
-                </svg>
-                <div class="ring-text">
-                  <strong>{{ job.match }}%</strong>
-                  <span>匹配度</span>
+          <p v-if="loading" class="state-tip" role="status">正在加载推荐结果…</p>
+          <p v-else-if="loadError" class="state-tip error" role="alert">
+            {{ loadError }}
+            <button type="button" class="text-btn" @click="loadLatestRun">重新加载</button>
+          </p>
+          <p v-else-if="visibleJobs.length === 0" class="state-tip">
+            当前筛选条件下暂无匹配岗位，请调整参数后重新匹配。
+          </p>
+
+          <article v-for="(job, index) in visibleJobs" :key="job.id" class="job-card">
+            <div class="rank-box" :class="{ gold: index === 0, silver: index === 1, bronze: index === 2 }">
+              {{ index + 1 }}
+            </div>
+            <div class="job-body">
+              <div class="job-top">
+                <img class="job-logo" :src="job.logo" :alt="job.logoAlt" />
+                <div class="job-head">
+                  <h3>{{ job.title }}</h3>
+                  <div class="job-company">{{ job.company }} <span class="company-chip">{{ job.industry }}</span></div>
+                  <div class="job-meta">
+                    <span><img class="meta-ico" :src="locationIcon" alt="" aria-hidden="true" />{{ job.location }}</span>
+                    <span>{{ job.education }}</span>
+                    <span class="salary-pill">{{ job.salary }}<template v-if="job.months"> · {{ job.months }}薪</template></span>
+                  </div>
+                  <div class="job-tags">
+                    <span v-for="tag in job.tags" :key="tag" class="tag">{{ tag }}</span>
+                  </div>
+                </div>
+                <div class="job-side">
+                  <button
+                    type="button"
+                    class="star-btn"
+                    :class="{ active: isBookmarked(job.id) }"
+                    :aria-label="isBookmarked(job.id) ? '取消收藏' : '收藏岗位'"
+                    @click="toggleBookmark(job)"
+                  >
+                    <img :src="bookmarkIcon" alt="" aria-hidden="true" />
+                  </button>
+                  <div class="ring-wrap">
+                    <svg viewBox="0 0 84 84" class="ring">
+                      <defs>
+                        <linearGradient :id="`ring-grad-${index}`" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stop-color="#3f7bff" />
+                          <stop offset="100%" stop-color="#8b5cff" />
+                        </linearGradient>
+                      </defs>
+                      <circle cx="42" cy="42" r="34" class="ring-track" />
+                      <circle
+                        cx="42"
+                        cy="42"
+                        r="34"
+                        class="ring-value"
+                        :stroke="`url(#ring-grad-${index})`"
+                        :style="{ strokeDasharray: ringDash(job.match) }"
+                      />
+                    </svg>
+                    <div class="ring-text">
+                      <strong>{{ job.match }}%</strong>
+                      <span>匹配度</span>
+                    </div>
+                  </div>
+                  <button type="button" class="btn-detail" @click="handleViewDetail(job)">查看详情</button>
                 </div>
               </div>
-              <div class="side-actions">
-                <button type="button" class="btn-outline" @click="handleViewDetail(job)">查看详情</button>
-                <button
-                  type="button"
-                  class="btn-bookmark"
-                  :class="{ active: isBookmarked(job.id) }"
-                  @click="toggleBookmark(job)"
-                >
-                  <img class="btn-icon" :src="bookmarkIcon" alt="" aria-hidden="true" />
-                  {{ isBookmarked(job.id) ? '已收藏' : '收藏' }}
-                </button>
+
+              <div class="reasons">
+                <div class="reasons-label">匹配原因</div>
+                <div class="reason-grid">
+                  <div v-for="reason in job.reasons" :key="reason.key" class="reason-item">
+                    <div class="reason-head">
+                      <img class="reason-icon" :src="reasonIcons[reason.key]" alt="" aria-hidden="true" />
+                      <span>{{ reason.label }}</span>
+                      <b>{{ reason.score }}%</b>
+                    </div>
+                    <p>{{ reasonDesc(job, reason.key) }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="job.missingSkills.length" class="missing-strip">
+                <div class="missing-row">
+                  <img class="missing-ico" :src="skillAddIcon" alt="" aria-hidden="true" />
+                  <span class="missing-label">待补充技能</span>
+                  <span v-for="skill in job.missingSkills" :key="skill" class="missing-chip">{{ skill }}</span>
+                </div>
+                <p class="missing-tip">{{ missingTipText }}</p>
               </div>
             </div>
           </article>
-
-          <p v-if="visibleJobs.length === 0" class="empty-tip">当前筛选条件下暂无匹配岗位，请调整参数后重新匹配。</p>
         </section>
 
-        <aside class="side-column">
-          <section class="panel">
-            <h2 class="panel-title">匹配概览</h2>
-            <div class="overview-grid">
-              <div class="overview-item">
-                <strong>{{ displayedAvg || matchOverview.avgMatch }}%</strong>
-                <span>平均匹配度</span>
+        <aside class="rightbar">
+          <section class="panel overview">
+            <header class="right-heading">
+              <h2>匹配概览</h2>
+              <button type="button" class="text-btn" @click="handleReset">重新设置</button>
+            </header>
+            <dl>
+              <div><dt>当前使用画像版本</dt><dd>{{ runMeta.profileVersion }}</dd></div>
+              <div><dt>模型版本</dt><dd>{{ runMeta.modelVersion }}</dd></div>
+              <div>
+                <dt>是否发生降级</dt>
+                <dd class="good">
+                  <img class="tiny-ico" :src="checkCircleIcon" alt="" aria-hidden="true" />否
+                </dd>
               </div>
-              <div class="overview-item">
-                <strong>{{ matchOverview.highMatchCount }}</strong>
-                <span>高匹配岗位</span>
-              </div>
-              <div class="overview-item">
-                <strong>{{ matchOverview.coveredSkills }}/{{ matchOverview.totalSkills }}</strong>
-                <span>技能覆盖</span>
-              </div>
+              <div><dt>推荐生成时间</dt><dd>{{ runMeta.createdAt }}</dd></div>
+              <div><dt>本次推荐数量</dt><dd>{{ visibleJobs.length }} 个岗位</dd></div>
+              <div><dt>筛选条件</dt><dd>{{ filterSummary }}</dd></div>
+            </dl>
+            <button type="button" class="details-toggle" @click="showDetails = !showDetails">
+              查看详细参数
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" :class="{ up: showDetails }">
+                <path d="m8 9 4 4 4-4" />
+              </svg>
+            </button>
+            <div v-if="showDetails" class="details-extra">
+              <div>推荐策略：<span>{{ mode }}</span></div>
+              <div>相似度及能力特征：多维加权</div>
+              <div>推荐得分仅供参考</div>
             </div>
           </section>
 
-          <section class="panel">
-            <h2 class="panel-title">结果分布</h2>
-            <div class="donut-wrap">
-              <svg viewBox="0 0 120 120" class="donut">
-                <circle
-                  v-for="slice in donutSlices"
-                  :key="slice.label"
-                  cx="60"
-                  cy="60"
-                  r="46"
-                  fill="none"
-                  :stroke="slice.color"
-                  stroke-width="16"
-                  :stroke-dasharray="slice.dash"
-                  :stroke-dashoffset="slice.offset"
-                />
-                <text x="60" y="57" text-anchor="middle" class="donut-total">{{ visibleJobs.length }}</text>
-                <text x="60" y="74" text-anchor="middle" class="donut-sub">岗位数</text>
-              </svg>
-              <ul class="legend">
+          <section class="panel distribution">
+            <h2>匹配结果分布</h2>
+            <div class="dist-layout">
+              <div class="donut-wrap">
+                <svg viewBox="0 0 120 120" class="donut">
+                  <circle
+                    v-for="slice in donutSlices"
+                    :key="slice.label"
+                    cx="60"
+                    cy="60"
+                    r="46"
+                    fill="none"
+                    :stroke="slice.color"
+                    stroke-width="16"
+                    :stroke-dasharray="slice.dash"
+                    :stroke-dashoffset="slice.offset"
+                  />
+                </svg>
+                <div class="donut-center">
+                  <strong>{{ visibleJobs.length }}</strong>
+                  <span>推荐岗位</span>
+                </div>
+              </div>
+              <ul class="dist-legend">
                 <li v-for="slice in distribution" :key="slice.label">
-                  <i :style="{ background: slice.color }" />
+                  <i class="legend-dot" :style="{ background: slice.color }" />
                   {{ slice.label }}
+                  <span>{{ slice.value }} ({{ Math.round((slice.value / (visibleJobs.length || 1)) * 100) }}%)</span>
                 </li>
+                <li v-if="distribution.length === 0" class="legend-empty">暂无匹配结果</li>
               </ul>
             </div>
-          </section>
-
-          <section class="panel">
-            <h2 class="panel-title">TOP5 岗位类别</h2>
-            <div v-for="item in categoryStats" :key="item.label" class="bar-row">
-              <span class="bar-label">{{ item.label }}</span>
-              <div class="bar-track">
-                <span class="bar-fill" :style="{ width: (item.value / 3) * 100 + '%' }" />
+            <div class="top-types">
+              <h3>TOP 5 岗位类别</h3>
+              <div v-for="item in categoryStats" :key="item.label" class="type-row">
+                <span class="type-label">{{ item.label }}</span>
+                <div class="type-track">
+                  <span class="type-fill" :style="{ width: item.percent + '%' }" />
+                </div>
+                <span class="type-value">{{ item.value }} ({{ item.percent }}%)</span>
               </div>
-              <span class="bar-value">{{ item.value }}</span>
             </div>
           </section>
 
-          <section class="panel notice-panel">
-            <h2 class="panel-title">重要提示</h2>
-            <p>{{ noticeText }}</p>
+          <section class="panel notice">
+            <div class="notice-head">
+              <img class="notice-ico" :src="megaphoneIcon" alt="" aria-hidden="true" />
+              <strong>重要提示</strong>
+            </div>
+            <p v-for="(line, i) in noticeLines" :key="i">{{ line }}</p>
+            <svg class="notice-doc" viewBox="0 0 60 70" aria-hidden="true">
+              <path d="M8 2h31l15 14v49H8z" fill="#ffba85" />
+              <path d="M39 2v14h15" fill="#fff0de" />
+              <path d="M17 30h25M17 38h24M17 46h19" stroke="#fff4e9" stroke-width="4" stroke-linecap="round" />
+            </svg>
           </section>
         </aside>
       </div>
@@ -427,30 +525,69 @@ function ringDash(score: number) {
 </template>
 
 <style scoped>
+.app-shell {
+  min-height: 100vh;
+}
+.workspace {
+  margin-left: 198px;
+  padding: 75px 57px 35px 17px;
+  background: linear-gradient(180deg, #f4f9ff 0%, #f8fbff 100%);
+}
+
+/* ---------- hero ---------- */
 .hero {
   height: 138px;
   border-radius: 12px;
-  background: linear-gradient(110deg, #eff7ff 0%, #daeaff 47%, #b8d8ff 75%, #c1d3ff 100%);
-  margin-bottom: 12px;
-  padding: 0 37px;
+  position: relative;
+  overflow: hidden;
+  background: #dceaff;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 32px;
+  margin-bottom: 12px;
 }
-.hero-content h1 {
-  font-size: 30px;
-  margin: 0 0 8px;
+.hero-art {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 701px;
+  object-fit: cover;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(240, 250, 255, 0.96) 0%, rgba(231, 242, 255, 0.52) 42%, transparent 61%);
+  pointer-events: none;
+}
+.hero-copy {
+  position: relative;
+  z-index: 1;
+}
+.hero-copy h1 {
+  font-size: 27px;
   font-weight: 800;
-  letter-spacing: -1px;
-  color: #101d46;
+  margin: 0 0 6px;
+  letter-spacing: 0.5px;
+  color: #0a1744;
 }
-.hero-content p {
-  margin: 0;
-  line-height: 1.75;
-  color: #41567f;
+.hero-copy p {
   font-size: 14px;
-  font-weight: 500;
+  line-height: 1.65;
+  color: #233052;
+  font-weight: 600;
+  margin: 0;
+}
+.hero-copy small {
+  display: block;
+  font-size: 12px;
+  color: #6a799b;
+  line-height: 1.8;
 }
 
+/* ---------- 通用 ---------- */
 .panel {
   background: white;
   border: 1px solid #edf2f7;
@@ -458,252 +595,367 @@ function ringDash(score: number) {
   padding: 18px;
   box-shadow: 0 4px 14px rgba(45, 78, 139, 0.045);
 }
-.panel-title {
-  margin: 0 0 14px;
+.panel h2 {
+  margin: 0;
   font-size: 15px;
   font-weight: 800;
   color: #16234a;
 }
-.panel-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-.panel-head .panel-title {
-  margin-bottom: 0;
-}
-.panel-note {
+.text-btn {
+  border: 0;
+  background: none;
+  color: #2168ff;
   font-size: 12px;
-  color: #7b8aa9;
+  font-weight: 700;
+  padding: 0;
+}
+.text-btn:hover {
+  text-decoration: underline;
+}
+.state-tip {
+  text-align: center;
+  color: #8592ab;
+  font-size: 13px;
+  padding: 28px 0;
+}
+.state-tip.error {
+  color: #e25060;
 }
 
+/* ---------- 匹配设置 ---------- */
 .settings-panel {
   margin-bottom: 12px;
 }
+.setting-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.setting-heading span {
+  font-size: 12px;
+  color: #8592ab;
+}
 .setting-row {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   align-items: flex-end;
   flex-wrap: wrap;
 }
-.setting-item {
+.setting-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
-.setting-label {
+.setting-field label {
   font-size: 12px;
   font-weight: 700;
   color: #4b5a7c;
+}
+.setting-field label em {
+  font-style: normal;
+  color: #a3aec2;
+  font-weight: 400;
+}
+.setting-field small {
+  font-size: 11px;
+  color: #a3aec2;
+}
+.info-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border: 1px solid #b9c4d8;
+  border-radius: 50%;
+  font-size: 9px;
+  font-style: normal;
+  color: #8592ab;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+.version-field {
+  min-width: 176px;
+}
+.version-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  border: 1px solid #d9e2ef;
+  border-radius: 8px;
+  padding: 0 10px;
+  background: white;
+}
+.version-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.version-select select {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 13px;
+  color: #243457;
+  font-weight: 700;
 }
 .select-shell {
-  height: 38px;
-  min-width: 150px;
+  height: 42px;
+  min-width: 132px;
   border: 1px solid #d9e2ef;
-  border-radius: 6px;
-  padding: 0 10px;
-  font-size: 12px;
-  color: #4b5a7c;
+  border-radius: 8px;
+  padding: 0 11px;
+  font-size: 13px;
+  color: #243457;
   background: white;
 }
-.mode-tabs {
+.strategy-options {
   display: flex;
-  height: 38px;
-  border: 1px solid #d9e2ef;
-  border-radius: 6px;
-  overflow: hidden;
+  gap: 10px;
 }
-.mode-tab {
-  border: 0;
+.strategy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  border: 1px solid #dbe4f2;
+  border-radius: 8px;
+  padding: 9px 13px;
   background: white;
-  padding: 0 14px;
-  font-size: 12px;
-  color: #4b5a7c;
+  text-align: left;
 }
-.mode-tab + .mode-tab {
-  border-left: 1px solid #e6edf7;
-}
-.mode-tab.active {
-  background: #2168ff;
-  color: white;
-  font-weight: 700;
-}
-.setting-actions {
-  display: flex;
-  gap: 8px;
-  margin-left: auto;
-}
-.btn-primary {
+.strategy strong {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  height: 38px;
-  padding: 0 22px;
+  gap: 7px;
+  font-size: 13px;
+  color: #243457;
+}
+.strategy small {
+  font-size: 11px;
+  color: #8b98b2;
+}
+.strategy .radio-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid #b9c4d8;
+  background: white;
+}
+.strategy.active {
+  border-color: #2168ff;
+  background: #f0f6ff;
+}
+.strategy.active strong {
+  color: #2168ff;
+}
+.strategy.active .radio-dot {
+  border: 4px solid #2168ff;
+}
+.start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 42px;
+  padding: 0 26px;
+  margin-left: auto;
   background: #2168ff;
   color: white;
   border: 0;
-  border-radius: 6px;
-  font-size: 13px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 700;
 }
-.btn-primary:hover {
+.start-btn:hover {
   background: #1557e0;
 }
-.btn-primary:disabled {
+.start-btn:disabled {
   background: #8fb0f5;
-}
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 38px;
-  padding: 0 18px;
-  background: white;
-  color: #4b5a7c;
-  border: 1px solid #d9e2ef;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 700;
+  cursor: not-allowed;
 }
 .btn-icon {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   object-fit: contain;
 }
 
-.content-grid {
+/* ---------- 主体两栏 ---------- */
+.columns {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-columns: minmax(0, 1fr) 262px;
   gap: 12px;
   align-items: start;
 }
-.side-column {
+.rightbar {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
+.rightbar .panel {
+  padding: 15px;
+}
 
-.match-card {
+/* ---------- 匹配结果 ---------- */
+.results-heading {
   display: flex;
-  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.results-title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.results-title span {
+  font-size: 12px;
+  color: #7b8aa9;
+}
+.results-title b {
+  color: #2168ff;
+  font-size: 15px;
+}
+.score-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #ff7a2f;
+}
+.warn-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ff7a2f;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.job-card {
+  display: flex;
+  gap: 14px;
   border: 1px solid #e8eef7;
   border-radius: 10px;
   padding: 16px 18px;
   margin-bottom: 12px;
   transition: box-shadow 0.2s, border-color 0.2s;
 }
-.match-card:hover {
+.job-card:hover {
   border-color: #b9d2ff;
   box-shadow: 0 6px 18px rgba(45, 78, 139, 0.08);
 }
-.rank-badge {
-  align-self: flex-start;
-  background: #f2f5fa;
-  color: #8592ab;
-  font-size: 11px;
-  font-weight: 800;
-  border-radius: 6px;
-  padding: 5px 9px;
+.rank-box {
+  width: 38px;
+  height: 38px;
   flex-shrink: 0;
-}
-.rank-badge.top3 {
-  background: #fff3e3;
-  color: #ff8a1a;
-}
-.match-card-main {
-  flex: 1;
-  min-width: 0;
-}
-.job-head {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  border: 1px solid #e3e9f4;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #8592ab;
+  background: #f7f9fd;
 }
-.job-logo {
-  width: 46px;
-  height: 46px;
-  object-fit: contain;
-  flex-shrink: 0;
+.rank-box.gold {
+  color: #d98a1a;
+  border-color: #f0ddb4;
+  background: #fff8e9;
 }
-.job-head-text {
+.rank-box.silver {
+  color: #7d8ca6;
+  border-color: #dde4ef;
+  background: #f2f5fa;
+}
+.rank-box.bronze {
+  color: #b07a4a;
+  border-color: #ecd9c4;
+  background: #fbf3ea;
+}
+.job-body {
   flex: 1;
   min-width: 0;
 }
-.job-head-text h3 {
+.job-top {
+  display: flex;
+  gap: 14px;
+}
+.job-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border: 1px solid #eef2f8;
+  border-radius: 10px;
+  padding: 5px;
+  background: white;
+}
+.job-head {
+  flex: 1;
+  min-width: 0;
+}
+.job-head h3 {
   margin: 0;
   font-size: 16px;
   font-weight: 800;
   color: #16234a;
 }
 .job-company {
-  font-size: 12px;
-  color: #7b8aa9;
-  margin-top: 5px;
-}
-.job-company i {
-  display: inline-block;
-  width: 1px;
-  height: 10px;
-  background: #d5deeb;
-  margin: 0 8px;
-  vertical-align: middle;
-}
-.job-salary {
-  font-size: 17px;
-  font-weight: 800;
-  color: #ff6b1a;
-  white-space: nowrap;
-}
-.reason-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px 18px;
-  margin: 12px 0;
-}
-.reason-item {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4b5a7c;
 }
-.reason-label {
+.company-chip {
+  background: #f2f5fa;
+  color: #8592ab;
+  font-size: 10px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+.job-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 7px;
+  font-size: 12px;
+  color: #7b8aa9;
+  flex-wrap: wrap;
+}
+.job-meta span {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  color: #4b5a7c;
-  white-space: nowrap;
+  gap: 4px;
 }
-.reason-icon {
-  width: 14px;
-  height: 14px;
+.meta-ico {
+  width: 13px;
+  height: 13px;
   object-fit: contain;
 }
-.reason-bar {
-  flex: 1;
-  height: 6px;
-  background: #eef2f8;
-  border-radius: 3px;
-  overflow: hidden;
-}
-.reason-fill {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, #4d8bff, #2168ff);
-  border-radius: 3px;
-}
-.reason-score {
-  font-size: 11px;
-  font-weight: 700;
-  color: #2168ff;
-  width: 34px;
-  text-align: right;
+.salary-pill {
+  color: #ff6b1a;
+  font-weight: 800;
 }
 .job-tags {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-top: 9px;
 }
 .tag {
   background: #f2f5fa;
@@ -712,31 +964,27 @@ function ringDash(score: number) {
   padding: 3px 8px;
   border-radius: 4px;
 }
-.missing {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.missing-label {
-  font-size: 11px;
-  color: #8592ab;
-}
-.missing-chip {
-  background: #fff4ec;
-  color: #e2711d;
-  font-size: 10px;
-  padding: 3px 8px;
-  border-radius: 4px;
-}
-.match-card-side {
-  width: 180px;
+.job-side {
+  width: 150px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  justify-content: center;
+  gap: 10px;
+}
+.star-btn {
+  align-self: flex-end;
+  padding: 0;
+  line-height: 0;
+}
+.star-btn img {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+  opacity: 0.75;
+}
+.star-btn.active img {
+  opacity: 1;
 }
 .ring-wrap {
   position: relative;
@@ -751,12 +999,11 @@ function ringDash(score: number) {
 .ring-track {
   fill: none;
   stroke: #eef2f8;
-  stroke-width: 7;
+  stroke-width: 8;
 }
 .ring-value {
   fill: none;
-  stroke: #2168ff;
-  stroke-width: 7;
+  stroke-width: 8;
   stroke-linecap: round;
 }
 .ring-text {
@@ -768,164 +1015,347 @@ function ringDash(score: number) {
   justify-content: center;
 }
 .ring-text strong {
-  font-size: 17px;
-  color: #2168ff;
+  font-size: 18px;
+  color: #4a5fd0;
 }
 .ring-text span {
   font-size: 10px;
   color: #8592ab;
 }
-.side-actions {
-  display: flex;
-  gap: 8px;
-}
-.btn-outline {
+.btn-detail {
   border: 1px solid #2168ff;
   background: white;
   color: #2168ff;
   border-radius: 6px;
-  padding: 7px 12px;
+  padding: 7px 16px;
   font-size: 12px;
   font-weight: 700;
 }
-.btn-bookmark {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  border: 1px solid #d9e2ef;
-  background: white;
-  color: #4b5a7c;
-  border-radius: 6px;
-  padding: 7px 12px;
-  font-size: 12px;
-  font-weight: 700;
-}
-.btn-bookmark.active {
-  background: #e8f1ff;
-  border-color: #2168ff;
-  color: #2168ff;
-}
-.empty-tip {
-  text-align: center;
-  color: #8592ab;
-  font-size: 13px;
-  padding: 30px 0;
+.btn-detail:hover {
+  background: #eef4ff;
 }
 
-.overview-grid {
+/* 匹配原因 */
+.reasons {
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 12px;
+  margin-top: 14px;
 }
-.overview-item {
+.reasons-label {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4b5a7c;
+  padding-top: 2px;
+}
+.reason-grid {
   flex: 1;
-  text-align: center;
-}
-.overview-item strong {
-  display: block;
-  font-size: 20px;
-  color: #2168ff;
-}
-.overview-item span {
-  font-size: 11px;
-  color: #8592ab;
-}
-.donut-wrap {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
 }
-.donut {
-  width: 118px;
-  height: 118px;
-  transform: rotate(-90deg);
+.reason-item {
+  min-width: 0;
+}
+.reason-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #243457;
+}
+.reason-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
   flex-shrink: 0;
 }
-.donut-total,
-.donut-sub {
-  transform: rotate(90deg);
-  transform-origin: center;
+.reason-head b {
+  color: #2168ff;
+  font-size: 12px;
 }
-.donut-total {
-  font-size: 22px;
-  font-weight: 800;
-  fill: #16234a;
+.reason-item p {
+  margin: 6px 0 0;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #8592ab;
 }
-.donut-sub {
+
+/* 待补充技能 */
+.missing-strip {
+  margin-top: 12px;
+  background: #fff6ee;
+  border: 1px solid #ffe3cd;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.missing-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.missing-ico {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+.missing-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #d9691f;
+}
+.missing-chip {
+  background: #ffe6d2;
+  color: #c9601c;
   font-size: 10px;
-  fill: #8592ab;
+  padding: 3px 9px;
+  border-radius: 4px;
 }
-.legend {
+.missing-tip {
+  margin: 7px 0 0;
+  font-size: 11px;
+  color: #b4703c;
+  line-height: 1.7;
+}
+
+/* ---------- 匹配概览 ---------- */
+.right-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.overview dl {
+  margin: 0;
+}
+.overview dl > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px dashed #eef2f8;
+}
+.overview dt {
+  font-size: 11px;
+  color: #8592ab;
+  white-space: nowrap;
+}
+.overview dd {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #243457;
+  text-align: right;
+}
+.overview dd.good {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #03b58c;
+}
+.tiny-ico {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+}
+.details-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 6px;
+  background: #f2f7ff;
+  color: #2168ff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 0;
+}
+.details-toggle svg {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.2s;
+}
+.details-toggle svg.up {
+  transform: rotate(180deg);
+}
+.details-extra {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #7b8aa9;
+  line-height: 2;
+}
+
+/* ---------- 匹配结果分布 ---------- */
+.dist-layout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 4px;
+}
+.donut-wrap {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  flex-shrink: 0;
+}
+.donut {
+  width: 116px;
+  height: 116px;
+  transform: rotate(-90deg);
+}
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.donut-center strong {
+  font-size: 22px;
+  color: #16234a;
+}
+.donut-center span {
+  font-size: 10px;
+  color: #8592ab;
+}
+.dist-legend {
   list-style: none;
   margin: 0;
   padding: 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-.legend li {
+.dist-legend li {
   display: flex;
   align-items: center;
   gap: 7px;
   font-size: 11px;
   color: #4b5a7c;
 }
-.legend i {
+.dist-legend li span {
+  margin-left: auto;
+  color: #243457;
+  font-weight: 700;
+}
+.legend-dot {
   width: 9px;
   height: 9px;
-  border-radius: 3px;
+  border-radius: 50%;
   flex-shrink: 0;
 }
-.bar-row {
+.legend-empty {
+  color: #a3aec2;
+}
+.top-types {
+  margin-top: 14px;
+}
+.top-types h3 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #16234a;
+}
+.type-row {
   display: flex;
   align-items: center;
-  gap: 9px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 9px;
 }
-.bar-label {
-  width: 68px;
+.type-label {
+  width: 88px;
   font-size: 11px;
   color: #4b5a7c;
   flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.bar-track {
+.type-track {
   flex: 1;
   height: 8px;
   background: #eef2f8;
   border-radius: 4px;
   overflow: hidden;
 }
-.bar-fill {
+.type-fill {
   display: block;
   height: 100%;
   background: linear-gradient(90deg, #6ea3ff, #2168ff);
   border-radius: 4px;
 }
-.bar-value {
+.type-value {
   font-size: 11px;
   font-weight: 700;
   color: #2168ff;
-  width: 16px;
-  text-align: right;
-}
-.notice-panel p {
-  margin: 0;
-  font-size: 11px;
-  line-height: 1.8;
-  color: #8592ab;
+  white-space: nowrap;
 }
 
-@media (max-width: 1190px) {
+/* ---------- 重要提示 ---------- */
+.notice {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff7ec 0%, #ffeed9 100%);
+  border-color: #ffe0bd;
+}
+.notice-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 9px;
+}
+.notice-head strong {
+  font-size: 13px;
+  color: #d9691f;
+}
+.notice-ico {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+}
+.notice p {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 7px;
+  font-size: 11px;
+  line-height: 1.85;
+  color: #a1613a;
+}
+.notice-doc {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  width: 52px;
+  height: 60px;
+  opacity: 0.9;
+}
+
+@media (max-width: 1380px) {
   .workspace {
     padding-right: 18px;
   }
 }
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
   .workspace {
     margin-left: 76px;
+    padding-top: 71px;
   }
-  .content-grid {
+  .columns {
     grid-template-columns: 1fr;
+  }
+  .setting-row {
+    gap: 14px;
+  }
+  .strategy-options {
+    flex-wrap: wrap;
   }
 }
 @media (max-width: 540px) {
@@ -933,20 +1363,42 @@ function ringDash(score: number) {
     margin-left: 0;
     padding: 70px 10px 82px;
   }
-  .match-card {
+  .hero {
+    height: 125px;
+    padding: 0 15px;
+  }
+  .hero-copy h1 {
+    font-size: 23px;
+  }
+  .hero-copy p {
+    font-size: 12px;
+  }
+  .hero-copy small {
+    font-size: 10px;
+    max-width: 85%;
+  }
+  .job-card {
     flex-direction: column;
   }
-  .match-card-side {
+  .job-top {
+    flex-wrap: wrap;
+  }
+  .job-side {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
   }
-  .reason-grid {
-    grid-template-columns: 1fr;
+  .reasons {
+    flex-direction: column;
   }
-  .setting-actions {
+  .reason-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .start-btn {
     margin-left: 0;
     width: 100%;
+    justify-content: center;
   }
 }
 </style>

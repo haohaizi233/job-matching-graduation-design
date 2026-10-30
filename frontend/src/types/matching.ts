@@ -3,10 +3,16 @@ export interface MatchFilterOption {
   value: string
 }
 
-export type MatchMode = '综合排序' | '高匹配优先' | '高潜力优先'
+export type MatchMode = '综合推荐' | '高匹配优先' | '高潜力优先'
+
+export interface MatchModeOption {
+  key: MatchMode
+  label: string
+  desc: string
+}
 
 export interface MatchReason {
-  /** 技能覆盖 / 教育匹配 / 项目相关性 / 求职意向 */
+  /** 技能覆盖 / 学历匹配 / 项目相关性 / 求职意向一致 */
   key: 'skill' | 'education' | 'project' | 'intent'
   label: string
   score: number
@@ -20,6 +26,10 @@ export interface MatchJobItem {
   location: string
   salary: string
   months: number
+  /** 学历要求（岗位侧） */
+  education?: string
+  /** 经验要求（岗位侧） */
+  experience?: string
   /** 综合匹配度 0-100 */
   match: number
   /** 潜力分（高潜力排序用） */
@@ -33,13 +43,6 @@ export interface MatchJobItem {
   category: string
 }
 
-export interface MatchOverview {
-  avgMatch: number
-  highMatchCount: number
-  coveredSkills: number
-  totalSkills: number
-}
-
 export interface MatchDistributionSlice {
   label: string
   value: number
@@ -49,4 +52,6 @@ export interface MatchDistributionSlice {
 export interface MatchCategoryStat {
   label: string
   value: number
+  /** 占比（%） */
+  percent: number
 }
