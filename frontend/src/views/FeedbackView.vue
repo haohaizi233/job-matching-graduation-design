@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
+import { listJobs } from '@/api/jobs'
+import { mapFeedbackToRecord } from '@/api/mappers'
+import { createRecommendation, getRun, listFeedback, listRuns, submitFeedback } from '@/api/recommendations'
+import type { FeedbackRow, JobRow } from '@/api/types'
 import { useToast } from '@/composables/useToast'
 import {
-  feedbackRecords,
-  feedbackStats,
   heroCopy,
   statusOptions,
   statusText,
   trendRanges,
 } from '@/data/feedback'
-import type { FeedbackRecordItem, FeedbackStatus } from '@/types/feedback'
+import type { FeedbackRecordItem, FeedbackStatItem, FeedbackStatus } from '@/types/feedback'
 
 import appliedIcon from '@/assets/icons/feedback/applied-job.png'
 import interviewIcon from '@/assets/icons/feedback/interview-gained.png'
@@ -35,14 +37,67 @@ const actionButtons: { status: FeedbackStatus; label: string; icon: string }[] =
   { status: 'interviewed', label: '已面试', icon: interviewIcon },
 ]
 
-const records = ref<FeedbackRecordItem[]>(
-  feedbackRecords.map((record) => ({ ...record })),
-)
+// 联调：反馈记录来自业务 API（推荐明细上的用户反馈）
+const records = ref<FeedbackRecordItem[]>([])
+const loading = ref(true)
+/** 反馈 → 推荐上下文（提交新反馈需要 run_id + item_id；相似推荐需要 job_id） */
+const feedbackMeta = ref<Map<number | string, { runId: string; itemId: string; jobId: string }>>(new Map())
+
 const activeRange = ref('7d')
 const activeStatus = ref<'all' | FeedbackStatus>('all')
 const keyword = ref('')
-const selectedId = ref(records.value[0].id)
+const selectedId = ref<number | string>('')
 const noteDraft = ref('')
+
+onMounted(async () => {
+  try {
+    const [feedbackRows, jobRows, runsPage] = await Promise.all([
+      listFeedback(),
+      listJobs(),
+      listRuns(1, 20),
+    ])
+    const jobsMap = new Map<string, JobRow>(jobRows.map((row) => [row.id, row]))
+
+    // 推荐明细项 id → 岗位/运行上下文（后端反馈只存 item_id）
+    const itemCtx = new Map<string, { runId: string; jobId: string }>()
+    for (const run of runsPage.items) {
+      const detail = await getRun(run.id)
+      for (const item of detail.items || []) {
+        itemCtx.set(item.id, { runId: run.id, jobId: item.job_id })
+      }
+    }
+
+    const built: FeedbackRecordItem[] = []
+    const meta = new Map<number | string, { runId: string; itemId: string; jobId: string }>()
+    for (const fb of feedbackRows as FeedbackRow[]) {
+      const ctx = itemCtx.get(fb.recommendation_item_id)
+      const job = ctx ? jobsMap.get(ctx.jobId) ?? null : null
+      built.push(mapFeedbackToRecord(fb, job))
+      if (ctx) {
+        meta.set(fb.id, { runId: ctx.runId, itemId: fb.recommendation_item_id, jobId: ctx.jobId })
+      }
+    }
+    records.value = built
+    feedbackMeta.value = meta
+    selectedId.value = built[0]?.id ?? ''
+  } catch (e) {
+    show(e instanceof Error ? e.message : '反馈记录加载失败')
+  } finally {
+    loading.value = false
+  }
+})
+
+/** 统计卡按真实反馈记录计算 */
+const feedbackStats = computed<FeedbackStatItem[]>(() => {
+  const list = records.value
+  const count = (status: FeedbackStatus) => list.filter((r) => r.status === status).length
+  return [
+    { key: 'total', label: '反馈总数', value: String(list.length), note: '来自推荐明细' },
+    { key: 'interested', label: '感兴趣', value: String(count('interested')), note: '愿意继续了解' },
+    { key: 'applied', label: '已投递', value: String(count('applied')), note: '已向企业投递' },
+    { key: 'interviewed', label: '已面试', value: String(count('interviewed')), note: '进入面试环节' },
+  ]
+})
 
 const filteredRecords = computed(() => {
   const kw = keyword.value.trim().toLowerCase()
@@ -83,18 +138,34 @@ function handleSelect(record: FeedbackRecordItem) {
   noteDraft.value = record.note
 }
 
-function handleStatusChange(status: FeedbackStatus) {
+async function handleStatusChange(status: FeedbackStatus) {
   const record = selectedRecord.value
   if (!record) return
-  record.status = status
-  show(`已将「${record.title}」标记为${statusText[status]}（演示）`)
+  const meta = feedbackMeta.value.get(record.id)
+  if (!meta) {
+    show('该记录缺少推荐上下文，无法提交新反馈')
+    return
+  }
+  try {
+    await submitFeedback({
+      runId: meta.runId,
+      itemId: meta.itemId,
+      feedbackType: status,
+      note: record.note || undefined,
+    })
+    record.status = status
+    record.bookmarked = status === 'interested'
+    show(`已将「${record.title}」标记为${statusText[status]}`)
+  } catch (e) {
+    show(e instanceof Error ? e.message : '反馈提交失败')
+  }
 }
 
 function handleSaveNote() {
   const record = selectedRecord.value
   if (!record) return
   record.note = noteDraft.value
-  show('备注已保存（演示，刷新后恢复）')
+  show('备注已本地保存（后端暂无备注更新接口）')
 }
 
 function handleToggleBookmark() {
@@ -107,13 +178,23 @@ function handleToggleBookmark() {
 function handleWithdraw() {
   const record = selectedRecord.value
   if (!record) return
-  show(`已撤回对「${record.title}」的反馈（演示）`)
+  show('反馈撤回暂未开放（后端暂无撤回接口）')
 }
 
-function handleRecommendAgain() {
+async function handleRecommendAgain() {
   const record = selectedRecord.value
   if (!record) return
-  show(`正在为你重新推荐与「${record.title}」相似的岗位（演示）`)
+  const meta = feedbackMeta.value.get(record.id)
+  show(`正在为你重新推荐与「${record.title}」相似的岗位…`)
+  try {
+    await createRecommendation({
+      mode: 'baseline',
+      jobIds: meta ? [meta.jobId] : undefined,
+    })
+    show('已生成新的推荐结果，可到智能匹配页查看')
+  } catch (e) {
+    show(e instanceof Error ? e.message : '重新推荐失败')
+  }
 }
 
 function handleStatusFilter(value: typeof activeStatus.value) {

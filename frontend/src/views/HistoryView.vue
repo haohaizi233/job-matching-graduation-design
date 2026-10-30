@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
+import { listJobs } from '@/api/jobs'
+import { dateOnly, dateTime, GENERIC_LOGO, jobProfileView, mapRunToHistory } from '@/api/mappers'
+import { createRecommendation, getRun, listRuns } from '@/api/recommendations'
+import type { JobRow } from '@/api/types'
 import { useToast } from '@/composables/useToast'
-import { heroCopy, historyRecords, statusOptions, statusText } from '@/data/history'
-import type { HistoryRecordItem } from '@/types/history'
+import { heroCopy, statusOptions, statusText } from '@/data/history'
+import type { HistoryJobItem, HistoryRecordItem } from '@/types/history'
 
 const router = useRouter()
 const { show } = useToast()
@@ -14,12 +18,57 @@ const { show } = useToast()
 const activeStatus = ref<'all' | 'done' | 'expired' | 'pending'>('all')
 const page = ref(1)
 const pageSize = 3
-const selectedId = ref(historyRecords[0].id)
+const selectedId = ref<number | string>('')
 const checkedJobs = ref<Array<number | string>>([])
 
+// 联调：推荐历史来自业务 API（每次匹配一条 run，含岗位快照）
+const records = ref<HistoryRecordItem[]>([])
+const loading = ref(true)
+
+onMounted(async () => {
+  try {
+    const [runsPage, jobRows] = await Promise.all([listRuns(1, 50), listJobs()])
+    const jobsMap = new Map<string, JobRow>(jobRows.map((row) => [row.id, row]))
+
+    const built: HistoryRecordItem[] = []
+    for (const run of runsPage.items) {
+      const record = mapRunToHistory(run)
+      const detail = await getRun(run.id)
+      const items = detail.items || []
+      const jobs: HistoryJobItem[] = items.map((item) => {
+        const row = jobsMap.get(item.job_id)
+        const view = row ? jobProfileView(row) : null
+        return {
+          id: item.job_id,
+          title: row?.title || '未命名岗位',
+          company: view?.employer || '未标注企业',
+          salary: view?.salary || '面议',
+          match: Math.round(item.score * 100),
+          logo: GENERIC_LOGO,
+          logoAlt: view?.employer || '未标注企业',
+        }
+      })
+      record.jobs = jobs
+      record.avgMatch = items.length
+        ? Math.round(items.reduce((sum, i) => sum + i.score * 100, 0) / items.length)
+        : 0
+      record.highMatchCount = items.filter((i) => i.score * 100 >= 85).length
+      record.jobCount = jobs.length
+      record.time = dateTime(run.created_at) || dateOnly(run.created_at)
+      built.push(record)
+    }
+    records.value = built
+    selectedId.value = built[0]?.id ?? ''
+  } catch (e) {
+    show(e instanceof Error ? e.message : '推荐历史加载失败')
+  } finally {
+    loading.value = false
+  }
+})
+
 const filteredRecords = computed(() => {
-  if (activeStatus.value === 'all') return historyRecords
-  return historyRecords.filter((record) => record.status === activeStatus.value)
+  if (activeStatus.value === 'all') return records.value
+  return records.value.filter((record) => record.status === activeStatus.value)
 })
 
 const totalPages = computed(() => Math.max(1, Math.ceil(filteredRecords.value.length / pageSize)))
@@ -31,7 +80,7 @@ const pageRecords = computed(() => {
 
 const selectedRecord = computed<HistoryRecordItem | undefined>(() => {
   return (
-    historyRecords.find((record) => record.id === selectedId.value) ?? filteredRecords.value[0] ?? undefined
+    records.value.find((record) => record.id === selectedId.value) ?? filteredRecords.value[0] ?? undefined
   )
 })
 
@@ -51,9 +100,15 @@ function toggleChecked(id: number | string) {
     : [...checkedJobs.value, id]
 }
 
-function handleRerun() {
+async function handleRerun() {
   if (checkedJobs.value.length > 0) {
-    show(`已选中 ${checkedJobs.value.length} 个岗位，正在重新匹配（演示）…`)
+    show(`已选中 ${checkedJobs.value.length} 个岗位，正在重新匹配…`)
+    try {
+      await createRecommendation({ mode: 'baseline', jobIds: checkedJobs.value.map(String) })
+      show('重新匹配完成')
+    } catch (e) {
+      show(e instanceof Error ? e.message : '重新匹配失败')
+    }
   }
   router.push('/matching')
 }
