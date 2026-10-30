@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128"><title>独立UI图标</title>
+<g fill="#586986">
+ <rect x="16" y="25" width="23" height="61" rx="4"/>
+ <path d="M47 24h41c11 0 17 6 19 17l7 32c2 8-3 15-11 17H74l-9 23c-2 5-5 7-10 7-8 0-12-7-10-15l5-24-4-4V30c0-3 0-5 1-6z" transform="translate(-1 -6) scale(1 0.98)" />
+</g></svg>

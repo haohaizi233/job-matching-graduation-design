@@ -1,0 +1,127 @@
+/* 基础重置与共享样式 */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', 'Noto Sans SC', system-ui, -apple-system, Arial,
+    sans-serif;
+  color: #0a1a42;
+  background: #f5faff;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+[hidden] {
+  display: none !important;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #2269ff;
+  outline-offset: 3px;
+}
+
+/* 卡片与通用工具类 */
+.card {
+  background: #fff;
+  border: 1px solid #edf1f7;
+  box-shadow: 0 3px 12px rgba(43, 67, 103, 0.045);
+  border-radius: 11px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 20px;
+}
+.card-header h2 {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #142344;
+  font-weight: 800;
+  gap: 6px;
+  margin: 0;
+}
+.text-link {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  color: #2874ff;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 0;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+.text-link .glyph {
+  height: 13px;
+  width: 13px;
+  stroke-width: 2.2;
+}
+.inline-info {
+  display: inline-flex;
+  padding: 0;
+  margin-top: 1px;
+  color: #9aa8c1;
+  vertical-align: middle;
+}
+.inline-info .glyph {
+  height: 13px;
+  width: 13px;
+  stroke-width: 1.8;
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot.blue {
+  background: #317bff;
+}
+.dot.violet {
+  background: #9754ff;
+}
+.dot.green {
+  background: #04c99d;
+}
+.dot.gray {
+  background: #9aa7ba;
+}
+.muted {
+  color: #96a0b4;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+.green-text {
+  color: #03bb82;
+  font-style: normal;
+  font-weight: 800;
+}
+.orange-text {
+  color: #ff713d;
+  font-style: normal;
+  font-weight: 800;
+}

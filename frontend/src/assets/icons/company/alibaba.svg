@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><defs></defs>
+<g fill="#FF6A1C">
+<path d="M133 206C177 112 339 122 383 182C399 208 387 228 354 250C321 273 287 293 278 313C271 330 288 337 311 332C337 326 363 315 392 295C357 335 312 364 268 367C226 369 209 341 225 307C245 264 309 236 333 205C351 182 332 172 310 172C242 167 190 190 157 223Z"/>
+<path d="M114 244C137 215 165 200 189 195C173 219 158 242 156 265C152 305 191 320 233 299C201 337 172 348 145 344C91 337 83 288 114 244Z"/>
+<circle cx="178" cy="266" r="11"/><circle cx="210" cy="266" r="11"/>
+</g>
+<text x="256" y="427" fill="#FF6A1C" text-anchor="middle" font-size="56" font-family="Noto Sans CJK SC, sans-serif" font-weight="900" letter-spacing="1">阿里巴巴</text>
+</svg>

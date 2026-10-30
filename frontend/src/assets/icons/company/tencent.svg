@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+<g fill="#1971DF" transform="translate(-5 0) skewX(-7)">
+ <text x="256" y="305" font-family="DejaVu Sans,Arial,sans-serif" font-size="101" font-weight="800" font-style="italic" text-anchor="middle" letter-spacing="-5">Tencent</text>
+</g>
+<path d="M418 198l13-17 6 24 23-1-14 13 7 19-23-7-10 15-3-23-20-4 22-6Z" fill="#FFB138"/>
+<path d="M428 195l16-22 4 23 20 5-23 8-5 28-9-23-19-7Z" fill="#2E83E8" opacity=".95"/>
+</svg>

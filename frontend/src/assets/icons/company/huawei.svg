@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+<defs><linearGradient id="rp" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FA3834"/><stop offset="1" stop-color="#BF0009"/></linearGradient></defs>
+<g fill="url(#rp)">
+<path d="M244 310C234 277 214 213 210 155C207 112 224 87 247 106C255 113 253 132 253 150L254 307Z"/>
+<path d="M234 317C205 286 164 245 147 201C131 164 146 144 169 147C190 151 203 175 212 192L252 316Z"/>
+<path d="M224 327C184 304 139 283 111 253C86 228 92 200 118 197C137 195 153 205 165 218L247 325Z"/>
+<path d="M216 340C176 335 127 334 101 318C81 306 78 280 96 267C113 255 134 261 151 271L247 330Z"/>
+</g>
+<g transform="translate(512 0) scale(-1 1)" fill="url(#rp)">
+<path d="M244 310C234 277 214 213 210 155C207 112 224 87 247 106C255 113 253 132 253 150L254 307Z"/>
+<path d="M234 317C205 286 164 245 147 201C131 164 146 144 169 147C190 151 203 175 212 192L252 316Z"/>
+<path d="M224 327C184 304 139 283 111 253C86 228 92 200 118 197C137 195 153 205 165 218L247 325Z"/>
+<path d="M216 340C176 335 127 334 101 318C81 306 78 280 96 267C113 255 134 261 151 271L247 330Z"/>
+</g>
+<path d="M255 106C260 92 280 101 280 118L273 309h-16Z" fill="#ED272E"/>
+<text x="256" y="433" font-family="DejaVu Sans, Arial, sans-serif" font-size="65" font-weight="800" text-anchor="middle" fill="#151515" letter-spacing="-3">HUAWEI</text>
+</svg>

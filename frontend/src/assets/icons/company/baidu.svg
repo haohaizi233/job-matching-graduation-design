@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><defs></defs>
+<g fill="#315BEE">
+<ellipse cx="150" cy="151" rx="43" ry="59" transform="rotate(-22 150 151)"/>
+<ellipse cx="246" cy="119" rx="45" ry="62" transform="rotate(-4 246 119)"/>
+<ellipse cx="348" cy="157" rx="43" ry="59" transform="rotate(20 348 157)"/>
+<ellipse cx="398" cy="255" rx="37" ry="49" transform="rotate(22 398 255)"/>
+<path d="M155 253C187 215 219 210 252 211C294 213 322 244 355 279C392 319 375 385 319 400C294 406 266 396 252 389C219 373 192 405 154 397C102 387 102 316 155 253Z"/>
+</g>
+<text x="255" y="347" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-size="89" font-weight="bold" fill="#FFFFFF" letter-spacing="-8">du</text>
+</svg>

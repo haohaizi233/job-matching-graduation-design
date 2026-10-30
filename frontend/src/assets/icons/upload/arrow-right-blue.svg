@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+<defs>
+  <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#408CFF"/><stop offset="1" stop-color="#1665F8"/></linearGradient>
+  <linearGradient id="cloud" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#EDF5FF"/><stop offset="1" stop-color="#CFE2FF"/></linearGradient>
+  <linearGradient id="green" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#1DD2A0"/><stop offset="1" stop-color="#00AA83"/></linearGradient>
+  <linearGradient id="orange" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#FFB548"/><stop offset="1" stop-color="#FF870C"/></linearGradient>
+  <linearGradient id="red" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#FF7777"/><stop offset="1" stop-color="#F5454E"/></linearGradient>
+  
+</defs>
+
+<path d="M49 31L80 64L49 97" stroke="#246EF7" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+
+</svg>

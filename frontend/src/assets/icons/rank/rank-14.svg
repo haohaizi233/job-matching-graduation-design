@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128">
+<defs>
+ <linearGradient id="badge" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#BAC3D0"/>
+  <stop offset="52%" stop-color="#9AA5B4"/>
+  <stop offset="100%" stop-color="#7B899B"/>
+ </linearGradient>
+ <filter id="shadow" x="-35%" y="-35%" width="170%" height="170%">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="2.1" result="blur"/>
+  <feOffset in="blur" dy="3" result="offset"/>
+  <feComponentTransfer in="offset" result="faded"><feFuncA type="linear" slope=".17"/></feComponentTransfer>
+  <feMerge><feMergeNode in="faded"/><feMergeNode in="SourceGraphic"/></feMerge>
+ </filter>
+</defs>
+<path d="M35 29Q35 23 43 23H85Q93 23 93 31V106L64 92 35 106Z"
+      fill="url(#badge)" filter="url(#shadow)" />
+<path d="M43 31H85" stroke="#F0F3F8" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+<text x="64" y="75" font-family="Arial,Helvetica,sans-serif" font-size="39" text-anchor="middle"
+      font-weight="700" fill="#FFFFFF" stroke="#FFFFFF" stroke-width=".24">14</text>
+</svg>
