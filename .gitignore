@@ -89,3 +89,6 @@ reports.zip
 # ---- 本地临时排查脚本 / 中间产物（不入库）----
 .tmp_*
 _tmp_*
+
+# JetBrains IDE local config
+.idea/
