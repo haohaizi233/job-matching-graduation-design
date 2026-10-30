@@ -436,19 +436,60 @@ interface ExperienceLike {
   highlights: string[]
 }
 
+/** 章节摘录行形如 "2025.03 - 2025.08 校园二手交易平台（后端开发）"，从中剥离时间段 */
+const PERIOD_RE = /^(\d{4}(?:\.\d{1,2})?\s*[-–~]\s*(?:\d{4}(?:\.\d{1,2})?|至今|今))\s+(.*)$/
+
+function splitPeriod(text: string): { period: string; rest: string } {
+  const m = text.match(PERIOD_RE)
+  return m ? { period: m[1].replace(/\s+/g, ''), rest: m[2].trim() } : { period: '', rest: text.trim() }
+}
+
+function achievementTexts(d: AnyDict): string[] {
+  return Array.isArray(d.quantified_achievements)
+    ? (d.quantified_achievements as unknown[]).map((x) => textOf(x)).filter(Boolean)
+    : []
+}
+
+/** 量化成果常常是要点原文的子串（如 "85%"），去重避免同一条内容重复展示 */
+function dedupeHighlights(list: string[]): string[] {
+  return list.filter((text, i) => !list.some((other, j) => j !== i && other.includes(text) && other !== text))
+}
+
+/**
+ * 解析器把经历章节按行切成多条 entry：首条带时间段的是标题行，其余是要点行。
+ * 这里按「遇到标题行开新经历、否则并入上一条要点」聚合，还原简历里的自然结构。
+ */
 function mapExperiences(list: unknown, fallbackRole: string): ExperienceLike[] {
-  return (Array.isArray(list) ? list : []).map((raw, index) => {
+  const entries = Array.isArray(list) ? list : []
+  const groups: { period: string; title: string; highlights: string[] }[] = []
+  for (const raw of entries) {
     const d = asDict(raw)
-    const highlights = Array.isArray(d.quantified_achievements)
-      ? (d.quantified_achievements as unknown[]).map((x) => textOf(x))
-      : []
-    const excerpt = textOf(d.excerpt)
+    const excerpt = textOf(d.excerpt).trim()
+    const achievements = achievementTexts(d)
+    const { period, rest } = splitPeriod(excerpt)
+    const explicitTitle = textOf(d.title || d.name).trim()
+    if (period || explicitTitle) {
+      groups.push({
+        period: period || textOf(d.period),
+        title: explicitTitle || rest,
+        highlights: achievements,
+      })
+    } else if (groups.length) {
+      const last = groups[groups.length - 1]
+      if (excerpt) last.highlights.push(excerpt)
+      last.highlights.push(...achievements)
+    } else if (excerpt || achievements.length) {
+      groups.push({ period: textOf(d.period), title: excerpt.slice(0, 40), highlights: achievements })
+    }
+  }
+  return groups.map((g, index) => {
+    const highlights = dedupeHighlights(g.highlights)
     return {
       id: index + 1,
-      name: textOf(d.title || d.name, '未命名经历'),
+      name: g.title || '未命名经历',
       role: fallbackRole,
-      period: textOf(d.period),
-      highlights: highlights.length ? highlights : excerpt ? [excerpt.slice(0, 60)] : ['暂无补充说明'],
+      period: g.period,
+      highlights: highlights.length ? highlights : ['暂无补充说明'],
     }
   })
 }
@@ -468,13 +509,26 @@ export function mapProfileSkills(row: ProfileRow | null): ProfileSkill[] {
 export function mapProfileEducation(row: ProfileRow | null): ProfileEducation {
   const prof = asDict(row?.profile_data?.profile)
   return {
-    school: '示例大学',
+    school: schoolFromEvidence(prof),
     major: pickText(prof, 'major', '未填写'),
     degree: pickText(prof, 'education_level', '未填写'),
     period: `${textOf(pickValue(prof, 'graduation_year'), '未填写')} 届`,
     gpa: '—',
     ranking: '—',
   }
+}
+
+/** 学校名没有独立字段，从学历字段的证据原文里推导（"2026.06  示例大学 软件工程 本科"） */
+function schoolFromEvidence(prof: AnyDict): string {
+  const level = asDict(prof.education_level)
+  const evidence = textOf(level.evidence_text)
+  const tokens = evidence.split(/\s+/).filter(Boolean)
+  const major = pickText(prof, 'major')
+  const degree = pickText(prof, 'education_level')
+  const school = tokens.find(
+    (t) => !/^\d{4}/.test(t) && t !== major && t !== degree && !/^(本科|硕士|博士|大专)$/.test(t),
+  )
+  return school || '未填写'
 }
 
 export function mapProfileProjects(row: ProfileRow | null): ProfileProject[] {
@@ -488,12 +542,16 @@ export function mapProfileProjects(row: ProfileRow | null): ProfileProject[] {
 }
 
 export function mapProfileInternships(row: ProfileRow | null): ProfileInternship[] {
-  return mapExperiences(row?.profile_data?.profile?.internship_experiences, '实习生').map((e) => ({
-    id: e.id,
-    company: e.name,
-    position: e.role,
-    period: e.period,
-    location: '—',
-    highlights: e.highlights,
-  }))
+  return mapExperiences(row?.profile_data?.profile?.internship_experiences, '实习生').map((e) => {
+    // 实习标题行形如 "某科技公司 后端开发实习生"，前段是公司、后段是岗位
+    const m = e.name.match(/^(\S+?)\s+(.+)$/)
+    return {
+      id: e.id,
+      company: m ? m[1] : e.name,
+      position: m ? m[2] : e.role,
+      period: e.period,
+      location: '—',
+      highlights: e.highlights,
+    }
+  })
 }
