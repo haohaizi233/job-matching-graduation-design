@@ -1,0 +1,97 @@
+Desktop boxes: {
+  ".topbar": {
+    "x": 0,
+    "y": 0,
+    "width": 1448,
+    "height": 62
+  },
+  ".sidebar": {
+    "x": 0,
+    "y": 62,
+    "width": 198,
+    "height": 1024
+  },
+  ".workspace": {
+    "x": 198,
+    "y": 0,
+    "width": 1250,
+    "height": 1139.2
+  },
+  ".breadcrumb": {
+    "x": 213,
+    "y": 75,
+    "width": 1178,
+    "height": 37
+  },
+  ".detail-grid": {
+    "x": 213,
+    "y": 112,
+    "width": 1178,
+    "height": 995.2
+  },
+  ".job-hero": {
+    "x": 213,
+    "y": 112,
+    "width": 804,
+    "height": 201
+  },
+  ".detail-tabs": {
+    "x": 213,
+    "y": 325,
+    "width": 804,
+    "height": 49
+  },
+  ".responsibility": {
+    "x": 213,
+    "y": 390,
+    "width": 804,
+    "height": 204
+  },
+  ".requirements": {
+    "x": 213,
+    "y": 606,
+    "width": 804,
+    "height": 203
+  },
+  ".skills": {
+    "x": 213,
+    "y": 821,
+    "width": 804,
+    "height": 117
+  },
+  ".company-info": {
+    "x": 213,
+    "y": 950,
+    "width": 804,
+    "height": 157.2
+  },
+  ".match-preview": {
+    "x": 1033,
+    "y": 112,
+    "width": 358,
+    "height": 258
+  },
+  ".skill-match": {
+    "x": 1033,
+    "y": 382,
+    "width": 358,
+    "height": 246
+  },
+  ".condition-match": {
+    "x": 1033,
+    "y": 640,
+    "width": 358,
+    "height": 194
+  },
+  ".advice": {
+    "x": 1033,
+    "y": 846,
+    "width": 358,
+    "height": 196
+  }
+}
+page errors []
+company tab visible? True
+save label 已收藏
+modal visible? True
+mobile scrollWidth innerWidth {'w': 390, 'iw': 390}
