@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 
 import IconGlyph from '@/components/common/IconGlyph.vue'
 import { useAuth } from '@/composables/useAuth'
-import { useToast } from '@/composables/useToast'
 import { notifications, student } from '@/data/dashboard'
 
 import brandCap from '@/assets/art/brand-cap.png'
@@ -16,7 +15,6 @@ const emit = defineEmits<{
   (e: 'submit', query: string): void
   (e: 'logout'): void
 }>()
-const { show } = useToast()
 const router = useRouter()
 const { state: authState, logout } = useAuth()
 
@@ -46,9 +44,9 @@ function handleSearchInput() {
   emit('search', query.value)
 }
 
-function handleDemo(name: string) {
-  show(`「${name}」属于页面导航演示，尚未连接实际业务后端。`)
+function goSettings() {
   openMenu.value = null
+  router.push('/settings')
 }
 
 async function handleLogout() {
@@ -113,7 +111,7 @@ async function handleLogout() {
         </button>
         <div v-show="openMenu === 'profile'" class="popover user-popover">
           <div class="popover-title">{{ displayName }} <span class="muted">学生账号</span></div>
-          <button type="button" @click="handleDemo('个人设置')">个人设置</button>
+          <button type="button" @click="goSettings">个人设置</button>
           <button type="button" @click="handleLogout">退出登录</button>
         </div>
       </div>

@@ -52,6 +52,18 @@ function handleSubmit(value: string) {
 }
 
 function handleStatSelect(item: StatCardItem) {
+  // 统计卡片对应真实页面，直接跳转
+  const routeByTarget: Record<string, string> = {
+    简历管理: '/resume',
+    我的画像: '/profile',
+    岗位探索: '/jobs',
+    智能匹配: '/matching',
+  }
+  const to = routeByTarget[item.target]
+  if (to) {
+    router.push(to)
+    return
+  }
   show(`「${item.target}」页面开发中，敬请期待。`)
 }
 
@@ -76,7 +88,7 @@ function handleLogout() {
         <StatsGrid :items="statCards" @select="handleStatSelect" />
 
         <section class="feature-grid" aria-label="智能匹配与求职进度">
-          <MatchPromo @start="handleDemo('智能匹配')" />
+          <MatchPromo @start="router.push('/matching')" />
           <JobProgressPanel
             :steps="progressSteps"
             :status="progressStatus"
@@ -87,13 +99,13 @@ function handleLogout() {
         <section class="analysis-grid" aria-label="推荐趋势与结果">
           <div class="column-left">
             <TrendCard />
-            <ActivityCard :items="activityItems" @more="handleDemo('更多动态')" />
+            <ActivityCard :items="activityItems" @more="router.push('/history')" />
           </div>
           <div class="column-right" ref="recommendationsEl">
             <RecommendCard
               :jobs="filteredJobs"
               @select="selectedJob = $event"
-              @more="handleDemo('岗位探索')"
+              @more="router.push('/jobs')"
             />
             <NoticeCard :text="noticeText" />
           </div>
