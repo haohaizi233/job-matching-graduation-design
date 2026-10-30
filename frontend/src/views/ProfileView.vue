@@ -10,7 +10,7 @@ import {
   mapProfileProjects,
   mapProfileSkills,
 } from '@/api/mappers'
-import { fieldValue, getProfile } from '@/api/profile'
+import { fieldValue, getProfile, getProfileVersion, listProfileVersions, saveProfile } from '@/api/profile'
 import type { ProfileRow } from '@/api/types'
 import { useAuth } from '@/composables/useAuth'
 import { useToast } from '@/composables/useToast'
@@ -141,6 +141,60 @@ function handleEdit(section: string) {
 function handleDemo(name: string) {
   show(`「${name}」功能开发中`)
 }
+
+// 确认当前画像：调用业务 API 保存修订并标记 confirmed
+const confirming = ref(false)
+
+async function handleConfirmProfile() {
+  if (!profile.value || confirming.value) return
+  confirming.value = true
+  try {
+    profile.value = await saveProfile({
+      edits: {},
+      confirm: true,
+      expectedVersion: profile.value.profile_version,
+    })
+    show('画像已确认，可用于智能匹配')
+  } catch (e) {
+    show(e instanceof Error ? e.message : '画像确认失败')
+  } finally {
+    confirming.value = false
+  }
+}
+
+// 版本历史：拉取历史版本并在版本卡片下展开
+const versions = ref<ProfileRow[]>([])
+const versionsOpen = ref(false)
+const viewingVersion = ref<number | null>(null)
+
+async function handleVersionHistory() {
+  if (!versionsOpen.value) {
+    try {
+      versions.value = await listProfileVersions()
+    } catch (e) {
+      show(e instanceof Error ? e.message : '版本历史加载失败')
+      return
+    }
+  }
+  versionsOpen.value = !versionsOpen.value
+}
+
+// 查看某个历史版本的画像（只读预览，不影响当前编辑版本）
+async function handleViewVersion(version: number) {
+  if (viewingVersion.value === version) {
+    profile.value = await getProfile()
+    viewingVersion.value = null
+    show('已返回当前版本')
+    return
+  }
+  try {
+    profile.value = await getProfileVersion(version)
+    viewingVersion.value = version
+    show(`正在预览 v${version}，再次点击可返回当前版本`)
+  } catch (e) {
+    show(e instanceof Error ? e.message : '版本加载失败')
+  }
+}
 </script>
 
 <template>
@@ -245,7 +299,7 @@ function handleDemo(name: string) {
         <div class="version-card">
           <div class="version-header">
             <span>当前画像版本</span>
-            <button class="link-btn" type="button" @click="handleDemo('版本历史')">
+            <button class="link-btn" type="button" @click="handleVersionHistory">
               版本历史
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 5l7 7-7 7" />
@@ -275,6 +329,21 @@ function handleDemo(name: string) {
             </svg>
             查看版本对比
           </button>
+          <ul v-if="versionsOpen" class="version-list">
+            <li v-for="v in versions" :key="v.id" class="version-item">
+              <button
+                type="button"
+                class="version-link"
+                :class="{ viewing: viewingVersion === v.profile_version }"
+                @click="handleViewVersion(v.profile_version)"
+              >
+                v{{ v.profile_version }}{{ viewingVersion === v.profile_version ? '（预览中）' : '' }}
+              </button>
+              <span>{{ dateTime(v.created_at) }}</span>
+              <span class="badge-current">{{ v.confirmed ? '已确认' : '待确认' }}</span>
+            </li>
+            <li v-if="!versions.length" class="version-item">暂无历史版本</li>
+          </ul>
         </div>
       </section>
 
@@ -474,7 +543,9 @@ function handleDemo(name: string) {
           <span class="version-tag">当前编辑基于版本 {{ profileVersion.version }}</span>
           <div class="bar-actions">
             <button type="button" class="btn-cancel" @click="handleDemo('取消')">取消</button>
-            <button type="button" class="btn-confirm" @click="handleDemo('确认')">确认当前画像</button>
+            <button type="button" class="btn-confirm" :disabled="confirming" @click="handleConfirmProfile">
+              {{ confirming ? '确认中…' : '确认当前画像' }}
+            </button>
           </div>
         </div>
         <div class="bar-content">
@@ -754,6 +825,37 @@ function handleDemo(name: string) {
   opacity: 0.85;
   margin-top: 8px;
   white-space: pre-line;
+}
+.version-list {
+  list-style: none;
+  margin-top: 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.version-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+}
+.version-item .badge-current {
+  margin-left: auto;
+}
+.version-link {
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 11px;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.version-link.viewing {
+  font-weight: 700;
 }
 .ai-illu {
   width: 80px;
