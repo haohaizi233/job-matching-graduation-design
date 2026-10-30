@@ -1,0 +1,297 @@
+﻿old_path,new_path,action
+background/img.png,assets/images/logo/logo-title.png,moved
+background/img_1.png,assets/images/banner/banner-settings.png,moved
+background/img_2.png,assets/images/illustration/slogan-career-start.png,moved
+background/img_3.png,assets/images/illustration/ai-resume-wide.png,moved
+background/img_4.png,assets/images/illustration/ai-resume-card.png,moved
+background/img_5.png,assets/images/banner/banner-campus.png,moved
+background/img_6.png,assets/images/illustration/login-hero.png,moved
+icons/img_55.png,assets/images/avatar/avatar-sample.png,moved
+icons/01_工作台.svg,assets/icons/nav/dashboard.svg,moved
+icons/01_工作台.png,assets/icons/nav/dashboard.png,moved
+icons/02_简历管理.svg,assets/icons/nav/resume.svg,moved
+icons/02_简历管理.png,assets/icons/nav/resume.png,moved
+icons/03_我的画像.svg,assets/icons/nav/profile.svg,moved
+icons/03_我的画像.png,assets/icons/nav/profile.png,moved
+icons/04_岗位探索.svg,assets/icons/nav/jobs.svg,moved
+icons/04_岗位探索.png,assets/icons/nav/jobs.png,moved
+icons/05_智能匹配.svg,assets/icons/nav/matching.svg,moved
+icons/05_智能匹配.png,assets/icons/nav/matching.png,moved
+icons/06_推荐历史.svg,assets/icons/nav/history.svg,moved
+icons/06_推荐历史.png,assets/icons/nav/history.png,moved
+icons/07_反馈中心.svg,assets/icons/nav/feedback.svg,moved
+icons/07_反馈中心.png,assets/icons/nav/feedback.png,moved
+icons/08_个人设置.svg,assets/icons/nav/settings.svg,moved
+icons/08_个人设置.png,assets/icons/nav/settings.png,moved
+icons/选中态_亮蓝色/01_工作台.svg,assets/icons/nav/dashboard-active.svg,moved
+icons/选中态_亮蓝色/01_工作台.png,assets/icons/nav/dashboard-active.png,moved
+icons/选中态_亮蓝色/02_简历管理.svg,assets/icons/nav/resume-active.svg,moved
+icons/选中态_亮蓝色/02_简历管理.png,assets/icons/nav/resume-active.png,moved
+icons/选中态_亮蓝色/03_我的画像.svg,assets/icons/nav/profile-active.svg,moved
+icons/选中态_亮蓝色/03_我的画像.png,assets/icons/nav/profile-active.png,moved
+icons/选中态_亮蓝色/04_岗位探索.svg,assets/icons/nav/jobs-active.svg,moved
+icons/选中态_亮蓝色/04_岗位探索.png,assets/icons/nav/jobs-active.png,moved
+icons/选中态_亮蓝色/05_智能匹配.svg,assets/icons/nav/matching-active.svg,moved
+icons/选中态_亮蓝色/05_智能匹配.png,assets/icons/nav/matching-active.png,moved
+icons/选中态_亮蓝色/06_推荐历史.svg,assets/icons/nav/history-active.svg,moved
+icons/选中态_亮蓝色/06_推荐历史.png,assets/icons/nav/history-active.png,moved
+icons/选中态_亮蓝色/07_反馈中心.svg,assets/icons/nav/feedback-active.svg,moved
+icons/选中态_亮蓝色/07_反馈中心.png,assets/icons/nav/feedback-active.png,moved
+icons/09_顶部搜索.svg,assets/icons/topbar/search.svg,moved
+icons/09_顶部搜索.png,assets/icons/topbar/search.png,moved
+icons/10_消息通知.svg,assets/icons/topbar/notification.svg,moved
+icons/10_消息通知.png,assets/icons/topbar/notification.png,moved
+icons/PNG/01_阿里巴巴_企业标识.png,assets/icons/company/alibaba.png,moved
+icons/SVG/01_阿里巴巴_企业标识.svg,assets/icons/company/alibaba.svg,moved
+icons/PNG/02_腾讯_QQ企业标识.png,assets/icons/company/tencent-qq.png,moved
+icons/SVG/02_腾讯_QQ企业标识.svg,assets/icons/company/tencent-qq.svg,moved
+icons/PNG/03_字节跳动_企业标识.png,assets/icons/company/bytedance.png,moved
+icons/SVG/03_字节跳动_企业标识.svg,assets/icons/company/bytedance.svg,moved
+icons/PNG/04_美团_企业标识.png,assets/icons/company/meituan.png,moved
+icons/SVG/04_美团_企业标识.svg,assets/icons/company/meituan.svg,moved
+icons/PNG/05_百度_企业标识.png,assets/icons/company/baidu.png,moved
+icons/SVG/05_百度_企业标识.svg,assets/icons/company/baidu.svg,moved
+icons/PNG/07_华为Logo_红色花瓣.png,assets/icons/company/huawei.png,moved
+icons/SVG/07_华为Logo_红色花瓣.svg,assets/icons/company/huawei.svg,moved
+icons/01_蓝色环绕地球企业标识.png,assets/icons/company/generic-globe.png,moved
+icons/01_蓝色环绕地球企业标识.svg,assets/icons/company/generic-globe.svg,moved
+icons/PNG/04_岗位地点_定位图标.png,assets/icons/job/location.png,moved
+icons/SVG/04_岗位地点_定位图标.svg,assets/icons/job/location.svg,moved
+icons/PNG/05_发布时间_时钟.png,assets/icons/job/publish-time.png,moved
+icons/SVG/05_发布时间_时钟.svg,assets/icons/job/publish-time.svg,moved
+icons/PNG/01_重新运行匹配_蓝色刷新.png,assets/icons/action/rerun-match.png,moved
+icons/SVG/01_重新运行匹配_蓝色刷新.svg,assets/icons/action/rerun-match.svg,moved
+icons/PNG/01_重置筛选_刷新箭头.png,assets/icons/action/reset-filter.png,moved
+icons/SVG/01_重置筛选_刷新箭头.svg,assets/icons/action/reset-filter.svg,moved
+icons/PNG/02_列表模式.png,assets/icons/action/view-list.png,moved
+icons/SVG/02_列表模式.svg,assets/icons/action/view-list.svg,moved
+icons/PNG/02_列表模式_选中态白色.png,assets/icons/action/view-list-active.png,moved
+icons/SVG/02_列表模式_选中态白色.svg,assets/icons/action/view-list-active.svg,moved
+icons/PNG/03_卡片模式_四宫格.png,assets/icons/action/view-grid.png,moved
+icons/SVG/03_卡片模式_四宫格.svg,assets/icons/action/view-grid.svg,moved
+icons/PNG/02_推荐岗位总数_蓝色斜箭头.png,assets/icons/action/trend-up.png,moved
+icons/SVG/02_推荐岗位总数_蓝色斜箭头.svg,assets/icons/action/trend-up.svg,moved
+icons/PNG/04_感兴趣_深灰蓝点赞.png,assets/icons/feedback/thumb-up-muted.png,moved
+icons/SVG/04_感兴趣_深灰蓝点赞.svg,assets/icons/feedback/thumb-up-muted.svg,moved
+icons/PNG/03_不感兴趣_深灰蓝点踩.png,assets/icons/feedback/thumb-down-muted.png,moved
+icons/SVG/03_不感兴趣_深灰蓝点踩.svg,assets/icons/feedback/thumb-down-muted.svg,moved
+icons/PNG/06_感兴趣_蓝色点赞.png,assets/icons/feedback/thumb-up-blue.png,moved
+icons/SVG/06_感兴趣_蓝色点赞.svg,assets/icons/feedback/thumb-up-blue.svg,moved
+icons/PNG/07_不感兴趣_红色点踩.png,assets/icons/feedback/thumb-down-red.png,moved
+icons/SVG/07_不感兴趣_红色点踩.svg,assets/icons/feedback/thumb-down-red.svg,moved
+icons/PNG/05_获得面试_深灰蓝时钟气泡.png,assets/icons/feedback/interview-gained.png,moved
+icons/SVG/05_获得面试_深灰蓝时钟气泡.svg,assets/icons/feedback/interview-gained.svg,moved
+icons/PNG/06_不相关_深灰蓝圆圈叉号.png,assets/icons/feedback/not-relevant.png,moved
+icons/SVG/06_不相关_深灰蓝圆圈叉号.svg,assets/icons/feedback/not-relevant.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/01_今日反馈_消息气泡.png,assets/icons/feedback/today-feedback.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/01_今日反馈_消息气泡.svg,assets/icons/feedback/today-feedback.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/02_感兴趣岗位_点赞.png,assets/icons/feedback/interested-job.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/02_感兴趣岗位_点赞.svg,assets/icons/feedback/interested-job.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/03_已投递岗位_纸飞机.png,assets/icons/feedback/applied-job.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/03_已投递岗位_纸飞机.svg,assets/icons/feedback/applied-job.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/04_待处理建议_时钟.png,assets/icons/feedback/pending-suggestion.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/04_待处理建议_时钟.svg,assets/icons/feedback/pending-suggestion.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/05_反馈趋势_信息.png,assets/icons/feedback/feedback-trend.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/05_反馈趋势_信息.svg,assets/icons/feedback/feedback-trend.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/06_反馈效果_满意度星标.png,assets/icons/feedback/feedback-rating.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/06_反馈效果_满意度星标.svg,assets/icons/feedback/feedback-rating.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/07_反馈提升_上升箭头.png,assets/icons/feedback/improvement-up.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/07_反馈提升_上升箭头.svg,assets/icons/feedback/improvement-up.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/08_优化建议_灯泡.png,assets/icons/feedback/optimization-tip.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/08_优化建议_灯泡.svg,assets/icons/feedback/optimization-tip.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/09_岗位收藏_星标.png,assets/icons/feedback/job-bookmark.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/09_岗位收藏_星标.svg,assets/icons/feedback/job-bookmark.svg,moved
+icons/反馈中心_10个独立图标/PNG_透明无底色/10_岗位详情_外链跳转.png,assets/icons/feedback/job-external-link.png,moved
+icons/反馈中心_10个独立图标/SVG_透明无底色/10_岗位详情_外链跳转.svg,assets/icons/feedback/job-external-link.svg,moved
+icons/反馈中心_10个独立图标/PNG_原图浅色底块/01_今日反馈_消息气泡.png,assets/icons/feedback/tile/today-feedback.png,moved
+icons/反馈中心_10个独立图标/PNG_原图浅色底块/02_感兴趣岗位_点赞.png,assets/icons/feedback/tile/interested-job.png,moved
+icons/反馈中心_10个独立图标/PNG_原图浅色底块/03_已投递岗位_纸飞机.png,assets/icons/feedback/tile/applied-job.png,moved
+icons/反馈中心_10个独立图标/PNG_原图浅色底块/04_待处理建议_时钟.png,assets/icons/feedback/tile/pending-suggestion.png,moved
+icons/PNG/06_匹配成功_绿色对勾.png,assets/icons/status/match-success.png,moved
+icons/SVG/06_匹配成功_绿色对勾.svg,assets/icons/status/match-success.svg,moved
+icons/PNG/08_已投递_纸飞机.png,assets/icons/status/applied.png,moved
+icons/SVG/08_已投递_纸飞机.svg,assets/icons/status/applied.svg,moved
+icons/PNG/09_已面试_日历.png,assets/icons/status/interviewed.png,moved
+icons/SVG/09_已面试_日历.svg,assets/icons/status/interviewed.svg,moved
+icons/PNG/10_再次推荐_外链.png,assets/icons/status/recommend-again.png,moved
+icons/SVG/10_再次推荐_外链.svg,assets/icons/status/recommend-again.svg,moved
+icons/PNG透明背景/01_画像版本_紫色加号.png,assets/icons/match/profile-version.png,moved
+icons/SVG矢量/01_画像版本_紫色加号.svg,assets/icons/match/profile-version.svg,moved
+icons/PNG透明背景/02_开始匹配_白色闪光.png,assets/icons/match/start-match.png,moved
+icons/SVG矢量/02_开始匹配_白色闪光.svg,assets/icons/match/start-match.svg,moved
+icons/PNG透明背景/04_技能覆盖_绿色对勾.png,assets/icons/match/skill-coverage.png,moved
+icons/SVG矢量/04_技能覆盖_绿色对勾.svg,assets/icons/match/skill-coverage.svg,moved
+icons/PNG透明背景/05_学历匹配_蓝色毕业帽.png,assets/icons/match/education-match.png,moved
+icons/SVG矢量/05_学历匹配_蓝色毕业帽.svg,assets/icons/match/education-match.svg,moved
+icons/PNG透明背景/06_项目相关性_紫色文档.png,assets/icons/match/project-relevance.png,moved
+icons/SVG矢量/06_项目相关性_紫色文档.svg,assets/icons/match/project-relevance.svg,moved
+icons/PNG透明背景/07_求职意向一致_橙红靶心.png,assets/icons/match/intent-aligned.png,moved
+icons/SVG矢量/07_求职意向一致_橙红靶心.svg,assets/icons/match/intent-aligned.svg,moved
+icons/PNG透明背景/09_收藏岗位_灰蓝空心星.png,assets/icons/match/bookmark-star.png,moved
+icons/SVG矢量/09_收藏岗位_灰蓝空心星.svg,assets/icons/match/bookmark-star.svg,moved
+icons/PNG_透明背景/01_第1名_金色排名徽章.png,assets/icons/rank/rank-01.png,moved
+icons/PNG_透明背景/02_第2名_银色排名徽章.png,assets/icons/rank/rank-02.png,moved
+icons/PNG_透明背景/03_第3名_铜色排名徽章.png,assets/icons/rank/rank-03.png,moved
+icons/PNG_透明背景/04_第4名_灰色排名徽章.png,assets/icons/rank/rank-04.png,moved
+icons/PNG_透明背景/05_第5名_灰色排名徽章.png,assets/icons/rank/rank-05.png,moved
+icons/PNG_透明背景/06_第6名_灰色排名徽章.png,assets/icons/rank/rank-06.png,moved
+icons/PNG_透明背景/07_第7名_灰色排名徽章.png,assets/icons/rank/rank-07.png,moved
+icons/PNG_透明背景/08_第8名_灰色排名徽章.png,assets/icons/rank/rank-08.png,moved
+icons/PNG_透明背景/09_第9名_灰色排名徽章.png,assets/icons/rank/rank-09.png,moved
+icons/PNG_透明背景/10_第10名_灰色排名徽章.png,assets/icons/rank/rank-10.png,moved
+icons/PNG_透明背景/11_第11名_灰色排名徽章.png,assets/icons/rank/rank-11.png,moved
+icons/PNG_透明背景/12_第12名_灰色排名徽章.png,assets/icons/rank/rank-12.png,moved
+icons/PNG_透明背景/13_第13名_灰色排名徽章.png,assets/icons/rank/rank-13.png,moved
+icons/PNG_透明背景/14_第14名_灰色排名徽章.png,assets/icons/rank/rank-14.png,moved
+icons/PNG_透明背景/15_第15名_灰色排名徽章.png,assets/icons/rank/rank-15.png,moved
+icons/PNG_透明背景/16_第16名_灰色排名徽章.png,assets/icons/rank/rank-16.png,moved
+icons/PNG_透明背景/17_第17名_灰色排名徽章.png,assets/icons/rank/rank-17.png,moved
+icons/PNG_透明背景/18_第18名_灰色排名徽章.png,assets/icons/rank/rank-18.png,moved
+icons/PNG_透明背景/19_第19名_灰色排名徽章.png,assets/icons/rank/rank-19.png,moved
+icons/PNG_透明背景/20_第20名_灰色排名徽章.png,assets/icons/rank/rank-20.png,moved
+icons/SVG_矢量/01_第1名_金色排名徽章.svg,assets/icons/rank/rank-01.svg,moved
+icons/SVG_矢量/02_第2名_银色排名徽章.svg,assets/icons/rank/rank-02.svg,moved
+icons/SVG_矢量/03_第3名_铜色排名徽章.svg,assets/icons/rank/rank-03.svg,moved
+icons/SVG_矢量/04_第4名_灰色排名徽章.svg,assets/icons/rank/rank-04.svg,moved
+icons/SVG_矢量/05_第5名_灰色排名徽章.svg,assets/icons/rank/rank-05.svg,moved
+icons/SVG_矢量/06_第6名_灰色排名徽章.svg,assets/icons/rank/rank-06.svg,moved
+icons/SVG_矢量/07_第7名_灰色排名徽章.svg,assets/icons/rank/rank-07.svg,moved
+icons/SVG_矢量/08_第8名_灰色排名徽章.svg,assets/icons/rank/rank-08.svg,moved
+icons/SVG_矢量/09_第9名_灰色排名徽章.svg,assets/icons/rank/rank-09.svg,moved
+icons/SVG_矢量/10_第10名_灰色排名徽章.svg,assets/icons/rank/rank-10.svg,moved
+icons/SVG_矢量/11_第11名_灰色排名徽章.svg,assets/icons/rank/rank-11.svg,moved
+icons/SVG_矢量/12_第12名_灰色排名徽章.svg,assets/icons/rank/rank-12.svg,moved
+icons/SVG_矢量/13_第13名_灰色排名徽章.svg,assets/icons/rank/rank-13.svg,moved
+icons/SVG_矢量/14_第14名_灰色排名徽章.svg,assets/icons/rank/rank-14.svg,moved
+icons/SVG_矢量/15_第15名_灰色排名徽章.svg,assets/icons/rank/rank-15.svg,moved
+icons/SVG_矢量/16_第16名_灰色排名徽章.svg,assets/icons/rank/rank-16.svg,moved
+icons/SVG_矢量/17_第17名_灰色排名徽章.svg,assets/icons/rank/rank-17.svg,moved
+icons/SVG_矢量/18_第18名_灰色排名徽章.svg,assets/icons/rank/rank-18.svg,moved
+icons/SVG_矢量/19_第19名_灰色排名徽章.svg,assets/icons/rank/rank-19.svg,moved
+icons/SVG_矢量/20_第20名_灰色排名徽章.svg,assets/icons/rank/rank-20.svg,moved
+icons/img.png,assets/icons/common/checkbox-expand.png,moved
+icons/img_1.png,assets/icons/common/edit-pencil.png,moved
+icons/img_2.png,assets/icons/common/check-square-green.png,moved
+icons/img_3.png,assets/icons/common/school.png,moved
+icons/img_4.png,assets/icons/common/user-solid.png,moved
+icons/img_5.png,assets/icons/common/shield-solid.png,moved
+icons/img_6.png,assets/icons/common/lock-tile.png,moved
+icons/img_7.png,assets/icons/common/mobile-outline-tile.png,moved
+icons/img_8.png,assets/icons/common/mail-outline-tile.png,moved
+icons/img_9.png,assets/icons/common/shield-check-tile.png,moved
+icons/img_10.png,assets/icons/common/monitor.png,moved
+icons/img_11.png,assets/icons/common/mobile-solid-tile.png,moved
+icons/img_12.png,assets/icons/common/bell-solid.png,moved
+icons/img_13.png,assets/icons/common/mail-solid-tile.png,moved
+icons/img_14.png,assets/icons/common/chat-tile.png,moved
+icons/img_15.png,assets/icons/common/bell-alert-tile.png,moved
+icons/img_16.png,assets/icons/common/user-outline-tile.png,moved
+icons/img_17.png,assets/icons/common/shield-outline-tile.png,moved
+icons/img_18.png,assets/icons/common/megaphone-tile.png,moved
+icons/img_19.png,assets/icons/common/user-clock.png,moved
+icons/img_20.png,assets/icons/common/document-solid.png,moved
+icons/img_21.png,assets/icons/common/palette.png,moved
+icons/img_22.png,assets/icons/common/target-solid.png,moved
+icons/img_23.png,assets/icons/common/settings-gear.png,moved
+icons/img_24.png,assets/icons/common/clipboard-list.png,moved
+icons/img_25.png,assets/icons/common/arrow-back-tile.png,moved
+icons/img_26.png,assets/icons/common/graduation-cap-tile.png,moved
+icons/img_27.png,assets/icons/common/help-circle-muted.png,moved
+icons/img_28.png,assets/icons/common/document-blue-tile.png,moved
+icons/img_29.png,assets/icons/common/document-purple-tile.png,moved
+icons/img_30.png,assets/icons/common/shield-check-hexagon.png,moved
+icons/img_31.png,assets/icons/common/calendar-tile.png,moved
+icons/img_32.png,assets/icons/common/code-tile.png,moved
+icons/img_33.png,assets/icons/common/bulb-tile.png,moved
+icons/img_34.png,assets/icons/common/company-building-tile.png,moved
+icons/img_35.png,assets/icons/common/document-tile-blue-light.png,moved
+icons/img_36.png,assets/icons/common/target-purple-tile.png,moved
+icons/img_37.png,assets/icons/common/chart-bar-mint.png,moved
+icons/img_38.png,assets/icons/common/clock-orange-tile.png,moved
+icons/img_39.png,assets/icons/common/user-muted.png,moved
+icons/img_40.png,assets/icons/common/lock-muted.png,moved
+icons/img_41.png,assets/icons/common/eye-off-muted.png,moved
+icons/img_42.png,assets/icons/common/social-qq.png,moved
+icons/img_43.png,assets/icons/common/social-wechat.png,moved
+icons/img_44.png,assets/icons/common/social-weibo.png,moved
+icons/img_45.png,assets/icons/common/document-tile-blue-glossy.png,moved
+icons/img_46.png,assets/icons/common/check-circle-mint.png,moved
+icons/img_47.png,assets/icons/common/clock-orange-soft.png,moved
+icons/img_48.png,assets/icons/common/warning-triangle-red.png,moved
+icons/img_49.png,assets/icons/common/search-tile.png,moved
+icons/img_50.png,assets/icons/common/chart-bar-mint-soft.png,moved
+icons/img_51.png,assets/icons/common/user-tile.png,moved
+icons/img_52.png,assets/icons/common/help-blue-tile.png,moved
+icons/img_53.png,assets/icons/common/file-pdf.png,moved
+icons/img_54.png,assets/icons/common/file-pdf-alt.png,moved
+icons/01_分布式系统_橙红色加号.png,assets/icons/common/skill-add-orange.png,moved
+icons/01_分布式系统_橙红色加号.svg,assets/icons/common/skill-add-orange.svg,moved
+icons/02_Kubernetes_金黄色加号.png,assets/icons/common/skill-add-gold.png,moved
+icons/02_Kubernetes_金黄色加号.svg,assets/icons/common/skill-add-gold.svg,moved
+icons/02_橙色重要提示小喇叭.png,assets/icons/common/megaphone-orange.png,moved
+icons/02_橙色重要提示小喇叭.svg,assets/icons/common/megaphone-orange.svg,moved
+icons/03_浅橙色折角文档.png,assets/icons/common/document-orange.png,moved
+icons/03_浅橙色折角文档.svg,assets/icons/common/document-orange.svg,moved
+page/登录.png,mockups/01-login.png,moved
+page/工作台.png,mockups/02-dashboard.png,moved
+page/简历管理.png,mockups/03-resume.png,moved
+page/我的画像.png,mockups/04-profile.png,moved
+page/岗位探索.png,mockups/05-jobs-list.png,moved
+page/岗位探索-2.png,mockups/06-job-detail.png,moved
+page/智能匹配.png,mockups/07-matching.png,moved
+page/推荐历史.png,mockups/08-history.png,moved
+page/反馈中心.png,mockups/09-feedback.png,moved
+page/个人设置.png,mockups/10-settings.png,moved
+icons/图标总览_仅用于检查.png,_reference/icon-overview-check-only.png,moved
+icons/反馈中心_10个独立图标/预览_10图标.png,_reference/feedback-icons-preview.png,moved
+icons/反馈中心_10个独立图标/说明.txt,_reference/feedback-icons-notes.txt,moved
+icons/选中态_亮蓝色/08_个人设置.png,"(重复, 删除; 保留 icons/08_个人设置.png)",dedup
+icons/选中态_亮蓝色/08_个人设置.svg,"(重复, 删除; 保留 icons/08_个人设置.svg)",dedup
+icons/PNG透明背景/03_排名第一_橙金徽章.png,"(重复, 删除; 保留 icons/PNG_透明背景/01_第1名_金色排名徽章.png)",dedup
+icons/PNG透明背景/08_排名第二_银灰徽章.png,"(重复, 删除; 保留 icons/PNG_透明背景/02_第2名_银色排名徽章.png)",dedup
+icons/SVG矢量/03_排名第一_橙金徽章.svg,"(重复, 删除; 保留 icons/SVG_矢量/01_第1名_金色排名徽章.svg)",dedup
+icons/SVG矢量/08_排名第二_银灰徽章.svg,"(重复, 删除; 保留 icons/SVG_矢量/02_第2名_银色排名徽章.svg)",dedup
+icons/PNG透明背景/03_排名第一_橙金徽章.png,assets/icons/rank/rank-01.png  (别名: 智能匹配页「排名第一」徽章 = rank-01),alias
+icons/SVG矢量/03_排名第一_橙金徽章.svg,assets/icons/rank/rank-01.svg  (别名: 智能匹配页「排名第一」徽章 = rank-01),alias
+icons/PNG透明背景/08_排名第二_银灰徽章.png,assets/icons/rank/rank-02.png  (别名: 智能匹配页「排名第二」徽章 = rank-02),alias
+icons/SVG矢量/08_排名第二_银灰徽章.svg,assets/icons/rank/rank-02.svg  (别名: 智能匹配页「排名第二」徽章 = rank-02),alias
+icons/选中态_亮蓝色/08_个人设置.png,"assets/icons/nav/settings.png  (别名: 个人设置 默认态=选中态, 同一文件)",alias
+icons/选中态_亮蓝色/08_个人设置.svg,"assets/icons/nav/settings.svg  (别名: 个人设置 默认态=选中态, 同一文件)",alias
+icons/PNG_透明背景/,"(空目录, 已删除)",cleanup
+icons/PNG透明背景/,"(空目录, 已删除)",cleanup
+icons/SVG_矢量/,"(空目录, 已删除)",cleanup
+icons/SVG矢量/,"(空目录, 已删除)",cleanup
+icons/反馈中心_10个独立图标/PNG_原图浅色底块/,"(空目录, 已删除)",cleanup
+icons/反馈中心_10个独立图标/PNG_透明无底色/,"(空目录, 已删除)",cleanup
+icons/反馈中心_10个独立图标/SVG_透明无底色/,"(空目录, 已删除)",cleanup
+icons/反馈中心_10个独立图标/,"(空目录, 已删除)",cleanup
+icons/选中态_亮蓝色/,"(空目录, 已删除)",cleanup
+background/,"(空目录, 已删除)",cleanup
+page/,"(空目录, 已删除)",cleanup
+icons/PNG_512透明背景/01_上传新简历_云端图标.png,assets/icons/upload/upload-cloud.png,moved
+icons/PNG_512透明背景/02_拖拽上传_云朵上箭头.png,assets/icons/upload/upload-drag.png,moved
+icons/PNG_512透明背景/03_选择文件上传_白色上传箭头.png,assets/icons/upload/upload-file.png,moved
+icons/PNG_512透明背景/03_附加变体_蓝色上传箭头.png,assets/icons/upload/upload-arrow-blue.png,moved
+icons/PNG_512透明背景/04_上传说明_蓝色信息提示.png,assets/icons/upload/upload-info.png,moved
+icons/PNG_512透明背景/05_更多说明_蓝色右箭头.png,assets/icons/upload/arrow-right-blue.png,moved
+icons/PNG_512透明背景/06_常见问题_灰蓝右箭头.png,assets/icons/upload/arrow-right-muted.png,moved
+icons/PNG_512透明背景/07_解析完成_绿色勾选.png,assets/icons/upload/parse-complete.png,moved
+icons/PNG_512透明背景/08_Word文件_蓝色W文档.png,assets/icons/upload/file-word.png,moved
+icons/PNG_512透明背景/09_部分解析_橙色警告.png,assets/icons/upload/parse-warning.png,moved
+icons/PNG_512透明背景/10_解析待重试_红色警告.png,assets/icons/upload/parse-error.png,moved
+icons/SVG_矢量图/01_上传新简历_云端图标.svg,assets/icons/upload/upload-cloud.svg,moved
+icons/SVG_矢量图/02_拖拽上传_云朵上箭头.svg,assets/icons/upload/upload-drag.svg,moved
+icons/SVG_矢量图/03_选择文件上传_白色上传箭头.svg,assets/icons/upload/upload-file.svg,moved
+icons/SVG_矢量图/03_附加变体_蓝色上传箭头.svg,assets/icons/upload/upload-arrow-blue.svg,moved
+icons/SVG_矢量图/04_上传说明_蓝色信息提示.svg,assets/icons/upload/upload-info.svg,moved
+icons/SVG_矢量图/05_更多说明_蓝色右箭头.svg,assets/icons/upload/arrow-right-blue.svg,moved
+icons/SVG_矢量图/06_常见问题_灰蓝右箭头.svg,assets/icons/upload/arrow-right-muted.svg,moved
+icons/SVG_矢量图/07_解析完成_绿色勾选.svg,assets/icons/upload/parse-complete.svg,moved
+icons/SVG_矢量图/08_Word文件_蓝色W文档.svg,assets/icons/upload/file-word.svg,moved
+icons/SVG_矢量图/09_部分解析_橙色警告.svg,assets/icons/upload/parse-warning.svg,moved
+icons/SVG_矢量图/10_解析待重试_红色警告.svg,assets/icons/upload/parse-error.svg,moved
+icons/PNG/,"(空目录, 已删除)",cleanup
+icons/PNG_512透明背景/,"(空目录, 已删除)",cleanup
+icons/SVG/,"(空目录, 已删除)",cleanup
+icons/SVG_矢量图/,"(空目录, 已删除)",cleanup
+icons/,"(空目录, 已删除)",cleanup
