@@ -117,8 +117,34 @@ function handleViewDetail(id: number | string) {
   router.push(`/job/${id}`)
 }
 
-function handleDemo(name: string) {
-  show(`「${name}」功能演示，尚未连接业务后端。`)
+// 导出当前筛选结果为 CSV（前端生成，无需后端接口）
+function handleExport() {
+  const rows = filteredRecords.value
+  if (!rows.length) {
+    show('当前没有可导出的记录')
+    return
+  }
+  const header = ['匹配时间', '画像版本', '匹配模式', '岗位数', '高匹配数', '平均匹配度', '状态']
+  const lines = rows.map((r) => [
+    r.time,
+    r.profileVersion,
+    r.mode,
+    String(r.jobCount),
+    String(r.highMatchCount),
+    String(r.avgMatch),
+    statusText[r.status] ?? r.status,
+  ])
+  const csv = [header, ...lines]
+    .map((cols) => cols.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(','))
+    .join('\r\n')
+  const blob = new Blob([`\ufeff${csv}`], { type: 'text/csv;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `推荐历史_${new Date().toISOString().slice(0, 10)}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
+  show(`已导出 ${rows.length} 条记录`)
 }
 </script>
 
@@ -196,7 +222,7 @@ function handleDemo(name: string) {
         <div class="panel-head">
           <h2 class="panel-title">推荐结果 · {{ selectedRecord.time }}</h2>
           <div class="result-actions">
-            <button type="button" class="btn-outline" @click="handleDemo('导出结果')">导出结果</button>
+            <button type="button" class="btn-outline" @click="handleExport">导出结果</button>
             <button type="button" class="btn-primary" @click="handleRerun">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6" /><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" /></svg>
               重新运行匹配
