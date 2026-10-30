@@ -49,6 +49,18 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def safe_basename(original_filename: str) -> str:
+    """文件名净化（跨平台）：剥掉任何路径成分，只留安全基名。
+
+    Windows 与 POSIX 分隔符都处理（`..\\..\\evil.txt` 与 `../../evil.txt`），
+    存储键不受此影响（本就由内容哈希决定），这里净化的是**元数据展示名**，
+    防止路径穿越字符串流入下游（导出/下载/日志）。
+    """
+    name = str(original_filename or "").replace("\\", "/").rsplit("/", 1)[-1].strip()
+    name = name.lstrip(".")
+    return name or "upload"
+
+
 class PrivateFileStore:
     """受控私有文件存储（本地目录实现）。"""
 

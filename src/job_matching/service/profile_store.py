@@ -35,7 +35,7 @@ from ..infra.persistence import (Resume, StudentProfile, User,
                                  get_session_factory, session_scope)
 from .contracts import FACT_SOURCES, Field, StudentProfile as StudentProfileContract
 from .errors import ServiceError
-from .file_store import PrivateFileStore, sha256_bytes
+from .file_store import PrivateFileStore, safe_basename, sha256_bytes
 from .job_store import DATA_SOURCES, resolve_data_source
 from .text_extract import MAX_UPLOAD_BYTES, extract_document_bytes
 
@@ -75,6 +75,8 @@ class StudentDataService:
           None  -> 未声明 -> unknown（不臆造来源）。
         """
         content = bytes(content or b"")
+        # 文件名净化（P1-06）：元数据只留安全基名，路径穿越字符串不得入库
+        filename = safe_basename(filename)
         if len(content) > self.max_upload_bytes:
             raise ServiceError("PAYLOAD_TOO_LARGE",
                                f"上传文件 {len(content)} 字节超过上限 {self.max_upload_bytes}")
