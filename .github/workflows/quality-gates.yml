@@ -14,6 +14,17 @@
 #
 # 运行身份：每个 job 生成唯一 JM_RUN_ID，所有诊断报告必须携带该 run_id 与
 # 当前 git commit，消费侧用 scripts/phase5_1a/verify_run_freshness.py 强制校验。
+#
+# ── Phase5-3 / M1 修复说明 ────────────────────────────────────────────────
+#  Core CI 曾把「历史权重不变性」写成 `assert ROOT/"models" 存在`。但 models/**
+#  被 .gitignore 忽略、Git 不跟踪，干净 checkout 中必然不存在，导致 quality-gates
+#  第 54 次运行（Run 41108847531 / commit cb1f4819）Phase5-1A 25 PASS / 1 FAIL。
+#  修复口径：
+#    * Core CI 改为**合成夹具自检**——用临时合成文件构造可验证的 SHA-256 基线，
+#      断言检查程序确实能发现被修改/被删除的权重文件，且检查过程不修改输入文件；
+#    * 真实历史权重完整性移入 Artifact-dependent Validation
+#      （scripts/phase5_1a/check_history_weights_integrity.py），
+#      缺失产物或无冻结基线时显式 NOT_RUN，**绝不计入 PASS**，也不伪造 checkpoint。
 name: quality-gates
 
 on:
@@ -121,6 +132,15 @@ jobs:
           echo "data/raw 是否存在: $([ -d data/raw ] && echo yes || echo no)"
           echo "models 是否存在:   $([ -d models ] && echo yes || echo no)"
 
+      # 历史模型权重完整性（A4 硬约束：本轮不得改动历史权重）。
+      # 该项属 Artifact-dependent：models/** 被 .gitignore 忽略，干净 checkout 中不存在。
+      # 缺失产物 / 无冻结基线 -> NOT_RUN（退出码 0），**绝不计入 PASS**；
+      # 有基线且哈希不一致 -> FAIL（退出码 1）。
+      - name: 历史权重完整性（Artifact-dependent，缺失即 NOT_RUN）
+        run: |
+          python scripts/phase5_1a/check_history_weights_integrity.py \
+            --out "reports/phase5-3/history-weights-integrity.json"
+
       - name: 模型兼容诊断（带运行身份，不复用旧报告）
         run: |
           python scripts/phase5_1a/diagnose_model_compat.py \
@@ -153,7 +173,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact-validation-evidence
-          path: reports/phase5-2/ci/
+          path: |
+            reports/phase5-2/ci/
+            reports/phase5-3/
           if-no-files-found: warn
 
   # ===== 历史模型兼容环境诊断（独立手动，不阻断纯 Python 开发）=====

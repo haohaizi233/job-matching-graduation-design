@@ -1,17 +1,17 @@
 {
   "generated_by": "tests/core_ci/run_all.py",
-  "created_at": "2026-10-29T16:44:10",
-  "seconds": 245.96,
+  "created_at": "2026-10-31T03:27:35",
+  "seconds": 250.3,
   "ok": true,
   "mode": "full",
   "environment": {
     "python": "3.13.2",
     "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "fce73e7e45c2e192797be4e197ff75be2e5ce9ab"
+    "commit": "cb1f4819f48a5278dedac324c99b6720a5dccdc7"
   },
   "totals": {
-    "tests": 78,
-    "pass": 78,
+    "tests": 79,
+    "pass": 79,
     "fail": 0,
     "skip": 0
   },
@@ -39,8 +39,8 @@
     },
     "C5": {
       "title": "Core CI 工作流契约",
-      "total": 15,
-      "pass": 15,
+      "total": 16,
+      "pass": 16,
       "fail": 0,
       "skip": 0
     }
@@ -583,6 +583,13 @@
       "group": "C5",
       "class": "C5CleanCheckoutContract",
       "test_id": "test_c5_ci_contract.C5CleanCheckoutContract.test_config_supports_data_root_override",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5CleanCheckoutContract",
+      "test_id": "test_c5_ci_contract.C5CleanCheckoutContract.test_file_list_source_is_explicitly_registered",
       "status": "PASS",
       "detail": ""
     },

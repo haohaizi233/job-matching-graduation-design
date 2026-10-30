@@ -1,0 +1,78 @@
+{
+  "generated_by": "scripts/phase5_1a/verify_fresh_checkout.py",
+  "created_at": "2026-10-31T03:21:18",
+  "seconds": 319.98,
+  "overall": "PASS",
+  "kept_checkout": null,
+  "policy": "Core CI 必须在全新 checkout（无 data/raw、无 models 权重、无 data/private）上通过；NOT_RUN 不计入 PASS",
+  "run_identity": {
+    "run_id": "m1-fresh-checkout-2-20261031-031557",
+    "git_commit": "cb1f4819f48a5278dedac324c99b6720a5dccdc7",
+    "git_dirty": true,
+    "execution_time": "2026-10-30T19:21:04Z",
+    "python_version": "3.13.2",
+    "python_executable": "D:\\APP\\python 3.13.2\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "dependency_versions": {
+      "numpy": "2.2.6",
+      "pandas": "3.0.0rc1",
+      "sklearn": "1.8.0",
+      "joblib": "1.5.3",
+      "torch": "2.12.0+cpu",
+      "fastapi": "0.120.3",
+      "pydantic": "2.9.2",
+      "sqlalchemy": "2.0.45",
+      "alembic": "1.18.1",
+      "argon2": "25.1.0",
+      "yaml": "6.0.2",
+      "httpx": "0.28.1",
+      "fitz": "1.27.2.3",
+      "docx": "1.2.0"
+    },
+    "artifact_count": 6,
+    "status": "PASS",
+    "extra": {
+      "tool": "verify_fresh_checkout"
+    }
+  },
+  "steps": [
+    {
+      "id": "export",
+      "status": "PASS",
+      "files_exported": 1145,
+      "file_list_source": "git",
+      "forbidden_artifacts": [],
+      "reason": "干净 checkout 内不含真实数据/权重"
+    },
+    {
+      "id": "syntax",
+      "status": "PASS",
+      "returncode": 0,
+      "tail": "\n"
+    },
+    {
+      "id": "phase5_1r",
+      "status": "PASS",
+      "returncode": 0,
+      "tail": ") ... ok\ntest_future_mode_never_degrades_silently (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_future_mode_never_degrades_silently) ... ok\ntest_future_model_unavailable (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_future_model_unavailable) ... ok\ntest_inapplicable_input_degrades_or_refuses (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_inapplicable_input_degrades_or_refuses) ... ok\ntest_load_only_on_init_or_cache_invalidation (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_load_only_on_init_or_cache_invalidation) ... ok\ntest_registered_statuses_valid (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_registered_statuses_valid) ... ok\ntest_timeout_does_not_mark_degraded (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_timeout_does_not_mark_degraded) ... ok\ntest_timeout_is_error_not_silent_fallback (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_timeout_is_error_not_silent_fallback) ... ok\ntest_unregistered_future_slot_rejected_on_load (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_unregistered_future_slot_rejected_on_load) ... ok\ntest_unregistered_model_explicit_error (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_unregistered_model_explicit_error) ... ok\ntest_working_model_keeps_model_identity (test_r6_e2e_chains.ChainCModelErrorsAndDegradation.test_working_model_keeps_model_identity) ... ok\n\n----------------------------------------------------------------------\nRan 151 tests in 32.180s\n\nOK\n"
+    },
+    {
+      "id": "phase5_1a",
+      "status": "PASS",
+      "returncode": 0,
+      "tail": "ver_passes_without_frozen_baseline (test_a1_a7_gates.A4ModelErrorTaxonomy.test_history_weights_check_never_passes_without_frozen_baseline) ... ok\ntest_integrity_checker_is_readonly_on_inputs (test_a1_a7_gates.A4ModelErrorTaxonomy.test_integrity_checker_is_readonly_on_inputs) ... ok\ntest_legacy_sklearn_unpickle_is_env_incompatible (test_a1_a7_gates.A4ModelErrorTaxonomy.test_legacy_sklearn_unpickle_is_env_incompatible) ... ok\ntest_missing_dependency_is_env_incompatible (test_a1_a7_gates.A4ModelErrorTaxonomy.test_missing_dependency_is_env_incompatible) ... ok\ntest_failing_or_partial_run_never_overwrites_baseline (test_a1_a7_gates.A6HistoricalBaseline.test_failing_or_partial_run_never_overwrites_baseline) ... ok\ntest_model_runner_rejects_unknown_group (test_a1_a7_gates.A6HistoricalBaseline.test_model_runner_rejects_unknown_group) ... ok\ntest_model_training_baseline_report_intact (test_a1_a7_gates.A6HistoricalBaseline.test_model_training_baseline_report_intact) ... ok\ntest_defaults_match_history (test_a1_a7_gates.A7ConfigAndDocs.test_defaults_match_history) ... ok\ntest_env_overrides (test_a1_a7_gates.A7ConfigAndDocs.test_env_overrides) ... ok\ntest_no_hardcoded_local_absolute_path_in_service (test_a1_a7_gates.A7ConfigAndDocs.test_no_hardcoded_local_absolute_path_in_service) ... ok\ntest_prod_without_auth_blocked (test_a1_a7_gates.A7ConfigAndDocs.test_prod_without_auth_blocked) ... ok\n\n----------------------------------------------------------------------\nRan 29 tests in 16.022s\n\nOK\n"
+    },
+    {
+      "id": "phase5_1",
+      "status": "PASS",
+      "returncode": 0,
+      "tail": "st_s19_s22_api.S20ApiNormalAndBoundary.test_openapi_document) ... ok\ntest_request_id_passthrough (test_s19_s22_api.S20ApiNormalAndBoundary.test_request_id_passthrough) ... ok\ntest_resume_and_job_parse_and_rank (test_s19_s22_api.S20ApiNormalAndBoundary.test_resume_and_job_parse_and_rank) ... ok\ntest_unsupported_format_rejected (test_s19_s22_api.S20ApiNormalAndBoundary.test_unsupported_format_rejected) ... ok\ntest_loaded_once_then_cached (test_s19_s22_api.S21ModelLoadCaching.test_loaded_once_then_cached) ... ok\ntest_registry_info_records_model_version (test_s19_s22_api.S21ModelLoadCaching.test_registry_info_records_model_version) ... ok\ntest_same_input_same_output (test_s19_s22_api.S22Determinism.test_same_input_same_output) ... ok\ntest_demo_output_is_not_gold_label (test_s23_s24_demo_guard.S23OfflineDemoPipeline.test_demo_output_is_not_gold_label) ... ok\ntest_demo_runs_end_to_end (test_s23_s24_demo_guard.S23OfflineDemoPipeline.test_demo_runs_end_to_end) ... ok\ntest_model_and_gold_files_unchanged (test_s23_s24_demo_guard.S24HistoryAssetsUntouched.test_model_and_gold_files_unchanged) ... ok\ntest_no_write_calls_targeting_history_assets (test_s23_s24_demo_guard.S24HistoryAssetsUntouched.test_no_write_calls_targeting_history_assets) ... ok\ntest_service_never_writes_model_checkpoints (test_s23_s24_demo_guard.S24HistoryAssetsUntouched.test_service_never_writes_model_checkpoints) ... ok\n\n----------------------------------------------------------------------\nRan 92 tests in 8.452s\n\nOK\n"
+    },
+    {
+      "id": "core_ci",
+      "status": "PASS",
+      "returncode": 0,
+      "tail": "st_core_ci_job_declared) ... ok\ntest_core_ci_never_runs_artifact_only_suites (test_c5_ci_contract.C5WorkflowContract.test_core_ci_never_runs_artifact_only_suites) ... ok\ntest_core_ci_runs_portable_suites (test_c5_ci_contract.C5WorkflowContract.test_core_ci_runs_portable_suites) ... ok\ntest_core_ci_writes_run_identity (test_c5_ci_contract.C5WorkflowContract.test_core_ci_writes_run_identity) ... ok\ntest_workflow_exists (test_c5_ci_contract.C5WorkflowContract.test_workflow_exists) ... ok\ntest_clean_export_contains_portable_suite_sources (test_c5_ci_contract.C5CleanCheckoutContract.test_clean_export_contains_portable_suite_sources) ... ok\ntest_clean_export_has_no_forbidden_artifacts (test_c5_ci_contract.C5CleanCheckoutContract.test_clean_export_has_no_forbidden_artifacts) ... ok\ntest_config_supports_data_root_override (test_c5_ci_contract.C5CleanCheckoutContract.test_config_supports_data_root_override) ... ok\ntest_file_list_source_is_explicitly_registered (test_c5_ci_contract.C5CleanCheckoutContract.test_file_list_source_is_explicitly_registered)\n文件清单来源必须显式登记：git 与无 git 退化路径不得互相冒充。 ... ok\ntest_registry_gate_report_schema (test_c5_ci_contract.C5CleanCheckoutContract.test_registry_gate_report_schema)\n状态口径登记表的 schema 必须固定，便于 CI 消费。 ... ok\ntest_synthetic_fixtures_are_declared_synthetic (test_c5_ci_contract.C5CleanCheckoutContract.test_synthetic_fixtures_are_declared_synthetic) ... ok\n\n----------------------------------------------------------------------\nRan 79 tests in 217.451s\n\nOK\n"
+    }
+  ]
+}
