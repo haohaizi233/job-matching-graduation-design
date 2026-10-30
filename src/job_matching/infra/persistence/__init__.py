@@ -15,11 +15,11 @@ from __future__ import annotations
 from .base import (Base, DbSettings, dispose_engines, get_engine, get_session,
                    get_session_factory, init_db, session_scope)
 from .models import (AuthSession, Job, RecommendationFeedback, RecommendationItem,
-                     RecommendationRun, Resume, StudentProfile, User)
+                     RecommendationRun, Resume, StudentProfile, User, UserSetting)
 
 __all__ = [
     "Base", "DbSettings", "dispose_engines", "get_engine", "get_session",
     "get_session_factory", "init_db", "session_scope",
-    "User", "AuthSession", "StudentProfile", "Resume", "Job",
+    "User", "AuthSession", "UserSetting", "StudentProfile", "Resume", "Job",
     "RecommendationRun", "RecommendationItem", "RecommendationFeedback",
 ]

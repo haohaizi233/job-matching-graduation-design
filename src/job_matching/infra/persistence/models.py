@@ -298,5 +298,29 @@ class RecommendationFeedback(Base):
     )
 
 
-__all__ = ["User", "AuthSession", "StudentProfile", "Resume", "Job",
+class UserSetting(Base):
+    """用户级设置（服务端持久化；主题等纯客户端显示偏好不入库）。
+
+    payload 结构（服务端严格校验，见 settings_store.UserSettingsService）：
+      {
+        "basic":        {nickname, school, major, enrollYear, graduateYear, region},
+        "notifications": {siteMessage, emailNotice, matchAlert, weeklyReport},
+        "resume_prefs": {autoParse, ocrImages},
+        "privacy":      {publicResume, companyView, hideSalary},
+        "job_intent":   {intentTags: [...]},
+      }
+    隐私边界：设置只属于 user_id 本人；API 层强制按当前登录用户隔离。
+    """
+
+    __tablename__ = "user_settings"
+
+    user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id", ondelete="CASCADE"),
+                                         primary_key=True)
+    payload: Mapped[dict] = mapped_column(JSON_TYPE, nullable=False, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, nullable=False,
+                                                 default=_now, onupdate=_now)
+
+
+__all__ = ["User", "AuthSession", "UserSetting", "StudentProfile", "Resume", "Job",
            "RecommendationRun", "RecommendationItem", "RecommendationFeedback"]

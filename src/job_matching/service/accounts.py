@@ -261,6 +261,82 @@ class AccountService:
         finally:
             session.close()
 
+    # ------------------------------------------------------ 密码修改 / 设备管理
+    def change_password(self, *, user_id: str, old_password: str,
+                        new_password: str, keep_token: str | None = None) -> dict:
+        """修改密码（必须验证原凭证），并撤销该用户**其他**活跃会话。
+
+        安全语义：改密后其他登录设备立即失效（服务端会话可撤销，非等 JWT 过期）；
+        `keep_token` 保留当前会话，避免用户改完密码立刻被自己踢出。
+        """
+        problems = validate_password(new_password)
+        if problems:
+            raise ServiceError("INVALID_REQUEST", "；".join(problems), {"fields": problems})
+        now = self._clock()
+        session = self._session_factory()
+        try:
+            user = session.query(User).filter(User.id == user_id).first()
+            if user is None or user.status != "active":
+                raise ServiceError("FORBIDDEN", "账号不可用")
+            if not verify_password(user.password_hash, old_password):
+                raise ServiceError("AUTH_INVALID_CREDENTIALS", "原密码不正确")
+            if verify_password(user.password_hash, new_password):
+                raise ServiceError("INVALID_REQUEST", "新密码不能与原密码相同")
+            user.password_hash = hash_password(new_password)
+            session.commit()
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
+        revoked = self.revoke_user_sessions(user_id, keep_token=keep_token)
+        return {"password_changed": True, "revoked_sessions": revoked}
+
+    def list_sessions(self, *, user_id: str, current_token: str | None = None) -> list[dict]:
+        """列出当前用户**活跃**会话（设备管理）；当前会话带 current 标记。"""
+        now = self._clock()
+        current_digest = _token_digest(current_token) if current_token else None
+        session = self._session_factory()
+        try:
+            rows = (session.query(AuthSession)
+                    .filter(AuthSession.user_id == user_id,
+                            AuthSession.revoked_at.is_(None),
+                            AuthSession.expires_at > now)
+                    .order_by(AuthSession.created_at.desc())
+                    .all())
+            out = []
+            for row in rows:
+                out.append({
+                    "session_id": row.id,
+                    "created_at": row.created_at.isoformat() if row.created_at else None,
+                    "last_seen_at": row.last_seen_at.isoformat() if row.last_seen_at else None,
+                    "expires_at": row.expires_at.isoformat() if row.expires_at else None,
+                    "user_agent": row.user_agent or "",
+                    "current": bool(current_digest and row.token_sha256 == current_digest),
+                })
+            return out
+        finally:
+            session.close()
+
+    def revoke_session(self, *, user_id: str, session_id: str) -> bool:
+        """撤销指定会话（仅限本人；找不到/非本人一律 False -> 路由层 404 防枚举）。"""
+        now = self._clock()
+        session = self._session_factory()
+        try:
+            row = (session.query(AuthSession)
+                   .filter(AuthSession.id == session_id,
+                           AuthSession.user_id == user_id).first())
+            if row is None or row.revoked_at is not None:
+                return False
+            row.revoked_at = now
+            session.commit()
+            return True
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
+
     def revoke_user_sessions(self, user_id: str, *,
                              keep_token: str | None = None) -> int:
         """撤销某用户的全部活跃会话（改密 / 风险处置时使用）。
