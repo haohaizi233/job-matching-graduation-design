@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128"><defs>
+<linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4596FF"/><stop offset="1" stop-color="#1163F5"/></linearGradient>
+<linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#36DDB3"/><stop offset="1" stop-color="#00A981"/></linearGradient>
+<linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B78DFF"/><stop offset="1" stop-color="#7B3FE2"/></linearGradient>
+<linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFBB65"/><stop offset="1" stop-color="#FF8528"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFD38D"/><stop offset="1" stop-color="#FFA250"/></linearGradient>
+<linearGradient id="navy" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#627999"/><stop offset="1" stop-color="#304461"/></linearGradient>
+</defs><g stroke="#FFB33A" fill="none" stroke-width="5" stroke-linecap="round"><path d="M64 13v9M27 28l7 7M101 28l-7 7M14 65h10M104 65h10M29 103l7-7M99 103l-7-7"/></g><path d="M64 31c-20 0-34 14-34 32 0 13 8 21 16 28 4 4 5 9 5 12h26c0-5 2-9 6-13 8-8 15-15 15-27 0-18-14-32-34-32Z" fill="url(#gold)"/><path d="M51 104h26M54 114h20" stroke="#FF9A22" stroke-width="7" stroke-linecap="round"/><path d="m52 70 9 10 17-22" stroke="#FFF6E9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>

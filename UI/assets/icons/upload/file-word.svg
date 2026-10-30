@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+<defs>
+  <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#408CFF"/><stop offset="1" stop-color="#1665F8"/></linearGradient>
+  <linearGradient id="cloud" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#EDF5FF"/><stop offset="1" stop-color="#CFE2FF"/></linearGradient>
+  <linearGradient id="green" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#1DD2A0"/><stop offset="1" stop-color="#00AA83"/></linearGradient>
+  <linearGradient id="orange" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#FFB548"/><stop offset="1" stop-color="#FF870C"/></linearGradient>
+  <linearGradient id="red" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#FF7777"/><stop offset="1" stop-color="#F5454E"/></linearGradient>
+  
+</defs>
+
+<path d="M31 15H79L101 37V106C101 111 97 115 92 115H31C26 115 23 111 23 106V23C23 18.5 26 15 31 15Z" fill="url(#blue)"/>
+<path d="M78.5 15V36C78.5 40 81.5 43 85.5 43H101" fill="#A8D4FF"/>
+<path d="M35 52L42.3 90H52L63 68L73 90H83L91 52H80L76 74L65.5 52H59.6L49.5 74L46 52H35Z" fill="white"/>
+
+</svg>

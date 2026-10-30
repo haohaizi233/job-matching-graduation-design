@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+ <defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1E9DFF"/><stop offset="0.55" stop-color="#0878ED"/><stop offset="1" stop-color="#0050D2"/></linearGradient><linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF16F"/><stop offset="1" stop-color="#A6D855"/></linearGradient></defs>
+ <!-- 蓝色轨道, 原稿为抽象的蓝色环绕地球 -->
+ <path d="M149 117 C225 62 327 99 377 156" stroke="#1999FF" stroke-width="29" stroke-linecap="round" fill="none"/>
+ <path d="M91 246 C91 144 162 118 210 114 C126 150 130 238 172 286 C207 327 282 345 329 313 C287 367 215 392 153 358 C111 331 93 290 91 246Z" fill="url(#b)"/>
+ <path d="M373 164 C414 188 421 245 403 291" stroke="#0569DC" stroke-width="45" stroke-linecap="round" fill="none"/>
+ <path d="M177 196 C210 142 292 129 348 170 C394 203 401 269 360 316 C321 359 245 359 207 321 C174 291 159 237 177 196Z" fill="url(#b)"/>
+ <path d="M232 190 C249 174 260 168 277 171 L270 190 L283 202 L276 216 L307 225 L294 249 L281 264 L265 269 L254 289 L238 282 L234 262 L218 251 L225 228 L216 214 Z" fill="url(#land)"/>
+ <path d="M244 177 C263 169 282 173 287 180" stroke="#D9F8FF" stroke-width="16" stroke-linecap="round" opacity="0.85"/>
+ <path d="M155 311 C218 361 314 371 365 307" stroke="#FFFFFF" stroke-width="29" stroke-linecap="round" fill="none"/>
+ <path d="M143 362 C180 390 245 420 281 417 C314 415 347 392 377 364" stroke="#0877E9" stroke-width="23" stroke-linecap="round" fill="none"/>
+ <path d="M100 383 L80 412" stroke="#178EED" stroke-width="16" stroke-linecap="round"/>
+ <path d="M390 362 L418 398" stroke="#178EED" stroke-width="16" stroke-linecap="round"/>
+ <path d="M360 126 L389 151" stroke="#279BFF" stroke-width="31" stroke-linecap="round"/>
+ </svg>

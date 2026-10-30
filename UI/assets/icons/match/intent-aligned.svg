@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128"><defs>
+<linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B979FF"/><stop offset=".52" stop-color="#9350F7"/><stop offset="1" stop-color="#7135DE"/></linearGradient>
+<linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4BA8FF"/><stop offset=".58" stop-color="#1675FF"/><stop offset="1" stop-color="#1558DA"/></linearGradient>
+<linearGradient id="mint" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1DDCB2"/><stop offset="1" stop-color="#05AD84"/></linearGradient>
+<linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFCE66"/><stop offset=".55" stop-color="#FFAD34"/><stop offset="1" stop-color="#FF8C26"/></linearGradient>
+<linearGradient id="silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C6D2E7"/><stop offset=".55" stop-color="#AAB9D2"/><stop offset="1" stop-color="#8699B9"/></linearGradient>
+<linearGradient id="warm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF9735"/><stop offset="1" stop-color="#FF5B26"/></linearGradient>
+<linearGradient id="sparkle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".65" stop-color="#F8FDFF"/><stop offset="1" stop-color="#C2E5FF"/></linearGradient>
+<filter id="shadow" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur in="SourceAlpha" stdDeviation="2.1" result="blur"/><feOffset dy="3" result="offset"/><feComponentTransfer><feFuncA type="linear" slope=".17"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<circle cx="64" cy="64" r="42" fill="#FFF0E6" opacity=".98"/>
+<circle cx="61" cy="68" r="30" fill="none" stroke="url(#warm)" stroke-width="8"/>
+<circle cx="61" cy="68" r="17" fill="none" stroke="#FF9A36" stroke-width="7"/>
+<circle cx="61" cy="68" r="5.5" fill="#FF6B2D"/>
+<path d="M63 65L91 37" fill="none" stroke="#FF642B" stroke-width="7" stroke-linecap="round"/>
+<path d="M90 37V22L105 37Z" fill="#FF8839"/>
+<path d="M91 37H108L96 49Z" fill="#FFAB54"/>
+</svg>

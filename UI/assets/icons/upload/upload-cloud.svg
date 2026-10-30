@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+<defs>
+  <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#408CFF"/><stop offset="1" stop-color="#1665F8"/></linearGradient>
+  <linearGradient id="cloud" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#EDF5FF"/><stop offset="1" stop-color="#CFE2FF"/></linearGradient>
+  <linearGradient id="green" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#1DD2A0"/><stop offset="1" stop-color="#00AA83"/></linearGradient>
+  <linearGradient id="orange" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#FFB548"/><stop offset="1" stop-color="#FF870C"/></linearGradient>
+  <linearGradient id="red" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#FF7777"/><stop offset="1" stop-color="#F5454E"/></linearGradient>
+  
+</defs>
+
+<path d="M39 93C27 93 18 83.9 18 72.8C18 62.4 25.7 53.7 36 52.6C38.3 40.9 48.5 32 60.9 32C75 32 86.1 42.8 86.7 56.7C100 57.1 109 65.7 109 76.3C109 86.9 100.4 94 89.5 94H39Z" fill="url(#blue)"/>
+<path d="M64 55C57.8 55 53 59.9 53 65.7V70H75V65.7C75 59.9 70.1 55 64 55ZM59.8 65.9C59.8 63.5 61.7 61.5 64 61.5C66.4 61.5 68.3 63.4 68.3 65.9V70H59.8V65.9Z" fill="#E4F1FF"/>
+<rect x="49" y="68" width="30" height="24" rx="5" fill="#FFFFFF"/>
+<circle cx="64" cy="77" r="3.9" fill="#1C6EF8"/>
+<path d="M64 78.6V85" stroke="#1C6EF8" stroke-width="4" stroke-linecap="round"/>
+
+</svg>
