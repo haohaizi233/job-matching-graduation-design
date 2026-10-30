@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import IconGlyph from '@/components/common/IconGlyph.vue'
+import { useAuth } from '@/composables/useAuth'
 import { useToast } from '@/composables/useToast'
 import type { AuthMode } from '@/types'
 
@@ -16,7 +17,9 @@ const props = defineProps<{ mode: AuthMode }>()
 const emit = defineEmits<{ (e: 'update:mode', mode: AuthMode): void }>()
 
 const router = useRouter()
+const route = useRoute()
 const { show } = useToast()
+const { login, register } = useAuth()
 
 const username = ref('')
 const email = ref('')
@@ -59,7 +62,9 @@ function togglePassword(target: 'password' | 'confirm') {
 
 const emailPattern = /^\S+@\S+\.\S+$/
 
-function handleSubmit() {
+const submitting = ref(false)
+
+async function handleSubmit() {
   let error = ''
   if (props.mode === 'reset') {
     if (!emailPattern.test(email.value.trim())) error = '请输入有效的邮箱地址'
@@ -75,13 +80,27 @@ function handleSubmit() {
   formError.value = error
   if (error) return
 
-  if (props.mode === 'login') {
-    show('登录成功，正在进入工作台...', 'top', 1600)
-    setTimeout(() => router.push('/dashboard'), 700)
-  } else if (props.mode === 'register') {
-    show('注册信息验证通过，请连接后端完成注册', 'top')
-  } else {
+  if (props.mode === 'reset') {
     show('重置邮件为 UI 演示，请连接后端邮件服务', 'top')
+    return
+  }
+
+  submitting.value = true
+  try {
+    if (props.mode === 'login') {
+      await login(username.value.trim(), password.value)
+      show('登录成功，正在进入工作台...', 'top', 1600)
+      const redirect = typeof route.query.redirect === 'string' ? route.query.redirect : ''
+      setTimeout(() => router.push(redirect || '/dashboard'), 400)
+    } else {
+      await register(username.value.trim(), password.value, email.value.trim())
+      show('注册成功，请登录', 'top')
+      switchMode('login')
+    }
+  } catch (e) {
+    formError.value = e instanceof Error ? e.message : '请求失败，请稍后重试'
+  } finally {
+    submitting.value = false
   }
 }
 
@@ -187,8 +206,8 @@ function handleSocial(provider: string) {
 
         <p class="form-errors" role="alert">{{ formError }}</p>
 
-        <button class="submit-button" type="submit">
-          <span>{{ submitLabel }}</span>
+        <button class="submit-button" type="submit" :disabled="submitting">
+          <span>{{ submitting ? '提交中...' : submitLabel }}</span>
           <span class="submit-arrow"><IconGlyph name="arrow" /></span>
         </button>
       </form>

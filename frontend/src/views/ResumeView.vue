@@ -25,8 +25,8 @@ const stats = computed(() => {
 })
 
 const dragOver = ref(false)
-const openFaq = ref<number | null>(null)
-const openMenu = ref<number | null>(null)
+const openFaq = ref<number | string | null>(null)
+const openMenu = ref<number | string | null>(null)
 const fileInput = ref<HTMLInputElement | null>(null)
 
 function openFileDialog() {
@@ -73,11 +73,11 @@ function handleFileUpload(file: File) {
   show('文件已添加，演示解析中…')
 }
 
-function toggleFaq(id: number) {
+function toggleFaq(id: number | string) {
   openFaq.value = openFaq.value === id ? null : id
 }
 
-function toggleMenu(id: number) {
+function toggleMenu(id: number | string) {
   openMenu.value = openMenu.value === id ? null : id
 }
 

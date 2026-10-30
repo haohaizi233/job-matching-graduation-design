@@ -1,5 +1,10 @@
 export * from './resume'
 export * from './profile'
+export * from './jobs'
+export * from './matching'
+export * from './history'
+export * from './feedback'
+export * from './settings'
 
 export type TrendRange = 7 | 30 | 90
 
@@ -47,7 +52,7 @@ export interface ProgressStep {
 }
 
 export interface JobItem {
-  id: number
+  id: number | string
   title: string
   company: string
   tags: string[]
@@ -58,7 +63,7 @@ export interface JobItem {
 }
 
 export interface ActivityItem {
-  id: number
+  id: number | string
   title: string
   desc: string
   time: string
@@ -70,7 +75,7 @@ export interface ActivityItem {
 }
 
 export interface NotificationItem {
-  id: number
+  id: number | string
   text: string
 }
 

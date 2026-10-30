@@ -8,7 +8,7 @@ export interface ResumeStat {
 }
 
 export interface ResumeItem {
-  id: number
+  id: number | string
   filename: string
   filesize: string
   uploadDate: string
@@ -30,7 +30,7 @@ export interface WorkflowStep {
 }
 
 export interface FAQItem {
-  id: number
+  id: number | string
   question: string
   answer: string
   extra: string
