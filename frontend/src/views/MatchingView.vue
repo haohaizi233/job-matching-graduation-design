@@ -1,24 +1,29 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
+import { listJobs } from '@/api/jobs'
+import { mapRecoToMatchItem } from '@/api/mappers'
+import { createRecommendation, getRun, listRuns } from '@/api/recommendations'
+import type { JobRow, RecoItem } from '@/api/types'
 import { useToast } from '@/composables/useToast'
 import {
   categoryOptions,
-  categoryStats,
   cityOptions,
-  distribution,
   heroCopy,
-  matchJobs,
   matchModes,
-  matchOverview,
-  noticeText,
   profileOptions,
   topKOptions,
 } from '@/data/matching'
-import type { MatchJobItem, MatchMode } from '@/types/matching'
+import type {
+  MatchCategoryStat,
+  MatchDistributionSlice,
+  MatchJobItem,
+  MatchMode,
+  MatchOverview,
+} from '@/types/matching'
 
 import bookmarkIcon from '@/assets/icons/match/bookmark-star.png'
 import resetIcon from '@/assets/icons/action/reset-filter.png'
@@ -43,12 +48,53 @@ const mode = ref<MatchMode>('综合排序')
 const topK = ref('10')
 const city = ref('all')
 const category = ref('all')
-const bookmarks = ref<Array<number | string>>([2])
+const bookmarks = ref<Array<number | string>>([])
 const running = ref(false)
 const runCount = ref(0)
 
+// 联调：推荐结果来自业务 API（baseline 打分 + 解释快照）
+const matchJobs = ref<MatchJobItem[]>([])
+const recoItems = ref<RecoItem[]>([])
+const jobsMap = ref<Map<string, JobRow>>(new Map())
+const currentRunId = ref('')
+const loaded = ref(false)
+
+/** 打分参考说明（后端 score 为排序参考分，不是录用概率） */
+const noticeText =
+  '匹配度与四维评分来自后端匹配服务的排序参考分（heuristic_score），仅用于岗位排序与求职参考，不代表企业录用概率。'
+
+async function loadJobsMap() {
+  const rows = await listJobs()
+  jobsMap.value = new Map(rows.map((row) => [row.id, row]))
+}
+
+function applyRunItems(runId: string, items: RecoItem[]) {
+  currentRunId.value = runId
+  recoItems.value = items
+  matchJobs.value = items.map((item) => mapRecoToMatchItem(item, jobsMap.value.get(item.job_id)))
+}
+
+async function loadLatestRun() {
+  await loadJobsMap()
+  const page = await listRuns(1, 1)
+  const latest = page.items[0]
+  if (!latest) return
+  const run = await getRun(latest.id)
+  applyRunItems(run.id, run.items || [])
+}
+
+onMounted(async () => {
+  try {
+    await loadLatestRun()
+  } catch (e) {
+    show(e instanceof Error ? e.message : '推荐记录加载失败')
+  } finally {
+    loaded.value = true
+  }
+})
+
 const visibleJobs = computed(() => {
-  let list = [...matchJobs]
+  let list = [...matchJobs.value]
   if (category.value !== 'all') {
     list = list.filter((job) => job.category === category.value)
   }
@@ -66,6 +112,42 @@ const displayedAvg = computed(() => {
   return Math.round(list.reduce((sum, job) => sum + job.match, 0) / list.length)
 })
 
+/** 概览统计由真实推荐项计算 */
+const matchOverview = computed<MatchOverview>(() => {
+  const items = recoItems.value
+  const covered = new Set<string>()
+  const missing = new Set<string>()
+  for (const item of items) {
+    for (const s of item.explanation_snapshot?.matched_skills ?? []) covered.add(String(s))
+    for (const s of item.explanation_snapshot?.missing_required_skills ?? []) missing.add(String(s))
+  }
+  return {
+    avgMatch: displayedAvg.value,
+    highMatchCount: items.filter((i) => i.score * 100 >= 85).length,
+    coveredSkills: covered.size,
+    totalSkills: covered.size + missing.size,
+  }
+})
+
+/** 匹配度分段分布（环形图） */
+const distribution = computed<MatchDistributionSlice[]>(() => {
+  const scores = recoItems.value.map((i) => i.score * 100)
+  return [
+    { label: '高匹配 85%+', value: scores.filter((s) => s >= 85).length, color: '#2168ff' },
+    { label: '中匹配 70-84%', value: scores.filter((s) => s >= 70 && s < 85).length, color: '#03b58c' },
+    { label: '待观察 <70%', value: scores.filter((s) => s < 70).length, color: '#ffb020' },
+  ]
+})
+
+/** 岗位类别分布 */
+const categoryStats = computed<MatchCategoryStat[]>(() => {
+  const counts = new Map<string, number>()
+  for (const job of matchJobs.value) {
+    counts.set(job.industry, (counts.get(job.industry) || 0) + 1)
+  }
+  return [...counts.entries()].map(([label, value]) => ({ label, value }))
+})
+
 function isBookmarked(id: number | string) {
   return bookmarks.value.includes(id)
 }
@@ -80,15 +162,24 @@ function toggleBookmark(job: MatchJobItem) {
   }
 }
 
-function handleStart() {
+async function handleStart() {
   if (running.value) return
   running.value = true
-  show('正在重新计算匹配度（演示）…', 'top')
-  setTimeout(() => {
-    running.value = false
+  show('正在调用匹配服务重新计算…', 'top')
+  try {
+    const result = await createRecommendation({
+      mode: 'baseline',
+      topK: Number(topK.value),
+    })
+    const run = await getRun(result.run.id)
+    applyRunItems(run.id, run.items || [])
     runCount.value += 1
-    show(`匹配完成，共为你找到 ${visibleJobs.value.length} 个岗位（演示数据）`)
-  }, 700)
+    show(`匹配完成，共为你找到 ${matchJobs.value.length} 个岗位`)
+  } catch (e) {
+    show(e instanceof Error ? e.message : '匹配执行失败')
+  } finally {
+    running.value = false
+  }
 }
 
 function handleReset() {
@@ -105,10 +196,11 @@ function handleViewDetail(job: MatchJobItem) {
 }
 
 const donutSlices = computed(() => {
-  const total = distribution.reduce((sum, s) => sum + s.value, 0) || 1
+  const slices = distribution.value
+  const total = slices.reduce((sum, s) => sum + s.value, 0) || 1
   const circumference = 2 * Math.PI * 46
   let accumulated = 0
-  return distribution.map((slice) => {
+  return slices.map((slice) => {
     const length = (slice.value / total) * circumference
     const offset = -accumulated
     accumulated += length
