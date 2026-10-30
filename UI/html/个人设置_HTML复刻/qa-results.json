@@ -1,0 +1,84 @@
+{
+  "desktop_viewport": [
+    1672,
+    941
+  ],
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "checks": {
+    "images_loaded": true,
+    "no_javascript_errors": true,
+    "desktop_no_overflow": true,
+    "all_4_privacy_rows": true,
+    "all_4_preference_rows": true,
+    "all_3_device_rows": true,
+    "nickname_updates": true,
+    "toggle_works": true,
+    "password_dialog": true,
+    "add_city_dialog": true,
+    "all_dialogs_close": true,
+    "mobile_no_overflow": true,
+    "mobile_images_loaded": true
+  },
+  "metrics": {
+    "images_count": 4,
+    "javascript_errors": [],
+    "hero_box": {
+      "x": 220,
+      "y": 80,
+      "width": 1410,
+      "height": 110
+    },
+    "profile-card_box": {
+      "x": 220,
+      "y": 202,
+      "width": 416,
+      "height": 213
+    },
+    "basic-card_box": {
+      "x": 649,
+      "y": 202,
+      "width": 478,
+      "height": 255
+    },
+    "security-card_box": {
+      "x": 1140,
+      "y": 202,
+      "width": 490,
+      "height": 255
+    },
+    "device-card_box": {
+      "x": 220,
+      "y": 427,
+      "width": 416,
+      "height": 285
+    },
+    "notice-card_box": {
+      "x": 649,
+      "y": 469,
+      "width": 478,
+      "height": 231
+    },
+    "privacy-card_box": {
+      "x": 1140,
+      "y": 469,
+      "width": 490,
+      "height": 231
+    },
+    "resume-card_box": {
+      "x": 649,
+      "y": 712,
+      "width": 478,
+      "height": 167
+    },
+    "prefs-card_box": {
+      "x": 1140,
+      "y": 712,
+      "width": 490,
+      "height": 168
+    }
+  },
+  "status": "PASS"
+}

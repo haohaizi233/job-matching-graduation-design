@@ -1,0 +1,15 @@
+desktop title 反馈中心 · 大学生就业岗位画像与简历智能匹配系统 js-errors [] horizontalOverflow False
+.banner {'x': 238, 'y': 78, 'width': 1394, 'height': 130}
+.stats {'x': 238, 'y': 219, 'width': 1394, 'height': 111}
+.upper-panels {'x': 238, 'y': 342, 'width': 888, 'height': 243}
+.records {'x': 238, 'y': 597, 'width': 888, 'height': 437.5}
+.detail {'x': 1138, 'y': 342, 'width': 494, 'height': 573}
+.mid-grid {'x': 238, 'y': 342, 'width': 1394, 'height': 692.5}
+.sicon {'x': 256, 'y': 234, 'width': 57, 'height': 57}
+rows 6
+tab dislike rows 1
+selected detail 腾讯
+edited true
+remark 这是一条更新后的反馈
+chart polylines 2
+mobile title 反馈中心 · 大学生就业岗位画像与简历智能匹配系统 js-errors [] horizontalOverflow False
