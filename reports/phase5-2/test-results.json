@@ -1,13 +1,13 @@
 {
   "generated_by": "tests/phase5_2/run_all.py",
-  "created_at": "2026-10-31T04:18:36",
-  "seconds": 30.68,
+  "created_at": "2026-10-31T05:30:52",
+  "seconds": 26.35,
   "ok": true,
   "mode": "full",
   "environment": {
     "python": "3.13.2",
     "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "1d8e7f0caef47bbf715d788cb5da2c6a23dd2492"
+    "commit": "b6ece8422301063c9fcc05686f3570d4e961fa16"
   },
   "totals": {
     "tests": 62,
