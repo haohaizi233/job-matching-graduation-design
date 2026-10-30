@@ -92,3 +92,7 @@ _tmp_*
 
 # JetBrains IDE local config
 .idea/
+
+# Phase4-3B 研究实验记录（结构化实验结果）必须入库
+!reports/model-research/runs/
+

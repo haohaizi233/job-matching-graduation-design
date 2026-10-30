@@ -1,0 +1,106 @@
+{
+  "paired_bootstrap_ndcg10": {
+    "Full_vs_-SemanticEmbedding": {
+      "status": "RUN",
+      "unit": "query_group(resume_id)",
+      "n_groups": 8,
+      "point_estimate_mean_diff": -0.01669779413769773,
+      "ci95": [
+        -0.03356021044683986,
+        -0.0026059289299568502
+      ],
+      "bootstrap_repeats": 2000,
+      "seed": 20261031,
+      "groups_a_better": 2,
+      "groups_b_better": 3,
+      "groups_tied": 3,
+      "power_warning": "n_groups=8，统计功效极低；CI 仅方向性参考，不得作为显著性结论"
+    },
+    "Full_vs_-SkillFeatures": {
+      "status": "RUN",
+      "unit": "query_group(resume_id)",
+      "n_groups": 8,
+      "point_estimate_mean_diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_repeats": 2000,
+      "seed": 20261031,
+      "groups_a_better": 0,
+      "groups_b_better": 0,
+      "groups_tied": 8,
+      "power_warning": "n_groups=8，统计功效极低；CI 仅方向性参考，不得作为显著性结论"
+    },
+    "Full_vs_-EducationConstraints": {
+      "status": "RUN",
+      "unit": "query_group(resume_id)",
+      "n_groups": 8,
+      "point_estimate_mean_diff": -0.0037223970975089754,
+      "ci95": [
+        -0.016810373750279273,
+        0.008436573737635192
+      ],
+      "bootstrap_repeats": 2000,
+      "seed": 20261031,
+      "groups_a_better": 2,
+      "groups_b_better": 3,
+      "groups_tied": 3,
+      "power_warning": "n_groups=8，统计功效极低；CI 仅方向性参考，不得作为显著性结论"
+    },
+    "Full_vs_-ExperienceConstraints": {
+      "status": "RUN",
+      "unit": "query_group(resume_id)",
+      "n_groups": 8,
+      "point_estimate_mean_diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_repeats": 2000,
+      "seed": 20261031,
+      "groups_a_better": 0,
+      "groups_b_better": 0,
+      "groups_tied": 8,
+      "power_warning": "n_groups=8，统计功效极低；CI 仅方向性参考，不得作为显著性结论"
+    },
+    "Full_vs_-IntentFeatures": {
+      "status": "RUN",
+      "unit": "query_group(resume_id)",
+      "n_groups": 8,
+      "point_estimate_mean_diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "bootstrap_repeats": 2000,
+      "seed": 20261031,
+      "groups_a_better": 0,
+      "groups_b_better": 0,
+      "groups_tied": 8,
+      "power_warning": "n_groups=8，统计功效极低；CI 仅方向性参考，不得作为显著性结论"
+    },
+    "Full_vs_-CrossEncoderReranking": {
+      "status": "RUN",
+      "unit": "query_group(resume_id)",
+      "n_groups": 8,
+      "point_estimate_mean_diff": -0.08809285681551586,
+      "ci95": [
+        -0.14173597013242356,
+        -0.03619930851178033
+      ],
+      "bootstrap_repeats": 2000,
+      "seed": 20261031,
+      "groups_a_better": 1,
+      "groups_b_better": 7,
+      "groups_tied": 0,
+      "power_warning": "n_groups=8，统计功效极低；CI 仅方向性参考，不得作为显著性结论"
+    }
+  },
+  "multi_seed": {
+    "status": "NOT_RUN",
+    "reason": "当前评估集为确定性合成夹具（8 个查询组），无可训练参数的检索基线本身无随机性；多随机种子实验需在真实 Gold 与监督训练数据到位后执行"
+  },
+  "unit": "query_group(resume_id)",
+  "caveat": "重采样单位与评价单位一致（查询组）；n_groups=8 时 CI 覆盖极宽，不构成显著性证据"
+}

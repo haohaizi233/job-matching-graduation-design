@@ -1,0 +1,2211 @@
+{
+  "meta": {
+    "experiment_id": "phase4-3b-retrieval-matrix-v1",
+    "run_id": "phase4-3b-retrieval-matrix-v1-20261031-042117",
+    "git_commit": "cb1f4819f48a5278dedac324c99b6720a5dccdc7",
+    "dataset_version": "dv-fd3762f85658",
+    "dataset_file": "D:\\desktop\\job-matching-model-research\\data\\independent_eval\\pairs\\pairs_synthetic_v1.jsonl",
+    "dataset_sha256": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8",
+    "split_version": "synthetic_fixture_split_pool_only",
+    "label_source": "synthetic_fixture_tier_proxy",
+    "label_provenance": "分析者把 difficulty_tier 映射为 0/1/2/3 的分级代理相关性，非人工标注、非真实录用结果",
+    "circularity_warning": "difficulty_tier 由技能/类别重合度分层生成，与技能类基线共享构造信号，存在循环性风险",
+    "gold_status": "BLOCKED — H2 真实人工 Gold 未冻结，本结果不得作为正式性能结论",
+    "seed": 20261031,
+    "device": "cpu",
+    "dependency_versions": {
+      "python": "3.11.18",
+      "numpy": "1.26.4"
+    },
+    "start_time": "2026-10-31T04:21:17",
+    "research_set": {
+      "pairs": 75,
+      "resumes": 8,
+      "jobs": 55,
+      "difficulty_tiers": {
+        "high_skill_overlap": 11,
+        "medium_skill_overlap": 24,
+        "hard_requirement_gap": 16,
+        "cross_category_negative": 16,
+        "same_direction_diff_duties": 8
+      },
+      "is_synthetic_all": true,
+      "eligible_for_gold_any": false
+    },
+    "task_definitions": {
+      "task_A_within_observed_pairs": "组内排序：候选 = 该简历的观测配对，相关性 = tier 分级",
+      "task_B_full_pool_retrieval": "全池检索：候选 = 55 条 JD，相关 = 夹具配对过的岗位"
+    },
+    "encoder_status": {
+      "E03_embedding_bge": {
+        "encoder_id": "bge_small_zh_v15",
+        "model_id": "BAAI/bge-small-zh-v1.5",
+        "revision": "7999e1d3359715c523056ef9478215996d62a620",
+        "license": "MIT",
+        "dim": 512,
+        "normalization": "l2",
+        "max_length": 256,
+        "device": "cpu",
+        "backend": "transformers-mean-pooling",
+        "offline": true,
+        "notes": "load_seconds=2.698; mean pooling over last_hidden_state"
+      }
+    },
+    "end_time": "2026-10-31T04:22:15",
+    "total_seconds": 58.05,
+    "encoder_used": "hash"
+  },
+  "results": {
+    "E00_rule_fusion": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.8309225125420368,
+              "std": 0.13912310474294648,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.875,
+              "std": 0.21650635094610965,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.5922619047619048,
+              "std": 0.13909607562389478,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.8250000000000001,
+              "std": 0.11989578808281798,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8917004368647026,
+              "std": 0.08141853615097457,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.875,
+              "std": 0.21650635094610965,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.9375,
+              "std": 0.08569568250501304,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.7757936507936508,
+              "std": 0.05645808841113519,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.692924430641822,
+            "std": 0.18548947785067144,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.45685108221914134,
+              "std": 0.2705377870964284,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.7291666666666666,
+              "std": 0.37209523123941146,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.22247023809523808,
+              "std": 0.12410883791808067,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.425,
+              "std": 0.2727178028658928,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.386629333716165,
+              "std": 0.184471398092037,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.7291666666666666,
+              "std": 0.37209523123941146,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.3211805555555556,
+              "std": 0.18476483421310905,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.30000000000000004,
+              "std": 0.17320508075688773,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6117751478540542,
+            "std": 0.20054148180903064,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 0.024
+    },
+    "E00x_trained_gradient_boosting": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.8510448564180386,
+              "std": 0.07732170150467546,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.7351190476190477,
+              "std": 0.2018331170617378,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.9024460350740493,
+              "std": 0.051130031968480365,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.8382936507936508,
+              "std": 0.12671645275114518,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.751417362119013,
+            "std": 0.08992715661979306,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.605987564148005,
+              "std": 0.16774644032241326,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.875,
+              "std": 0.21650635094610965,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.3080357142857143,
+              "std": 0.07153699608167807,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.575,
+              "std": 0.18540496217739155,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.6147075040072361,
+              "std": 0.14956544420891985,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.875,
+              "std": 0.21650635094610965,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.5669642857142858,
+              "std": 0.13559642699842508,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.5375000000000001,
+              "std": 0.18666480653835096,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.7922203240493166,
+            "std": 0.06550661165758288,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 5.725
+    },
+    "E00x_trained_mlp": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.787613856899614,
+              "std": 0.09370635070374636,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.7101190476190476,
+              "std": 0.17851487199617158,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.975,
+              "std": 0.06614378277661474,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8632315681942802,
+              "std": 0.05436256703938394,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.9624999999999999,
+              "std": 0.0484122918275927,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.8007936507936508,
+              "std": 0.07920121973402315,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6850009071117562,
+            "std": 0.08342511664908527,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.6302990941646128,
+              "std": 0.2295125317119239,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.8333333333333333,
+              "std": 0.2886751345948129,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.33854166666666663,
+              "std": 0.12736695725856,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.625,
+              "std": 0.2331844763272204,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.6053565983296734,
+              "std": 0.1475807509446783,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.8333333333333333,
+              "std": 0.2886751345948129,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.5565476190476191,
+              "std": 0.13713102420843182,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.5249999999999999,
+              "std": 0.17853571071357124,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.7588240215090343,
+            "std": 0.08137034646229584,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 1.113
+    },
+    "E00x_trained_ranknet": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.737838609909029,
+              "std": 0.13978022945435167,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6851190476190476,
+              "std": 0.14747376683587463,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.95,
+              "std": 0.08660254037844385,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8665799969454122,
+              "std": 0.06837071941806325,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.8382936507936508,
+              "std": 0.12671645275114518,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6660929184808901,
+            "std": 0.06823860994747241,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.5617346294475075,
+              "std": 0.24344556345097887,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.8541666666666666,
+              "std": 0.2560042859884272,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.26711309523809523,
+              "std": 0.09199450016064688,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.525,
+              "std": 0.26339134382131846,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.566152276823214,
+              "std": 0.17056486868419424,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.8541666666666666,
+              "std": 0.2560042859884272,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.5143849206349206,
+              "std": 0.13991876529330988,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.4875,
+              "std": 0.18328597873268976,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.7806499403693337,
+            "std": 0.07558593123787181,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 1.211
+    },
+    "E00x_trained_ridge": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.7954423349925155,
+              "std": 0.08704290075197844,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.7351190476190477,
+              "std": 0.2018331170617378,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8808980926009088,
+              "std": 0.04797015278733452,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.8382936507936508,
+              "std": 0.12671645275114518,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6986068275278181,
+            "std": 0.04723868930876795,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.5763003119569263,
+              "std": 0.2242280903488103,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.8541666666666666,
+              "std": 0.2560042859884272,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.2849702380952381,
+              "std": 0.07910384524102541,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.55,
+              "std": 0.23979157616563596,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.5945619893456544,
+              "std": 0.15023723542696363,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.8541666666666666,
+              "std": 0.2560042859884272,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.560515873015873,
+              "std": 0.14267445881017038,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.5249999999999999,
+              "std": 0.1713913650100261,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.7877999050845319,
+            "std": 0.06301563447022974,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 0.963
+    },
+    "E01_tfidf_char": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.7417878683259436,
+              "std": 0.1580360297795028,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6642857142857144,
+              "std": 0.2088327347690278,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.8999999999999999,
+              "std": 0.1414213562373095,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8493881848692562,
+              "std": 0.10408976072249802,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.9624999999999999,
+              "std": 0.06959705453537526,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.8007936507936508,
+              "std": 0.0936634037784076,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6455609838274932,
+            "std": 0.1744434162313169,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.5597246291801397,
+              "std": 0.2727136617227559,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.8125,
+              "std": 0.34798527267687634,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.2601686507936508,
+              "std": 0.14483935874744866,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.5,
+              "std": 0.28284271247461906,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.4720474261195244,
+              "std": 0.1812163761699196,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.8303571428571428,
+              "std": 0.30709613431999716,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.38318452380952384,
+              "std": 0.15555934376208116,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.35,
+              "std": 0.1414213562373095,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6780407686168932,
+            "std": 0.08504173457044467,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 0.053
+    },
+    "E02_bm25": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.8066680751492535,
+              "std": 0.10335823237465885,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6684523809523809,
+              "std": 0.1637315965667156,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.925,
+              "std": 0.0968245836551854,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8934832109985056,
+              "std": 0.06165745216248195,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.9624999999999999,
+              "std": 0.0484122918275927,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.8007936507936508,
+              "std": 0.07920121973402315,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.7093820193171608,
+            "std": 0.0803760861954238,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.5363420393729326,
+              "std": 0.2907838267130763,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.7125,
+              "std": 0.39191038516477206,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.2624007936507936,
+              "std": 0.13665201969472135,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.5,
+              "std": 0.2645751311064591,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.4581572687856471,
+              "std": 0.2261513890551583,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.728125,
+              "std": 0.3647425247691856,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.37351190476190477,
+              "std": 0.16711117382179977,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.3625,
+              "std": 0.18666480653835096,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.641834634286848,
+            "std": 0.08793677932748165,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 0.047
+    },
+    "E03_embedding_bge": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.7757326728824224,
+              "std": 0.12340052154986217,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6934523809523809,
+              "std": 0.21143524093942126,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.95,
+              "std": 0.13228756555322954,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8316553351804168,
+              "std": 0.06834385829117097,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.95,
+              "std": 0.08660254037844385,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.7882936507936508,
+              "std": 0.0859443103247579,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6392786949685535,
+            "std": 0.13795806367296173,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.3641501355731722,
+              "std": 0.16938575978071232,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.6041666666666666,
+              "std": 0.34295995069071517,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.2021329365079365,
+              "std": 0.1220618629366535,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.35,
+              "std": 0.19364916731037082,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.35903999771828154,
+              "std": 0.09020252555528074,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.6220238095238095,
+              "std": 0.3134904937674182,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.32589285714285715,
+              "std": 0.10795615593521468,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.3,
+              "std": 0.1,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6435235411205121,
+            "std": 0.09644101205245591,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 0.182
+    },
+    "E03_embedding_hash": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.7147915354672209,
+              "std": 0.11407617146937059,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6434523809523809,
+              "std": 0.12085385704190317,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.9,
+              "std": 0.09999999999999998,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8249926082809856,
+              "std": 0.09229663593620877,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.95,
+              "std": 0.07071067811865474,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.7882936507936508,
+              "std": 0.06990296472395349,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.5988937556154537,
+            "std": 0.12188711592257025,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.32999317317784577,
+              "std": 0.19164916708979754,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.6291666666666667,
+              "std": 0.3927953594996311,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.16418650793650794,
+              "std": 0.0812266183384916,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.30000000000000004,
+              "std": 0.17320508075688773,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.30681935015359474,
+              "std": 0.13191866651586545,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.6470238095238094,
+              "std": 0.36612852826070413,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.25620039682539686,
+              "std": 0.09139612069391925,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.25,
+              "std": 0.1224744871391589,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.5742292385055263,
+            "std": 0.05504147337367369,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 0.021
+    },
+    "E04_embedding_bge_plus_rule": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.8287067569187442,
+              "std": 0.14041532809585944,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6047619047619048,
+              "std": 0.12503967624286558,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.8500000000000001,
+              "std": 0.13228756555322954,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8885349516382745,
+              "std": 0.08253377960176722,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.9375,
+              "std": 0.08569568250501304,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.7757936507936508,
+              "std": 0.05645808841113519,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.7046636343216532,
+            "std": 0.1662200688281264,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.5156467425673861,
+              "std": 0.2744065348036121,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.7541666666666667,
+              "std": 0.3261464820870797,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.2532242063492064,
+              "std": 0.08929639210842456,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.5,
+              "std": 0.2645751311064591,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.4371523058485211,
+              "std": 0.18182944288679495,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.7541666666666667,
+              "std": 0.3261464820870797,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.3727678571428571,
+              "std": 0.15885547353650004,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.35,
+              "std": 0.16583123951776998,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6265188444469714,
+            "std": 0.14982191872617415,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 0.037
+    },
+    "E04_embedding_plus_rule": {
+      "status": "RUN",
+      "error": null,
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.8171544196530209,
+              "std": 0.1328860586330747,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.875,
+              "std": 0.21650635094610965,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6255952380952381,
+              "std": 0.11961620172152984,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.875,
+              "std": 0.0968245836551854,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8826582274393242,
+              "std": 0.09973543529670581,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.875,
+              "std": 0.21650635094610965,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.95,
+              "std": 0.07071067811865474,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.7882936507936509,
+              "std": 0.06990296472395349,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.7358223831985624,
+            "std": 0.1619699553859493,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.4746074099254251,
+              "std": 0.280730754173248,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.6875,
+              "std": 0.34798527267687634,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.22544642857142858,
+              "std": 0.11559109633475559,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.45,
+              "std": 0.2783882181415011,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.4674090765785535,
+              "std": 0.17005079541533538,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.7083333333333334,
+              "std": 0.3090082702956526,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.43105158730158727,
+              "std": 0.14263565143254614,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.4,
+              "std": 0.15,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6115956472523322,
+            "std": 0.1127548027381958,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 0.025
+    },
+    "E05_embedding_plus_reranker": {
+      "status": "RUN",
+      "reranker": "bge_reranker_base",
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.7474655590412155,
+              "std": 0.1337872002801283,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6684523809523809,
+              "std": 0.1637315965667156,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.925,
+              "std": 0.0968245836551854,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8645210254462696,
+              "std": 0.074401543291966,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.8382936507936508,
+              "std": 0.12671645275114518,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6400757575757576,
+            "std": 0.1684404917630588,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.5252404988485027,
+              "std": 0.17809824257093115,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.8541666666666666,
+              "std": 0.2560042859884272,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.25942460317460314,
+              "std": 0.11643440565715832,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.475,
+              "std": 0.1984313483298443,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.4855792005771268,
+              "std": 0.1297629031875068,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.8541666666666666,
+              "std": 0.2560042859884272,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.4154265873015873,
+              "std": 0.14672795961188076,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.375,
+              "std": 0.10897247358851683,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6926106845676325,
+            "std": 0.09244732713631736,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 33.975,
+      "note": "两阶段：Embedding 召回 Top20 -> Cross-Encoder 精排；未覆盖候选记 -1e9（视为未召回）"
+    },
+    "E06_full_two_stage_with_constraints": {
+      "status": "RUN",
+      "reranker": "bge_reranker_base",
+      "task_A": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "graded",
+            "relevant_values": [
+              "3",
+              "2",
+              "1"
+            ],
+            "gain_mode": "ordinal",
+            "label_source": "synthetic_fixture_tier_proxy"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 7,
+            "max": 12,
+            "mean": 9.375
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.7821790525417835,
+              "std": 0.14507921280327343,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.875,
+              "std": 0.21650635094610965,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.6684523809523809,
+              "std": 0.1637315965667156,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.925,
+              "std": 0.0968245836551854,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.8841688494621541,
+              "std": 0.10463349811525748,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.875,
+              "std": 0.21650635094610965,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 1.0,
+              "std": 0.0,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.8382936507936508,
+              "std": 0.12671645275114518,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6782544191919192,
+            "std": 0.19378838120417616,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "task_B": {
+        "summary": {
+          "relevance_spec": {
+            "kind": "binary",
+            "relevant_values": [
+              "1"
+            ],
+            "gain_mode": "binary",
+            "label_source": "synthetic_fixture_tier_proxy+full_pool_retrieval"
+          },
+          "queries_total": 8,
+          "queries_evaluated": 8,
+          "queries_skipped": {
+            "too_small": 0,
+            "no_relevance_labels": 0,
+            "all_zero_relevance": 0,
+            "nan_relevance_dropped": 0
+          },
+          "group_size": {
+            "min": 55,
+            "max": 55,
+            "mean": 55.0
+          },
+          "metrics": {
+            "ndcg@5": {
+              "mean": 0.5750442038112152,
+              "std": 0.16641143852077508,
+              "n": 8
+            },
+            "mrr@5": {
+              "mean": 0.9375,
+              "std": 0.16535945694153692,
+              "n": 8
+            },
+            "recall@5": {
+              "mean": 0.2790178571428571,
+              "std": 0.12617915703389598,
+              "n": 8
+            },
+            "precision@5": {
+              "mean": 0.5,
+              "std": 0.17320508075688773,
+              "n": 8
+            },
+            "ndcg@10": {
+              "mean": 0.49038742708463434,
+              "std": 0.10797647970567271,
+              "n": 8
+            },
+            "mrr@10": {
+              "mean": 0.9375,
+              "std": 0.16535945694153692,
+              "n": 8
+            },
+            "recall@10": {
+              "mean": 0.38888888888888884,
+              "std": 0.10901870530012818,
+              "n": 8
+            },
+            "precision@10": {
+              "mean": 0.35,
+              "std": 0.07071067811865477,
+              "n": 8
+            }
+          },
+          "pairwise_accuracy": {
+            "mean": 0.6915428761337064,
+            "std": 0.08409111693169273,
+            "n": 8,
+            "note": "组内可比较对（真实标签不同且预测不并列）上的顺序正确率"
+          }
+        },
+        "per_group_skipped": {
+          "too_small": 0,
+          "no_relevance_labels": 0,
+          "all_zero_relevance": 0,
+          "nan_relevance_dropped": 0
+        }
+      },
+      "seconds": 33.987,
+      "note": "E05 + 硬/软约束（学历硬约束、技能/经验/类别/意向软约束，人工权重）"
+    },
+    "E07_finetuned_model": {
+      "status": "NOT_RUN",
+      "reason": "缺少合法、足量、正确切分的监督训练数据（H2 Gold 未冻结），且不得用合成夹具或盲测 Gold 微调；前置条件未满足"
+    }
+  }
+}

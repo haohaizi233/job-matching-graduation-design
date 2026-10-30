@@ -1,0 +1,1297 @@
+{
+  "generated_by": "scripts/phase4_3b/check_model_compatibility.py",
+  "generated_at": "2026-10-31T04:17:39",
+  "environment": {
+    "python": "3.11.18",
+    "executable": "C:\\Users\\MemoryLeak\\miniconda3\\envs\\graduation-design\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "sklearn": "1.5.2",
+    "joblib": "1.6.0",
+    "torch": "2.1.2+cu121",
+    "transformers": "4.40.2",
+    "jieba": "0.42.1",
+    "cuda_available": true,
+    "torch_cuda": "12.1",
+    "gpu": "NVIDIA GeForce RTX 2050",
+    "gpu_total_memory_mb": 4096
+  },
+  "behavior_taxonomy": {
+    "LOAD": "仅反序列化 checkpoint",
+    "PREDICT": "加载既有 checkpoint 做前向推理（不训练）",
+    "REEVALUATE": "用既有预测文件重算指标（不训练不推理）",
+    "COMPARE_HISTORICAL": "比对当前推理输出与历史落盘预测",
+    "RETRAIN": "重新训练（本轮未执行，见 03-baseline-reproduction.md）",
+    "REPRODUCE_FROM_SCRATCH": "从零训练复现（本轮未执行）"
+  },
+  "totals": {
+    "runs": 14,
+    "by_load_status": {
+      "LOADED": 14
+    }
+  },
+  "read_only_notice": "全程只读 models/，未写入或改动任何历史 checkpoint",
+  "results": [
+    {
+      "run": "matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\ridge\\candidate_cold\\ridge-candidate_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.7602,
+        "info": {
+          "run_id": "ridge-candidate_cold-final-20261028-203750",
+          "model_name": "ridge",
+          "protocol": "candidate_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12261,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0037,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12270,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0015,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/ridge/job_cold/ridge-job_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\ridge\\job_cold\\ridge-job_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0054,
+        "info": {
+          "run_id": "ridge-job_cold-final-20261028-203750",
+          "model_name": "ridge",
+          "protocol": "job_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12422,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0011,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12251,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0015,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/ridge/double_cold/ridge-double_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\ridge\\double_cold\\ridge-double_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0074,
+        "info": {
+          "run_id": "ridge-double_cold-final-20261028-203750",
+          "model_name": "ridge",
+          "protocol": "double_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 2225,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0008,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 2369,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0008,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\gradient_boosting\\candidate_cold\\gradient_boosting-candidate_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0382,
+        "info": {
+          "run_id": "gradient_boosting-candidate_cold-final-20261028-203750",
+          "model_name": "gradient_boosting",
+          "protocol": "candidate_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12261,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0754,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12270,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0607,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\gradient_boosting\\job_cold\\gradient_boosting-job_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0388,
+        "info": {
+          "run_id": "gradient_boosting-job_cold-final-20261028-203750",
+          "model_name": "gradient_boosting",
+          "protocol": "job_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12422,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0875,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12251,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0629,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\gradient_boosting\\double_cold\\gradient_boosting-double_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0385,
+        "info": {
+          "run_id": "gradient_boosting-double_cold-final-20261028-203750",
+          "model_name": "gradient_boosting",
+          "protocol": "double_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 2225,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0345,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 2369,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0454,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\mlp\\candidate_cold\\mlp-candidate_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0468,
+        "info": {
+          "run_id": "mlp-candidate_cold-final-20261028-203750",
+          "model_name": "mlp",
+          "protocol": "candidate_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12261,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.045,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12270,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.011,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/mlp/job_cold/mlp-job_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\mlp\\job_cold\\mlp-job_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0079,
+        "info": {
+          "run_id": "mlp-job_cold-final-20261028-203750",
+          "model_name": "mlp",
+          "protocol": "job_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12422,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0074,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12251,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0062,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/mlp/double_cold/mlp-double_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\mlp\\double_cold\\mlp-double_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0119,
+        "info": {
+          "run_id": "mlp-double_cold-final-20261028-203750",
+          "model_name": "mlp",
+          "protocol": "double_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 2225,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.003,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 2369,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0026,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\ranknet\\candidate_cold\\ranknet-candidate_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0174,
+        "info": {
+          "run_id": "ranknet-candidate_cold-final-20261028-203750",
+          "model_name": "ranknet",
+          "protocol": "candidate_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12261,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0088,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12270,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0058,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\ranknet\\job_cold\\ranknet-job_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.009,
+        "info": {
+          "run_id": "ranknet-job_cold-final-20261028-203750",
+          "model_name": "ranknet",
+          "protocol": "job_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12422,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0117,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 12251,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0085,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750",
+      "task": "matching_ranking",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\matching\\ranknet\\double_cold\\ranknet-double_cold-final-20261028-203750",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0073,
+        "info": {
+          "run_id": "ranknet-double_cold-final-20261028-203750",
+          "model_name": "ranknet",
+          "protocol": "double_cold",
+          "dataset_version": "dv-0ce28fa6b560",
+          "feature_groups_enabled": [
+            "skill",
+            "position",
+            "category",
+            "experience"
+          ],
+          "n_features": 49,
+          "requires_labels": false,
+          "supports_cpu": true
+        },
+        "feature_names_n": 49
+      },
+      "predict": {
+        "status": "RUN",
+        "device": "cpu",
+        "note": "仅前向推理，未训练、未修改权重"
+      },
+      "reevaluate": {
+        "status": "RUN",
+        "n_pairs_table": 122560
+      },
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_test.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 2225,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.002,
+            "finite": true
+          },
+          "predictions_validation.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "pair_index",
+              "pred_scores"
+            ],
+            "prediction_key": "pred_scores",
+            "row_alignment_ok": true,
+            "n": 2369,
+            "max_abs_diff": 0.0,
+            "mean_abs_diff": 0.0,
+            "identical": true,
+            "bitwise_allclose_1e-9": true,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0022,
+            "finite": true
+          }
+        }
+      },
+      "feature_consistency": {
+        "n_features_declared": 49,
+        "n_features_loaded": 49,
+        "names_match": true,
+        "task_declared": "match_ranking",
+        "groups_enabled": [
+          "skill",
+          "position",
+          "category",
+          "experience"
+        ],
+        "standardize_columns": [
+          "years_experience"
+        ]
+      }
+    },
+    {
+      "run": "education/tfidf/tfidf-final-20261028-212254",
+      "task": "education_multilabel",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\education\\tfidf\\tfidf-final-20261028-212254",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.1169,
+        "info": {
+          "model_type": "tfidf_char_ovr_logreg",
+          "model_version": "tfidf-final-20261028-212254",
+          "thresholds": {
+            "博士": 0.45,
+            "硕士": 0.4,
+            "本科": 0.45,
+            "大专": 0.3,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "fallback_to_rules": true
+        }
+      },
+      "predict": {
+        "status": "RUN",
+        "seconds": 0.0075,
+        "output_type": "list",
+        "sample": [
+          {
+            "input": "<岗位名称>数据分析师<岗位描述>负责报表<学历描述>本科",
+            "normalized_input": "<岗位名称>数据分析师<岗位描述>负责报表<学历描述>本科",
+            "model_version": "tfidf-final-20261028-212254",
+            "model_type": "tfidf_char_ovr_logreg",
+            "expression_seen_in_train": false,
+            "labels": [
+              "博士",
+              "硕士",
+              "本科"
+            ],
+            "scores": {
+              "博士": 0.695782,
+              "硕士": 0.737164,
+              "本科": 0.65082,
+              "大专": 0.027833,
+              "学历不限": 0.005154,
+              "学历不明": 0.070416
+            },
+            "confidence": 0.694589,
+            "confidence_meaning": "模型分数在预测标签上的均值，未经校准，不是真实正确概率",
+            "fallback_to_rule": false,
+            "rule": null,
+            "note": {}
+          }
+        ]
+      },
+      "reevaluate": null,
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_gold_holdout_human.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "record_key",
+              "proba",
+              "pred"
+            ],
+            "subset": "gold_holdout",
+            "n": 736,
+            "dim": 6,
+            "max_abs_diff": 2.902403628546324e-08,
+            "mean_abs_diff": 6.460415570137445e-09,
+            "identical": false,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.0138,
+            "finite": true
+          },
+          "predictions_validation_pseudo.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "record_key",
+              "proba",
+              "pred"
+            ],
+            "subset": "validation",
+            "n": 45226,
+            "dim": 6,
+            "max_abs_diff": 2.919262231948494e-08,
+            "mean_abs_diff": 6.7053191163979345e-09,
+            "identical": false,
+            "bitwise_allclose_1e-6": true,
+            "predict_seconds": 0.4751,
+            "finite": true
+          }
+        }
+      }
+    },
+    {
+      "run": "education/charcnn/charcnn-final-20261028-212510",
+      "task": "education_multilabel",
+      "run_dir": "D:\\desktop\\job-matching-model-research\\models\\education\\charcnn\\charcnn-final-20261028-212510",
+      "load": {
+        "status": "LOADED",
+        "seconds": 0.0172,
+        "info": {
+          "model_type": "char_cnn",
+          "model_version": "charcnn-final-20261028-212510",
+          "thresholds": {
+            "博士": 0.25,
+            "硕士": 0.3,
+            "本科": 0.2,
+            "大专": 0.4,
+            "学历不限": 0.7,
+            "学历不明": 0.4
+          },
+          "label_order": [
+            "博士",
+            "硕士",
+            "本科",
+            "大专",
+            "学历不限",
+            "学历不明"
+          ],
+          "fallback_to_rules": true
+        }
+      },
+      "predict": {
+        "status": "RUN",
+        "seconds": 0.018,
+        "output_type": "list",
+        "sample": [
+          {
+            "input": "<岗位名称>数据分析师<岗位描述>负责报表<学历描述>本科",
+            "normalized_input": "<岗位名称>数据分析师<岗位描述>负责报表<学历描述>本科",
+            "model_version": "charcnn-final-20261028-212510",
+            "model_type": "char_cnn",
+            "expression_seen_in_train": false,
+            "labels": [
+              "博士",
+              "硕士",
+              "本科"
+            ],
+            "scores": {
+              "博士": 0.344964,
+              "硕士": 0.31291,
+              "本科": 0.783167,
+              "大专": 0.123546,
+              "学历不限": 0.182825,
+              "学历不明": 0.000664
+            },
+            "confidence": 0.480347,
+            "confidence_meaning": "模型分数在预测标签上的均值，未经校准，不是真实正确概率",
+            "fallback_to_rule": false,
+            "rule": null,
+            "note": {}
+          }
+        ]
+      },
+      "reevaluate": null,
+      "compare_historical": {
+        "status": "RUN",
+        "rows": {
+          "predictions_gold_holdout_human.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "record_key",
+              "proba",
+              "pred"
+            ],
+            "subset": "gold_holdout",
+            "n": 736,
+            "dim": 6,
+            "max_abs_diff": 6.267428398132324e-05,
+            "mean_abs_diff": 5.483959515571031e-06,
+            "identical": false,
+            "bitwise_allclose_1e-6": false,
+            "predict_seconds": 0.0375,
+            "finite": true
+          },
+          "predictions_validation_pseudo.npz": {
+            "status": "COMPARABLE",
+            "keys": [
+              "record_key",
+              "proba",
+              "pred"
+            ],
+            "subset": "validation",
+            "n": 45226,
+            "dim": 6,
+            "max_abs_diff": 0.00012853741645812988,
+            "mean_abs_diff": 5.946939851263349e-06,
+            "identical": false,
+            "bitwise_allclose_1e-6": false,
+            "predict_seconds": 0.4303,
+            "finite": true
+          }
+        }
+      }
+    }
+  ]
+}
