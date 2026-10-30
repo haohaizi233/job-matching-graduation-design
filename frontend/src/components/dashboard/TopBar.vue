@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import IconGlyph from '@/components/common/IconGlyph.vue'
+import { useAuth } from '@/composables/useAuth'
 import { useToast } from '@/composables/useToast'
 import { notifications, student } from '@/data/dashboard'
 
@@ -15,6 +17,11 @@ const emit = defineEmits<{
   (e: 'logout'): void
 }>()
 const { show } = useToast()
+const router = useRouter()
+const { state: authState, logout } = useAuth()
+
+/** 联调：顶栏展示真实登录用户名，未登录时回退演示名 */
+const displayName = computed(() => authState.user?.username || student.name)
 
 const query = ref('')
 const openMenu = ref<'notification' | 'profile' | null>(null)
@@ -44,9 +51,11 @@ function handleDemo(name: string) {
   openMenu.value = null
 }
 
-function handleLogout() {
+async function handleLogout() {
   openMenu.value = null
+  await logout()
   emit('logout')
+  router.push('/login')
 }
 </script>
 
@@ -95,15 +104,15 @@ function handleLogout() {
           :aria-expanded="openMenu === 'profile'"
           @click.stop="toggleMenu('profile')"
         >
-          <img class="avatar" :src="student.avatar" alt="李同学头像" />
+          <img class="avatar" :src="student.avatar" :alt="`${displayName}头像`" />
           <span class="user-meta">
-            <strong>{{ student.name }}</strong>
+            <strong>{{ displayName }}</strong>
             <small>{{ student.meta }}</small>
           </span>
           <IconGlyph name="chevron" class="chevron-down" />
         </button>
         <div v-show="openMenu === 'profile'" class="popover user-popover">
-          <div class="popover-title">{{ student.name }} <span class="muted">学生账号</span></div>
+          <div class="popover-title">{{ displayName }} <span class="muted">学生账号</span></div>
           <button type="button" @click="handleDemo('个人设置')">个人设置</button>
           <button type="button" @click="handleLogout">退出登录</button>
         </div>
