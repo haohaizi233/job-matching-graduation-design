@@ -24,6 +24,23 @@ export class ApiError extends Error {
 const TOKEN_KEY = 'jm_token'
 const USER_KEY = 'jm_user'
 
+/** 会话失效事件：401 清会话后广播，供全局状态（useAuth 等）同步复位 */
+export const SESSION_EXPIRED_EVENT = 'jm:session-expired'
+
+/** 失效 Token 处理：清除本地会话并回登录页（仅鉴权请求触发，登录/注册 401 不触发） */
+function handleUnauthorized(): void {
+  setToken('')
+  setStoredUser(null)
+  try {
+    window.dispatchEvent(new Event(SESSION_EXPIRED_EVENT))
+  } catch {
+    // 非浏览器环境忽略
+  }
+  if (typeof window !== 'undefined' && window.location.hash !== '#/login') {
+    window.location.hash = '#/login'
+  }
+}
+
 export function getToken(): string {
   return localStorage.getItem(TOKEN_KEY) || ''
 }
@@ -100,6 +117,11 @@ export async function apiRequest<T>(path: string, options: RequestOptions = {}):
 
   if (!res.ok || (payload && typeof payload === 'object' && 'error' in payload)) {
     const err = (payload as ApiErrorBody | null)?.error
+    // 失效 Token：仅当本次请求携带了鉴权且确实带了 Token 时才清会话跳登录，
+    // 登录/注册接口的 401（凭证错误）不得触发跳转，避免吞掉表单错误提示。
+    if (res.status === 401 && auth && getToken()) {
+      handleUnauthorized()
+    }
     throw new ApiError(err?.code || `HTTP_${res.status}`, err?.message || `请求失败（${res.status}）`, {
       status: res.status,
       detail: err?.detail ?? {},

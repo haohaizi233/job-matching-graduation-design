@@ -24,6 +24,7 @@ export const statusText: Record<FeedbackStatus, string> = {
   applied: '已投递',
   interviewed: '已面试',
   irrelevant: '不相关',
+  pending: '待反馈',
 }
 
 export const statusOptions: FeedbackStatusOption[] = [
