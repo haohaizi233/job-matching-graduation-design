@@ -4,11 +4,23 @@ import { useRouter } from 'vue-router'
 
 import IconGlyph from '@/components/common/IconGlyph.vue'
 import { useAuth } from '@/composables/useAuth'
-import { notifications, student } from '@/data/dashboard'
+import { useDashboardSummary } from '@/composables/useDashboardSummary'
+import type { NotificationItem } from '@/types'
 
+import avatarFallback from '@/assets/art/avatar-student.png'
 import brandCap from '@/assets/art/brand-cap.png'
 import notificationIcon from '@/assets/icons/topbar/notification.svg'
 import searchIcon from '@/assets/icons/topbar/search.svg'
+
+const props = withDefaults(
+  defineProps<{
+    /** 真实通知列表；不传时由工作台汇总（真实 API）按需加载 */
+    notifications?: NotificationItem[]
+    /** 用户副标题（专业 · 学历）；不传时同上 */
+    meta?: string
+  }>(),
+  { notifications: undefined, meta: undefined },
+)
 
 const emit = defineEmits<{
   (e: 'search', query: string): void
@@ -17,9 +29,18 @@ const emit = defineEmits<{
 }>()
 const router = useRouter()
 const { state: authState, logout } = useAuth()
+const dashboard = useDashboardSummary()
 
-/** 联调：顶栏展示真实登录用户名，未登录时回退演示名 */
-const displayName = computed(() => authState.user?.username || student.name)
+/** 顶栏展示真实登录用户名 */
+const displayName = computed(() => authState.user?.username || '未登录')
+
+/** 优先用调用方传入的真实数据，否则用工作台汇总（真实 API） */
+const noticeItems = computed<NotificationItem[]>(() =>
+  props.notifications ?? (dashboard.summary.value?.notifications ?? []),
+)
+const userMeta = computed(() =>
+  props.meta ?? dashboard.summary.value?.studentMeta ?? '学生账号',
+)
 
 const query = ref('')
 const openMenu = ref<'notification' | 'profile' | null>(null)
@@ -33,7 +54,11 @@ function onDocumentClick(event: MouseEvent) {
   if (target && !target.closest('.popover-host')) openMenu.value = null
 }
 
-onMounted(() => document.addEventListener('click', onDocumentClick))
+onMounted(() => {
+  document.addEventListener('click', onDocumentClick)
+  // 未传入通知时按需加载真实数据（单例缓存，不会重复请求）
+  if (props.notifications === undefined) void dashboard.ensure()
+})
 onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 
 function handleSearch() {
@@ -85,11 +110,14 @@ async function handleLogout() {
           @click.stop="toggleMenu('notification')"
         >
           <img class="bell-icon" :src="notificationIcon" alt="" aria-hidden="true" />
-          <span class="notification-count">{{ notifications.length }}</span>
+          <span class="notification-count">{{ noticeItems.length }}</span>
         </button>
         <div v-show="openMenu === 'notification'" class="popover notifications">
-          <div class="popover-title">消息通知 <span class="muted">{{ notifications.length }}条未读</span></div>
-          <p v-for="item in notifications" :key="item.id">{{ item.text }}</p>
+          <div class="popover-title">
+            消息通知 <span class="muted">{{ noticeItems.length }}条</span>
+          </div>
+          <p v-for="item in noticeItems" :key="item.id">{{ item.text }}</p>
+          <p v-if="noticeItems.length === 0" class="muted-empty">暂无新通知</p>
         </div>
       </div>
 
@@ -102,10 +130,10 @@ async function handleLogout() {
           :aria-expanded="openMenu === 'profile'"
           @click.stop="toggleMenu('profile')"
         >
-          <img class="avatar" :src="student.avatar" :alt="`${displayName}头像`" />
+          <img class="avatar" :src="avatarFallback" :alt="`${displayName}头像`" />
           <span class="user-meta">
             <strong>{{ displayName }}</strong>
-            <small>{{ student.meta }}</small>
+            <small>{{ userMeta }}</small>
           </span>
           <IconGlyph name="chevron" class="chevron-down" />
         </button>
@@ -285,6 +313,11 @@ async function handleLogout() {
 }
 .notifications p:last-child {
   border: 0;
+}
+.notifications .muted-empty {
+  color: #9aa5bb;
+  text-align: center;
+  padding: 16px 5px;
 }
 .user-popover button {
   display: block;
