@@ -1,17 +1,17 @@
 {
   "generated_by": "tests/phase5_2/run_all.py",
-  "created_at": "2026-10-31T03:00:56",
-  "seconds": 21.65,
+  "created_at": "2026-10-31T04:18:36",
+  "seconds": 30.68,
   "ok": true,
   "mode": "full",
   "environment": {
     "python": "3.13.2",
     "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "cb1f4819f48a5278dedac324c99b6720a5dccdc7"
+    "commit": "1d8e7f0caef47bbf715d788cb5da2c6a23dd2492"
   },
   "totals": {
-    "tests": 56,
-    "pass": 52,
+    "tests": 62,
+    "pass": 58,
     "fail": 0,
     "skip": 4
   },
@@ -64,6 +64,13 @@
       "pass": 0,
       "fail": 0,
       "skip": 3
+    },
+    "T8": {
+      "title": "用户设置/密码/设备管理（Phase5-3）",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
     }
   },
   "consistency": {
@@ -465,6 +472,48 @@
       "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_migrate_and_schema_on_postgresql",
       "status": "SKIP",
       "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_change_password_verifies_old_and_revokes_other_sessions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_session_list_and_revoke_real_invalidation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_session_revoke_others_and_cross_user_404",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_default_then_persist_and_reload",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_strict_validation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_user_isolation",
+      "status": "PASS",
+      "detail": ""
     }
   ]
 }

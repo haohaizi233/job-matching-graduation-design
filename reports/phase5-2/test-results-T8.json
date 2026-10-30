@@ -1,0 +1,78 @@
+{
+  "generated_by": "tests/phase5_2/run_all.py",
+  "created_at": "2026-10-31T04:10:13",
+  "seconds": 17.42,
+  "ok": true,
+  "mode": "partial:T8",
+  "environment": {
+    "python": "3.13.2",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "commit": "1573f3af41db3d5b8b8f99ed8506cd6e4b0ebccb"
+  },
+  "totals": {
+    "tests": 6,
+    "pass": 6,
+    "fail": 0,
+    "skip": 0
+  },
+  "groups": {
+    "T8": {
+      "title": "用户设置/密码/设备管理（Phase5-3）",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
+    }
+  },
+  "consistency": {
+    "sum_groups_total_eq_totals_tests": true,
+    "sum_groups_pass_eq_totals_pass": true,
+    "all_records_have_legal_group": true,
+    "no_empty_run": true,
+    "modules_registered_non_empty": true
+  },
+  "records": [
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_change_password_verifies_old_and_revokes_other_sessions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_session_list_and_revoke_real_invalidation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_session_revoke_others_and_cross_user_404",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_default_then_persist_and_reload",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_strict_validation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_user_isolation",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}
