@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
+import { listJobs } from '@/api/jobs'
+import { mapJobToCard } from '@/api/mappers'
 import { useToast } from '@/composables/useToast'
 import {
   categoryOptions,
@@ -11,7 +13,6 @@ import {
   educationOptions,
   heroCopy,
   hotTags,
-  jobList,
   selectedFilters,
   sortOptions,
 } from '@/data/jobs'
@@ -31,8 +32,23 @@ const viewMode = ref<'list' | 'card'>('list')
 const activeTag = ref('')
 const chips = ref([...selectedFilters])
 
+// 联调：岗位列表来自业务 API（学生可见的已发布岗位）
+const jobs = ref<JobCardItem[]>([])
+const loading = ref(true)
+
+onMounted(async () => {
+  try {
+    const rows = await listJobs({ status: 'published' })
+    jobs.value = rows.map((row) => mapJobToCard(row))
+  } catch (e) {
+    show(e instanceof Error ? e.message : '岗位列表加载失败')
+  } finally {
+    loading.value = false
+  }
+})
+
 const filteredJobs = computed(() => {
-  let list = [...jobList]
+  let list = [...jobs.value]
   const kw = keyword.value.trim().toLowerCase()
   if (kw) {
     list = list.filter((job) => `${job.title} ${job.company}`.toLowerCase().includes(kw))
@@ -54,7 +70,7 @@ const filteredJobs = computed(() => {
 })
 
 function handleSearch() {
-  show(`搜索「${keyword.value || '全部岗位'}」（演示数据）`)
+  show(`搜索「${keyword.value || '全部岗位'}」，共 ${filteredJobs.value.length} 个匹配结果`)
 }
 
 function handleReset() {
@@ -82,7 +98,8 @@ function handleViewDetail(job: JobCardItem) {
 }
 
 function handleAddMatch(job: JobCardItem) {
-  show(`「${job.title}」已加入匹配队列（演示）`)
+  show(`「${job.title}」已加入匹配队列`)
+  router.push('/matching')
 }
 </script>
 
@@ -205,6 +222,8 @@ function handleAddMatch(job: JobCardItem) {
         </div>
 
         <div class="job-list" :class="{ 'card-mode': viewMode === 'card' }">
+          <p v-if="loading" class="job-empty">岗位加载中...</p>
+          <p v-else-if="!filteredJobs.length" class="job-empty">暂无符合条件的岗位，试试调整筛选条件</p>
           <article v-for="job in filteredJobs" :key="job.id" class="job-card">
             <img class="job-logo" :src="job.logo" :alt="job.logoAlt" />
             <div class="job-main">
@@ -425,6 +444,7 @@ function handleAddMatch(job: JobCardItem) {
 .view-btn.active { background: #2168ff; border-color: #2168ff; color: white; }
 
 .job-list { display: flex; flex-direction: column; gap: 12px; }
+.job-empty { padding: 32px 0; text-align: center; color: #8a97b1; font-size: 14px; }
 .job-card {
   display: flex;
   gap: 16px;

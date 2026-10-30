@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
+import { getJob } from '@/api/jobs'
+import { mapJobToCard, mapJobToDetail } from '@/api/mappers'
+import { getRun, listRuns } from '@/api/recommendations'
+import type { JobRow, RecoItem } from '@/api/types'
 import { useToast } from '@/composables/useToast'
-import { jobDetail, jobList } from '@/data/jobs'
+import type { JobCardItem, JobDetailData } from '@/types'
 
 const router = useRouter()
 const route = useRoute()
@@ -17,12 +21,67 @@ type DetailTab = (typeof tabs)[number]
 const activeTab = ref<DetailTab>('岗位详情')
 const bookmarked = ref(false)
 
-const job = computed(() => {
-  const id = Number(route.params.id)
-  return jobList.find((item) => item.id === id) ?? jobList[0]
-})
+/** 空占位（加载完成前渲染骨架文案，不展示演示数据） */
+const EMPTY_JOB_ROW: JobRow = {
+  id: '',
+  title: '加载中...',
+  job_description: '',
+  source: '',
+  source_license: '',
+  status: '',
+  job_category: null,
+  city: null,
+  education_min: null,
+  created_at: '',
+  updated_at: '',
+  profile_parsed: false,
+  profile_status: '',
+  profile_error: null,
+  parser_version: null,
+  profile_current: false,
+  data_source: '',
+}
 
-const detail = jobDetail
+const jobCard = ref<JobCardItem | null>(null)
+const detailData = ref<JobDetailData | null>(null)
+
+const job = computed<JobCardItem>(() => jobCard.value ?? mapJobToCard(EMPTY_JOB_ROW))
+const detail = computed<JobDetailData>(() => detailData.value ?? mapJobToDetail(EMPTY_JOB_ROW))
+
+onMounted(async () => {
+  const id = String(route.params.id || '')
+  try {
+    const row = await getJob(id)
+
+    // 若已有推荐记录，用该岗位的解释快照填充匹配度/技能匹配
+    let matchScore = 0
+    let matched: string[] = []
+    let missing: string[] = []
+    let explanation: RecoItem['explanation_snapshot'] | undefined
+    try {
+      const page = await listRuns(1, 1)
+      const latest = page.items[0]
+      if (latest) {
+        const run = await getRun(latest.id)
+        const item = (run.items || []).find((it) => it.job_id === id)
+        if (item) {
+          matchScore = item.score * 100
+          matched = item.explanation_snapshot?.matched_skills ?? []
+          missing = item.explanation_snapshot?.missing_required_skills ?? []
+          explanation = item.explanation_snapshot
+        }
+      }
+    } catch {
+      // 没有推荐历史不影响岗位详情展示
+    }
+
+    detailData.value = mapJobToDetail(row, { matchScore, matched, missing, explanation })
+    jobCard.value = mapJobToCard(row, matchScore)
+  } catch (e) {
+    show(e instanceof Error ? e.message : '岗位详情加载失败')
+    router.push('/jobs')
+  }
+})
 
 function handleBack() {
   if (window.history.length > 1) {
@@ -38,11 +97,11 @@ function handleBookmark() {
 }
 
 function handleApply() {
-  show(`已发起对「${job.value.title}」的投递（演示，未接入投递流程）`)
+  show(`已记录对「${job.value.title}」的投递意向（投递流程未接入）`)
 }
 
 function handleMatchInfo() {
-  show('匹配度由技能、教育、项目与求职意向四维加权计算（演示数据）')
+  show('匹配度由技能、教育、项目与求职意向四维加权计算，仅用于排序参考')
 }
 </script>
 
