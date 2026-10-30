@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f9ff">
+  <meta name="description" content="大学生就业岗位画像与简历智能匹配系统 · 学生岗位探索（界面复刻演示）">
+  <title>岗位探索 | 大学生就业岗位画像与简历智能匹配系统</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" class="icon-defs" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3.2 10 8.8-7 8.8 7v10.2a1 1 0 0 1-1 1h-5.6v-7H9.8v7H4.2a1 1 0 0 1-1-1Z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M7 2.8h7l4 4v13.4a1.2 1.2 0 0 1-1.2 1.2H7A2 2 0 0 1 5 19.4V4.8a2 2 0 0 1 2-2Z"/><path d="M14 3v4.5h4M8.3 11h6.8M8.3 14.5h6.8M8.3 18h4.5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="7.2" r="3.1"/><path d="M5.2 19c0-3.7 2.5-5.4 6.8-5.4s6.8 1.7 6.8 5.4v1.2H5.2Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.4 15.4 5.2 5.2"/></symbol>
+    <symbol id="i-heart-hand" viewBox="0 0 24 24"><path d="M8 6.4C5.8 5 3 6.9 3 9.5v3c0 1.3 1.5 2.6 2.8 2.7L8.5 19c.7.9 2.3.3 2-1.2l-1.4-4.2 3.1-2.2 2.2 1.6v4a1.8 1.8 0 0 0 3.6.1l.4-5.4c2.6-1.2 2.8-4.5.4-5.5-1.6-.8-3.3-.1-4.5 1.1C12 5.2 9.9 5.2 8 6.4Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.8v5.5l3.5 2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 4.5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H10l-4.8 3v-3H4a1 1 0 0 1-1-1v-12a1 1 0 0 1 1-1Z"/><path d="M7.6 11.5h.1m4.2 0h.1m4.2 0h.1" stroke-width="2.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="m10 2.5 4 .1.6 2.2 1.6.8 2.2-1 2.4 3.1-1.4 1.9.3 1.7 2 1.3-1.2 3.8-2.4-.1-1.3 1.2.1 2.4-3.8 1.2-1.3-2-1.8-.3-2 1.5-3-2.4 1-2.2-.9-1.6-2.2-.6-.1-4 2.3-.5.8-1.5-1-2.2 3.1-2.4 1.9 1.4 1.7-.3Z" transform="translate(0 1) scale(.94) translate(.7 .1)"/><circle cx="12" cy="12" r="3.1"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 9c0-3.3-2.1-5.5-6-5.5S6 5.7 6 9v3.5l-1.8 3.4v1.4h15.6v-1.4L18 12.5ZM10 20h4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.8 12.6 4.7 4.4 9.7-10"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.4 7 1-5 4.8 1.2 7-6.3-3.3-6.3 3.3 1.2-7-5-4.8 7-1Z"/></symbol>
+    <symbol id="i-bar" viewBox="0 0 24 24"><path d="M4 20V9m5.5 11V4.5M15 20V13m5 7V7"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 10.8v5.2m0-8.2v.2"/></symbol>
+    <symbol id="i-paper" viewBox="0 0 24 24"><path d="M3 10.6 21 3l-6.5 18-3.4-7-8.1-3.4Z"/><path d="M11.1 14 21 3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V8m5 11V4m5 15v-7m5 7V7"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 10h17m-12-7v4m7-4v4"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="13" rx="2"/><path d="M9 7.5V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2.5M3 13h18"/></symbol>
+    <symbol id="i-location" viewBox="0 0 24 24"><path d="M12 21s-7.5-6.5-7.5-12a7.5 7.5 0 1 1 15 0C19.5 14.5 12 21 12 21Z"/><circle cx="12" cy="9.2" r="2.3"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19 7v5h-5M5 17v-5h5"/><path d="M6.5 9A7 7 0 0 1 19 12M17.5 15A7 7 0 0 1 5 12"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12M3 6h2M3 12h2M3 18h2"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-grad" viewBox="0 0 24 24"><path d="m2 9.2 10-5 10 5-10 5Z"/><path d="M6 11v5.5c3.2 2.5 8.8 2.5 12 0V11M22 9v7"/></symbol>
+    <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m7.6 12.3 3.1 3.1 5.7-6.2"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-trending" viewBox="0 0 24 24"><path d="m3 16 6-6 4 4 8-9M16 5h5v5"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <a href="#workbench" class="brand" aria-label="大学生就业岗位画像与简历智能匹配系统">
+      <img src="assets/brand-mark.png" class="brand-logo" alt="学士帽标识">
+      <span>大学生就业岗位画像与简历智能匹配系统</span>
+    </a>
+    <div class="topbar-right">
+      <form class="global-search" id="globalSearchForm" role="search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+        <input id="globalSearch" aria-label="搜索岗位、公司或关键词" placeholder="搜索岗位、公司或关键词..." autocomplete="off">
+      </form>
+      <div class="popover-host">
+        <button class="notification-button" id="notificationToggle" title="消息通知" aria-label="消息通知" aria-expanded="false">
+          <svg class="icon stroke"><use href="#i-bell"></use></svg><span class="notification-count">3</span>
+        </button>
+        <div class="popover notifications" id="notificationMenu" hidden>
+          <div class="popover-title">消息通知 <span class="muted">3条未读</span></div>
+          <p>画像分析正在进行中</p><p>今日为你新增5个推荐岗位</p><p>你收藏的岗位发布了新动态</p>
+        </div>
+      </div>
+      <div class="topbar-separator"></div>
+      <div class="popover-host">
+        <button class="user-menu-button" id="profileToggle" aria-label="个人账户菜单" aria-expanded="false">
+          <img src="assets/user-avatar.png" alt="李同学头像">
+          <span class="user-meta"><strong>李同学</strong><small>计算机科学与技术 · 大四</small></span>
+          <svg class="icon stroke chevron-down"><use href="#i-chevron"></use></svg>
+        </button>
+        <div class="popover user-popover" id="profileMenu" hidden>
+          <div class="popover-title">李同学 <span class="muted">学生账号</span></div>
+          <button data-demo="个人设置">个人设置</button><button data-demo="退出登录">退出登录</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <nav class="side-nav" aria-label="主导航">
+      <a href="#workbench" class="side-link"><svg class="icon stroke"><use href="#i-home"></use></svg><span>工作台</span></a>
+      <a href="#resume" class="side-link" data-demo="简历管理"><svg class="icon stroke"><use href="#i-file"></use></svg><span>简历管理</span></a>
+      <a href="#profile" class="side-link" data-demo="我的画像"><svg class="icon stroke"><use href="#i-user"></use></svg><span>我的画像</span></a>
+      <a href="#jobs" class="side-link active" aria-current="page"><svg class="icon stroke"><use href="#i-search"></use></svg><span>岗位探索</span></a>
+      <a href="#matching" class="side-link" data-demo="智能匹配"><svg class="icon stroke"><use href="#i-heart-hand"></use></svg><span>智能匹配</span></a>
+      <a href="#history" class="side-link" data-demo="推荐历史"><svg class="icon stroke"><use href="#i-clock"></use></svg><span>推荐历史</span></a>
+      <a href="#feedback" class="side-link" data-demo="反馈中心"><svg class="icon stroke"><use href="#i-chat"></use></svg><span>反馈中心</span></a>
+      <a href="#settings" class="side-link" data-demo="个人设置"><svg class="icon stroke"><use href="#i-settings"></use></svg><span>个人设置</span></a>
+    </nav>
+    <div class="sidebar-motto" aria-label="让每一位大学生找到更合适的职业起点">
+      <span>让每一位大学生<br>找到更合适的职业起点</span>
+      <img src="assets/sidebar-student.png" alt="飞向未来的大学生插画">
+    </div>
+  </aside>
+
+  <main class="workspace" id="jobs">
+    <div class="jobs-page">
+      <section class="explore-banner" aria-label="探索更多适合你的岗位">
+        <div class="hero-content"><h1>探索更多适合你的岗位</h1>
+          <p>海量优质校招岗位，发现更广阔的职业可能</p>
+          <p>多维度筛选，精准匹配，助你找到心仪的offer</p>
+        </div>
+      </section>
+
+      <section class="search-panel card" aria-label="岗位搜索和筛选">
+        <form id="jobFilterForm">
+          <div class="search-primary">
+            <label for="keyword">关键词</label>
+            <div class="control keyword-box"><svg class="icon"><use href="#i-search"/></svg><input id="keyword" name="keyword" autocomplete="off" placeholder="搜索岗位名称、公司名称或关键词，如：前端开发、产品经理、字节跳动" /></div>
+            <label for="city">城市</label>
+            <div class="select-wrap"><select id="city"><option value="">请选择城市</option><option>北京</option><option>上海</option><option>深圳</option><option>杭州</option><option>广州</option></select></div>
+          </div>
+          <div class="filter-row">
+            <label class="filter-group">岗位类别<div class="select-wrap"><select id="category"><option value="">全部类别</option><option>后端开发</option><option>算法工程师</option><option>产品经理</option><option>前端开发</option><option>数据分析</option><option>软件开发</option></select></div></label>
+            <label class="filter-group">学历要求<div class="select-wrap"><select id="education"><option value="">全部学历</option><option>本科</option><option>硕士</option><option>博士</option><option>大专</option></select></div></label>
+            <label class="filter-group">技能标签<div class="select-wrap"><select id="skill"><option value="">请选择技能标签</option><option>Java</option><option>Python</option><option>React</option><option>Vue</option><option>MySQL</option><option>数据分析</option></select></div></label>
+            <div class="filter-group salary-group"><span>薪资范围</span><div class="salary-inputs"><input id="salaryMin" type="number" min="0" max="200" placeholder="最低薪资" aria-label="最低薪资（K）"><span>−</span><input id="salaryMax" type="number" min="0" max="200" placeholder="最高薪资" aria-label="最高薪资（K）"><span class="salary-unit">K</span></div></div>
+            <div class="filter-actions"><button type="submit" class="search-cta">搜索岗位</button><button type="button" id="resetFilters" class="reset-btn"><svg class="icon"><use href="#i-refresh"/></svg>重置筛选</button></div>
+          </div>
+          <div class="hot-row"><span>热门标签：</span><div id="popularTags" class="popular-tags"><button type="button" data-tag="Java">Java</button><button type="button" data-tag="Python">Python</button><button type="button" data-tag="前端开发">前端开发</button><button type="button" data-tag="产品经理">产品经理</button><button type="button" data-tag="数据分析">数据分析</button><button type="button" data-tag="人工智能">人工智能</button><button type="button" data-tag="算法">算法</button><button type="button" data-tag="大数据">大数据</button><button type="button" data-tag="软件测试">软件测试</button><button type="button" data-tag="运营">运营</button><button type="button" data-tag="UI设计">UI设计</button><button type="button" class="more-hot" id="moreTags">更多 <span>⌄</span></button></div></div>
+        </form>
+      </section>
+
+      <div class="results-meta">
+        <div class="results-heading">共 <strong id="resultCount">1,286</strong> 个岗位</div>
+        <div class="applied-filters"><span>已选条件：</span><div id="activeChips"></div><button id="clearChips" type="button">清空全部</button></div>
+      </div>
+
+      <div class="sort-bar card"><div id="sortTabs" class="sort-tabs" role="tablist" aria-label="岗位排序">
+        <button type="button" role="tab" aria-selected="true" class="active" data-sort="综合排序">综合排序</button>
+        <button type="button" role="tab" aria-selected="false" data-sort="最新发布">最新发布</button>
+        <button type="button" role="tab" aria-selected="false" data-sort="薪资从高到低">薪资从高到低</button>
+        <button type="button" role="tab" aria-selected="false" data-sort="薪资从低到高">薪资从低到高</button>
+        <button type="button" role="tab" aria-selected="false" data-sort="匹配度从高到低">匹配度从高到低</button>
+      </div><div class="view-modes"><button type="button" class="active" data-view="list" title="列表模式"><svg class="icon"><use href="#i-list"/></svg>列表模式</button><button type="button" data-view="grid" title="卡片模式"><svg class="icon"><use href="#i-grid"/></svg>卡片模式</button></div></div>
+
+      <section id="jobResults" class="job-results" aria-label="岗位搜索结果"></section>
+      <div class="page-bottom"><span id="resultHint">展示部分演示岗位，点击筛选条件可查看动态效果</span><button id="showMoreJobs" class="show-more" type="button">加载更多岗位 <svg class="icon"><use href="#i-chevron"/></svg></button></div>
+    </div>
+  </main>
+
+  <div class="popover-mask" id="mask" hidden></div>
+  <div class="job-detail-modal" id="jobModal" role="dialog" aria-modal="true" aria-labelledby="jobModalTitle" hidden>
+    <button class="modal-close" id="closeModal" aria-label="关闭">×</button>
+    <div class="modal-head"><img id="modalLogo" alt="企业图标"><div><h2 id="jobModalTitle"></h2><p id="modalCompany"></p></div></div>
+    <p class="modal-salary" id="modalSalary"></p><div class="modal-tags" id="modalTags"></div>
+    <h3>岗位简介</h3><p class="modal-description" id="modalDescription"></p>
+    <p class="modal-note">说明：此页面为截图复刻演示，岗位信息来自截图示例，不能视作实时招聘信息。</p>
+    <button class="search-cta modal-action" id="modalMatch">加入匹配</button>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body></html>
