@@ -137,6 +137,20 @@ async function handleRetry(item: ResumeItem) {
   }
 }
 
+/** 解析失败横幅：批量重试全部失败简历 */
+async function handleRetryFailed() {
+  const failed = resumeList.value.filter((r) => r.status === 'retry')
+  if (!failed.length) return
+  show(`正在重新解析 ${failed.length} 份失败简历…`)
+  try {
+    await Promise.all(failed.map((item) => reparseResume(String(item.id))))
+    await refresh()
+    show('重新解析完成')
+  } catch (e) {
+    show(e instanceof Error ? e.message : '重新解析失败')
+  }
+}
+
 function handleDownload(_item: ResumeItem) {
   openMenu.value = null
   show('简历文件下载接口暂未开放（文件为私有存储）')
@@ -356,7 +370,7 @@ function handleDemo(name: string) {
               <strong>解析失败提示</strong>
               <p>你的简历《李同学_秋招简历.pdf》可能是扫描版或图片格式，系统未能识别到完整的文本内容。<br />建议上传可编辑的 PDF 或 DOCX 文件，或点击"重新解析"使用 OCR 技术进行识别。</p>
             </div>
-            <button type="button" class="btn-outline" @click="handleDemo('重新解析')">重新解析</button>
+            <button type="button" class="btn-outline" @click="handleRetryFailed">重新解析</button>
           </div>
         </section>
 
