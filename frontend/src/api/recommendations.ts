@@ -1,5 +1,7 @@
 import { apiRequest } from './http'
+import { toServerFeedbackType } from './mappers'
 import type { FeedbackRow, RecoHistoryPage, RecoRun, RecoRunResult } from './types'
+import type { FeedbackStatus } from '@/types/feedback'
 
 export interface RecommendInput {
   mode?: 'baseline' | 'experimental_model' | 'future_verified'
@@ -40,7 +42,8 @@ export async function listRuns(page = 1, pageSize = 20): Promise<RecoHistoryPage
 export async function submitFeedback(input: {
   runId: string
   itemId: string
-  feedbackType: string
+  /** 前端展示态（含 pending 之外的 5 种）；映射为后端 feedback_type 枚举提交 */
+  feedbackType: FeedbackStatus
   note?: string
 }): Promise<FeedbackRow> {
   const data = await apiRequest<{ feedback: FeedbackRow }>(
@@ -49,7 +52,7 @@ export async function submitFeedback(input: {
       method: 'POST',
       json: {
         item_id: input.itemId,
-        feedback_type: input.feedbackType,
+        feedback_type: toServerFeedbackType(input.feedbackType),
         note: input.note ?? null,
       },
     },
