@@ -1,13 +1,13 @@
 {
   "generated_by": "tests/core_ci/run_all.py",
-  "created_at": "2026-10-31T04:22:18",
-  "seconds": 192.77,
+  "created_at": "2026-10-31T12:02:50",
+  "seconds": 344.88,
   "ok": true,
   "mode": "full",
   "environment": {
     "python": "3.13.2",
     "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "1d8e7f0caef47bbf715d788cb5da2c6a23dd2492"
+    "commit": "05bd8a258d10113aa1f88439bff6fbb47a936e0d"
   },
   "totals": {
     "tests": 79,

@@ -103,6 +103,163 @@ jobs:
             reports/phase5-1/test-results.json
           if-no-files-found: warn
 
+  # ======================= Frontend CI =======================
+  # 前端质量门禁：依赖安装 / 类型检查 / 生产构建（不含真实业务数据）。
+  frontend-ci:
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: fe-${{ github.run_id }}-${{ github.run_attempt }}
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 依赖安装（npm ci，锁文件）
+        run: npm ci
+
+      - name: 类型检查（vue-tsc）
+        run: npm run typecheck
+
+      - name: 生产构建（vite build）
+        run: npm run build
+
+      - name: 上传前端构建产物清单
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-ci-evidence
+          path: frontend/dist/
+          if-no-files-found: warn
+
+  # ==================== Database Integration ====================
+  # PostgreSQL 集成验收：GitHub Actions 原生 postgres service（隔离临时库），
+  # 跑 T7 PG 集成 + R9 PG/契约 + M4 十项验收登记；绝不用 SQLite 结果冒充 PG。
+  postgres-integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: jm_ci_pg
+          POSTGRES_USER: jm_ci
+          POSTGRES_PASSWORD: jm_ci_pw_ci_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U jm_ci -d jm_ci_pg"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      JM_RUN_ID: pg-${{ github.run_id }}-${{ github.run_attempt }}
+      JM_TEST_DATABASE_URL_POSTGRES: postgresql+psycopg2://jm_ci:jm_ci_pw_ci_only@127.0.0.1:5432/jm_ci_pg
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 依赖安装（服务/测试最小集）
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 \
+                      httpx==0.28.1 pymupdf==1.24.14 python-docx==1.1.2 \
+                      sqlalchemy==2.0.36 alembic==1.14.0 argon2-cffi==23.1.0 \
+                      python-multipart==0.0.20 psycopg2-binary==2.9.10
+
+      - name: T7 PostgreSQL 集成（迁移/JSONB/约束/事务/降级重升级）
+        working-directory: tests/phase5_2
+        run: python test_t7_pg_integration.py
+
+      - name: R9 PostgreSQL + API 契约（含并发幂等）
+        working-directory: tests/phase5_2r
+        run: python test_r9_pg_contract.py
+
+      - name: M4 十项 PostgreSQL 验收登记（PASS/FAIL/NOT_RUN 显式）
+        run: |
+          python scripts/phase5_3/pg_acceptance_checks.py \
+            --out "reports/phase5-3/pg-acceptance.json"
+          cat "reports/phase5-3/pg-acceptance.json"
+
+      - name: 上传 PostgreSQL 验收证据
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: postgres-integration-evidence
+          path: |
+            reports/phase5-3/pg-acceptance.json
+            reports/phase5-2/test-results.json
+            reports/phase5-2r/test-results.json
+          if-no-files-found: warn
+
+  # ======================== Browser E2E ========================
+  # 真实浏览器（Chromium）+ 真实前后端 + 隔离测试库（tests/e2e/.runtime），
+  # 合成夹具数据；失败保留 Trace/Screenshot（含 Token 脱敏检查见 build_report）。
+  browser-e2e:
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: e2e-${{ github.run_id }}-${{ github.run_attempt }}
+      JM_E2E_PYTHON: python
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 后端依赖安装
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 \
+                      httpx==0.28.1 pymupdf==1.24.14 python-docx==1.1.2 \
+                      sqlalchemy==2.0.36 alembic==1.14.0 argon2-cffi==23.1.0 \
+                      python-multipart==0.0.20
+
+      - name: 前端依赖安装（npm ci）
+        working-directory: frontend
+        run: npm ci
+
+      - name: 安装 Playwright Chromium
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
+
+      - name: Playwright E2E（E01–E12，隔离运行目录）
+        working-directory: frontend
+        run: npx playwright test
+
+      - name: 生成 E2E 验收报告（只做格式转换）
+        if: always()
+        run: python tests/e2e/build_report.py
+
+      - name: 上传 E2E 证据（报告/Trace/截图）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-e2e-evidence
+          path: |
+            reports/phase5-3/e2e-results.json
+            reports/phase5-3/e2e-results.md
+            frontend/e2e/.artifacts/
+          if-no-files-found: warn
+
   # ============ 级别二：Artifact-dependent Validation ============
   # 需要真实原始数据 / 训练产物 / GPU / 历史 checkpoint。
   # 每一项都显式登记 PASS / FAIL / BLOCKED / NOT_RUN / ENV_INCOMPATIBLE，

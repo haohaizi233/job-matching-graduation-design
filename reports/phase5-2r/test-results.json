@@ -1,19 +1,19 @@
 {
   "generated_by": "tests/phase5_2r/run_all.py",
-  "created_at": "2026-10-31T05:31:43",
-  "seconds": 29.92,
+  "created_at": "2026-10-31T11:53:40",
+  "seconds": 56.03,
   "ok": true,
   "mode": "full",
   "environment": {
     "python": "3.13.2",
     "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "b6ece8422301063c9fcc05686f3570d4e961fa16"
+    "commit": "05bd8a258d10113aa1f88439bff6fbb47a936e0d"
   },
   "totals": {
     "tests": 70,
-    "pass": 68,
+    "pass": 70,
     "fail": 0,
-    "skip": 2
+    "skip": 0
   },
   "groups": {
     "R1": {
@@ -75,9 +75,9 @@
     "R9": {
       "title": "PostgreSQL 集成 + API 契约与安全边界（P1-08/P1-09）",
       "total": 9,
-      "pass": 7,
+      "pass": 9,
       "fail": 0,
-      "skip": 2
+      "skip": 0
     }
   },
   "consistency": {
@@ -547,15 +547,15 @@
       "group": "R9",
       "class": "R9PostgreSQLAndContract",
       "test_id": "test_r9_pg_contract.R9PostgreSQLAndContract.test_pg_constraints_jsonb_and_transactions",
-      "status": "SKIP",
-      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+      "status": "PASS",
+      "detail": ""
     },
     {
       "group": "R9",
       "class": "R9PostgreSQLAndContract",
       "test_id": "test_r9_pg_contract.R9PostgreSQLAndContract.test_pg_migrate_upgrade_downgrade_reupgrade",
-      "status": "SKIP",
-      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+      "status": "PASS",
+      "detail": ""
     },
     {
       "group": "R9",

@@ -11,6 +11,8 @@ import { defineConfig, devices } from '@playwright/test'
  */
 const BACKEND_PORT = Number(process.env.JM_E2E_PORT || 8123)
 const FRONTEND_PORT = 5173
+// Python 启动命令：Windows 本地默认 py -3.13；CI（Linux）用 JM_E2E_PYTHON=python 覆盖
+const PY = process.env.JM_E2E_PYTHON || 'py -3.13'
 
 export default defineConfig({
   testDir: './e2e',
@@ -35,7 +37,7 @@ export default defineConfig({
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: [
     {
-      command: 'py -3.13 tests/e2e/serve_backend.py',
+      command: `${PY} tests/e2e/serve_backend.py`,
       cwd: '..',
       url: `http://127.0.0.1:${BACKEND_PORT}/api/v1/health`,
       reuseExistingServer: true,
