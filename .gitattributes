@@ -1,0 +1,53 @@
+# =====================================================================
+# 行尾与二进制属性统一约定（Phase4-3B 数据完整性修复）
+#
+# 背景：本仓库的冻结完整性校验（src/job_matching/annotation/freeze.py 的
+# verify_freeze）对数据文件做**逐字节** SHA-256。Windows 上 `core.autocrlf=true`
+# 会在 checkout 时把 LF smudge 成 CRLF，使工作区文件字节与 Git blob 不一致，
+# 导致冻结复验误报「数据被篡改」——而实际语义内容完全未变。
+#
+# 修复：对所有参与哈希完整性校验的数据/配置文本统一钉死 LF，
+# 保证「同一 commit 在任何平台上 checkout 出的字节完全一致」。
+# =====================================================================
+
+# 默认：文本文件一律以 LF 存储、以 LF 检出（跨平台字节可复现）
+* text=auto eol=lf
+
+# ---- 参与 SHA-256 完整性校验的数据产物：强制 LF ----
+*.jsonl text eol=lf
+*.json  text eol=lf
+*.csv   text eol=lf
+*.md    text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.py    text eol=lf
+*.ts    text eol=lf
+*.tsx   text eol=lf
+*.js    text eol=lf
+*.css   text eol=lf
+*.html  text eol=lf
+*.txt   text eol=lf
+
+# ---- 明确按二进制处理，禁止任何行尾转换 ----
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+*.gz    binary
+*.pt    binary
+*.pth   binary
+*.pkl   binary
+*.npz   binary
+*.npy   binary
+*.safetensors binary
+*.bin   binary
+*.db    binary
+*.sqlite binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.eot   binary
