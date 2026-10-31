@@ -1,0 +1,150 @@
+{
+  "best_params": {
+    "alpha": 1.0
+  },
+  "search": {
+    "evaluated": [
+      {
+        "params": {},
+        "selection_value": 0.972191
+      }
+    ],
+    "limit": 1,
+    "space": {}
+  },
+  "selection_metric": "ndcg_at_5_ordinal",
+  "selection_value": 0.972191,
+  "smoke": false,
+  "validation": {
+    "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+    "gain_modes": {
+      "ordinal": {
+        "all": {
+          "mrr@10": 0.87774,
+          "mrr@5": 0.877587,
+          "ndcg@10": 0.981003,
+          "ndcg@5": 0.972191,
+          "queries_evaluated": 934,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.8696,
+          "recall@5": 0.658999
+        },
+        "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+        "gain_mode": "ordinal",
+        "group_size_distribution": {
+          "max": 62,
+          "mean": 13.0393,
+          "median": 11.0,
+          "min": 1,
+          "p25": 7.0,
+          "p75": 18.0
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "queries_size_eq_1": 7,
+        "queries_size_ge_2": 934,
+        "queries_size_ge_min": 934,
+        "queries_total": 941,
+        "size_ge_2": {
+          "mrr@10": 0.87774,
+          "mrr@5": 0.877587,
+          "ndcg@10": 0.981003,
+          "ndcg@5": 0.972191,
+          "queries_evaluated": 934,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.8696,
+          "recall@5": 0.658999
+        },
+        "size_ge_maxk": {
+          "mrr@10": 0.954065,
+          "mrr@5": 0.953812,
+          "ndcg@10": 0.976205,
+          "ndcg@5": 0.966312,
+          "queries_evaluated": 564,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.798858,
+          "recall@5": 0.497714
+        }
+      },
+      "score": {
+        "all": {
+          "mrr@10": 0.87774,
+          "mrr@5": 0.877587,
+          "ndcg@10": 0.994738,
+          "ndcg@5": 0.991482,
+          "queries_evaluated": 934,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.8696,
+          "recall@5": 0.658999
+        },
+        "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+        "gain_mode": "score",
+        "group_size_distribution": {
+          "max": 62,
+          "mean": 13.0393,
+          "median": 11.0,
+          "min": 1,
+          "p25": 7.0,
+          "p75": 18.0
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "queries_size_eq_1": 7,
+        "queries_size_ge_2": 934,
+        "queries_size_ge_min": 934,
+        "queries_total": 941,
+        "size_ge_2": {
+          "mrr@10": 0.87774,
+          "mrr@5": 0.877587,
+          "ndcg@10": 0.994738,
+          "ndcg@5": 0.991482,
+          "queries_evaluated": 934,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.8696,
+          "recall@5": 0.658999
+        },
+        "size_ge_maxk": {
+          "mrr@10": 0.954065,
+          "mrr@5": 0.953812,
+          "ndcg@10": 0.992935,
+          "ndcg@5": 0.988822,
+          "queries_evaluated": 564,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.798858,
+          "recall@5": 0.497714
+        }
+      }
+    },
+    "ks": [
+      5,
+      10
+    ],
+    "min_group_size_for_ranking": 2,
+    "pairwise": {
+      "pairs_used": 101738,
+      "pairwise_accuracy": 0.595733,
+      "queries_no_valid_pair": 7,
+      "queries_used": 934,
+      "tie_eps": 0.001,
+      "tie_rule": "|Δfinal_score| <= tie_eps 的对不计入；预测分完全相同的对计 0.5",
+      "weighting": "per_query_macro_average"
+    },
+    "per_query_spearman": {
+      "note": "组内样本 < 3 或零方差记为不可评估，不强行填 0",
+      "queries_not_evaluable": 241,
+      "queries_used": 700,
+      "spearman_per_query_mean": 0.391908
+    },
+    "query_unit": "candidate_id",
+    "regression": {
+      "kendall_tau_b": 0.40331,
+      "mae": 0.021551,
+      "rmse": 0.027921,
+      "spearman": 0.562104
+    }
+  }
+}

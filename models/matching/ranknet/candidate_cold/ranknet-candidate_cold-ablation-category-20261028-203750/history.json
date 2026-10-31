@@ -1,0 +1,110 @@
+[
+  {
+    "epoch": 0,
+    "seconds": 2.72,
+    "selection_value": 0.923875,
+    "train_loss": 0.65196759
+  },
+  {
+    "epoch": 1,
+    "seconds": 4.66,
+    "selection_value": 0.930848,
+    "train_loss": 0.60094784
+  },
+  {
+    "epoch": 2,
+    "seconds": 6.48,
+    "selection_value": 0.932588,
+    "train_loss": 0.59313577
+  },
+  {
+    "epoch": 3,
+    "seconds": 8.49,
+    "selection_value": 0.934559,
+    "train_loss": 0.58830524
+  },
+  {
+    "epoch": 4,
+    "seconds": 10.49,
+    "selection_value": 0.934595,
+    "train_loss": 0.58460087
+  },
+  {
+    "epoch": 5,
+    "seconds": 12.55,
+    "selection_value": 0.937016,
+    "train_loss": 0.58181244
+  },
+  {
+    "epoch": 6,
+    "seconds": 14.58,
+    "selection_value": 0.93737,
+    "train_loss": 0.57986616
+  },
+  {
+    "epoch": 7,
+    "seconds": 16.62,
+    "selection_value": 0.939611,
+    "train_loss": 0.57842388
+  },
+  {
+    "epoch": 8,
+    "seconds": 18.4,
+    "selection_value": 0.939276,
+    "train_loss": 0.57729621
+  },
+  {
+    "epoch": 9,
+    "seconds": 20.15,
+    "selection_value": 0.940626,
+    "train_loss": 0.57629849
+  },
+  {
+    "epoch": 10,
+    "seconds": 21.92,
+    "selection_value": 0.939884,
+    "train_loss": 0.57536391
+  },
+  {
+    "epoch": 11,
+    "seconds": 23.7,
+    "selection_value": 0.938769,
+    "train_loss": 0.57488655
+  },
+  {
+    "epoch": 12,
+    "seconds": 25.86,
+    "selection_value": 0.93947,
+    "train_loss": 0.57391072
+  },
+  {
+    "epoch": 13,
+    "seconds": 27.71,
+    "selection_value": 0.939013,
+    "train_loss": 0.57375459
+  },
+  {
+    "epoch": 14,
+    "seconds": 29.72,
+    "selection_value": 0.939304,
+    "train_loss": 0.57309043
+  },
+  {
+    "epoch": 15,
+    "seconds": 31.46,
+    "selection_value": 0.940083,
+    "train_loss": 0.5727406
+  },
+  {
+    "epoch": 16,
+    "seconds": 33.35,
+    "selection_value": 0.938889,
+    "train_loss": 0.57226242
+  },
+  {
+    "epoch": 17,
+    "seconds": 35.22,
+    "selection_value": 0.940021,
+    "train_loss": 0.57164693
+  }
+]

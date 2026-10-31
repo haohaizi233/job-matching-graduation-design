@@ -1,0 +1,93 @@
+{
+  "cat_vocabs": {
+    "inferred_category": [
+      "BUSINESS-DEVELOPMENT",
+      "FINANCE",
+      "HR",
+      "INFORMATION-TECHNOLOGY",
+      "SALES",
+      "UNKNOWN",
+      "__OOV__"
+    ],
+    "job_category": [
+      "BUSINESS-DEVELOPMENT",
+      "FINANCE",
+      "HR",
+      "INFORMATION-TECHNOLOGY",
+      "SALES",
+      "__OOV__"
+    ]
+  },
+  "feature_names": [
+    "skill_jaccard",
+    "skill_overlap_ratio_cv",
+    "skill_overlap_ratio_job",
+    "both_skills_empty",
+    "category_match",
+    "inferred_category=BUSINESS-DEVELOPMENT",
+    "inferred_category=FINANCE",
+    "inferred_category=HR",
+    "inferred_category=INFORMATION-TECHNOLOGY",
+    "inferred_category=SALES",
+    "inferred_category=UNKNOWN",
+    "inferred_category=__OOV__",
+    "job_category=BUSINESS-DEVELOPMENT",
+    "job_category=FINANCE",
+    "job_category=HR",
+    "job_category=INFORMATION-TECHNOLOGY",
+    "job_category=SALES",
+    "job_category=__OOV__",
+    "years_experience"
+  ],
+  "group_order": [
+    "skill",
+    "position",
+    "category",
+    "experience"
+  ],
+  "groups_enabled": [
+    "skill",
+    "category",
+    "experience"
+  ],
+  "num_stats": {
+    "both_skills_empty": {
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "category_match": {
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "skill_jaccard": {
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "skill_overlap_ratio_cv": {
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "skill_overlap_ratio_job": {
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "years_experience": {
+      "mean": 6.3618623060522905,
+      "std": 4.707761644615258
+    }
+  },
+  "raw_columns": [
+    "skill_jaccard",
+    "skill_overlap_ratio_cv",
+    "skill_overlap_ratio_job",
+    "both_skills_empty",
+    "category_match",
+    "inferred_category",
+    "job_category",
+    "years_experience"
+  ],
+  "standardize_columns": [
+    "years_experience"
+  ],
+  "task": "match_ranking"
+}

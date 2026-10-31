@@ -1,0 +1,136 @@
+{
+  "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+  "gain_modes": {
+    "ordinal": {
+      "all": {
+        "mrr@10": 0.788825,
+        "mrr@5": 0.788825,
+        "ndcg@10": 0.987803,
+        "ndcg@5": 0.987241,
+        "queries_evaluated": 3199,
+        "queries_skipped_zero_relevance": 0,
+        "recall@10": 0.999849,
+        "recall@5": 0.993861
+      },
+      "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+      "gain_mode": "ordinal",
+      "group_size_distribution": {
+        "max": 12,
+        "mean": 1.934,
+        "median": 1.0,
+        "min": 1,
+        "p25": 1.0,
+        "p75": 2.0
+      },
+      "ks": [
+        5,
+        10
+      ],
+      "queries_size_eq_1": 3224,
+      "queries_size_ge_2": 3199,
+      "queries_size_ge_min": 3199,
+      "queries_total": 6423,
+      "size_ge_2": {
+        "mrr@10": 0.788825,
+        "mrr@5": 0.788825,
+        "ndcg@10": 0.987803,
+        "ndcg@5": 0.987241,
+        "queries_evaluated": 3199,
+        "queries_skipped_zero_relevance": 0,
+        "recall@10": 0.999849,
+        "recall@5": 0.993861
+      },
+      "size_ge_maxk": {
+        "mrr@10": 1.0,
+        "mrr@5": 1.0,
+        "ndcg@10": 0.922625,
+        "ndcg@5": 0.877185,
+        "queries_evaluated": 2,
+        "queries_skipped_zero_relevance": 0,
+        "recall@10": 0.8,
+        "recall@5": 0.7
+      }
+    },
+    "score": {
+      "all": {
+        "mrr@10": 0.788825,
+        "mrr@5": 0.788825,
+        "ndcg@10": 0.99719,
+        "ndcg@5": 0.997036,
+        "queries_evaluated": 3199,
+        "queries_skipped_zero_relevance": 0,
+        "recall@10": 0.999849,
+        "recall@5": 0.993861
+      },
+      "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+      "gain_mode": "score",
+      "group_size_distribution": {
+        "max": 12,
+        "mean": 1.934,
+        "median": 1.0,
+        "min": 1,
+        "p25": 1.0,
+        "p75": 2.0
+      },
+      "ks": [
+        5,
+        10
+      ],
+      "queries_size_eq_1": 3224,
+      "queries_size_ge_2": 3199,
+      "queries_size_ge_min": 3199,
+      "queries_total": 6423,
+      "size_ge_2": {
+        "mrr@10": 0.788825,
+        "mrr@5": 0.788825,
+        "ndcg@10": 0.99719,
+        "ndcg@5": 0.997036,
+        "queries_evaluated": 3199,
+        "queries_skipped_zero_relevance": 0,
+        "recall@10": 0.999849,
+        "recall@5": 0.993861
+      },
+      "size_ge_maxk": {
+        "mrr@10": 1.0,
+        "mrr@5": 1.0,
+        "ndcg@10": 0.978459,
+        "ndcg@5": 0.965533,
+        "queries_evaluated": 2,
+        "queries_skipped_zero_relevance": 0,
+        "recall@10": 0.8,
+        "recall@5": 0.7
+      }
+    }
+  },
+  "inference_seconds_per_pair": 3.8e-07,
+  "ks": [
+    5,
+    10
+  ],
+  "min_group_size_for_ranking": 2,
+  "pairwise": {
+    "pairs_used": 10734,
+    "pairwise_accuracy": 0.690486,
+    "queries_no_valid_pair": 3224,
+    "queries_used": 3199,
+    "tie_eps": 0.001,
+    "tie_rule": "|Δfinal_score| <= tie_eps 的对不计入；预测分完全相同的对计 0.5",
+    "weighting": "per_query_macro_average"
+  },
+  "per_query_spearman": {
+    "note": "组内样本 < 3 或零方差记为不可评估，不强行填 0",
+    "queries_not_evaluable": 4983,
+    "queries_used": 1440,
+    "spearman_per_query_mean": 0.484082
+  },
+  "protocol": "job_cold",
+  "query_unit": "candidate_id",
+  "regression": {
+    "kendall_tau_b": 0.310539,
+    "mae": 4.513558,
+    "rmse": 5.156334,
+    "spearman": 0.446023
+  },
+  "rows": 12422,
+  "subset": "test"
+}

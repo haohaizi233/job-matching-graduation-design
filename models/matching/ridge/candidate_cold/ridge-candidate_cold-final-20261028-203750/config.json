@@ -1,0 +1,160 @@
+{
+  "common": {
+    "data": {
+      "dataset_version": "dv-0ce28fa6b560",
+      "feature_columns": {
+        "categorical": [
+          "target_position_norm",
+          "inferred_category",
+          "job_category"
+        ],
+        "numeric": [
+          "skill_jaccard",
+          "skill_overlap_ratio_cv",
+          "skill_overlap_ratio_job",
+          "both_skills_empty",
+          "position_token_overlap",
+          "category_match",
+          "years_experience"
+        ]
+      },
+      "feature_schema_file": "data/processed/matching/feature_schema.json",
+      "features_file": "data/processed/matching/features_pairs.csv",
+      "regression_target": "final_score",
+      "relevance_columns": [
+        "final_score",
+        "label_ordinal",
+        "label_strength",
+        "candidate_rank"
+      ],
+      "splits_dir": "data/splits/matching",
+      "targets_file": "data/processed/matching/targets_pairs.csv",
+      "task": "match_ranking"
+    },
+    "evaluation": {
+      "auxiliary_metrics": [
+        "mae",
+        "rmse",
+        "spearman",
+        "kendall_tau_b"
+      ],
+      "bootstrap": {
+        "ci": 0.95,
+        "repeats": 1000,
+        "unit": "query"
+      },
+      "ks": [
+        5,
+        10
+      ],
+      "min_group_size_for_ranking": 2,
+      "pairwise": {
+        "per_query_equal_weight": true,
+        "tie_eps": 0.001
+      },
+      "query_unit": "candidate_id",
+      "selection_metric": "ndcg_at_5_ordinal"
+    },
+    "experiment_prefix": "mt41",
+    "feature_groups": {
+      "category": [
+        "category_match",
+        "inferred_category",
+        "job_category"
+      ],
+      "experience": [
+        "years_experience"
+      ],
+      "position": [
+        "position_token_overlap",
+        "target_position_norm"
+      ],
+      "skill": [
+        "skill_jaccard",
+        "skill_overlap_ratio_cv",
+        "skill_overlap_ratio_job",
+        "both_skills_empty"
+      ]
+    },
+    "pair_sampling": {
+      "max_pairs_per_group": 64,
+      "max_total_pairs": 400000,
+      "min_score_margin": 0.001,
+      "strategy": "group_all_pairs_then_cap"
+    },
+    "paths": {
+      "logs_dir": "reports/model-training/logs",
+      "models_dir": "models/matching",
+      "reports_dir": "reports/model-training",
+      "runs_dir": "reports/model-training/runs"
+    },
+    "pipeline_version": "phase4-matching-v1",
+    "privacy": {
+      "forbid_in_logs": [
+        "resume_text",
+        "experience_text",
+        "education_text",
+        "job_description",
+        "job_text",
+        "user"
+      ],
+      "note": "训练日志与报告不得输出简历正文/JD 原文/联系方式；只允许 ID、特征值与统计量。"
+    },
+    "resources": {
+      "gpu_budget_mb": 4094,
+      "prefer_gpu": true,
+      "torch_num_threads": 4
+    },
+    "seeds": {
+      "bootstrap": 20261204,
+      "global": 20261201,
+      "pair_sampling": 20261202,
+      "random_baseline": 20261101,
+      "torch_init": 20261203
+    },
+    "stage": "第四阶段 4.1：人岗匹配模型训练与排序算法实验",
+    "test_policy": {
+      "feature_changes_on_test_feedback": "forbidden",
+      "hyperparam_search_on_test": "forbidden",
+      "note": "test 仅在模型方案与超参数按 validation 锁定后做一次确认评估；结果必须披露 test 已参与过零训练基线比较。",
+      "selection_on_test": "forbidden",
+      "test_previously_used_for_baseline_comparison": true
+    },
+    "version": 1
+  },
+  "model": {
+    "inference": {
+      "requires_labels": false,
+      "resume_from_checkpoint": "NOT_APPLICABLE（sklearn 闭式解求解，无迭代检查点）",
+      "supports_cpu": true
+    },
+    "model": {
+      "description": "L2 正则线性回归，作为可解释线性对照；输出分数直接用于岗位排序",
+      "name": "ridge",
+      "params": {
+        "fit_intercept": true
+      },
+      "search_space": {
+        "alpha": [
+          0.1,
+          1.0,
+          10.0,
+          100.0
+        ]
+      },
+      "selection_metric": "ndcg_at_5_ordinal",
+      "standardize_numeric": false,
+      "type": "sklearn_regressor"
+    },
+    "outputs": {
+      "artifacts": [
+        "model.pkl",
+        "feature_map.json",
+        "config.json",
+        "metrics.json",
+        "manifest.json",
+        "coefficients.json"
+      ]
+    }
+  }
+}

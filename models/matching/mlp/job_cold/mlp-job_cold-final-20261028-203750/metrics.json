@@ -1,0 +1,151 @@
+{
+  "best_params": {},
+  "search": {
+    "evaluated": [
+      {
+        "best_epoch": 26,
+        "checkpoint": "D:\\desktop\\毕业设计\\models\\matching\\mlp\\job_cold\\mlp-job_cold-final-20261028-203750\\checkpoint_search_0.pt",
+        "epochs_run": 35,
+        "params": {},
+        "selection_value": 0.989075
+      }
+    ],
+    "limit": 1,
+    "space": {}
+  },
+  "selection_metric": "ndcg_at_5_ordinal",
+  "selection_value": 0.989075,
+  "smoke": false,
+  "validation": {
+    "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+    "gain_modes": {
+      "ordinal": {
+        "all": {
+          "mrr@10": 0.874659,
+          "mrr@5": 0.874659,
+          "ndcg@10": 0.989924,
+          "ndcg@5": 0.989075,
+          "queries_evaluated": 3199,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 1.0,
+          "recall@5": 0.993362
+        },
+        "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+        "gain_mode": "ordinal",
+        "group_size_distribution": {
+          "max": 11,
+          "mean": 2.018,
+          "median": 2.0,
+          "min": 1,
+          "p25": 1.0,
+          "p75": 3.0
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "queries_size_eq_1": 2872,
+        "queries_size_ge_2": 3199,
+        "queries_size_ge_min": 3199,
+        "queries_total": 6071,
+        "size_ge_2": {
+          "mrr@10": 0.874659,
+          "mrr@5": 0.874659,
+          "ndcg@10": 0.989924,
+          "ndcg@5": 0.989075,
+          "queries_evaluated": 3199,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 1.0,
+          "recall@5": 0.993362
+        },
+        "size_ge_maxk": {
+          "mrr@10": 1.0,
+          "mrr@5": 1.0,
+          "ndcg@10": 0.984075,
+          "ndcg@5": 0.979465,
+          "queries_evaluated": 1,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 1.0,
+          "recall@5": 1.0
+        }
+      },
+      "score": {
+        "all": {
+          "mrr@10": 0.874659,
+          "mrr@5": 0.874659,
+          "ndcg@10": 0.997722,
+          "ndcg@5": 0.997564,
+          "queries_evaluated": 3199,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 1.0,
+          "recall@5": 0.993362
+        },
+        "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+        "gain_mode": "score",
+        "group_size_distribution": {
+          "max": 11,
+          "mean": 2.018,
+          "median": 2.0,
+          "min": 1,
+          "p25": 1.0,
+          "p75": 3.0
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "queries_size_eq_1": 2872,
+        "queries_size_ge_2": 3199,
+        "queries_size_ge_min": 3199,
+        "queries_total": 6071,
+        "size_ge_2": {
+          "mrr@10": 0.874659,
+          "mrr@5": 0.874659,
+          "ndcg@10": 0.997722,
+          "ndcg@5": 0.997564,
+          "queries_evaluated": 3199,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 1.0,
+          "recall@5": 0.993362
+        },
+        "size_ge_maxk": {
+          "mrr@10": 1.0,
+          "mrr@5": 1.0,
+          "ndcg@10": 0.977826,
+          "ndcg@5": 0.974099,
+          "queries_evaluated": 1,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 1.0,
+          "recall@5": 1.0
+        }
+      }
+    },
+    "ks": [
+      5,
+      10
+    ],
+    "min_group_size_for_ranking": 2,
+    "pairwise": {
+      "pairs_used": 11244,
+      "pairwise_accuracy": 0.713716,
+      "queries_no_valid_pair": 2872,
+      "queries_used": 3199,
+      "tie_eps": 0.001,
+      "tie_rule": "|Δfinal_score| <= tie_eps 的对不计入；预测分完全相同的对计 0.5",
+      "weighting": "per_query_macro_average"
+    },
+    "per_query_spearman": {
+      "note": "组内样本 < 3 或零方差记为不可评估，不强行填 0",
+      "queries_not_evaluable": 4467,
+      "queries_used": 1604,
+      "spearman_per_query_mean": 0.499757
+    },
+    "query_unit": "candidate_id",
+    "regression": {
+      "kendall_tau_b": 0.535486,
+      "mae": 0.017879,
+      "rmse": 0.023017,
+      "spearman": 0.719384
+    }
+  }
+}

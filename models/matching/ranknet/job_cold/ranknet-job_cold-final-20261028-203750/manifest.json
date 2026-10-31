@@ -1,0 +1,117 @@
+{
+  "ablation_dropped_groups": [],
+  "artifacts": [
+    {
+      "bytes": 24704,
+      "path": "checkpoint_best.pt",
+      "sha256": "f29476db833e21979069595680455b5c7d8f6f3ed952587439b34ffeb14d2fd5"
+    },
+    {
+      "bytes": 74806,
+      "path": "checkpoint_search_0.pt",
+      "sha256": "d02d3d398823736f7c205b829c447af08c2903d25492ffaf6b9f5916c2d5b596"
+    },
+    {
+      "bytes": 5291,
+      "path": "config.json",
+      "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+    },
+    {
+      "bytes": 4912,
+      "path": "feature_map.json",
+      "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1"
+    },
+    {
+      "bytes": 1857,
+      "path": "history.json",
+      "sha256": "9f7bf468ab46bd878fe745e9c3225f2c8eca5c7a6cd93af7296907033dd3234f"
+    },
+    {
+      "bytes": 4169,
+      "path": "metrics.json",
+      "sha256": "156c07c5248ef415817f27acf99d86aedcf4a4822d6c9be1a062f2989761a674"
+    },
+    {
+      "bytes": 26944,
+      "path": "model.pt",
+      "sha256": "77b1ac699ed8363f4b65b6ecc59db1a634d0436f3747552521a959717d35cfc1"
+    },
+    {
+      "bytes": 681,
+      "path": "pair_stats.json",
+      "sha256": "40e3b90005a622fccf258052e8547f1b6779ff9b39a79303b522facfb6250dbf"
+    }
+  ],
+  "best_epoch": 8,
+  "created_at": "2026-10-28T20:47:12",
+  "dataset_version": "dv-0ce28fa6b560",
+  "device": "cuda",
+  "environment": {
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2050",
+    "gpu_total_memory_mb": 4096,
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "python": "3.11.18",
+    "sklearn": "1.5.2",
+    "torch": "2.1.2+cu121",
+    "torch_cuda": "12.1"
+  },
+  "feature_map": {
+    "groups_dropped": [],
+    "groups_enabled": [
+      "skill",
+      "position",
+      "category",
+      "experience"
+    ],
+    "n_features": 49,
+    "raw_columns": [
+      "skill_jaccard",
+      "skill_overlap_ratio_cv",
+      "skill_overlap_ratio_job",
+      "both_skills_empty",
+      "position_token_overlap",
+      "target_position_norm",
+      "category_match",
+      "inferred_category",
+      "job_category",
+      "years_experience"
+    ]
+  },
+  "feature_schema_file": "data/processed/matching/feature_schema.json",
+  "feature_schema_sha256": "ed6334ca241e2ea90a825f50e817bd79bf9b2679ae5b80227663f57783fa1876",
+  "generated_by": "scripts/model_training/train.py",
+  "inference": {
+    "forbidden_inputs": [
+      "final_score",
+      "raw_score",
+      "candidate_rank",
+      "candidate_rank_pct",
+      "label_strength",
+      "semantic_score",
+      "skill_score",
+      "position_score",
+      "category_score",
+      "experience_score",
+      "education_score"
+    ],
+    "interface": "predict_score(resume, job) -> float; rank_jobs(resume, jobs) -> list",
+    "requires_labels": false,
+    "supports_cpu": true
+  },
+  "model_name": "ranknet",
+  "model_parameters": 5441,
+  "pipeline_version": "phase4-matching-v1",
+  "protocol": "job_cold",
+  "rows": {
+    "train": 97887,
+    "validation": 12251
+  },
+  "run_id": "ranknet-job_cold-final-20261028-203750",
+  "seed": 20261201,
+  "smoke": false,
+  "split_manifest_file": "data/splits/matching/job_cold/manifest.json",
+  "split_manifest_sha256": "cf14ec736912193f060770438f970177084aa1e4a992e35ba7ad8c2db234370b",
+  "training_seconds": 98.92
+}

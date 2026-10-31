@@ -1,0 +1,151 @@
+{
+  "best_params": {},
+  "search": {
+    "evaluated": [
+      {
+        "best_epoch": 1,
+        "checkpoint": "D:\\desktop\\毕业设计\\models\\matching\\ranknet\\candidate_cold\\smoke-ranknet-002\\checkpoint_search_0.pt",
+        "epochs_run": 2,
+        "params": {},
+        "selection_value": 0.894201
+      }
+    ],
+    "limit": 1,
+    "space": {}
+  },
+  "selection_metric": "ndcg_at_5_ordinal",
+  "selection_value": 0.894201,
+  "smoke": true,
+  "validation": {
+    "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+    "gain_modes": {
+      "ordinal": {
+        "all": {
+          "mrr@10": 0.756809,
+          "mrr@5": 0.753928,
+          "ndcg@10": 0.922401,
+          "ndcg@5": 0.894201,
+          "queries_evaluated": 157,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.796954,
+          "recall@5": 0.535993
+        },
+        "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+        "gain_mode": "ordinal",
+        "group_size_distribution": {
+          "max": 28,
+          "mean": 12.6582,
+          "median": 11.5,
+          "min": 1,
+          "p25": 7.0,
+          "p75": 17.75
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "queries_size_eq_1": 1,
+        "queries_size_ge_2": 157,
+        "queries_size_ge_min": 157,
+        "queries_total": 158,
+        "size_ge_2": {
+          "mrr@10": 0.756809,
+          "mrr@5": 0.753928,
+          "ndcg@10": 0.922401,
+          "ndcg@5": 0.894201,
+          "queries_evaluated": 157,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.796954,
+          "recall@5": 0.535993
+        },
+        "size_ge_maxk": {
+          "mrr@10": 0.811384,
+          "mrr@5": 0.80816,
+          "ndcg@10": 0.899598,
+          "ndcg@5": 0.872708,
+          "queries_evaluated": 96,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.687789,
+          "recall@5": 0.370372
+        }
+      },
+      "score": {
+        "all": {
+          "mrr@10": 0.756809,
+          "mrr@5": 0.753928,
+          "ndcg@10": 0.980225,
+          "ndcg@5": 0.970435,
+          "queries_evaluated": 157,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.796954,
+          "recall@5": 0.535993
+        },
+        "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+        "gain_mode": "score",
+        "group_size_distribution": {
+          "max": 28,
+          "mean": 12.6582,
+          "median": 11.5,
+          "min": 1,
+          "p25": 7.0,
+          "p75": 17.75
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "queries_size_eq_1": 1,
+        "queries_size_ge_2": 157,
+        "queries_size_ge_min": 157,
+        "queries_total": 158,
+        "size_ge_2": {
+          "mrr@10": 0.756809,
+          "mrr@5": 0.753928,
+          "ndcg@10": 0.980225,
+          "ndcg@5": 0.970435,
+          "queries_evaluated": 157,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.796954,
+          "recall@5": 0.535993
+        },
+        "size_ge_maxk": {
+          "mrr@10": 0.811384,
+          "mrr@5": 0.80816,
+          "ndcg@10": 0.973217,
+          "ndcg@5": 0.960946,
+          "queries_evaluated": 96,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.687789,
+          "recall@5": 0.370372
+        }
+      }
+    },
+    "ks": [
+      5,
+      10
+    ],
+    "min_group_size_for_ranking": 2,
+    "pairwise": {
+      "pairs_used": 15603,
+      "pairwise_accuracy": 0.54983,
+      "queries_no_valid_pair": 1,
+      "queries_used": 157,
+      "tie_eps": 0.001,
+      "tie_rule": "|Δfinal_score| <= tie_eps 的对不计入；预测分完全相同的对计 0.5",
+      "weighting": "per_query_macro_average"
+    },
+    "per_query_spearman": {
+      "note": "组内样本 < 3 或零方差记为不可评估，不强行填 0",
+      "queries_not_evaluable": 8,
+      "queries_used": 150,
+      "spearman_per_query_mean": 0.133668
+    },
+    "query_unit": "candidate_id",
+    "regression": {
+      "kendall_tau_b": -0.149837,
+      "mae": 0.879101,
+      "rmse": 0.890164,
+      "spearman": -0.228664
+    }
+  }
+}

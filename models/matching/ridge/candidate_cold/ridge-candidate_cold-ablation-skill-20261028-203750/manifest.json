@@ -1,0 +1,96 @@
+{
+  "ablation_dropped_groups": [
+    "skill"
+  ],
+  "artifacts": [
+    {
+      "bytes": 4322,
+      "path": "config.json",
+      "sha256": "a86f76453960369f4c1cb71687bdd37d68d3a53548752f8947eb6db12f14d289"
+    },
+    {
+      "bytes": 4399,
+      "path": "feature_map.json",
+      "sha256": "9cb3dd2f35a1b1d52c2379720ea73abba9caa6ed429a5aefaad587eb1be59bf5"
+    },
+    {
+      "bytes": 4026,
+      "path": "metrics.json",
+      "sha256": "13ff7f5ae1ba76fbe43ee7908ffd7d6c348f1a48955951e90f9657394605765f"
+    },
+    {
+      "bytes": 2730,
+      "path": "model.pkl",
+      "sha256": "032309d2a85a192461e64c5e5d19b61420bb6a84655f73c5cc9aabeb7cc2fb01"
+    }
+  ],
+  "best_epoch": null,
+  "created_at": "2026-10-28T20:50:41",
+  "dataset_version": "dv-0ce28fa6b560",
+  "device": "cuda",
+  "environment": {
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2050",
+    "gpu_total_memory_mb": 4096,
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "python": "3.11.18",
+    "sklearn": "1.5.2",
+    "torch": "2.1.2+cu121",
+    "torch_cuda": "12.1"
+  },
+  "feature_map": {
+    "groups_dropped": [
+      "skill"
+    ],
+    "groups_enabled": [
+      "position",
+      "category",
+      "experience"
+    ],
+    "n_features": 45,
+    "raw_columns": [
+      "position_token_overlap",
+      "target_position_norm",
+      "category_match",
+      "inferred_category",
+      "job_category",
+      "years_experience"
+    ]
+  },
+  "feature_schema_file": "data/processed/matching/feature_schema.json",
+  "feature_schema_sha256": "ed6334ca241e2ea90a825f50e817bd79bf9b2679ae5b80227663f57783fa1876",
+  "generated_by": "scripts/model_training/train.py",
+  "inference": {
+    "forbidden_inputs": [
+      "final_score",
+      "raw_score",
+      "candidate_rank",
+      "candidate_rank_pct",
+      "label_strength",
+      "semantic_score",
+      "skill_score",
+      "position_score",
+      "category_score",
+      "experience_score",
+      "education_score"
+    ],
+    "interface": "predict_score(resume, job) -> float; rank_jobs(resume, jobs) -> list",
+    "requires_labels": false,
+    "supports_cpu": true
+  },
+  "model_name": "ridge",
+  "model_parameters": 46,
+  "pipeline_version": "phase4-matching-v1",
+  "protocol": "candidate_cold",
+  "rows": {
+    "train": 98029,
+    "validation": 12270
+  },
+  "run_id": "ridge-candidate_cold-ablation-skill-20261028-203750",
+  "seed": 20261201,
+  "smoke": false,
+  "split_manifest_file": "data/splits/matching/candidate_cold/manifest.json",
+  "split_manifest_sha256": "42557c1b37044d71e293bf446112163ceed7c7dbcf1f538d1c64fa0e9d9fc108",
+  "training_seconds": 2.68
+}

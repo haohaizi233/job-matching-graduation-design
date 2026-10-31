@@ -1,0 +1,117 @@
+{
+  "ablation_dropped_groups": [
+    "category"
+  ],
+  "artifacts": [
+    {
+      "bytes": 21120,
+      "path": "checkpoint_best.pt",
+      "sha256": "c74899fd725423cd06bf4a9afee77a12cffdd38432f7c00cb889be4b28190d29"
+    },
+    {
+      "bytes": 64054,
+      "path": "checkpoint_search_0.pt",
+      "sha256": "b04da1e4990d7ef45dbbfda7211734731d46c9606486dd063a8840bcb14d2020"
+    },
+    {
+      "bytes": 5291,
+      "path": "config.json",
+      "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+    },
+    {
+      "bytes": 3976,
+      "path": "feature_map.json",
+      "sha256": "0eab87e7e013432b60a64428e6cd782497f4f78bdc86724d2a8aab229f0dc0b9"
+    },
+    {
+      "bytes": 1964,
+      "path": "history.json",
+      "sha256": "a2ec7b995da1f859b7cfe9a7f48d80230e63bfb7a78e89aa51cc488d906c0c90"
+    },
+    {
+      "bytes": 4239,
+      "path": "metrics.json",
+      "sha256": "192aef5e46c3801da073230cada9b636dafeb2ecfac00b11f28acbd0a9c2a0d1"
+    },
+    {
+      "bytes": 22912,
+      "path": "model.pt",
+      "sha256": "f7ad50846202e041c070c9b02c1ce6bcc91d048883c8b9c5ecdeaf9edc114c59"
+    },
+    {
+      "bytes": 680,
+      "path": "pair_stats.json",
+      "sha256": "cf02598e0a733cc44a2cb42e78baec96523e378cdbae97ead42ceee293b3a46f"
+    }
+  ],
+  "best_epoch": 9,
+  "created_at": "2026-10-28T20:55:52",
+  "dataset_version": "dv-0ce28fa6b560",
+  "device": "cuda",
+  "environment": {
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2050",
+    "gpu_total_memory_mb": 4096,
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "python": "3.11.18",
+    "sklearn": "1.5.2",
+    "torch": "2.1.2+cu121",
+    "torch_cuda": "12.1"
+  },
+  "feature_map": {
+    "groups_dropped": [
+      "category"
+    ],
+    "groups_enabled": [
+      "skill",
+      "position",
+      "experience"
+    ],
+    "n_features": 35,
+    "raw_columns": [
+      "skill_jaccard",
+      "skill_overlap_ratio_cv",
+      "skill_overlap_ratio_job",
+      "both_skills_empty",
+      "position_token_overlap",
+      "target_position_norm",
+      "years_experience"
+    ]
+  },
+  "feature_schema_file": "data/processed/matching/feature_schema.json",
+  "feature_schema_sha256": "ed6334ca241e2ea90a825f50e817bd79bf9b2679ae5b80227663f57783fa1876",
+  "generated_by": "scripts/model_training/train.py",
+  "inference": {
+    "forbidden_inputs": [
+      "final_score",
+      "raw_score",
+      "candidate_rank",
+      "candidate_rank_pct",
+      "label_strength",
+      "semantic_score",
+      "skill_score",
+      "position_score",
+      "category_score",
+      "experience_score",
+      "education_score"
+    ],
+    "interface": "predict_score(resume, job) -> float; rank_jobs(resume, jobs) -> list",
+    "requires_labels": false,
+    "supports_cpu": true
+  },
+  "model_name": "ranknet",
+  "model_parameters": 4545,
+  "pipeline_version": "phase4-matching-v1",
+  "protocol": "candidate_cold",
+  "rows": {
+    "train": 98029,
+    "validation": 12270
+  },
+  "run_id": "ranknet-candidate_cold-ablation-category-20261028-203750",
+  "seed": 20261201,
+  "smoke": false,
+  "split_manifest_file": "data/splits/matching/candidate_cold/manifest.json",
+  "split_manifest_sha256": "42557c1b37044d71e293bf446112163ceed7c7dbcf1f538d1c64fa0e9d9fc108",
+  "training_seconds": 37.79
+}
