@@ -1,0 +1,41 @@
+{
+  "experiment_id": "phase4-3b-retrieval-matrix-v1",
+  "run_id": "phase4-3b-retrieval-matrix-v1-20261031-041801",
+  "git_commit": "cb1f4819f48a5278dedac324c99b6720a5dccdc7",
+  "dataset_version": "dv-fd3762f85658",
+  "dataset_file": "D:\\desktop\\job-matching-model-research\\data\\independent_eval\\pairs\\pairs_synthetic_v1.jsonl",
+  "dataset_sha256": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8",
+  "split_version": "synthetic_fixture_split_pool_only",
+  "label_source": "synthetic_fixture_tier_proxy",
+  "label_provenance": "分析者把 difficulty_tier 映射为 0/1/2/3 的分级代理相关性，非人工标注、非真实录用结果",
+  "circularity_warning": "difficulty_tier 由技能/类别重合度分层生成，与技能类基线共享构造信号，存在循环性风险",
+  "gold_status": "BLOCKED — H2 真实人工 Gold 未冻结，本结果不得作为正式性能结论",
+  "seed": 20261031,
+  "device": "cpu",
+  "dependency_versions": {
+    "python": "3.11.18",
+    "numpy": "1.26.4"
+  },
+  "start_time": "2026-10-31T04:18:01",
+  "research_set": {
+    "pairs": 75,
+    "resumes": 8,
+    "jobs": 55,
+    "difficulty_tiers": {
+      "high_skill_overlap": 11,
+      "medium_skill_overlap": 24,
+      "hard_requirement_gap": 16,
+      "cross_category_negative": 16,
+      "same_direction_diff_duties": 8
+    },
+    "is_synthetic_all": true,
+    "eligible_for_gold_any": false
+  },
+  "task_definitions": {
+    "task_A_within_observed_pairs": "组内排序：候选 = 该简历的观测配对，相关性 = tier 分级",
+    "task_B_full_pool_retrieval": "全池检索：候选 = 55 条 JD，相关 = 夹具配对过的岗位"
+  },
+  "end_time": "2026-10-31T04:18:57",
+  "total_seconds": 55.72,
+  "encoder_used": "hash"
+}

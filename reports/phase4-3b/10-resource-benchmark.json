@@ -1,0 +1,66 @@
+{
+  "device_probe": {
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 2050",
+    "gpu_total_memory_mb": 4096
+  },
+  "hash_encoder": {
+    "load_seconds": 0.0004,
+    "single_encode_seconds": 0.00449,
+    "batch64_seconds": 0.18086,
+    "dim": 512
+  },
+  "bge_encoder": {
+    "status": "RUN",
+    "load_seconds": 0.3121,
+    "single_encode_seconds": 0.02211,
+    "batch64_seconds": 0.28671,
+    "throughput_texts_per_sec": 223.22,
+    "dim": 512,
+    "device": "cpu",
+    "python_peak_memory_mb": 4.38,
+    "describe": {
+      "encoder_id": "bge_small_zh_v15",
+      "model_id": "BAAI/bge-small-zh-v1.5",
+      "revision": "7999e1d3359715c523056ef9478215996d62a620",
+      "license": "MIT",
+      "dim": 512,
+      "normalization": "l2",
+      "max_length": 256,
+      "device": "cpu",
+      "backend": "transformers-mean-pooling",
+      "offline": true,
+      "notes": "load_seconds=0.312; mean pooling over last_hidden_state"
+    }
+  },
+  "reranker": {
+    "status": "RUN",
+    "load_seconds": 3.4391,
+    "single_pair_seconds": 0.0611,
+    "batch16_seconds": 0.33364,
+    "describe": {
+      "reranker_id": "bge_reranker_base",
+      "model_id": "BAAI/bge-reranker-base",
+      "revision": "2cfc18c9415c912f9d8155881c133215df768a70",
+      "license": "MIT",
+      "max_length": 256,
+      "batch_size": 8,
+      "device": "cpu",
+      "load_seconds": 3.439,
+      "finetuned": false,
+      "backend": "transformers-sequence-classification"
+    }
+  },
+  "end_to_end_recall": {
+    "status": "RUN",
+    "pool_size": 55,
+    "queries": 8,
+    "seconds_by_topk": {
+      "top_5": 0.0601,
+      "top_10": 0.114,
+      "top_20": 0.0812,
+      "top_55": 0.0898
+    },
+    "note": "仅召回阶段（离线哈希向量），不含预处理/数据库；CPU"
+  }
+}

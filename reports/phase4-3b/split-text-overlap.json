@@ -1,0 +1,22 @@
+{
+  "protocol": "double_cold",
+  "unit": "normalized_profile_text_hash",
+  "candidate": {
+    "overlap_hash_counts": {
+      "train&test": 8,
+      "train&validation": 8,
+      "validation&test": 2
+    },
+    "test_entities": 919,
+    "train_and_test_rate": 0.008705
+  },
+  "job": {
+    "overlap_hash_counts": {
+      "train&test": 2,
+      "train&validation": 1,
+      "validation&test": 2
+    },
+    "test_entities": 165,
+    "train_and_test_rate": 0.012121
+  }
+}
