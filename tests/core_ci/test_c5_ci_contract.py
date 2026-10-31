@@ -141,21 +141,27 @@ class C5CleanCheckoutContract(unittest.TestCase):
                       f"未知的文件清单来源: {src}")
         if src == vfc.SOURCE_FALLBACK:
             # 退化枚举只在"已导出的干净 checkout / 源码包"中才可信；
-            # 若在真实开发仓库根（含 data/raw、models）退化，结果必然包含被禁产物，
-            # 下面的 test_clean_export_has_no_forbidden_artifacts 会如实失败（不静默通过）。
+            # 若在真实开发仓库根（git 可用）却退化，说明清单来源被伪装，
+            # 直接判失败，绝不把退化结果冒充 git 权威清单。
             self.assertFalse(vfc._git_available(),
                              "git 可用却走了退化枚举，来源登记不可信")
 
     def test_clean_export_has_no_forbidden_artifacts(self):
+        """干净 checkout 导出清单里不得出现 data/raw、data/private、models/** 权重。
+
+        Phase6 口径：训练产物允许入库（models/ 是交付物），但导出到干净 checkout
+        时**仍被剥离**，以证明 Core CI 不依赖真实数据 / 权重即可运行。
+        """
+        import tempfile
         import verify_fresh_checkout as vfc
-        files = vfc.tracked_file_list()
-        self.assertTrue(files, "无法取得文件清单")
-        bad = [f for f in files
-               if f.startswith(vfc.FORBIDDEN_PREFIXES) or f.endswith(vfc.FORBIDDEN_SUFFIXES)]
+        with tempfile.TemporaryDirectory(prefix="jm_c5_export_") as td:
+            copied = vfc.export_clean_checkout(Path(td))
+            self.assertTrue(copied, "无法导出干净 checkout 文件清单")
+            bad = vfc.assert_no_forbidden_artifacts(Path(td))
         self.assertEqual(
             bad, [],
-            "干净 checkout 含被禁产物（若本机不在 git 仓库内，无法证明 checkout 洁净，"
-            f"请在 git 仓库中运行）: {bad[:8]}")
+            "干净 checkout 导出含被禁产物（导出必须剥离 data/raw、data/private、"
+            f"models/** 权重）: {bad[:8]}")
 
     def test_clean_export_contains_portable_suite_sources(self):
         import verify_fresh_checkout as vfc

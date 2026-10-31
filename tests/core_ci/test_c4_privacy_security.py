@@ -3,7 +3,8 @@
 
 覆盖：
   * 仓库内不得出现密钥 / 口令 / 私钥 / 令牌明文；
-  * `.env`、`models/`、`data/raw/`、`data/private/` 必须被忽略且未入库；
+  * `.env`、`data/raw/`、`data/private/` 必须被忽略且未入库；
+    `models/` 仅允许白名单训练产物入库（Phase6 起权重为交付物，白名单外文件仍禁入）；
   * 服务层源码不得写死本机绝对路径 / 用户名；
   * 错误响应与日志不得回显密码、令牌、简历原文；
   * 密码哈希不得出现在任何响应契约里；
@@ -107,16 +108,28 @@ class C4SecretsAndLeaks(unittest.TestCase):
         for needle in (".env", "models/**", "data/raw/", "data/private/", "*.pem", "*.key"):
             self.assertIn(needle, gi, f".gitignore 缺少敏感路径规则: {needle}")
 
-    def test_models_and_raw_data_untracked(self):
+    #: models/ 允许入库的训练产物扩展名（与 .gitignore 白名单一致；Phase6 起权重为交付物）
+    MODEL_ARTIFACT_EXTS = {".json", ".md", ".txt", ".npz", ".npy", ".pkl", ".pt", ".pth"}
+
+    def test_raw_and_private_data_untracked_model_artifacts_whitelisted(self):
+        """原始数据 / 私有简历绝不入库；models/ 仅允许白名单训练产物。
+
+        Phase6 口径调整：训练产物（权重、checkpoint、预测矩阵、指标 JSON）是交付物，
+        允许按白名单入库；但 `models/` 之下白名单之外的任何文件仍禁入，
+        且 `data/raw/`、`data/private/` 的禁令完全不变。
+        """
         tracked = _tracked_files()
-        leaked = [t for t in tracked
-                  if t.startswith("models/") and t != "models/README.md"]
-        self.assertEqual(leaked, [], f"模型权重被入库: {leaked[:5]}")
         raw_leaked = [t for t in tracked if t.startswith("data/raw/")]
         self.assertEqual(raw_leaked, [], f"原始数据被入库: {raw_leaked[:5]}")
         private_leaked = [t for t in tracked if t.startswith("data/private/")
                           and t.rstrip("/") != "data/private"]
         self.assertEqual(private_leaked, [], f"私有简历目录被入库: {private_leaked[:5]}")
+        bad_models = [t for t in tracked if t.startswith("models/")
+                      and Path(t).suffix.lower() not in self.MODEL_ARTIFACT_EXTS]
+        self.assertEqual(
+            bad_models, [],
+            f"models/ 出现白名单之外的文件（训练产物仅限 "
+            f"{sorted(self.MODEL_ARTIFACT_EXTS)}）: {bad_models[:5]}")
 
     def test_no_hardcoded_local_absolute_path_in_service_layer(self):
         rx = re.compile(r"[A-Za-z]:[\\/](Users|desktop|Desktop|home)[\\/]")
@@ -221,9 +234,39 @@ class C4EncodingIntegrity(unittest.TestCase):
         ".pptx", ".7z", ".rar", ".mp4", ".mp3", ".whl", ".so", ".dll", ".pyd",
     }
 
+    #: 无 git 退化枚举时需要跳过的"非仓库内容"目录（对齐 verify_fresh_checkout）
+    NON_REPO_DIR_NAMES = {
+        ".git", "chinese-skillspan-benchmark", "node_modules", "__pycache__",
+        "dist", "build", ".venv", "venv", "env", ".pytest_cache", ".mypy_cache",
+        ".ruff_cache", ".ipynb_checkpoints", ".idea", ".runtime", ".artifacts",
+        "_tmp_img_extract",
+    }
+
+    def _in_git_worktree(self) -> bool:
+        try:
+            r = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"],
+                               cwd=str(ROOT), capture_output=True, text=True,
+                               encoding="utf-8", errors="replace", timeout=20)
+        except Exception:  # noqa: BLE001
+            return False
+        return r.returncode == 0 and (r.stdout or "").strip() == "true"
+
     def _text_candidates(self) -> list[tuple[str, bytes]]:
+        rels = _tracked_files()
+        source = "git"
+        if not rels:
+            # 无 git 退化路径（如 verify_fresh_checkout 导出的临时 checkout）：
+            # 遍历文件系统，显式登记来源，绝不把退化结果伪装成 git 清单。
+            source = "filesystem_fallback"
+            for p in sorted(ROOT.rglob("*")):
+                if not p.is_file():
+                    continue
+                parts = p.relative_to(ROOT).parts
+                if any(seg in self.NON_REPO_DIR_NAMES for seg in parts[:-1]):
+                    continue
+                rels.append("/".join(parts))
         out = []
-        for rel in _tracked_files():
+        for rel in rels:
             p = ROOT / rel
             if not p.is_file() or p.stat().st_size > 2_000_000:
                 continue
@@ -233,6 +276,7 @@ class C4EncodingIntegrity(unittest.TestCase):
             if b"\x00" in data:  # 含 NUL 视为二进制，不做文本编码判定
                 continue
             out.append((rel, data))
+        self._file_list_source = source
         return out
 
     def test_tracked_text_files_are_strict_utf8(self):
@@ -269,13 +313,15 @@ class C4EncodingIntegrity(unittest.TestCase):
             # 仅当该文件在 Git 中无待提交改动时，才把 git blob 一并作为判定对象：
             # blob 是「同一 commit 在任何平台 checkout 字节一致」的事实来源；
             # 本地正在编辑该文件时跳过 blob 校验，避免把"未提交的中间态"误判为提交缺陷。
-            try:
-                st = subprocess.run(["git", "status", "--porcelain", "--", name],
-                                    cwd=str(ROOT), capture_output=True, text=True,
-                                    encoding="utf-8", errors="replace", timeout=30)
-                clean = not (st.stdout or "").strip()
-            except Exception:  # noqa: BLE001
-                clean = False
+            clean = False
+            if self._in_git_worktree():
+                try:
+                    st = subprocess.run(["git", "status", "--porcelain", "--", name],
+                                        cwd=str(ROOT), capture_output=True, text=True,
+                                        encoding="utf-8", errors="replace", timeout=30)
+                    clean = not (st.stdout or "").strip()
+                except Exception:  # noqa: BLE001
+                    clean = False
             if clean:
                 try:
                     blob = subprocess.run(["git", "show", f":{name}"], cwd=str(ROOT),
@@ -294,14 +340,42 @@ class C4EncodingIntegrity(unittest.TestCase):
                 self.assertNotIn(b"\x00", data, f"{name}（{origin}）含 NUL 字节")
 
     def test_root_config_files_declare_lf_attribute(self):
-        """`.gitattributes` 必须把根配置文件钉成 `eol=lf`，否则 Windows checkout 会 smudge 成 CRLF。"""
-        r = subprocess.run(["git", "check-attr", "eol", "text", "--",
-                            ".gitignore", ".gitattributes"], cwd=str(ROOT),
-                           capture_output=True, text=True, encoding="utf-8",
-                           errors="replace", timeout=30)
-        out = r.stdout or ""
-        self.assertIn(".gitignore: eol: lf", out, f".gitignore 未钉死 LF: {out!r}")
-        self.assertIn(".gitattributes: eol: lf", out, f".gitattributes 未钉死 LF: {out!r}")
+        """`.gitattributes` 必须把根配置文件钉成 `eol=lf`，否则 Windows checkout 会 smudge 成 CRLF。
+
+        主判定走 **`.gitattributes` 文本内容**（可移植，无 git 也能校验）；
+        处于 git 工作区时再用 `git check-attr` 复核真实生效的属性值。
+        """
+        p = ROOT / ".gitattributes"
+        self.assertTrue(p.exists(), ".gitattributes 缺失")
+        text = p.read_text(encoding="utf-8")
+        active = [ln.split("#", 1)[0].strip() for ln in text.splitlines()]
+        active = [ln for ln in active if ln]
+        for target in (".gitignore", ".gitattributes"):
+            hit = None
+            for ln in active:
+                parts = ln.split()
+                if parts and parts[0] == target:
+                    hit = parts
+                    break
+            self.assertIsNotNone(hit, f".gitattributes 未显式声明 {target} 的行尾规则")
+            self.assertIn("text", hit, f"{target} 未声明 text（text=auto 在 Windows 下可能被 smudge 成 CRLF）")
+            self.assertIn("eol=lf", hit, f"{target} 未钉死 eol=lf: {hit}")
+        for ext in ("*.ini", "*.jsonl", "*.json", "*.csv", "*.md", "*.py"):
+            hit = [ln for ln in active if ln.split()[:1] == [ext]]
+            self.assertTrue(hit, f".gitattributes 未声明 {ext} 的行尾规则")
+            self.assertIn("eol=lf", hit[0].split(), f"{ext} 未钉死 eol=lf: {hit[0]}")
+
+        if self._in_git_worktree():
+            r = subprocess.run(["git", "check-attr", "eol", "text", "--",
+                                ".gitignore", ".gitattributes"], cwd=str(ROOT),
+                               capture_output=True, text=True, encoding="utf-8",
+                               errors="replace", timeout=30)
+            out = r.stdout or ""
+            self.assertIn(".gitignore: eol: lf", out, f".gitignore 未钉死 LF: {out!r}")
+            self.assertIn(".gitattributes: eol: lf", out,
+                          f".gitattributes 未钉死 LF: {out!r}")
+            self.assertIn(".gitignore: text: set", out,
+                          f".gitignore 未显式声明 text: {out!r}")
 
     def test_gitignore_sensitive_rules_still_present(self):
         """修复编码后忽略规则不得丢失（防止转码时误删规则）。"""

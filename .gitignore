@@ -62,9 +62,20 @@ data/independent_eval/annotation/packets/
 data/independent_eval/annotation/final_labels.csv
 data/independent_eval/annotation/arbitration_filled*.csv
 
-# ---- 模型权重与训练检查点（体积大，训练产物不入库）----
+# ---- 模型训练产物：默认忽略，Phase6 起按白名单入库（训练产物=交付物）----
+# `models/**` 敏感规则必须保留（C4 门禁断言其存在）；下方按扩展名白名单精确放行，
+# 白名单之外的任何文件仍被忽略（与 tests/core_ci/test_c4_privacy_security.py 口径一致）。
 models/**
 !models/README.md
+!models/**/
+!models/**/*.json
+!models/**/*.md
+!models/**/*.txt
+!models/**/*.npz
+!models/**/*.npy
+!models/**/*.pkl
+!models/**/*.pt
+!models/**/*.pth
 experiments/**
 !experiments/README.md
 *.safetensors
@@ -99,6 +110,6 @@ frontend/e2e/.artifacts/
 # JetBrains IDE local config
 .idea/
 
-# Phase4-3B �о�ʵ���¼���ṹ��ʵ�������������
+# Phase4-3B 研究实验记录（结构化实验结果）必须入库
 !reports/model-research/runs/
 
