@@ -31,6 +31,8 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Callable
 
+from sqlalchemy.exc import IntegrityError
+
 from ..infra.persistence import (Resume, StudentProfile, User,
                                  get_session_factory, session_scope)
 from .contracts import FACT_SOURCES, Field, StudentProfile as StudentProfileContract
@@ -354,6 +356,15 @@ class StudentDataService:
             session.commit()
             session.refresh(new_row)
             return self._profile_row(new_row)
+        except IntegrityError as e:
+            # 并发保存竞态：两个事务同时读到同一 base 版本 -> 同时插入 (user_id, profile_version+1)，
+            # 后者被唯一约束拦截。此处必须转 409 CONFLICT（与乐观锁语义一致），
+            # 不得把并发冲突泄漏成 500（P2 并发版本控制）。
+            session.rollback()
+            raise ServiceError("CONFLICT",
+                               "画像已被其他操作更新，请重新加载后再保存",
+                               {"cause": "unique_constraint_user_profile_version",
+                                "constraint_hint": str(getattr(e, "orig", e))[:200]}) from e
         except Exception:
             session.rollback()
             raise

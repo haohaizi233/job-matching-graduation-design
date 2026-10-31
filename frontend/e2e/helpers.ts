@@ -134,14 +134,18 @@ export async function uploadResumeExpectSuccess(
   await expect(toast(page)).toContainText('上传成功')
 }
 
-/** 我的画像 → 确认当前画像（推荐前置） */
-export async function confirmProfile(page: Page): Promise<void> {
-  await gotoNav(page, '我的画像')
+/** 等画像真实加载完成（画像未加载时编辑/确认动作会落空，不能误判为成功） */
+export async function waitForProfileLoaded(page: Page): Promise<void> {
   await expect(page.getByText('当前画像版本')).toBeVisible()
-  // 等画像真实加载完成再确认（画像未加载时确认动作无效果，不能误判为成功）
   await expect(
     page.locator('.edit-field', { hasText: '专业' }).locator('input'),
   ).not.toHaveValue('', { timeout: 15_000 })
+}
+
+/** 我的画像 → 确认当前画像（推荐前置） */
+export async function confirmProfile(page: Page): Promise<void> {
+  await gotoNav(page, '我的画像')
+  await waitForProfileLoaded(page)
   await page.getByRole('button', { name: '确认当前画像' }).click()
   await expect(toast(page)).toContainText('画像已确认')
 }

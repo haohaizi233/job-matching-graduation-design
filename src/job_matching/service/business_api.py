@@ -21,6 +21,7 @@
 """
 
 from dataclasses import dataclass, field
+import os
 from pathlib import Path
 from typing import Any, Callable
 
@@ -296,9 +297,14 @@ def create_business_app(business: BusinessServices | None = None):
     auth_router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
 
     # 注册频率限制（P1-09）：单客户端固定窗口计数（内存实现，单进程有效；
-    # 多实例部署必须在网关侧再加一层限流）
+    # 多实例部署必须在网关侧再加一层限流）。
+    # 上限可经 JM_REGISTER_RATE_LIMIT 覆盖：E2E 隔离环境（tests/e2e/serve_backend.py）
+    # 需要单轮套件连续注册十余个合成账号，放宽上限以免撞限流；生产保持默认 20。
     _register_buckets: dict[str, list[float]] = {}
-    _REGISTER_LIMIT = 20      # 次 / 小时 / 客户端
+    try:
+        _REGISTER_LIMIT = max(1, int(os.environ.get("JM_REGISTER_RATE_LIMIT", "20")))
+    except ValueError:
+        _REGISTER_LIMIT = 20      # 次 / 小时 / 客户端
 
     def _register_rate_limited(client: str, now_ts: float) -> bool:
         if len(_register_buckets) > 10000:   # pragma: no cover - 防内存膨胀

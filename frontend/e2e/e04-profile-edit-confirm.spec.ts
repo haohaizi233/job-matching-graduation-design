@@ -7,6 +7,7 @@ import {
   toast,
   uniqueUsername,
   uploadResumeExpectSuccess,
+  waitForProfileLoaded,
 } from './helpers'
 
 /**
@@ -21,7 +22,8 @@ test.describe('E04 画像修改、确认、版本历史', () => {
     await uploadResumeExpectSuccess(page, `${username}_合成简历.txt`)
 
     await page.getByRole('button', { name: '我的画像', exact: true }).click()
-    await expect(page.getByText('当前画像版本')).toBeVisible()
+    // 等画像真实加载完成再编辑：异步加载落库后会重填表单，提前输入会被回填覆盖
+    await waitForProfileLoaded(page)
 
     await test.step('E04-1 人工修订毕业年份并保存为新版本', async () => {
       const field = page.locator('.edit-field', { hasText: '毕业年份' }).locator('input')

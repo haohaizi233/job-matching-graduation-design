@@ -223,6 +223,10 @@ class RecommendationRun(Base):
     idempotency_key: Mapped[str | None] = mapped_column(String(128), nullable=True)
     # 画像内容指纹（推荐时刻的画像不可变摘要；不是 updated_at）
     profile_content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    # 降级快照（Phase5-3 / M5）：模型不可用显式降级时记录
+    # {degraded, reason_code, failure_kind, requested_model_id, actual_scoring_method}；
+    # 未降级为 NULL（不乐观回填）
+    degradation_info: Mapped[dict | None] = mapped_column(JSON_TYPE, nullable=True)
     # completed | failed
     status: Mapped[str] = mapped_column(String(16), nullable=False, default="completed")
     error_detail: Mapped[str | None] = mapped_column(String(512), nullable=True)

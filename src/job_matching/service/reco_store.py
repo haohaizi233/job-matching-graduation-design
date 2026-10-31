@@ -179,6 +179,7 @@ class RecommendationService:
                     "model_version": result.get("model_version"),
                     "evaluation_status": result.get("evaluation_status"),
                     "formal_evaluation": result.get("formal_evaluation"),
+                    "degradation": result.get("degradation"),
                     "warnings": result.get("warnings", [])}}
 
     # ============================================================ 历史
@@ -393,6 +394,7 @@ class RecommendationService:
                     request_semantic_hash=semantic_hash,
                     idempotency_key=idempotency_key,
                     profile_content_hash=profile_content_hash,
+                    degradation_info=(result.get("degradation") or None),
                     status="completed", runtime_ms=runtime_ms,
                     finished_at=_now())
                 s.add(run)
@@ -484,6 +486,7 @@ class RecommendationService:
                "request_semantic_hash": run.request_semantic_hash,
                "idempotency_key": run.idempotency_key,
                "profile_content_hash": run.profile_content_hash,
+               "degradation_info": run.degradation_info,
                "semantics": "score_type 为排序参考分，不是录用概率"}
         if with_items:
             items = (session.query(RecommendationItem)

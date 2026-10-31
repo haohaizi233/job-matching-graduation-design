@@ -11,6 +11,8 @@
   JM_E2E_STORAGE     显式私有存储根（优先于 RUN_DIR 推导）
   JM_E2E_PORT        监听端口（默认 8000；前端 vite 代理固定指向 127.0.0.1:8000）
   JM_E2E_SEED        1=启动前写入合成种子数据（管理员 + 合成岗位），默认 1
+  JM_REGISTER_RATE_LIMIT  注册频率上限（次/小时/客户端）；E2E 默认放宽到 100000，
+                     避免单轮套件连续注册十余个合成账号撞限流（限流逻辑本身仍在）
 
 用法（项目根目录）：
   set PYTHONPATH=src
@@ -86,6 +88,9 @@ def seed(biz) -> None:
 def main() -> int:
     os.environ["PYTHONUTF8"] = "1"
     os.environ.setdefault("JM_API_ENV", "dev")
+    # E2E 隔离环境配置注入：放宽注册频率上限（每轮套件要注册十余个合成账号），
+    # 限流代码路径保持生效，只是上限不阻塞测试；生产默认 20/小时不变。
+    os.environ.setdefault("JM_REGISTER_RATE_LIMIT", "100000")
 
     from job_matching.infra.persistence import dispose_engines
     dispose_engines()

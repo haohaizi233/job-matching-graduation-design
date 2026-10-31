@@ -65,10 +65,18 @@ const showDetails = ref(false)
 const matchJobs = ref<MatchJobItem[]>([])
 const recoItems = ref<RecoItem[]>([])
 const jobsMap = ref<Map<string, JobRow>>(new Map())
-const runMeta = ref<{ profileVersion: string; modelVersion: string; createdAt: string }>({
+const runMeta = ref<{
+  profileVersion: string
+  modelVersion: string
+  createdAt: string
+  degraded: boolean
+  degradationNote: string
+}>({
   profileVersion: '—',
   modelVersion: '—',
   createdAt: '—',
+  degraded: false,
+  degradationNote: '',
 })
 const loading = ref(true)
 const loadError = ref('')
@@ -81,7 +89,13 @@ async function loadJobsMap() {
 function applyRunItems(
   runId: string,
   items: RecoItem[],
-  meta: { profileVersion: string; modelVersion: string; createdAt: string },
+  meta: {
+    profileVersion: string
+    modelVersion: string
+    createdAt: string
+    degraded: boolean
+    degradationNote: string
+  },
 ) {
   recoItems.value = items
   matchJobs.value = items.map((item) => mapRecoToMatchItem(item, jobsMap.value.get(item.job_id)))
@@ -99,6 +113,10 @@ async function loadLatestRun() {
     profileVersion: run.profile_version != null ? `v${run.profile_version}` : '未生成画像',
     modelVersion: run.model_version || '—',
     createdAt: dateTime(run.created_at) || '—',
+    degraded: Boolean(run.degradation_info?.degraded),
+    degradationNote: run.degradation_info?.degraded
+      ? `已降级（${run.degradation_info.reason_code || 'MODEL_UNAVAILABLE'}，请求模型 ${run.degradation_info.requested_model_id || '—'}）`
+      : '',
   })
 }
 
@@ -225,10 +243,19 @@ async function handleStart() {
       topK: Number(topK.value),
     })
     const run = await getRun(result.run.id)
+    const deg = run.degradation_info?.degraded
+      ? run.degradation_info
+      : result.result_summary?.degradation?.degraded
+        ? result.result_summary.degradation
+        : null
     applyRunItems(run.id, run.items || [], {
       profileVersion: run.profile_version != null ? `v${run.profile_version}` : '未生成画像',
       modelVersion: run.model_version || '—',
       createdAt: dateTime(run.created_at) || '—',
+      degraded: Boolean(deg?.degraded),
+      degradationNote: deg?.degraded
+        ? `已降级（${deg.reason_code || 'MODEL_UNAVAILABLE'}，请求模型 ${deg.requested_model_id || '—'}）`
+        : '',
     })
     show(`匹配完成，共为你找到 ${matchJobs.value.length} 个岗位`)
   } catch (e) {
@@ -441,7 +468,10 @@ function handleViewDetail(job: MatchJobItem) {
               <div><dt>模型版本</dt><dd>{{ runMeta.modelVersion }}</dd></div>
               <div>
                 <dt>是否发生降级</dt>
-                <dd class="good">
+                <dd v-if="runMeta.degraded" class="warn">
+                  <span class="warn-ico">!</span>{{ runMeta.degradationNote }}
+                </dd>
+                <dd v-else class="good">
                   <img class="tiny-ico" :src="checkCircleIcon" alt="" aria-hidden="true" />否
                 </dd>
               </div>

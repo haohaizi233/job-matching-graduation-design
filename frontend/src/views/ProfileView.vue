@@ -155,17 +155,26 @@ const editForm = reactive<Record<string, string>>({
 })
 const savingEdits = ref(false)
 
-function fillEditForm() {
+function fillEditForm(force = false) {
   for (const f of Object.keys(editForm)) {
+    // 异步加载/刷新不得静默覆盖用户已输入的未保存内容（force 用于还原与保存后重填）
+    if (!force && editTouched[f]) continue
     const v = fieldValue(profile.value, f)
     editForm[f] = v === undefined || v === null ? '' : String(v)
   }
 }
 
-watch(profile, fillEditForm, { immediate: true })
+const editTouched = reactive<Record<string, boolean>>({})
+
+function markEditTouched(field: string) {
+  editTouched[field] = true
+}
+
+watch(profile, () => fillEditForm(), { immediate: true })
 
 function handleCancelEdit() {
-  fillEditForm()
+  for (const f of Object.keys(editTouched)) editTouched[f] = false
+  fillEditForm(true)
   show('已还原为当前画像内容')
 }
 
@@ -188,6 +197,8 @@ async function handleSaveEdits() {
       note: '画像页人工修订',
       expectedVersion: profile.value.profile_version,
     })
+    for (const f of Object.keys(editTouched)) editTouched[f] = false
+    fillEditForm(true)
     show('画像修改已保存为新版本（确认后用于智能匹配）')
   } catch (e) {
     show(e instanceof Error ? e.message : '画像修改保存失败')
@@ -621,27 +632,27 @@ async function handleViewVersion(version: number) {
             <div class="edit-grid">
               <label class="edit-field">
                 <span>学历层次</span>
-                <input v-model="editForm.education_level" placeholder="如：本科" />
+                <input v-model="editForm.education_level" placeholder="如：本科" @input="markEditTouched('education_level')" />
               </label>
               <label class="edit-field">
                 <span>专业</span>
-                <input v-model="editForm.major" placeholder="如：软件工程" />
+                <input v-model="editForm.major" placeholder="如：软件工程" @input="markEditTouched('major')" />
               </label>
               <label class="edit-field">
                 <span>毕业年份</span>
-                <input v-model="editForm.graduation_year" placeholder="如：2027" />
+                <input v-model="editForm.graduation_year" placeholder="如：2027" @input="markEditTouched('graduation_year')" />
               </label>
               <label class="edit-field">
                 <span>求职意向</span>
-                <input v-model="editForm.employment_intention" placeholder="如：后端开发工程师" />
+                <input v-model="editForm.employment_intention" placeholder="如：后端开发工程师" @input="markEditTouched('employment_intention')" />
               </label>
               <label class="edit-field">
                 <span>期望城市</span>
-                <input v-model="editForm.preferred_cities" placeholder="如：杭州、上海" />
+                <input v-model="editForm.preferred_cities" placeholder="如：杭州、上海" @input="markEditTouched('preferred_cities')" />
               </label>
               <label class="edit-field">
                 <span>工作性质</span>
-                <input v-model="editForm.employment_type" placeholder="如：全职" />
+                <input v-model="editForm.employment_type" placeholder="如：全职" @input="markEditTouched('employment_type')" />
               </label>
             </div>
             <p class="edit-note">修改会保存为新的画像版本并保留原始抽取证据；点击「确认当前画像」后才用于智能匹配</p>
