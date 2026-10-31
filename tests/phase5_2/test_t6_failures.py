@@ -159,6 +159,27 @@ class T6FailureTransactions(unittest.TestCase):
         self.assertTrue(any("degrad" in w or "fallback" in w.lower() or "baseline" in w
                             for w in data["result_summary"]["warnings"]),
                         data["result_summary"]["warnings"])
+        # Phase5-3 / M5：降级必须可追溯（API 显式字段 + 运行记录持久化）
+        deg = data["result_summary"].get("degradation")
+        self.assertIsNotNone(deg, "result_summary.degradation 不得丢失")
+        self.assertTrue(deg.get("degraded"))
+        self.assertEqual(deg.get("requested_model_id"), "no_such_model")
+        run_id = data["run"]["id"]
+        rr = self.h.client.get(f"/api/v1/recommendations/{run_id}",
+                               headers=self.h.auth(token))
+        self.assertEqual(rr.status_code, 200, rr.text)
+        persisted = rr.json()["data"]["run"].get("degradation_info")
+        self.assertIsNotNone(persisted, "降级信息必须持久化到运行记录")
+        self.assertTrue(persisted.get("degraded"))
+        self.assertEqual(persisted.get("reason_code"), "MODEL_MISSING")
+
+        # 未降级运行不得携带降级快照（不乐观回填）
+        r2 = self.h.client.post("/api/v1/recommendations", headers=self.h.auth(token),
+                                json={"mode": "baseline", "job_ids": [job_id]})
+        self.assertEqual(r2.status_code, 200, r2.text)
+        d2 = r2.json()["data"]
+        self.assertIsNone(d2["result_summary"].get("degradation"))
+        self.assertIsNone(d2["run"].get("degradation_info"))
 
     def test_model_env_incompatible_is_registered_not_run(self):
         self.skipTest("NOT_RUN: 需要旧依赖栈 checkpoint 才能真实复现 MODEL_ENV_INCOMPATIBLE；"

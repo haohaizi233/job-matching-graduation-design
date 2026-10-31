@@ -1,0 +1,403 @@
+{
+  "generated_by": "scripts/phase5_1a/check_history_weights_integrity.py",
+  "note": "历史模型权重完整性基线（只读清单）。仅登记文件哈希，不包含权重内容，不是评估协议，不改写任何模型产物。",
+  "created_at": "2026-10-31T03:05:16",
+  "root": "D:\\desktop\\毕业设计\\models",
+  "files": {
+    "education/charcnn/charcnn-final-20261028-212510/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-final-20261028-212510/checkpoint_best.pt",
+      "size": 38988,
+      "sha256": "7f0ac44fd29c056879afdb9868cc4fce280a2a89e29b03dc51f1c6da549e5267"
+    },
+    "education/charcnn/charcnn-final-20261028-212510/model.pt": {
+      "path": "education/charcnn/charcnn-final-20261028-212510/model.pt",
+      "size": 39052,
+      "sha256": "cca6d3c4c15d3cb827188c65d5bcbf48fd3421aa10df906817e1fc05f07d2177"
+    },
+    "education/charcnn/charcnn-final-balanced-20261028-212534/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-final-balanced-20261028-212534/checkpoint_best.pt",
+      "size": 38988,
+      "sha256": "4eb190b845dc424e90b35873d303daca89ab5739f85026ff8542895fe43fdf30"
+    },
+    "education/charcnn/charcnn-final-balanced-20261028-212534/model.pt": {
+      "path": "education/charcnn/charcnn-final-balanced-20261028-212534/model.pt",
+      "size": 39052,
+      "sha256": "98dc032de92bc856d567cf8599b0aecc94677e9ccd3c9aa8f426389020cbb259"
+    },
+    "education/charcnn/charcnn-final-confw-20261028-221032/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-final-confw-20261028-221032/checkpoint_best.pt",
+      "size": 38988,
+      "sha256": "2b870ecf947ad2c58ced51e2516c33ea758a33738add0ad4a49f77399bc4152c"
+    },
+    "education/charcnn/charcnn-final-confw-20261028-221032/model.pt": {
+      "path": "education/charcnn/charcnn-final-confw-20261028-221032/model.pt",
+      "size": 39052,
+      "sha256": "dadf0ddd545cc4417afee6497b82e079db32cfce38452b776e85d263d3264846"
+    },
+    "education/charcnn/charcnn-final-highconf-20261028-221117/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-final-highconf-20261028-221117/checkpoint_best.pt",
+      "size": 38604,
+      "sha256": "5438366bad117a4ead36cd97d0ea29126ed4e2b819da6d0a9928119064750b4f"
+    },
+    "education/charcnn/charcnn-final-highconf-20261028-221117/model.pt": {
+      "path": "education/charcnn/charcnn-final-highconf-20261028-221117/model.pt",
+      "size": 38668,
+      "sha256": "6b94d2e9911612b72722c3ebac99f3ad239b6cbac1edc2a1757284baa6997aa3"
+    },
+    "education/charcnn/charcnn-final-holdout-20261028-212622/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-final-holdout-20261028-212622/checkpoint_best.pt",
+      "size": 38604,
+      "sha256": "b8b0d93e5e51e4125f59f7a6738a50e62b4cb234d3f92736baf31f53d678ebea"
+    },
+    "education/charcnn/charcnn-final-holdout-20261028-212622/model.pt": {
+      "path": "education/charcnn/charcnn-final-holdout-20261028-212622/model.pt",
+      "size": 38668,
+      "sha256": "39ef505ff16a5d6b8c1563cf915e583ad2919f005c5e313352f7519271b9b6c9"
+    },
+    "education/charcnn/charcnn-final-holdout-vloss-20261028-213521/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521/checkpoint_best.pt",
+      "size": 38604,
+      "sha256": "ee7f37febb01e5627a5d403f972dba97b8f539e3cee087a439574a8f7abac5fb"
+    },
+    "education/charcnn/charcnn-final-holdout-vloss-20261028-213521/model.pt": {
+      "path": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521/model.pt",
+      "size": 38732,
+      "sha256": "0640e786c6ad79f83b1ec8cb324de75c70bbc7ee4f9f2a4a3ec13a129d7580f4"
+    },
+    "education/charcnn/charcnn-final-vloss-20261028-213415/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-final-vloss-20261028-213415/checkpoint_best.pt",
+      "size": 38988,
+      "sha256": "52a337c06a2bc3c9eae4a8132644e4352b22d4df45fe9e1421a2d5dd0fccff5a"
+    },
+    "education/charcnn/charcnn-final-vloss-20261028-213415/model.pt": {
+      "path": "education/charcnn/charcnn-final-vloss-20261028-213415/model.pt",
+      "size": 39052,
+      "sha256": "bafbd977a2c66dc647898e4c995168cd7525a0dd8457b9921262c4fc67671afa"
+    },
+    "education/charcnn/charcnn-final-vloss-balanced-20261028-213450/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450/checkpoint_best.pt",
+      "size": 38988,
+      "sha256": "777e9ce06d1ac38cf8047779afe0d68a779b9ce6692f5949dc2e3f5cdc1ad0c9"
+    },
+    "education/charcnn/charcnn-final-vloss-balanced-20261028-213450/model.pt": {
+      "path": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450/model.pt",
+      "size": 39116,
+      "sha256": "9ba756e7b9ee9a8bf6b3a1869ba54ec7afc0a0ee6086803ced230289a66555a6"
+    },
+    "education/charcnn/charcnn-smoke-charcnn-20261028-211911/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-smoke-charcnn-20261028-211911/checkpoint_best.pt",
+      "size": 31692,
+      "sha256": "eeecf48e74757393ed59b496f432bef58f7860ed137a7f6a9742d4a796784885"
+    },
+    "education/charcnn/charcnn-smoke-charcnn-20261028-211911/model.pt": {
+      "path": "education/charcnn/charcnn-smoke-charcnn-20261028-211911/model.pt",
+      "size": 31756,
+      "sha256": "5584e77c7432e7133b251da68911e692c0ac0686223401fceb993934005a2d37"
+    },
+    "education/charcnn/charcnn-smoke-charcnn-20261028-211941/checkpoint_best.pt": {
+      "path": "education/charcnn/charcnn-smoke-charcnn-20261028-211941/checkpoint_best.pt",
+      "size": 31692,
+      "sha256": "e9bc6ea35d74a2058dca82e2990debeb2bff8e03b053151a6544646d1dc6bc90"
+    },
+    "education/charcnn/charcnn-smoke-charcnn-20261028-211941/model.pt": {
+      "path": "education/charcnn/charcnn-smoke-charcnn-20261028-211941/model.pt",
+      "size": 31756,
+      "sha256": "77fdb7fea6699da75d4fff125566ee0426df823ccafd10658e149169bcfac5db"
+    },
+    "education/tfidf/tfidf-final-20261028-212254/model.pkl": {
+      "path": "education/tfidf/tfidf-final-20261028-212254/model.pkl",
+      "size": 27219,
+      "sha256": "8b0bee49272fb341868c1d2172da044ceafec455490d5c15aec46601264c6c5c"
+    },
+    "education/tfidf/tfidf-final-balanced-20261028-212312/model.pkl": {
+      "path": "education/tfidf/tfidf-final-balanced-20261028-212312/model.pkl",
+      "size": 27219,
+      "sha256": "02049419baa36d5511461adb39d98ccdff3b0d798ceaa9d14bdc7cab9f5f7101"
+    },
+    "education/tfidf/tfidf-final-confw-20261028-220908/model.pkl": {
+      "path": "education/tfidf/tfidf-final-confw-20261028-220908/model.pkl",
+      "size": 27219,
+      "sha256": "7a6b1abc45c462a2dbf5489c3fd4cf2bb23399732c8f82f0a28ded59e8e1f327"
+    },
+    "education/tfidf/tfidf-final-highconf-20261028-221021/model.pkl": {
+      "path": "education/tfidf/tfidf-final-highconf-20261028-221021/model.pkl",
+      "size": 23209,
+      "sha256": "17c38fa75dd826e3edc8b3aa401cb93831ab3efafe108873b077eda98acdd800"
+    },
+    "education/tfidf/tfidf-final-holdout-20261028-212556/model.pkl": {
+      "path": "education/tfidf/tfidf-final-holdout-20261028-212556/model.pkl",
+      "size": 24400,
+      "sha256": "e07d0f9894fcfff3ab3b9fe9e1950c55149f29bf76a67cb9b95a1023d0d811ed"
+    },
+    "education/tfidf/tfidf-final-title-20261028-212332/model.pkl": {
+      "path": "education/tfidf/tfidf-final-title-20261028-212332/model.pkl",
+      "size": 20081257,
+      "sha256": "7ab39afd71cff89bd30b880f17de17c5467785cbb3ca4896950f775ac6c806ec"
+    },
+    "education/tfidf/tfidf-smoke-tfidf-20261028-211845/model.pkl": {
+      "path": "education/tfidf/tfidf-smoke-tfidf-20261028-211845/model.pkl",
+      "size": 8395,
+      "sha256": "cf39c23057a6b973347f6701f636771fc2c9377b015e7cbb363a5e935692998d"
+    },
+    "matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/model.pkl": {
+      "path": "matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-final-20261028-203750/model.pkl",
+      "size": 376567,
+      "sha256": "1810ff896bb74e9c13e212a72be6e65a616448760d7926a60ba918df42422b54"
+    },
+    "matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750/model.pkl": {
+      "path": "matching/gradient_boosting/candidate_cold/gradient_boosting-candidate_cold-smoke-20261028-203750/model.pkl",
+      "size": 372932,
+      "sha256": "47717dadc18c93f1d76bab798032f0092209e001f8d035f47256266ff4abf368"
+    },
+    "matching/gradient_boosting/candidate_cold/smoke-gb-002/model.pkl": {
+      "path": "matching/gradient_boosting/candidate_cold/smoke-gb-002/model.pkl",
+      "size": 372932,
+      "sha256": "47717dadc18c93f1d76bab798032f0092209e001f8d035f47256266ff4abf368"
+    },
+    "matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/model.pkl": {
+      "path": "matching/gradient_boosting/double_cold/gradient_boosting-double_cold-final-20261028-203750/model.pkl",
+      "size": 376487,
+      "sha256": "68ec3e62c68067c2c662956485f93cbdd3abd2370afd0b8b753aebdb811d7313"
+    },
+    "matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/model.pkl": {
+      "path": "matching/gradient_boosting/job_cold/gradient_boosting-job_cold-final-20261028-203750/model.pkl",
+      "size": 376455,
+      "sha256": "517127a1648053bb5bc4a96be9c3c5506c414d6a7f778bdebfc15efb06d9a2d0"
+    },
+    "matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/checkpoint_best.pt",
+      "size": 24704,
+      "sha256": "450e1a4bb9e9a082c00b11da5fe08d24957b806feb01123d4420f795f3638c18"
+    },
+    "matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/checkpoint_search_0.pt",
+      "size": 74806,
+      "sha256": "3699dff24a315df46b1c6d13306f8563f37890bec151db23576bf2dfe1e0f44e"
+    },
+    "matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/model.pt": {
+      "path": "matching/mlp/candidate_cold/mlp-candidate_cold-final-20261028-203750/model.pt",
+      "size": 26944,
+      "sha256": "ea8b2e6208128fb1aacfd188be76cae11cf813f97034ccfbd7a70b6acc04ae4f"
+    },
+    "matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/checkpoint_best.pt",
+      "size": 24192,
+      "sha256": "343645350ea9d435a67011f15b11a5395b437a50db5a982801a4b299ea90c368"
+    },
+    "matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/checkpoint_search_0.pt",
+      "size": 73270,
+      "sha256": "0a59fcff7349eb43ba08225648af7da9c660af82ce93d526453806e710a991e7"
+    },
+    "matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/model.pt": {
+      "path": "matching/mlp/candidate_cold/mlp-candidate_cold-smoke-20261028-203750/model.pt",
+      "size": 26304,
+      "sha256": "2beba372535b65bed07d2bfa40c46f87c4dc16a6262a3f0f6495a5592f4dfcd2"
+    },
+    "matching/mlp/candidate_cold/smoke-mlp-001/checkpoint_best.pt": {
+      "path": "matching/mlp/candidate_cold/smoke-mlp-001/checkpoint_best.pt",
+      "size": 24192,
+      "sha256": "343645350ea9d435a67011f15b11a5395b437a50db5a982801a4b299ea90c368"
+    },
+    "matching/mlp/candidate_cold/smoke-mlp-001/checkpoint_search_0.pt": {
+      "path": "matching/mlp/candidate_cold/smoke-mlp-001/checkpoint_search_0.pt",
+      "size": 73270,
+      "sha256": "0a59fcff7349eb43ba08225648af7da9c660af82ce93d526453806e710a991e7"
+    },
+    "matching/mlp/candidate_cold/smoke-mlp-001/model.pt": {
+      "path": "matching/mlp/candidate_cold/smoke-mlp-001/model.pt",
+      "size": 26304,
+      "sha256": "2beba372535b65bed07d2bfa40c46f87c4dc16a6262a3f0f6495a5592f4dfcd2"
+    },
+    "matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/checkpoint_best.pt",
+      "size": 24704,
+      "sha256": "66ef7831c7798da291a6ae15c826b6b3b2e2b243235f04763537d294d21b0f32"
+    },
+    "matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/checkpoint_search_0.pt",
+      "size": 74806,
+      "sha256": "895dd5fbc44cc86ededdac13880a4e87c3d4437d9eae820d10a184daff4e500d"
+    },
+    "matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/model.pt": {
+      "path": "matching/mlp/double_cold/mlp-double_cold-final-20261028-203750/model.pt",
+      "size": 26944,
+      "sha256": "3a90bc79ed434b172445bfe32a778b61ac44b66c8f0ccf1eb2c5f85a6131a7f8"
+    },
+    "matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/checkpoint_best.pt",
+      "size": 24704,
+      "sha256": "20eef2a4ca4bae0c34de85afc6c5cc807e80de6a06106fb0dabac571fa7e838b"
+    },
+    "matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/checkpoint_search_0.pt",
+      "size": 74806,
+      "sha256": "dd00dee7655674b0df194c61e50f37a483748411699dd7b407a33ccb227fcebd"
+    },
+    "matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/model.pt": {
+      "path": "matching/mlp/job_cold/mlp-job_cold-final-20261028-203750/model.pt",
+      "size": 26944,
+      "sha256": "c76f4eae9f5f8e917412f9f530282659c1a1790c82d09ba3be80cde004cd5d6a"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/checkpoint_best.pt",
+      "size": 21120,
+      "sha256": "c74899fd725423cd06bf4a9afee77a12cffdd38432f7c00cb889be4b28190d29"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/checkpoint_search_0.pt",
+      "size": 64054,
+      "sha256": "b04da1e4990d7ef45dbbfda7211734731d46c9606486dd063a8840bcb14d2020"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/model.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-category-20261028-203750/model.pt",
+      "size": 22912,
+      "sha256": "f7ad50846202e041c070c9b02c1ce6bcc91d048883c8b9c5ecdeaf9edc114c59"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/checkpoint_best.pt",
+      "size": 17024,
+      "sha256": "7728bbc1f2fc94a587d94c2d0f9ed694a8232916dd4ee25b58cbe464275cb6d5"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/checkpoint_search_0.pt",
+      "size": 51766,
+      "sha256": "385e08457365ee2c206910798499fc569a5560f08f91e16eadd9e96f7c2e39c5"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/model.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-position-20261028-203750/model.pt",
+      "size": 17600,
+      "sha256": "eeafc326100e718438dacb5a764bdd9d5695e20e09d231e14a48a09dc423b0eb"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/checkpoint_best.pt",
+      "size": 23680,
+      "sha256": "01e5bfce81be17d58cb6df553086669de191e4e309049903d2b66f37c765fe3a"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/checkpoint_search_0.pt",
+      "size": 71734,
+      "sha256": "b4fb54b7fbf8699ee5157eedec06f8c9b01d02e7ee4e8925518799d22a89c2d2"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/model.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-ablation-skill-20261028-203750/model.pt",
+      "size": 25792,
+      "sha256": "4be0bcc156a1cd70d8a15fc2d4d9652bdc1b0f94d0c6bea5ad96f74edf82a960"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/checkpoint_best.pt",
+      "size": 24704,
+      "sha256": "4083af92047670006c1380df3ddad47d58c126ce535df6b373f10610b83f8d65"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/checkpoint_search_0.pt",
+      "size": 74806,
+      "sha256": "1ec5f9829a90247457fa3b9484e5540e23dba21e3130a47019771a40d55e75b2"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/model.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-final-20261028-203750/model.pt",
+      "size": 26944,
+      "sha256": "5e6841b8d450542392dd991128fdacc65acd0d34cfe5f0f12c72a75614d30aaa"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/checkpoint_best.pt",
+      "size": 24192,
+      "sha256": "7e4c73842e9c960bdf2b13614442cacb86b02a8b1a770fd05b5439d142cd2ce4"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/checkpoint_search_0.pt",
+      "size": 73270,
+      "sha256": "86f7457ce3c004a1a162a0690934a2a86405076d696b577f1b0f442b406fa0ba"
+    },
+    "matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/model.pt": {
+      "path": "matching/ranknet/candidate_cold/ranknet-candidate_cold-smoke-20261028-203750/model.pt",
+      "size": 26304,
+      "sha256": "974339450a2af546ae75316083dcb96381b1db3f15116d364318cfd6153030fa"
+    },
+    "matching/ranknet/candidate_cold/smoke-ranknet-002/checkpoint_best.pt": {
+      "path": "matching/ranknet/candidate_cold/smoke-ranknet-002/checkpoint_best.pt",
+      "size": 24192,
+      "sha256": "7e4c73842e9c960bdf2b13614442cacb86b02a8b1a770fd05b5439d142cd2ce4"
+    },
+    "matching/ranknet/candidate_cold/smoke-ranknet-002/checkpoint_search_0.pt": {
+      "path": "matching/ranknet/candidate_cold/smoke-ranknet-002/checkpoint_search_0.pt",
+      "size": 73270,
+      "sha256": "86f7457ce3c004a1a162a0690934a2a86405076d696b577f1b0f442b406fa0ba"
+    },
+    "matching/ranknet/candidate_cold/smoke-ranknet-002/model.pt": {
+      "path": "matching/ranknet/candidate_cold/smoke-ranknet-002/model.pt",
+      "size": 26304,
+      "sha256": "974339450a2af546ae75316083dcb96381b1db3f15116d364318cfd6153030fa"
+    },
+    "matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/checkpoint_best.pt",
+      "size": 24704,
+      "sha256": "527d6282f19407f83eb13112b244e430ff833e8d3c4b2e90cf8a83a294057d31"
+    },
+    "matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/checkpoint_search_0.pt",
+      "size": 74806,
+      "sha256": "0405614525e25c8df4c3da6ceeb762a84dde778df7b781a20f25c7f3333d7abd"
+    },
+    "matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/model.pt": {
+      "path": "matching/ranknet/double_cold/ranknet-double_cold-final-20261028-203750/model.pt",
+      "size": 26944,
+      "sha256": "0c469bd681a94a05996b2dd205799f2c4ab9c1da0b5aaa40dd8ac1bc9257c1d3"
+    },
+    "matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/checkpoint_best.pt": {
+      "path": "matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/checkpoint_best.pt",
+      "size": 24704,
+      "sha256": "f29476db833e21979069595680455b5c7d8f6f3ed952587439b34ffeb14d2fd5"
+    },
+    "matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/checkpoint_search_0.pt": {
+      "path": "matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/checkpoint_search_0.pt",
+      "size": 74806,
+      "sha256": "d02d3d398823736f7c205b829c447af08c2903d25492ffaf6b9f5916c2d5b596"
+    },
+    "matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/model.pt": {
+      "path": "matching/ranknet/job_cold/ranknet-job_cold-final-20261028-203750/model.pt",
+      "size": 26944,
+      "sha256": "77b1ac699ed8363f4b65b6ecc59db1a634d0436f3747552521a959717d35cfc1"
+    },
+    "matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/model.pkl": {
+      "path": "matching/ridge/candidate_cold/ridge-candidate_cold-ablation-category-20261028-203750/model.pkl",
+      "size": 2384,
+      "sha256": "28753dc15211a57ee16db51c76b9ae00f24e6c151f97bb1067c58ffc62ce9878"
+    },
+    "matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/model.pkl": {
+      "path": "matching/ridge/candidate_cold/ridge-candidate_cold-ablation-position-20261028-203750/model.pkl",
+      "size": 1160,
+      "sha256": "e8e66f61290d53087d1467c8382646cf525c912c87904e421be1bd0e475204d4"
+    },
+    "matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/model.pkl": {
+      "path": "matching/ridge/candidate_cold/ridge-candidate_cold-ablation-skill-20261028-203750/model.pkl",
+      "size": 2730,
+      "sha256": "032309d2a85a192461e64c5e5d19b61420bb6a84655f73c5cc9aabeb7cc2fb01"
+    },
+    "matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/model.pkl": {
+      "path": "matching/ridge/candidate_cold/ridge-candidate_cold-final-20261028-203750/model.pkl",
+      "size": 2833,
+      "sha256": "a61559290f82be0cc2e97d6ed44356c3e17f26b3a76e5bcedb1fb350e81f0691"
+    },
+    "matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750/model.pkl": {
+      "path": "matching/ridge/candidate_cold/ridge-candidate_cold-smoke-20261028-203750/model.pkl",
+      "size": 2686,
+      "sha256": "21ad1f5522373a0ddc7c5ced4bdec736c898d622ecaded0f55bb7737d45ff590"
+    },
+    "matching/ridge/candidate_cold/smoke-ridge-001/model.pkl": {
+      "path": "matching/ridge/candidate_cold/smoke-ridge-001/model.pkl",
+      "size": 2734,
+      "sha256": "77c4c62ea86a0b5ebcb45d8d2cf56e547b84084f0268b9303350cc17aaba2458"
+    },
+    "matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/model.pkl": {
+      "path": "matching/ridge/double_cold/ridge-double_cold-final-20261028-203750/model.pkl",
+      "size": 2833,
+      "sha256": "ccec869a6e168aef3345f2e52718527b3f8c01f9130d08c4bbb441174eff2fb2"
+    },
+    "matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/model.pkl": {
+      "path": "matching/ridge/job_cold/ridge-job_cold-final-20261028-203750/model.pkl",
+      "size": 2833,
+      "sha256": "e196581320a8699067331801bc871e62f06bc70a2f2fcf9a9eccc3075b88be26"
+    }
+  }
+}

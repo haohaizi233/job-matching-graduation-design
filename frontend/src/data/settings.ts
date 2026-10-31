@@ -1,24 +1,21 @@
 import type {
-  DeviceItem,
-  SecurityLogItem,
   SettingsSelectOption,
   SettingsToggleItem,
 } from '@/types/settings'
 
+/**
+ * 个人设置页的**展示元数据**（文案/选项/字段定义）。
+ *
+ * 真实取值一律来自服务端 /students/me/settings（见 api/settings.ts），
+ * 本文件不再存放任何演示身份、假设备或假安全日志数据。
+ */
+
 export const heroCopy = {
   title: '个人设置',
-  lines: ['管理你的账号资料、通知偏好与推荐设置', '设置仅保存在当前浏览器（演示），不会上传服务端'],
-}
-
-export const defaultSettings = {
-  nickname: '李同学',
-  school: '浙江大学',
-  major: '软件工程',
-  enrollYear: '2021',
-  graduateYear: '2025',
-  region: '浙江 · 杭州',
-  theme: 'light',
-  intentTags: ['产品经理', '前端开发', '杭州', '互联网', '校招'],
+  lines: [
+    '管理你的账号资料、通知偏好与推荐设置',
+    '业务设置保存在你的账号下（服务端持久化）；主题等显示偏好仅保存在本机浏览器',
+  ],
 }
 
 export const schoolYearOptions: SettingsSelectOption[] = [
@@ -27,6 +24,7 @@ export const schoolYearOptions: SettingsSelectOption[] = [
   { label: '2022', value: '2022' },
   { label: '2023', value: '2023' },
   { label: '2024', value: '2024' },
+  { label: '2025', value: '2025' },
 ]
 
 export const graduateYearOptions: SettingsSelectOption[] = [
@@ -44,6 +42,7 @@ export const regionOptions: SettingsSelectOption[] = [
   { label: '广东 · 广州', value: 'gd-gz' },
 ]
 
+/** 主题是纯客户端显示偏好：只存 localStorage，不上传服务端 */
 export const themeOptions: SettingsSelectOption[] = [
   { label: '浅色模式', value: 'light' },
   { label: '深色模式', value: 'dark' },
@@ -59,7 +58,7 @@ export const notificationToggles: SettingsToggleItem[] = [
 
 export const resumeParseToggles: SettingsToggleItem[] = [
   { key: 'autoParse', label: '上传后自动解析', desc: '简历上传完成后立即解析', value: true },
-  { key: 'ocrImages', label: '识别图片中的文字', desc: '对扫描件启用 OCR（演示）', value: false },
+  { key: 'ocrImages', label: '识别图片中的文字', desc: '对扫描件启用 OCR（当前解析链路未接入 OCR，此项为预留偏好）', value: false },
 ]
 
 export const privacyToggles: SettingsToggleItem[] = [
@@ -68,25 +67,23 @@ export const privacyToggles: SettingsToggleItem[] = [
   { key: 'hideSalary', label: '隐藏期望薪资', desc: '不在公开资料中展示期望薪资', value: false },
 ]
 
-export const securityItems = [
-  { key: 'password', label: '修改密码', desc: '定期修改密码有助于账号安全' },
-  { key: 'phone', label: '绑定手机', desc: '已绑定 138****6789' },
-  { key: 'email', label: '绑定邮箱', desc: '已绑定 li***@zju.edu.cn' },
-  { key: 'twoFactor', label: '二次验证', desc: '登录时进行短信验证' },
+/**
+ * 密码与安全条目。`implemented: false` 表示后端尚未提供安全实现，
+ * 页面必须清晰标注"未接入"，不得模拟成功。
+ */
+export interface SecurityItem {
+  key: string
+  label: string
+  desc: string
+  implemented: boolean
+}
+
+export const securityItems: SecurityItem[] = [
+  { key: 'password', label: '修改密码', desc: '验证原密码后生效，其他登录设备将自动退出', implemented: true },
+  { key: 'phone', label: '绑定手机', desc: '未接入短信服务，暂不可用', implemented: false },
+  { key: 'email', label: '绑定邮箱', desc: '未接入邮件验证服务，暂不可用', implemented: false },
+  { key: 'twoFactor', label: '二次验证', desc: '未接入二次验证服务，暂不可用', implemented: false },
 ]
 
-export const deviceList: DeviceItem[] = [
-  { id: 1, name: 'Chrome · Windows', place: '浙江 杭州', time: '2024-10-30 14:20', current: true },
-  { id: 2, name: 'Safari · iPhone', place: '浙江 杭州', time: '2024-10-28 21:05', current: false },
-  { id: 3, name: 'Edge · Windows', place: '上海', time: '2024-10-21 09:47', current: false },
-]
-
-export const securityLogs: SecurityLogItem[] = [
-  { id: 1, time: '2024-10-30 14:20', event: '账号登录成功', location: '浙江 杭州' },
-  { id: 2, time: '2024-10-28 21:05', event: '账号登录成功', location: '浙江 杭州' },
-  { id: 3, time: '2024-10-26 10:33', event: '修改了通知偏好', location: '浙江 杭州' },
-  { id: 4, time: '2024-10-21 09:47', event: '账号登录成功', location: '上海' },
-  { id: 5, time: '2024-10-18 16:12', event: '修改了登录密码', location: '浙江 杭州' },
-]
-
-export const STORAGE_KEY = 'job-matching-settings'
+/** 纯客户端偏好存储键（只存主题等显示偏好） */
+export const STORAGE_KEY = 'job-matching-settings-client'

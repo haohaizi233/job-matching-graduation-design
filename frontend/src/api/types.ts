@@ -143,6 +143,14 @@ export interface RecoRun {
   scoring_config_version: string
   job_set_snapshot: Array<Record<string, unknown>>
   created_at: string
+  /** 模型不可用显式降级快照（未降级为 null） */
+  degradation_info?: {
+    degraded: boolean
+    reason_code?: string
+    failure_kind?: string
+    requested_model_id?: string
+    actual_scoring_method?: string
+  } | null
   items?: RecoItem[]
 }
 
@@ -156,6 +164,7 @@ export interface RecoRunResult {
     model_version?: string
     evaluation_status?: string
     formal_evaluation?: boolean
+    degradation?: RecoRun['degradation_info']
     warnings?: string[]
   }
 }

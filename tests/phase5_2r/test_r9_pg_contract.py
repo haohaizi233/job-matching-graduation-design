@@ -97,6 +97,9 @@ class R9PostgreSQLAndContract(unittest.TestCase):
                         StudentProfile.profile_data["profile"]["major"]["value"]
                         .as_string() == "软件工程")).scalars().first()
                 self.assertIsNotNone(got, "JSONB 路径查询必须命中")
+                # 先提交用户与画像：后续唯一约束用例触发 IntegrityError 后
+                # rollback 只回滚失败语句，不得连带丢掉前置数据（R9 修复点）
+                s.commit()
 
                 # 唯一约束：(user_id, profile_version)
                 s.add(StudentProfile(user_id=u.id, profile_version=1,

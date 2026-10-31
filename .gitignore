@@ -90,5 +90,11 @@ reports.zip
 .tmp_*
 _tmp_*
 
+# ---- E2E 运行时产物（隔离临时库/存储/测试结果，用完可删）----
+tests/e2e/.runtime/
+frontend/test-results/
+frontend/playwright-report/
+frontend/e2e/.artifacts/
+
 # JetBrains IDE local config
 .idea/

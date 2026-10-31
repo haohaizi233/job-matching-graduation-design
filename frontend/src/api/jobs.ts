@@ -10,6 +10,19 @@ export interface JobListQuery {
 }
 
 export async function listJobs(query: JobListQuery = {}): Promise<JobRow[]> {
+  const data = await listJobsPaged(query)
+  return data.items
+}
+
+export interface JobPage {
+  items: JobRow[]
+  page: number
+  pageSize: number
+  total: number
+}
+
+/** 分页列表（含 total，工作台统计等需要真实总数的场景使用） */
+export async function listJobsPaged(query: JobListQuery = {}): Promise<JobPage> {
   const params = new URLSearchParams()
   if (query.category) params.set('category', query.category)
   if (query.city) params.set('city', query.city)
@@ -17,8 +30,7 @@ export async function listJobs(query: JobListQuery = {}): Promise<JobRow[]> {
   if (query.page) params.set('page', String(query.page))
   if (query.pageSize) params.set('page_size', String(query.pageSize))
   const qs = params.toString()
-  const data = await apiRequest<{ items: JobRow[] }>(`/jobs${qs ? `?${qs}` : ''}`)
-  return data.items
+  return apiRequest<JobPage>(`/jobs${qs ? `?${qs}` : ''}`)
 }
 
 export async function getJob(jobId: string): Promise<JobRow> {

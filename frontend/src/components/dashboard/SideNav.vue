@@ -30,6 +30,7 @@ function handleClick(item: (typeof navItems)[number]) {
         class="side-link"
         :class="{ active: item.key === activeKey }"
         :aria-current="item.key === activeKey ? 'page' : undefined"
+        :aria-label="item.label"
         @click="handleClick(item)"
       >
         <img class="side-icon" :src="item.key === activeKey ? item.iconActive : item.icon" alt="" aria-hidden="true" />

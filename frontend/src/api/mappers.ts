@@ -333,6 +333,8 @@ export function mapRecoToMatchItem(item: RecoItem, job?: JobRow | null): MatchJo
     location: v?.city || '全国',
     salary: v?.salary || '面议',
     months: 0,
+    education: v?.education || '学历要求未标注',
+    experience: v?.experience || '经验不限',
     match,
     potential,
     tags: (v ? [...v.requiredSkills, ...v.preferredSkills] : matched).slice(0, 5),
@@ -364,22 +366,41 @@ export function mapRunToHistory(run: RecoRun): HistoryRecordItem {
 
 // ---------------------------------------------------------------- 反馈
 
-const FEEDBACK_STATUS: FeedbackStatus[] = [
-  'interested',
-  'notInterested',
-  'applied',
-  'interviewed',
-  'irrelevant',
-]
+const VIEW_TO_SERVER_STATUS: Record<Exclude<FeedbackStatus, 'pending'>, string> = {
+  interested: 'interested',
+  notInterested: 'not_interested',
+  applied: 'applied',
+  interviewed: 'interview',
+  irrelevant: 'irrelevant',
+}
+
+const SERVER_TO_VIEW_STATUS: Record<string, FeedbackStatus> = {
+  interested: 'interested',
+  not_interested: 'notInterested',
+  applied: 'applied',
+  interview: 'interviewed',
+  irrelevant: 'irrelevant',
+}
+
+/** 前端展示态 → 后端 feedback_type 枚举（reco_store.FEEDBACK_TYPES） */
+export function toServerFeedbackType(status: FeedbackStatus): string {
+  if (status === 'pending') {
+    throw new Error('pending 为前端展示态，不能作为 feedback_type 提交')
+  }
+  return VIEW_TO_SERVER_STATUS[status]
+}
+
+/** 后端 feedback_type 枚举 → 前端展示态 */
+export function fromServerFeedbackType(raw: string): FeedbackStatus {
+  return SERVER_TO_VIEW_STATUS[raw] ?? 'interested'
+}
 
 export function mapFeedbackToRecord(
   fb: FeedbackRow,
   job?: JobRow | null,
   _item?: RecoItem | null,
 ): FeedbackRecordItem {
-  const status: FeedbackStatus = FEEDBACK_STATUS.includes(fb.feedback_type as FeedbackStatus)
-    ? (fb.feedback_type as FeedbackStatus)
-    : 'interested'
+  const status = fromServerFeedbackType(fb.feedback_type)
   const v = job ? jobProfileView(job) : null
   return {
     id: fb.id,
@@ -392,6 +413,30 @@ export function mapFeedbackToRecord(
     status,
     note: fb.note || '',
     bookmarked: status === 'interested',
+    logo: GENERIC_LOGO,
+    logoAlt: v?.employer || '未标注企业',
+    trend: [],
+  }
+}
+
+/** RecoItem（尚无反馈的推荐明细）→ 待反馈展示行（首个反馈的提交入口） */
+export function mapItemToPendingRecord(
+  item: RecoItem,
+  job?: JobRow | null,
+  runCreatedAt?: string | null,
+): FeedbackRecordItem {
+  const v = job ? jobProfileView(job) : null
+  return {
+    id: `pending:${item.id}`,
+    title: job?.title || '推荐岗位',
+    company: v?.employer || '未标注企业',
+    industry: v?.categoryLabel || '互联网 / IT',
+    salary: v?.salary || '面议',
+    location: v?.city || '全国',
+    time: dateTime(runCreatedAt),
+    status: 'pending',
+    note: '',
+    bookmarked: false,
     logo: GENERIC_LOGO,
     logoAlt: v?.employer || '未标注企业',
     trend: [],

@@ -1,7 +1,7 @@
 import { reactive, readonly } from 'vue'
 
 import { fetchMe, login as apiLogin, logout as apiLogout, register as apiRegister } from '@/api/auth'
-import { getStoredUser, getToken, setStoredUser, setToken } from '@/api/http'
+import { getStoredUser, getToken, SESSION_EXPIRED_EVENT, setStoredUser, setToken } from '@/api/http'
 import type { AuthUser } from '@/api/types'
 
 interface AuthState {
@@ -16,6 +16,15 @@ const state = reactive<AuthState>({
   token: getToken(),
   restored: false,
 })
+
+// 失效 Token 被 http 层清会话后，同步复位全局登录态（避免页面继续展示旧用户信息）
+if (typeof window !== 'undefined') {
+  window.addEventListener(SESSION_EXPIRED_EVENT, () => {
+    state.token = ''
+    state.user = null
+    state.restored = true
+  })
+}
 
 /** 全局登录态（单例）：token 持久化在 localStorage，用户信息随登录写入 */
 export function useAuth() {

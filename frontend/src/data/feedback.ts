@@ -24,10 +24,12 @@ export const statusText: Record<FeedbackStatus, string> = {
   applied: '已投递',
   interviewed: '已面试',
   irrelevant: '不相关',
+  pending: '待反馈',
 }
 
 export const statusOptions: FeedbackStatusOption[] = [
   { label: '全部', value: 'all' },
+  { label: '待反馈', value: 'pending' },
   { label: '感兴趣', value: 'interested' },
   { label: '不感兴趣', value: 'notInterested' },
   { label: '已投递', value: 'applied' },

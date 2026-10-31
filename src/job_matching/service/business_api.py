@@ -21,6 +21,7 @@
 """
 
 from dataclasses import dataclass, field
+import os
 from pathlib import Path
 from typing import Any, Callable
 
@@ -32,6 +33,7 @@ from .job_store import JobService
 from .profile_store import StudentDataService
 from .reco_store import FEEDBACK_TYPES, RecommendationService
 from .settings import ServiceSettings
+from .settings_store import UserSettingsService
 
 API_VERSION = "v1"
 APP_VERSION = "phase5-2-0.1.0"
@@ -121,6 +123,7 @@ class BusinessServices:
     students: StudentDataService
     jobs: JobService
     recommendations: RecommendationService
+    user_settings: UserSettingsService
     core: Any                      # Phase5-1 Services（评分/解析复用入口）
     store: PrivateFileStore
     settings: ServiceSettings
@@ -155,8 +158,10 @@ def make_business_services(*, database_url: str | None = None,
     jobs = JobService(services=core_services, session_factory=sf)
     reco = RecommendationService(services=core_services, job_service=jobs,
                                  profile_service=students, session_factory=sf)
+    user_settings = UserSettingsService(session_factory=sf)
     return BusinessServices(accounts=accounts, students=students, jobs=jobs,
-                            recommendations=reco, core=core_services, store=store,
+                            recommendations=reco, user_settings=user_settings,
+                            core=core_services, store=store,
                             settings=st, db_settings=db,
                             config=st.to_config_dict())
 
@@ -281,13 +286,25 @@ def create_business_app(business: BusinessServices | None = None):
         feedback_type: str
         note: str | None = None
 
+    class ChangePasswordIn(BaseModel):
+        old_password: str = PField(..., min_length=1, max_length=128)
+        new_password: str = PField(..., min_length=1, max_length=128)
+
+    class UserSettingsIn(BaseModel):
+        settings: dict
+
     # ---------------------------------------------------------- 认证
     auth_router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
 
     # 注册频率限制（P1-09）：单客户端固定窗口计数（内存实现，单进程有效；
-    # 多实例部署必须在网关侧再加一层限流）
+    # 多实例部署必须在网关侧再加一层限流）。
+    # 上限可经 JM_REGISTER_RATE_LIMIT 覆盖：E2E 隔离环境（tests/e2e/serve_backend.py）
+    # 需要单轮套件连续注册十余个合成账号，放宽上限以免撞限流；生产保持默认 20。
     _register_buckets: dict[str, list[float]] = {}
-    _REGISTER_LIMIT = 20      # 次 / 小时 / 客户端
+    try:
+        _REGISTER_LIMIT = max(1, int(os.environ.get("JM_REGISTER_RATE_LIMIT", "20")))
+    except ValueError:
+        _REGISTER_LIMIT = 20      # 次 / 小时 / 客户端
 
     def _register_rate_limited(client: str, now_ts: float) -> bool:
         if len(_register_buckets) > 10000:   # pragma: no cover - 防内存膨胀
@@ -333,8 +350,57 @@ def create_business_app(business: BusinessServices | None = None):
     def me(request: Request, user: dict = Depends(current_user)):
         return _envelope(request.state.request_id, {"user": user})
 
+    # ---- Phase5-3 / M2：密码安全操作与登录设备管理（真实会话失效）----
+    @auth_router.post("/change-password")
+    def change_password(body: ChangePasswordIn, request: Request,
+                        biz: BusinessServices = Depends(get_biz),
+                        user: dict = Depends(current_user)):
+        # 改密必须验证原凭证；改密后撤销**其他**会话（当前会话保留）
+        out = biz.accounts.change_password(
+            user_id=user["id"], old_password=body.old_password,
+            new_password=body.new_password, keep_token=bearer_token(request))
+        return _envelope(request.state.request_id, out)
+
+    @auth_router.get("/sessions")
+    def list_sessions(request: Request, biz: BusinessServices = Depends(get_biz),
+                      user: dict = Depends(current_user)):
+        items = biz.accounts.list_sessions(user_id=user["id"],
+                                           current_token=bearer_token(request))
+        return _envelope(request.state.request_id, {"items": items})
+
+    @auth_router.delete("/sessions/{session_id}")
+    def revoke_session(session_id: str, request: Request,
+                       biz: BusinessServices = Depends(get_biz),
+                       user: dict = Depends(current_user)):
+        revoked = biz.accounts.revoke_session(user_id=user["id"], session_id=session_id)
+        if not revoked:
+            # 非本人 / 不存在 / 已撤销一律 404（防会话枚举）
+            raise ServiceError("NOT_FOUND", "会话不存在或已失效")
+        return _envelope(request.state.request_id, {"revoked": True})
+
+    @auth_router.post("/sessions/revoke-others")
+    def revoke_other_sessions(request: Request, biz: BusinessServices = Depends(get_biz),
+                              user: dict = Depends(current_user)):
+        revoked = biz.accounts.revoke_user_sessions(
+            user["id"], keep_token=bearer_token(request))
+        return _envelope(request.state.request_id, {"revoked_sessions": revoked})
+
     # ---------------------------------------------------------- 学生画像
     profile_router = APIRouter(prefix="/api/v1/students/me", tags=["students"])
+
+    # ---- Phase5-3 / M2：用户级设置服务端持久化（主题等纯客户端偏好不入库）----
+    @profile_router.get("/settings")
+    def get_user_settings(request: Request, biz: BusinessServices = Depends(get_biz),
+                          user: dict = Depends(current_user)):
+        return _envelope(request.state.request_id,
+                         {"settings": biz.user_settings.get(user)})
+
+    @profile_router.put("/settings")
+    def put_user_settings(body: UserSettingsIn, request: Request,
+                          biz: BusinessServices = Depends(get_biz),
+                          user: dict = Depends(current_user)):
+        saved = biz.user_settings.update(user, body.settings)
+        return _envelope(request.state.request_id, {"settings": saved})
 
     @profile_router.get("/profile")
     def get_profile(request: Request, biz: BusinessServices = Depends(get_biz),

@@ -131,13 +131,31 @@ class C5WorkflowContract(unittest.TestCase):
 
 class C5CleanCheckoutContract(unittest.TestCase):
 
+    def test_file_list_source_is_explicitly_registered(self):
+        """文件清单来源必须显式登记：git 与无 git 退化路径不得互相冒充。"""
+        import verify_fresh_checkout as vfc
+        files = vfc.tracked_file_list()
+        self.assertTrue(files, "无法取得文件清单")
+        src = vfc.file_list_source()
+        self.assertIn(src, (vfc.SOURCE_GIT, vfc.SOURCE_FALLBACK),
+                      f"未知的文件清单来源: {src}")
+        if src == vfc.SOURCE_FALLBACK:
+            # 退化枚举只在"已导出的干净 checkout / 源码包"中才可信；
+            # 若在真实开发仓库根（含 data/raw、models）退化，结果必然包含被禁产物，
+            # 下面的 test_clean_export_has_no_forbidden_artifacts 会如实失败（不静默通过）。
+            self.assertFalse(vfc._git_available(),
+                             "git 可用却走了退化枚举，来源登记不可信")
+
     def test_clean_export_has_no_forbidden_artifacts(self):
         import verify_fresh_checkout as vfc
         files = vfc.tracked_file_list()
         self.assertTrue(files, "无法取得文件清单")
         bad = [f for f in files
                if f.startswith(vfc.FORBIDDEN_PREFIXES) or f.endswith(vfc.FORBIDDEN_SUFFIXES)]
-        self.assertEqual(bad, [], f"干净 checkout 含被禁产物: {bad[:8]}")
+        self.assertEqual(
+            bad, [],
+            "干净 checkout 含被禁产物（若本机不在 git 仓库内，无法证明 checkout 洁净，"
+            f"请在 git 仓库中运行）: {bad[:8]}")
 
     def test_clean_export_contains_portable_suite_sources(self):
         import verify_fresh_checkout as vfc

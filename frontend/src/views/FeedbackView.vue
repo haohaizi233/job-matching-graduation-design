@@ -4,9 +4,9 @@ import { computed, onMounted, ref } from 'vue'
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
 import { listJobs } from '@/api/jobs'
-import { mapFeedbackToRecord } from '@/api/mappers'
+import { mapFeedbackToRecord, mapItemToPendingRecord } from '@/api/mappers'
 import { createRecommendation, getRun, listFeedback, listRuns, submitFeedback } from '@/api/recommendations'
-import type { FeedbackRow, JobRow } from '@/api/types'
+import type { FeedbackRow, JobRow, RecoItem } from '@/api/types'
 import { useToast } from '@/composables/useToast'
 import {
   heroCopy,
@@ -59,24 +59,43 @@ onMounted(async () => {
     const jobsMap = new Map<string, JobRow>(jobRows.map((row) => [row.id, row]))
 
     // 推荐明细项 id → 岗位/运行上下文（后端反馈只存 item_id）
-    const itemCtx = new Map<string, { runId: string; jobId: string }>()
+    const itemCtx = new Map<string, { runId: string; jobId: string; item: RecoItem; runCreatedAt: string }>()
     for (const run of runsPage.items) {
       const detail = await getRun(run.id)
       for (const item of detail.items || []) {
-        itemCtx.set(item.id, { runId: run.id, jobId: item.job_id })
+        itemCtx.set(item.id, {
+          runId: run.id,
+          jobId: item.job_id,
+          item,
+          runCreatedAt: detail.created_at || run.created_at,
+        })
       }
     }
 
     const built: FeedbackRecordItem[] = []
     const meta = new Map<number | string, { runId: string; itemId: string; jobId: string }>()
+    const feedbackItemIds = new Set<string>()
+    const feedbackJobIds = new Set<string>()
     for (const fb of feedbackRows as FeedbackRow[]) {
+      feedbackItemIds.add(fb.recommendation_item_id)
       const ctx = itemCtx.get(fb.recommendation_item_id)
       const job = ctx ? jobsMap.get(ctx.jobId) ?? null : null
+      if (ctx) feedbackJobIds.add(ctx.jobId)
       built.push(mapFeedbackToRecord(fb, job))
       if (ctx) {
         meta.set(fb.id, { runId: ctx.runId, itemId: fb.recommendation_item_id, jobId: ctx.jobId })
       }
     }
+
+    // 尚未反馈的推荐明细 → 待反馈行（首个反馈的提交入口；同岗位去重取最近一次明细）
+    for (const [itemId, ctx] of itemCtx) {
+      if (feedbackItemIds.has(itemId) || feedbackJobIds.has(ctx.jobId)) continue
+      const job = jobsMap.get(ctx.jobId) ?? null
+      const record = mapItemToPendingRecord(ctx.item, job, ctx.runCreatedAt)
+      built.push(record)
+      meta.set(record.id, { runId: ctx.runId, itemId, jobId: ctx.jobId })
+    }
+
     records.value = built
     feedbackMeta.value = meta
     selectedId.value = built[0]?.id ?? ''
@@ -87,12 +106,19 @@ onMounted(async () => {
   }
 })
 
-/** 统计卡按真实反馈记录计算 */
+/** 统计卡按真实反馈记录计算（待反馈明细不计入反馈总数） */
 const feedbackStats = computed<FeedbackStatItem[]>(() => {
   const list = records.value
-  const count = (status: FeedbackStatus) => list.filter((r) => r.status === status).length
+  const submitted = list.filter((r) => r.status !== 'pending')
+  const pendingCount = list.length - submitted.length
+  const count = (status: FeedbackStatus) => submitted.filter((r) => r.status === status).length
   return [
-    { key: 'total', label: '反馈总数', value: String(list.length), note: '来自推荐明细' },
+    {
+      key: 'total',
+      label: '反馈总数',
+      value: String(submitted.length),
+      note: pendingCount > 0 ? `另有 ${pendingCount} 条待反馈` : '来自推荐明细',
+    },
     { key: 'interested', label: '感兴趣', value: String(count('interested')), note: '愿意继续了解' },
     { key: 'applied', label: '已投递', value: String(count('applied')), note: '已向企业投递' },
     { key: 'interviewed', label: '已面试', value: String(count('interviewed')), note: '进入面试环节' },
@@ -682,6 +708,10 @@ function handleRangeChange(value: string) {
 .status-badge.irrelevant {
   background: #ffeef0;
   color: #e25060;
+}
+.status-badge.pending {
+  background: #fff7e8;
+  color: #c77c0a;
 }
 .empty-tip {
   text-align: center;

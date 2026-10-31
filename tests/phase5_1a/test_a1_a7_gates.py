@@ -13,10 +13,12 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import importlib
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -39,6 +41,10 @@ def _child_env() -> dict:
 
 def _out(r) -> str:
     return (r.stdout or "") + (r.stderr or "")
+
+
+def sha256_bytes(blob: bytes) -> str:
+    return hashlib.sha256(blob).hexdigest()
 
 
 HEAVY_LIBS = ("pandas", "torch", "sklearn", "fastapi", "pydantic", "joblib")
@@ -196,10 +202,110 @@ class A4ModelErrorTaxonomy(unittest.TestCase):
         self.assertIn("MODEL_ENV_INCOMPATIBLE", ERROR_CODES)
         self.assertEqual(ServiceError("MODEL_ENV_INCOMPATIBLE", "x").http_status, 503)
 
-    def test_history_checkpoints_untouched(self):
-        # A4 硬约束：本轮不得改动历史权重（models/ 必须保持只读）
-        probe = ROOT / "models"
-        self.assertTrue(probe.exists())
+    def test_history_weights_check_is_artifact_dependent(self):
+        # A4 硬约束：本轮不得改动历史权重（models/ 保持只读）。
+        # 但真实权重完整性属 **Artifact-dependent**：models/ 被 .gitignore 忽略，
+        # 干净 checkout 中必然不存在，因此 Core CI 不得断言其存在（否则必然失败）。
+        # 正确口径：缺失产物时显式 NOT_RUN（退出码 0），且**绝不计入 PASS**。
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "check_history_weights_integrity",
+            ROOT / "scripts" / "phase5_1a" / "check_history_weights_integrity.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+
+        with tempfile.TemporaryDirectory(prefix="jm_hw_") as td:
+            tmp = Path(td)
+            empty_root = tmp / "models"           # 模拟干净 checkout：无权重
+            out = tmp / "report.json"
+            code, rep = mod.run_check(empty_root, tmp / "baseline.json", out,
+                                      run_id="selftest-no-artifact")
+            self.assertEqual(code, 0, rep)
+            self.assertEqual(rep["status"], "NOT_RUN", rep["status_reason"])
+            self.assertNotEqual(rep["status"], "PASS", "无产物时不得判定 PASS")
+            self.assertTrue(out.exists(), "缺失产物也必须留下可核对的报告")
+
+    def test_history_weights_check_never_passes_without_frozen_baseline(self):
+        # 有 models/ 但没有冻结基线：只能 NOT_RUN，因为"未与基线比对"≠"未被修改"。
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "check_history_weights_integrity",
+            ROOT / "scripts" / "phase5_1a" / "check_history_weights_integrity.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+
+        status, reason = mod.decide_status(models_exists=True, has_baseline=False,
+                                           changed=[], missing=[])
+        self.assertEqual(status, "NOT_RUN", reason)
+        self.assertIn("基线", reason)
+
+    def test_history_weights_check_detects_modified_weights(self):
+        # 建立基线 -> 篡改权重 -> 必须 FAIL（证明检查程序真能发现权重被修改）。
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "check_history_weights_integrity",
+            ROOT / "scripts" / "phase5_1a" / "check_history_weights_integrity.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+
+        with tempfile.TemporaryDirectory(prefix="jm_hw_") as td:
+            tmp = Path(td)
+            root = tmp / "models"
+            (root / "m1").mkdir(parents=True)
+            (root / "m1" / "model.pkl").write_bytes(b"SYNTHETIC-WEIGHT-1")
+            (root / "m1" / "model.pt").write_bytes(b"SYNTHETIC-WEIGHT-2")
+            baseline = tmp / "baseline.json"
+            out = tmp / "report.json"
+
+            code, rep = mod.run_check(root, baseline, out, run_id="selftest-baseline",
+                                      write_baseline=True)
+            self.assertEqual(code, 0, rep)
+            self.assertTrue(baseline.exists())
+
+            # 未改动时应 PASS
+            code, rep = mod.run_check(root, baseline, out, run_id="selftest-clean")
+            self.assertEqual(code, 0, rep)
+            self.assertEqual(rep["status"], "PASS", rep["status_reason"])
+
+            # 篡改一个权重文件 -> 必须 FAIL
+            (root / "m1" / "model.pkl").write_bytes(b"SYNTHETIC-WEIGHT-TAMPERED")
+            code, rep = mod.run_check(root, baseline, out, run_id="selftest-tampered")
+            self.assertEqual(code, 1, rep)
+            self.assertEqual(rep["status"], "FAIL")
+            self.assertIn("m1/model.pkl", rep["changed"])
+
+            # 删除一个基线内文件 -> 同样 FAIL
+            (root / "m1" / "model.pkl").write_bytes(b"SYNTHETIC-WEIGHT-1")
+            (root / "m1" / "model.pt").unlink()
+            code, rep = mod.run_check(root, baseline, out, run_id="selftest-missing")
+            self.assertEqual(code, 1, rep)
+            self.assertEqual(rep["status"], "FAIL")
+            self.assertIn("m1/model.pt", rep["missing"])
+
+    def test_integrity_checker_is_readonly_on_inputs(self):
+        # 检查过程不得修改输入文件（只读保证）。
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "check_history_weights_integrity",
+            ROOT / "scripts" / "phase5_1a" / "check_history_weights_integrity.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+
+        with tempfile.TemporaryDirectory(prefix="jm_hw_") as td:
+            tmp = Path(td)
+            root = tmp / "models"
+            root.mkdir()
+            (root / "model.pkl").write_bytes(b"SYNTHETIC-READONLY-PROBE")
+            before = sha256_bytes((root / "model.pkl").read_bytes())
+
+            baseline = tmp / "baseline.json"
+            out = tmp / "report.json"
+            mod.run_check(root, baseline, out, run_id="selftest-ro", write_baseline=True)
+            code, _ = mod.run_check(root, baseline, out, run_id="selftest-ro-2")
+            self.assertEqual(code, 0)
+
+            after = sha256_bytes((root / "model.pkl").read_bytes())
+            self.assertEqual(before, after, "完整性检查过程修改了输入文件")
 
 
 class A1RunnerTrust(unittest.TestCase):

@@ -1,19 +1,19 @@
 {
   "generated_by": "tests/phase5_2/run_all.py",
-  "created_at": "2026-10-29T17:38:44",
-  "seconds": 34.86,
+  "created_at": "2026-10-31T13:24:45",
+  "seconds": 72.46,
   "ok": true,
   "mode": "full",
   "environment": {
     "python": "3.13.2",
     "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "ceb7a32c1e7632123d81d668620062e5db2b8c24"
+    "commit": "25743f200da35546a9ff2e70adafc71a9dedf972"
   },
   "totals": {
-    "tests": 56,
-    "pass": 52,
+    "tests": 62,
+    "pass": 61,
     "fail": 0,
-    "skip": 4
+    "skip": 1
   },
   "groups": {
     "T1": {
@@ -61,9 +61,16 @@
     "T7": {
       "title": "PostgreSQL 集成",
       "total": 3,
-      "pass": 0,
+      "pass": 3,
       "fail": 0,
-      "skip": 3
+      "skip": 0
+    },
+    "T8": {
+      "title": "用户设置/密码/设备管理（Phase5-3）",
+      "total": 6,
+      "pass": 6,
+      "fail": 0,
+      "skip": 0
     }
   },
   "consistency": {
@@ -449,22 +456,64 @@
       "group": "T7",
       "class": "T7PostgreSQLIntegration",
       "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_downgrade_reupgrade_on_postgresql",
-      "status": "SKIP",
-      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+      "status": "PASS",
+      "detail": ""
     },
     {
       "group": "T7",
       "class": "T7PostgreSQLIntegration",
       "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_jsonb_query_and_constraints_on_postgresql",
-      "status": "SKIP",
-      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+      "status": "PASS",
+      "detail": ""
     },
     {
       "group": "T7",
       "class": "T7PostgreSQLIntegration",
       "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_migrate_and_schema_on_postgresql",
-      "status": "SKIP",
-      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_change_password_verifies_old_and_revokes_other_sessions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_session_list_and_revoke_real_invalidation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_session_revoke_others_and_cross_user_404",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_default_then_persist_and_reload",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_strict_validation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "T8",
+      "class": "T8UserSettingsAndSessions",
+      "test_id": "test_t8_user_settings.T8UserSettingsAndSessions.test_settings_user_isolation",
+      "status": "PASS",
+      "detail": ""
     }
   ]
 }

@@ -223,6 +223,10 @@ class RecommendationRun(Base):
     idempotency_key: Mapped[str | None] = mapped_column(String(128), nullable=True)
     # 画像内容指纹（推荐时刻的画像不可变摘要；不是 updated_at）
     profile_content_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    # 降级快照（Phase5-3 / M5）：模型不可用显式降级时记录
+    # {degraded, reason_code, failure_kind, requested_model_id, actual_scoring_method}；
+    # 未降级为 NULL（不乐观回填）
+    degradation_info: Mapped[dict | None] = mapped_column(JSON_TYPE, nullable=True)
     # completed | failed
     status: Mapped[str] = mapped_column(String(16), nullable=False, default="completed")
     error_detail: Mapped[str | None] = mapped_column(String(512), nullable=True)
@@ -298,5 +302,29 @@ class RecommendationFeedback(Base):
     )
 
 
-__all__ = ["User", "AuthSession", "StudentProfile", "Resume", "Job",
+class UserSetting(Base):
+    """用户级设置（服务端持久化；主题等纯客户端显示偏好不入库）。
+
+    payload 结构（服务端严格校验，见 settings_store.UserSettingsService）：
+      {
+        "basic":        {nickname, school, major, enrollYear, graduateYear, region},
+        "notifications": {siteMessage, emailNotice, matchAlert, weeklyReport},
+        "resume_prefs": {autoParse, ocrImages},
+        "privacy":      {publicResume, companyView, hideSalary},
+        "job_intent":   {intentTags: [...]},
+      }
+    隐私边界：设置只属于 user_id 本人；API 层强制按当前登录用户隔离。
+    """
+
+    __tablename__ = "user_settings"
+
+    user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id", ondelete="CASCADE"),
+                                         primary_key=True)
+    payload: Mapped[dict] = mapped_column(JSON_TYPE, nullable=False, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, nullable=False,
+                                                 default=_now, onupdate=_now)
+
+
+__all__ = ["User", "AuthSession", "UserSetting", "StudentProfile", "Resume", "Job",
            "RecommendationRun", "RecommendationItem", "RecommendationFeedback"]

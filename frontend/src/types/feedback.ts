@@ -1,4 +1,11 @@
-export type FeedbackStatus = 'interested' | 'notInterested' | 'applied' | 'interviewed' | 'irrelevant'
+export type FeedbackStatus =
+  | 'interested'
+  | 'notInterested'
+  | 'applied'
+  | 'interviewed'
+  | 'irrelevant'
+  /** 推荐明细尚未提交反馈（仅前端展示态，后端无对应 feedback_type） */
+  | 'pending'
 
 export interface FeedbackRecordItem {
   id: number | string

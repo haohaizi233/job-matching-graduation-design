@@ -47,8 +47,9 @@ TEST_MODULES = [
     ("T5", "test_t5_isolation.T5DataIsolation", "数据隔离（链路D）"),
     ("T6", "test_t6_failures.T6FailureTransactions", "异常事务（链路E）"),
     ("T7", "test_t7_pg_integration.T7PostgreSQLIntegration", "PostgreSQL 集成"),
+    ("T8", "test_t8_user_settings.T8UserSettingsAndSessions", "用户设置/密码/设备管理（Phase5-3）"),
 ]
-GROUPS = ["T1", "T2", "T3", "T4", "T5", "T6", "T7"]
+GROUPS = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"]
 
 
 def _walk(suite):

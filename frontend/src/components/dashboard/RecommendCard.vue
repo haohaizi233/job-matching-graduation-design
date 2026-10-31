@@ -2,9 +2,14 @@
 import IconGlyph from '@/components/common/IconGlyph.vue'
 import type { JobItem } from '@/types'
 
-defineProps<{
-  jobs: JobItem[]
-}>()
+withDefaults(
+  defineProps<{
+    jobs: JobItem[]
+    /** 空态文案（无推荐结果 / 无关键词命中），由调用方给出真实语义 */
+    emptyText?: string
+  }>(),
+  { emptyText: '暂无推荐结果。' },
+)
 
 defineEmits<{
   (e: 'select', job: JobItem): void
@@ -52,7 +57,7 @@ defineEmits<{
       </button>
     </div>
 
-    <p v-if="jobs.length === 0" class="no-results">未找到与关键词匹配的推荐岗位。</p>
+    <p v-if="jobs.length === 0" class="no-results">{{ emptyText }}</p>
   </section>
 </template>
 

@@ -14,8 +14,10 @@ export default defineConfig({
     port: 5173,
     proxy: {
       // 联调：业务 API 由本地后端提供（uvicorn :8000）
+      // E2E 隔离环境通过 VITE_API_TARGET 覆盖目标（如 http://127.0.0.1:8123），
+      // 不传时保持默认 8000，不影响日常开发。
       '/api': {
-        target: 'http://127.0.0.1:8000',
+        target: process.env.VITE_API_TARGET || 'http://127.0.0.1:8000',
         changeOrigin: true,
       },
     },
