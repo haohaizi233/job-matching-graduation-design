@@ -95,28 +95,60 @@ class M2ModelFallback(unittest.TestCase):
             self.assertIsNone(r.get("rerank_score"))
 
     # ---------------------------------------------------------- 服务级降级
+    def _svc_with_simulated_missing_bge(self) -> MatchingService:
+        """确定性构造「BGE 权重缺失」服务：在制品加载边界抛 FileNotFoundError。
+
+        与真实权重缺失时 `ResearchRetrievalScorer._get_encoder` 产生的
+        ServiceError 路径完全一致（MODEL_MISSING / failure_kind=artifact_missing /
+        component=bge_encoder），但不依赖本机是否安装权重、不触发真实模型加载
+        （避免 30s 默认 deadline 与冷加载竞速）。真实权重推理由
+        test_bge_real_model_inference 单独覆盖（缺失时显式 NOT_RUN，不冒充）。
+        """
+        def boom():
+            raise FileNotFoundError("bge weights not present (simulated)")
+
+        scorer = make_research_scorer(BGE_MODEL_ID, encoder_factory=boom)
+
+        def loader_impl(reg):
+            return scorer
+
+        return MatchingService(register_builtin_models(
+            ModelRegistry(loader_impl=loader_impl)))
+
     def test_missing_artifact_degrades_with_reason(self):
-        svc = _svc()
+        svc = self._svc_with_simulated_missing_bge()
         res = svc.rank(_student(), _jobs(), RankOptions(
             mode="experimental_model", model_id=BGE_MODEL_ID, allow_fallback=True))
         deg = res.get("degradation")
-        if deg is None:
-            self.skipTest("本机 BGE 权重存在，缺失路径未触发（登记 SKIP，不计 PASS）")
+        self.assertIsNotNone(deg, "权重缺失 + allow_fallback=True 必须显式降级")
         self.assertTrue(deg["degraded"])
         self.assertEqual(BGE_MODEL_ID, deg["requested_model_id"])
         self.assertEqual("baseline_skill_text_v1", deg["actual_scoring_method"])
+        self.assertEqual("artifact_missing", deg["failure_kind"])
         self.assertIn("degraded_to_baseline", " ".join(res["warnings"]))
 
     def test_missing_artifact_refuses_without_fallback(self):
-        svc = _svc()
-        try:
-            res = svc.rank(_student(), _jobs(), RankOptions(
+        svc = self._svc_with_simulated_missing_bge()
+        with self.assertRaises(ServiceError) as ctx:
+            svc.rank(_student(), _jobs(), RankOptions(
                 mode="experimental_model", model_id=BGE_MODEL_ID, allow_fallback=False))
-        except ServiceError as e:
-            self.assertEqual("MODEL_MISSING", e.code)
-        else:
-            self.assertIsNone(res.get("degradation"),
-                              "allow_fallback=False 不允许降级出结果")
+        self.assertEqual("MODEL_MISSING", ctx.exception.code)
+        self.assertEqual("artifact_missing", ctx.exception.detail["failure_kind"])
+
+    def test_bge_real_model_inference(self):
+        """真实 BGE 编码器业务级推理；权重/依赖缺失时显式 NOT_RUN（不以 Mock 冒充）。"""
+        try:
+            from job_matching.models.text_encoder import build_encoder
+            enc = build_encoder("bge_small_zh_v15", local_files_only=True)
+        except Exception as e:  # noqa: BLE001
+            self.skipTest(f"NOT_RUN: BGE 编码器权重/依赖不可用（{type(e).__name__}: {e}）")
+        import math
+        reset_research_caches()
+        scorer = make_research_scorer(BGE_MODEL_ID, encoder_factory=lambda: enc)
+        res = scorer.rank(_student(), _jobs(3))
+        self.assertEqual(3, len(res))
+        for r in res:
+            self.assertTrue(math.isfinite(r["score"]))
 
     def test_unregistered_default_slot_fails_explicitly(self):
         """默认模型槽位未注册 = 部署错误 -> 显式失败，不静默长期降级。"""

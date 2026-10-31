@@ -109,6 +109,50 @@ jobs:
             reports/phase5-1/test-results.json
           if-no-files-found: warn
 
+  # ======================= Phase6 门禁（R6）=======================
+  # Phase6 研究推荐策略统一验收：干净 checkout 即可执行——
+  #   * 不需要真实简历（全部合成夹具，不进入 Gold）；
+  #   * 不强制 BGE/Reranker 权重（真实权重专项自动显式 NOT_RUN/SKIP，不冒充 PASS）；
+  #   * 不依赖本地开发数据库（业务夹具用隔离临时 SQLite）；
+  #   * 不复用历史归档结果（run_all.py 每次真实执行并覆盖证据）；
+  #   * 测试失败真实标红（非零退出）并保存逐项证据（if: always() 上传）。
+  phase6-gates:
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: phase6-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 依赖安装（服务/测试最小集，版本固定）
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 \
+                      httpx==0.28.1 pymupdf==1.24.14 python-docx==1.1.2 \
+                      sqlalchemy==2.0.36 alembic==1.14.0 argon2-cffi==23.1.0 \
+                      python-multipart==0.0.20
+
+      - name: 语法与导入检查
+        run: python -m compileall -q src tests/phase6
+
+      - name: Phase6 统一验收（run_all.py，失败非零退出）
+        run: python tests/phase6/run_all.py
+
+      - name: 上传 Phase6 证据（逐项结果 JSON/Markdown，失败同样保留）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase6-evidence
+          path: |
+            reports/phase6-r/06-phase6-regression.json
+            reports/phase6-r/06-phase6-regression.md
+          if-no-files-found: warn
+
   # ======================= Frontend CI =======================
   # 前端质量门禁：依赖安装 / 类型检查 / 生产构建（不含真实业务数据）。
   frontend-ci:

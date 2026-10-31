@@ -1,19 +1,19 @@
 {
   "generated_by": "tests/phase5_2/run_all.py",
-  "created_at": "2026-10-31T13:24:45",
-  "seconds": 72.46,
+  "created_at": "2026-10-31T18:51:53",
+  "seconds": 28.11,
   "ok": true,
   "mode": "full",
   "environment": {
     "python": "3.13.2",
     "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "25743f200da35546a9ff2e70adafc71a9dedf972"
+    "commit": "3e096c53a55c49999c10e4ba8dcb9a99eb4e499a"
   },
   "totals": {
     "tests": 62,
-    "pass": 61,
+    "pass": 58,
     "fail": 0,
-    "skip": 1
+    "skip": 4
   },
   "groups": {
     "T1": {
@@ -61,9 +61,9 @@
     "T7": {
       "title": "PostgreSQL 集成",
       "total": 3,
-      "pass": 3,
+      "pass": 0,
       "fail": 0,
-      "skip": 0
+      "skip": 3
     },
     "T8": {
       "title": "用户设置/密码/设备管理（Phase5-3）",
@@ -456,22 +456,22 @@
       "group": "T7",
       "class": "T7PostgreSQLIntegration",
       "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_downgrade_reupgrade_on_postgresql",
-      "status": "PASS",
-      "detail": ""
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
     },
     {
       "group": "T7",
       "class": "T7PostgreSQLIntegration",
       "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_jsonb_query_and_constraints_on_postgresql",
-      "status": "PASS",
-      "detail": ""
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
     },
     {
       "group": "T7",
       "class": "T7PostgreSQLIntegration",
       "test_id": "test_t7_pg_integration.T7PostgreSQLIntegration.test_migrate_and_schema_on_postgresql",
-      "status": "PASS",
-      "detail": ""
+      "status": "SKIP",
+      "detail": "NOT_RUN: 未提供 JM_TEST_DATABASE_URL_POSTGRES；SQLite 通过不代表 PostgreSQL 兼容，本组不得计入 PASS"
     },
     {
       "group": "T8",

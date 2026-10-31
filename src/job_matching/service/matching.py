@@ -442,8 +442,16 @@ class MatchingService:
                     code=e.code, model_id=reg.model_id, detail=e.detail)
             raise
 
-        if opts.top_k is not None:
-            rows = rows[: max(0, int(opts.top_k))]
+        # 硬约束过滤项不得以零分形式混入最终推荐（任务 4.2）：
+        # 合格候选进入 results；被过滤项单独登记 filtered_out（含原因），并显式告警。
+        qualified = [r for r in rows if not r.get("filtered")]
+        filtered_rows = [r for r in rows if r.get("filtered")]
+        requested_k = None if opts.top_k is None else max(0, int(opts.top_k))
+        if requested_k is not None:
+            qualified = qualified[:requested_k]
+        shortfall = (max(0, requested_k - len(qualified))
+                     if requested_k is not None else 0)
+        rows = qualified
         scoring_method = f"research_fusion.{spec.model_id}"
         results = []
         for rank_i, r in enumerate(rows, start=1):
@@ -470,7 +478,25 @@ class MatchingService:
             }
             results.append(item)
 
+        # 被硬约束过滤的岗位单独登记（可解释、不静默丢弃、不以零分冒充合格推荐）
+        filtered_out = [{
+            "job_id": jobs[r["pos"]].job_id,
+            "pos": r["pos"],
+            "score": 0.0,
+            "filtered": True,
+            "filter_reason": r["filter_reason"],
+            "scoring_method": scoring_method,
+        } for r in filtered_rows]
+
         all_warns = list(warnings)
+        if filtered_out:
+            all_warns.append(
+                f"hard_filtered_excluded:{len(filtered_out)}:"
+                + ",".join(sorted({str(f["filter_reason"]) for f in filtered_out})))
+        if shortfall:
+            all_warns.append(
+                f"top_k_shortfall:requested={requested_k},returned={len(results)},"
+                f"qualified={len(qualified) + shortfall}")
         all_warns.append("research_strategy:实验性研究推荐策略，未经真实人工 Gold 正式验证")
         all_warns.append("score_semantics:排序参考分，不是录用概率")
         all_warns.append(f"evaluation_status:{spec.evaluation_status}:禁止正式模式与录用概率表述")
@@ -489,6 +515,7 @@ class MatchingService:
             "label_source": "synthetic_or_unlabeled",
             "options": opts.echo(),
             "warnings": all_warns,
+            "filtered_out": filtered_out,
             "results": results,
         }
 

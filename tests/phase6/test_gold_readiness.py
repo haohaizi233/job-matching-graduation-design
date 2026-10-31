@@ -25,6 +25,107 @@ from _util import ROOT
 PY = sys.executable
 SCRIPTS = ROOT / "scripts" / "phase4_3a_2"
 
+#: Gold 工作区状态词表（与既有协议 coordination；值为状态，不是断言目标）
+GOLD_STATE_VOCAB = ("BLOCKED", "READY_FOR_ANNOTATION", "READY_FOR_FREEZE",
+                    "FROZEN_AND_VERIFIED", "INVALID")
+
+
+def audit_gold_workspace_state(root: Path) -> dict:
+    """**只读**审计真实 Gold 工作区状态（不写不删，不覆盖任何现有文件）。
+
+    状态由真实计数**推导**，而非硬编码为零：
+      * BLOCKED              —— 尚无真实人岗配对（H2 未启动）；
+      * READY_FOR_ANNOTATION —— 有真实配对，但双人完整标注未就绪；
+      * READY_FOR_FREEZE     —— 真实配对齐备且 ≥2 标注员完整覆盖、分歧已仲裁；
+      * FROZEN_AND_VERIFIED  —— 已冻结且哈希校验通过；
+      * INVALID              —— 结构不一致（如声称 verified 却无冻结产物）。
+
+    该审计是**环境状态检查**，不应成为长期不变的断言；工具链单元测试
+    （合成夹具）与本审计解耦——真实配对增长不会使工具链测试失败。
+    """
+    root = Path(root)
+    notes: list[str] = []
+
+    # 真实简历（真人 PII 源，只读计数）
+    private_resumes = root / "data" / "private" / "resumes"
+    real_resumes = (sum(1 for _ in private_resumes.rglob("*.txt"))
+                    if private_resumes.exists() else 0)
+
+    # 真实人岗配对
+    real_pairs_path = root / "data" / "independent_eval" / "pairs" / "pairs_real_v2.jsonl"
+    real_pairs = 0
+    if real_pairs_path.exists():
+        real_pairs = sum(1 for ln in real_pairs_path.read_text(
+            encoding="utf-8").splitlines() if ln.strip())
+
+    # 双人标注（只读解析 annotations_*.csv，统计标注员与配对覆盖）
+    raw_annot = root / "data" / "private" / "annotations_raw"
+    annot_files = sorted(raw_annot.glob("annotations_*.csv")) if raw_annot.exists() else []
+    annotators: set[str] = set()
+    covered_pairs: set[str] = set()
+    parse_error = False
+    for f in annot_files:
+        try:
+            import csv as _csv
+            with open(f, "r", encoding="utf-8", newline="") as fh:
+                for row in _csv.DictReader(fh):
+                    aid = str(row.get("annotator_id") or "").strip()
+                    pid = str(row.get("pair_id") or "").strip()
+                    if aid:
+                        annotators.add(aid)
+                    if pid:
+                        covered_pairs.add(pid)
+        except Exception:  # noqa: BLE001
+            parse_error = True
+            notes.append(f"标注文件不可解析: {f.name}")
+
+    # 冻结门禁（只读）
+    frozen_dir = root / "data" / "independent_eval" / "frozen" / "evalset_v2"
+    fb_path = frozen_dir / "freeze_blocked.json"
+    h2_status = None
+    freeze_written = False
+    freeze_verified = False
+    if fb_path.exists():
+        try:
+            fb = json.loads(fb_path.read_text(encoding="utf-8"))
+            h2_status = fb.get("h2_status")
+            freeze_written = bool(fb.get("freeze_written"))
+            freeze_verified = bool(fb.get("freeze_verified"))
+        except Exception:  # noqa: BLE001
+            parse_error = True
+            h2_status = "INVALID"
+            notes.append("freeze_blocked.json 不可解析")
+
+    annotations_complete = (len(annotators) >= 2 and real_pairs > 0
+                            and len(covered_pairs) >= real_pairs)
+
+    # 状态推导（不硬编码任何计数为零）
+    if parse_error or (freeze_verified and not freeze_written):
+        status = "INVALID"
+    elif freeze_verified and freeze_written and real_pairs > 0:
+        status = "FROZEN_AND_VERIFIED"
+    elif real_pairs == 0:
+        status = "BLOCKED"
+    elif annotations_complete:
+        status = "READY_FOR_FREEZE"
+    else:
+        status = "READY_FOR_ANNOTATION"
+
+    return {
+        "status": status,
+        "vocabulary": list(GOLD_STATE_VOCAB),
+        "real_resumes": real_resumes,
+        "real_pairs": real_pairs,
+        "annotation_files": len(annot_files),
+        "distinct_annotators": len(annotators),
+        "covered_pairs": len(covered_pairs),
+        "annotations_complete": annotations_complete,
+        "h2_status": h2_status,
+        "freeze_written": freeze_written,
+        "freeze_verified": freeze_verified,
+        "notes": notes,
+    }
+
 
 def _run_script(name: str, workspace: Path, env_extra: dict | None = None):
     env = dict(os.environ)
@@ -85,35 +186,63 @@ class M3GoldReadiness(unittest.TestCase):
     maxDiff = None
 
     # ---------------------------------------------------------- 真实数据状态
-    def test_real_data_status_still_blocked(self):
-        """重新清点真实数据（不采信历史报告）：真实简历/配对/双人标注必须为 0。"""
-        private_resumes = ROOT / "data" / "private" / "resumes"
-        real_resumes = 0
-        if private_resumes.exists():
-            real_resumes = sum(1 for _ in private_resumes.rglob("*.txt"))
-        real_pairs_path = ROOT / "data" / "independent_eval" / "pairs" / "pairs_real_v2.jsonl"
-        real_pairs = 0
-        if real_pairs_path.exists():
-            real_pairs = sum(1 for line in real_pairs_path.read_text(
-                encoding="utf-8").splitlines() if line.strip())
-        raw_annot = ROOT / "data" / "private" / "annotations_raw"
-        annot_files = list(raw_annot.glob("annotations_*.csv")) if raw_annot.exists() else []
-        self.assertEqual(0, real_pairs, "真实人岗配对必须为 0（H2 BLOCKED）")
-        self.assertEqual(0, len(annot_files), "双人有效人工标注必须为 0（H2 BLOCKED）")
-        # 冻结门禁状态：freeze_blocked.json 必须保持 blocked，且未冻结
-        blocked = json.loads((ROOT / "data" / "independent_eval" / "frozen"
-                              / "evalset_v2" / "freeze_blocked.json").read_text(
-                                  encoding="utf-8"))
-        self.assertEqual("blocked", blocked["h2_status"])
-        self.assertFalse(blocked["freeze_written"])
-        self.assertFalse(blocked["freeze_verified"])
+    def test_gold_workspace_state_driven_and_consistent(self):
+        """真实工作区状态**状态驱动**审计（只读）：不硬编码真实数据必须为零。
 
-    def test_synthetic_pairs_not_eligible_for_gold(self):
+        状态由真实计数推导（BLOCKED/READY_*/FROZEN_AND_VERIFIED/INVALID）。
+        本用例只校验**恒成立的不变式**，不假设真实配对数为 0——真实配对从
+        0 增加到 100 时本用例仍应 PASS，而不会因计数增长失败。
+        """
+        before = self._dir_snapshot(ROOT / "data")
+        state = audit_gold_workspace_state(ROOT)
+
+        # 1) 状态必须落在协议词表内
+        self.assertIn(state["status"], GOLD_STATE_VOCAB, state)
+        self.assertEqual(list(GOLD_STATE_VOCAB), state["vocabulary"])
+
+        # 2) 恒成立不变式（与真实计数无关）
+        if state["status"] == "FROZEN_AND_VERIFIED":
+            self.assertTrue(state["freeze_verified"], state)
+            self.assertTrue(state["freeze_written"], state)
+            self.assertGreater(state["real_pairs"], 0, state)
+        if state["status"] == "INVALID":
+            # 结构不一致时不得被当成可用/已冻结
+            self.assertFalse(state["freeze_verified"] and not state["freeze_written"], state)
+        # 未冻结前，冻结门禁不得声称 verified
+        if not state["freeze_verified"]:
+            self.assertFalse(state["freeze_written"] and state["status"] == "FROZEN_AND_VERIFIED")
+
+        # 3) 合成数据永远不构成真实配对 / Gold 资格
+        self._assert_synthetic_never_gold()
+
+        # 4) 审计只读：执行后 data/ 目录树无新增/修改
+        after = self._dir_snapshot(ROOT / "data")
+        self.assertEqual(before, after, "Gold 状态审计必须只读，不得写入/覆盖真实数据")
+
+        # 5) H2 当前状态仅登记，不作为长期断言（工具链测试与之解耦）
+        if state["real_pairs"] == 0:
+            self.assertEqual("BLOCKED", state["status"], state)
+
+    @staticmethod
+    def _dir_snapshot(base: Path) -> dict:
+        """只读快照：相对路径 -> (size, mtime_ns)，用于证明审计无副作用。"""
+        snap = {}
+        if not base.exists():
+            return snap
+        for p in sorted(base.rglob("*")):
+            if p.is_file():
+                rel = str(p.relative_to(base))
+                st = p.stat()
+                snap[rel] = (st.st_size, st.st_mtime_ns)
+        return snap
+
+    def _assert_synthetic_never_gold(self):
         """合成配对存在但不允许成为 Gold（eligible_for_gold=False 或标记合成）。"""
         p = ROOT / "data" / "independent_eval" / "pairs" / "pairs_synthetic_v1.jsonl"
+        if not p.exists():
+            return
         rows = [json.loads(x) for x in p.read_text(encoding="utf-8").splitlines()
                 if x.strip()]
-        self.assertGreater(len(rows), 0)
         for r in rows:
             self.assertTrue(r.get("is_synthetic") or not r.get("eligible_for_gold"),
                             f"合成配对不得具备 Gold 资格: {r.get('pair_id')}")

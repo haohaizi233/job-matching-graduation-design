@@ -1,0 +1,238 @@
+{
+  "benchmark": "bm25_naive_vs_inverted_index",
+  "generated_at": "2026-10-31T18:01:59",
+  "python": "3.13.2",
+  "numpy": "2.2.6",
+  "hardware_note": "同一进程/解释器/硬件下测量；RSS 为进程常驻内存（psutil）",
+  "stat_method": "预热 3 次不计入；热查询逐条测延迟取中位/P95；建索引与冷查询独立成列，口径不混用",
+  "tokenizer": "jieba + _TOKEN_RE（与业务召回一致）",
+  "params": {
+    "k1": 1.5,
+    "b": 0.75,
+    "top_k": 10
+  },
+  "sizes": [
+    150,
+    500,
+    1000,
+    5000,
+    10000
+  ],
+  "results": [
+    {
+      "corpus_size": 150,
+      "measured_queries": 20,
+      "top_k": 10,
+      "k1": 1.5,
+      "b": 0.75,
+      "naive": {
+        "build_ms": 99.863,
+        "cold_query_ms": 2.764,
+        "warm_query_mean_ms": 0.504,
+        "warm_query_p50_ms": 0.434,
+        "warm_query_p95_ms": 0.783,
+        "throughput_qps": 1983.694,
+        "rss_before_mb": 101.34,
+        "rss_after_mb": 101.7,
+        "rss_delta_mb": 0.36,
+        "measured_queries": 20
+      },
+      "new": {
+        "build_ms": 30.548,
+        "cold_query_ms": 3.568,
+        "warm_query_mean_ms": 0.259,
+        "warm_query_p50_ms": 0.227,
+        "warm_query_p95_ms": 0.325,
+        "throughput_qps": 3865.108,
+        "rss_before_mb": 101.8,
+        "rss_after_mb": 102.56,
+        "rss_delta_mb": 0.76,
+        "measured_queries": 20
+      },
+      "speedup": {
+        "build_naive_over_new": 3.269,
+        "warm_p50_naive_over_new": 1.912,
+        "warm_p95_naive_over_new": 2.409,
+        "cold_naive_over_new": 0.775
+      },
+      "equivalence": {
+        "identical": true,
+        "note": "identical",
+        "tolerance": 1e-12
+      },
+      "wall_seconds": 0.17
+    },
+    {
+      "corpus_size": 500,
+      "measured_queries": 20,
+      "top_k": 10,
+      "k1": 1.5,
+      "b": 0.75,
+      "naive": {
+        "build_ms": 112.191,
+        "cold_query_ms": 1.224,
+        "warm_query_mean_ms": 0.926,
+        "warm_query_p50_ms": 0.927,
+        "warm_query_p95_ms": 1.695,
+        "throughput_qps": 1079.663,
+        "rss_before_mb": 102.73,
+        "rss_after_mb": 102.98,
+        "rss_delta_mb": 0.25,
+        "measured_queries": 20
+      },
+      "new": {
+        "build_ms": 118.793,
+        "cold_query_ms": 0.248,
+        "warm_query_mean_ms": 0.235,
+        "warm_query_p50_ms": 0.191,
+        "warm_query_p95_ms": 0.312,
+        "throughput_qps": 4249.533,
+        "rss_before_mb": 102.98,
+        "rss_after_mb": 105.18,
+        "rss_delta_mb": 2.2,
+        "measured_queries": 20
+      },
+      "speedup": {
+        "build_naive_over_new": 0.944,
+        "warm_p50_naive_over_new": 4.853,
+        "warm_p95_naive_over_new": 5.433,
+        "cold_naive_over_new": 4.935
+      },
+      "equivalence": {
+        "identical": true,
+        "note": "identical",
+        "tolerance": 1e-12
+      },
+      "wall_seconds": 0.28
+    },
+    {
+      "corpus_size": 1000,
+      "measured_queries": 20,
+      "top_k": 10,
+      "k1": 1.5,
+      "b": 0.75,
+      "naive": {
+        "build_ms": 178.864,
+        "cold_query_ms": 2.841,
+        "warm_query_mean_ms": 1.626,
+        "warm_query_p50_ms": 1.258,
+        "warm_query_p95_ms": 4.167,
+        "throughput_qps": 615.182,
+        "rss_before_mb": 105.22,
+        "rss_after_mb": 105.25,
+        "rss_delta_mb": 0.03,
+        "measured_queries": 20
+      },
+      "new": {
+        "build_ms": 174.488,
+        "cold_query_ms": 0.258,
+        "warm_query_mean_ms": 0.096,
+        "warm_query_p50_ms": 0.082,
+        "warm_query_p95_ms": 0.132,
+        "throughput_qps": 10433.512,
+        "rss_before_mb": 105.25,
+        "rss_after_mb": 109.16,
+        "rss_delta_mb": 3.91,
+        "measured_queries": 20
+      },
+      "speedup": {
+        "build_naive_over_new": 1.025,
+        "warm_p50_naive_over_new": 15.341,
+        "warm_p95_naive_over_new": 31.568,
+        "cold_naive_over_new": 11.012
+      },
+      "equivalence": {
+        "identical": true,
+        "note": "identical",
+        "tolerance": 1e-12
+      },
+      "wall_seconds": 0.43
+    },
+    {
+      "corpus_size": 5000,
+      "measured_queries": 12,
+      "top_k": 10,
+      "k1": 1.5,
+      "b": 0.75,
+      "naive": {
+        "build_ms": 926.421,
+        "cold_query_ms": 15.255,
+        "warm_query_mean_ms": 10.368,
+        "warm_query_p50_ms": 7.75,
+        "warm_query_p95_ms": 29.025,
+        "throughput_qps": 96.453,
+        "rss_before_mb": 109.03,
+        "rss_after_mb": 114.41,
+        "rss_delta_mb": 5.38,
+        "measured_queries": 12
+      },
+      "new": {
+        "build_ms": 1575.11,
+        "cold_query_ms": 0.581,
+        "warm_query_mean_ms": 0.172,
+        "warm_query_p50_ms": 0.168,
+        "warm_query_p95_ms": 0.23,
+        "throughput_qps": 5815.081,
+        "rss_before_mb": 114.53,
+        "rss_after_mb": 137.84,
+        "rss_delta_mb": 23.32,
+        "measured_queries": 12
+      },
+      "speedup": {
+        "build_naive_over_new": 0.588,
+        "warm_p50_naive_over_new": 46.131,
+        "warm_p95_naive_over_new": 126.196,
+        "cold_naive_over_new": 26.256
+      },
+      "equivalence": {
+        "identical": true,
+        "note": "identical",
+        "tolerance": 1e-12
+      },
+      "wall_seconds": 2.84
+    },
+    {
+      "corpus_size": 10000,
+      "measured_queries": 8,
+      "top_k": 10,
+      "k1": 1.5,
+      "b": 0.75,
+      "naive": {
+        "build_ms": 2066.197,
+        "cold_query_ms": 27.986,
+        "warm_query_mean_ms": 14.889,
+        "warm_query_p50_ms": 12.082,
+        "warm_query_p95_ms": 25.073,
+        "throughput_qps": 67.165,
+        "rss_before_mb": 120.7,
+        "rss_after_mb": 126.31,
+        "rss_delta_mb": 5.61,
+        "measured_queries": 8
+      },
+      "new": {
+        "build_ms": 1879.245,
+        "cold_query_ms": 0.542,
+        "warm_query_mean_ms": 0.156,
+        "warm_query_p50_ms": 0.144,
+        "warm_query_p95_ms": 0.241,
+        "throughput_qps": 6416.941,
+        "rss_before_mb": 126.36,
+        "rss_after_mb": 173.93,
+        "rss_delta_mb": 47.57,
+        "measured_queries": 8
+      },
+      "speedup": {
+        "build_naive_over_new": 1.099,
+        "warm_p50_naive_over_new": 83.903,
+        "warm_p95_naive_over_new": 104.037,
+        "cold_naive_over_new": 51.635
+      },
+      "equivalence": {
+        "identical": true,
+        "note": "identical",
+        "tolerance": 1e-12
+      },
+      "wall_seconds": 4.31
+    }
+  ]
+}
