@@ -1,0 +1,448 @@
+{
+  "gold_holdout_human": {
+    "confusion_counts": {
+      "fn": 44,
+      "fp": 637,
+      "tn": 2355,
+      "tp": 1380
+    },
+    "empty_pred_samples": 0,
+    "error_types": {
+      "empty_pred_nonempty_true": 0,
+      "exact_match": 382,
+      "extra_label_only": 315,
+      "missing_label_only": 35,
+      "substitution": 4,
+      "total_wrong": 354
+    },
+    "exact_match_ratio": 0.519022,
+    "fixed_05": {
+      "confusion_counts": {
+        "fn": 312,
+        "fp": 307,
+        "tn": 2685,
+        "tp": 1112
+      },
+      "empty_pred_samples": 0,
+      "error_types": {
+        "empty_pred_nonempty_true": 0,
+        "exact_match": 337,
+        "extra_label_only": 177,
+        "missing_label_only": 221,
+        "substitution": 1,
+        "total_wrong": 399
+      },
+      "exact_match_ratio": 0.45788,
+      "group_level": {
+        "group_macro_exact_match": 0.689514,
+        "group_modal_match_rate": 0.666667,
+        "groups": 12
+      },
+      "hamming_loss": 0.140172,
+      "label_combo_error_rate": 0.54212,
+      "label_provenance": "human_gold",
+      "labels": [
+        "博士",
+        "硕士",
+        "本科",
+        "大专",
+        "学历不限",
+        "学历不明"
+      ],
+      "length_buckets": {
+        "len0": {
+          "exact_match_ratio": 0.357143,
+          "micro_f1": 0.794521,
+          "samples": 14
+        },
+        "len1-2": {
+          "exact_match_ratio": 0.352745,
+          "micro_f1": 0.740868,
+          "samples": 601
+        },
+        "len11+": {
+          "exact_match_ratio": null,
+          "samples": 0
+        },
+        "len3-5": {
+          "exact_match_ratio": 0.972973,
+          "micro_f1": 0.990654,
+          "samples": 37
+        },
+        "len6-10": {
+          "exact_match_ratio": 1.0,
+          "micro_f1": 1.0,
+          "samples": 84
+        }
+      },
+      "macro_f1": 0.535549,
+      "micro_f1": 0.782272,
+      "micro_precision": 0.78365,
+      "micro_recall": 0.780899,
+      "per_label": {
+        "博士": {
+          "f1": 0.626007,
+          "precision": 0.641509,
+          "predicted": 424,
+          "recall": 0.611236,
+          "support": 445
+        },
+        "大专": {
+          "f1": 0.904918,
+          "precision": 0.965035,
+          "predicted": 143,
+          "recall": 0.851852,
+          "support": 162
+        },
+        "学历不明": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 2
+        },
+        "学历不限": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 1
+        },
+        "本科": {
+          "f1": 0.834646,
+          "precision": 0.889262,
+          "predicted": 298,
+          "recall": 0.78635,
+          "support": 337
+        },
+        "硕士": {
+          "f1": 0.847721,
+          "precision": 0.788809,
+          "predicted": 554,
+          "recall": 0.916143,
+          "support": 477
+        }
+      },
+      "pred_label_combo_count": 5,
+      "samples": 736,
+      "set": "gold_holdout_human@0.5"
+    },
+    "group_level": {
+      "group_macro_exact_match": 0.707131,
+      "group_modal_match_rate": 0.666667,
+      "groups": 12
+    },
+    "hamming_loss": 0.154212,
+    "label_combo_error_rate": 0.480978,
+    "label_provenance": "human_gold",
+    "labels": [
+      "博士",
+      "硕士",
+      "本科",
+      "大专",
+      "学历不限",
+      "学历不明"
+    ],
+    "length_buckets": {
+      "len0": {
+        "exact_match_ratio": 0.357143,
+        "micro_f1": 0.794521,
+        "samples": 14
+      },
+      "len1-2": {
+        "exact_match_ratio": 0.427621,
+        "micro_f1": 0.77265,
+        "samples": 601
+      },
+      "len11+": {
+        "exact_match_ratio": null,
+        "samples": 0
+      },
+      "len3-5": {
+        "exact_match_ratio": 0.972973,
+        "micro_f1": 0.990654,
+        "samples": 37
+      },
+      "len6-10": {
+        "exact_match_ratio": 1.0,
+        "micro_f1": 1.0,
+        "samples": 84
+      }
+    },
+    "macro_f1": 0.549246,
+    "micro_f1": 0.802092,
+    "micro_precision": 0.684184,
+    "micro_recall": 0.969101,
+    "per_label": {
+      "博士": {
+        "f1": 0.753599,
+        "precision": 0.60462,
+        "predicted": 736,
+        "recall": 1.0,
+        "support": 445
+      },
+      "大专": {
+        "f1": 0.904918,
+        "precision": 0.965035,
+        "predicted": 143,
+        "recall": 0.851852,
+        "support": 162
+      },
+      "学历不明": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "support": 2
+      },
+      "学历不限": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "support": 1
+      },
+      "本科": {
+        "f1": 0.827763,
+        "precision": 0.730159,
+        "predicted": 441,
+        "recall": 0.95549,
+        "support": 337
+      },
+      "硕士": {
+        "f1": 0.809199,
+        "precision": 0.681492,
+        "predicted": 697,
+        "recall": 0.995807,
+        "support": 477
+      }
+    },
+    "pred_label_combo_count": 4,
+    "samples": 736,
+    "set": "gold_holdout_human"
+  },
+  "validation_pseudo": {
+    "confusion_counts": {
+      "fn": 2143,
+      "fp": 45223,
+      "tn": 128238,
+      "tp": 95752
+    },
+    "empty_pred_samples": 0,
+    "error_types": {
+      "empty_pred_nonempty_true": 0,
+      "exact_match": 22691,
+      "extra_label_only": 21301,
+      "missing_label_only": 1066,
+      "substitution": 168,
+      "total_wrong": 22535
+    },
+    "exact_match_ratio": 0.501725,
+    "fixed_05": {
+      "confusion_counts": {
+        "fn": 20299,
+        "fp": 24891,
+        "tn": 148570,
+        "tp": 77596
+      },
+      "empty_pred_samples": 0,
+      "error_types": {
+        "empty_pred_nonempty_true": 0,
+        "exact_match": 23713,
+        "extra_label_only": 12904,
+        "missing_label_only": 8397,
+        "substitution": 212,
+        "total_wrong": 21513
+      },
+      "exact_match_ratio": 0.524322,
+      "group_level": {
+        "group_macro_exact_match": 0.824417,
+        "group_modal_match_rate": 0.942308,
+        "groups": 52
+      },
+      "hamming_loss": 0.166534,
+      "label_combo_error_rate": 0.475678,
+      "label_provenance": "pseudo_online",
+      "labels": [
+        "博士",
+        "硕士",
+        "本科",
+        "大专",
+        "学历不限",
+        "学历不明"
+      ],
+      "length_buckets": {
+        "len0": {
+          "exact_match_ratio": 0.48826,
+          "micro_f1": 0.762018,
+          "samples": 2896
+        },
+        "len1-2": {
+          "exact_match_ratio": 0.504212,
+          "micro_f1": 0.757953,
+          "samples": 39531
+        },
+        "len11+": {
+          "exact_match_ratio": 1.0,
+          "micro_f1": 1.0,
+          "samples": 3
+        },
+        "len3-5": {
+          "exact_match_ratio": 0.841667,
+          "micro_f1": 0.961201,
+          "samples": 2520
+        },
+        "len6-10": {
+          "exact_match_ratio": 0.880435,
+          "micro_f1": 0.965854,
+          "samples": 276
+        }
+      },
+      "macro_f1": 0.652478,
+      "micro_f1": 0.774481,
+      "micro_precision": 0.75713,
+      "micro_recall": 0.792645,
+      "per_label": {
+        "博士": {
+          "f1": 0.634028,
+          "precision": 0.581798,
+          "predicted": 29316,
+          "recall": 0.696561,
+          "support": 24486
+        },
+        "大专": {
+          "f1": 0.959448,
+          "precision": 0.969801,
+          "predicted": 12186,
+          "recall": 0.949313,
+          "support": 12449
+        },
+        "学历不明": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 623
+        },
+        "学历不限": {
+          "f1": 0.714286,
+          "precision": 0.683962,
+          "predicted": 212,
+          "recall": 0.747423,
+          "support": 194
+        },
+        "本科": {
+          "f1": 0.8709,
+          "precision": 0.943191,
+          "predicted": 27883,
+          "recall": 0.808901,
+          "support": 32512
+        },
+        "硕士": {
+          "f1": 0.736207,
+          "precision": 0.677349,
+          "predicted": 32890,
+          "recall": 0.806268,
+          "support": 27631
+        }
+      },
+      "pred_label_combo_count": 8,
+      "samples": 45226,
+      "set": "validation_pseudo@0.5"
+    },
+    "group_level": {
+      "group_macro_exact_match": 0.822154,
+      "group_modal_match_rate": 0.903846,
+      "groups": 52
+    },
+    "hamming_loss": 0.174553,
+    "label_combo_error_rate": 0.498275,
+    "label_provenance": "pseudo_online",
+    "labels": [
+      "博士",
+      "硕士",
+      "本科",
+      "大专",
+      "学历不限",
+      "学历不明"
+    ],
+    "length_buckets": {
+      "len0": {
+        "exact_match_ratio": 0.48826,
+        "micro_f1": 0.762018,
+        "samples": 2896
+      },
+      "len1-2": {
+        "exact_match_ratio": 0.478359,
+        "micro_f1": 0.792318,
+        "samples": 39531
+      },
+      "len11+": {
+        "exact_match_ratio": 1.0,
+        "micro_f1": 1.0,
+        "samples": 3
+      },
+      "len3-5": {
+        "exact_match_ratio": 0.841667,
+        "micro_f1": 0.961201,
+        "samples": 2520
+      },
+      "len6-10": {
+        "exact_match_ratio": 0.880435,
+        "micro_f1": 0.965854,
+        "samples": 276
+      }
+    },
+    "macro_f1": 0.671511,
+    "micro_f1": 0.801708,
+    "micro_precision": 0.679213,
+    "micro_recall": 0.978109,
+    "per_label": {
+      "博士": {
+        "f1": 0.703642,
+        "precision": 0.543327,
+        "predicted": 44984,
+        "recall": 0.998162,
+        "support": 24486
+      },
+      "大专": {
+        "f1": 0.959448,
+        "precision": 0.969801,
+        "predicted": 12186,
+        "recall": 0.949313,
+        "support": 12449
+      },
+      "学历不明": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "predicted": 0,
+        "recall": 0.0,
+        "support": 623
+      },
+      "学历不限": {
+        "f1": 0.714286,
+        "precision": 0.683962,
+        "predicted": 212,
+        "recall": 0.747423,
+        "support": 194
+      },
+      "本科": {
+        "f1": 0.886429,
+        "precision": 0.809941,
+        "predicted": 39293,
+        "recall": 0.978869,
+        "support": 32512
+      },
+      "硕士": {
+        "f1": 0.765261,
+        "precision": 0.621287,
+        "predicted": 44300,
+        "recall": 0.996091,
+        "support": 27631
+      }
+    },
+    "pred_label_combo_count": 8,
+    "samples": 45226,
+    "set": "validation_pseudo"
+  }
+}

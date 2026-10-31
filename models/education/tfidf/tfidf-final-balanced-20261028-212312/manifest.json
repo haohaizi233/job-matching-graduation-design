@@ -1,0 +1,183 @@
+{
+  "artifacts": [
+    "model.pkl",
+    "manifest.json",
+    "config.json",
+    "metrics.json",
+    "thresholds.json",
+    "feature_map.json",
+    "history.json"
+  ],
+  "created_at": "2026-10-28T21:23:27",
+  "data": {
+    "dataset_version_note": "数据版本见 reports/phase3-preprocessing-summary.json（dv-0ce28fa6b560）",
+    "eval_rows": 45226,
+    "eval_unique_slots": 52,
+    "split_manifest": "data/splits/education/manifest.json",
+    "threshold_tuning_rows": 45226,
+    "train_rows": 180903,
+    "train_unique_slots": 79
+  },
+  "experiment": "A",
+  "experiment_meaning": "A=已知表达分布（第三阶段固定切分）；B=未见过槽位表达泛化（train 内部按槽位留出）",
+  "gold_policy": "gold_holdout 只做一次性最终评估；未参与训练、阈值选择与模型选择",
+  "holdout_info": null,
+  "input_mode": "slot",
+  "label_order": [
+    "博士",
+    "硕士",
+    "本科",
+    "大专",
+    "学历不限",
+    "学历不明"
+  ],
+  "model_description": {
+    "C": 0.5,
+    "class_weight": null,
+    "max_iter": 1000,
+    "min_df": 1,
+    "model_type": "tfidf_char_ovr_logreg",
+    "n_parameters": 2160,
+    "n_tfidf_features": 359,
+    "ngram_max": 3,
+    "ngram_min": 1,
+    "thresholds": {
+      "博士": 0.2,
+      "大专": 0.2,
+      "学历不明": 0.2,
+      "学历不限": 0.2,
+      "本科": 0.25,
+      "硕士": 0.3
+    }
+  },
+  "model_type": "tfidf_char_ovr_logreg",
+  "model_version": "tfidf-final-balanced-20261028-212312",
+  "run_id": "tfidf-final-balanced-20261028-212312",
+  "sample_weight_strategy": "slot_balanced",
+  "saved": {
+    "bytes": 27219,
+    "model_file": "model.pkl"
+  },
+  "selection": {
+    "best_C": 0.5,
+    "best_tune_micro_f1": 0.801708,
+    "metric": "micro_f1_on_threshold_tuning_set"
+  },
+  "threshold_detail": {
+    "博士": {
+      "f1": 0.703642,
+      "threshold": 0.2
+    },
+    "大专": {
+      "f1": 0.959448,
+      "threshold": 0.2
+    },
+    "学历不明": {
+      "f1": 0.0,
+      "threshold": 0.2
+    },
+    "学历不限": {
+      "f1": 0.714286,
+      "threshold": 0.2
+    },
+    "本科": {
+      "f1": 0.886429,
+      "threshold": 0.25
+    },
+    "硕士": {
+      "f1": 0.765261,
+      "threshold": 0.3
+    }
+  },
+  "threshold_selected_on": "validation_pseudo",
+  "thresholds": [
+    0.2,
+    0.3,
+    0.25,
+    0.2,
+    0.2,
+    0.2
+  ],
+  "train_seconds": 10.27,
+  "train_slot_vocab": [
+    "",
+    "Bachelor及以上",
+    "MBA/EMBA",
+    "不限",
+    "专科",
+    "专科、本科、硕士",
+    "专科及以上",
+    "专科及以上学历",
+    "全日制大学在读",
+    "全日制本科以上学历,理工科专业",
+    "全日制本科以上学历,理工科专业;",
+    "全日制本科及以上",
+    "全日制本科及以上学历",
+    "其他",
+    "博士",
+    "博士及以上",
+    "博士及以上学历",
+    "博士生",
+    "博士研究生",
+    "博士研究生/博士",
+    "博士研究生及以上",
+    "博士研究生毕业",
+    "博士研究生毕业及以上",
+    "大专",
+    "大专以上",
+    "大专及以上",
+    "大专及以上学历",
+    "大学",
+    "大学专科",
+    "大学专科及以上学历",
+    "大学专科毕业",
+    "大学及以上",
+    "大学本科",
+    "大学本科及以上",
+    "大学本科及以上学历",
+    "大学本科毕业",
+    "学历不限",
+    "学士",
+    "学士及以上",
+    "应届博士",
+    "无学历要求",
+    "普通高等教育五年制本科",
+    "普通高等教育四年制本科",
+    "本科",
+    "本科,硕士",
+    "本科,硕士,博士",
+    "本科/硕士",
+    "本科、硕士",
+    "本科以上",
+    "本科以上学历",
+    "本科以及上",
+    "本科及以上",
+    "本科及以上学历",
+    "本科及其以上",
+    "本科学历以上",
+    "本科或技工院校预备技师(技师)及以上",
+    "校招",
+    "研究生",
+    "研究生硕士",
+    "硕士",
+    "硕士 及以上",
+    "硕士 研究生",
+    "硕士,博士",
+    "硕士,本科",
+    "硕士/博士",
+    "硕士、博士",
+    "硕士、本科",
+    "硕士及以上",
+    "硕士及以上(特别优秀可放宽至本科)",
+    "硕士及以上学位",
+    "硕士及以上学历",
+    "硕士及其以上",
+    "硕士或博士",
+    "硕士研究生",
+    "硕士研究生及以上",
+    "硕士研究生及以上学历",
+    "硕士研究生毕业",
+    "硕士研究生毕业及以上",
+    "统招本科"
+  ]
+}

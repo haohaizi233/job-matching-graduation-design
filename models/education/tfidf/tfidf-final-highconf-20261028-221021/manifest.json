@@ -1,0 +1,175 @@
+{
+  "artifacts": [
+    "model.pkl",
+    "manifest.json",
+    "config.json",
+    "metrics.json",
+    "thresholds.json",
+    "feature_map.json",
+    "history.json"
+  ],
+  "created_at": "2026-10-28T22:10:28",
+  "data": {
+    "dataset_version_note": "数据版本见 reports/phase3-preprocessing-summary.json（dv-0ce28fa6b560）",
+    "eval_rows": 45226,
+    "eval_unique_slots": 52,
+    "split_manifest": "data/splits/education/manifest.json",
+    "threshold_tuning_rows": 45226,
+    "train_rows": 6324,
+    "train_unique_slots": 55
+  },
+  "experiment": "A",
+  "experiment_meaning": "A=已知表达分布（第三阶段固定切分）；B=未见过槽位表达泛化（train 内部按槽位留出）",
+  "gold_policy": "gold_holdout 只做一次性最终评估；未参与训练、阈值选择与模型选择",
+  "holdout_info": null,
+  "input_mode": "slot",
+  "label_order": [
+    "博士",
+    "硕士",
+    "本科",
+    "大专",
+    "学历不限",
+    "学历不明"
+  ],
+  "model_description": {
+    "C": 1.0,
+    "class_weight": null,
+    "max_iter": 1000,
+    "min_df": 1,
+    "model_type": "tfidf_char_ovr_logreg",
+    "n_parameters": 1730,
+    "n_tfidf_features": 345,
+    "ngram_max": 3,
+    "ngram_min": 1,
+    "thresholds": {
+      "博士": 0.2,
+      "大专": 0.8,
+      "学历不明": 0.2,
+      "学历不限": 0.2,
+      "本科": 0.25,
+      "硕士": 0.4
+    }
+  },
+  "model_type": "tfidf_char_ovr_logreg",
+  "model_version": "tfidf-final-highconf-20261028-221021",
+  "run_id": "tfidf-final-highconf-20261028-221021",
+  "sample_weight_strategy": "none",
+  "saved": {
+    "bytes": 23209,
+    "model_file": "model.pkl"
+  },
+  "selection": {
+    "best_C": 1.0,
+    "best_tune_micro_f1": 0.800329,
+    "metric": "micro_f1_on_threshold_tuning_set"
+  },
+  "subset": "high_conf",
+  "subset_info": {
+    "dropped": {
+      "empty_slot": 11856,
+      "modal_share_below_threshold": 162723,
+      "status_not_ok": 0
+    },
+    "kept_non_modal_rows": 420,
+    "kept_unique_slots": 55,
+    "min_modal_share": 0.9,
+    "note": "高置信度来自训练集内部一致性，非模型自评；gold_holdout 不参与定义",
+    "rows_after": 6324,
+    "rows_before": 180903,
+    "rule": "label_status=='ok' 且 槽位非空 且 P(标签组合|槽位) 众数占比 >= 0.9（只用 train 统计）",
+    "stats_source": "train_only"
+  },
+  "threshold_detail": {
+    "博士": {
+      "f1": 0.702655,
+      "threshold": 0.2
+    },
+    "大专": {
+      "f1": 0.959441,
+      "threshold": 0.8
+    },
+    "学历不明": {
+      "f1": 0.0,
+      "threshold": 0.2
+    },
+    "学历不限": {
+      "f1": 0.030303,
+      "threshold": 0.2
+    },
+    "本科": {
+      "f1": 0.885214,
+      "threshold": 0.25
+    },
+    "硕士": {
+      "f1": 0.764657,
+      "threshold": 0.4
+    }
+  },
+  "threshold_selected_on": "validation_pseudo",
+  "thresholds": [
+    0.2,
+    0.4,
+    0.25,
+    0.8,
+    0.2,
+    0.2
+  ],
+  "train_seconds": 0.64,
+  "train_slot_vocab": [
+    "Bachelor及以上",
+    "MBA/EMBA",
+    "专科",
+    "专科、本科、硕士",
+    "专科及以上",
+    "专科及以上学历",
+    "全日制大学在读",
+    "全日制本科以上学历,理工科专业",
+    "全日制本科以上学历,理工科专业;",
+    "全日制本科及以上",
+    "全日制本科及以上学历",
+    "博士",
+    "博士及以上学历",
+    "博士生",
+    "博士研究生/博士",
+    "博士研究生及以上",
+    "博士研究生毕业",
+    "博士研究生毕业及以上",
+    "大专以上",
+    "大专及以上",
+    "大专及以上学历",
+    "大学专科",
+    "大学专科及以上学历",
+    "大学及以上",
+    "大学本科及以上学历",
+    "学士",
+    "应届博士",
+    "无学历要求",
+    "普通高等教育五年制本科",
+    "普通高等教育四年制本科",
+    "本科,硕士,博士",
+    "本科/硕士",
+    "本科、硕士",
+    "本科以上",
+    "本科以上学历",
+    "本科以及上",
+    "本科及以上学历",
+    "本科及其以上",
+    "本科学历以上",
+    "本科或技工院校预备技师(技师)及以上",
+    "研究生",
+    "研究生硕士",
+    "硕士 及以上",
+    "硕士 研究生",
+    "硕士,本科",
+    "硕士/博士",
+    "硕士、博士",
+    "硕士、本科",
+    "硕士及以上(特别优秀可放宽至本科)",
+    "硕士及以上学位",
+    "硕士及以上学历",
+    "硕士及其以上",
+    "硕士或博士",
+    "硕士研究生及以上学历",
+    "统招本科"
+  ]
+}
