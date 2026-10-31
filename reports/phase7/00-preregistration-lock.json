@@ -1,0 +1,95 @@
+{
+  "artifact": "phase7-preregistration-lock",
+  "blind_test_outputs_absent": true,
+  "discipline": [
+    "预注册后禁止修改主评价指标 / 切分方式 / 通过条件以追求更好成绩",
+    "blind_test 结果在模型锁定前不得读取",
+    "不可计算项必须写 not_computable + reason，禁止填 0 或用代理标签补足"
+  ],
+  "hash_lock_ok": true,
+  "invariants": [
+    {
+      "actual": [
+        "0",
+        "1",
+        "2",
+        "unjudgeable"
+      ],
+      "expected": [
+        "0",
+        "1",
+        "2",
+        "unjudgeable"
+      ],
+      "key": "evaluation_task.label_schema",
+      "ok": true
+    },
+    {
+      "actual": "NDCG@10",
+      "expected": "NDCG@10",
+      "key": "metrics.primary",
+      "ok": true
+    },
+    {
+      "actual": "查询组（resume_id）",
+      "expected": "查询组（resume_id）",
+      "key": "statistical_method.resampling_unit",
+      "ok": true
+    },
+    {
+      "actual": "paired bootstrap",
+      "expected": "paired bootstrap",
+      "key": "statistical_method.method",
+      "ok": true
+    },
+    {
+      "actual": 1000,
+      "expected": 1000,
+      "key": "statistical_method.n_boot",
+      "ok": true
+    },
+    {
+      "actual": 20261205,
+      "expected": 20261205,
+      "key": "statistical_method.seed",
+      "ok": true
+    },
+    {
+      "actual": "resume_id（查询组）",
+      "expected": "resume_id（查询组）",
+      "key": "data_boundaries.split_unit",
+      "ok": true
+    },
+    {
+      "actual": "selected_model_id / model_version / scoring_config_version / feature_version / data_version / hyperparameters 全部锁定并写入 reports/phase7/06-model-selection.md 之后",
+      "expected": "non-empty/true",
+      "key": "data_boundaries.blind_test.unlock_condition_required",
+      "ok": true
+    },
+    {
+      "actual": "不得为解除阻断而降低本文件任何阈值；确需调整必须走 amendment 并说明与结果无关的独立理由",
+      "expected": "non-empty/true",
+      "key": "pass_criteria.no_downgrade_rule_required",
+      "ok": true
+    },
+    {
+      "actual": true,
+      "expected": true,
+      "key": "model_selection_rule.lock_before_blind_test",
+      "ok": true
+    },
+    {
+      "actual": "not_computable",
+      "expected": "not_computable",
+      "key": "not_computable_policy.status_value",
+      "ok": true
+    }
+  ],
+  "invariants_ok": true,
+  "premature_blind_outputs": [],
+  "protocol_id": "phase7-eval-protocol-v1",
+  "protocol_path": "configs/phase7-preregistered-protocol-v1.json",
+  "sha256": "7112e151e2553f52bf16530ab717ad2bf4278b3660b97dfbfd252b2b95eb65f5",
+  "sha256_recorded": "7112e151e2553f52bf16530ab717ad2bf4278b3660b97dfbfd252b2b95eb65f5",
+  "status": "PASS"
+}

@@ -1,0 +1,147 @@
+{
+  "annotation_and_freeze": {
+    "annotation_files": 0,
+    "covered_pairs": 0,
+    "distinct_annotators": 0,
+    "dual_annotation_complete": false,
+    "freeze_verified": false,
+    "freeze_written": false,
+    "h2_status": "blocked",
+    "level": "annotation_and_freeze"
+  },
+  "artifact": "phase7-real-data-status",
+  "generated_at": "2026-10-31T22:25:00+08:00",
+  "historical_snapshot_discrepancy": {
+    "note": "历史报告存在两个统计时点（旧冻结阻断快照 real_resumes=0 / Phase6-R 本地审计 real_resumes=1）；本报告是第三个实测时点，不改写历史报告，两者并存可追溯",
+    "old_freeze_blocked_snapshot": {
+      "real_pairs": 0,
+      "real_resumes": 0,
+      "source": "data/independent_eval/frozen/evalset_v2/freeze_blocked.json"
+    },
+    "phase6r_local_audit": {
+      "real_pairs": 0,
+      "real_resumes": 1,
+      "source": "reports/phase6-r/04-gold-gate-readiness.md"
+    },
+    "phase7_now": {
+      "real_pairs": 0,
+      "real_resumes": 1,
+      "source": "reports/phase7/01-data-status.json"
+    }
+  },
+  "job_pool": {
+    "job_pool_path": "data/independent_eval/pool/job_pool_v1.jsonl",
+    "jobs_in_pool": 150,
+    "level": "job_pool",
+    "manifest": {
+      "category_distribution": {
+        "FINANCE": 8,
+        "HR": 12,
+        "INFORMATION-TECHNOLOGY": 88,
+        "MARKETING-OPS": 15,
+        "OTHER": 19,
+        "SALES": 8
+      },
+      "dataset_version": "dv-fd3762f85658",
+      "duplicates_removed": {
+        "exact_dup": 23990,
+        "near_dup": 0,
+        "norm_dup": 184
+      },
+      "historical_gold_in_source": 736,
+      "jobs_read_total": 45342,
+      "jobs_selected": 150,
+      "jobs_unique": 21168,
+      "license_status": {
+        "job-education/annotated": "apache-2.0",
+        "job-education/default-test": "apache-2.0",
+        "other/all_df": "UNKNOWN"
+      }
+    }
+  },
+  "levels": {
+    "consent_verified": {
+      "by_consent_status": {},
+      "by_source_class": {},
+      "granted_or_licensed": 0,
+      "invalid_codes": [],
+      "level": "consent_verified",
+      "note": "授权记录本身可能含个人信息，只统计计数与状态分布",
+      "parse_errors": [],
+      "record_files": [],
+      "records_invalid": 0,
+      "records_total": 0,
+      "records_valid": 0,
+      "verified": false,
+      "withdrawn": 0
+    },
+    "eligible_for_gold": {
+      "candidates_cjk": 1,
+      "candidates_with_consent": 0,
+      "derivation": "eligible = min(中文可判定简历数, 有效授权记录数)，且必须通过脱敏与重复隔离（当前无 accepted 导入，故为 0）",
+      "eligible_for_gold": 0,
+      "gaps": [
+        "无有效授权记录（consent_status 非 granted/licensed）",
+        "同时满足「中文 + 已授权」的真实简历为 0"
+      ],
+      "level": "eligible_for_gold"
+    },
+    "file_exists": {
+      "cjk_likely": 1,
+      "count": 1,
+      "items": [
+        {
+          "bytes": 780,
+          "cjk_ratio": 0.386,
+          "language_guess": "zh_or_mixed",
+          "pii_pattern_hits": {
+            "email_like": 1,
+            "idcard_like": 0,
+            "mobile_like": 1
+          },
+          "sha256_prefix": "8e810ab0796c4370",
+          "storage_layout": "app_upload_sharded_store"
+        }
+      ],
+      "level": "file_exists",
+      "note": "仅登记指纹与粗粒度统计，不输出简历正文或任何个人标识",
+      "pii_pattern_suspect": 1,
+      "root": "data/private/resumes"
+    },
+    "intake_accepted": {
+      "accepted": false,
+      "level": "intake_accepted",
+      "pairs_real_v1": {
+        "exists": true,
+        "path": "data/independent_eval/pairs/pairs_v1.jsonl",
+        "rows": 0
+      },
+      "pairs_real_v2": {
+        "exists": false,
+        "path": "data/independent_eval/pairs/pairs_real_v2.jsonl",
+        "rows": 0
+      },
+      "real_pairs_total": 0,
+      "resume_pool_csv": "data/independent_eval/resume_pool/resumes.csv",
+      "resume_pool_exists": false,
+      "resume_pool_rows": 0
+    }
+  },
+  "pii_policy": "不含任何简历正文、姓名、联系方式；仅指纹前缀与计数",
+  "status": {
+    "blockers": [
+      "有效真实简历缺口 30 份（协议下限 30）",
+      "真实人岗配对缺口 300 组（协议门禁 300）",
+      "独立标注员缺口 2 人（协议要求 ≥2）",
+      "授权记录缺口：当前无任何 consent 记录文件"
+    ],
+    "gold_state": "BLOCKED",
+    "h2_min_real_pairs": 300,
+    "h2_status": "blocked",
+    "missing": {
+      "annotators_missing": 2,
+      "real_pairs_missing": 300,
+      "valid_resumes_missing": 30
+    }
+  }
+}

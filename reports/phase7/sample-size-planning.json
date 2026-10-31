@@ -1,0 +1,276 @@
+{
+  "artifact": "phase7-sample-size-planning",
+  "conclusions": [
+    "Scenario A（30 简历 × 10 岗 = 300 配对）只覆盖 30 个查询组，组级 70/30 后盲测组数为 9，低于稳定性下限 20，**不能支撑稳定统计结论**——这正是任务书指出的风险。",
+    "达到「盲测有效查询组 ≥ 20」需要至少 67 个独立查询组（blind 占 30% → ceil(20/0.30) = 67），按每份简历 8–12 个岗位计，约需 536–804 个配对。",
+    "若目标是 blind MDE ≤ 0.10（NDCG@10，假设 sd_diff=0.2），需要约 32 个盲测查询组，即约 107 个独立查询组，对应 Scenario C 量级（120 份简历 / 1200 配对）。",
+    "满足配对门禁的方案：A, B, C；满足盲测统计稳定性的方案：B, C。",
+    "Scenario A 仅可作为「流程与工具链跑通」的最小可行规模；正式结论必须至少采用 Scenario B。"
+  ],
+  "discipline": [
+    "以上全部为规划测算，不是已采集或已标注事实",
+    "不得把假设值写成实测值；真实数据到位后必须用实测 sd_diff / unjudgeable 率回填并复算",
+    "不得为凑够规模而降低授权、中文准入或双人标注门禁",
+    "不得通过删除低质量样本提高指标；unjudgeable 必须保留并单独统计"
+  ],
+  "generated_at": "2026-10-31T22:20:00+08:00",
+  "method": {
+    "assumed_sd_diff": 0.2,
+    "mde_formula": "MDE = (z_0.975 + z_0.80) * sd_diff / sqrt(n_groups)",
+    "split": "resume_id 组级 70/30",
+    "z_sum": 2.801585
+  },
+  "protocol_id": "phase7-eval-protocol-v1",
+  "required_groups_for_target_mde": {
+    "mde_0.05": 126,
+    "mde_0.10": 32,
+    "mde_0.15": 14,
+    "mde_0.20": 8
+  },
+  "scenarios": [
+    {
+      "annotation_workload": {
+        "annotators": 2,
+        "assumed_arbitration_minutes_each": 4.0,
+        "assumed_arbitrations": 90,
+        "assumed_disagreement_rate": 0.3,
+        "assumed_minutes_per_pair": 2.0,
+        "hours_per_annotator": 10.0,
+        "hours_total_incl_arbitration": 26.0,
+        "labels_per_annotator": 300,
+        "status": "ASSUMPTION",
+        "total_labels": 600
+      },
+      "inputs": {
+        "blind_ratio": 0.3,
+        "dev_ratio": 0.7,
+        "pairs_per_resume": 10,
+        "real_resumes": 30,
+        "split_method": "resume_id 组级划分",
+        "total_pairs": 300
+      },
+      "note": "对应既有 300 配对下限；仅用于流程跑通，不支撑稳定统计结论",
+      "post_dedup": {
+        "assumed_dedup_loss_rate": 0.05,
+        "effective_pairs": 285,
+        "removed_pairs": 15,
+        "status": "ASSUMPTION"
+      },
+      "query_group_split": {
+        "blind_test_groups": 9,
+        "dev_validation_groups": 21
+      },
+      "risk_summary": [
+        "盲测查询组 9 < 20，统计不稳定，禁止声明显著提升"
+      ],
+      "scenario_id": "A",
+      "scenario_name": "最低配对门禁",
+      "statistical_stability": {
+        "assumed_sd_diff": 0.2,
+        "assumed_sd_diff_status": "ASSUMPTION（非实测；dev_validation 上实测后必须回填复算）",
+        "blind_groups_stable": false,
+        "dev_groups_stable": true,
+        "interpretation": "MDE 表示在当前组数下可稳定检出的 NDCG@10 最小差值；MDE 越小，能可靠判断的提升越细微",
+        "mde_blind_test": 0.1868,
+        "mde_dev_validation": 0.1223,
+        "mde_formula": "MDE = (z_0.975 + z_0.80) * sd_diff / sqrt(n_groups)",
+        "min_groups_required": 20
+      },
+      "unjudgeable_sensitivity": [
+        {
+          "assumed_unjudgeable_rate": 0.05,
+          "effective_judgeable_pairs": 271,
+          "effective_pairs_per_resume": 9.03,
+          "pairs_dropped_as_unjudgeable": 14,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.1,
+          "effective_judgeable_pairs": 257,
+          "effective_pairs_per_resume": 8.57,
+          "pairs_dropped_as_unjudgeable": 28,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.2,
+          "effective_judgeable_pairs": 228,
+          "effective_pairs_per_resume": 7.6,
+          "pairs_dropped_as_unjudgeable": 57,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.3,
+          "effective_judgeable_pairs": 200,
+          "effective_pairs_per_resume": 6.67,
+          "pairs_dropped_as_unjudgeable": 85,
+          "risk": "可控"
+        }
+      ]
+    },
+    {
+      "annotation_workload": {
+        "annotators": 2,
+        "assumed_arbitration_minutes_each": 4.0,
+        "assumed_arbitrations": 168,
+        "assumed_disagreement_rate": 0.3,
+        "assumed_minutes_per_pair": 2.0,
+        "hours_per_annotator": 18.7,
+        "hours_total_incl_arbitration": 48.5,
+        "labels_per_annotator": 560,
+        "status": "ASSUMPTION",
+        "total_labels": 1120
+      },
+      "inputs": {
+        "blind_ratio": 0.3,
+        "dev_ratio": 0.7,
+        "pairs_per_resume": 8,
+        "real_resumes": 70,
+        "split_method": "resume_id 组级划分",
+        "total_pairs": 560
+      },
+      "note": "盲测查询组 ≥20，达到协议稳定性下限",
+      "post_dedup": {
+        "assumed_dedup_loss_rate": 0.05,
+        "effective_pairs": 532,
+        "removed_pairs": 28,
+        "status": "ASSUMPTION"
+      },
+      "query_group_split": {
+        "blind_test_groups": 21,
+        "dev_validation_groups": 49
+      },
+      "risk_summary": [
+        "无阻断性风险；仍需以实测 sd_diff 回填后复算 MDE"
+      ],
+      "scenario_id": "B",
+      "scenario_name": "具备合理独立查询组数",
+      "statistical_stability": {
+        "assumed_sd_diff": 0.2,
+        "assumed_sd_diff_status": "ASSUMPTION（非实测；dev_validation 上实测后必须回填复算）",
+        "blind_groups_stable": true,
+        "dev_groups_stable": true,
+        "interpretation": "MDE 表示在当前组数下可稳定检出的 NDCG@10 最小差值；MDE 越小，能可靠判断的提升越细微",
+        "mde_blind_test": 0.1223,
+        "mde_dev_validation": 0.08,
+        "mde_formula": "MDE = (z_0.975 + z_0.80) * sd_diff / sqrt(n_groups)",
+        "min_groups_required": 20
+      },
+      "unjudgeable_sensitivity": [
+        {
+          "assumed_unjudgeable_rate": 0.05,
+          "effective_judgeable_pairs": 505,
+          "effective_pairs_per_resume": 7.21,
+          "pairs_dropped_as_unjudgeable": 27,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.1,
+          "effective_judgeable_pairs": 479,
+          "effective_pairs_per_resume": 6.84,
+          "pairs_dropped_as_unjudgeable": 53,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.2,
+          "effective_judgeable_pairs": 426,
+          "effective_pairs_per_resume": 6.09,
+          "pairs_dropped_as_unjudgeable": 106,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.3,
+          "effective_judgeable_pairs": 372,
+          "effective_pairs_per_resume": 5.31,
+          "pairs_dropped_as_unjudgeable": 160,
+          "risk": "可控"
+        }
+      ]
+    },
+    {
+      "annotation_workload": {
+        "annotators": 2,
+        "assumed_arbitration_minutes_each": 4.0,
+        "assumed_arbitrations": 360,
+        "assumed_disagreement_rate": 0.3,
+        "assumed_minutes_per_pair": 2.0,
+        "hours_per_annotator": 40.0,
+        "hours_total_incl_arbitration": 104.0,
+        "labels_per_annotator": 1200,
+        "status": "ASSUMPTION",
+        "total_labels": 2400
+      },
+      "inputs": {
+        "blind_ratio": 0.3,
+        "dev_ratio": 0.7,
+        "pairs_per_resume": 10,
+        "real_resumes": 120,
+        "split_method": "resume_id 组级划分",
+        "total_pairs": 1200
+      },
+      "note": "突破既有 600 配对上限，用于把 MDE 压到 0.10 以内",
+      "post_dedup": {
+        "assumed_dedup_loss_rate": 0.05,
+        "effective_pairs": 1140,
+        "removed_pairs": 60,
+        "status": "ASSUMPTION"
+      },
+      "query_group_split": {
+        "blind_test_groups": 36,
+        "dev_validation_groups": 84
+      },
+      "risk_summary": [
+        "无阻断性风险；仍需以实测 sd_diff 回填后复算 MDE"
+      ],
+      "scenario_id": "C",
+      "scenario_name": "具有更充分统计稳定性的扩展方案",
+      "statistical_stability": {
+        "assumed_sd_diff": 0.2,
+        "assumed_sd_diff_status": "ASSUMPTION（非实测；dev_validation 上实测后必须回填复算）",
+        "blind_groups_stable": true,
+        "dev_groups_stable": true,
+        "interpretation": "MDE 表示在当前组数下可稳定检出的 NDCG@10 最小差值；MDE 越小，能可靠判断的提升越细微",
+        "mde_blind_test": 0.0934,
+        "mde_dev_validation": 0.0611,
+        "mde_formula": "MDE = (z_0.975 + z_0.80) * sd_diff / sqrt(n_groups)",
+        "min_groups_required": 20
+      },
+      "unjudgeable_sensitivity": [
+        {
+          "assumed_unjudgeable_rate": 0.05,
+          "effective_judgeable_pairs": 1083,
+          "effective_pairs_per_resume": 9.03,
+          "pairs_dropped_as_unjudgeable": 57,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.1,
+          "effective_judgeable_pairs": 1026,
+          "effective_pairs_per_resume": 8.55,
+          "pairs_dropped_as_unjudgeable": 114,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.2,
+          "effective_judgeable_pairs": 912,
+          "effective_pairs_per_resume": 7.6,
+          "pairs_dropped_as_unjudgeable": 228,
+          "risk": "可控"
+        },
+        {
+          "assumed_unjudgeable_rate": 0.3,
+          "effective_judgeable_pairs": 798,
+          "effective_pairs_per_resume": 6.65,
+          "pairs_dropped_as_unjudgeable": 342,
+          "risk": "可控"
+        }
+      ]
+    }
+  ],
+  "status": "PLANNING_ASSUMPTIONS_NOT_COLLECTED_FACTS",
+  "total_query_groups_needed": {
+    "blind_ratio": 0.3,
+    "for_blind_groups_ge_20": 67,
+    "for_blind_mde_le_0.10": 107,
+    "formula": "total_groups = ceil(target_blind_groups / blind_ratio)"
+  }
+}

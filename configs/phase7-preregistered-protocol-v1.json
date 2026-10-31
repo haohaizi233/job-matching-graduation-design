@@ -1,0 +1,163 @@
+{
+  "protocol_id": "phase7-eval-protocol-v1",
+  "protocol_title": "真实中文人岗匹配 Gold 评估协议（预注册）",
+  "status": "preregistered_locked",
+  "registered_at": "2026-10-31T22:10:00+08:00",
+  "registered_by": "research_lead_human",
+  "registration_note": "本文件在查看任何正式 blind_test 结果之前锁定。任何字段修改都必须走 amendment 流程（见 amendments_policy），并升版本号；禁止在看到 blind_test 结果后修改主指标、切分方式或通过条件以追求更好成绩。",
+  "parent_protocols": [
+    "phase4-3a-protocol-v1",
+    "phase4-3a-annotation-v1",
+    "phase4-3a-2-consent-v1"
+  ],
+
+  "evaluation_task": {
+    "task_name": "chinese_resume_job_relevance_ranking",
+    "unit": "pair(resume_id, job_id)",
+    "query_group_key": "resume_id",
+    "candidate_set_per_group": "该 resume_id 配对到的全部岗位（含 difficulty_tier 分层负样本）",
+    "label_schema": ["0", "1", "2", "unjudgeable"],
+    "label_semantics": {
+      "0": "明显不匹配",
+      "1": "部分匹配",
+      "2": "高度匹配",
+      "unjudgeable": "资料不足或信息自相矛盾，无法可靠判断（独立状态，不是 0）"
+    },
+    "relevance_threshold": 1,
+    "target_population": "中国大陆高校毕业生/在校生的中文求职简历与中文招聘岗位 JD",
+    "excluded_from_truth": ["city", "salary_expectation", "user_preference", "scam_probability"]
+  },
+
+  "data_boundaries": {
+    "train": {
+      "purpose": "仅用于 E07 有条件监督微调；主评价的 E00-E06 不使用任何 Gold 标签训练",
+      "allowed_label_sources": ["授权真实中文人工标注标签（与 Gold 独立采集）"],
+      "forbidden_label_sources": ["英文代理标签", "模型自评", "业务用户反馈", "合成标签"],
+      "current_state": "BLOCKED：无独立合规训练标签"
+    },
+    "dev_validation": {
+      "purpose": "开发集：模型选型与超参数选择的唯一依据",
+      "group_level_split_ratio": 0.7,
+      "allowed_use": ["model_selection", "hyperparameter_selection", "threshold_calibration"],
+      "forbidden_use": ["final_performance_claim"]
+    },
+    "blind_test": {
+      "purpose": "最终盲测：一次性独立评价",
+      "group_level_split_ratio": 0.3,
+      "allowed_use": ["single_final_evaluation"],
+      "forbidden_use": ["model_selection", "hyperparameter_selection", "error_analysis_before_unlock", "repeated_evaluation"],
+      "unlock_condition": "selected_model_id / model_version / scoring_config_version / feature_version / data_version / hyperparameters 全部锁定并写入 reports/phase7/06-model-selection.md 之后",
+      "access_log_required": true
+    },
+    "split_unit": "resume_id（查询组）",
+    "split_method": "组级随机划分（固定种子），同一 resume_id 的所有 pair 必须落在同一 split",
+    "split_seed": 20261215,
+    "synthetic_data_policy": "is_synthetic=true / eligible_for_gold=false 的样本不得进入任何 Gold split",
+    "english_proxy_policy": "英文简历与英文代理标签不得充当中文人工真值"
+  },
+
+  "models": [
+    {"id": "E00", "name": "规则 Baseline（required_skills × 简历技能 Jaccard）", "requires_training_labels": false, "applicable_without_real_gold": true, "notes": "当前线上规则基线口径"},
+    {"id": "E01", "name": "TF-IDF + Cosine", "requires_training_labels": false, "applicable_without_real_gold": true, "notes": "字符 + 词 n-gram，评估集内拟合 IDF"},
+    {"id": "E02", "name": "BM25", "requires_training_labels": false, "applicable_without_real_gold": true, "notes": "复用 src/job_matching/models/retrieval.py 倒排索引实现"},
+    {"id": "E03", "name": "BGE Embedding 余弦", "requires_training_labels": false, "applicable_without_real_gold": true, "notes": "依赖 BGE 权重；权重缺失时显式 MODEL_MISSING，不回退随机分"},
+    {"id": "E04", "name": "Embedding + 结构化特征融合（FeatureFusion）", "requires_training_labels": false, "applicable_without_real_gold": true, "notes": "融合权重为人工设定，非训练得到"},
+    {"id": "E05", "name": "BM25/TF-IDF + Cross-Encoder 精排", "requires_training_labels": false, "applicable_without_real_gold": true, "notes": "Phase4-3B 观察到合成代理标签上负贡献，必须如实保留结果"},
+    {"id": "E06", "name": "现有完整融合推荐策略（zh_research_*_v1 四种）", "requires_training_labels": false, "applicable_without_real_gold": true, "notes": "复用 RESEARCH_STRATEGY_SPECS，禁止重造算法"},
+    {"id": "E07", "name": "有条件监督微调", "requires_training_labels": true, "applicable_without_real_gold": false, "notes": "仅在具有独立、合规且足够的训练标签后执行；最终盲测 Gold 严禁用于训练"}
+  ],
+
+  "metrics": {
+    "primary": "NDCG@10",
+    "secondary": ["NDCG@5", "Recall@10", "MRR", "Precision@5"],
+    "operational": ["latency_p50_ms", "latency_p95_ms", "peak_memory_mb", "explainability_coverage"],
+    "definitions_source": "src/job_matching/independent_eval/metrics.py（与 evaluation/metrics.py 的 metrics_ranking.evaluate_ranking 同口径）",
+    "top_k": [5, 10],
+    "gain": "有序相关性 {0,1,2}",
+    "discount": "1/log2(rank+1)",
+    "min_group_size_for_ranking": 2,
+    "unjudgeable_handling": "不计入增益、不计入相关项、不计入分母；组内排序时跳过并单独计数",
+    "tie_breaking": "分数相同按原始行序稳定排序（stable sort，不引入随机）",
+    "group_truncation": "组内候选数不足 K 时按实际组大小截断，Precision@K 分母 = min(K, 组内可判定候选数)"
+  },
+
+  "statistical_method": {
+    "resampling_unit": "查询组（resume_id）",
+    "method": "paired bootstrap",
+    "n_boot": 1000,
+    "seed": 20261205,
+    "same_resamples_for_all_models": true,
+    "implementation": "src/job_matching/evaluation/statistical_tests.py::bootstrap_diff（确定性，同种子同组）",
+    "reports": ["mean", "n_groups", "ci_95", "delta_vs_baseline", "statistical_stability"],
+    "stability_rule": "有效查询组 < 20 时 statistical_stability='unstable'，禁止声明显著优于 Baseline",
+    "multiplicity": "主指标唯一（NDCG@10），次指标仅作解释性报告，不用于选型胜负判定",
+    "minimum_detectable_effect": {
+      "formula": "MDE = (z_0.975 + z_0.80) * sd_diff / sqrt(n_groups) = 2.802 * sd_diff / sqrt(n)",
+      "assumed_sd_diff": 0.20,
+      "assumption_status": "ASSUMPTION（规划用，非实测；真实 sd_diff 在 dev_validation 上实测后必须回填并复算）",
+      "power": 0.8,
+      "alpha_two_sided": 0.05
+    }
+  },
+
+  "pass_criteria": {
+    "gate_g1_data": "真实授权中文简历 ≥ 最低门禁、真实配对 ≥ 300、consent 全部 granted/licensed、来源许可可核",
+    "gate_g2_annotation": "双人独立标注完整覆盖全部真实配对、分歧全部仲裁、Kappa 可计算或显式 not_computable",
+    "gate_g3_freeze": "Gold 冻结成功且 SHA-256 复验通过，split 组级隔离无泄漏",
+    "gate_g4_statistical": "blind_test 有效查询组 ≥ 20",
+    "gate_g5_effect": "选定模型相对 E00/E02 基线的 NDCG@10 配对 Bootstrap 95% CI 下界 > 0（在 G4 通过的前提下）",
+    "acceptance_rule": "G1-G4 全部通过才有资格判定 G5；任一门禁未通过则结论降级为 BLOCKED / 有条件通过，不得通过降低门槛或删除样本来满足",
+    "no_downgrade_rule": "不得为解除阻断而降低本文件任何阈值；确需调整必须走 amendment 并说明与结果无关的独立理由"
+  },
+
+  "model_selection_rule": {
+    "selection_data": "dev_validation only",
+    "primary_criterion": "NDCG@10 均值",
+    "tie_breakers_in_order": [
+      "NDCG@10 配对 Bootstrap 95% CI 下界更高",
+      "NDCG@5 均值更高",
+      "Recall@10 均值更高",
+      "推理延迟 p95 更低",
+      "实现复杂度更低（更简单者优先）"
+    ],
+    "stability_requirement": "dev_validation 有效查询组 < 20 时只能给出 provisional 选型，标记 statistical_stability=unstable",
+    "lock_fields": [
+      "selected_model_id",
+      "model_version",
+      "scoring_config_version",
+      "feature_version",
+      "data_version",
+      "hyperparameters",
+      "selection_reason"
+    ],
+    "lock_before_blind_test": true
+  },
+
+  "not_computable_policy": {
+    "status_value": "not_computable",
+    "rule": "样本不足、单人标注、无重叠样本、类别样本量 < 5、期望一致率 = 1 等情形一律输出 status='not_computable' + reason",
+    "forbidden": ["填充 0", "用合成数据补足", "用代理标签替代", "隐藏失败或不可计算项"],
+    "metric_level": "指标级同样适用：无法计算的指标写 not_computable 并给 reason"
+  },
+
+  "amendments_policy": {
+    "allowed_before_blind_test": true,
+    "allowed_after_blind_test": false,
+    "requirements": [
+      "新版本号（phase7-eval-protocol-v2 ...）",
+      "变更字段与变更理由",
+      "声明变更与已观察结果无关的独立理由",
+      "保留旧版本文件，不覆盖"
+    ],
+    "exception": "blind_test 后只能追加勘误（erratum），不得改变主指标、切分与通过条件"
+  },
+
+  "integrity_guards": {
+    "blind_test_metrics_not_read_before_lock": true,
+    "no_hark": true,
+    "no_cherry_picking_samples": true,
+    "no_fabricated_significance": true,
+    "hash_lock_file": "configs/phase7-preregistered-protocol-v1.sha256",
+    "pinned_hash_in_tests": "tests/phase7/test_preregistration.py"
+  }
+}
