@@ -1,8 +1,8 @@
 # Phase4-3B 测试结果
 
-- 生成时间：2026-10-31T04:41:46
-- 运行用例：127，耗时 74.672s
-- PASS=127 FAIL=0 ERROR=0 SKIP=0
+- 生成时间：2026-10-31T15:35:22
+- 运行用例：18，耗时 0.388s
+- PASS=18 FAIL=0 ERROR=0 SKIP=0
 
 | 组 | 模块 | 说明 |
 |---|---|---|
@@ -16,3 +16,5 @@
 | P8 | `test_p8_evaluation_metrics` | 排序指标正确性 / 小样本与空样本 / 指标适用性 |
 | P9 | `test_p9_reproducibility` | 同输入同输出 / 固定种子 / 推理不改权重 |
 | P10 | `test_p10_privacy_guards` | 日志与导出不落简历原文 / 冻结数据不可修改 |
+| P11 | `test_p11_reproducibility_guards` | 仓库根解析可移植 / 行尾与冻结完整性回归护栏 |
+| P12 | `test_p12_runtime_guard` | 推理超时契约 / 降级契约 / 统一模型输出信封 |
