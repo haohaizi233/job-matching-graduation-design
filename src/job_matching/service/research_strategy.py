@@ -53,6 +53,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import threading
 import time
 from dataclasses import dataclass, field
 
@@ -68,7 +69,7 @@ from .logging_utils import get_service_logger
 
 __all__ = [
     "StrategySpec", "RESEARCH_STRATEGY_SPECS", "ResearchRetrievalScorer",
-    "build_scorer", "INDEX_CACHE", "RecallIndexCache",
+    "build_scorer", "INDEX_CACHE", "RecallIndexCache", "INDEX_SCHEMA_VERSION",
 ]
 
 LOG = get_service_logger("job_matching.service.research_strategy")
@@ -183,60 +184,79 @@ RESEARCH_STRATEGY_SPECS: dict[str, StrategySpec] = {
 }
 
 
+#: 索引 schema 版本：索引结构/语义变化时升级（缓存键组成部分，旧索引自动失效）
+INDEX_SCHEMA_VERSION = 1
+
+
 # ------------------------------------------------------------------ 索引缓存
 class RecallIndexCache:
-    """召回索引生命周期管理：内容哈希 + 索引版本 + 容量上限 + 安全失效。
+    """召回索引生命周期管理：内容哈希 + 煍略/配置版本 + 容量上限 + 并发安全失效。
 
     * 索引构建与查询分离：`build` 只在缓存未命中时发生；
-    * 键 = (策略标识, 岗位文本内容哈希)，岗位新增/修改即产生新键 = 安全失效；
+    * 键 = (策略标识, 检索配置哈希, 索引 schema 版本, 岗位文本内容哈希)。
+      岗位新增/修改、rrf_k 等检索配置、编码器版本、策略版本变化均产生新键 = 安全失效；
+    * 并发安全：`get_or_build` 持锁 check-then-act，同一键并发只构建一次
+      （builder 在锁外执行会引入重复构建，锁内执行对索引构建是可接受的串行点）；
     * 容量上限（默认 8 个索引）控制内存，超出按 LRU 淘汰。
     """
 
     def __init__(self, max_entries: int = 8):
         self.max_entries = int(max_entries)
         self._entries: dict[str, dict] = {}
+        self._lock = threading.Lock()
         self.build_count = 0
         self.hit_count = 0
         self.evict_count = 0
 
     @staticmethod
-    def content_key(strategy_id: str, docs: list[str]) -> str:
-        blob = json.dumps({"s": strategy_id, "d": list(docs)}, ensure_ascii=False,
-                          sort_keys=True).encode("utf-8")
+    def content_key(strategy_id: str, docs: list[str],
+                    config: dict | None = None) -> str:
+        """缓存键：覆盖全部影响索引内容/检索语义的输入。
+
+        config 建议包含：retrieval（检索配置如 rrf_k）、encoder_tag（编码器/
+        Embedding 版本）、strategy_version（策略实现版本）、scoring_config_version、
+        schema（索引 schema 版本）。缺省 config 时与历史键口径兼容（仅策略+文档）。
+        """
+        blob = json.dumps({"s": strategy_id, "d": list(docs),
+                           "c": dict(config or {})},
+                          ensure_ascii=False, sort_keys=True).encode("utf-8")
         return hashlib.sha256(blob).hexdigest()
 
     def get_or_build(self, key: str, builder):
-        if key in self._entries:
-            self.hit_count += 1
-            ent = self._entries.pop(key)          # LRU 触碰
-            self._entries[key] = ent
-            return ent
-        t0 = time.perf_counter()
-        index = builder()
-        self._entries[key] = {
-            "index": index,
-            "index_version": key[:16],
-            "built_ms": round((time.perf_counter() - t0) * 1000, 3),
-            "built_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
-        }
-        self.build_count += 1
-        while len(self._entries) > self.max_entries:
-            self._entries.pop(next(iter(self._entries)))
-            self.evict_count += 1
-        return self._entries[key]
+        with self._lock:
+            if key in self._entries:
+                self.hit_count += 1
+                ent = self._entries.pop(key)          # LRU 触碰
+                self._entries[key] = ent
+                return ent
+            t0 = time.perf_counter()
+            index = builder()
+            self._entries[key] = {
+                "index": index,
+                "index_version": key[:16],
+                "built_ms": round((time.perf_counter() - t0) * 1000, 3),
+                "built_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            }
+            self.build_count += 1
+            while len(self._entries) > self.max_entries:
+                self._entries.pop(next(iter(self._entries)))
+                self.evict_count += 1
+            return self._entries[key]
 
     def invalidate(self, key: str | None = None) -> int:
-        before = len(self._entries)
-        if key is None:
-            self._entries.clear()
-        else:
-            self._entries.pop(key, None)
-        return before - len(self._entries)
+        with self._lock:
+            before = len(self._entries)
+            if key is None:
+                self._entries.clear()
+            else:
+                self._entries.pop(key, None)
+            return before - len(self._entries)
 
     def stats(self) -> dict:
-        return {"entries": len(self._entries), "max_entries": self.max_entries,
-                "builds": self.build_count, "hits": self.hit_count,
-                "evictions": self.evict_count}
+        with self._lock:
+            return {"entries": len(self._entries), "max_entries": self.max_entries,
+                    "builds": self.build_count, "hits": self.hit_count,
+                    "evictions": self.evict_count}
 
 
 #: 进程级索引缓存（同一岗位集多次推荐复用同一索引）
@@ -401,6 +421,55 @@ class ResearchRetrievalScorer:
         self._reranker_error: ServiceError | None = None
         self.cache = cache or INDEX_CACHE
 
+    # ---------------------------------------------------------- 资源标识
+    def warmup(self) -> dict:
+        """预加载重资源（编码器/精排器），把冷加载移出请求 deadline 预算。
+
+        背景缺陷（R2 超时审计）：BGE 编码器/精排器冷加载（权重读取 + 框架初始化）
+        发生在首个请求的 `rank()` 内，而请求 deadline（默认 30s）从进入服务开始计时；
+        冷加载属不可中断的底层 PyTorch 阶段，协作式 deadline 无法切分它——首个请求
+        可能在加载完成后的下一处检查点被误判 INFERENCE_TIMEOUT（实测本机冷加载
+        30–50s）。兼容方案：部署/预热阶段显式调用 warmup()，把加载时间移出请求预算。
+        不得声称软超时能强制中断不可中断的底层推理。
+        """
+        loaded = []
+        if self.spec.use_embedding:
+            self._get_encoder()
+            loaded.append("bge_encoder")
+        if self.spec.use_reranker:
+            self._get_reranker()
+            loaded.append("reranker")
+        return {"model_id": self.spec.model_id, "preloaded": loaded,
+                "index_cache": self.cache.stats()}
+
+    def _encoder_tag(self) -> str:
+        """编码器/Embedding 版本标识（缓存键组成部分）。
+
+        仅在 use_embedding 时有意义：编码器 revision 变化 -> 旧向量索引失效。
+        未加载编码器时返回策略声明的默认标识（加载后会以实际 revision 为准，
+        首次构建必然未命中缓存，不存在用旧标识命中旧索引的问题）。
+        """
+        if not self.spec.use_embedding:
+            return "lexical_only"
+        enc = self._encoder
+        if enc is None:
+            return "bge_small_zh_v15@pending"
+        info = None
+        try:
+            if callable(getattr(enc, "describe", None)):
+                info = enc.describe()      # 契约：EncoderInfo（dataclass）
+        except Exception:  # noqa: BLE001 —— describe 失败不阻断，降级为类名标识
+            info = None
+        if info is None:
+            return f"{type(enc).__name__}@unknown"
+        # 严格按 EncoderInfo 契约取字段（dataclass 或 dict 两种形态兼容）
+        if isinstance(info, dict):
+            model_id, revision = info.get("model_id"), info.get("revision")
+        else:
+            model_id = getattr(info, "model_id", None)
+            revision = getattr(info, "revision", None)
+        return f"{model_id or type(enc).__name__}@{revision or 'unknown'}"
+
     # ---------------------------------------------------------- 资源惰性加载
     def _get_encoder(self):
         if self._encoder is not None:
@@ -494,7 +563,19 @@ class ResearchRetrievalScorer:
                  "missing_fields": ["employment_intention|major|education_level|skills|experiences"]})
 
         docs = [_job_doc_text(j) for j in jobs]
-        content_key = self.cache.content_key(self.spec.model_id, docs)
+        # 缓存键覆盖：策略标识 + 检索配置（rrf_k）+ 编码器标识 + 策略/评分版本
+        # + 索引 schema 版本 + 岗位文本内容哈希（任务 4.1：任何一项变化都安全失效）
+        cache_config = {
+            "retrieval": {"rrf_k": self.rrf_k, "fusion_id": "rrf"},
+            "encoder_tag": self._encoder_tag(),
+            "strategy_version": self.spec.model_version,
+            "scoring_config_version": self.spec.scoring_config_version,
+            "schema": INDEX_SCHEMA_VERSION,
+        }
+        content_key = self.cache.content_key(self.spec.model_id, docs,
+                                             config=cache_config)
+        if deadline_check is not None:
+            deadline_check()      # 建索引（编码/倒排构建）是耗时阶段，构建前先查超时
         entry = self.cache.get_or_build(content_key, lambda: self._build_index(docs))
         index = entry["index"]
 
