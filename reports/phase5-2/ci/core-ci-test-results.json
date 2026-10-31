@@ -1,17 +1,17 @@
 {
   "generated_by": "tests/core_ci/run_all.py",
-  "created_at": "2026-10-31T13:33:55",
-  "seconds": 277.58,
+  "created_at": "2026-10-31T17:00:45",
+  "seconds": 247.23,
   "ok": true,
   "mode": "full",
   "environment": {
-    "python": "3.13.2",
-    "platform": "Windows-11-10.0.26200-SP0",
-    "commit": "25743f200da35546a9ff2e70adafc71a9dedf972"
+    "python": "3.11.18",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "commit": "21ae6e5d6762d4965648371fca96c0940d210049"
   },
   "totals": {
-    "tests": 79,
-    "pass": 79,
+    "tests": 87,
+    "pass": 87,
     "fail": 0,
     "skip": 0
   },
@@ -32,15 +32,15 @@
     },
     "C4": {
       "title": "密钥与泄漏门禁",
-      "total": 19,
-      "pass": 19,
+      "total": 24,
+      "pass": 24,
       "fail": 0,
       "skip": 0
     },
     "C5": {
       "title": "Core CI 工作流契约",
-      "total": 16,
-      "pass": 16,
+      "total": 19,
+      "pass": 19,
       "fail": 0,
       "skip": 0
     }
@@ -379,13 +379,6 @@
     {
       "group": "C4",
       "class": "C4SecretsAndLeaks",
-      "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_models_and_raw_data_untracked",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "group": "C4",
-      "class": "C4SecretsAndLeaks",
       "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_no_hardcoded_local_absolute_path_in_service_layer",
       "status": "PASS",
       "detail": ""
@@ -401,6 +394,13 @@
       "group": "C4",
       "class": "C4SecretsAndLeaks",
       "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_no_secret_material_in_tracked_files",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4SecretsAndLeaks",
+      "test_id": "test_c4_privacy_security.C4SecretsAndLeaks.test_raw_and_private_data_untracked_model_artifacts_whitelisted",
       "status": "PASS",
       "detail": ""
     },
@@ -496,6 +496,55 @@
       "detail": ""
     },
     {
+      "group": "C4",
+      "class": "C4EncodingIntegrity",
+      "test_id": "test_c4_privacy_security.C4EncodingIntegrity.test_gitignore_sensitive_rules_still_present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4EncodingIntegrity",
+      "test_id": "test_c4_privacy_security.C4EncodingIntegrity.test_root_config_files_are_utf8_and_lf",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4EncodingIntegrity",
+      "test_id": "test_c4_privacy_security.C4EncodingIntegrity.test_root_config_files_declare_lf_attribute",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4EncodingIntegrity",
+      "test_id": "test_c4_privacy_security.C4EncodingIntegrity.test_tracked_text_files_are_strict_utf8",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C4",
+      "class": "C4EncodingIntegrity",
+      "test_id": "test_c4_privacy_security.C4EncodingIntegrity.test_utf8_decode_errors_are_not_masked_in_gate",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_artifact_integrity_invocation_requires_manifest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_artifact_integrity_root_is_project_root",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "group": "C5",
       "class": "C5WorkflowContract",
       "test_id": "test_c5_ci_contract.C5WorkflowContract.test_artifact_job_is_not_required_for_core",
@@ -555,6 +604,13 @@
       "group": "C5",
       "class": "C5WorkflowContract",
       "test_id": "test_c5_ci_contract.C5WorkflowContract.test_core_ci_writes_run_identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "group": "C5",
+      "class": "C5WorkflowContract",
+      "test_id": "test_c5_ci_contract.C5WorkflowContract.test_integrity_checker_resolves_project_root_relative_paths",
       "status": "PASS",
       "detail": ""
     },

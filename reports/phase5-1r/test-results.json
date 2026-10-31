@@ -1,7 +1,7 @@
 {
   "generated_by": "tests/phase5_1r/run_all.py",
-  "created_at": "2026-10-31T13:28:22",
-  "seconds": 96.06,
+  "created_at": "2026-10-31T16:53:05",
+  "seconds": 44.42,
   "ok": true,
   "mode": "full",
   "requested_group": null,
@@ -14,23 +14,23 @@
     "test_r6_e2e_chains"
   ],
   "environment": {
-    "python": "3.13.2",
-    "python_full": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]",
-    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.11.18",
+    "python_full": "3.11.18 | packaged by Anaconda, Inc. | (main, Oct 26 2026, 18:13:29) [MSC v.1942 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
     "dependencies": {
-      "fastapi": "0.120.3",
-      "pydantic": "2.9.2",
+      "fastapi": "0.115.6",
+      "pydantic": "2.10.4",
       "httpx": "0.28.1",
-      "uvicorn": "0.35.0",
-      "numpy": "2.2.6",
-      "scipy": "1.17.0rc1",
-      "sklearn": "1.8.0",
-      "joblib": "1.5.3",
-      "pandas": "3.0.0rc1",
-      "torch": "2.12.0+cpu",
+      "uvicorn": "0.34.0",
+      "numpy": "1.26.4",
+      "scipy": "1.15.3",
+      "sklearn": "1.5.2",
+      "joblib": "1.6.0",
+      "pandas": "2.2.3",
+      "torch": "2.1.2+cu121",
       "yaml": "6.0.2"
     },
-    "commit": "25743f200da35546a9ff2e70adafc71a9dedf972",
+    "commit": "21ae6e5d6762d4965648371fca96c0940d210049",
     "worktree": "dirty"
   },
   "totals": {

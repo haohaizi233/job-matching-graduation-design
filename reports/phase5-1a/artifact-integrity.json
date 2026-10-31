@@ -1,12 +1,48 @@
 {
   "generated_by": "scripts/phase5_1a/check_artifact_integrity.py",
-  "created_at": "2026-10-29T14:36:04",
+  "created_at": "2026-10-31T17:00:59",
   "capability_boundary": "普通哈希完整性自检：可发现非预期变化（误改/误删/清单外新增），不等于可信签名防篡改；不得据此声称数据已防恶意篡改或已匿名化",
+  "status": "PASS",
+  "status_reason": "1 份 manifest 全部完整",
+  "require_manifest": true,
   "manifests_checked": 1,
   "manifests_ok": 1,
+  "run_identity": {
+    "run_id": "phase6-m0-final-20261031-165637",
+    "git_commit": "21ae6e5d6762d4965648371fca96c0940d210049",
+    "git_dirty": true,
+    "execution_time": "2026-10-31T09:00:47Z",
+    "python_version": "3.11.18",
+    "python_executable": "C:\\Users\\MemoryLeak\\miniconda3\\envs\\graduation-design\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "dependency_versions": {
+      "numpy": "1.26.4",
+      "pandas": "2.2.3",
+      "sklearn": "1.5.2",
+      "joblib": "1.6.0",
+      "torch": "2.1.2+cu121",
+      "fastapi": "0.115.6",
+      "pydantic": "2.10.4",
+      "sqlalchemy": "2.0.36",
+      "alembic": "1.14.0",
+      "argon2": "23.1.0",
+      "yaml": "6.0.2",
+      "httpx": "0.28.1",
+      "fitz": "1.24.14",
+      "docx": "1.1.2"
+    },
+    "artifact_count": 1,
+    "status": "PASS",
+    "extra": {
+      "scan_root": "D:\\desktop\\毕业设计",
+      "scan_glob": "data/independent_eval/**/manifest*.json",
+      "require_manifest": true,
+      "tool": "check_artifact_integrity"
+    }
+  },
   "results": [
     {
-      "manifest": "data\\independent_eval\\frozen\\pool_v1\\manifest.json",
+      "manifest": "data/independent_eval/frozen/pool_v1/manifest.json",
       "stage": "pool",
       "dataset_version": "dv-fd3762f85658",
       "frozen_at": "2026-10-29T10:20:54",
@@ -39,7 +75,7 @@
           "match": true,
           "expected": "13bf2581e8784041f83b7278ce88a5d94e8902d91a08232e52fba04149d28b81",
           "actual": "13bf2581e8784041f83b7278ce88a5d94e8902d91a08232e52fba04149d28b81",
-          "resolved": "data\\independent_eval\\pool\\job_pool_v1.jsonl"
+          "resolved": "data/independent_eval/pool/job_pool_v1.jsonl"
         },
         {
           "key": "pairs",
@@ -48,7 +84,7 @@
           "match": true,
           "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
           "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "resolved": "data\\independent_eval\\pairs\\pairs_v1.jsonl"
+          "resolved": "data/independent_eval/pairs/pairs_v1.jsonl"
         },
         {
           "key": "pairs_synthetic",
@@ -57,7 +93,7 @@
           "match": true,
           "expected": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8",
           "actual": "722b3da279f13738e109049a1dfe0a74ba23aef0045f24d4aa8c1d8026372fd8",
-          "resolved": "data\\independent_eval\\pairs\\pairs_synthetic_v1.jsonl"
+          "resolved": "data/independent_eval/pairs/pairs_synthetic_v1.jsonl"
         },
         {
           "key": "pool_manifest",
@@ -66,7 +102,7 @@
           "match": true,
           "expected": "b074f04d7180d47de7c0c8e205ba2a388506e99baa512737760078f34efc5c95",
           "actual": "b074f04d7180d47de7c0c8e205ba2a388506e99baa512737760078f34efc5c95",
-          "resolved": "data\\independent_eval\\pool\\pool_manifest_v1.json"
+          "resolved": "data/independent_eval/pool/pool_manifest_v1.json"
         }
       ],
       "problems": [],

@@ -84,9 +84,15 @@ jobs:
 
       - name: 完整性检查器自检（合成冻结夹具，必需 manifest）
         run: |
+          # --root 必须是项目根：manifest 内登记的是**项目根相对路径**
+          # （如 data/independent_eval/pool/job_pool_v1.jsonl）。
+          # 若把 --root 指向 data/independent_eval，路径会解析到
+          # data/independent_eval/data/independent_eval/... 而误判「文件缺失」；
+          # 该缺陷曾被前置步骤失败所掩盖（后续步骤被 skip），见 C5 门禁。
           python scripts/phase5_1a/check_artifact_integrity.py \
-            --root data/independent_eval --glob '**/manifest*.json' \
-            --require-manifest --quiet
+            --root . --glob 'data/independent_eval/**/manifest*.json' \
+            --require-manifest --quiet \
+            --out reports/phase5-1a/artifact-integrity.json
 
       - name: 干净 checkout 可移植性验证（证明不依赖真实数据/权重）
         run: python scripts/phase5_1a/verify_fresh_checkout.py
@@ -311,9 +317,15 @@ jobs:
 
       - name: 完整性检查（真实冻结产物，必需 manifest）
         run: |
+          # --root 必须是项目根：manifest 内登记的是**项目根相对路径**
+          # （如 data/independent_eval/pool/job_pool_v1.jsonl）。
+          # 若把 --root 指向 data/independent_eval，路径会解析到
+          # data/independent_eval/data/independent_eval/... 而误判「文件缺失」；
+          # 该缺陷曾被前置步骤失败所掩盖（后续步骤被 skip），见 C5 门禁。
           python scripts/phase5_1a/check_artifact_integrity.py \
-            --root data/independent_eval --glob '**/manifest*.json' \
-            --require-manifest --quiet
+            --root . --glob 'data/independent_eval/**/manifest*.json' \
+            --require-manifest --quiet \
+            --out reports/phase5-1a/artifact-integrity.json
 
       - name: Artifact-dependent 状态登记（PASS/FAIL/BLOCKED/NOT_RUN/ENV_INCOMPATIBLE）
         run: |
