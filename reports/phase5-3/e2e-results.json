@@ -1,0 +1,257 @@
+{
+  "generated_at": "2026-10-31T11:19:27+08:00",
+  "run_id": "m3-e2e-20261031-110657",
+  "raw_source": "frontend/e2e/.artifacts/e2e-raw.json",
+  "environment": {
+    "base_url": "http://127.0.0.1:5173",
+    "backend": "tests/e2e/serve_backend.py（隔离 sqlite + 隔离存储）",
+    "fixtures": "tests/e2e/fixtures.py（全部合成数据 is_synthetic）",
+    "playwright": "1.64.1"
+  },
+  "totals": {
+    "tests": 17,
+    "pass": 17,
+    "fail": 0,
+    "skip": 0,
+    "duration_ms": 131254
+  },
+  "scenarios": [
+    {
+      "id": "E01",
+      "title": "注册、登录、退出",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e01-auth.spec.ts",
+          "title": "UI 注册 → 登录 → 退出登录 → 再登录（真实会话撤销）",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 8185,
+          "errors": [],
+          "steps": []
+        },
+        {
+          "file": "e01-auth.spec.ts",
+          "title": "E01 登录凭证错误给出真实错误提示且不进入工作台",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 2684,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "title": "上传简历与解析",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e02-resume-upload.spec.ts",
+          "title": "上传合成简历 → 简历列表显示解析结果 → 我的画像呈现抽取字段",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 5731,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E03",
+      "title": "简历解析失败及重试",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e03-resume-parse-failures.spec.ts",
+          "title": "空文件 / 损坏文档报错，不可解析正文标记部分解析，并可重新解析",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 6141,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E04",
+      "title": "画像修改、确认、版本历史",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e04-profile-edit-confirm.spec.ts",
+          "title": "修改画像字段 → 保存新版本 → 确认 → 版本历史可回看",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 9672,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E05",
+      "title": "岗位查询、筛选与详情",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e05-jobs.spec.ts",
+          "title": "岗位列表真实加载 → 关键词筛选 → 详情页 → 返回列表",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 6463,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E06",
+      "title": "发起推荐与解释展示",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e06-matching.spec.ts",
+          "title": "发起匹配得到真实推荐结果并展示解释与免责声明",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 9232,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E07",
+      "title": "推荐历史与 CSV 导出",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e07-history-export.spec.ts",
+          "title": "推荐历史展示真实运行记录并可导出 CSV",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 9555,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E08",
+      "title": "反馈提交与状态回显",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e08-feedback.spec.ts",
+          "title": "提交反馈 → 提示成功 → 刷新后状态从服务端回显",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 12450,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E09",
+      "title": "未认证及 Token 失效",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e09-auth-guard.spec.ts",
+          "title": "未登录访问受保护页被引导到登录页",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 1630,
+          "errors": [],
+          "steps": []
+        },
+        {
+          "file": "e09-auth-guard.spec.ts",
+          "title": "未带 Token 的业务 API 由服务端拒绝（401）",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 427,
+          "errors": [],
+          "steps": []
+        },
+        {
+          "file": "e09-auth-guard.spec.ts",
+          "title": "失效 Token 触发全局会话复位并回到登录页",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 6433,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E10",
+      "title": "多用户数据隔离",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e10-isolation.spec.ts",
+          "title": "用户 B 看不到用户 A 的简历、推荐历史与反馈",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 13965,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E11",
+      "title": "空数据、网络错误与 API 失败",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e11-error-states.spec.ts",
+          "title": "空数据展示合理空态与引导",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 4260,
+          "errors": [],
+          "steps": []
+        },
+        {
+          "file": "e11-error-states.spec.ts",
+          "title": "网络中断登记真实错误码并降级为空态（无假数据）",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 11835,
+          "errors": [],
+          "steps": []
+        },
+        {
+          "file": "e11-error-states.spec.ts",
+          "title": "服务端 500 展示真实错误码且不展示假数据",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 9751,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    },
+    {
+      "id": "E12",
+      "title": "页面刷新与基础响应式检查",
+      "status": "PASS",
+      "tests": [
+        {
+          "file": "e12-refresh-responsive.spec.ts",
+          "title": "刷新后会话保持，缩小视口核心功能仍可用",
+          "status": "PASSED",
+          "expected_status": "passed",
+          "duration_ms": 12840,
+          "errors": [],
+          "steps": []
+        }
+      ]
+    }
+  ]
+}

@@ -605,7 +605,12 @@ async function handleViewVersion(version: number) {
             >
               {{ savingEdits ? '保存中…' : '保存修改' }}
             </button>
-            <button type="button" class="btn-confirm" :disabled="confirming" @click="handleConfirmProfile">
+            <button
+              type="button"
+              class="btn-confirm"
+              :disabled="confirming || !profile"
+              @click="handleConfirmProfile"
+            >
               {{ confirming ? '确认中…' : '确认当前画像' }}
             </button>
           </div>
