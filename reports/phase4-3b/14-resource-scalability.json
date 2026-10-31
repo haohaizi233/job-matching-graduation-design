@@ -1,0 +1,331 @@
+{
+  "generated_by": "scripts/phase4_3b/run_scalability_benchmark.py",
+  "git_commit": "d7babaa16da28041c50cd4cb0c9663427fa909f1",
+  "label_source": "synthetic_deterministic_pool_expansion",
+  "gold_status": "BLOCKED",
+  "quality_metrics_computed": false,
+  "base_pool_file": "data/independent_eval/pool/job_pool_v1.jsonl",
+  "base_pool_size": 150,
+  "queries": 8,
+  "top_ks": [
+    5,
+    10,
+    20
+  ],
+  "device": "cpu",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "dependency_versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.5.2",
+    "torch": "2.1.2+cu121",
+    "transformers": "4.40.2",
+    "psutil": "7.2.2",
+    "joblib": "1.6.0"
+  },
+  "boundary": "模型侧：含分词/向量化/索引/检索；不含数据库、网络与简历解析管线",
+  "pool_sizes": [
+    {
+      "pool_size": 150,
+      "pool_source": "synthetic_deterministic_pool_expansion",
+      "tfidf": {
+        "index_id": "tfidf_char",
+        "build_seconds": 2.5225,
+        "search_top5_seconds": 0.1209,
+        "search_top10_seconds": 0.0085,
+        "search_top20_seconds": 0.0087,
+        "py_peak_mb": null,
+        "rss_peak_mb": 147.098,
+        "rss_delta_mb": 107.539,
+        "status": "RUN",
+        "wall_seconds": 2.7212
+      },
+      "bm25": {
+        "index_id": "bm25_okapi",
+        "build_seconds": 1.0347,
+        "search_top5_seconds": 0.5292,
+        "search_top10_seconds": 0.5103,
+        "search_top20_seconds": 0.7983,
+        "py_peak_mb": null,
+        "rss_peak_mb": 199.891,
+        "rss_delta_mb": 57.691,
+        "status": "RUN",
+        "wall_seconds": 2.8741
+      },
+      "embedding_hash": {
+        "index_id": "embedding_cosine",
+        "encoder": {
+          "encoder_id": "hash_ngram",
+          "model_id": "job-matching/hash-ngram",
+          "revision": "dim512-ng24-seed0",
+          "license": "project-internal",
+          "dim": 512,
+          "normalization": "l2",
+          "max_length": 512,
+          "device": "cpu",
+          "backend": "sklearn-free-hashing",
+          "offline": true,
+          "notes": "确定性特征哈希，无预训练语义；仅作可执行基线"
+        },
+        "encode_corpus_seconds": 0.3805,
+        "build_seconds": 0.3534,
+        "search_top5_seconds": 0.027,
+        "search_top10_seconds": 0.0231,
+        "search_top20_seconds": 0.0255,
+        "py_peak_mb": null,
+        "rss_peak_mb": 200.328,
+        "rss_delta_mb": 0.457,
+        "status": "RUN",
+        "wall_seconds": 0.8354
+      }
+    },
+    {
+      "pool_size": 500,
+      "pool_source": "synthetic_deterministic_pool_expansion",
+      "tfidf": {
+        "index_id": "tfidf_char",
+        "build_seconds": 0.5487,
+        "search_top5_seconds": 0.0168,
+        "search_top10_seconds": 0.0167,
+        "search_top20_seconds": 0.0171,
+        "py_peak_mb": null,
+        "rss_peak_mb": 220.047,
+        "rss_delta_mb": 12.965,
+        "status": "RUN",
+        "wall_seconds": 0.6446
+      },
+      "bm25": {
+        "index_id": "bm25_okapi",
+        "build_seconds": 0.5389,
+        "search_top5_seconds": 1.7114,
+        "search_top10_seconds": 1.9062,
+        "search_top20_seconds": 2.3093,
+        "py_peak_mb": null,
+        "rss_peak_mb": 206.734,
+        "rss_delta_mb": 0.07,
+        "status": "RUN",
+        "wall_seconds": 6.4872
+      },
+      "embedding_hash": {
+        "index_id": "embedding_cosine",
+        "encoder": {
+          "encoder_id": "hash_ngram",
+          "model_id": "job-matching/hash-ngram",
+          "revision": "dim512-ng24-seed0",
+          "license": "project-internal",
+          "dim": 512,
+          "normalization": "l2",
+          "max_length": 512,
+          "device": "cpu",
+          "backend": "sklearn-free-hashing",
+          "offline": true,
+          "notes": "确定性特征哈希，无预训练语义；仅作可执行基线"
+        },
+        "encode_corpus_seconds": 2.0571,
+        "build_seconds": 1.3344,
+        "search_top5_seconds": 0.0259,
+        "search_top10_seconds": 0.0265,
+        "search_top20_seconds": 0.0255,
+        "py_peak_mb": null,
+        "rss_peak_mb": 209.656,
+        "rss_delta_mb": 2.941,
+        "status": "RUN",
+        "wall_seconds": 3.4924
+      }
+    },
+    {
+      "pool_size": 1000,
+      "pool_source": "synthetic_deterministic_pool_expansion",
+      "tfidf": {
+        "index_id": "tfidf_char",
+        "build_seconds": 0.9469,
+        "search_top5_seconds": 0.035,
+        "search_top10_seconds": 0.0339,
+        "search_top20_seconds": 0.0433,
+        "py_peak_mb": null,
+        "rss_peak_mb": 233.215,
+        "rss_delta_mb": 15.02,
+        "status": "RUN",
+        "wall_seconds": 1.072
+      },
+      "bm25": {
+        "index_id": "bm25_okapi",
+        "build_seconds": 1.3494,
+        "search_top5_seconds": 4.9405,
+        "search_top10_seconds": 5.0201,
+        "search_top20_seconds": 4.5006,
+        "py_peak_mb": null,
+        "rss_peak_mb": 210.211,
+        "rss_delta_mb": -3.191,
+        "status": "RUN",
+        "wall_seconds": 15.8678
+      },
+      "embedding_hash": {
+        "index_id": "embedding_cosine",
+        "encoder": {
+          "encoder_id": "hash_ngram",
+          "model_id": "job-matching/hash-ngram",
+          "revision": "dim512-ng24-seed0",
+          "license": "project-internal",
+          "dim": 512,
+          "normalization": "l2",
+          "max_length": 512,
+          "device": "cpu",
+          "backend": "sklearn-free-hashing",
+          "offline": true,
+          "notes": "确定性特征哈希，无预训练语义；仅作可执行基线"
+        },
+        "encode_corpus_seconds": 4.1328,
+        "build_seconds": 3.2006,
+        "search_top5_seconds": 0.0274,
+        "search_top10_seconds": 0.026,
+        "search_top20_seconds": 0.0294,
+        "py_peak_mb": null,
+        "rss_peak_mb": 209.766,
+        "rss_delta_mb": 1.977,
+        "status": "RUN",
+        "wall_seconds": 7.4403
+      }
+    },
+    {
+      "pool_size": 5000,
+      "pool_source": "synthetic_deterministic_pool_expansion",
+      "tfidf": {
+        "index_id": "tfidf_char",
+        "build_seconds": 4.7124,
+        "search_top5_seconds": 0.1944,
+        "search_top10_seconds": 0.173,
+        "search_top20_seconds": 0.1451,
+        "py_peak_mb": null,
+        "rss_peak_mb": 367.043,
+        "rss_delta_mb": 49.859,
+        "status": "RUN",
+        "wall_seconds": 5.237
+      },
+      "bm25": {
+        "index_id": "bm25_okapi",
+        "build_seconds": 6.1105,
+        "search_top5_seconds": 19.8544,
+        "search_top10_seconds": 19.8358,
+        "search_top20_seconds": 22.0592,
+        "py_peak_mb": null,
+        "rss_peak_mb": 246.09,
+        "rss_delta_mb": -122.969,
+        "status": "RUN",
+        "wall_seconds": 67.9086
+      },
+      "embedding_hash": {
+        "index_id": "embedding_cosine",
+        "encoder": {
+          "encoder_id": "hash_ngram",
+          "model_id": "job-matching/hash-ngram",
+          "revision": "dim512-ng24-seed0",
+          "license": "project-internal",
+          "dim": 512,
+          "normalization": "l2",
+          "max_length": 512,
+          "device": "cpu",
+          "backend": "sklearn-free-hashing",
+          "offline": true,
+          "notes": "确定性特征哈希，无预训练语义；仅作可执行基线"
+        },
+        "encode_corpus_seconds": 17.3106,
+        "build_seconds": 20.1416,
+        "search_top5_seconds": 0.0392,
+        "search_top10_seconds": 0.0325,
+        "search_top20_seconds": 0.0337,
+        "py_peak_mb": null,
+        "rss_peak_mb": 57.441,
+        "rss_delta_mb": -30.062,
+        "status": "RUN",
+        "wall_seconds": 37.567
+      }
+    },
+    {
+      "pool_size": 10000,
+      "pool_source": "synthetic_deterministic_pool_expansion",
+      "tfidf": {
+        "index_id": "tfidf_char",
+        "build_seconds": 9.7379,
+        "search_top5_seconds": 0.5002,
+        "search_top10_seconds": 0.3638,
+        "search_top20_seconds": 0.4421,
+        "py_peak_mb": null,
+        "rss_peak_mb": 359.062,
+        "rss_delta_mb": 122.82,
+        "status": "RUN",
+        "wall_seconds": 11.0716
+      },
+      "bm25": {
+        "index_id": "bm25_okapi",
+        "build_seconds": 19.4066,
+        "search_top5_seconds": 42.2487,
+        "search_top10_seconds": 45.624,
+        "search_top20_seconds": 38.3539,
+        "py_peak_mb": null,
+        "rss_peak_mb": 190.719,
+        "rss_delta_mb": 108.191,
+        "status": "RUN",
+        "wall_seconds": 145.7194
+      },
+      "embedding_hash": {
+        "index_id": "embedding_cosine",
+        "encoder": {
+          "encoder_id": "hash_ngram",
+          "model_id": "job-matching/hash-ngram",
+          "revision": "dim512-ng24-seed0",
+          "license": "project-internal",
+          "dim": 512,
+          "normalization": "l2",
+          "max_length": 512,
+          "device": "cpu",
+          "backend": "sklearn-free-hashing",
+          "offline": true,
+          "notes": "确定性特征哈希，无预训练语义；仅作可执行基线"
+        },
+        "encode_corpus_seconds": 33.2245,
+        "build_seconds": 59.7409,
+        "search_top5_seconds": 0.1564,
+        "search_top10_seconds": 0.1083,
+        "search_top20_seconds": 0.1042,
+        "py_peak_mb": null,
+        "rss_peak_mb": 64.465,
+        "rss_delta_mb": -23.707,
+        "status": "RUN",
+        "wall_seconds": 93.3977
+      }
+    }
+  ],
+  "gpu": {
+    "status": "RUN",
+    "reason": null,
+    "device": "cuda",
+    "cuda_available": true,
+    "torch_version": "2.1.2+cu121",
+    "gpu_name": "NVIDIA GeForce RTX 2050",
+    "gpu_total_memory_mb": 4096,
+    "bge_encode": {
+      "model_id": "BAAI/bge-small-zh-v1.5",
+      "revision": "7999e1d3359715c523056ef9478215996d62a620",
+      "license": "MIT",
+      "dim": 512,
+      "load_seconds": 6.696,
+      "encode_texts": 150,
+      "encode_seconds": 1.436,
+      "throughput_texts_per_s": 104.5,
+      "peak_memory_allocated_mb": 484.5,
+      "peak_memory_reserved_mb": 506.0
+    },
+    "bge_reranker": {
+      "reranker_id": "bge_reranker_base",
+      "load_seconds": 5.935,
+      "score_pairs": 32,
+      "score_seconds": 1.166,
+      "throughput_pairs_per_s": 27.4,
+      "truncated_pairs": 31,
+      "peak_memory_allocated_mb": 1253.6,
+      "peak_memory_reserved_mb": 1264.0,
+      "scored_finite": true
+    }
+  }
+}

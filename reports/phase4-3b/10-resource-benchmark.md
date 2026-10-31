@@ -42,12 +42,12 @@ Top-K 规模对延迟无单调影响（候选少、开销由批量构造主导�
 ## 5. 扩展性与部署含义
 
 1. 当前实现为纯 CPU 可运行（满足任务书「CPU 环境可跑基础模型」）；4GB 显存下 BGE-small + reranker-base 也完全可放 GPU，但非必需。
-2. 岗位池 55 条的召回毫秒级完成；千级池量级预计仍在亚秒级（向量点积线性），**未实测**（登记 NOT_RUN）。
+2. 岗位池 55 条的召回毫秒级完成；千级池**已实测**（见 14-resource-scalability.md：10000 条池 TF-IDF search@10 0.36s、向量 search@10 0.11s；BM25 45.6s 为当前实现瓶颈）。
 3. 端到端推荐耗时（含解析/数据库/API）未在本报告测量——属于 Phase5-3 集成侧，本报告边界明确为模型侧。
-4. 显存峰值未测（本轮 CPU）；GPU 混合精度可用性未测（无训练任务）——NOT_RUN。
+4. ~~显存峰值未测~~ → **已测**（14-resource-scalability.md：BGE 编码峰值 84.5 MB、精排峰值 1253.6 MB，4GB 显存充裕）；GPU 混合精度可用性未测（无训练任务）——NOT_RUN。
 
 ## 6. 未执行登记
 
-- 千级/万级岗位池扩展性：NOT_RUN。
-- GPU 推理基准与显存峰值：NOT_RUN。
+- ~~千级/万级岗位池扩展性：NOT_RUN~~ → **已执行**，见 `14-resource-scalability.md`（150/500/1000/5000/10000 五档实测 + GPU 显存峰值）。
+- ~~GPU 推理基准与显存峰值：NOT_RUN~~ → **已执行**，见 `14-resource-scalability.md` 第 3 节（RTX 2050：BGE 编码 504.5 texts/s、峰值 84.5 MB；reranker 27.4 pairs/s、峰值 1253.6 MB）。
 - 含数据库的端到端延迟：NOT_RUN（非本 Agent 职责边界）。

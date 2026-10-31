@@ -1,0 +1,186 @@
+{
+  "generated_by": "scripts/phase4_3b/run_scalability_benchmark.py",
+  "git_commit": "d7babaa16da28041c50cd4cb0c9663427fa909f1",
+  "label_source": "synthetic_deterministic_pool_expansion",
+  "gold_status": "BLOCKED",
+  "quality_metrics_computed": false,
+  "base_pool_file": "data/independent_eval/pool/job_pool_v1.jsonl",
+  "base_pool_size": 150,
+  "queries": 8,
+  "top_ks": [
+    5,
+    10,
+    20
+  ],
+  "device": "cpu",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "dependency_versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.5.2",
+    "torch": "2.1.2+cu121",
+    "transformers": "4.40.2",
+    "psutil": "7.2.2",
+    "joblib": "1.6.0"
+  },
+  "boundary": "模型侧：含分词/向量化/索引/检索；不含数据库、网络与简历解析管线",
+  "pool_sizes": [
+    {
+      "pool_size": 150,
+      "pool_source": "synthetic_deterministic_pool_expansion",
+      "tfidf": {
+        "index_id": "tfidf_char",
+        "build_seconds": 13.6587,
+        "search_top5_seconds": 0.361,
+        "search_top10_seconds": 0.0497,
+        "search_top20_seconds": 0.0432,
+        "py_peak_mb": 71.934,
+        "rss_delta_mb": 127.332,
+        "status": "RUN",
+        "wall_seconds": 14.3323
+      },
+      "bm25": {
+        "index_id": "bm25_okapi",
+        "build_seconds": 57.6276,
+        "search_top5_seconds": 2.2215,
+        "search_top10_seconds": 2.1612,
+        "search_top20_seconds": 2.4033,
+        "py_peak_mb": 57.343,
+        "rss_delta_mb": -70.535,
+        "status": "RUN",
+        "wall_seconds": 64.5019
+      },
+      "embedding_hash": {
+        "index_id": "embedding_cosine",
+        "encoder": {
+          "encoder_id": "hash_ngram",
+          "model_id": "job-matching/hash-ngram",
+          "revision": "dim512-ng24-seed0",
+          "license": "project-internal",
+          "dim": 512,
+          "normalization": "l2",
+          "max_length": 512,
+          "device": "cpu",
+          "backend": "sklearn-free-hashing",
+          "offline": true,
+          "notes": "确定性特征哈希，无预训练语义；仅作可执行基线"
+        },
+        "encode_corpus_seconds": 8.3338,
+        "build_seconds": 3.0043,
+        "search_top5_seconds": 0.1889,
+        "search_top10_seconds": 0.1678,
+        "search_top20_seconds": 0.199,
+        "py_peak_mb": 0.915,
+        "rss_delta_mb": 2.031,
+        "status": "RUN",
+        "wall_seconds": 11.895
+      }
+    },
+    {
+      "pool_size": 500,
+      "pool_source": "synthetic_deterministic_pool_expansion",
+      "tfidf": {
+        "index_id": "tfidf_char",
+        "build_seconds": 1.797,
+        "search_top5_seconds": 0.0389,
+        "search_top10_seconds": 0.0355,
+        "search_top20_seconds": 0.0321,
+        "py_peak_mb": 26.753,
+        "rss_delta_mb": 26.098,
+        "status": "RUN",
+        "wall_seconds": 1.9213
+      },
+      "bm25": {
+        "index_id": "bm25_okapi",
+        "build_seconds": 2.8232,
+        "search_top5_seconds": 3.784,
+        "search_top10_seconds": 3.5397,
+        "search_top20_seconds": 3.2995,
+        "py_peak_mb": 5.681,
+        "rss_delta_mb": 1.293,
+        "status": "RUN",
+        "wall_seconds": 13.4548
+      },
+      "embedding_hash": {
+        "index_id": "embedding_cosine",
+        "encoder": {
+          "encoder_id": "hash_ngram",
+          "model_id": "job-matching/hash-ngram",
+          "revision": "dim512-ng24-seed0",
+          "license": "project-internal",
+          "dim": 512,
+          "normalization": "l2",
+          "max_length": 512,
+          "device": "cpu",
+          "backend": "sklearn-free-hashing",
+          "offline": true,
+          "notes": "确定性特征哈希，无预训练语义；仅作可执行基线"
+        },
+        "encode_corpus_seconds": 10.7678,
+        "build_seconds": 11.2571,
+        "search_top5_seconds": 0.1286,
+        "search_top10_seconds": 0.1349,
+        "search_top20_seconds": 0.1764,
+        "py_peak_mb": 2.968,
+        "rss_delta_mb": -105.973,
+        "status": "RUN",
+        "wall_seconds": 22.4656
+      }
+    },
+    {
+      "pool_size": 1000,
+      "pool_source": "synthetic_deterministic_pool_expansion",
+      "tfidf": {
+        "index_id": "tfidf_char",
+        "build_seconds": 2.7441,
+        "search_top5_seconds": 0.0421,
+        "search_top10_seconds": 0.0422,
+        "search_top20_seconds": 0.0404,
+        "py_peak_mb": 42.885,
+        "rss_delta_mb": 48.812,
+        "status": "RUN",
+        "wall_seconds": 2.8855
+      },
+      "bm25": {
+        "index_id": "bm25_okapi",
+        "build_seconds": 5.8961,
+        "search_top5_seconds": 8.0738,
+        "search_top10_seconds": 8.2965,
+        "search_top20_seconds": 8.4937,
+        "py_peak_mb": 11.269,
+        "rss_delta_mb": 60.871,
+        "status": "RUN",
+        "wall_seconds": 30.7758
+      },
+      "embedding_hash": {
+        "index_id": "embedding_cosine",
+        "encoder": {
+          "encoder_id": "hash_ngram",
+          "model_id": "job-matching/hash-ngram",
+          "revision": "dim512-ng24-seed0",
+          "license": "project-internal",
+          "dim": 512,
+          "normalization": "l2",
+          "max_length": 512,
+          "device": "cpu",
+          "backend": "sklearn-free-hashing",
+          "offline": true,
+          "notes": "确定性特征哈希，无预训练语义；仅作可执行基线"
+        },
+        "encode_corpus_seconds": 21.2439,
+        "build_seconds": 22.6903,
+        "search_top5_seconds": 0.1651,
+        "search_top10_seconds": 0.231,
+        "search_top20_seconds": 0.1621,
+        "py_peak_mb": 5.904,
+        "rss_delta_mb": -99.766,
+        "status": "RUN",
+        "wall_seconds": 44.494
+      }
+    }
+  ],
+  "gpu": {
+    "status": "NOT_RUN",
+    "reason": "--skip-gpu"
+  }
+}
