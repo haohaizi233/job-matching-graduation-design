@@ -24,12 +24,15 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(os.environ.get("JM_ROOT", r"D:\desktop\job-matching-model-research"))
-sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _paths  # noqa: E402
+
+ROOT = _paths.ROOT
+_paths.ensure_src_on_path()
 
 PAIRS_FILE = ROOT / "data/independent_eval/pairs/pairs_synthetic_v1.jsonl"
-OUT_ROOT = ROOT / "reports/model-research"
-OUT_REPORT = ROOT / "reports/phase4-3b/06-retrieval-benchmark.json"
+OUT_ROOT = _paths.MODEL_RESEARCH_DIR
+OUT_REPORT = _paths.PHASE4_3B_DIR / "06-retrieval-benchmark.json"
 
 # 分析者定义的合成夹具代理相关性（NOT gold）
 TIER_RELEVANCE = {

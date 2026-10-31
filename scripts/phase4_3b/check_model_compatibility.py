@@ -24,10 +24,13 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(os.environ.get("JM_ROOT", r"D:\desktop\job-matching-model-research"))
-sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _paths  # noqa: E402
 
-OUT_DIR = ROOT / "reports" / "phase4-3b"
+ROOT = _paths.ROOT
+_paths.ensure_src_on_path()
+
+OUT_DIR = _paths.PHASE4_3B_DIR
 OUT_JSON = OUT_DIR / "model-compatibility-runs.json"
 
 RUN_TARGETS = [

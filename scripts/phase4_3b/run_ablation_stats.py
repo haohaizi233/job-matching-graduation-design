@@ -20,8 +20,11 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(os.environ.get("JM_ROOT", r"D:\desktop\job-matching-model-research"))
-sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _paths  # noqa: E402
+
+ROOT = _paths.ROOT
+_paths.ensure_src_on_path()
 sys.path.insert(0, str(ROOT / "scripts" / "phase4_3b"))
 
 from run_research_experiments import (  # noqa: E402
@@ -29,7 +32,7 @@ from run_research_experiments import (  # noqa: E402
     skill_set, _edu_tokens, _years_min, _to_float, jdump, sha256_file, PAIRS_FILE,
     LABEL_SOURCE)
 
-OUT_ROOT = ROOT / "reports/model-research"
+OUT_ROOT = _paths.MODEL_RESEARCH_DIR
 SEED = 20261031
 N_BOOT = 2000
 
@@ -385,9 +388,9 @@ def main() -> int:
     payload["meta"]["end_time"] = time.strftime("%Y-%m-%dT%H:%M:%S")
     payload["meta"]["total_seconds"] = round(time.time() - t0, 3)
 
-    jdump(payload, ROOT / "reports/phase4-3b/08-ablation-study.json")
-    jdump(payload["statistical"], ROOT / "reports/phase4-3b/09-statistical-analysis.json")
-    jdump(payload["resources"], ROOT / "reports/phase4-3b/10-resource-benchmark.json")
+    jdump(payload, _paths.PHASE4_3B_DIR / "08-ablation-study.json")
+    jdump(payload["statistical"], _paths.PHASE4_3B_DIR / "09-statistical-analysis.json")
+    jdump(payload["resources"], _paths.PHASE4_3B_DIR / "10-resource-benchmark.json")
     jdump(payload, OUT_ROOT / "runs" / f"{run_id}.json")
     print(f"wrote reports/phase4-3b/08-ablation-study.json ({payload['meta']['total_seconds']}s)")
     return 0

@@ -19,9 +19,12 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path(os.environ.get("JM_ROOT", r"D:\desktop\job-matching-model-research"))
-MODELS_ROOT = ROOT / "models"
-OUT_DIR = ROOT / "reports" / "phase4-3b"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _paths  # noqa: E402
+
+ROOT = _paths.ROOT
+MODELS_ROOT = _paths.MODELS_ROOT
+OUT_DIR = _paths.PHASE4_3B_DIR
 OUT_JSON = OUT_DIR / "model-registry.json"
 
 CHECKPOINT_NAMES = ("model.pkl", "model.pt", "checkpoint_best.pt")

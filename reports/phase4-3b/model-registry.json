@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/phase4_3b/build_model_registry.py",
-  "generated_at": "2026-10-31T04:15:04",
-  "scan_root": "D:\\desktop\\job-matching-model-research\\models",
+  "generated_at": "2026-10-31T14:39:59",
+  "scan_root": "D:\\desktop\\毕业设计\\models",
   "probe_environment": {
     "python": "3.11.18",
     "platform": "Windows-10-10.0.26200-SP0",
@@ -512,7 +512,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 10.2069,
+        "load_seconds": 6.5554,
         "loaded_type": "dict",
         "error": null
       },
@@ -1010,7 +1010,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0041,
+        "load_seconds": 0.0023,
         "loaded_type": "dict",
         "error": null
       },
@@ -1508,7 +1508,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0031,
+        "load_seconds": 0.0009,
         "loaded_type": "dict",
         "error": null
       },
@@ -2006,7 +2006,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0027,
+        "load_seconds": 0.0011,
         "loaded_type": "dict",
         "error": null
       },
@@ -2726,7 +2726,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0018,
+        "load_seconds": 0.0009,
         "loaded_type": "dict",
         "error": null
       },
@@ -3446,7 +3446,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.002,
+        "load_seconds": 0.0008,
         "loaded_type": "dict",
         "error": null
       },
@@ -3944,7 +3944,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0019,
+        "load_seconds": 0.0007,
         "loaded_type": "dict",
         "error": null
       },
@@ -4442,7 +4442,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0023,
+        "load_seconds": 0.0009,
         "loaded_type": "dict",
         "error": null
       },
@@ -4480,12 +4480,12 @@
       "seed": null,
       "training_seconds": null,
       "metrics": {
-        "__error__": "FileNotFoundError: [Errno 2] No such file or directory: 'D:\\\\desktop\\\\job-matching-model-research\\\\models\\\\education\\\\charcnn\\\\charcnn-smoke-charcnn-20261028-211911\\\\metrics.json'"
+        "__error__": "FileNotFoundError: [Errno 2] No such file or directory: 'D:\\\\desktop\\\\毕业设计\\\\models\\\\education\\\\charcnn\\\\charcnn-smoke-charcnn-20261028-211911\\\\metrics.json'"
       },
       "artifacts": null,
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.002,
+        "load_seconds": 0.0007,
         "loaded_type": "dict",
         "error": null
       },
@@ -4981,7 +4981,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0019,
+        "load_seconds": 0.0007,
         "loaded_type": "dict",
         "error": null
       },
@@ -5477,7 +5477,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 4.4856,
+        "load_seconds": 4.082,
         "loaded_type": "dict",
         "error": null
       },
@@ -5973,7 +5973,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0053,
+        "load_seconds": 0.0021,
         "loaded_type": "dict",
         "error": null
       },
@@ -6469,7 +6469,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.005,
+        "load_seconds": 0.002,
         "loaded_type": "dict",
         "error": null
       },
@@ -6965,7 +6965,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0064,
+        "load_seconds": 0.0018,
         "loaded_type": "dict",
         "error": null
       },
@@ -7683,7 +7683,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0049,
+        "load_seconds": 0.0021,
         "loaded_type": "dict",
         "error": null
       },
@@ -8179,7 +8179,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 1.3978,
+        "load_seconds": 0.7825,
         "loaded_type": "dict",
         "error": null
       },
@@ -8673,7 +8673,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0035,
+        "load_seconds": 0.0028,
         "loaded_type": "dict",
         "error": null
       },
@@ -8900,7 +8900,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.2837,
+        "load_seconds": 0.7528,
         "loaded_type": "dict",
         "error": null
       },
@@ -9127,7 +9127,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0422,
+        "load_seconds": 0.0103,
         "loaded_type": "dict",
         "error": null
       },
@@ -9354,7 +9354,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0318,
+        "load_seconds": 0.0103,
         "loaded_type": "dict",
         "error": null
       },
@@ -9581,7 +9581,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0361,
+        "load_seconds": 0.0115,
         "loaded_type": "dict",
         "error": null
       },
@@ -9808,7 +9808,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.044,
+        "load_seconds": 0.01,
         "loaded_type": "dict",
         "error": null
       },
@@ -10053,7 +10053,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0024,
+        "load_seconds": 0.0012,
         "loaded_type": "dict",
         "error": null
       },
@@ -10298,7 +10298,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0025,
+        "load_seconds": 0.0009,
         "loaded_type": "dict",
         "error": null
       },
@@ -10543,7 +10543,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.002,
+        "load_seconds": 0.001,
         "loaded_type": "dict",
         "error": null
       },
@@ -10788,7 +10788,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0023,
+        "load_seconds": 0.0009,
         "loaded_type": "dict",
         "error": null
       },
@@ -11033,7 +11033,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0026,
+        "load_seconds": 0.0009,
         "loaded_type": "dict",
         "error": null
       },
@@ -11282,7 +11282,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0021,
+        "load_seconds": 0.0007,
         "loaded_type": "dict",
         "error": null
       },
@@ -11531,7 +11531,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0022,
+        "load_seconds": 0.0008,
         "loaded_type": "dict",
         "error": null
       },
@@ -11780,7 +11780,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.002,
+        "load_seconds": 0.0009,
         "loaded_type": "dict",
         "error": null
       },
@@ -12030,7 +12030,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0023,
+        "load_seconds": 0.0008,
         "loaded_type": "dict",
         "error": null
       },
@@ -12280,7 +12280,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0025,
+        "load_seconds": 0.0009,
         "loaded_type": "dict",
         "error": null
       },
@@ -12530,7 +12530,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0023,
+        "load_seconds": 0.0008,
         "loaded_type": "dict",
         "error": null
       },
@@ -12780,7 +12780,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0021,
+        "load_seconds": 0.0008,
         "loaded_type": "dict",
         "error": null
       },
@@ -13030,7 +13030,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.002,
+        "load_seconds": 0.001,
         "loaded_type": "dict",
         "error": null
       },
@@ -13258,7 +13258,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0015,
+        "load_seconds": 0.0005,
         "loaded_type": "dict",
         "error": null
       },
@@ -13486,7 +13486,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0015,
+        "load_seconds": 0.0005,
         "loaded_type": "dict",
         "error": null
       },
@@ -13714,7 +13714,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0012,
+        "load_seconds": 0.0006,
         "loaded_type": "dict",
         "error": null
       },
@@ -13943,7 +13943,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0014,
+        "load_seconds": 0.0008,
         "loaded_type": "dict",
         "error": null
       },
@@ -14172,7 +14172,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0015,
+        "load_seconds": 0.0007,
         "loaded_type": "dict",
         "error": null
       },
@@ -14401,7 +14401,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0014,
+        "load_seconds": 0.0006,
         "loaded_type": "dict",
         "error": null
       },
@@ -14630,7 +14630,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0014,
+        "load_seconds": 0.0006,
         "loaded_type": "dict",
         "error": null
       },
@@ -14859,7 +14859,7 @@
       ],
       "load_probe": {
         "load_status": "LOADED",
-        "load_seconds": 0.0013,
+        "load_seconds": 0.0006,
         "loaded_type": "dict",
         "error": null
       },

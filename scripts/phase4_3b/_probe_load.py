@@ -6,7 +6,10 @@ import sys
 import time
 import traceback
 
-ROOT = r"D:\desktop\毕业设计\models"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _paths  # noqa: E402
+
+ROOT = str(_paths.MODELS_ROOT)
 PY = sys.version.split()[0]
 import numpy, pandas, sklearn, joblib  # noqa
 print(f"python={PY} numpy={numpy.__version__} pandas={pandas.__version__} "
