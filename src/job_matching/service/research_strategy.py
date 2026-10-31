@@ -56,6 +56,8 @@ import json
 import time
 from dataclasses import dataclass, field
 
+import numpy as np
+
 from ..domain.job_rules import classify_job_category
 from ..models.fusion import FeatureFusion, FusionConfig
 from ..models.retrieval import BM25Recall, EmbeddingRecall, RecallFusion, TfidfRecall
@@ -75,9 +77,15 @@ LOG = get_service_logger("job_matching.service.research_strategy")
 MODEL_VERSION = "zh_research_v1-20261031"
 FEATURE_VERSION = "zh_research_feature_v1"
 SCORING_CONFIG_VERSION = "research_scoring_config_v1"
+# 精排（Cross-Encoder）融合口径升级：原 `weight * (logit / max_logit)` 在全负/零/
+# 混合 logits 下会静默跳过或越界，改为批内 min-max 归一化到 [0,1] 的严格单调变换。
+# 只有使用精排的策略升级到 v2；无精排策略保持 v1，历史结果版本解释不变。
+SCORING_CONFIG_VERSION_RERANK = "research_scoring_config_v2"
 RESEARCH_SCORE_TYPE = "research_fusion_score"
 SERVICE_SCORE_TYPE = "model_raw_score"     # 服务层 SCORE_TYPES 允许值
 RECALL_FUSION_ID = "rrf_k60_bm25_tfidf"
+#: 精排实际作用的最大候选数（Top-50 边界）
+RERANK_TOP_N = 50
 
 
 @dataclass(frozen=True)
@@ -148,7 +156,7 @@ RESEARCH_STRATEGY_SPECS: dict[str, StrategySpec] = {
         model_id="zh_research_rerank_v1",
         model_version=MODEL_VERSION,
         feature_version=FEATURE_VERSION,
-        scoring_config_version=SCORING_CONFIG_VERSION,
+        scoring_config_version=SCORING_CONFIG_VERSION_RERANK,
         score_type=SERVICE_SCORE_TYPE,
         research_score_type=RESEARCH_SCORE_TYPE,
         evaluation_status="research_only_zh",
@@ -162,7 +170,7 @@ RESEARCH_STRATEGY_SPECS: dict[str, StrategySpec] = {
         model_id="zh_research_bge_rerank_v1",
         model_version=MODEL_VERSION,
         feature_version=FEATURE_VERSION,
-        scoring_config_version=SCORING_CONFIG_VERSION,
+        scoring_config_version=SCORING_CONFIG_VERSION_RERANK,
         score_type=SERVICE_SCORE_TYPE,
         research_score_type=RESEARCH_SCORE_TYPE,
         evaluation_status="research_only_zh",
@@ -310,6 +318,69 @@ def _job_doc_text(job: JobProfile) -> str:
     return " ".join(p for p in parts if p).strip()
 
 
+# ------------------------------------------------------------------ 精排输出契约
+def _rerank_contract_error(model_id: str, msg: str, **extra) -> ServiceError:
+    """精排返回值**契约违规**（数据类型/长度/非有限值），明确区别于权重损坏。
+
+    与 MODEL_CORRUPT（真实推理/加载异常）严格区分：契约违规是软件口径问题，
+    不得伪装成模型权重损坏，也不静默吞掉。
+    """
+    detail = {"model_id": model_id, "component": "reranker",
+              "failure_kind": "rerank_output_contract_violation"}
+    detail.update(extra)
+    return ServiceError("INTERNAL_ERROR", msg, detail)
+
+
+def _extract_rerank_scores(result, *, expected: int, model_id: str,
+                           positions: list[int]) -> list[float]:
+    """严格按 RerankResult 契约取出 scores -> 一维有限数值序列。
+
+    * 显式判断 `scores is None`（不能用 `or []`：NumPy 数组布尔歧义）；
+    * 转为一维数值序列；
+    * 校验长度与候选数一致（保证与 job_id/positions 一一对应）；
+    * 校验非 NaN/Inf；
+    * 以上违规 -> 契约错误（非 MODEL_CORRUPT）。
+    """
+    scores = getattr(result, "scores", None)
+    if scores is None:
+        raise _rerank_contract_error(model_id, "精排返回 scores=None（契约要求一维数值数组）",
+                                     expected=expected, positions=positions[:8])
+    try:
+        arr = np.asarray(scores, dtype=np.float64).reshape(-1)
+    except (TypeError, ValueError) as e:
+        raise _rerank_contract_error(
+            model_id, f"精排 scores 无法转为一维数值序列: {type(e).__name__}: {e}",
+            expected=expected) from e
+    if arr.size != expected:
+        raise _rerank_contract_error(
+            model_id, f"精排返回条数与候选数不一致: expected={expected} actual={int(arr.size)}",
+            expected=expected, actual=int(arr.size), positions=positions[:8])
+    if not bool(np.all(np.isfinite(arr))):
+        bad = int(np.sum(~np.isfinite(arr)))
+        raise _rerank_contract_error(
+            model_id, f"精排分数含 NaN/Inf（{bad} 个非有限值），拒绝出层",
+            expected=expected, nonfinite=bad)
+    return [float(x) for x in arr]
+
+
+def _minmax_normalize(raw: list[float]) -> list[float]:
+    """批内 min-max 归一化到 [0,1]，严格单调、数值稳定、可解释。
+
+    口径：
+      * 输入 = Cross-Encoder 原始 Logit（未校准为概率，禁止表述为录用概率）；
+      * 输出 = 「本批精排候选内的相对排序信号」∈ [0,1]，跨请求不可比；
+      * hi > lo 时 `(x-lo)/(hi-lo)` 严格递增；全等（含单元素）退化为中性 0.5，
+        不除零、不产生 NaN/Inf。
+    """
+    if not raw:
+        return []
+    lo = min(raw)
+    hi = max(raw)
+    if hi > lo:
+        return [(x - lo) / (hi - lo) for x in raw]
+    return [0.5] * len(raw)
+
+
 # ------------------------------------------------------------------ 策略执行体
 class ResearchRetrievalScorer:
     """研究推荐策略执行体：召回 -> RRF -> FeatureFusion -> 业务约束 -> Top-K。"""
@@ -427,74 +498,75 @@ class ResearchRetrievalScorer:
         entry = self.cache.get_or_build(content_key, lambda: self._build_index(docs))
         index = entry["index"]
 
-        # ---- 阶段 1/2：召回 + RRF -> 归一化语义分
+        # ---- 阶段 1：召回 + RRF -> 每候选归一化召回语义分
         pool = len(jobs) if not pool_limit else min(len(jobs), max(int(pool_limit), 1))
         hits = index.search([query], top_k=pool, pool=pool)[0]
         recall_scores: dict[int, float] = {int(d): float(s) for d, s in hits}
         max_rrf = max(recall_scores.values()) if recall_scores else 0.0
 
-        rows: list[dict] = []
-        scored_positions: set[int] = set()
-
-        def _eval(pos: int, semantic_score: float | None) -> dict:
-            if deadline_check is not None:
-                deadline_check()
-            resume_in, job_in = build_fusion_inputs(student, jobs[pos])
-            breakdown = self.fusion.score(resume_in, job_in, semantic_score=semantic_score)
-            return {"pos": pos, "breakdown": breakdown}
-
-        # 召回命中的候选：语义分 = RRF 归一化
+        # 候选顺序：召回命中按 (-rrf, pos)，未命中按 pos（全量池补齐 / 截断池跳过）
+        order: list[int] = []
+        recall_sem: dict[int, float | None] = {}
         for pos, rrf in sorted(recall_scores.items(), key=lambda kv: (-kv[1], kv[0])):
-            sem = (rrf / max_rrf) if max_rrf > 0 else None
-            rows.append(_eval(pos, sem))
-            scored_positions.add(pos)
-
-        # 未命中候选：不静默丢弃 —— 全量池下按中性语义分补齐；
-        # 显式截断池下跳过并在结果里登记 truncation。
+            order.append(pos)
+            recall_sem[pos] = (rrf / max_rrf) if max_rrf > 0 else None
         truncated = 0
         for pos in range(len(jobs)):
-            if pos in scored_positions:
+            if pos in recall_sem:
                 continue
             if pool_limit and pool < len(jobs):
                 truncated += 1
                 continue
-            rows.append(_eval(pos, None))
+            order.append(pos)
+            recall_sem[pos] = None
 
-        # ---- 可选阶段：精排（默认关闭）
+        # ---- 阶段 2（可选）：Cross-Encoder 精排（默认关闭，Top-50 边界）
         rerank_applied = False
+        rerank_raw: dict[int, float] = {}
+        rerank_norm: dict[int, float] = {}
+        rerank_truncated = 0
         reranker = self._get_reranker()
-        if reranker is not None and rows:
-            order = [r["pos"] for r in rows[: max(1, min(len(rows), 50))]]
-            queries = [query] * len(order)
-            documents = [_job_doc_text(jobs[p]) for p in order]
+        if reranker is not None and order:
+            if deadline_check is not None:
+                deadline_check()
+            rerank_positions = order[: min(len(order), RERANK_TOP_N)]
+            queries = [query] * len(rerank_positions)
+            documents = [_job_doc_text(jobs[p]) for p in rerank_positions]
             try:
                 rr = reranker.score(queries, documents)
-                rr_scores = list(getattr(rr, "scores", []) or [])
-            except Exception as e:  # noqa: BLE001
+            except Exception as e:  # noqa: BLE001 —— 真实推理/加载异常 -> MODEL_CORRUPT
                 raise ServiceError(
                     "MODEL_CORRUPT",
                     f"精排模型推理失败: {type(e).__name__}: {e}",
                     {"model_id": self.spec.model_id,
                      "failure_kind": "artifact_corrupt_or_load_failed",
                      "component": "reranker"}) from e
-            if len(rr_scores) != len(order):
-                raise ServiceError(
-                    "MODEL_CORRUPT",
-                    f"精排返回条数不一致: expected={len(order)} actual={len(rr_scores)}",
-                    {"model_id": self.spec.model_id, "component": "reranker"})
-            m = max(rr_scores) if rr_scores else 0.0
-            for row, s in zip(rows, rr_scores):
-                if m > 0:
-                    row["breakdown"].contributions["semantic"] = (
-                        row["breakdown"].weights["semantic"] * (float(s) / m))
-                    row["breakdown"].total = float(sum(
-                        row["breakdown"].contributions.values()))
-                    if row["breakdown"].filtered:
-                        row["breakdown"].total = 0.0
-                    row["rerank_score"] = float(s)
+            # 契约校验在 try 之外：返回值类型/长度/非有限值 -> 契约违规，不伪装权重损坏
+            raw_scores = _extract_rerank_scores(
+                rr, expected=len(rerank_positions),
+                model_id=self.spec.model_id, positions=rerank_positions)
+            rerank_truncated = int(getattr(rr, "truncated", 0) or 0)
+            norms = _minmax_normalize(raw_scores)
+            for p, raw, norm in zip(rerank_positions, raw_scores, norms):
+                rerank_raw[p] = raw
+                rerank_norm[p] = norm
             rerank_applied = True
 
-        # ---- 阶段 3：业务约束 + 稳定排序
+        # ---- 阶段 3：FeatureFusion（语义输入 = 精排归一化信号优先，否则召回信号）
+        rows: list[dict] = []
+        for pos in order:
+            if deadline_check is not None:
+                deadline_check()
+            sem = rerank_norm[pos] if pos in rerank_norm else recall_sem[pos]
+            resume_in, job_in = build_fusion_inputs(student, jobs[pos])
+            breakdown = self.fusion.score(resume_in, job_in, semantic_score=sem)
+            rows.append({
+                "pos": pos, "breakdown": breakdown,
+                "rerank_score": rerank_raw.get(pos),
+                "rerank_norm": rerank_norm.get(pos),
+            })
+
+        # ---- 阶段 4：业务约束 + 稳定排序
         out = []
         for row in rows:
             b = row["breakdown"]
@@ -511,6 +583,8 @@ class ResearchRetrievalScorer:
                 "filtered": bool(b.filtered),
                 "filter_reason": b.filter_reason,
                 "rerank_score": row.get("rerank_score"),
+                "rerank_norm": row.get("rerank_norm"),
+                "rerank_truncated": rerank_truncated,
             })
 
         out.sort(key=lambda r: (1 if r["filtered"] else 0, -r["score"], r["pos"]))
@@ -537,17 +611,19 @@ class ResearchRetrievalScorer:
                 extra={"scoring_config_version": self.spec.scoring_config_version,
                        "research_score_type": self.spec.research_score_type,
                        "evaluation_status": self.spec.evaluation_status,
-                       "rerank_applied": rerank_applied},
+                       "rerank_applied": rerank_applied,
+                       "rerank_truncated": rerank_truncated,
+                       "rerank_positions": len(rerank_norm)},
             ).to_dict()
 
         LOG.info("research_strategy rank model_id=%s candidates=%d scored=%d "
                  "truncated=%d rerank=%s index=%s",
-                 self.spec.model_id, len(jobs), len(scored_positions),
+                 self.spec.model_id, len(jobs), len(order),
                  truncated, rerank_applied, entry["index_version"])
         for item in out:
             item["retrieval_truncated"] = truncated
             item["index_version"] = entry["index_version"]
-            item["candidate_scored"] = len(scored_positions)
+            item["candidate_scored"] = len(order)
         return out
 
 
