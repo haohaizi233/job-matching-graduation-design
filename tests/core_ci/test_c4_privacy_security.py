@@ -199,6 +199,118 @@ class C4ResponseAndLoggingPrivacy(unittest.TestCase):
 
 
 HEX_TOKEN_RE = re.compile(r"\b[0-9a-fA-F]{32,}\b")
+
+
+class C4EncodingIntegrity(unittest.TestCase):
+    """文本文件编码门禁（Phase6 M0：CI 曾因 .gitignore 混入 GBK 字节而 ERROR）。
+
+    背景：`.gitignore` 尾部注释曾以 GBK 写入，导致
+    `test_gitignore_covers_sensitive_paths` 在 UTF-8 解码时抛
+    `UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd1 in position 2253`。
+    本门禁固化修复口径：仓库内文本必须严格按 UTF-8 可解码，且关键配置文件
+    不得含 CR（.gitattributes 已钉死 LF，保证 Windows/Linux checkout 字节一致）。
+
+    纪律：**不得**用 `errors="ignore"` / `errors="replace"` 降低断言绕过。
+    """
+
+    #: 明确按二进制处理的扩展名（与 .gitattributes 的 binary 规则一致）
+    BINARY_EXTS = {
+        ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".pdf", ".zip", ".gz",
+        ".pt", ".pth", ".pkl", ".npz", ".npy", ".safetensors", ".bin", ".db",
+        ".sqlite", ".woff", ".woff2", ".ttf", ".eot", ".xlsx", ".xls", ".docx",
+        ".pptx", ".7z", ".rar", ".mp4", ".mp3", ".whl", ".so", ".dll", ".pyd",
+    }
+
+    def _text_candidates(self) -> list[tuple[str, bytes]]:
+        out = []
+        for rel in _tracked_files():
+            p = ROOT / rel
+            if not p.is_file() or p.stat().st_size > 2_000_000:
+                continue
+            if Path(rel).suffix.lower() in self.BINARY_EXTS:
+                continue
+            data = p.read_bytes()
+            if b"\x00" in data:  # 含 NUL 视为二进制，不做文本编码判定
+                continue
+            out.append((rel, data))
+        return out
+
+    def test_tracked_text_files_are_strict_utf8(self):
+        """所有入库文本必须严格 UTF-8 可解码（禁止 GBK/GB2312/latin-1 混入）。"""
+        offenders = []
+        for rel, data in self._text_candidates():
+            try:
+                data.decode("utf-8")  # 严格解码，不使用 errors= 逃逸
+            except UnicodeDecodeError as e:
+                offenders.append(f"{rel}: {e}")
+        self.assertEqual(offenders, [],
+                         f"存在非 UTF-8 文本文件（需转码为 UTF-8）: {offenders[:5]}")
+
+    def test_utf8_decode_errors_are_not_masked_in_gate(self):
+        """自检：本门禁的严格解码确实能捕获 GBK 字节，而不是被 errors= 吞掉。"""
+        gbk_bytes = "# 中文注释测试".encode("gbk")
+        with self.assertRaises(UnicodeDecodeError):
+            gbk_bytes.decode("utf-8")
+        # 同一份字节若被 errors="replace" 处理会得到替换字符，说明绕过方式是可观测的
+        self.assertIn("�", gbk_bytes.decode("utf-8", errors="replace"))
+
+    def test_root_config_files_are_utf8_and_lf(self):
+        """`.gitignore` / `.gitattributes` 必须 UTF-8 + 纯 LF（跨平台 checkout 字节一致）。
+
+        判定基准是 **Git 存储的 blob 字节**（`git show :path`），因为这才是
+        「同一 commit 在任何平台 checkout 出的字节完全一致」的唯一事实来源；
+        工作区字节同时校验，用于暴露本机 checkout 未刷新造成的 CRLF 残留。
+        """
+        for name in (".gitignore", ".gitattributes", ".env.example", "alembic.ini"):
+            p = ROOT / name
+            if not p.exists():
+                continue
+            blobs = [("worktree", p.read_bytes())]
+            # 仅当该文件在 Git 中无待提交改动时，才把 git blob 一并作为判定对象：
+            # blob 是「同一 commit 在任何平台 checkout 字节一致」的事实来源；
+            # 本地正在编辑该文件时跳过 blob 校验，避免把"未提交的中间态"误判为提交缺陷。
+            try:
+                st = subprocess.run(["git", "status", "--porcelain", "--", name],
+                                    cwd=str(ROOT), capture_output=True, text=True,
+                                    encoding="utf-8", errors="replace", timeout=30)
+                clean = not (st.stdout or "").strip()
+            except Exception:  # noqa: BLE001
+                clean = False
+            if clean:
+                try:
+                    blob = subprocess.run(["git", "show", f":{name}"], cwd=str(ROOT),
+                                          capture_output=True, timeout=30).stdout
+                    if blob:
+                        blobs.append(("git-blob", blob))
+                except Exception:  # noqa: BLE001
+                    pass
+            for origin, data in blobs:
+                try:
+                    data.decode("utf-8")
+                except UnicodeDecodeError as e:
+                    self.fail(f"{name}（{origin}）不是合法 UTF-8: {e}")
+                self.assertNotIn(b"\r", data,
+                                 f"{name}（{origin}）含 CR，破坏 LF 规范与跨平台字节一致性")
+                self.assertNotIn(b"\x00", data, f"{name}（{origin}）含 NUL 字节")
+
+    def test_root_config_files_declare_lf_attribute(self):
+        """`.gitattributes` 必须把根配置文件钉成 `eol=lf`，否则 Windows checkout 会 smudge 成 CRLF。"""
+        r = subprocess.run(["git", "check-attr", "eol", "text", "--",
+                            ".gitignore", ".gitattributes"], cwd=str(ROOT),
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=30)
+        out = r.stdout or ""
+        self.assertIn(".gitignore: eol: lf", out, f".gitignore 未钉死 LF: {out!r}")
+        self.assertIn(".gitattributes: eol: lf", out, f".gitattributes 未钉死 LF: {out!r}")
+
+    def test_gitignore_sensitive_rules_still_present(self):
+        """修复编码后忽略规则不得丢失（防止转码时误删规则）。"""
+        gi = (ROOT / ".gitignore").read_text(encoding="utf-8")
+        for needle in (".env", "models/**", "data/raw/", "data/private/", "*.pem", "*.key",
+                       "data/independent_eval/annotation/final_labels.csv"):
+            self.assertIn(needle, gi, f".gitignore 缺少敏感路径规则: {needle}")
+
+
 NUMERIC_ID_RE = re.compile(r"^\d{6,}$")
 
 

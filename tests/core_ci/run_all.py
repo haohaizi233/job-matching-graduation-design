@@ -48,6 +48,7 @@ TEST_MODULES = [
     ("C4", "test_c4_privacy_security.C4ResponseAndLoggingPrivacy", "响应与日志隐私"),
     ("C4", "test_c4_privacy_security.C4ReportPrivacy", "报告隐私"),
     ("C4", "test_c4_privacy_security.C4DependencyHygiene", "依赖与下载卫生"),
+    ("C4", "test_c4_privacy_security.C4EncodingIntegrity", "文本编码与换行门禁（UTF-8 / LF）"),
     ("C5", "test_c5_ci_contract.C5WorkflowContract", "Core CI 工作流契约"),
     ("C5", "test_c5_ci_contract.C5CleanCheckoutContract", "干净 checkout 契约"),
 ]

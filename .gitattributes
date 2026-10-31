@@ -13,6 +13,16 @@
 # 默认：文本文件一律以 LF 存储、以 LF 检出（跨平台字节可复现）
 * text=auto eol=lf
 
+# ---- 仓库根配置文件：显式 text + LF ----
+# 这些文件是跨平台一致性门禁的判定对象（tests/core_ci 的 C4EncodingIntegrity），
+# 必须显式 `text` 而不是 `auto`：`text=auto` 在 Windows + core.autocrlf=true 下
+# 仍可能被 smudge 成 CRLF，导致同一 commit 在 Windows / Linux checkout 字节不一致。
+.gitignore     text eol=lf
+.gitattributes text eol=lf
+*.ini          text eol=lf
+*.cfg          text eol=lf
+*.toml         text eol=lf
+
 # ---- 参与 SHA-256 完整性校验的数据产物：强制 LF ----
 *.jsonl text eol=lf
 *.json  text eol=lf
