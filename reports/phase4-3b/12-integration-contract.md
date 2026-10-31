@@ -74,7 +74,9 @@ breakdown.to_dict()                          # 可解释明细
 | 冻结数据不可改、导出脱敏 | **已验证**（P10） |
 | 研究模型相对基线的**真实**优劣 | **未验证**（H2 BLOCKED） |
 | E07 微调模型 | NOT_RUN |
-| 千级岗位池延迟、GPU 推理 | NOT_RUN |
+| 推理超时/降级契约、统一输出信封 | **已验证**（P12 + `models/runtime_guard.py`） |
+| 可复现性护栏（仓库根解析/行尾/冻结哈希） | **已验证**（P11） |
+| ~~千级岗位池延迟、GPU 推理~~ | **已实测**（`14-resource-scalability.md`：10000 条池向量 search@10 0.11s；GPU BGE 编码 504.5 texts/s / 峰值 84.5MB，精排 27.4 pairs/s / 峰值 1253.6MB） |
 | service 层集成行为 | 未验证（Phase5-3 侧） |
 
 ## 7. 示例输入输出
