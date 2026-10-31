@@ -94,11 +94,22 @@ CI 工作流（`.github/workflows/quality-gates.yml`）：Python Core CI / Front
 Database Integration（PG service）/ Browser E2E / Artifact-dependent Validation
 （真实权重缺失即 `NOT_RUN`，不伪造）五个隔离 Job。
 
-## 模型产物缺失处理
+## 模型产物与分发
 
-`models/`（历史 checkpoint）默认不入库。缺失时**不影响** Core CI 与业务演示
-（baseline 启发式排序始终可用）；`experimental_model` 按 `allow_fallback` 显式降级或
-显式报 `MODEL_MISSING`，绝不静默冒充模型输出。历史权重完整性自检：
+`models/` 采用**扩展名白名单入库**（`.gitignore` 总忽略 `models/**` 后按
+json/md/txt/npz/npy/pkl/pt/pth 精确放行，C4 门禁断言该敏感规则存在）：
+当前 433 个跟踪文件（35.5 MB）为本项目训练产出的 checkpoint 与指标产物，
+manifest 逐文件登记 sha256。三点口径说明：
+
+1. **历史 checkpoint 不重训、不改写**；缺失时**不影响** Core CI 与业务演示
+   （baseline 启发式排序始终可用），`experimental_model` 按 `allow_fallback`
+   显式降级或显式报 `MODEL_MISSING`，绝不静默冒充模型输出；
+2. **许可待补**：训练数据与模型分发许可尚未随产物登记（见
+   `reports/phase6-r/05-model-artifact-audit.md`），公开再分发前必须补齐；
+3. **体积策略**：final 变体保留 Git 跟踪；smoke/ablation 变体与大词表建议
+   迁移 Git LFS 或 GitHub Release（涉及历史变更，需批准后执行）。
+
+历史权重完整性自检：
 
 ```powershell
 py -3.13 scripts/phase5_1a/check_history_weights_integrity.py   # 与 configs/history-weights-baseline.json 比对
@@ -136,6 +147,8 @@ py -3.13 scripts/phase5_1a/check_history_weights_integrity.py   # 与 configs/hi
 > Phase5-1 研究 API 默认仅本地开发使用（无认证）；Phase5-2 业务 API 已含认证（Argon2id + 会话）与多用户隔离，
 > 但仍属本地联调口径，外网部署（HTTPS、鉴权加固等）为上线阻断项。
 
-> 说明：原始数据集、模型权重（`models/`）与训练产物体积较大，默认不入库（见 `.gitignore`）；
+> 说明：原始数据集不入库；模型权重（`models/`）与训练产物按扩展名白名单入库
+> （final 变体 Git 跟踪，smoke/ablation 建议迁移 LFS/Release，许可声明待补，见
+> `reports/phase6-r/05-model-artifact-audit.md`）；
 > 历史权重有完整性基线自检（`configs/history-weights-baseline.json`）。
 > 子项目 `chinese-skillspan-benchmark` 为独立仓库，另有远端。
