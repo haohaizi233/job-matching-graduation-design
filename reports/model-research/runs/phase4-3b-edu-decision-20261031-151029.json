@@ -1,0 +1,5711 @@
+{
+  "generated_by": "scripts/phase4_3b/education_decision_consistency.py",
+  "git_commit": "d7babaa16da28041c50cd4cb0c9663427fa909f1",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "models_root": "models",
+  "inputs_csv": "data/processed/education/education_inputs.csv",
+  "live_limit_per_split": 2000,
+  "live_check": "RUN",
+  "scope_note": "决策层一致性与 label flip 统计；不评价学历抽取精度，不使用任何人工 Gold 结论（H2 仍 BLOCKED）",
+  "runs_found": 16,
+  "decision_self_consistency": [
+    {
+      "run_dir": "education/charcnn/charcnn-final-20261028-212510",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.25,
+            "硕士": 0.3,
+            "本科": 0.2,
+            "大专": 0.4,
+            "学历不限": 0.7,
+            "学历不明": 0.4
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.25,
+            "硕士": 0.3,
+            "本科": 0.2,
+            "大专": 0.4,
+            "学历不限": 0.7,
+            "学历不明": 0.4
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-balanced-20261028-212534",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.45,
+            "本科": 0.2,
+            "大专": 0.65,
+            "学历不限": 0.55,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.45,
+            "本科": 0.2,
+            "大专": 0.65,
+            "学历不限": 0.55,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-confw-20261028-221032",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.3,
+            "本科": 0.2,
+            "大专": 0.55,
+            "学历不限": 0.25,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.3,
+            "本科": 0.2,
+            "大专": 0.55,
+            "学历不限": 0.25,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-highconf-20261028-221117",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.2,
+            "硕士": 0.3,
+            "本科": 0.4,
+            "大专": 0.7,
+            "学历不限": 0.55,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.2,
+            "硕士": 0.3,
+            "本科": 0.4,
+            "大专": 0.7,
+            "学历不限": 0.55,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-holdout-20261028-212622",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.25,
+            "本科": 0.2,
+            "大专": 0.7,
+            "学历不限": 0.6,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.25,
+            "本科": 0.2,
+            "大专": 0.7,
+            "学历不限": 0.6,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.2,
+            "本科": 0.25,
+            "大专": 0.2,
+            "学历不限": 0.5,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.2,
+            "本科": 0.25,
+            "大专": 0.2,
+            "学历不限": 0.5,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-vloss-20261028-213415",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.35,
+            "本科": 0.25,
+            "大专": 0.5,
+            "学历不限": 0.45,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.35,
+            "本科": 0.25,
+            "大专": 0.5,
+            "学历不限": 0.45,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.25,
+            "硕士": 0.25,
+            "本科": 0.25,
+            "大专": 0.5,
+            "学历不限": 0.55,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.25,
+            "硕士": 0.25,
+            "本科": 0.25,
+            "大专": 0.5,
+            "学历不限": 0.55,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 3000,
+          "labels": 6,
+          "decisions": 18000,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.2,
+            "硕士": 0.2,
+            "本科": 0.25,
+            "大专": 0.55,
+            "学历不限": 0.5,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.2,
+            "硕士": 0.2,
+            "本科": 0.25,
+            "大专": 0.55,
+            "学历不限": 0.5,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-20261028-212254",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.45,
+            "硕士": 0.4,
+            "本科": 0.45,
+            "大专": 0.3,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.45,
+            "硕士": 0.4,
+            "本科": 0.45,
+            "大专": 0.3,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-balanced-20261028-212312",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.2,
+            "硕士": 0.3,
+            "本科": 0.25,
+            "大专": 0.2,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.2,
+            "硕士": 0.3,
+            "本科": 0.25,
+            "大专": 0.2,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-confw-20261028-220908",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.3,
+            "硕士": 0.35,
+            "本科": 0.3,
+            "大专": 0.6,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.3,
+            "硕士": 0.35,
+            "本科": 0.3,
+            "大专": 0.6,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-highconf-20261028-221021",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.2,
+            "硕士": 0.4,
+            "本科": 0.25,
+            "大专": 0.8,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.2,
+            "硕士": 0.4,
+            "本科": 0.25,
+            "大专": 0.8,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-holdout-20261028-212556",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.45,
+            "硕士": 0.4,
+            "本科": 0.3,
+            "大专": 0.3,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.45,
+            "硕士": 0.4,
+            "本科": 0.3,
+            "大专": 0.3,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-title-20261028-212332",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 45226,
+          "labels": 6,
+          "decisions": 271356,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.35,
+            "硕士": 0.4,
+            "本科": 0.5,
+            "大专": 0.4,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.35,
+            "硕士": 0.4,
+            "本科": 0.5,
+            "大专": 0.4,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "records": 3000,
+          "labels": 6,
+          "decisions": 18000,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.45,
+            "本科": 0.35,
+            "大专": 0.2,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "records": 736,
+          "labels": 6,
+          "decisions": 4416,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "thresholds": {
+            "博士": 0.4,
+            "硕士": 0.45,
+            "本科": 0.35,
+            "大专": 0.2,
+            "学历不限": 0.2,
+            "学历不明": 0.2
+          },
+          "consistent": true
+        }
+      }
+    }
+  ],
+  "live_reproduction": [
+    {
+      "run_dir": "education/charcnn/charcnn-final-20261028-212510",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 6.6542,
+          "max_abs_proba_diff": 8.630752563476562e-05,
+          "mean_abs_proba_diff": 5.873312615828278e-06,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0138,
+          "max_abs_proba_diff": 6.267428398132324e-05,
+          "mean_abs_proba_diff": 5.483959515571031e-06,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-balanced-20261028-212534",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0187,
+          "max_abs_proba_diff": 6.902217864990234e-05,
+          "mean_abs_proba_diff": 2.355658282491883e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0134,
+          "max_abs_proba_diff": 6.902217864990234e-05,
+          "mean_abs_proba_diff": 2.0609255779677568e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-confw-20261028-221032",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0156,
+          "max_abs_proba_diff": 8.717179298400879e-05,
+          "mean_abs_proba_diff": 1.2245503820518403e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0213,
+          "max_abs_proba_diff": 7.337331771850586e-05,
+          "mean_abs_proba_diff": 1.0817958873356242e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-highconf-20261028-221117",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0258,
+          "max_abs_proba_diff": 0.00010496377944946289,
+          "mean_abs_proba_diff": 1.8384454492964628e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0174,
+          "max_abs_proba_diff": 0.00010496377944946289,
+          "mean_abs_proba_diff": 1.7383400452250708e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-holdout-20261028-212622",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0253,
+          "max_abs_proba_diff": 6.601214408874512e-05,
+          "mean_abs_proba_diff": 9.674841373984814e-06,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0125,
+          "max_abs_proba_diff": 4.836916923522949e-05,
+          "mean_abs_proba_diff": 8.480173605905739e-06,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0194,
+          "max_abs_proba_diff": 0.00011605024337768555,
+          "mean_abs_proba_diff": 6.0236666855428e-06,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0135,
+          "max_abs_proba_diff": 0.00011605024337768555,
+          "mean_abs_proba_diff": 6.529536723217536e-06,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-vloss-20261028-213415",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.017,
+          "max_abs_proba_diff": 8.767843246459961e-05,
+          "mean_abs_proba_diff": 8.156518869479139e-06,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0143,
+          "max_abs_proba_diff": 0.0001234114170074463,
+          "mean_abs_proba_diff": 7.522183526473953e-06,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0164,
+          "max_abs_proba_diff": 8.410215377807617e-05,
+          "mean_abs_proba_diff": 1.2997187077085452e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0191,
+          "max_abs_proba_diff": 8.71121883392334e-05,
+          "mean_abs_proba_diff": 1.3728763829973797e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0201,
+          "max_abs_proba_diff": 5.227327346801758e-05,
+          "mean_abs_proba_diff": 1.0272456721092263e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0176,
+          "max_abs_proba_diff": 4.798173904418945e-05,
+          "mean_abs_proba_diff": 1.0358315826717602e-05,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-20261028-212254",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 1.843,
+          "max_abs_proba_diff": 2.902403628546324e-08,
+          "mean_abs_proba_diff": 6.719307695708003e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.008,
+          "max_abs_proba_diff": 2.902403628546324e-08,
+          "mean_abs_proba_diff": 6.460415570137445e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-balanced-20261028-212312",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0126,
+          "max_abs_proba_diff": 2.9581429972225237e-08,
+          "mean_abs_proba_diff": 7.708231909210204e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0088,
+          "max_abs_proba_diff": 2.942485111123716e-08,
+          "mean_abs_proba_diff": 6.78654562696038e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-confw-20261028-220908",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0135,
+          "max_abs_proba_diff": 2.9492817854581688e-08,
+          "mean_abs_proba_diff": 8.736809230877012e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0057,
+          "max_abs_proba_diff": 2.9492817854581688e-08,
+          "mean_abs_proba_diff": 7.544791583901896e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-highconf-20261028-221021",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0152,
+          "max_abs_proba_diff": 2.9534505952000245e-08,
+          "mean_abs_proba_diff": 6.3838101786994525e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0056,
+          "max_abs_proba_diff": 2.912123886478213e-08,
+          "mean_abs_proba_diff": 5.3902199065179214e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-holdout-20261028-212556",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0263,
+          "max_abs_proba_diff": 2.9633809961460145e-08,
+          "mean_abs_proba_diff": 6.5719153596515926e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0075,
+          "max_abs_proba_diff": 2.6406380970733778e-08,
+          "mean_abs_proba_diff": 5.970480700356108e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-final-title-20261028-212332",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.1395,
+          "max_abs_proba_diff": 0.9761794250421499,
+          "mean_abs_proba_diff": 0.182708159531032,
+          "label_flips": 3114,
+          "flip_rate": 0.2595,
+          "per_label_flips": {
+            "博士": 1442,
+            "硕士": 1236,
+            "本科": 392,
+            "大专": 5,
+            "学历不限": 1,
+            "学历不明": 38
+          },
+          "within_eps": false
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.1537,
+          "max_abs_proba_diff": 0.9437582727904065,
+          "mean_abs_proba_diff": 0.15532846863212213,
+          "label_flips": 882,
+          "flip_rate": 0.19972826,
+          "per_label_flips": {
+            "博士": 459,
+            "硕士": 319,
+            "本科": 103,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 1
+          },
+          "within_eps": false
+        }
+      }
+    },
+    {
+      "run_dir": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+      "splits": {
+        "predictions_validation_pseudo.npz": {
+          "status": "RUN",
+          "compared_records": 2000,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0308,
+          "max_abs_proba_diff": 2.9694242287270356e-08,
+          "mean_abs_proba_diff": 5.701354694698698e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        },
+        "predictions_gold_holdout_human.npz": {
+          "status": "RUN",
+          "compared_records": 736,
+          "labels": 6,
+          "load_and_infer_seconds": 0.0145,
+          "max_abs_proba_diff": 2.8837306875750812e-08,
+          "mean_abs_proba_diff": 5.7770172104596425e-09,
+          "label_flips": 0,
+          "flip_rate": 0.0,
+          "per_label_flips": {
+            "博士": 0,
+            "硕士": 0,
+            "本科": 0,
+            "大专": 0,
+            "学历不限": 0,
+            "学历不明": 0
+          },
+          "within_eps": true
+        }
+      }
+    }
+  ],
+  "cross_run": {
+    "splits": {
+      "predictions_validation_pseudo.npz": {
+        "runs_compared": [
+          "education/charcnn/charcnn-final-20261028-212510",
+          "education/charcnn/charcnn-final-balanced-20261028-212534",
+          "education/charcnn/charcnn-final-confw-20261028-221032",
+          "education/charcnn/charcnn-final-highconf-20261028-221117",
+          "education/charcnn/charcnn-final-holdout-20261028-212622",
+          "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+          "education/charcnn/charcnn-final-vloss-20261028-213415",
+          "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+          "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+          "education/tfidf/tfidf-final-20261028-212254",
+          "education/tfidf/tfidf-final-balanced-20261028-212312",
+          "education/tfidf/tfidf-final-confw-20261028-220908",
+          "education/tfidf/tfidf-final-highconf-20261028-221021",
+          "education/tfidf/tfidf-final-holdout-20261028-212556",
+          "education/tfidf/tfidf-final-title-20261028-212332",
+          "education/tfidf/tfidf-smoke-tfidf-20261028-211845"
+        ],
+        "pairs": [
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 50,
+            "flip_rate": 0.00018426,
+            "per_label_flips": {
+              "博士": 12,
+              "硕士": 8,
+              "本科": 18,
+              "大专": 12,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 89,
+            "flip_rate": 0.00032798,
+            "per_label_flips": {
+              "博士": 19,
+              "硕士": 30,
+              "本科": 28,
+              "大专": 12,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 13001,
+            "flip_rate": 0.04791123,
+            "per_label_flips": {
+              "博士": 12059,
+              "硕士": 224,
+              "本科": 526,
+              "大专": 12,
+              "学历不限": 180,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 51,
+            "flip_rate": 0.00018794,
+            "per_label_flips": {
+              "博士": 4,
+              "硕士": 16,
+              "本科": 19,
+              "大专": 12,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 297,
+            "flip_rate": 0.0010945,
+            "per_label_flips": {
+              "博士": 14,
+              "硕士": 12,
+              "本科": 260,
+              "大专": 11,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 74,
+            "flip_rate": 0.0002727,
+            "per_label_flips": {
+              "博士": 16,
+              "硕士": 24,
+              "本科": 22,
+              "大专": 12,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 112,
+            "flip_rate": 0.00041274,
+            "per_label_flips": {
+              "博士": 35,
+              "硕士": 30,
+              "本科": 36,
+              "大专": 11,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 121,
+            "flip_rate": 0.00672222,
+            "per_label_flips": {
+              "博士": 11,
+              "硕士": 55,
+              "本科": 55,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3012,
+            "flip_rate": 0.01109981,
+            "per_label_flips": {
+              "博士": 27,
+              "硕士": 37,
+              "本科": 36,
+              "大专": 12,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3009,
+            "flip_rate": 0.01108875,
+            "per_label_flips": {
+              "博士": 34,
+              "硕士": 31,
+              "本科": 37,
+              "大专": 11,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3007,
+            "flip_rate": 0.01108138,
+            "per_label_flips": {
+              "博士": 33,
+              "硕士": 30,
+              "本科": 36,
+              "大专": 12,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3821,
+            "flip_rate": 0.01408113,
+            "per_label_flips": {
+              "博士": 230,
+              "硕士": 228,
+              "本科": 246,
+              "大专": 13,
+              "学历不限": 208,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3362,
+            "flip_rate": 0.01238963,
+            "per_label_flips": {
+              "博士": 52,
+              "硕士": 73,
+              "本科": 325,
+              "大专": 12,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 24275,
+            "flip_rate": 0.08945813,
+            "per_label_flips": {
+              "博士": 7525,
+              "硕士": 7661,
+              "本科": 6858,
+              "大专": 83,
+              "学历不限": 25,
+              "学历不明": 2123
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 234,
+            "flip_rate": 0.013,
+            "per_label_flips": {
+              "博士": 3,
+              "硕士": 4,
+              "本科": 6,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 79,
+            "flip_rate": 0.00029113,
+            "per_label_flips": {
+              "博士": 31,
+              "硕士": 38,
+              "本科": 10,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 12991,
+            "flip_rate": 0.04787438,
+            "per_label_flips": {
+              "博士": 12047,
+              "硕士": 232,
+              "本科": 532,
+              "大专": 0,
+              "学历不限": 180,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 33,
+            "flip_rate": 0.00012161,
+            "per_label_flips": {
+              "博士": 8,
+              "硕士": 24,
+              "本科": 1,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 283,
+            "flip_rate": 0.00104291,
+            "per_label_flips": {
+              "博士": 18,
+              "硕士": 20,
+              "本科": 242,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 50,
+            "flip_rate": 0.00018426,
+            "per_label_flips": {
+              "博士": 28,
+              "硕士": 16,
+              "本科": 6,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 82,
+            "flip_rate": 0.00030219,
+            "per_label_flips": {
+              "博士": 23,
+              "硕士": 38,
+              "本科": 18,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 124,
+            "flip_rate": 0.00688889,
+            "per_label_flips": {
+              "博士": 14,
+              "硕士": 55,
+              "本科": 55,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2986,
+            "flip_rate": 0.01100399,
+            "per_label_flips": {
+              "博士": 23,
+              "硕士": 45,
+              "本科": 18,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2979,
+            "flip_rate": 0.0109782,
+            "per_label_flips": {
+              "博士": 22,
+              "硕士": 39,
+              "本科": 19,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2973,
+            "flip_rate": 0.01095609,
+            "per_label_flips": {
+              "博士": 21,
+              "硕士": 38,
+              "本科": 18,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3795,
+            "flip_rate": 0.01398532,
+            "per_label_flips": {
+              "博士": 226,
+              "硕士": 236,
+              "本科": 228,
+              "大专": 1,
+              "学历不限": 208,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3320,
+            "flip_rate": 0.01223485,
+            "per_label_flips": {
+              "博士": 48,
+              "硕士": 65,
+              "本科": 307,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 24247,
+            "flip_rate": 0.08935494,
+            "per_label_flips": {
+              "博士": 7515,
+              "硕士": 7669,
+              "本科": 6840,
+              "大专": 75,
+              "学历不限": 25,
+              "学历不明": 2123
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 237,
+            "flip_rate": 0.01316667,
+            "per_label_flips": {
+              "博士": 6,
+              "硕士": 4,
+              "本科": 6,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 12976,
+            "flip_rate": 0.0478191,
+            "per_label_flips": {
+              "博士": 12040,
+              "硕士": 234,
+              "本科": 522,
+              "大专": 0,
+              "学历不限": 180,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 56,
+            "flip_rate": 0.00020637,
+            "per_label_flips": {
+              "博士": 23,
+              "硕士": 22,
+              "本科": 11,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 286,
+            "flip_rate": 0.00105397,
+            "per_label_flips": {
+              "博士": 13,
+              "硕士": 18,
+              "本科": 252,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 53,
+            "flip_rate": 0.00019532,
+            "per_label_flips": {
+              "博士": 7,
+              "硕士": 30,
+              "本科": 16,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 27,
+            "flip_rate": 9.95e-05,
+            "per_label_flips": {
+              "博士": 16,
+              "硕士": 0,
+              "本科": 8,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 123,
+            "flip_rate": 0.00683333,
+            "per_label_flips": {
+              "博士": 11,
+              "硕士": 57,
+              "本科": 55,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2931,
+            "flip_rate": 0.01080131,
+            "per_label_flips": {
+              "博士": 16,
+              "硕士": 7,
+              "本科": 8,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2928,
+            "flip_rate": 0.01079025,
+            "per_label_flips": {
+              "博士": 19,
+              "硕士": 1,
+              "本科": 9,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2922,
+            "flip_rate": 0.01076814,
+            "per_label_flips": {
+              "博士": 18,
+              "硕士": 0,
+              "本科": 8,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3766,
+            "flip_rate": 0.01387845,
+            "per_label_flips": {
+              "博士": 221,
+              "硕士": 222,
+              "本科": 218,
+              "大专": 1,
+              "学历不限": 208,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3287,
+            "flip_rate": 0.01211324,
+            "per_label_flips": {
+              "博士": 47,
+              "硕士": 43,
+              "本科": 297,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 24202,
+            "flip_rate": 0.08918911,
+            "per_label_flips": {
+              "博士": 7512,
+              "硕士": 7637,
+              "本科": 6830,
+              "大专": 75,
+              "学历不限": 25,
+              "学历不明": 2123
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 236,
+            "flip_rate": 0.01311111,
+            "per_label_flips": {
+              "博士": 3,
+              "硕士": 6,
+              "本科": 6,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 13000,
+            "flip_rate": 0.04790755,
+            "per_label_flips": {
+              "博士": 12055,
+              "硕士": 232,
+              "本科": 533,
+              "大专": 0,
+              "学历不限": 180,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 12754,
+            "flip_rate": 0.04700099,
+            "per_label_flips": {
+              "博士": 12045,
+              "硕士": 236,
+              "本科": 290,
+              "大专": 3,
+              "学历不限": 180,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 12993,
+            "flip_rate": 0.04788175,
+            "per_label_flips": {
+              "博士": 12043,
+              "硕士": 240,
+              "本科": 530,
+              "大专": 0,
+              "学历不限": 180,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 12955,
+            "flip_rate": 0.04774171,
+            "per_label_flips": {
+              "博士": 12024,
+              "硕士": 234,
+              "本科": 514,
+              "大专": 3,
+              "学历不限": 180,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 905,
+            "flip_rate": 0.05027778,
+            "per_label_flips": {
+              "博士": 791,
+              "硕士": 43,
+              "本科": 63,
+              "大专": 0,
+              "学历不限": 8,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 15859,
+            "flip_rate": 0.05844352,
+            "per_label_flips": {
+              "博士": 12032,
+              "硕士": 233,
+              "本科": 514,
+              "大专": 0,
+              "学历不限": 184,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 15856,
+            "flip_rate": 0.05843247,
+            "per_label_flips": {
+              "博士": 12027,
+              "硕士": 235,
+              "本科": 515,
+              "大专": 3,
+              "学历不限": 180,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 15850,
+            "flip_rate": 0.05841035,
+            "per_label_flips": {
+              "博士": 12026,
+              "硕士": 234,
+              "本科": 514,
+              "大专": 0,
+              "学历不限": 180,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 15070,
+            "flip_rate": 0.0555359,
+            "per_label_flips": {
+              "博士": 11829,
+              "硕士": 12,
+              "本科": 304,
+              "大专": 1,
+              "学历不限": 28,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 15555,
+            "flip_rate": 0.05732322,
+            "per_label_flips": {
+              "博士": 12007,
+              "硕士": 213,
+              "本科": 255,
+              "大专": 0,
+              "学历不限": 184,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 30868,
+            "flip_rate": 0.11375462,
+            "per_label_flips": {
+              "博士": 13436,
+              "硕士": 7771,
+              "本科": 7290,
+              "大专": 75,
+              "学历不限": 173,
+              "学历不明": 2123
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 1050,
+            "flip_rate": 0.05833333,
+            "per_label_flips": {
+              "博士": 799,
+              "硕士": 8,
+              "本科": 30,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 260,
+            "flip_rate": 0.00095815,
+            "per_label_flips": {
+              "博士": 10,
+              "硕士": 4,
+              "本科": 243,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 33,
+            "flip_rate": 0.00012161,
+            "per_label_flips": {
+              "博士": 20,
+              "硕士": 8,
+              "本科": 5,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 75,
+            "flip_rate": 0.00027639,
+            "per_label_flips": {
+              "博士": 31,
+              "硕士": 22,
+              "本科": 19,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 121,
+            "flip_rate": 0.00672222,
+            "per_label_flips": {
+              "博士": 12,
+              "硕士": 54,
+              "本科": 55,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2971,
+            "flip_rate": 0.01094872,
+            "per_label_flips": {
+              "博士": 31,
+              "硕士": 21,
+              "本科": 19,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2970,
+            "flip_rate": 0.01094503,
+            "per_label_flips": {
+              "博士": 30,
+              "硕士": 23,
+              "本科": 18,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2966,
+            "flip_rate": 0.01093029,
+            "per_label_flips": {
+              "博士": 29,
+              "硕士": 22,
+              "本科": 19,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3812,
+            "flip_rate": 0.01404797,
+            "per_label_flips": {
+              "博士": 234,
+              "硕士": 244,
+              "本科": 229,
+              "大专": 1,
+              "学历不限": 208,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3321,
+            "flip_rate": 0.01223854,
+            "per_label_flips": {
+              "博士": 56,
+              "硕士": 57,
+              "本科": 308,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 24244,
+            "flip_rate": 0.08934389,
+            "per_label_flips": {
+              "博士": 7523,
+              "硕士": 7657,
+              "本科": 6841,
+              "大专": 75,
+              "学历不限": 25,
+              "学历不明": 2123
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 234,
+            "flip_rate": 0.013,
+            "per_label_flips": {
+              "博士": 4,
+              "硕士": 3,
+              "本科": 6,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 273,
+            "flip_rate": 0.00100606,
+            "per_label_flips": {
+              "博士": 10,
+              "硕士": 12,
+              "本科": 248,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 299,
+            "flip_rate": 0.00110187,
+            "per_label_flips": {
+              "博士": 21,
+              "硕士": 18,
+              "本科": 260,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 137,
+            "flip_rate": 0.00761111,
+            "per_label_flips": {
+              "博士": 12,
+              "硕士": 55,
+              "本科": 70,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3209,
+            "flip_rate": 0.01182579,
+            "per_label_flips": {
+              "博士": 21,
+              "硕士": 25,
+              "本科": 260,
+              "大专": 3,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3196,
+            "flip_rate": 0.01177789,
+            "per_label_flips": {
+              "博士": 20,
+              "硕士": 19,
+              "本科": 261,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3196,
+            "flip_rate": 0.01177789,
+            "per_label_flips": {
+              "博士": 19,
+              "硕士": 18,
+              "本科": 260,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 4042,
+            "flip_rate": 0.01489556,
+            "per_label_flips": {
+              "博士": 224,
+              "硕士": 240,
+              "本科": 470,
+              "大专": 4,
+              "学历不限": 208,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3075,
+            "flip_rate": 0.01133198,
+            "per_label_flips": {
+              "博士": 46,
+              "硕士": 61,
+              "本科": 65,
+              "大专": 3,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 24462,
+            "flip_rate": 0.09014726,
+            "per_label_flips": {
+              "博士": 7517,
+              "硕士": 7653,
+              "本科": 7070,
+              "大专": 74,
+              "学历不限": 25,
+              "学历不明": 2123
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 250,
+            "flip_rate": 0.01388889,
+            "per_label_flips": {
+              "博士": 4,
+              "硕士": 4,
+              "本科": 21,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 76,
+            "flip_rate": 0.00028007,
+            "per_label_flips": {
+              "博士": 19,
+              "硕士": 30,
+              "本科": 24,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 119,
+            "flip_rate": 0.00661111,
+            "per_label_flips": {
+              "博士": 11,
+              "硕士": 54,
+              "本科": 54,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2964,
+            "flip_rate": 0.01092292,
+            "per_label_flips": {
+              "博士": 11,
+              "硕士": 29,
+              "本科": 24,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2971,
+            "flip_rate": 0.01094872,
+            "per_label_flips": {
+              "博士": 18,
+              "硕士": 31,
+              "本科": 23,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2967,
+            "flip_rate": 0.01093398,
+            "per_label_flips": {
+              "博士": 17,
+              "硕士": 30,
+              "本科": 24,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3809,
+            "flip_rate": 0.01403691,
+            "per_label_flips": {
+              "博士": 218,
+              "硕士": 252,
+              "本科": 234,
+              "大专": 1,
+              "学历不限": 208,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3298,
+            "flip_rate": 0.01215378,
+            "per_label_flips": {
+              "博士": 44,
+              "硕士": 49,
+              "本科": 305,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 24247,
+            "flip_rate": 0.08935494,
+            "per_label_flips": {
+              "博士": 7513,
+              "硕士": 7665,
+              "本科": 6846,
+              "大专": 75,
+              "学历不限": 25,
+              "学历不明": 2123
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 232,
+            "flip_rate": 0.01288889,
+            "per_label_flips": {
+              "博士": 3,
+              "硕士": 3,
+              "本科": 5,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 129,
+            "flip_rate": 0.00716667,
+            "per_label_flips": {
+              "博士": 15,
+              "硕士": 57,
+              "本科": 57,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2918,
+            "flip_rate": 0.0107534,
+            "per_label_flips": {
+              "博士": 8,
+              "硕士": 7,
+              "本科": 0,
+              "大专": 3,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2901,
+            "flip_rate": 0.01069075,
+            "per_label_flips": {
+              "博士": 3,
+              "硕士": 1,
+              "本科": 1,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 2901,
+            "flip_rate": 0.01069075,
+            "per_label_flips": {
+              "博士": 2,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3761,
+            "flip_rate": 0.01386002,
+            "per_label_flips": {
+              "博士": 221,
+              "硕士": 222,
+              "本科": 210,
+              "大专": 4,
+              "学历不限": 208,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 3274,
+            "flip_rate": 0.01206533,
+            "per_label_flips": {
+              "博士": 39,
+              "硕士": 43,
+              "本科": 289,
+              "大专": 3,
+              "学历不限": 4,
+              "学历不明": 2896
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 24181,
+            "flip_rate": 0.08911172,
+            "per_label_flips": {
+              "博士": 7500,
+              "硕士": 7637,
+              "本科": 6822,
+              "大专": 74,
+              "学历不限": 25,
+              "学历不明": 2123
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 242,
+            "flip_rate": 0.01344444,
+            "per_label_flips": {
+              "博士": 7,
+              "硕士": 6,
+              "本科": 8,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 337,
+            "flip_rate": 0.01872222,
+            "per_label_flips": {
+              "博士": 14,
+              "硕士": 56,
+              "本科": 57,
+              "大专": 0,
+              "学历不限": 1,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 338,
+            "flip_rate": 0.01877778,
+            "per_label_flips": {
+              "博士": 15,
+              "硕士": 57,
+              "本科": 57,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 338,
+            "flip_rate": 0.01877778,
+            "per_label_flips": {
+              "博士": 15,
+              "硕士": 57,
+              "本科": 57,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 314,
+            "flip_rate": 0.01744444,
+            "per_label_flips": {
+              "博士": 2,
+              "硕士": 46,
+              "本科": 46,
+              "大专": 0,
+              "学历不限": 11,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 344,
+            "flip_rate": 0.01911111,
+            "per_label_flips": {
+              "博士": 11,
+              "硕士": 53,
+              "本科": 70,
+              "大专": 0,
+              "学历不限": 1,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 1661,
+            "flip_rate": 0.09227778,
+            "per_label_flips": {
+              "博士": 490,
+              "硕士": 538,
+              "本科": 475,
+              "大专": 5,
+              "学历不限": 2,
+              "学历不明": 151
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 333,
+            "flip_rate": 0.0185,
+            "per_label_flips": {
+              "博士": 8,
+              "硕士": 51,
+              "本科": 53,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 209
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 23,
+            "flip_rate": 8.476e-05,
+            "per_label_flips": {
+              "博士": 7,
+              "硕士": 8,
+              "本科": 1,
+              "大专": 3,
+              "学历不限": 4,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 17,
+            "flip_rate": 6.265e-05,
+            "per_label_flips": {
+              "博士": 6,
+              "硕士": 7,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 865,
+            "flip_rate": 0.00318769,
+            "per_label_flips": {
+              "博士": 213,
+              "硕士": 229,
+              "本科": 210,
+              "大专": 1,
+              "学历不限": 212,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 360,
+            "flip_rate": 0.00132667,
+            "per_label_flips": {
+              "博士": 35,
+              "硕士": 36,
+              "本科": 289,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 22839,
+            "flip_rate": 0.08416619,
+            "per_label_flips": {
+              "博士": 7504,
+              "硕士": 7642,
+              "本科": 6822,
+              "大专": 75,
+              "学历不限": 21,
+              "学历不明": 775
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 30,
+            "flip_rate": 0.00166667,
+            "per_label_flips": {
+              "博士": 6,
+              "硕士": 5,
+              "本科": 8,
+              "大专": 0,
+              "学历不限": 11,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 6,
+            "flip_rate": 2.211e-05,
+            "per_label_flips": {
+              "博士": 1,
+              "硕士": 1,
+              "本科": 1,
+              "大专": 3,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 866,
+            "flip_rate": 0.00319138,
+            "per_label_flips": {
+              "博士": 220,
+              "硕士": 223,
+              "本科": 211,
+              "大专": 4,
+              "学历不限": 208,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 379,
+            "flip_rate": 0.00139669,
+            "per_label_flips": {
+              "博士": 38,
+              "硕士": 44,
+              "本科": 290,
+              "大专": 3,
+              "学历不限": 4,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 22836,
+            "flip_rate": 0.08415513,
+            "per_label_flips": {
+              "博士": 7501,
+              "硕士": 7638,
+              "本科": 6823,
+              "大专": 74,
+              "学历不限": 25,
+              "学历不明": 775
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 33,
+            "flip_rate": 0.00183333,
+            "per_label_flips": {
+              "博士": 7,
+              "硕士": 6,
+              "本科": 8,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 860,
+            "flip_rate": 0.00316927,
+            "per_label_flips": {
+              "博士": 219,
+              "硕士": 222,
+              "本科": 210,
+              "大专": 1,
+              "学历不限": 208,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 373,
+            "flip_rate": 0.00137458,
+            "per_label_flips": {
+              "博士": 37,
+              "硕士": 43,
+              "本科": 289,
+              "大专": 0,
+              "学历不限": 4,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 22834,
+            "flip_rate": 0.08414776,
+            "per_label_flips": {
+              "博士": 7500,
+              "硕士": 7637,
+              "本科": 6822,
+              "大专": 75,
+              "学历不限": 25,
+              "学历不明": 775
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 33,
+            "flip_rate": 0.00183333,
+            "per_label_flips": {
+              "博士": 7,
+              "硕士": 6,
+              "本科": 8,
+              "大专": 0,
+              "学历不限": 12,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 1055,
+            "flip_rate": 0.00388788,
+            "per_label_flips": {
+              "博士": 190,
+              "硕士": 209,
+              "本科": 443,
+              "大专": 1,
+              "学历不限": 212,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 23478,
+            "flip_rate": 0.08652103,
+            "per_label_flips": {
+              "博士": 7669,
+              "硕士": 7759,
+              "本科": 6998,
+              "大专": 76,
+              "学历不限": 201,
+              "学历不明": 775
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 35,
+            "flip_rate": 0.00194444,
+            "per_label_flips": {
+              "博士": 10,
+              "硕士": 11,
+              "本科": 13,
+              "大专": 0,
+              "学历不限": 1,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 45226,
+            "decisions": 271356,
+            "label_flips": 23171,
+            "flip_rate": 0.08538967,
+            "per_label_flips": {
+              "博士": 7533,
+              "硕士": 7670,
+              "本科": 7097,
+              "大专": 75,
+              "学历不限": 21,
+              "学历不明": 775
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 33,
+            "flip_rate": 0.00183333,
+            "per_label_flips": {
+              "博士": 3,
+              "硕士": 2,
+              "本科": 17,
+              "大专": 0,
+              "学历不限": 11,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-title-20261028-212332",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 3000,
+            "decisions": 18000,
+            "label_flips": 1476,
+            "flip_rate": 0.082,
+            "per_label_flips": {
+              "博士": 482,
+              "硕士": 491,
+              "本科": 426,
+              "大专": 5,
+              "学历不限": 12,
+              "学历不明": 60
+            }
+          }
+        ]
+      },
+      "predictions_gold_holdout_human.npz": {
+        "runs_compared": [
+          "education/charcnn/charcnn-final-20261028-212510",
+          "education/charcnn/charcnn-final-balanced-20261028-212534",
+          "education/charcnn/charcnn-final-confw-20261028-221032",
+          "education/charcnn/charcnn-final-highconf-20261028-221117",
+          "education/charcnn/charcnn-final-holdout-20261028-212622",
+          "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+          "education/charcnn/charcnn-final-vloss-20261028-213415",
+          "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+          "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+          "education/tfidf/tfidf-final-20261028-212254",
+          "education/tfidf/tfidf-final-balanced-20261028-212312",
+          "education/tfidf/tfidf-final-confw-20261028-220908",
+          "education/tfidf/tfidf-final-highconf-20261028-221021",
+          "education/tfidf/tfidf-final-holdout-20261028-212556",
+          "education/tfidf/tfidf-final-title-20261028-212332",
+          "education/tfidf/tfidf-smoke-tfidf-20261028-211845"
+        ],
+        "pairs": [
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 205,
+            "flip_rate": 0.0464221,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 29,
+            "flip_rate": 0.00656703,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 51,
+            "flip_rate": 0.01154891,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 12,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 43,
+            "flip_rate": 0.00973732,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 336,
+            "flip_rate": 0.07608696,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 128,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-20261028-212510",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 205,
+            "flip_rate": 0.0464221,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 29,
+            "flip_rate": 0.00656703,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 51,
+            "flip_rate": 0.01154891,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 12,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 43,
+            "flip_rate": 0.00973732,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 336,
+            "flip_rate": 0.07608696,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 128,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-balanced-20261028-212534",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 232,
+            "flip_rate": 0.05253623,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 2,
+            "flip_rate": 0.0004529,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 78,
+            "flip_rate": 0.01766304,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 16,
+            "flip_rate": 0.00362319,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 309,
+            "flip_rate": 0.06997283,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-confw-20261028-221032",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 232,
+            "flip_rate": 0.05253623,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 230,
+            "flip_rate": 0.05208333,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 232,
+            "flip_rate": 0.05253623,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 232,
+            "flip_rate": 0.05253623,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 256,
+            "flip_rate": 0.05797101,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 12,
+              "本科": 41,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 246,
+            "flip_rate": 0.05570652,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 246,
+            "flip_rate": 0.05570652,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 246,
+            "flip_rate": 0.05570652,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 219,
+            "flip_rate": 0.04959239,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 244,
+            "flip_rate": 0.05525362,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 453,
+            "flip_rate": 0.10258152,
+            "per_label_flips": {
+              "博士": 250,
+              "硕士": 128,
+              "本科": 62,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-highconf-20261028-221117",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 219,
+            "flip_rate": 0.04959239,
+            "per_label_flips": {
+              "博士": 203,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 2,
+            "flip_rate": 0.0004529,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 78,
+            "flip_rate": 0.01766304,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 16,
+            "flip_rate": 0.00362319,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 309,
+            "flip_rate": 0.06997283,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-20261028-212622",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 2,
+            "flip_rate": 0.0004529,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 2,
+            "flip_rate": 0.0004529,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 80,
+            "flip_rate": 0.01811594,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 41,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 16,
+            "flip_rate": 0.00362319,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 16,
+            "flip_rate": 0.00362319,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 16,
+            "flip_rate": 0.00362319,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 43,
+            "flip_rate": 0.00973732,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 311,
+            "flip_rate": 0.07042572,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 62,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-holdout-vloss-20261028-213521",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 43,
+            "flip_rate": 0.00973732,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 78,
+            "flip_rate": 0.01766304,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 16,
+            "flip_rate": 0.00362319,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 309,
+            "flip_rate": 0.06997283,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-20261028-213415",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 78,
+            "flip_rate": 0.01766304,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 14,
+            "flip_rate": 0.00317029,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 16,
+            "flip_rate": 0.00362319,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 309,
+            "flip_rate": 0.06997283,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-final-vloss-balanced-20261028-213450",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 41,
+            "flip_rate": 0.00928442,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-20261028-212254",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 92,
+            "flip_rate": 0.02083333,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 92,
+            "flip_rate": 0.02083333,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 92,
+            "flip_rate": 0.02083333,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 65,
+            "flip_rate": 0.0147192,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 12,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 94,
+            "flip_rate": 0.02128623,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 39,
+              "本科": 41,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 387,
+            "flip_rate": 0.08763587,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 140,
+              "本科": 99,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 13
+            }
+          },
+          {
+            "run_a": "education/charcnn/charcnn-smoke-charcnn-20261028-211941",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 65,
+            "flip_rate": 0.0147192,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 12,
+              "本科": 39,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 14
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 2,
+            "flip_rate": 0.0004529,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 297,
+            "flip_rate": 0.06725543,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 1
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-20261028-212254",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 2,
+            "flip_rate": 0.0004529,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 297,
+            "flip_rate": 0.06725543,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 1
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-balanced-20261028-212312",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "run_b": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 2,
+            "flip_rate": 0.0004529,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 297,
+            "flip_rate": 0.06725543,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 1
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-confw-20261028-220908",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 27,
+            "flip_rate": 0.00611413,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "run_b": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 29,
+            "flip_rate": 0.00656703,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 324,
+            "flip_rate": 0.07336957,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 128,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 1
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-highconf-20261028-221021",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 0,
+            "flip_rate": 0.0,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 0,
+              "本科": 0,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "run_b": "education/tfidf/tfidf-final-title-20261028-212332",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 299,
+            "flip_rate": 0.06770833,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 101,
+              "本科": 62,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 1
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-holdout-20261028-212556",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 29,
+            "flip_rate": 0.00656703,
+            "per_label_flips": {
+              "博士": 0,
+              "硕士": 27,
+              "本科": 2,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 0
+            }
+          },
+          {
+            "run_a": "education/tfidf/tfidf-final-title-20261028-212332",
+            "run_b": "education/tfidf/tfidf-smoke-tfidf-20261028-211845",
+            "status": "RUN",
+            "shared_records": 736,
+            "decisions": 4416,
+            "label_flips": 324,
+            "flip_rate": 0.07336957,
+            "per_label_flips": {
+              "博士": 135,
+              "硕士": 128,
+              "本科": 60,
+              "大专": 0,
+              "学历不限": 0,
+              "学历不明": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}
