@@ -1,6 +1,6 @@
 {
   "generated_by": "tests/phase4_3b/run_all.py",
-  "generated_at": "2026-10-31T15:42:31",
+  "generated_at": "2026-10-31T17:18:17",
   "groups": [
     {
       "group": "P1",
@@ -70,7 +70,7 @@
     "SKIP": 0
   },
   "tests_run": 154,
-  "seconds": 83.486,
+  "seconds": 185.609,
   "ok": true,
   "records": [
     {
