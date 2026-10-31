@@ -1,0 +1,2210 @@
+{
+  "created_at": "2026-10-28T23:38:25",
+  "label_order": [
+    "博士",
+    "硕士",
+    "本科",
+    "大专",
+    "学历不限",
+    "学历不明"
+  ],
+  "reload_consistency": {
+    "gold_holdout_human": {
+      "max_abs_diff": 0.00011605024337768555,
+      "record_keys_aligned": true
+    },
+    "holdout_unseen_slots_pseudo": {
+      "max_abs_diff": 0.00012603402137756348,
+      "record_keys_aligned": true
+    },
+    "validation_pseudo": {
+      "max_abs_diff": 0.0001646280288696289,
+      "record_keys_aligned": true
+    }
+  },
+  "run_id": "charcnn-final-holdout-vloss-20261028-213521",
+  "seconds": 0.97,
+  "sets": {
+    "gold_holdout_human": {
+      "confusion_counts": {
+        "fn": 42,
+        "fp": 651,
+        "tn": 2341,
+        "tp": 1382
+      },
+      "empty_pred_samples": 0,
+      "error_types": {
+        "empty_pred_nonempty_true": 0,
+        "exact_match": 375,
+        "extra_label_only": 322,
+        "missing_label_only": 35,
+        "substitution": 4,
+        "total_wrong": 361
+      },
+      "exact_match_ratio": 0.509511,
+      "focus_analysis": {
+        "大专/专科": {
+          "exact_match_ratio": 0.237762,
+          "samples": 143,
+          "top_slots": {
+            "大专": 143
+          }
+        },
+        "学历不明/空槽位": {
+          "exact_match_ratio": 0.0,
+          "samples": 14,
+          "top_slots": {
+            "": 14
+          }
+        },
+        "学历不限": {
+          "samples": 0
+        },
+        "应届/在校/实习": {
+          "samples": 0
+        },
+        "本科及以上": {
+          "exact_match_ratio": 1.0,
+          "samples": 7,
+          "top_slots": {
+            "本科及以上": 7
+          }
+        },
+        "硕士及以上": {
+          "exact_match_ratio": 0.925926,
+          "samples": 27,
+          "top_slots": {
+            "硕士及以上": 2,
+            "硕士研究生及以上": 25
+          }
+        }
+      },
+      "group_level": {
+        "group_macro_exact_match": 0.594036,
+        "group_modal_match_rate": 0.583333,
+        "groups": 12
+      },
+      "hamming_loss": 0.156929,
+      "label_combo_error_rate": 0.490489,
+      "label_provenance": "human_gold",
+      "labels": [
+        "博士",
+        "硕士",
+        "本科",
+        "大专",
+        "学历不限",
+        "学历不明"
+      ],
+      "length_buckets": {
+        "len0": {
+          "exact_match_ratio": 0.0,
+          "micro_f1": 0.712644,
+          "samples": 14
+        },
+        "len1-2": {
+          "exact_match_ratio": 0.427621,
+          "micro_f1": 0.77265,
+          "samples": 601
+        },
+        "len11+": {
+          "exact_match_ratio": null,
+          "samples": 0
+        },
+        "len3-5": {
+          "exact_match_ratio": 0.918919,
+          "micro_f1": 0.972477,
+          "samples": 37
+        },
+        "len6-10": {
+          "exact_match_ratio": 1.0,
+          "micro_f1": 1.0,
+          "samples": 84
+        }
+      },
+      "macro_f1": 0.59056,
+      "micro_f1": 0.799537,
+      "micro_precision": 0.679784,
+      "micro_recall": 0.970506,
+      "per_label": {
+        "博士": {
+          "f1": 0.753599,
+          "precision": 0.60462,
+          "predicted": 736,
+          "recall": 1.0,
+          "support": 445
+        },
+        "大专": {
+          "f1": 0.904918,
+          "precision": 0.965035,
+          "predicted": 143,
+          "recall": 0.851852,
+          "support": 162
+        },
+        "学历不明": {
+          "f1": 0.25,
+          "precision": 0.142857,
+          "predicted": 14,
+          "recall": 1.0,
+          "support": 2
+        },
+        "学历不限": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 1
+        },
+        "本科": {
+          "f1": 0.825641,
+          "precision": 0.726862,
+          "predicted": 443,
+          "recall": 0.95549,
+          "support": 337
+        },
+        "硕士": {
+          "f1": 0.809199,
+          "precision": 0.681492,
+          "predicted": 697,
+          "recall": 0.995807,
+          "support": 477
+        }
+      },
+      "pred_label_combo_count": 5,
+      "samples": 736,
+      "set": "gold_holdout_human",
+      "slot_error_table": [
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 2,
+            "大专": 0,
+            "学历不明": 12,
+            "学历不限": 0,
+            "本科": 9,
+            "硕士": 2
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 14,
+          "slot": ""
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 2,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "硕士及以上"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "硕士研究生"
+        },
+        {
+          "exact_match_ratio": 0.237762,
+          "extra_label_counts": {
+            "博士": 106,
+            "大专": 5,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 86,
+            "硕士": 105
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 1,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 143,
+          "slot": "大专"
+        },
+        {
+          "exact_match_ratio": 0.31769,
+          "extra_label_counts": {
+            "博士": 149,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 24,
+            "硕士": 115
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 24,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 277,
+          "slot": "本科"
+        },
+        {
+          "exact_match_ratio": 0.739645,
+          "extra_label_counts": {
+            "博士": 33,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 15,
+            "硕士": 0
+          },
+          "rows": 169,
+          "slot": "硕士"
+        },
+        {
+          "exact_match_ratio": 0.833333,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 2
+          },
+          "rows": 12,
+          "slot": "博士"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 58,
+          "slot": "硕士研究生毕业及以上"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 27,
+          "slot": "博士及以上"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 25,
+          "slot": "硕士研究生及以上"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 7,
+          "slot": "本科及以上"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "硕士研究生及以上学历"
+        }
+      ]
+    },
+    "holdout_unseen_slots_pseudo": {
+      "confusion_counts": {
+        "fn": 109,
+        "fp": 1003,
+        "tn": 4656,
+        "tp": 2344
+      },
+      "empty_pred_samples": 0,
+      "error_types": {
+        "empty_pred_nonempty_true": 0,
+        "exact_match": 427,
+        "extra_label_only": 872,
+        "missing_label_only": 50,
+        "substitution": 3,
+        "total_wrong": 925
+      },
+      "exact_match_ratio": 0.315828,
+      "focus_analysis": {
+        "大专/专科": {
+          "samples": 0
+        },
+        "学历不明/空槽位": {
+          "samples": 0
+        },
+        "学历不限": {
+          "exact_match_ratio": 0.741176,
+          "samples": 85,
+          "top_slots": {
+            "学历不限": 85
+          }
+        },
+        "应届/在校/实习": {
+          "samples": 0
+        },
+        "本科及以上": {
+          "samples": 0
+        },
+        "硕士及以上": {
+          "exact_match_ratio": 0.067478,
+          "samples": 904,
+          "top_slots": {
+            "硕士及以上": 904
+          }
+        }
+      },
+      "group_level": {
+        "group_macro_exact_match": 0.535982,
+        "group_modal_match_rate": 0.555556,
+        "groups": 18
+      },
+      "hamming_loss": 0.137081,
+      "label_combo_error_rate": 0.684172,
+      "label_provenance": "pseudo_online",
+      "labels": [
+        "博士",
+        "硕士",
+        "本科",
+        "大专",
+        "学历不限",
+        "学历不明"
+      ],
+      "length_buckets": {
+        "len0": {
+          "exact_match_ratio": null,
+          "samples": 0
+        },
+        "len1-2": {
+          "exact_match_ratio": 0.0,
+          "micro_f1": 0.714286,
+          "samples": 7
+        },
+        "len11+": {
+          "exact_match_ratio": 0.0,
+          "micro_f1": 0.5,
+          "samples": 3
+        },
+        "len3-5": {
+          "exact_match_ratio": 0.288837,
+          "micro_f1": 0.8,
+          "samples": 1281
+        },
+        "len6-10": {
+          "exact_match_ratio": 0.934426,
+          "micro_f1": 0.986207,
+          "samples": 61
+        }
+      },
+      "macro_f1": 0.727453,
+      "micro_f1": 0.808276,
+      "micro_precision": 0.700329,
+      "micro_recall": 0.955565,
+      "per_label": {
+        "博士": {
+          "f1": 0.933389,
+          "precision": 0.885466,
+          "predicted": 1266,
+          "recall": 0.986796,
+          "support": 1136
+        },
+        "大专": {
+          "f1": 0.631579,
+          "precision": 1.0,
+          "predicted": 6,
+          "recall": 0.461538,
+          "support": 13
+        },
+        "学历不明": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "predicted": 0,
+          "recall": 0.0,
+          "support": 0
+        },
+        "学历不限": {
+          "f1": 0.851351,
+          "precision": 0.741176,
+          "predicted": 85,
+          "recall": 1.0,
+          "support": 63
+        },
+        "本科": {
+          "f1": 0.260563,
+          "precision": 0.156448,
+          "predicted": 946,
+          "recall": 0.778947,
+          "support": 190
+        },
+        "硕士": {
+          "f1": 0.960382,
+          "precision": 0.963602,
+          "predicted": 1044,
+          "recall": 0.957184,
+          "support": 1051
+        }
+      },
+      "pred_label_combo_count": 6,
+      "samples": 1352,
+      "set": "holdout_unseen_slots_pseudo",
+      "slot_error_table": [
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 15,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 15,
+          "slot": "本科/硕士"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 4,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 1,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 3,
+            "硕士": 0
+          },
+          "rows": 7,
+          "slot": "其他"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 5,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 5,
+          "slot": "硕士,本科"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 3,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 3
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 3,
+          "slot": "普通高等教育五年制本科"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 1
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "博士研究生毕业及以上"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 1,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "本科,硕士,博士"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 1,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "专科、本科、硕士"
+        },
+        {
+          "exact_match_ratio": 0.067478,
+          "extra_label_counts": {
+            "博士": 107,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 798,
+            "硕士": 34
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 904,
+          "slot": "硕士及以上"
+        },
+        {
+          "exact_match_ratio": 0.741176,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 22,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 15,
+            "大专": 5,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 19,
+            "硕士": 22
+          },
+          "rows": 85,
+          "slot": "学历不限"
+        },
+        {
+          "exact_match_ratio": 0.886878,
+          "extra_label_counts": {
+            "博士": 10,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 18,
+            "硕士": 23
+          },
+          "rows": 221,
+          "slot": "博士研究生"
+        },
+        {
+          "exact_match_ratio": 0.972973,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 1,
+            "硕士": 0
+          },
+          "rows": 37,
+          "slot": "硕士及以上学历"
+        },
+        {
+          "exact_match_ratio": 0.979167,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 48,
+          "slot": "硕士、博士"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 11,
+          "slot": "大学本科及以上学历"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 6,
+          "slot": "大专及以上学历"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 3,
+          "slot": "硕士/博士"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "博士研究生/博士"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "硕士及以上学位"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "本科学历以上"
+        }
+      ]
+    },
+    "validation_pseudo": {
+      "confusion_counts": {
+        "fn": 1485,
+        "fp": 47761,
+        "tn": 125700,
+        "tp": 96410
+      },
+      "empty_pred_samples": 0,
+      "error_types": {
+        "empty_pred_nonempty_true": 0,
+        "exact_match": 21068,
+        "extra_label_only": 22943,
+        "missing_label_only": 995,
+        "substitution": 220,
+        "total_wrong": 24158
+      },
+      "exact_match_ratio": 0.465838,
+      "focus_analysis": {
+        "大专/专科": {
+          "exact_match_ratio": 0.436854,
+          "samples": 11418,
+          "top_slots": {
+            "专科": 8,
+            "大专": 11410
+          }
+        },
+        "学历不明/空槽位": {
+          "exact_match_ratio": 0.0,
+          "samples": 2896,
+          "top_slots": {
+            "": 2896
+          }
+        },
+        "学历不限": {
+          "exact_match_ratio": 0.682692,
+          "samples": 208,
+          "top_slots": {
+            "不限": 180,
+            "学历不限": 28
+          }
+        },
+        "应届/在校/实习": {
+          "samples": 0
+        },
+        "本科及以上": {
+          "exact_match_ratio": 0.882133,
+          "samples": 1069,
+          "top_slots": {
+            "本科及以上": 1069
+          }
+        },
+        "硕士及以上": {
+          "exact_match_ratio": 0.322314,
+          "samples": 363,
+          "top_slots": {
+            "硕士及以上": 242,
+            "硕士研究生及以上": 121
+          }
+        }
+      },
+      "group_level": {
+        "group_macro_exact_match": 0.686683,
+        "group_modal_match_rate": 0.75,
+        "groups": 52
+      },
+      "hamming_loss": 0.181481,
+      "label_combo_error_rate": 0.534162,
+      "label_provenance": "pseudo_online",
+      "labels": [
+        "博士",
+        "硕士",
+        "本科",
+        "大专",
+        "学历不限",
+        "学历不明"
+      ],
+      "length_buckets": {
+        "len0": {
+          "exact_match_ratio": 0.0,
+          "micro_f1": 0.708758,
+          "samples": 2896
+        },
+        "len1-2": {
+          "exact_match_ratio": 0.478156,
+          "micro_f1": 0.792227,
+          "samples": 39531
+        },
+        "len11+": {
+          "exact_match_ratio": 1.0,
+          "micro_f1": 1.0,
+          "samples": 3
+        },
+        "len3-5": {
+          "exact_match_ratio": 0.761508,
+          "micro_f1": 0.947965,
+          "samples": 2520
+        },
+        "len6-10": {
+          "exact_match_ratio": 0.884058,
+          "micro_f1": 0.96837,
+          "samples": 276
+        }
+      },
+      "macro_f1": 0.730083,
+      "micro_f1": 0.79656,
+      "micro_precision": 0.66872,
+      "micro_recall": 0.984831,
+      "per_label": {
+        "博士": {
+          "f1": 0.703468,
+          "precision": 0.543107,
+          "predicted": 45004,
+          "recall": 0.998203,
+          "support": 24486
+        },
+        "大专": {
+          "f1": 0.959448,
+          "precision": 0.969801,
+          "predicted": 12186,
+          "recall": 0.949313,
+          "support": 12449
+        },
+        "学历不明": {
+          "f1": 0.354078,
+          "precision": 0.215124,
+          "predicted": 2896,
+          "recall": 1.0,
+          "support": 623
+        },
+        "学历不限": {
+          "f1": 0.714286,
+          "precision": 0.683962,
+          "predicted": 212,
+          "recall": 0.747423,
+          "support": 194
+        },
+        "本科": {
+          "f1": 0.884078,
+          "precision": 0.80538,
+          "predicted": 39554,
+          "recall": 0.979823,
+          "support": 32512
+        },
+        "硕士": {
+          "f1": 0.765142,
+          "precision": 0.621088,
+          "predicted": 44319,
+          "recall": 0.9962,
+          "support": 27631
+        }
+      },
+      "pred_label_combo_count": 7,
+      "samples": 45226,
+      "set": "validation_pseudo",
+      "slot_error_table": [
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 927,
+            "大专": 0,
+            "学历不明": 2273,
+            "学历不限": 0,
+            "本科": 1238,
+            "硕士": 753
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 61,
+            "学历不明": 0,
+            "学历不限": 2,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2896,
+          "slot": ""
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 8,
+            "硕士": 8
+          },
+          "missing_label_counts": {
+            "博士": 2,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 10,
+          "slot": "大学专科"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 8,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 8,
+            "硕士": 8
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 8,
+          "slot": "专科"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 4,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 4,
+          "slot": "本科/硕士"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 2,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "研究生"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 2,
+            "大专": 2,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "大学及以上"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 2,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "本科、硕士"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 2,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "研究生硕士"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 1
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "学士及以上"
+        },
+        {
+          "exact_match_ratio": 0.0,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "硕士,本科"
+        },
+        {
+          "exact_match_ratio": 0.045455,
+          "extra_label_counts": {
+            "博士": 34,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 214,
+            "硕士": 13
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 242,
+          "slot": "硕士及以上"
+        },
+        {
+          "exact_match_ratio": 0.408643,
+          "extra_label_counts": {
+            "博士": 2069,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 46
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 17,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 558,
+            "硕士": 0
+          },
+          "rows": 4258,
+          "slot": "硕士"
+        },
+        {
+          "exact_match_ratio": 0.43716,
+          "extra_label_counts": {
+            "博士": 6214,
+            "大专": 340,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 5884,
+            "硕士": 6165
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 42,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 11410,
+          "slot": "大专"
+        },
+        {
+          "exact_match_ratio": 0.488215,
+          "extra_label_counts": {
+            "博士": 141,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 3
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 14,
+            "硕士": 0
+          },
+          "rows": 297,
+          "slot": "硕士研究生"
+        },
+        {
+          "exact_match_ratio": 0.497721,
+          "extra_label_counts": {
+            "博士": 10993,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 322,
+            "硕士": 9705
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 508,
+            "学历不明": 0,
+            "学历不限": 5,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 23037,
+          "slot": "本科"
+        },
+        {
+          "exact_match_ratio": 0.565217,
+          "extra_label_counts": {
+            "博士": 10,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 9
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 23,
+          "slot": "大学本科"
+        },
+        {
+          "exact_match_ratio": 0.6,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 1,
+            "硕士": 1
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 5,
+          "slot": "校招"
+        },
+        {
+          "exact_match_ratio": 0.677778,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 58,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 38,
+            "大专": 7,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 41,
+            "硕士": 54
+          },
+          "rows": 180,
+          "slot": "不限"
+        },
+        {
+          "exact_match_ratio": 0.714286,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 8,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 3,
+            "大专": 2,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 8,
+            "硕士": 7
+          },
+          "rows": 28,
+          "slot": "学历不限"
+        },
+        {
+          "exact_match_ratio": 0.75,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 1,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 1,
+            "硕士": 1
+          },
+          "rows": 4,
+          "slot": "无学历要求"
+        },
+        {
+          "exact_match_ratio": 0.761905,
+          "extra_label_counts": {
+            "博士": 5,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 21,
+          "slot": "大学本科及以上"
+        },
+        {
+          "exact_match_ratio": 0.833333,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 2
+          },
+          "rows": 12,
+          "slot": "博士及以上"
+        },
+        {
+          "exact_match_ratio": 0.833333,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 6,
+          "slot": "大学本科及以上学历"
+        },
+        {
+          "exact_match_ratio": 0.86,
+          "extra_label_counts": {
+            "博士": 7,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 50,
+          "slot": "硕士研究生毕业"
+        },
+        {
+          "exact_match_ratio": 0.869565,
+          "extra_label_counts": {
+            "博士": 2,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 2,
+            "硕士": 1
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 23,
+          "slot": "大学本科毕业"
+        },
+        {
+          "exact_match_ratio": 0.876033,
+          "extra_label_counts": {
+            "博士": 8,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 2
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 10,
+            "硕士": 0
+          },
+          "rows": 121,
+          "slot": "硕士研究生及以上"
+        },
+        {
+          "exact_match_ratio": 0.882133,
+          "extra_label_counts": {
+            "博士": 85,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 8,
+            "硕士": 53
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 35,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1069,
+          "slot": "本科及以上"
+        },
+        {
+          "exact_match_ratio": 0.9,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 1
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 10,
+          "slot": "大学"
+        },
+        {
+          "exact_match_ratio": 0.921348,
+          "extra_label_counts": {
+            "博士": 14,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 1,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 23,
+            "硕士": 40
+          },
+          "rows": 623,
+          "slot": "博士"
+        },
+        {
+          "exact_match_ratio": 0.923077,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 1
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 13,
+          "slot": "硕士及以上学历"
+        },
+        {
+          "exact_match_ratio": 0.936709,
+          "extra_label_counts": {
+            "博士": 25,
+            "大专": 26,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 13,
+            "硕士": 23
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 711,
+          "slot": "专科及以上"
+        },
+        {
+          "exact_match_ratio": 0.947368,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 19,
+          "slot": "硕士、博士"
+        },
+        {
+          "exact_match_ratio": 0.978261,
+          "extra_label_counts": {
+            "博士": 1,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 1,
+            "硕士": 1
+          },
+          "rows": 46,
+          "slot": "博士研究生"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 40,
+          "slot": "大专及以上"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 17,
+          "slot": "本科及以上学历"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 8,
+          "slot": "博士研究生及以上"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 3,
+          "slot": "博士生"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 3,
+          "slot": "全日制本科及以上学历"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "硕士及以上学位"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "本科,硕士"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "博士研究生毕业"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "全日制大学在读"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 2,
+          "slot": "大学专科毕业"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "大学专科及以上学历"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "MBA/EMBA"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "全日制本科以上学历"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "大学本科毕业及以上"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "本科或技工院校预备技师(技师)及以上"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "全日制本科或同等以上学历"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "大专及以上学历"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "博士研究生毕业并取得相应学位"
+        },
+        {
+          "exact_match_ratio": 1.0,
+          "extra_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "missing_label_counts": {
+            "博士": 0,
+            "大专": 0,
+            "学历不明": 0,
+            "学历不限": 0,
+            "本科": 0,
+            "硕士": 0
+          },
+          "rows": 1,
+          "slot": "硕士研究生毕业及以上"
+        }
+      ]
+    }
+  },
+  "stored_metrics_match": {
+    "gold_holdout_human": {
+      "exact_match_delta": 0.0
+    },
+    "holdout_unseen_slots_pseudo": {
+      "exact_match_delta": 0.0
+    },
+    "validation_pseudo": {
+      "exact_match_delta": 0.0
+    }
+  }
+}

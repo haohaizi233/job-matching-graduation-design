@@ -1,0 +1,244 @@
+{
+  "artifacts": [
+    "model.pt",
+    "checkpoint_best.pt",
+    "tokenizer.json",
+    "manifest.json",
+    "config.json",
+    "metrics.json",
+    "thresholds.json",
+    "feature_map.json",
+    "history.json"
+  ],
+  "created_at": "2026-10-28T21:19:52",
+  "data": {
+    "dataset_version_note": "数据版本见 reports/phase3-preprocessing-summary.json（dv-0ce28fa6b560）",
+    "eval_rows": 3000,
+    "eval_unique_slots": 25,
+    "split_manifest": "data/splits/education/manifest.json",
+    "threshold_tuning_rows": 3000,
+    "train_rows": 3000,
+    "train_unique_slots": 27
+  },
+  "experiment": "A",
+  "experiment_meaning": "A=已知表达分布（第三阶段固定切分）；B=未见过槽位表达泛化（train 内部按槽位留出）",
+  "gold_policy": "gold_holdout 只做一次性最终评估；未参与训练、阈值选择与模型选择",
+  "holdout_info": null,
+  "input_mode": "slot",
+  "label_order": [
+    "博士",
+    "硕士",
+    "本科",
+    "大专",
+    "学历不限",
+    "学历不明"
+  ],
+  "model_type": "char_cnn",
+  "model_version": "charcnn-smoke-charcnn-20261028-211941",
+  "n_parameters": 7334,
+  "run_id": "charcnn-smoke-charcnn-20261028-211941",
+  "sample_weight_strategy": "none",
+  "saved": {
+    "bytes": 31756,
+    "model_file": "model.pt"
+  },
+  "selection": {
+    "best_val_micro_f1_fixed05": 0.751188,
+    "metric": "micro_f1_on_validation_tuned_thresholds"
+  },
+  "threshold_detail": {
+    "博士": {
+      "f1": 0.696219,
+      "threshold": 0.2
+    },
+    "大专": {
+      "f1": 0.958308,
+      "threshold": 0.55
+    },
+    "学历不明": {
+      "f1": 0.367188,
+      "threshold": 0.2
+    },
+    "学历不限": {
+      "f1": 0.695652,
+      "threshold": 0.5
+    },
+    "本科": {
+      "f1": 0.874376,
+      "threshold": 0.25
+    },
+    "硕士": {
+      "f1": 0.75026,
+      "threshold": 0.2
+    }
+  },
+  "threshold_selected_on": "validation_pseudo",
+  "thresholds": [
+    0.2,
+    0.2,
+    0.25,
+    0.55,
+    0.5,
+    0.2
+  ],
+  "train_info": {
+    "best_epoch": 12,
+    "best_val_micro_f1_fixed05": 0.751188,
+    "device": "cuda",
+    "epochs_run": 17,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.865271,
+        "val_exact_match_fixed05": 0.247333,
+        "val_loss": 0.624914,
+        "val_micro_f1_fixed05": 0.684482
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.77504,
+        "val_exact_match_fixed05": 0.287667,
+        "val_loss": 0.578212,
+        "val_micro_f1_fixed05": 0.709329
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.706865,
+        "val_exact_match_fixed05": 0.2,
+        "val_loss": 0.536365,
+        "val_micro_f1_fixed05": 0.685061
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.671216,
+        "val_exact_match_fixed05": 0.215,
+        "val_loss": 0.500708,
+        "val_micro_f1_fixed05": 0.695893
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.635585,
+        "val_exact_match_fixed05": 0.457,
+        "val_loss": 0.473455,
+        "val_micro_f1_fixed05": 0.744154
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.598134,
+        "val_exact_match_fixed05": 0.478333,
+        "val_loss": 0.453728,
+        "val_micro_f1_fixed05": 0.75034
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.583412,
+        "val_exact_match_fixed05": 0.349,
+        "val_loss": 0.435696,
+        "val_micro_f1_fixed05": 0.710474
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.567222,
+        "val_exact_match_fixed05": 0.349,
+        "val_loss": 0.424494,
+        "val_micro_f1_fixed05": 0.710414
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.564489,
+        "val_exact_match_fixed05": 0.349,
+        "val_loss": 0.410531,
+        "val_micro_f1_fixed05": 0.710464
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.550934,
+        "val_exact_match_fixed05": 0.479,
+        "val_loss": 0.403848,
+        "val_micro_f1_fixed05": 0.751094
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.537468,
+        "val_exact_match_fixed05": 0.479,
+        "val_loss": 0.399092,
+        "val_micro_f1_fixed05": 0.751037
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.534276,
+        "val_exact_match_fixed05": 0.479,
+        "val_loss": 0.393831,
+        "val_micro_f1_fixed05": 0.751188
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.543157,
+        "val_exact_match_fixed05": 0.236667,
+        "val_loss": 0.388236,
+        "val_micro_f1_fixed05": 0.705442
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.527423,
+        "val_exact_match_fixed05": 0.325667,
+        "val_loss": 0.394612,
+        "val_micro_f1_fixed05": 0.613692
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.51551,
+        "val_exact_match_fixed05": 0.107333,
+        "val_loss": 0.391789,
+        "val_micro_f1_fixed05": 0.662828
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.524639,
+        "val_exact_match_fixed05": 0.107333,
+        "val_loss": 0.391702,
+        "val_micro_f1_fixed05": 0.662721
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.512515,
+        "val_exact_match_fixed05": 0.108,
+        "val_loss": 0.387357,
+        "val_micro_f1_fixed05": 0.662935
+      }
+    ],
+    "n_parameters": 7334,
+    "nonfinite_grad_steps": 0,
+    "peak_memory_mb": 57.0,
+    "seconds": 2.39
+  },
+  "train_slot_vocab": [
+    "",
+    "不限",
+    "专科",
+    "专科及以上",
+    "博士",
+    "博士及以上",
+    "博士生",
+    "博士研究生",
+    "博士研究生及以上",
+    "大专",
+    "大专及以上",
+    "大学",
+    "大学专科及以上学历",
+    "大学本科及以上",
+    "大学本科及以上学历",
+    "大学本科毕业",
+    "学历不限",
+    "本科",
+    "本科及以上",
+    "本科及以上学历",
+    "硕士",
+    "硕士,博士",
+    "硕士、博士",
+    "硕士及以上",
+    "硕士研究生",
+    "硕士研究生及以上",
+    "硕士研究生毕业"
+  ]
+}

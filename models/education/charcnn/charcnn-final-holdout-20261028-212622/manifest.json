@@ -1,0 +1,285 @@
+{
+  "artifacts": [
+    "model.pt",
+    "checkpoint_best.pt",
+    "tokenizer.json",
+    "manifest.json",
+    "config.json",
+    "metrics.json",
+    "thresholds.json",
+    "feature_map.json",
+    "history.json"
+  ],
+  "created_at": "2026-10-28T21:27:02",
+  "data": {
+    "dataset_version_note": "数据版本见 reports/phase3-preprocessing-summary.json（dv-0ce28fa6b560）",
+    "eval_rows": 1352,
+    "eval_unique_slots": 18,
+    "split_manifest": "data/splits/education/manifest.json",
+    "threshold_tuning_rows": 45226,
+    "train_rows": 179551,
+    "train_unique_slots": 61
+  },
+  "experiment": "B",
+  "experiment_meaning": "A=已知表达分布（第三阶段固定切分）；B=未见过槽位表达泛化（train 内部按槽位留出）",
+  "gold_policy": "gold_holdout 只做一次性最终评估；未参与训练、阈值选择与模型选择",
+  "holdout_info": {
+    "holdout_label_support": {
+      "博士": 1136,
+      "大专": 13,
+      "学历不明": 0,
+      "学历不限": 63,
+      "本科": 190,
+      "硕士": 1051
+    },
+    "holdout_slots": [
+      "专科、本科、硕士",
+      "其他",
+      "博士研究生",
+      "博士研究生/博士",
+      "博士研究生毕业及以上",
+      "大专及以上学历",
+      "大学本科及以上学历",
+      "学历不限",
+      "普通高等教育五年制本科",
+      "本科,硕士,博士",
+      "本科/硕士",
+      "本科学历以上",
+      "硕士,本科",
+      "硕士/博士",
+      "硕士、博士",
+      "硕士及以上",
+      "硕士及以上学位",
+      "硕士及以上学历"
+    ],
+    "rows_holdout": 1352,
+    "rows_train": 179551,
+    "strategy": "rank_interleaved(holdout_every=4, skip_top=8)",
+    "train_label_support": {
+      "博士": 97470,
+      "大专": 50259,
+      "学历不明": 2442,
+      "学历不限": 645,
+      "本科": 130328,
+      "硕士": 109635
+    },
+    "unique_slots_holdout": 18,
+    "unique_slots_total": 79
+  },
+  "input_mode": "slot",
+  "label_order": [
+    "博士",
+    "硕士",
+    "本科",
+    "大专",
+    "学历不限",
+    "学历不明"
+  ],
+  "model_type": "char_cnn",
+  "model_version": "charcnn-final-holdout-20261028-212622",
+  "n_parameters": 9062,
+  "run_id": "charcnn-final-holdout-20261028-212622",
+  "sample_weight_strategy": "none",
+  "saved": {
+    "bytes": 38668,
+    "model_file": "model.pt"
+  },
+  "selection": {
+    "best_tune_micro_f1_fixed05": 0.729005,
+    "metric": "micro_f1_on_threshold_tuning_set(early_stopping)"
+  },
+  "threshold_detail": {
+    "博士": {
+      "f1": 0.703424,
+      "threshold": 0.4
+    },
+    "大专": {
+      "f1": 0.959484,
+      "threshold": 0.7
+    },
+    "学历不明": {
+      "f1": 0.354078,
+      "threshold": 0.2
+    },
+    "学历不限": {
+      "f1": 0.714286,
+      "threshold": 0.6
+    },
+    "本科": {
+      "f1": 0.886262,
+      "threshold": 0.2
+    },
+    "硕士": {
+      "f1": 0.765128,
+      "threshold": 0.25
+    }
+  },
+  "threshold_selected_on": "validation_pseudo(实验A)",
+  "thresholds": [
+    0.4,
+    0.25,
+    0.2,
+    0.7,
+    0.6,
+    0.2
+  ],
+  "train_info": {
+    "best_epoch": 7,
+    "best_val_micro_f1_fixed05": 0.729005,
+    "device": "cuda",
+    "epochs_run": 12,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.44882,
+        "val_exact_match_fixed05": 0.321519,
+        "val_loss": 0.354445,
+        "val_micro_f1_fixed05": 0.617726
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.373304,
+        "val_exact_match_fixed05": 0.321496,
+        "val_loss": 0.376587,
+        "val_micro_f1_fixed05": 0.616806
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.369059,
+        "val_exact_match_fixed05": 0.321297,
+        "val_loss": 0.354258,
+        "val_micro_f1_fixed05": 0.616876
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.366756,
+        "val_exact_match_fixed05": 0.321629,
+        "val_loss": 0.383664,
+        "val_micro_f1_fixed05": 0.616969
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.365679,
+        "val_exact_match_fixed05": 0.238204,
+        "val_loss": 0.346664,
+        "val_micro_f1_fixed05": 0.712056
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.365722,
+        "val_exact_match_fixed05": 0.321917,
+        "val_loss": 0.350506,
+        "val_micro_f1_fixed05": 0.617771
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.364995,
+        "val_exact_match_fixed05": 0.358931,
+        "val_loss": 0.354822,
+        "val_micro_f1_fixed05": 0.729005
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.365641,
+        "val_exact_match_fixed05": 0.32174,
+        "val_loss": 0.35504,
+        "val_micro_f1_fixed05": 0.617003
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.36398,
+        "val_exact_match_fixed05": 0.238204,
+        "val_loss": 0.341339,
+        "val_micro_f1_fixed05": 0.712081
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.365165,
+        "val_exact_match_fixed05": 0.317561,
+        "val_loss": 0.366244,
+        "val_micro_f1_fixed05": 0.627375
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.363146,
+        "val_exact_match_fixed05": 0.450626,
+        "val_loss": 0.345728,
+        "val_micro_f1_fixed05": 0.662259
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.363762,
+        "val_exact_match_fixed05": 0.321961,
+        "val_loss": 0.354628,
+        "val_micro_f1_fixed05": 0.617079
+      }
+    ],
+    "n_parameters": 9062,
+    "nonfinite_grad_steps": 0,
+    "peak_memory_mb": 57.0,
+    "seconds": 24.38
+  },
+  "train_slot_vocab": [
+    "",
+    "Bachelor及以上",
+    "MBA/EMBA",
+    "不限",
+    "专科",
+    "专科及以上",
+    "专科及以上学历",
+    "全日制大学在读",
+    "全日制本科以上学历,理工科专业",
+    "全日制本科以上学历,理工科专业;",
+    "全日制本科及以上",
+    "全日制本科及以上学历",
+    "博士",
+    "博士及以上",
+    "博士及以上学历",
+    "博士生",
+    "博士研究生及以上",
+    "博士研究生毕业",
+    "大专",
+    "大专以上",
+    "大专及以上",
+    "大学",
+    "大学专科",
+    "大学专科及以上学历",
+    "大学专科毕业",
+    "大学及以上",
+    "大学本科",
+    "大学本科及以上",
+    "大学本科毕业",
+    "学士",
+    "学士及以上",
+    "应届博士",
+    "无学历要求",
+    "普通高等教育四年制本科",
+    "本科",
+    "本科,硕士",
+    "本科、硕士",
+    "本科以上",
+    "本科以上学历",
+    "本科以及上",
+    "本科及以上",
+    "本科及以上学历",
+    "本科及其以上",
+    "本科或技工院校预备技师(技师)及以上",
+    "校招",
+    "研究生",
+    "研究生硕士",
+    "硕士",
+    "硕士 及以上",
+    "硕士 研究生",
+    "硕士,博士",
+    "硕士、本科",
+    "硕士及以上(特别优秀可放宽至本科)",
+    "硕士及其以上",
+    "硕士或博士",
+    "硕士研究生",
+    "硕士研究生及以上",
+    "硕士研究生及以上学历",
+    "硕士研究生毕业",
+    "硕士研究生毕业及以上",
+    "统招本科"
+  ]
+}

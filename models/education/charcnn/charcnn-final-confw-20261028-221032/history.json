@@ -1,0 +1,80 @@
+{
+  "grid_log": [],
+  "train_info": {
+    "best_epoch": 4,
+    "best_monitor_value": 0.325454,
+    "best_val_micro_f1_fixed05": 0.71943,
+    "device": "cuda",
+    "early_stopping_monitor": "val_loss",
+    "epochs_run": 9,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.314773,
+        "val_exact_match_fixed05": 0.238358,
+        "val_loss": 0.328087,
+        "val_micro_f1_fixed05": 0.700697
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.241177,
+        "val_exact_match_fixed05": 0.491929,
+        "val_loss": 0.330274,
+        "val_micro_f1_fixed05": 0.768927
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.233876,
+        "val_exact_match_fixed05": 0.492261,
+        "val_loss": 0.326752,
+        "val_micro_f1_fixed05": 0.769025
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.23178,
+        "val_exact_match_fixed05": 0.239287,
+        "val_loss": 0.325454,
+        "val_micro_f1_fixed05": 0.71943
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.230912,
+        "val_exact_match_fixed05": 0.492637,
+        "val_loss": 0.329145,
+        "val_micro_f1_fixed05": 0.769517
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.230274,
+        "val_exact_match_fixed05": 0.239088,
+        "val_loss": 0.326016,
+        "val_micro_f1_fixed05": 0.719382
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.229816,
+        "val_exact_match_fixed05": 0.239398,
+        "val_loss": 0.327341,
+        "val_micro_f1_fixed05": 0.719443
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.229805,
+        "val_exact_match_fixed05": 0.23953,
+        "val_loss": 0.32792,
+        "val_micro_f1_fixed05": 0.71998
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.22937,
+        "val_exact_match_fixed05": 0.239575,
+        "val_loss": 0.329828,
+        "val_micro_f1_fixed05": 0.719988
+      }
+    ],
+    "n_parameters": 9158,
+    "nonfinite_grad_steps": 0,
+    "peak_memory_mb": 57.0,
+    "seconds": 21.9
+  }
+}
