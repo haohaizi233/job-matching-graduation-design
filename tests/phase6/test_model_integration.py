@@ -164,9 +164,16 @@ class M1ModelIntegration(unittest.TestCase):
             deg = r.json()["data"]["result_summary"]["degradation"]
             if deg is None:
                 self.skipTest("BGE 权重在本机存在，失败路径未触发（登记 SKIP，不计 PASS）")
-        self.assertEqual(400, r.status_code)
+        # 契约：MODEL_MISSING 在 errors.ERROR_CODES 登记为 503（模型能力缺失是服务侧
+        # 问题，不是请求非法）。历史断言误写 400——本机权重存在时该用例走 skipTest
+        # 从未真正执行，直到 CI 干净 checkout（无 torch/权重）才首次运行并暴露。
+        self.assertEqual(503, r.status_code,
+                         "MODEL_MISSING 登记 HTTP 状态为 503（见 errors.ERROR_CODES）")
         body = r.text
         self.assertIn("MODEL_MISSING", body)
+        err = r.json().get("error", {})
+        self.assertEqual("MODEL_MISSING", err.get("code"),
+                         "显式失败必须携带稳定 error_code，不静默降级")
 
     def test_06_formal_mode_rejected(self):
         """正式模式门禁：research_only_zh 模型不允许 formal。"""

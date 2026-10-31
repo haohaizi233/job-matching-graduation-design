@@ -1,6 +1,6 @@
 {
   "generated_by": "tests/phase6/run_all.py",
-  "generated_at": "2026-10-31T19:15:29",
+  "generated_at": "2026-10-31T19:31:10",
   "python": "3.13.2",
   "platform": "win32",
   "modules": [
@@ -20,7 +20,7 @@
     "SKIP": 2
   },
   "tests_run": 81,
-  "seconds": 36.93,
+  "seconds": 71.776,
   "ok": true,
   "load_errors": [],
   "records": [
@@ -28,567 +28,567 @@
       "module": "test_gold_readiness",
       "test": "test_annotation_import_validation (test_gold_readiness.M3GoldReadiness.test_annotation_import_validation)",
       "status": "PASS",
-      "ms": 1262.151,
+      "ms": 1070.034,
       "detail": ""
     },
     {
       "module": "test_gold_readiness",
       "test": "test_annotation_progress_and_resume_support (test_gold_readiness.M3GoldReadiness.test_annotation_progress_and_resume_support)",
       "status": "PASS",
-      "ms": 1.669,
+      "ms": 6.939,
       "detail": ""
     },
     {
       "module": "test_gold_readiness",
       "test": "test_export_annotation_packets_blind_and_checked (test_gold_readiness.M3GoldReadiness.test_export_annotation_packets_blind_and_checked)",
       "status": "PASS",
-      "ms": 288.219,
+      "ms": 633.746,
       "detail": ""
     },
     {
       "module": "test_gold_readiness",
       "test": "test_freeze_gold_blocks_without_real_data (test_gold_readiness.M3GoldReadiness.test_freeze_gold_blocks_without_real_data)",
       "status": "PASS",
-      "ms": 248.649,
+      "ms": 557.215,
       "detail": ""
     },
     {
       "module": "test_gold_readiness",
       "test": "test_freeze_hash_verification_tooling (test_gold_readiness.M3GoldReadiness.test_freeze_hash_verification_tooling)",
       "status": "PASS",
-      "ms": 1.143,
+      "ms": 2.887,
       "detail": ""
     },
     {
       "module": "test_gold_readiness",
       "test": "test_gold_workspace_state_driven_and_consistent (test_gold_readiness.M3GoldReadiness.test_gold_workspace_state_driven_and_consistent)",
       "status": "PASS",
-      "ms": 37.579,
+      "ms": 147.511,
       "detail": ""
     },
     {
       "module": "test_gold_readiness",
       "test": "test_leakage_gate_tooling (test_gold_readiness.M3GoldReadiness.test_leakage_gate_tooling)",
       "status": "PASS",
-      "ms": 251.864,
+      "ms": 614.999,
       "detail": ""
     },
     {
       "module": "test_gold_readiness",
       "test": "test_pii_detection_and_masking_available (test_gold_readiness.M3GoldReadiness.test_pii_detection_and_masking_available)",
       "status": "PASS",
-      "ms": 0.037,
+      "ms": 0.122,
       "detail": ""
     },
     {
       "module": "test_index_invalidation",
       "test": "test_cache_hit_skips_rebuild (test_index_invalidation.M2IndexInvalidation.test_cache_hit_skips_rebuild)",
       "status": "PASS",
-      "ms": 0.187,
+      "ms": 0.474,
       "detail": ""
     },
     {
       "module": "test_index_invalidation",
       "test": "test_content_key_changes_on_doc_edit (test_index_invalidation.M2IndexInvalidation.test_content_key_changes_on_doc_edit)",
       "status": "PASS",
-      "ms": 0.11,
+      "ms": 0.397,
       "detail": ""
     },
     {
       "module": "test_index_invalidation",
       "test": "test_index_refresh_after_job_edit (test_index_invalidation.M2IndexInvalidation.test_index_refresh_after_job_edit)",
       "status": "PASS",
-      "ms": 2414.502,
+      "ms": 6292.975,
       "detail": ""
     },
     {
       "module": "test_index_invalidation",
       "test": "test_invalidate_specific_and_all (test_index_invalidation.M2IndexInvalidation.test_invalidate_specific_and_all)",
       "status": "PASS",
-      "ms": 0.056,
+      "ms": 0.21,
       "detail": ""
     },
     {
       "module": "test_index_invalidation",
       "test": "test_lru_eviction_respects_capacity (test_index_invalidation.M2IndexInvalidation.test_lru_eviction_respects_capacity)",
       "status": "PASS",
-      "ms": 0.039,
+      "ms": 0.178,
       "detail": ""
     },
     {
       "module": "test_index_invalidation",
       "test": "test_user_data_isolation_via_content_key (test_index_invalidation.M2IndexInvalidation.test_user_data_isolation_via_content_key)",
       "status": "PASS",
-      "ms": 0.085,
+      "ms": 0.272,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_bge_missing_raises_model_missing (test_model_fallback.M2ModelFallback.test_bge_missing_raises_model_missing)",
       "status": "PASS",
-      "ms": 0.385,
+      "ms": 1.223,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_bge_real_model_inference (test_model_fallback.M2ModelFallback.test_bge_real_model_inference)",
       "status": "PASS",
-      "ms": 17438.254,
+      "ms": 37754.051,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_empty_job_list_rejected (test_model_fallback.M2ModelFallback.test_empty_job_list_rejected)",
       "status": "PASS",
-      "ms": 16.292,
+      "ms": 20.22,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_empty_text_rejected_not_random_score (test_model_fallback.M2ModelFallback.test_empty_text_rejected_not_random_score)",
       "status": "PASS",
-      "ms": 0.313,
+      "ms": 0.457,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_explicit_model_id_missing_can_degrade (test_model_fallback.M2ModelFallback.test_explicit_model_id_missing_can_degrade)",
       "status": "PASS",
-      "ms": 1.759,
+      "ms": 2.004,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_fusion_score_nan_refused (test_model_fallback.M2ModelFallback.test_fusion_score_nan_refused)",
       "status": "PASS",
-      "ms": 0.244,
+      "ms": 0.247,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_missing_artifact_degrades_with_reason (test_model_fallback.M2ModelFallback.test_missing_artifact_degrades_with_reason)",
       "status": "PASS",
-      "ms": 0.943,
+      "ms": 1.234,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_missing_artifact_refuses_without_fallback (test_model_fallback.M2ModelFallback.test_missing_artifact_refuses_without_fallback)",
       "status": "PASS",
-      "ms": 0.413,
+      "ms": 0.566,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_rerank_disabled_by_default (test_model_fallback.M2ModelFallback.test_rerank_disabled_by_default)",
       "status": "PASS",
-      "ms": 4.973,
+      "ms": 5.82,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_reranker_missing_raises_model_missing (test_model_fallback.M2ModelFallback.test_reranker_missing_raises_model_missing)",
       "status": "PASS",
-      "ms": 4.895,
+      "ms": 5.014,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_timeout_never_degrades (test_model_fallback.M2ModelFallback.test_timeout_never_degrades)",
       "status": "PASS",
-      "ms": 0.533,
+      "ms": 0.588,
       "detail": ""
     },
     {
       "module": "test_model_fallback",
       "test": "test_unregistered_default_slot_fails_explicitly (test_model_fallback.M2ModelFallback.test_unregistered_default_slot_fails_explicitly)",
       "status": "PASS",
-      "ms": 0.331,
+      "ms": 0.411,
       "detail": ""
     },
     {
       "module": "test_model_integration",
       "test": "test_01_profile_confirmed_and_jobs_parsed (test_model_integration.M1ModelIntegration.test_01_profile_confirmed_and_jobs_parsed)",
       "status": "PASS",
-      "ms": 427.671,
+      "ms": 581.327,
       "detail": ""
     },
     {
       "module": "test_model_integration",
       "test": "test_02_research_strategy_really_called (test_model_integration.M1ModelIntegration.test_02_research_strategy_really_called)",
       "status": "PASS",
-      "ms": 479.09,
+      "ms": 666.232,
       "detail": ""
     },
     {
       "module": "test_model_integration",
       "test": "test_03_research_differs_from_baseline (test_model_integration.M1ModelIntegration.test_03_research_differs_from_baseline)",
       "status": "PASS",
-      "ms": 400.962,
+      "ms": 638.795,
       "detail": ""
     },
     {
       "module": "test_model_integration",
       "test": "test_04_model_missing_degrades_explicitly (test_model_integration.M1ModelIntegration.test_04_model_missing_degrades_explicitly)",
       "status": "SKIP",
-      "ms": 527.793,
+      "ms": 894.325,
       "detail": "BGE 权重在本机存在，降级路径未触发（登记 SKIP，不计 PASS）"
     },
     {
       "module": "test_model_integration",
       "test": "test_05_allow_fallback_false_refuses (test_model_integration.M1ModelIntegration.test_05_allow_fallback_false_refuses)",
       "status": "SKIP",
-      "ms": 436.359,
+      "ms": 735.582,
       "detail": "BGE 权重在本机存在，失败路径未触发（登记 SKIP，不计 PASS）"
     },
     {
       "module": "test_model_integration",
       "test": "test_06_formal_mode_rejected (test_model_integration.M1ModelIntegration.test_06_formal_mode_rejected)",
       "status": "PASS",
-      "ms": 0.274,
+      "ms": 0.351,
       "detail": ""
     },
     {
       "module": "test_model_integration",
       "test": "test_07_user_isolation (test_model_integration.M1ModelIntegration.test_07_user_isolation)",
       "status": "PASS",
-      "ms": 777.189,
+      "ms": 1665.045,
       "detail": ""
     },
     {
       "module": "test_model_integration",
       "test": "test_08_deterministic_same_input (test_model_integration.M1ModelIntegration.test_08_deterministic_same_input)",
       "status": "PASS",
-      "ms": 7.815,
+      "ms": 8.784,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_cache_key_includes_encoder_tag (test_ranking_and_cache_contracts.R2CacheKeyContract.test_cache_key_includes_encoder_tag)",
       "status": "PASS",
-      "ms": 0.159,
+      "ms": 0.275,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_cache_key_includes_retrieval_config (test_ranking_and_cache_contracts.R2CacheKeyContract.test_cache_key_includes_retrieval_config)",
       "status": "PASS",
-      "ms": 0.062,
+      "ms": 0.16,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_cache_key_includes_strategy_and_schema_version (test_ranking_and_cache_contracts.R2CacheKeyContract.test_cache_key_includes_strategy_and_schema_version)",
       "status": "PASS",
-      "ms": 0.071,
+      "ms": 0.19,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_cache_key_stable_for_identical_inputs (test_ranking_and_cache_contracts.R2CacheKeyContract.test_cache_key_stable_for_identical_inputs)",
       "status": "PASS",
-      "ms": 0.071,
+      "ms": 0.178,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_concurrent_get_or_build_builds_once (test_ranking_and_cache_contracts.R2CacheKeyContract.test_concurrent_get_or_build_builds_once)",
       "status": "PASS",
-      "ms": 55.469,
+      "ms": 58.175,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_different_rrf_k_scorers_do_not_share_index (test_ranking_and_cache_contracts.R2CacheKeyContract.test_different_rrf_k_scorers_do_not_share_index)",
       "status": "PASS",
-      "ms": 5.722,
+      "ms": 10.523,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_encoder_tag_dict_form_supported (test_ranking_and_cache_contracts.R2CacheKeyContract.test_encoder_tag_dict_form_supported)",
       "status": "PASS",
-      "ms": 0.072,
+      "ms": 0.142,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_encoder_tag_respects_encoderinfo_contract (test_ranking_and_cache_contracts.R2CacheKeyContract.test_encoder_tag_respects_encoderinfo_contract)",
       "status": "PASS",
-      "ms": 0.047,
+      "ms": 0.119,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_deadline_checked_before_index_build (test_ranking_and_cache_contracts.R2DeadlineContract.test_deadline_checked_before_index_build)",
       "status": "PASS",
-      "ms": 0.201,
+      "ms": 0.335,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_deadline_checked_per_candidate (test_ranking_and_cache_contracts.R2DeadlineContract.test_deadline_checked_per_candidate)",
       "status": "PASS",
-      "ms": 2.31,
+      "ms": 5.017,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_warmup_preloads_heavy_resources (test_ranking_and_cache_contracts.R2DeadlineContract.test_warmup_preloads_heavy_resources)",
       "status": "PASS",
-      "ms": 3.846,
+      "ms": 7.204,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_duplicate_job_ids_deduped_with_warning (test_ranking_and_cache_contracts.R2TopKAndHardConstraint.test_duplicate_job_ids_deduped_with_warning)",
       "status": "PASS",
-      "ms": 2.423,
+      "ms": 5.69,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_filtered_rows_sorted_after_qualified_in_rank (test_ranking_and_cache_contracts.R2TopKAndHardConstraint.test_filtered_rows_sorted_after_qualified_in_rank)",
       "status": "PASS",
-      "ms": 2.399,
+      "ms": 5.73,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_hard_filtered_job_not_in_final_results (test_ranking_and_cache_contracts.R2TopKAndHardConstraint.test_hard_filtered_job_not_in_final_results)",
       "status": "PASS",
-      "ms": 2.591,
+      "ms": 5.8,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_same_score_stable_order (test_ranking_and_cache_contracts.R2TopKAndHardConstraint.test_same_score_stable_order)",
       "status": "PASS",
-      "ms": 2.485,
+      "ms": 7.619,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_top_k_negative_treated_as_zero (test_ranking_and_cache_contracts.R2TopKAndHardConstraint.test_top_k_negative_treated_as_zero)",
       "status": "PASS",
-      "ms": 2.13,
+      "ms": 4.931,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_top_k_shortfall_declared (test_ranking_and_cache_contracts.R2TopKAndHardConstraint.test_top_k_shortfall_declared)",
       "status": "PASS",
-      "ms": 2.323,
+      "ms": 5.676,
       "detail": ""
     },
     {
       "module": "test_ranking_and_cache_contracts",
       "test": "test_top_k_zero_returns_empty (test_ranking_and_cache_contracts.R2TopKAndHardConstraint.test_top_k_zero_returns_empty)",
       "status": "PASS",
-      "ms": 2.141,
+      "ms": 5.558,
       "detail": ""
     },
     {
       "module": "test_recommendation_persistence",
       "test": "test_explanation_replayable_from_history (test_recommendation_persistence.M5RecommendationPersistence.test_explanation_replayable_from_history)",
       "status": "PASS",
-      "ms": 712.595,
+      "ms": 670.431,
       "detail": ""
     },
     {
       "module": "test_recommendation_persistence",
       "test": "test_feedback_loop_not_gold (test_recommendation_persistence.M5RecommendationPersistence.test_feedback_loop_not_gold)",
       "status": "PASS",
-      "ms": 410.254,
+      "ms": 854.044,
       "detail": ""
     },
     {
       "module": "test_recommendation_persistence",
       "test": "test_idempotency_key_semantic_conflict (test_recommendation_persistence.M5RecommendationPersistence.test_idempotency_key_semantic_conflict)",
       "status": "PASS",
-      "ms": 411.74,
+      "ms": 649.245,
       "detail": ""
     },
     {
       "module": "test_recommendation_persistence",
       "test": "test_job_update_produces_distinct_run (test_recommendation_persistence.M5RecommendationPersistence.test_job_update_produces_distinct_run)",
       "status": "PASS",
-      "ms": 443.826,
+      "ms": 659.938,
       "detail": ""
     },
     {
       "module": "test_recommendation_persistence",
       "test": "test_model_version_persisted_in_db (test_recommendation_persistence.M5RecommendationPersistence.test_model_version_persisted_in_db)",
       "status": "PASS",
-      "ms": 342.591,
+      "ms": 470.289,
       "detail": ""
     },
     {
       "module": "test_recommendation_persistence",
       "test": "test_profile_change_produces_distinct_run (test_recommendation_persistence.M5RecommendationPersistence.test_profile_change_produces_distinct_run)",
       "status": "PASS",
-      "ms": 510.855,
+      "ms": 758.22,
       "detail": ""
     },
     {
       "module": "test_recommendation_persistence",
       "test": "test_repeat_request_naturally_deduped (test_recommendation_persistence.M5RecommendationPersistence.test_repeat_request_naturally_deduped)",
       "status": "PASS",
-      "ms": 408.505,
+      "ms": 577.62,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_equal_logits (test_reranker_contract.RerankerContract.test_reranker_equal_logits)",
       "status": "PASS",
-      "ms": 3.048,
+      "ms": 9.994,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_inference_exception_is_corrupt (test_reranker_contract.RerankerContract.test_reranker_inference_exception_is_corrupt)",
       "status": "PASS",
-      "ms": 2.433,
+      "ms": 9.47,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_length_mismatch (test_reranker_contract.RerankerContract.test_reranker_length_mismatch)",
       "status": "PASS",
-      "ms": 2.358,
+      "ms": 8.072,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_mixed_signs_strictly_monotonic (test_reranker_contract.RerankerContract.test_reranker_mixed_signs_strictly_monotonic)",
       "status": "PASS",
-      "ms": 3.159,
+      "ms": 12.868,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_negative_logits (test_reranker_contract.RerankerContract.test_reranker_negative_logits)",
       "status": "PASS",
-      "ms": 3.239,
+      "ms": 11.595,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_none_scores (test_reranker_contract.RerankerContract.test_reranker_none_scores)",
       "status": "PASS",
-      "ms": 3.113,
+      "ms": 11.652,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_nonfinite_scores (test_reranker_contract.RerankerContract.test_reranker_nonfinite_scores)",
       "status": "PASS",
-      "ms": 5.059,
+      "ms": 19.757,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_numpy_scores (test_reranker_contract.RerankerContract.test_reranker_numpy_scores)",
       "status": "PASS",
-      "ms": 2.939,
+      "ms": 12.394,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_numpy_scores_order_preserved (test_reranker_contract.RerankerContract.test_reranker_numpy_scores_order_preserved)",
       "status": "PASS",
-      "ms": 3.215,
+      "ms": 6.581,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_real_model_inference (test_reranker_contract.RerankerContract.test_reranker_real_model_inference)",
       "status": "PASS",
-      "ms": 3253.248,
+      "ms": 5117.316,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_scoring_version (test_reranker_contract.RerankerContract.test_reranker_scoring_version)",
       "status": "PASS",
-      "ms": 0.041,
+      "ms": 0.098,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_stable_order_same_input (test_reranker_contract.RerankerContract.test_reranker_stable_order_same_input)",
       "status": "PASS",
-      "ms": 5.395,
+      "ms": 11.748,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_top50_boundary (test_reranker_contract.RerankerContract.test_reranker_top50_boundary)",
       "status": "PASS",
-      "ms": 224.737,
+      "ms": 272.579,
       "detail": ""
     },
     {
       "module": "test_reranker_contract",
       "test": "test_reranker_zero_logits (test_reranker_contract.RerankerContract.test_reranker_zero_logits)",
       "status": "PASS",
-      "ms": 3.523,
+      "ms": 5.561,
       "detail": ""
     },
     {
       "module": "test_retrieval_equivalence",
       "test": "test_empty_corpus (test_retrieval_equivalence.M2RetrievalEquivalence.test_empty_corpus)",
       "status": "PASS",
-      "ms": 0.193,
+      "ms": 0.301,
       "detail": ""
     },
     {
       "module": "test_retrieval_equivalence",
       "test": "test_empty_query_and_unknown_terms (test_retrieval_equivalence.M2RetrievalEquivalence.test_empty_query_and_unknown_terms)",
       "status": "PASS",
-      "ms": 3.212,
+      "ms": 11.298,
       "detail": ""
     },
     {
       "module": "test_retrieval_equivalence",
       "test": "test_medium_pool_exact_match (test_retrieval_equivalence.M2RetrievalEquivalence.test_medium_pool_exact_match)",
       "status": "PASS",
-      "ms": 399.84,
+      "ms": 919.869,
       "detail": ""
     },
     {
       "module": "test_retrieval_equivalence",
       "test": "test_only_positive_scores_returned (test_retrieval_equivalence.M2RetrievalEquivalence.test_only_positive_scores_returned)",
       "status": "PASS",
-      "ms": 11.099,
+      "ms": 31.509,
       "detail": ""
     },
     {
       "module": "test_retrieval_equivalence",
       "test": "test_repeated_query_terms_accumulate (test_retrieval_equivalence.M2RetrievalEquivalence.test_repeated_query_terms_accumulate)",
       "status": "PASS",
-      "ms": 16.94,
+      "ms": 46.215,
       "detail": ""
     },
     {
       "module": "test_retrieval_equivalence",
       "test": "test_small_pool_exact_match (test_retrieval_equivalence.M2RetrievalEquivalence.test_small_pool_exact_match)",
       "status": "PASS",
-      "ms": 48.706,
+      "ms": 124.809,
       "detail": ""
     },
     {
       "module": "test_retrieval_equivalence",
       "test": "test_tie_breaking_stable_by_doc_id (test_retrieval_equivalence.M2RetrievalEquivalence.test_tie_breaking_stable_by_doc_id)",
       "status": "PASS",
-      "ms": 0.796,
+      "ms": 1.732,
       "detail": ""
     },
     {
       "module": "test_retrieval_equivalence",
       "test": "test_topk_variants (test_retrieval_equivalence.M2RetrievalEquivalence.test_topk_variants)",
       "status": "PASS",
-      "ms": 188.04,
+      "ms": 385.306,
       "detail": ""
     }
   ]

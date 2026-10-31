@@ -91,13 +91,29 @@ class M2RetrievalEquivalence(unittest.TestCase):
         scores = [s for _d, s in rows]
         self.assertEqual(scores, sorted(scores, reverse=True))
 
+    def _oov_query(self, docs: list[str]) -> str:
+        """构造在**当前分词口径**下与语料词元完全不相交的查询。
+
+        分词口径随 jieba 是否安装而不同（jieba 分词 / 字符退化，见
+        models/retrieval.tokenize_zh）：同一字符串在两种口径下的词元集合不同，
+        「未登录」前提必须按当前 token 集显式断言，不能硬编码查询串，
+        否则换环境就出现假失败（CI 干净 checkout 无 jieba 时曾复现）。
+        """
+        vocab: set[str] = set()
+        for d in docs:
+            vocab.update(tokenize_zh(d))
+        for cand in ("啊嗷龘鬱", "完全未登录词xyzzy", "qxzjvk9"):
+            if set(tokenize_zh(cand)).isdisjoint(vocab):
+                return cand
+        self.fail("合成语料词元覆盖了全部候选查询，无法构造未登录查询（夹具问题）")
+
     def test_empty_query_and_unknown_terms(self):
         docs = synthetic_job_pool(10)
         idx = BM25Recall()
         idx.build(docs)
         self.assertEqual([[]], idx.search([""], top_k=5))
         self.assertEqual([[]], idx.search(["   "], top_k=5))
-        self.assertEqual([[]], idx.search(["完全未登录词xyzzy"], top_k=5))
+        self.assertEqual([[]], idx.search([self._oov_query(docs)], top_k=5))
 
     def test_repeated_query_terms_accumulate(self):
         # 重复查询词重复累加语义与朴素实现一致

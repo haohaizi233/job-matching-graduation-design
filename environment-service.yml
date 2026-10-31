@@ -24,4 +24,6 @@ dependencies:
       - pydantic==2.10.4
       - uvicorn==0.34.0
       - httpx==0.28.1        # 测试客户端
+      - jieba==0.42.1        # 中文分词（models/retrieval.tokenize_zh 的统一口径）：
+                             # 缺失时会静默退化为字符切分，导致检索/排序口径与训练侧不一致
       - pymupdf==1.24.14     # PDF 文本抽取（缺失时显式报错，不静默跳过）
