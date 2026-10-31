@@ -22,7 +22,7 @@
 >
 > **本表是全仓唯一的阶段状态清单**，其他文档（README、project-structure、各架构审计）
 > 一律引用本表，不再各自维护完成率/测试数，避免多处口径不一致。
-> 测试数为 2026-10-31 Phase5-3 基线轮实测（各阶段原始报告见 `reports/phase5-*/`）；"独立复现"指能否在当前审计环境
+> 测试数为 2026-10-31 Phase5-3 收敛轮实测（各阶段原始报告见 `reports/phase5-*/`）；"独立复现"指能否在当前审计环境
 > （Python 3.13.2 / numpy 2.2.6 / scikit-learn 1.8.0 / torch 2.12.0+cpu）独立复跑，
 > 与项目原训练环境（conda `graduation-design`，Python 3.11 + sklearn 1.5.2 + CUDA）严格区分。
 
@@ -40,10 +40,10 @@
 | 业务推理服务（Phase5-1） | ✅ 中文简历/JD 解析、业务画像、Baseline 排序、可解释结果、FastAPI | ✅ S01–S24 **92/92 PASS**（`reports/phase5-1/`） | ✅ 纯 CPU 合成夹具可复跑 | ⬜ 未验证（分数为启发式/研究分，非录用概率） | 中文人岗匹配模型缺失（`future_verified` 仅预留）；服务默认本地开发、无认证（外网部署为上线阻断项） |
 | 工程整改（Phase5-1R） | ✅ F-001–F-009 全部修复 + 二轮审计补漏（姓名 PII 脱敏缺口） | ✅ R1–R6 **151/151 PASS**（`reports/phase5-1r/`） | ✅ 纯 CPU 合成夹具可复跑（`python tests/phase5_1r/run_all.py`） | —（本阶段只做整改，不产生业务结论） | 无 P0/P1 遗留；剩余风险见 `reports/phase5-1r/phase5-1r-acceptance.md` |
 | 架构优化与工程质量治理（Phase5-1A） | ✅ 模块化单体分层（domain/infra 抽取 + 兼容 re-export）、类型化配置、模型加载失败三分类、测试运行器可信化、环境三分、最小 CI | ✅ 门禁自检 **26/26 PASS**（A1/A2/A4/A6/A7）+ 全套件回归（`reports/phase5-1a/`） | ✅ 纯 CPU 可复跑（`python tests/phase5_1a/run_all.py`） | —（本阶段只做架构治理，不产生业务结论） | 5 个 GBM checkpoint 跨 sklearn 版本不可加载（`MODEL_ENV_INCOMPATIBLE`，走 Legacy 环境，禁止重训）；`pip check` 环境冲突同上 |
-| 业务后端与持久化（Phase5-2） | ✅ 业务 API（认证、学生画像版本化、简历私有存储、岗位管理、推荐快照与反馈闭环）+ SQLAlchemy 持久层 + Alembic 迁移 | ✅ T1–T7 **52 PASS / 0 FAIL / 4 SKIP**（`reports/phase5-2/`） | ✅ 纯 CPU 合成夹具可复跑（PG 集成需 Docker 临时实例） | ⬜ 未验证（分数为排序参考分） | T7 PostgreSQL 集成 3 项 + T6 异常事务 1 项 SKIP（`NOT_RUN`/`ENV_INCOMPATIBLE`）；服务默认本地开发部署 |
-| 业务一致性回归（Phase5-2R） | ✅ 岗位画像失效与版本管理、推荐幂等与并发唯一、合成标记、文件生命周期、上传上限、筛选分页语义、快照一致性、API 契约边界 | ✅ R1–R9 **68 PASS / 0 FAIL / 2 SKIP**（`reports/phase5-2r/`） | ✅ 纯 CPU 合成夹具可复跑 | —（本阶段为一致性回归，不产生业务结论） | R9 中 PG 集成 + 契约安全边界 2 项 SKIP；其余无 P0/P1 遗留 |
-| CI 与产物完整性治理（Phase5-3） | ✅ M0 基线审计 + M1 GitHub Actions 修复（Core CI 模型检查改合成夹具自检、历史权重检查归位 Artifact-dependent）+ 历史权重完整性基线自检 | ✅ Core CI **79/79 PASS**；六套件合计 **467 PASS / 0 FAIL / 6 SKIP**（`reports/phase5-3/`、`reports/phase5-2/ci/`） | ✅ 纯 CPU 可复跑 | —（本阶段只做工程治理） | CI 修复需推送 GitHub 触发真实 Actions 运行复核 |
-| 前后端实现 | ✅ 业务 API 联调 + Vue 3.5 / TypeScript 5.7 / Vite 6 前端 10 页面（登录、工作台、简历、我的画像、岗位、岗位详情、智能匹配、推荐历史、反馈中心、个人设置）：登录态、简历上传解析、画像确认与版本预览、推荐创建/重跑、反馈提交、CSV 导出走真实接口 | ⚠ 前端无独立自动化套件；联调链路由 Phase5-2 / 5-2R 契约与一致性测试覆盖 | ⚠ 需 Node 24 + 本地后端联调 | ⬜ 未验证 | 前端缺独立 e2e 测试；无 HTTPS / 外网部署（上线阻断项） |
+| 业务后端与持久化（Phase5-2） | ✅ 业务 API（认证、学生画像版本化、简历私有存储、岗位管理、推荐快照与反馈闭环、用户设置/会话管理、推荐降级可追溯）+ SQLAlchemy 持久层 + Alembic 迁移 | ✅ T1–T8 **61 PASS / 0 FAIL / 1 SKIP**（`reports/phase5-2/`，2026-10-31 Phase5-3 复跑） | ✅ 纯 CPU 合成夹具可复跑（PG 集成需 Docker 临时实例） | ⬜ 未验证（分数为排序参考分） | T6 中 1 项依赖外部故障注入条件用例登记 `NOT_RUN`；PG 集成已由 M4 在真实 PG16 隔离库验证（10/10） |
+| 业务一致性回归（Phase5-2R） | ✅ 岗位画像失效与版本管理、推荐幂等与并发唯一、合成标记、文件生命周期、上传上限、筛选分页语义、快照一致性、API 契约边界 | ✅ R1–R9 **70 PASS / 0 FAIL / 0 SKIP**（`reports/phase5-2r/`，真实 PG16 复跑） | ✅ 纯 CPU 合成夹具可复跑 | —（本阶段为一致性回归，不产生业务结论） | 无 P0/P1 遗留 |
+| CI 与产物完整性治理（Phase5-3） | ✅ M0 基线审计 + M1 GitHub Actions 修复（Core CI 模型检查改合成夹具自检、历史权重检查归位 Artifact-dependent）+ M2 前端真实 API 联调 + M3 浏览器 E2E（E01–E12）+ M4 PostgreSQL 集成 + M5 推理契约/降级可追溯 + M6 交付整理（报告/文档/清理） | ✅ Core CI **79/79 PASS**；后端七套件合计 **543 PASS / 0 FAIL / 1 SKIP**；另有浏览器 E2E **17/17**、PG 验收 **10/10**、M5 推理探针 **10/10**（`reports/phase5-3/`） | ✅ 纯 CPU 可复跑 | —（本阶段只做工程治理） | CI 修复与新增 Job 需推送 GitHub 触发真实 Actions 运行复核 |
+| 前后端实现 | ✅ 业务 API 联调 + Vue 3.5 / TypeScript 5.7 / Vite 6 前端 10 页面（登录、工作台、简历、我的画像、岗位、岗位详情、智能匹配、推荐历史、反馈中心、个人设置）：登录态、简历上传解析、画像确认与版本预览、推荐创建/重跑、降级标记展示、反馈提交、CSV 导出走真实接口 | ✅ 浏览器 E2E **E01–E12 共 17 用例全通过**（Playwright，真实前后端 + 隔离库，`reports/phase5-3/e2e-results.md`）；前端 `typecheck`/`build` 门禁纳入 Frontend CI | ✅ Node 24 + 隔离 E2E 环境可复跑（`npx playwright test`） | ⬜ 未验证 | 无 HTTPS / 外网部署（上线阻断项）；Token 存 localStorage 为 P2 残余风险（`reports/phase5-3/07-security-review.md`） |
 | Agent 能力 | ⬜ 未开始 | — | — | — | 不提前造代码 |
 
 > **H2 口径提示**：Phase5-1R 通过只代表冻结/标注/推理软件流程在工程夹具下可正确运行，
@@ -163,3 +163,12 @@ $py = "C:\Users\MemoryLeak\miniconda3\envs\graduation-design\python.exe"
 | `reports/phase5-2/ci/core-ci-test-results.md` | Core CI 可移植门禁（C2–C5） |
 | `reports/phase5-3/00-baseline-audit.md` | Phase5-3 M0 基线审计（真实执行记录） |
 | `reports/phase5-3/01-ci-remediation.md` | Phase5-3 M1 GitHub Actions CI 修复 |
+| `reports/phase5-3/02-api-contract-matrix.md` | Phase5-3 M2 前后端接口契约矩阵 |
+| `reports/phase5-3/03-frontend-integration.md` | Phase5-3 M2 前端业务联调验收 |
+| `reports/phase5-3/04-e2e-acceptance.md` | Phase5-3 M3 浏览器 E2E 验收（E01–E12） |
+| `reports/phase5-3/05-postgresql-validation.md` | Phase5-3 M4 PostgreSQL 集成验收 |
+| `reports/phase5-3/06-model-serving-validation.md` | Phase5-3 M5 推理契约与模型接口一致性 |
+| `reports/phase5-3/07-security-review.md` | Phase5-3 M5 安全审计 |
+| `reports/phase5-3/08-real-evaluation-readiness.md` | Phase5-3 真实数据评估就绪度（H2 阻断） |
+| `reports/phase5-3/09-regression-results.md` | Phase5-3 M6 全量回归汇总 |
+| `reports/phase5-3/phase5-3-final-acceptance.md` | Phase5-3 最终验收报告 |

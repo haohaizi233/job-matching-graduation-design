@@ -51,6 +51,81 @@ py -3.13 tests/phase5_2r/run_all.py   # 业务一致性回归（R1–R9）
 训练/评估环境（Conda `graduation-design`）、数据完整性校验与各阶段测试入口见
 [docs/project-overview.md](docs/project-overview.md)。
 
+## 数据库初始化与环境变量
+
+```powershell
+# 数据库初始化（SQLite 默认 data/private/dev.db；首次运行或升级后执行）
+$env:PYTHONPATH = "src"
+py -3.13 -m alembic upgrade head        # 迁移即建库；降级用 alembic downgrade base
+
+# PostgreSQL（可选，本地/CI 均用可销毁的隔离库）
+$env:JM_DATABASE_URL = "postgresql+psycopg2://user:pass@127.0.0.1:5432/job_matching"
+```
+
+常用环境变量（完整清单见 `src/job_matching/service/settings.py`）：
+
+| 变量 | 默认 | 说明 |
+|---|---|---|
+| `JM_DATABASE_URL` | `sqlite:///data/private/dev.db` | 业务库连接串 |
+| `JM_API_ENV` | `dev` | `production/staging` 启动时强制安全门禁（`assert_deployment_safety`） |
+| `JM_RATE_LIMIT_PER_MINUTE` | 300 | 单客户端每分钟请求上限 |
+| `JM_REGISTER_RATE_LIMIT` | 20 | 注册频率上限（次/小时/客户端；E2E 隔离环境放宽） |
+| `JM_MAX_UPLOAD_BYTES` | 4194304 | 简历上传大小上限 |
+| `JM_E2E_PORT` / `JM_E2E_PYTHON` | 8123 / `py -3.13` | 浏览器 E2E 隔离后端端口 / Python 命令 |
+| `JM_TEST_DATABASE_URL_POSTGRES` | 无 | 提供后 PG 集成测试真实执行，缺省登记 `NOT_RUN` |
+
+## 测试、E2E 与 CI
+
+```powershell
+# 单元/契约/回归（纯 CPU 合成夹具；均输出 PASS/FAIL/SKIP 汇总）
+py -3.13 tests/phase5_1/run_all.py     # S01–S24 推理服务契约
+py -3.13 tests/phase5_1r/run_all.py    # R1–R6 工程整改回归
+py -3.13 tests/phase5_1a/run_all.py    # A1–A7 架构门禁
+py -3.13 tests/core_ci/run_all.py      # 可信 CI 门禁（负向/隐私/契约）
+
+# 浏览器 E2E（E01–E12；真实前后端 + 隔离测试库 tests/e2e/.runtime/，不碰 dev.db）
+cd frontend
+npm run typecheck && npm run build
+npx playwright test                    # 自动拉起隔离后端与 vite
+py ..\tests\e2e\build_report.py        # 生成 reports/phase5-3/e2e-results.*
+```
+
+CI 工作流（`.github/workflows/quality-gates.yml`）：Python Core CI / Frontend CI /
+Database Integration（PG service）/ Browser E2E / Artifact-dependent Validation
+（真实权重缺失即 `NOT_RUN`，不伪造）五个隔离 Job。
+
+## 模型产物缺失处理
+
+`models/`（历史 checkpoint）默认不入库。缺失时**不影响** Core CI 与业务演示
+（baseline 启发式排序始终可用）；`experimental_model` 按 `allow_fallback` 显式降级或
+显式报 `MODEL_MISSING`，绝不静默冒充模型输出。历史权重完整性自检：
+
+```powershell
+py -3.13 scripts/phase5_1a/check_history_weights_integrity.py   # 与 configs/history-weights-baseline.json 比对
+```
+
+## 常见故障排查
+
+| 现象 | 处理 |
+|---|---|
+| 启动报数据库表不存在 | 先执行 `alembic upgrade head` |
+| 前端 401 后停在登录页 | 会话已失效（改密/撤销/过期），重新登录即恢复 |
+| 注册报 `RATE_LIMITED` | 一小时窗口 20 次；E2E 用隔离后端（`tests/e2e/serve_backend.py`）不受影响 |
+| 推荐结果带"已降级"标记 | 模型不可用显式降级到启发式基线，`degradation_info` 可追溯原因码 |
+| PG 测试显示 `NOT_RUN` | 未提供 `JM_TEST_DATABASE_URL_POSTGRES`（缺环境显式登记，不冒充通过） |
+| Playwright 端口占用 | 结束残留的 8123/5173 进程，或改 `JM_E2E_PORT` |
+
+## 毕业设计演示流程（约 5 分钟）
+
+1. `alembic upgrade head` → 启动业务 API（8000）→ `scripts/dev_seed_api.py` 灌演示数据；
+2. `npm run dev` 打开 `http://127.0.0.1:5173`，用 `demo_student / Demo@12345` 登录；
+3. 上传简历（可用 `tests/fixtures` 合成简历）→ 查看解析画像 → 人工修订并**确认画像**；
+4. 岗位探索筛选 → 智能匹配发起推荐 → 展示解释、评分口径与降级标记；
+5. 推荐历史导出 CSV → 提交反馈 → 再次推荐观察历史累积；
+6. （可选）`npx playwright test` 现场演示 17 条端到端自动化验收。
+
+> 演示账号仅由本地种子脚本生成（`scripts/dev_seed_api.py`），默认凭证禁止带入线上环境。
+
 前端 10 个页面视图：登录、工作台、简历管理、我的画像、岗位探索、岗位详情、智能匹配、
 推荐历史、反馈中心、个人设置（`frontend/src/views/`）。
 
