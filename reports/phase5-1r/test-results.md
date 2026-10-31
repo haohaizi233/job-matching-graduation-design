@@ -1,8 +1,8 @@
 # Phase5-1R 整改回归测试报告
 
-- 生成时间：2026-10-31T13:28:22 ｜ 耗时：96.06s ｜ 模式：full
+- 生成时间：2026-10-31T16:53:05 ｜ 耗时：44.42s ｜ 模式：full
 - 运行模块：test_r1_gold_freeze, test_r2_annotation_quality, test_r3_business_constraints, test_r4_api_boundary, test_r5_metrics_input, test_r6_e2e_chains
-- Python 3.13.2 ｜ commit `25743f200da35546a9ff2e70adafc71a9dedf972`（dirty）
+- Python 3.11.18 ｜ commit `21ae6e5d6762d4965648371fca96c0940d210049`（dirty）
 - 总计 151 项：PASS=151 FAIL=0 ERROR=0 SKIP=0 ｜ ok=True
 
 | 组 | 内容 | 总数 | 通过 | 失败 | 错误 | 跳过 |

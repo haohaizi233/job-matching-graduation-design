@@ -271,7 +271,8 @@ class RecommendationService:
                          mode: str, model_id: str, model_version: str,
                          scoring_method: str, top_k: int | None,
                          job_entries: list[dict], category: str | None,
-                         city: str | None, allow_fallback: bool) -> dict:
+                         city: str | None, allow_fallback: bool,
+                         scoring_config_version: str = SCORING_CONFIG_VERSION) -> dict:
         """推荐结果的**全部有效输入**（P0-02 B）。任一项变化都必须产生不同指纹。"""
         return {
             "schema": FINGERPRINT_SCHEMA,
@@ -283,7 +284,9 @@ class RecommendationService:
             "model_id": str(model_id or ""),
             "model_version": str(model_version or ""),
             "scoring_method": str(scoring_method or ""),
-            "scoring_config_version": SCORING_CONFIG_VERSION,
+            # 评分配置版本：优先取结果自带的研究策略配置版本（Phase6/M1），
+            # 未携带（如 baseline）则回落到本服务快照口径版本，历史指纹不变。
+            "scoring_config_version": str(scoring_config_version or SCORING_CONFIG_VERSION),
             "top_k": (int(top_k) if top_k is not None else None),
             "jobs": sorted(job_entries, key=lambda d: str(d.get("job_id", ""))),
             "filters": {"category": str(category or ""), "city": str(city or "")},
@@ -314,6 +317,7 @@ class RecommendationService:
             model_id=model_id or "",
             model_version=str(result.get("model_version") or ""),
             scoring_method=str(result.get("scoring_method") or ""),
+            scoring_config_version=str(result.get("scoring_config_version") or ""),
             top_k=top_k, job_entries=job_entries, category=category, city=city,
             allow_fallback=allow_fallback)
         semantic_json = canonical_json(payload)
@@ -383,7 +387,10 @@ class RecommendationService:
                     profile_version=int(prof["profile_version"]),
                     scoring_method=str(result.get("scoring_method") or "unknown"),
                     model_version=result.get("model_version"),
-                    scoring_config_version=SCORING_CONFIG_VERSION,
+                    # 评分配置版本随结果落库（研究策略带 research_scoring_config_v*；
+                    # baseline 不带 -> 回落本服务快照口径版本，历史行为不变）
+                    scoring_config_version=str(
+                        result.get("scoring_config_version") or SCORING_CONFIG_VERSION),
                     job_set_snapshot=[{"job_id": j.id, "title": j.title,
                                        "updated_at": _iso(j.updated_at),
                                        "job_content_hash": j.job_content_hash,

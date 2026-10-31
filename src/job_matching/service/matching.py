@@ -366,6 +366,11 @@ class MatchingService:
                     {"model_id": model_id, "evaluation_status": reg.evaluation_status,
                      "supported_languages": reg.supported_languages})
             predictor = self.registry.load(model_id)
+            if reg.loader == "research_retrieval":
+                # Phase6 / M1：Phase4-3B 研究推荐策略（BM25+TF-IDF+RRF -> FeatureFusion）
+                # 走独立链路，不复用旧英文代理标签模型的输入适配。
+                return self._rank_research(student, jobs, opts, deadline, warnings,
+                                           reg, predictor)
             resume_in, _ = LegacyMatchAdapter.build_inputs(student, jobs[0])
             LegacyMatchAdapter.check_feature_policy(
                 ["skill_jaccard", "skill_overlap_ratio_cv", "skill_overlap_ratio_job",
@@ -411,6 +416,81 @@ class MatchingService:
                 "experimental_model:旧英文代理标签模型，仅供研究/诊断",
                 "not_a_chinese_validated_model:禁止表述为中文人岗适配度或录用概率",
             ])
+
+    # -------------------------------------------------- research（Phase6 / M1）
+    def _rank_research(self, student, jobs, opts, deadline, warnings, reg, scorer) -> dict:
+        """Phase4-3B 研究推荐策略：BM25+TF-IDF(+BGE) -> RRF -> FeatureFusion -> 业务约束 -> Top-K。
+
+        与 baseline_skill_text_v1 明确区分：独立的 model_id / model_version /
+        feature_version / scoring_config_version / score_type，并在每条结果里
+        保留可解释明细与统一模型输出信封；evaluation_status 恒为 research_only_zh。
+        """
+        spec = scorer.spec
+
+        def _deadline_check() -> None:
+            self._check_deadline(deadline)
+
+        try:
+            rows = scorer.rank(student, jobs, top_k=None, deadline_check=_deadline_check)
+        except ServiceError as e:
+            not_registered = (e.detail or {}).get("failure_kind") == "model_not_registered"
+            degradable = (e.code in self.DEGRADABLE_CODES and opts.allow_fallback
+                          and (not not_registered or opts.model_id is not None))
+            if degradable:
+                return self._degrade_to_baseline(
+                    student, jobs, opts, deadline, warnings,
+                    code=e.code, model_id=reg.model_id, detail=e.detail)
+            raise
+
+        if opts.top_k is not None:
+            rows = rows[: max(0, int(opts.top_k))]
+        scoring_method = f"research_fusion.{spec.model_id}"
+        results = []
+        for rank_i, r in enumerate(rows, start=1):
+            item = build_match_result(
+                student, jobs[r["pos"]], rank=rank_i, score=r["score"],
+                score_type=spec.score_type, scoring_method=scoring_method,
+                model_version=spec.model_version,
+                warnings=["score_components:" + ",".join(sorted(r["breakdown"]["contributions"]))])
+            item["research"] = {
+                "model_id": spec.model_id,
+                "model_version": spec.model_version,
+                "feature_version": spec.feature_version,
+                "scoring_config_version": spec.scoring_config_version,
+                "research_score_type": spec.research_score_type,
+                "evaluation_status": spec.evaluation_status,
+                "breakdown": r["breakdown"],
+                "envelope": r["envelope"],
+                "filtered": r["filtered"],
+                "filter_reason": r["filter_reason"],
+                "rerank_score": r.get("rerank_score"),
+                "index_version": r.get("index_version"),
+                "candidate_scored": r.get("candidate_scored"),
+                "retrieval_truncated": r.get("retrieval_truncated"),
+            }
+            results.append(item)
+
+        all_warns = list(warnings)
+        all_warns.append("research_strategy:实验性研究推荐策略，未经真实人工 Gold 正式验证")
+        all_warns.append("score_semantics:排序参考分，不是录用概率")
+        all_warns.append(f"evaluation_status:{spec.evaluation_status}:禁止正式模式与录用概率表述")
+        return {
+            "mode": opts.mode,
+            "scoring_method": scoring_method,
+            "score_type": spec.score_type,
+            "model_id": spec.model_id,
+            "model_version": spec.model_version,
+            "feature_version": spec.feature_version,
+            "scoring_config_version": spec.scoring_config_version,
+            "research_score_type": spec.research_score_type,
+            "evaluation_status": spec.evaluation_status,
+            "formal_evaluation": False,
+            "demo": True,
+            "label_source": "synthetic_or_unlabeled",
+            "options": opts.echo(),
+            "warnings": all_warns,
+            "results": results,
+        }
 
     # ---------------------------------------------------------- future
     def _rank_future(self, student, jobs, opts) -> dict:

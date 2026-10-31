@@ -128,6 +128,77 @@ class C5WorkflowContract(unittest.TestCase):
         block = _core_job_block(_wf_text())
         self.assertIn("JM_RUN_ID", block, "core-ci 必须建立运行身份 JM_RUN_ID")
 
+    # -------- 完整性检查器调用契约（Phase6 M0）--------
+    # 背景：workflow 曾用 `--root data/independent_eval` 调用 check_artifact_integrity.py，
+    # 而 manifest 内登记的是**项目根相对路径**，导致全部文件被判「文件缺失」。
+    # 该缺陷长期未被发现，是因为 core-ci 前置步骤先失败、后续步骤被 skip。
+
+    @staticmethod
+    def _integrity_invocations(text: str) -> list[str]:
+        blocks = []
+        for m in re.finditer(r"check_artifact_integrity\.py", text):
+            seg = text[m.end(): m.end() + 600].split("\n\n", 1)[0]
+            blocks.append(seg)
+        return blocks
+
+    @staticmethod
+    def _run_integrity(scan_root: Path, out: Path) -> tuple[int, str]:
+        args = [sys.executable, str(ROOT / "scripts" / "phase5_1a" /
+                                    "check_artifact_integrity.py"),
+                "--root", str(scan_root), "--glob", "**/manifest*.json",
+                "--require-manifest", "--run-id", "selftest-c5", "--out", str(out)]
+        r = subprocess.run(args, cwd=str(ROOT), capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=180,
+                           env=dict(__import__("os").environ, PYTHONUTF8="1"))
+        return r.returncode, (r.stdout or "") + (r.stderr or "")
+
+    def test_artifact_integrity_invocation_requires_manifest(self):
+        blocks = self._integrity_invocations(_wf_text())
+        self.assertTrue(blocks, "workflow 未调用 check_artifact_integrity.py")
+        for b in blocks:
+            self.assertIn("--require-manifest", b,
+                          f"完整性校验必须声明必需 manifest（否则 0 份会被记成 NOT_RUN）: {b!r}")
+            self.assertIn("--out", b, f"完整性校验必须显式指定报告输出路径: {b!r}")
+
+    def test_artifact_integrity_root_is_project_root(self):
+        """`--root` 必须是项目根，manifest 内的项目根相对路径才能解析到真实文件。"""
+        for b in self._integrity_invocations(_wf_text()):
+            self.assertNotIn("--root data/independent_eval", b,
+                             "check_artifact_integrity.py 的 --root 指向 data/independent_eval "
+                             "会把 manifest 内的项目根相对路径解析到 "
+                             "data/independent_eval/data/independent_eval/... 并误判「文件缺失」")
+            self.assertNotIn("--root data\\independent_eval", b, "同上（Windows 分隔符）")
+
+    def test_integrity_checker_resolves_project_root_relative_paths(self):
+        """功能验证：项目根相对路径在 `--root`=项目根 时可解析，指向子目录时确实会失败。"""
+        import hashlib
+        import tempfile
+        with tempfile.TemporaryDirectory(prefix="jm_c5_integrity_") as td:
+            proj = Path(td)
+            pool = proj / "data" / "independent_eval" / "pool"
+            pool.mkdir(parents=True)
+            payload = b'{"job_id": "J1", "title": "demo"}\n'
+            (pool / "job_pool_v1.jsonl").write_bytes(payload)
+            frozen = proj / "data" / "independent_eval" / "frozen" / "pool_v1"
+            frozen.mkdir(parents=True)
+            manifest = {
+                "stage": "pool",
+                "files": {"job_pool": {
+                    "path": "data/independent_eval/pool/job_pool_v1.jsonl",
+                    "sha256": hashlib.sha256(payload).hexdigest()}},
+            }
+            (frozen / "manifest.json").write_text(
+                json.dumps(manifest, ensure_ascii=False), encoding="utf-8", newline="\n")
+
+            ok_code, ok_out = self._run_integrity(proj, proj / "ok.json")
+            bad_code, bad_out = self._run_integrity(
+                proj / "data" / "independent_eval", proj / "bad.json")
+        self.assertEqual(ok_code, 0, f"--root=项目根 应当 PASS: {ok_out[-800:]}")
+        self.assertEqual(bad_code, 1,
+                         f"--root=子目录 应当 FAIL（证明路径解析契约确实生效）: {bad_out[-800:]}")
+        self.assertIn("文件缺失", bad_out,
+                      f"子目录 root 的失败原因应为「文件缺失」，而非其它: {bad_out[-800:]}")
+
 
 class C5CleanCheckoutContract(unittest.TestCase):
 

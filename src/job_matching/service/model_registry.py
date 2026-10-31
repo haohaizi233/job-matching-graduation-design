@@ -213,6 +213,10 @@ class ModelRegistry:
         if reg.loader == "education":
             from ..education.predictor import EducationNormalizer
             return EducationNormalizer.from_model_dir(Path(reg.loader_kwargs["run_dir"]))
+        if reg.loader == "research_retrieval":
+            # Phase4-3B 研究推荐策略（BM25+TF-IDF+RRF -> FeatureFusion -> 业务约束）
+            from .research_strategy import build_scorer
+            return build_scorer(reg.loader_kwargs.get("strategy_id", reg.model_id))
         raise ServiceError("MODEL_MISSING", f"未知加载器类型: {reg.loader}",
                            {"model_id": reg.model_id})
 
@@ -289,6 +293,30 @@ def register_builtin_models(registry: ModelRegistry, *,
             ],
             loader="education",
             loader_kwargs={"run_dir": str(run_dir)},
+        ))
+
+    # ---- Phase6 / M1：Phase4-3B 研究推荐策略（实验性业务模式，正式模式一律拒绝）----
+    # 全部 evaluation_status="research_only_zh" -> formal_use_allowed=False；
+    # 真实人工 Gold（H2）到位并完成正式评估前，禁止登记为 verified。
+    from .research_strategy import RESEARCH_STRATEGY_SPECS
+    for _sid in sorted(RESEARCH_STRATEGY_SPECS):
+        _spec = RESEARCH_STRATEGY_SPECS[_sid]
+        registry.register(ModelRegistration(
+            model_id=_spec.model_id,
+            model_version=_spec.model_version,
+            task_type="retrieval_fusion_ranking",
+            training_data_version="none_unsupervised_retrieval+analyst_set_weights",
+            evaluation_status=_spec.evaluation_status,
+            supported_languages=["zh"],
+            artifacts=[],
+            checksum="none",
+            limitations=list(_spec.limitations) + [
+                f"feature_version={_spec.feature_version}",
+                f"scoring_config_version={_spec.scoring_config_version}",
+                f"score_type={_spec.score_type}（排序参考分，非录用概率）",
+            ],
+            loader="research_retrieval",
+            loader_kwargs={"strategy_id": _spec.model_id},
         ))
 
     # future_verified 预留槽位：本轮不伪称存在已验证中文模型

@@ -98,7 +98,18 @@ class TfidfRecall(RecallIndex):
 
 
 class BM25Recall(RecallIndex):
-    """Okapi BM25。k1=1.5, b=0.75（默认，未调参）。"""
+    """Okapi BM25。k1=1.5, b=0.75（默认，未调参）。
+
+    Phase6 / M2 检索性能优化（等价性见 tests/phase6/test_retrieval_equivalence.py）：
+      * 倒排索引：term -> (doc_ids, tfs)，查询只遍历命中的 posting list，
+        不再对全量文档做 `tokens.count(term)`（原实现 O(q_terms * n * doc_len)）；
+      * 文档长度归一化因子 `k1*(1-b+b*dl/avgdl)` 与每词 IDF 在 build 期预计算；
+      * Top-K 用 `argpartition` 选阈值 + 边界平分段按 doc_id 升序补齐，
+        与全量 `lexsort((doc_id, -score))` 的排序（含 tie-breaking）**逐位一致**；
+      * 浮点口径：分数按「query 词序逐词累加」，运算顺序与朴素实现完全相同，
+        因此同输入分数为 bit 级一致（测试仍以 1e-12 容差断言，防御未来重构）；
+      * 空查询返回 []；未登录词不贡献分；零分文档不出现在结果中（与原实现一致）。
+    """
 
     index_id = "bm25_okapi"
 
@@ -110,10 +121,15 @@ class BM25Recall(RecallIndex):
         self._avgdl = 0.0
         self._df: dict[str, int] = {}
         self._n = 0
+        # ---- Phase6 / M2 预计算结构 ----
+        self._postings: dict[str, tuple[np.ndarray, np.ndarray]] = {}
+        self._idf_cache: dict[str, float] = {}
+        self._norm: np.ndarray | None = None   # k1*(1-b+b*dl/avgdl)，逐文档
 
     def describe(self) -> dict:
         return {"index_id": self.index_id, "k1": self.k1, "b": self.b,
-                "tokenizer": "jieba+_TOKEN_RE", "fitted_on": "corpus_only_no_labels"}
+                "tokenizer": "jieba+_TOKEN_RE", "fitted_on": "corpus_only_no_labels",
+                "implementation": "inverted_index_precomputed_idf_topk_partition"}
 
     def build(self, docs: list[str]) -> None:
         self._docs_tokens = [tokenize_zh(d) for d in docs]
@@ -121,36 +137,71 @@ class BM25Recall(RecallIndex):
         self._doc_len = np.asarray([len(t) for t in self._docs_tokens], dtype=np.float64)
         self._avgdl = float(self._doc_len.mean()) if self._n else 0.0
         self._df = {}
-        for toks in self._docs_tokens:
-            for t in set(toks):
-                self._df[t] = self._df.get(t, 0) + 1
+        postings: dict[str, list[tuple[int, int]]] = {}
+        for i, toks in enumerate(self._docs_tokens):
+            if not toks:
+                continue
+            counts: dict[str, int] = {}
+            for t in toks:
+                counts[t] = counts.get(t, 0) + 1
+            for t, tf in counts.items():
+                postings.setdefault(t, []).append((i, tf))
+        for t, pl in postings.items():
+            self._df[t] = len(pl)
+            self._postings[t] = (
+                np.asarray([d for d, _ in pl], dtype=np.int64),
+                np.asarray([f for _, f in pl], dtype=np.float64),
+            )
+        self._idf_cache = {t: self._idf(t) for t in self._df}
+        if self._n:
+            # 与朴素实现逐位一致：k1*(1.0-b+b*doc_len/avgdl) 的运算顺序保持不变
+            self._norm = self.k1 * (1.0 - self.b + self.b * self._doc_len / self._avgdl)
+        else:
+            self._norm = np.zeros(0, dtype=np.float64)
 
     def _idf(self, term: str) -> float:
         n_q = self._df.get(term, 0)
         return math.log(1.0 + (self._n - n_q + 0.5) / (n_q + 0.5))
 
+    @staticmethod
+    def _topk_indices(scores: np.ndarray, k: int) -> np.ndarray:
+        """按 (-score, doc_id) 取前 k 个正分下标（与 lexsort 全排序逐位一致）。
+
+        平分边界用「>阈值全体 + ==阈值按 doc_id 升序补齐」保证 tie-breaking 稳定，
+        避免 argpartition 在平分段的任意选择。
+        """
+        idx = np.flatnonzero(scores > 0)
+        if idx.size == 0:
+            return idx
+        if k <= 0:
+            return idx[:0]
+        if idx.size <= k:
+            return idx[np.lexsort((idx, -scores[idx]))]
+        kth = np.partition(scores[idx], idx.size - k)[idx.size - k]
+        above = idx[scores[idx] > kth]
+        tied = np.sort(idx[scores[idx] == kth])
+        need = k - above.size
+        above = above[np.lexsort((above, -scores[above]))]
+        return np.concatenate([above, tied[:need]])
+
     def search(self, queries: list[str], top_k: int = 10) -> list[list[tuple[int, float]]]:
         out = []
         for q in queries:
             q_tokens = tokenize_zh(q)
-            scores = np.zeros(self._n, dtype=np.float64)
             if not q_tokens:
                 out.append([])
                 continue
-            for term in q_tokens:
-                if term not in self._df:
+            scores = np.zeros(self._n, dtype=np.float64)
+            for term in q_tokens:          # 保留重复查询词的重复累加语义
+                pl = self._postings.get(term)
+                if pl is None:
                     continue
-                idf = self._idf(term)
-                for i, toks in enumerate(self._docs_tokens):
-                    if not toks:
-                        continue
-                    tf = toks.count(term)
-                    if tf == 0:
-                        continue
-                    denom = tf + self.k1 * (1.0 - self.b + self.b * self._doc_len[i] / self._avgdl)
-                    scores[i] += idf * tf * (self.k1 + 1.0) / denom
-            order = np.lexsort((np.arange(self._n), -scores))[:top_k]
-            out.append([(int(j), float(scores[j])) for j in order if scores[j] > 0])
+                doc_ids, tf = pl
+                idf = self._idf_cache[term]
+                denom = tf + self._norm[doc_ids]
+                scores[doc_ids] += idf * tf * (self.k1 + 1.0) / denom
+            order = self._topk_indices(scores, top_k)
+            out.append([(int(j), float(scores[j])) for j in order])
         return out
 
 
