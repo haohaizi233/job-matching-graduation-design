@@ -35,6 +35,8 @@ TEST_MODULES = [
     ("P8", "test_p8_evaluation_metrics", "排序指标正确性 / 小样本与空样本 / 指标适用性"),
     ("P9", "test_p9_reproducibility", "同输入同输出 / 固定种子 / 推理不改权重"),
     ("P10", "test_p10_privacy_guards", "日志与导出不落简历原文 / 冻结数据不可修改"),
+    ("P11", "test_p11_reproducibility_guards", "仓库根解析可移植 / 行尾与冻结完整性回归护栏"),
+    ("P12", "test_p12_runtime_guard", "推理超时契约 / 降级契约 / 统一模型输出信封"),
 ]
 
 
