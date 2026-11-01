@@ -27,8 +27,9 @@ from __future__ import annotations
 from urllib.parse import urlencode
 
 from .base import BaseOAuthProvider
-from ..exceptions import (InvalidIdentity, ProviderProtocolError,
-                          ProviderUnavailable, TokenExchangeFailed)
+from ..exceptions import (IdentityIntegrityError, InvalidIdentity,
+                          ProviderProtocolError, ProviderUnavailable,
+                          TokenExchangeFailed)
 from ..schemas import OAuthIdentity, OAuthTokenResponse
 
 AUTH_URL = "https://api.weibo.com/oauth2/authorize"
@@ -102,12 +103,13 @@ class WeiboProvider(BaseOAuthProvider):
             self._raise_weibo_error(info, where="userinfo")
             got_id = info.get("id") or info.get("idstr")
             if got_id is not None and str(got_id) != str(uid):
-                raise ProviderProtocolError("微博 users/show 返回的 uid 与授权不一致")
+                raise IdentityIntegrityError(
+                    "微博 users/show 返回的 uid 与授权不一致")
             display_name = _clip(info.get("screen_name"))
             avatar_url = _clip(info.get("avatar_large") or info.get("profile_image_url"), 512)
             profile_fetched = True
-        except (ProviderProtocolError, ProviderUnavailable, TokenExchangeFailed):
-            raise
+        except IdentityIntegrityError:
+            raise        # 身份串号必须阻断
         except Exception:  # noqa: BLE001 - 资料失败不影响 uid 已核验（契约允许）
             profile_fetched = False
 

@@ -41,6 +41,35 @@ def run_migrations(database_url: str) -> None:
     command.upgrade(cfg, "head")
 
 
+def run_downgrade(database_url: str, revision: str = "base") -> None:
+    """把给定数据库回滚到指定 revision（默认 base）。"""
+    from alembic import command
+    from alembic.config import Config
+
+    os.environ["JM_DATABASE_URL"] = database_url
+    cfg = Config(str(ROOT / "alembic.ini"))
+    cfg.set_main_option("script_location", str(ROOT / "alembic"))
+    command.downgrade(cfg, revision)
+
+
+def reset_pg_schema(database_url: str) -> None:
+    """PostgreSQL 用例间硬重置：DROP SCHEMA public CASCADE + CREATE schema。
+
+    迁移 downgrade 带有生产安全护栏——存在 password_hash IS NULL 的纯 OAuth
+    账号时**拒绝回滚**（不静默删号/伪造密码）。该护栏不得为测试便利而削弱，
+    因此用例间清理一律用整库 schema 重建，不用 downgrade。
+    """
+    from sqlalchemy import create_engine, text
+
+    eng = create_engine(database_url, future=True)
+    try:
+        with eng.begin() as conn:
+            conn.execute(text("DROP SCHEMA public CASCADE"))
+            conn.execute(text("CREATE SCHEMA public"))
+    finally:
+        eng.dispose()
+
+
 class MutableClock:
     """可快进的时钟（TTL 过期测试不 sleep）。"""
 
@@ -58,10 +87,11 @@ class OAuthHarness:
     """一个测试类一套隔离环境：临时库 + 真实 app + Fake Provider + 可注入时钟。"""
 
     def __init__(self, *, frontend_origin: str = TEST_FRONTEND_ORIGIN,
-                 state_ttl: int = 300, ticket_ttl: int = 60):
+                 state_ttl: int = 300, ticket_ttl: int = 60,
+                 database_url: str | None = None):
         self.tmp = tempfile.TemporaryDirectory(prefix="jm_p8a_")
         base = Path(self.tmp.name)
-        self.db_url = f"sqlite:///{base / 'oauth.db'}"
+        self.db_url = database_url or f"sqlite:///{base / 'oauth.db'}"
         self.storage_root = base / "storage"
         os.environ["JM_DATABASE_URL"] = self.db_url
 
@@ -188,10 +218,20 @@ class OAuthHarness:
 
 
 def parse_complete_url(location: str) -> dict:
-    """解析前端完成页跳转参数（rid/mode/status/reason/return_path）。"""
+    """解析前端完成页跳转参数（rid/mode/status/reason/return_path）。
+
+    Hash 路由：查询串位于 URL 片段内（.../#/oauth/complete?rid=...），
+    兼容解析片段内与常规位置的查询参数。
+    """
     parts = urlsplit(location)
     query = parse_qs(parts.query)
-    return {"path": parts.path, "fragment": parts.fragment,
+    frag = parts.fragment or ""
+    if "?" in frag:
+        frag_path, frag_query = frag.split("?", 1)
+        query = {**query, **parse_qs(frag_query)}
+    else:
+        frag_path = frag
+    return {"path": parts.path, "fragment": frag_path,
             **{k: (v[0] if v else "") for k, v in query.items()}}
 
 

@@ -248,12 +248,12 @@ class OAuthService:
                     origin, self.settings.frontend_origins):
                 raise InvalidRedirect("请求 Origin 不在可信白名单",
                                       {"field": "origin"})
-            if not ticket:
+            if not ticket or not browser_binding_secret:
+                # 缺少票据或浏览器绑定凭据一律按通用票据错误处理（不做存在性预言机）
                 raise ServiceError("OAUTH_TICKET_EXPIRED", "票据无效或已过期")
             data = self.tickets.consume(
                 ticket=ticket,
-                browser_binding_digest=(digest(browser_binding_secret)
-                                        if browser_binding_secret else None),
+                browser_binding_digest=digest(browser_binding_secret),
                 browser_binding_key=rid or None)
             mode = data["mode"]
 

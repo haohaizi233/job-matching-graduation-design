@@ -10,7 +10,8 @@ import { expect, request as playwrightRequest, type Page } from '@playwright/tes
  */
 
 /** E2E 前端基址（playwright.config.ts 的 baseURL；可用 JM_E2E_BASE_URL 覆盖） */
-export const BASE_URL = process.env.JM_E2E_BASE_URL || 'http://127.0.0.1:5173'
+export const BASE_URL = process.env.JM_E2E_BASE_URL
+  || `http://127.0.0.1:${process.env.JM_E2E_FRONTEND_PORT || 5373}`
 
 /** 合成学生密码（与 tests/e2e/fixtures.py 的 STUDENT_PASSWORD 一致） */
 export const STUDENT_PASSWORD = 'E2eStudent!2026'

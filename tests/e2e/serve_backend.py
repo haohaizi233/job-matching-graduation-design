@@ -39,6 +39,15 @@ STORAGE_ROOT.mkdir(parents=True, exist_ok=True)
 PORT = int(os.environ.get("JM_E2E_PORT") or 8000)
 DO_SEED = str(os.environ.get("JM_E2E_SEED", "1")).strip().lower() not in ("0", "false", "no")
 
+# ---- Phase8-A / M9：E2E 用模拟第三方授权服务器（仅测试注入，生产无此开关）----
+# 只有「外部身份 Provider」被替换为本地模拟平台；本站事务/票据/账号/会话全部真实。
+OAUTH_FAKE = str(os.environ.get("JM_E2E_OAUTH_FAKE", "1")).strip().lower() not in (
+    "0", "false", "no")
+FAKE_OAUTH_URL = (os.environ.get("JM_E2E_FAKE_OAUTH_URL")
+                  or "http://127.0.0.1:8125").rstrip("/")
+FRONTEND_ORIGIN = (os.environ.get("JM_E2E_FRONTEND_ORIGIN")
+                   or "http://127.0.0.1:5373").rstrip("/")
+
 
 def run_migrations(database_url: str) -> None:
     """E2E 建库唯一入口：走 Alembic 迁移（迁移本身也是被测对象）。"""
@@ -85,12 +94,69 @@ def seed(biz) -> None:
         print(f"[e2e-seed] job created: {item['title']} ({job_id})")
 
 
+def build_oauth_kwargs() -> dict:
+    """Phase8-A：E2E OAuth 注入（真实业务链路 + 本地模拟平台）。
+
+    状态设计（同时覆盖「可用」与「未配置」两种前端状态）：
+      wechat / qq  -> 配置齐全（假凭据），指向本地模拟授权服务器，可真实跑通登录/绑定；
+      weibo        -> enabled=True 但**无凭据** -> OAUTH_PROVIDER_NOT_CONFIGURED，
+                      前端按钮显示「暂未开放」，用来验证禁用态不产生假成功。
+
+    `FakeOAuthProvider` / `RemoteFakeProvider` 只在 tests/ 下，生产代码不 import，
+    也没有任何请求级开关能打开它们。
+    """
+    if not OAUTH_FAKE:
+        return {}
+    from fake_oauth_provider import RemoteFakeProvider
+    from job_matching.service.oauth.config import (OAuthProviderConfig,
+                                                   OAuthSettings)
+    from job_matching.service.oauth.http_client import OAuthHttpClient
+    from job_matching.service.oauth.registry import build_registry
+
+    base = f"http://127.0.0.1:{PORT}"
+    redirect = base + "/api/v1/auth/oauth/{pid}/callback"
+    providers = {
+        "wechat": OAuthProviderConfig(
+            provider_id="wechat", label="微信", enabled=True,
+            client_id="e2e-wechat-appid", client_secret="e2e-fake-secret-not-real",
+            redirect_uri=redirect.format(pid="wechat")),
+        "qq": OAuthProviderConfig(
+            provider_id="qq", label="QQ", enabled=True,
+            client_id="e2e-qq-appid", client_secret="e2e-fake-secret-not-real",
+            redirect_uri=redirect.format(pid="qq")),
+        # 微博故意「已启用但无凭据」-> NOT_CONFIGURED（前端禁用态的真实来源）
+        "weibo": OAuthProviderConfig(
+            provider_id="weibo", label="微博", enabled=True,
+            client_id="", client_secret=""),
+    }
+    settings = OAuthSettings(
+        enabled=True, public_base_url=base,
+        frontend_origins=(FRONTEND_ORIGIN,),
+        state_ttl_seconds=300, ticket_ttl_seconds=60,
+        api_env="dev", cookie_secure=False, providers=providers)
+    http = OAuthHttpClient()
+    registry = build_registry(
+        settings, http,
+        provider_factory=lambda pid, cfg, h: RemoteFakeProvider(
+            provider_id=pid, label=cfg.label, client_id=cfg.client_id,
+            client_secret=cfg.client_secret, fake_base=FAKE_OAUTH_URL, http=h))
+    print(f"[e2e-oauth] fake provider server={FAKE_OAUTH_URL} "
+          f"providers={sorted(p.provider_id for p in registry.list())}")
+    return {"oauth_settings": settings, "oauth_registry": registry,
+            "oauth_http": http}
+
+
 def main() -> int:
     os.environ["PYTHONUTF8"] = "1"
     os.environ.setdefault("JM_API_ENV", "dev")
     # E2E 隔离环境配置注入：放宽注册频率上限（每轮套件要注册十余个合成账号），
     # 限流代码路径保持生效，只是上限不阻塞测试；生产默认 20/小时不变。
     os.environ.setdefault("JM_REGISTER_RATE_LIMIT", "100000")
+    # Phase8-A：OAuth 限流同样在 E2E 隔离环境放宽（一轮套件要发起十余次授权），
+    # 限流代码路径保持生效，只是上限不阻塞测试；生产默认 30/30/60 每分钟不变。
+    os.environ.setdefault("JM_OAUTH_START_RATE_LIMIT", "100000")
+    os.environ.setdefault("JM_OAUTH_CALLBACK_RATE_LIMIT", "100000")
+    os.environ.setdefault("JM_OAUTH_EXCHANGE_RATE_LIMIT", "100000")
 
     from job_matching.infra.persistence import dispose_engines
     dispose_engines()
@@ -98,7 +164,8 @@ def main() -> int:
 
     from job_matching.service.business_api import (create_business_app,
                                                    make_business_services)
-    biz = make_business_services(database_url=DB_URL, storage_root=STORAGE_ROOT)
+    biz = make_business_services(database_url=DB_URL, storage_root=STORAGE_ROOT,
+                                 **build_oauth_kwargs())
     if DO_SEED:
         seed(biz)
     app = create_business_app(biz)

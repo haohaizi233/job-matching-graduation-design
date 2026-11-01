@@ -22,15 +22,18 @@
 函数内，FastAPI 需要在定义时解析注解（字符串注解会解析失败）。
 """
 
+import os
 import time
 from typing import Any, Callable
 
 from ..errors import ServiceError
 
-# 限流参数（每客户端每分钟）
-_START_LIMIT = 30
-_CALLBACK_FAIL_LIMIT = 30
-_EXCHANGE_LIMIT = 60
+# 限流参数（每客户端每分钟）。上限可经环境变量覆盖（与 JM_REGISTER_RATE_LIMIT 同口径）：
+# E2E 隔离环境（tests/e2e/serve_backend.py）放宽到不阻塞套件的量级，
+# 限流代码路径保持生效；生产默认值不变。
+_START_LIMIT = max(1, int(os.environ.get("JM_OAUTH_START_RATE_LIMIT", "30")))
+_CALLBACK_FAIL_LIMIT = max(1, int(os.environ.get("JM_OAUTH_CALLBACK_RATE_LIMIT", "30")))
+_EXCHANGE_LIMIT = max(1, int(os.environ.get("JM_OAUTH_EXCHANGE_RATE_LIMIT", "60")))
 
 
 def create_oauth_router(*, get_biz: Callable, current_user: Callable,

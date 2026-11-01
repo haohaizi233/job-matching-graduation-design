@@ -95,6 +95,17 @@ function providerState(provider: OAuthProvider): OAuthProviderStatus | undefined
   return oauthProviders.value.find((p) => p.id === provider)
 }
 
+/**
+ * 平台是否不可用（未配置 / 已禁用 / 状态未知）。
+ *
+ * 失败即关闭而非放开：只有后端明确返回 enabled=true 才允许发起绑定，
+ * 与登录页 AuthCard 的 socialDisabled 同口径，避免「状态未加载/加载失败」
+ * 被误当成可用而放出假绑定入口。
+ */
+function providerUnavailable(provider: OAuthProvider): boolean {
+  return providerState(provider)?.enabled !== true
+}
+
 async function refreshOAuth() {
   await Promise.all([loadProviders(), loadIdentities()])
 }
@@ -172,10 +183,12 @@ async function loadSessions() {
 async function loadAll() {
   loading.value = true
   loadError.value = ''
+  // 平台状态 / 绑定关系独立加载，不因个人设置或会话加载失败而丢失——
+  // 否则 providerState 为空会被误判为「平台可用」，放出假绑定入口。
+  await refreshOAuth().catch(() => {})
   try {
     applySettings(await getUserSettings())
     await loadSessions()
-    await refreshOAuth()
   } catch (e) {
     loadError.value = e instanceof ApiError ? e.message : '设置加载失败，请重试'
   } finally {
@@ -606,7 +619,7 @@ async function handleOfflineOthers() {
                   · 最近登录 {{ formatTime(identityOf(provider)?.last_login_at ?? null) }}
                 </template>
               </template>
-              <template v-else-if="providerState(provider)?.enabled === false">
+              <template v-else-if="providerUnavailable(provider)">
                 <template v-if="providerState(provider)?.reason_code === 'OAUTH_PROVIDER_NOT_CONFIGURED'">
                   该平台暂未开放（凭据尚未配置）
                 </template>
@@ -628,7 +641,7 @@ async function handleOfflineOthers() {
             v-else
             type="button"
             class="btn-outline"
-            :disabled="oauthBusy === provider || providerState(provider)?.enabled === false"
+            :disabled="oauthBusy === provider || providerUnavailable(provider)"
             @click="handleBind(provider)"
           >
             {{ oauthBusy === provider ? '跳转中…' : '绑定' }}
@@ -705,6 +718,17 @@ async function handleOfflineOthers() {
 </template>
 
 <style scoped>
+/* 工作台基础布局（与其它视图同口径）：固定侧栏 198px + 固定顶栏 62px。
+   此前缺省这条基础规则，桌面宽度（>1000px）下设置页内容整体压在固定侧栏/顶栏
+   下面，左侧字段与按钮被遮挡无法点击。 */
+.app-shell {
+  min-height: 100vh;
+}
+.workspace {
+  margin-left: 198px;
+  padding: 75px 16px 35px 15px;
+  min-height: 100vh;
+}
 .hero {
   height: 138px;
   border-radius: 12px;

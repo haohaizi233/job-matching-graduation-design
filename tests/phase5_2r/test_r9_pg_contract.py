@@ -19,7 +19,8 @@ import os
 import threading
 import unittest
 
-from _util import SYNTHETIC_JOB_TEXT, BusinessHarness, run_downgrade, run_migrations  # noqa: E402
+from _util import (SYNTHETIC_JOB_TEXT, BusinessHarness, reset_pg_schema,  # noqa: E402
+                   run_downgrade, run_migrations)
 
 
 class R9PostgreSQLAndContract(unittest.TestCase):
@@ -42,6 +43,10 @@ class R9PostgreSQLAndContract(unittest.TestCase):
         url = self._require_pg()
         from sqlalchemy import create_engine, inspect
         try:
+            # 从干净 schema 起步：Phase8-A 迁移的 downgrade 带安全护栏（存在
+            # password_hash IS NULL 的纯 OAuth 账号时拒绝回滚），共享测试库若有
+            # 其它套件残留数据会被误伤；护栏本身不许削弱，故显式清库。
+            reset_pg_schema(url)
             run_migrations(url)
             eng = create_engine(url, future=True)
             insp = inspect(eng)

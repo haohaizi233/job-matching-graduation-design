@@ -102,3 +102,12 @@ class ProviderTimeout(Exception):
 
 class ProviderProtocolError(Exception):
     """Provider 响应格式非法（非 JSON、字段缺失、JSONP 无法安全解析等）。"""
+
+
+class IdentityIntegrityError(ProviderProtocolError):
+    """身份完整性违规（如 userinfo 返回的 openid/uid 与授权不一致）。
+
+    必须阻断登录/绑定（防身份串号）；与"资料读取失败只降级"区分：
+    资料阶段的其它异常（超时/HTTP 错误/权限 errcode/格式异常）一律降级为
+    profile_fetched=False，不得阻断已核验身份。
+    """

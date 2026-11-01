@@ -1,0 +1,229 @@
+# Phase8-A 统一 OAuth 质量门禁（phase8-oauth-gates）
+#
+# 纪律：
+#   * **无真实第三方凭据也必须全绿**——外部身份 Provider 一律由测试侧 FakeOAuthProvider
+#     替代（仅测试注入，生产代码无任何开关可达），本站业务链路（事务/票据/账号/会话/
+#     数据库）全部真实执行；
+#   * 真实微信 / QQ / 微博联调在本轮登记为 NOT_RUN（无开发者凭据与审核回调域名），
+#     **绝不**把 Mock 通过写成真实平台授权成功；
+#   * 保持既有 core-ci / frontend-ci / postgres-integration / browser-e2e /
+#     phase6-gates / phase7-gates 门禁不变，本工作流只做加法；
+#   * 运行身份 JM_RUN_ID 与既有工作流同口径，证据随 run 上传。
+name: phase8-oauth-gates
+
+on:
+  push:
+    branches: [main, master, "feat/phase8a-*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # ================= OAuth 后端测试（Python 3.11 / SQLite）=================
+  oauth-backend:
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: p8a-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 依赖安装（服务/测试最小集，版本固定）
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 \
+                      httpx==0.28.1 pymupdf==1.24.14 python-docx==1.1.2 \
+                      sqlalchemy==2.0.36 alembic==1.14.0 argon2-cffi==23.1.0 \
+                      python-multipart==0.0.20 jieba==0.42.1
+
+      - name: 语法与导入检查
+        run: python -m compileall -q src scripts tests/phase8a
+
+      - name: OAuth 环境体检（oauth doctor，缺凭据时安全禁用）
+        run: python scripts/phase8a/oauth_doctor.py
+
+      - name: Phase8-A OAuth 测试套件（Fake Provider 全链路，run_all.py）
+        run: python tests/phase8a/run_all.py
+
+      - name: 既有核心回归不被破坏（core-ci）
+        run: python tests/core_ci/run_all.py
+
+      - name: 上传 OAuth 后端证据
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase8-oauth-backend-evidence
+          path: |
+            reports/phase8-a/07-provider-mock-tests.json
+            reports/phase8-a/07-provider-mock-tests.md
+          if-no-files-found: warn
+
+  # ================= OAuth PostgreSQL 集成（迁移 + 三表约束）=================
+  oauth-postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: jm_ci_pg
+          POSTGRES_USER: jm_ci
+          POSTGRES_PASSWORD: jm_ci_pw_ci_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U jm_ci -d jm_ci_pg"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      JM_RUN_ID: p8a-pg-${{ github.run_id }}-${{ github.run_attempt }}
+      # 与 tests/phase8a/test_pg_integration.py 的 PG_ENV 同名（不匹配会静默 NOT_RUN）
+      JM_TEST_DATABASE_URL_POSTGRES: postgresql+psycopg2://jm_ci:jm_ci_pw_ci_only@127.0.0.1:5432/jm_ci_pg
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 依赖安装（服务/测试最小集 + psycopg2）
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 \
+                      httpx==0.28.1 pymupdf==1.24.14 python-docx==1.1.2 \
+                      sqlalchemy==2.0.36 alembic==1.14.0 argon2-cffi==23.1.0 \
+                      python-multipart==0.0.20 jieba==0.42.1 psycopg2-binary==2.9.10
+
+      - name: OAuth PostgreSQL 集成（迁移/唯一约束/原子消费/纯 OAuth 账号）
+        run: python tests/phase8a/run_all.py
+
+      - name: 上传 OAuth PostgreSQL 证据
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase8-oauth-postgres-evidence
+          path: |
+            reports/phase8-a/07-provider-mock-tests.json
+          if-no-files-found: warn
+
+  # ================= OAuth 前端（typecheck + build）=================
+  oauth-frontend:
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: p8a-fe-${{ github.run_id }}-${{ github.run_attempt }}
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 依赖安装（npm ci，锁文件）
+        run: npm ci
+
+      - name: 类型检查（vue-tsc）
+        run: npm run typecheck
+
+      - name: 生产构建（vite build）
+        run: npm run build
+
+  # ============ OAuth 浏览器 E2E（真实前后端，仅外部 Provider 用 Fake）============
+  oauth-browser-e2e:
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: p8a-e2e-${{ github.run_id }}-${{ github.run_attempt }}
+      JM_E2E_PYTHON: python
+      JM_E2E_FAKE_OAUTH: "1"
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 后端依赖安装
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 \
+                      httpx==0.28.1 pymupdf==1.24.14 python-docx==1.1.2 \
+                      sqlalchemy==2.0.36 alembic==1.14.0 argon2-cffi==23.1.0 \
+                      python-multipart==0.0.20 jieba==0.42.1
+
+      - name: 前端依赖安装（npm ci）
+        working-directory: frontend
+        run: npm ci
+
+      - name: 安装 Playwright Chromium
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
+
+      - name: Playwright E2E（E13–E15 OAuth 专项，隔离运行目录）
+        working-directory: frontend
+        run: npx playwright test e2e/e13-oauth-login.spec.ts e2e/e14-oauth-account-binding.spec.ts e2e/e15-oauth-security.spec.ts
+
+      - name: 上传 OAuth E2E 证据
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase8-oauth-e2e-evidence
+          path: |
+            frontend/e2e/.artifacts/
+          if-no-files-found: warn
+
+  # ============ 真实平台联调状态登记（NOT_RUN，凭据到位前禁止假 PASS）============
+  real-provider-status:
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: p8a-real-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 真实平台联调状态登记（本轮固定 NOT_RUN）
+        run: |
+          python - <<'EOF'
+          import json, os
+          status = {
+            "implementation": "COMPLETE",
+            "mock_integration": "PASS",
+            "real_provider_integration": "NOT_RUN",
+            "provider_approval": "PENDING",
+            "reason": "真实开发者凭据与平台审核回调域名尚未提供，禁止把 Mock 通过冒充真实授权成功",
+          }
+          os.makedirs("reports/phase8-a", exist_ok=True)
+          with open("reports/phase8-a/real-provider-status.json", "w", encoding="utf-8") as f:
+            json.dump(status, f, ensure_ascii=False, indent=2)
+          print(json.dumps(status, ensure_ascii=False, indent=2))
+          assert status["real_provider_integration"] == "NOT_RUN"
+          EOF
+
+      - name: 上传真实联调状态登记
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase8-oauth-real-status
+          path: reports/phase8-a/real-provider-status.json
+          if-no-files-found: warn

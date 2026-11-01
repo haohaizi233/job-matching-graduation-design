@@ -30,8 +30,9 @@ import re
 from urllib.parse import parse_qs, urlencode
 
 from .base import BaseOAuthProvider
-from ..exceptions import (InvalidIdentity, ProviderProtocolError,
-                          ProviderUnavailable, TokenExchangeFailed)
+from ..exceptions import (IdentityIntegrityError, InvalidIdentity,
+                          ProviderProtocolError, ProviderUnavailable,
+                          TokenExchangeFailed)
 from ..schemas import OAuthIdentity, OAuthTokenResponse
 
 AUTH_URL = "https://graph.qq.com/oauth2.0/authorize"
@@ -90,7 +91,8 @@ class QQProvider(BaseOAuthProvider):
         openid = str(self._require(me.get("openid"), "openid", ME_URL))
         consumer = str(me.get("client_id") or me.get("oauth_consumer_key") or "")
         if consumer and consumer != str(self.client_id):
-            raise ProviderProtocolError("QQ /me 返回的 client_id 与本应用不一致")
+            raise IdentityIntegrityError(
+                "QQ /me 返回的 client_id 与本应用不一致")
 
         return OAuthTokenResponse(
             provider=self.provider_id,
@@ -124,8 +126,8 @@ class QQProvider(BaseOAuthProvider):
                 avatar_url = _clip(info.get("figureurl_qq_2") or info.get("figureurl_qq_1"), 512)
                 profile_fetched = True
             # ret != 0：仅资料缺失/权限不足 —— 身份已由 /me 核验，不构成账号关联错误
-        except (ProviderProtocolError, ProviderUnavailable, TokenExchangeFailed):
-            raise
+        except IdentityIntegrityError:
+            raise        # 身份串号必须阻断
         except Exception:  # noqa: BLE001 - 资料读取失败不影响已核验身份
             profile_fetched = False
 

@@ -28,8 +28,9 @@ from __future__ import annotations
 from urllib.parse import urlencode
 
 from .base import BaseOAuthProvider
-from ..exceptions import (InvalidIdentity, ProviderProtocolError,
-                          ProviderUnavailable, TokenExchangeFailed)
+from ..exceptions import (IdentityIntegrityError, InvalidIdentity,
+                          ProviderProtocolError, ProviderUnavailable,
+                          TokenExchangeFailed)
 from ..schemas import OAuthIdentity, OAuthTokenResponse
 
 AUTH_URL = "https://open.weixin.qq.com/connect/qrconnect"
@@ -108,13 +109,14 @@ class WeChatProvider(BaseOAuthProvider):
             # openid 必须与换 token 时一致，否则视为协议异常（防身份串号）
             got_openid = str(info.get("openid") or "")
             if got_openid and got_openid != str(openid):
-                raise ProviderProtocolError("微信 userinfo 返回的 openid 与授权不一致")
+                raise IdentityIntegrityError(
+                    "微信 userinfo 返回的 openid 与授权不一致")
             display_name = _clip(info.get("nickname"))
             avatar_url = _clip(info.get("headimgurl"), 512)
             unionid = unionid or (str(info["unionid"]) if info.get("unionid") else None)
             profile_fetched = True
-        except (ProviderProtocolError, ProviderUnavailable, TokenExchangeFailed):
-            raise
+        except IdentityIntegrityError:
+            raise        # 身份串号必须阻断
         except Exception:  # noqa: BLE001 - 资料读取失败不影响已核验身份（契约允许）
             profile_fetched = False
 

@@ -83,7 +83,7 @@ class BaseOAuthProvider:
     # ---------------------------------------------------------- 辅助
     def _require(self, value, field: str, url: str):
         if value is None or str(value).strip() == "":
-            from .exceptions import ProviderProtocolError
+            from ..exceptions import ProviderProtocolError
             raise ProviderProtocolError(
                 f"{self.provider_id} 响应缺少必要字段 {field} @ {redact_url(url)}")
         return value

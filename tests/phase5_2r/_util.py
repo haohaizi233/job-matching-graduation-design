@@ -124,6 +124,24 @@ def run_downgrade(database_url: str, revision: str = "base") -> None:
     _alembic_env_call(lambda cmd, cfg, *_a: cmd.downgrade(cfg, revision), database_url)
 
 
+def reset_pg_schema(database_url: str) -> None:
+    """PostgreSQL 共享测试库硬重置：DROP SCHEMA public CASCADE + CREATE schema。
+
+    Phase8-A 迁移的 downgrade 带安全护栏——存在 password_hash IS NULL 的
+    纯 OAuth 账号时拒绝回滚。downgrade 用例必须从干净 schema 起步，
+    否则会被其它套件残留数据误伤（护栏本身不许削弱）。
+    """
+    from sqlalchemy import create_engine, text
+
+    eng = create_engine(database_url, future=True)
+    try:
+        with eng.begin() as conn:
+            conn.execute(text("DROP SCHEMA public CASCADE"))
+            conn.execute(text("CREATE SCHEMA public"))
+    finally:
+        eng.dispose()
+
+
 # ---------------------------------------------------------------- 夹具
 class BusinessHarness:
     """一个测试类一套隔离环境：临时库 + 临时私有存储 + 业务 app + HTTP 客户端。"""
