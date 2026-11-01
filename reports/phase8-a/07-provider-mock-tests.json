@@ -1,18 +1,18 @@
 {
   "suite": "phase8a-oauth",
-  "run_id": "phase8a-20261101T070742Z",
+  "run_id": "phase8a-20261101T082446Z",
   "overall": "PASS",
-  "started_at": "2026-11-01T07:02:01.968356+00:00",
-  "finished_at": "2026-11-01T07:07:42.445088+00:00",
-  "seconds": 340.477,
+  "started_at": "2026-11-01T08:21:43.492395+00:00",
+  "finished_at": "2026-11-01T08:24:46.403693+00:00",
+  "seconds": 182.911,
   "python_version": "3.13.2",
   "actual_python_executable": "D:\\APP\\python 3.13.2\\python.exe",
   "sys_argv": [
-    "tests/phase8a/run_all.py"
+    "tests\\phase8a\\run_all.py"
   ],
   "working_directory": "D:\\desktop\\毕业设计",
-  "execution_command": "'D:\\APP\\python 3.13.2\\python.exe' tests/phase8a/run_all.py",
-  "git_sha": "12e03639b663908a7da9333dd35839dd73658ba2",
+  "execution_command": "'D:\\APP\\python 3.13.2\\python.exe' 'tests\\phase8a\\run_all.py'",
+  "git_sha": "0b6849727d33e9ef90efd29a2a47cd8ee4aedf32",
   "totals": {
     "tests": 144,
     "pass": 144,
@@ -29,7 +29,7 @@
       "fail": 0,
       "error": 0,
       "skip": 0,
-      "seconds": 282.714,
+      "seconds": 133.351,
       "records": [
         {
           "test": "test_api_flows.TestBindFlows.test_bind_full_flow",
@@ -237,7 +237,7 @@
       "fail": 0,
       "error": 0,
       "skip": 0,
-      "seconds": 21.98,
+      "seconds": 20.966,
       "records": [
         {
           "test": "test_identity_service.TestBindingPolicy.test_bind_is_idempotent_for_same_user",
@@ -325,7 +325,7 @@
       "fail": 0,
       "error": 0,
       "skip": 0,
-      "seconds": 17.169,
+      "seconds": 16.808,
       "records": [
         {
           "test": "test_pg_integration.TestPgMigration.test_downgrade_guard_and_rollback",
@@ -361,7 +361,7 @@
       "fail": 0,
       "error": 0,
       "skip": 0,
-      "seconds": 0.067,
+      "seconds": 0.191,
       "records": [
         {
           "test": "test_provider_protocol.TestOAuthHttpClient.test_http_status_error_mapped",
@@ -529,7 +529,7 @@
       "fail": 0,
       "error": 0,
       "skip": 0,
-      "seconds": 0.015,
+      "seconds": 0.007,
       "records": [
         {
           "test": "test_security_primitives.TestCookieContract.test_binding_cookie_flags",
@@ -597,7 +597,7 @@
       "fail": 0,
       "error": 0,
       "skip": 0,
-      "seconds": 18.532,
+      "seconds": 11.587,
       "records": [
         {
           "test": "test_transaction_ticket.TestAuthTransaction.test_browser_binding_isolated_per_transaction",

@@ -36,7 +36,11 @@ from job_matching.service.oauth.providers.weibo import (TOKEN_URL as WB_TOKEN_UR
                                                         WeiboProvider)
 from job_matching.service.oauth.schemas import OAuthIdentity, OAuthTokenResponse
 
-SECRET = "TEST-APP-SECRET-DO-NOT-LOG"
+# 合成密钥探针（仅测试夹具，非真实凭据）：用于验证异常/日志/URL 均对 client_secret 脱敏。
+# 值必须以 example/placeholder 等「占位符」前缀开头——core-ci 的 C4 密钥扫描
+# （test_no_secret_material_in_tracked_files）会把"看起来像真密钥"的赋值拦下，
+# 而 example/placeholder 开头的占位符值是其明确放行的测试夹具形态，避免误判。
+SECRET = "example-test-app-secret-do-not-log"
 
 
 def make_http(handler, *, max_bytes: int = 1_048_576) -> OAuthHttpClient:
