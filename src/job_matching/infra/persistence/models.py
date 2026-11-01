@@ -47,7 +47,12 @@ class User(Base):
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
     username: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
     email: Mapped[str | None] = mapped_column(String(255), unique=True, nullable=True)
-    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    # Phase8-A：改为可空 —— 纯 OAuth 账号没有本站密码（NULL）。
+    # 业务规则（accounts.py 强制）：
+    #   * 密码注册用户 = Argon2id 哈希；纯 OAuth 用户 = NULL；
+    #   * password_hash=NULL 时密码登录/改密一律安全拒绝（不抛异常、不泄露账号存在）；
+    #   * 禁止固定密码/空密码/可预测密码占位。
+    password_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)
     role: Mapped[str] = mapped_column(String(16), nullable=False, default="student")
     status: Mapped[str] = mapped_column(String(16), nullable=False, default="active")
     # 登录失败限制（连续失败计数 + 锁定截止时间）
@@ -326,5 +331,100 @@ class UserSetting(Base):
                                                  default=_now, onupdate=_now)
 
 
+class OAuthIdentity(Base):
+    """第三方登录身份映射（Phase8-A / M3.1）。
+
+    身份命名空间：UNIQUE(provider, client_id, subject) —— 同一平台身份不能绑定两个
+    本站用户；不同 AppID 的 OpenID 不会意外碰撞（client_id 参与唯一键）。
+    昵称/头像只是展示字段，**永不**参与身份识别；union_id 仅在平台真实可用时填写。
+    并发绑定依靠数据库唯一约束兜底（先查后插只是优化，冲突仍由约束拒绝）。
+    """
+
+    __tablename__ = "oauth_identities"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id", ondelete="CASCADE"),
+                                         nullable=False, index=True)
+    provider: Mapped[str] = mapped_column(String(32), nullable=False)      # wechat|qq|weibo
+    client_id: Mapped[str] = mapped_column(String(128), nullable=False)    # AppID 参与命名空间
+    subject: Mapped[str] = mapped_column(String(128), nullable=False)      # openid / uid
+    union_id: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    display_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    avatar_url: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_now)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, nullable=False,
+                                                 default=_now, onupdate=_now)
+    last_login_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    __table_args__ = (
+        UniqueConstraint("provider", "client_id", "subject",
+                         name="uq_oauth_identities_subject"),
+        Index("ix_oauth_identities_user_provider", "user_id", "provider"),
+    )
+
+
+class OAuthAuthTransaction(Base):
+    """短期 OAuth 授权事务（Phase8-A / M4.2）。
+
+    state 只存 SHA-256 摘要（明文仅随授权 URL 一次性交给浏览器）；
+    browser_binding_digest 是浏览器绑定凭据摘要（多标签页按事务隔离）；
+    事务有 TTL 且**一次性消费**（consumed_at），重复回调 -> OAUTH_CALLBACK_REPLAY。
+    """
+
+    __tablename__ = "oauth_auth_transactions"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    rid: Mapped[str] = mapped_column(String(16), nullable=False, unique=True)   # 非秘密短标识
+    provider: Mapped[str] = mapped_column(String(32), nullable=False)
+    mode: Mapped[str] = mapped_column(String(16), nullable=False)               # login | bind
+    state_digest: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
+    browser_binding_digest: Mapped[str] = mapped_column(String(64), nullable=False)
+    browser_binding_key: Mapped[str] = mapped_column(String(32), nullable=False)
+    initiator_user_id: Mapped[str | None] = mapped_column(
+        String(36), ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    initiator_session_digest: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    redirect_uri: Mapped[str] = mapped_column(String(512), nullable=False)
+    return_path: Mapped[str] = mapped_column(String(256), nullable=False, default="/dashboard")
+    code_verifier: Mapped[str | None] = mapped_column(String(128), nullable=True)  # PKCE（按平台契约）
+    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+    consumed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    __table_args__ = (
+        Index("ix_oauth_tx_expires", "expires_at"),
+        Index("ix_oauth_tx_state", "state_digest"),
+    )
+
+
+class OAuthLoginTicket(Base):
+    """一次性登录/绑定票据（Phase8-A / M4.3）。
+
+    票据明文（≥128 位熵）只经短期 HttpOnly Cookie 交给同一浏览器；
+    库里只存 SHA-256 摘要；TTL 30-60 秒；原子消费（UPDATE ... WHERE consumed_at IS NULL）
+    保证并发消费只成功一次；重放 -> OAUTH_TICKET_ALREADY_USED。
+    mode=login：user_id = 登录目标用户；mode=bind：user_id = 发起绑定的本站用户，
+    payload_json = 待绑定的第三方身份快照（identity）。
+    """
+
+    __tablename__ = "oauth_login_tickets"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    ticket_digest: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
+    mode: Mapped[str] = mapped_column(String(16), nullable=False, default="login")
+    user_id: Mapped[str] = mapped_column(String(36), ForeignKey("users.id", ondelete="CASCADE"),
+                                         nullable=False, index=True)
+    browser_binding_digest: Mapped[str] = mapped_column(String(64), nullable=False)
+    browser_binding_key: Mapped[str] = mapped_column(String(32), nullable=False)
+    payload_json: Mapped[dict | None] = mapped_column(JSON_TYPE, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=_now)
+    expires_at: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+    consumed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+
+    __table_args__ = (
+        Index("ix_oauth_tickets_expires", "expires_at"),
+    )
+
+
 __all__ = ["User", "AuthSession", "UserSetting", "StudentProfile", "Resume", "Job",
-           "RecommendationRun", "RecommendationItem", "RecommendationFeedback"]
+           "RecommendationRun", "RecommendationItem", "RecommendationFeedback",
+           "OAuthIdentity", "OAuthAuthTransaction", "OAuthLoginTicket"]

@@ -1,0 +1,673 @@
+{
+  "suite": "phase8a-oauth",
+  "run_id": "phase8a-20261101T082446Z",
+  "overall": "PASS",
+  "started_at": "2026-11-01T08:21:43.492395+00:00",
+  "finished_at": "2026-11-01T08:24:46.403693+00:00",
+  "seconds": 182.911,
+  "python_version": "3.13.2",
+  "actual_python_executable": "D:\\APP\\python 3.13.2\\python.exe",
+  "sys_argv": [
+    "tests\\phase8a\\run_all.py"
+  ],
+  "working_directory": "D:\\desktop\\毕业设计",
+  "execution_command": "'D:\\APP\\python 3.13.2\\python.exe' 'tests\\phase8a\\run_all.py'",
+  "git_sha": "0b6849727d33e9ef90efd29a2a47cd8ee4aedf32",
+  "totals": {
+    "tests": 144,
+    "pass": 144,
+    "fail": 0,
+    "error": 0,
+    "skip": 0
+  },
+  "modules": [
+    {
+      "module": "test_api_flows",
+      "status": "PASS",
+      "tests": 49,
+      "pass": 49,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "seconds": 133.351,
+      "records": [
+        {
+          "test": "test_api_flows.TestBindFlows.test_bind_full_flow",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestBindFlows.test_bind_mode_requires_same_mode_transaction",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestBindFlows.test_oauth_binding_user_changed",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestBindFlows.test_oauth_identity_conflict",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestBindFlows.test_oauth_unauthorized_binding",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestBindFlows.test_unbind_flow_and_last_login_method",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestBindFlows.test_unbind_other_users_identity_not_found",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestBindFlows.test_unbind_requires_recent_session",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_callback_access_denied",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_callback_without_code",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_callback_without_state",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_code_replay_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_error_redirect_never_leaks_code_state_token",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_oauth_provider_malformed_response",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_oauth_provider_timeout",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_provider_http_errors_mapped_not_password_error",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_state_browser_binding",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_state_expired",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_state_mismatch",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_state_replay",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestCallbackErrors.test_state_wrong_provider",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestExchangeSecurity.test_exchange_unknown_ticket_not_leaking_user",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestExchangeSecurity.test_exchange_without_browser_binding",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestExchangeSecurity.test_exchange_without_ticket_cookie",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestExchangeSecurity.test_exchange_wrong_origin_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestExchangeSecurity.test_ticket_double_exchange_race",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestExchangeSecurity.test_ticket_expired",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestExchangeSecurity.test_ticket_replay",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestLoginFlow.test_default_student_role_and_password_login_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestLoginFlow.test_exchange_shape_matches_password_login",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestLoginFlow.test_full_login_chain_enters_existing_account_system",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestLoginFlow.test_multi_tab_authorization",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestLoginFlow.test_oauth_issues_new_session_each_login",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestLoginFlow.test_pkce_when_supported",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestLoginFlow.test_second_login_same_identity_no_duplicate_account",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestOAuthConfig.test_config_status_states",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestOAuthConfig.test_each_provider_independent",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestOAuthConfig.test_enabled_without_credentials_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestOAuthConfig.test_production_http_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestProviderStatusAPI.test_invalid_mode_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestProviderStatusAPI.test_invalid_return_path_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestProviderStatusAPI.test_providers_status_shape_without_secrets",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestProviderStatusAPI.test_return_path_whitelisted_echoed",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestProviderStatusAPI.test_unconfigured_provider_rejected_without_fake_link",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestProviderStatusAPI.test_unknown_provider_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestRateLimit.test_callback_failure_rate_limited",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestRateLimit.test_oauth_start_rate_limited",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestSecurityLogging.test_api_responses_never_contain_provider_token",
+          "status": "PASS"
+        },
+        {
+          "test": "test_api_flows.TestSecurityLogging.test_oauth_secret_not_logged",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "module": "test_identity_service",
+      "status": "PASS",
+      "tests": 19,
+      "pass": 19,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "seconds": 20.966,
+      "records": [
+        {
+          "test": "test_identity_service.TestBindingPolicy.test_bind_is_idempotent_for_same_user",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestBindingPolicy.test_oauth_duplicate_concurrent_register",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestBindingPolicy.test_oauth_identity_conflict",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestBindingPolicy.test_one_identity_per_provider_policy",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestNoAutoMerge.test_oauth_login_does_not_merge_by_nickname",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestNoAutoMerge.test_oauth_login_does_not_merge_by_unverified_email",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestNoAutoMerge.test_oauth_login_does_not_merge_by_verified_email",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestNoAutoMerge.test_same_identity_login_reuses_account",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestNoAutoMerge.test_same_subject_different_appid_is_distinct_identity",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestNoAutoMerge.test_same_subject_different_provider_is_distinct_identity",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestOAuthOnlyAccount.test_change_password_requires_old_password",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestOAuthOnlyAccount.test_oauth_default_student_role",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestOAuthOnlyAccount.test_oauth_only_password_login_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestOAuthOnlyAccount.test_oauth_username_generated_not_nickname",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestOAuthOnlyAccount.test_set_password_only_for_oauth_only_accounts",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestUnbind.test_oauth_last_login_method_cannot_unbind",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestUnbind.test_unbind_allowed_when_other_identity_exists",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestUnbind.test_unbind_allowed_when_password_exists",
+          "status": "PASS"
+        },
+        {
+          "test": "test_identity_service.TestUnbind.test_unbind_other_users_identity_hidden",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "module": "test_pg_integration",
+      "status": "PASS",
+      "tests": 6,
+      "pass": 6,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "seconds": 16.808,
+      "records": [
+        {
+          "test": "test_pg_integration.TestPgMigration.test_downgrade_guard_and_rollback",
+          "status": "PASS"
+        },
+        {
+          "test": "test_pg_integration.TestPgMigration.test_oauth_tables_and_nullable_password",
+          "status": "PASS"
+        },
+        {
+          "test": "test_pg_integration.TestPgMigration.test_transaction_rollback_leaves_no_partial_rows",
+          "status": "PASS"
+        },
+        {
+          "test": "test_pg_integration.TestPgMigration.test_unique_constraint_and_fk",
+          "status": "PASS"
+        },
+        {
+          "test": "test_pg_integration.TestPgOAuthFlow.test_bind_and_unbind_on_postgresql",
+          "status": "PASS"
+        },
+        {
+          "test": "test_pg_integration.TestPgOAuthFlow.test_oauth_only_user_and_login_chain_on_postgresql",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "module": "test_provider_protocol",
+      "status": "PASS",
+      "tests": 39,
+      "pass": 39,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "seconds": 0.191,
+      "records": [
+        {
+          "test": "test_provider_protocol.TestOAuthHttpClient.test_http_status_error_mapped",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestOAuthHttpClient.test_no_redirect_followed",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestOAuthHttpClient.test_redact_url_strips_query",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestOAuthHttpClient.test_response_size_bounded",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestOAuthHttpClient.test_timeout_mapped",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_build_authorization_url",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_full_flow_form_token_jsonp_me_json_profile",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_jsonp_malicious_payload_rejected_without_eval",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_me_consumer_key_mismatch_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_me_error_maps_to_token_exchange_failed",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_nickname_alone_never_identity",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_parse_qq_payload_formats",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_profile_http_failure_degrades",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_profile_permission_error_degrades",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_token_error_mapping",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestQQProtocol.test_token_json_response_supported",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_build_authorization_url_qrconnect",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_errcode_maps_to_token_exchange_failed",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_exception_messages_do_not_leak_secret",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_exchange_code_happy_path",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_exchange_code_without_unionid",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_exchange_timeout_raises_provider_timeout",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_get_identity_happy_path",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_get_identity_missing_subject_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_get_identity_openid_mismatch_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_get_identity_profile_errcode_degrades",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_get_identity_profile_http_failure_degrades",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_missing_code_raises_token_exchange_failed",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_missing_openid_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeChatProtocol.test_provider_busy_maps_to_unavailable",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_build_authorization_url",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_error_code_mapping",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_exchange_code_happy_path",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_get_identity_happy_path",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_identity_without_uid_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_missing_access_token_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_missing_uid_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_profile_failure_keeps_verified_uid",
+          "status": "PASS"
+        },
+        {
+          "test": "test_provider_protocol.TestWeiboProtocol.test_uid_mismatch_rejected",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "module": "test_security_primitives",
+      "status": "PASS",
+      "tests": 14,
+      "pass": 14,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "seconds": 0.007,
+      "records": [
+        {
+          "test": "test_security_primitives.TestCookieContract.test_binding_cookie_flags",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestCookieContract.test_cookie_names_reject_bad_rid",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestCookieContract.test_per_transaction_cookie_isolation",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestCookieContract.test_ticket_cookie_flags_and_clear",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestOriginCheck.test_origin_must_match_whitelist",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestPkce.test_pkce_s256_rfc7636_vector",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestPkce.test_pkce_verifier_entropy",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestPkce.test_pkce_verifier_respects_random_source",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestReturnPathWhitelist.test_accepts_internal_routes",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestReturnPathWhitelist.test_default_when_missing",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestReturnPathWhitelist.test_redirect_open_redirect_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestReturnPathWhitelist.test_rejects_overlong",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestStateAndRandomness.test_digest_is_one_way_sha256",
+          "status": "PASS"
+        },
+        {
+          "test": "test_security_primitives.TestStateAndRandomness.test_state_randomness",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "module": "test_transaction_ticket",
+      "status": "PASS",
+      "tests": 17,
+      "pass": 17,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "seconds": 11.587,
+      "records": [
+        {
+          "test": "test_transaction_ticket.TestAuthTransaction.test_browser_binding_isolated_per_transaction",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestAuthTransaction.test_cleanup_removes_expired",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestAuthTransaction.test_state_expired",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestAuthTransaction.test_state_lifecycle_and_digest_only",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestAuthTransaction.test_state_mismatch_mode",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestAuthTransaction.test_state_mismatch_provider",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestAuthTransaction.test_state_missing_or_unknown",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestAuthTransaction.test_state_replay_rejected",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_browser_binding_mismatch",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_cleanup",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_digest_only_in_db",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_double_exchange_race",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_error_messages_do_not_leak_user_id",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_expired",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_lifecycle",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_mode_validation",
+          "status": "PASS"
+        },
+        {
+          "test": "test_transaction_ticket.TestLoginTicket.test_ticket_replay",
+          "status": "PASS"
+        }
+      ]
+    }
+  ]
+}

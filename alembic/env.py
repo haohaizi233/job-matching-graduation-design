@@ -26,7 +26,9 @@ from job_matching.infra.persistence import models as _models  # noqa: E402,F401 
 
 config = context.config
 if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+    # disable_existing_loggers=False：迁移不得禁用应用既有 logger
+    # （否则同进程内跑完 alembic 后业务日志全部静默，安全审计日志会凭空消失）
+    fileConfig(config.config_file_name, disable_existing_loggers=False)
 
 target_metadata = Base.metadata
 

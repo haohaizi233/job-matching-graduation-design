@@ -13,7 +13,8 @@ import os
 import unittest
 from datetime import datetime
 
-from _util import ROOT, run_downgrade, run_migrations  # noqa: E402
+from _util import (ROOT, reset_pg_schema, run_downgrade,  # noqa: E402
+                   run_migrations)
 
 
 class T7PostgreSQLIntegration(unittest.TestCase):
@@ -99,6 +100,10 @@ class T7PostgreSQLIntegration(unittest.TestCase):
             dispose_engines()
 
     def test_downgrade_reupgrade_on_postgresql(self):
+        # 从干净 schema 起步：Phase8-A 迁移的 downgrade 带安全护栏（存在
+        # password_hash IS NULL 的纯 OAuth 账号时拒绝回滚），共享测试库若有
+        # 其它套件残留数据会被误伤；护栏本身不许削弱，故显式清库。
+        reset_pg_schema(self.pg_url)
         run_migrations(self.pg_url)
         run_downgrade(self.pg_url, "base")
         run_migrations(self.pg_url)

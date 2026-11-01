@@ -18,8 +18,8 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)   # 仓库根目录
 if (-not $RunId) { $RunId = "m3-e2e-" + (Get-Date -Format "yyyyMMdd-HHmmss") }
 
-Write-Host "== [1/4] 停止旧的 E2E 服务（8123 后端 / 5173 前端）"
-foreach ($port in 8123, 5173) {
+Write-Host "== [1/4] 停止旧的 E2E 服务（8123 后端 / 8125 模拟授权 / 5373 前端）"
+foreach ($port in 8123, 8125, 5373) {
     $conn = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($conn) {
         Stop-Process -Id $conn.OwningProcess -Force -ErrorAction SilentlyContinue

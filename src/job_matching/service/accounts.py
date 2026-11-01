@@ -166,6 +166,11 @@ class AccountService:
                                    f"登录失败次数过多，账号锁定至 {user.locked_until.isoformat()}Z",
                                    {"locked_until": user.locked_until.isoformat()})
 
+            if not user.password_hash:
+                # 纯 OAuth 账号（password_hash=NULL）：密码登录一律拒绝，
+                # 响应与"密码错误"**完全一致**（不抛异常、不泄露账号存在/登录方式）
+                raise ServiceError("AUTH_INVALID_CREDENTIALS", "认证失败，凭证无效")
+
             if not verify_password(user.password_hash, password):
                 # 原子自增（P1-09）：并发登录失败不得丢更新（读-改-写会互相覆盖）
                 from sqlalchemy import update as _sa_update
@@ -278,6 +283,12 @@ class AccountService:
             user = session.query(User).filter(User.id == user_id).first()
             if user is None or user.status != "active":
                 raise ServiceError("FORBIDDEN", "账号不可用")
+            if not user.password_hash:
+                # 纯 OAuth 账号没有本站密码：不得把 NULL 当作"原密码正确"，
+                # 也不走"原密码不正确"伪装 —— 明确引导到设置密码流程（仅对已登录本人可见）
+                raise ServiceError("INVALID_REQUEST",
+                                   "该账号为第三方登录账号，尚未设置本站密码，"
+                                   "请使用「设置密码」而不是「修改密码」")
             if not verify_password(user.password_hash, old_password):
                 raise ServiceError("AUTH_INVALID_CREDENTIALS", "原密码不正确")
             if verify_password(user.password_hash, new_password):
@@ -356,6 +367,76 @@ class AccountService:
                 row.revoked_at = now
             session.commit()
             return len(rows)
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
+
+    # ------------------------------------------- Phase8-A：OAuth 账号密码补设
+    def set_password(self, *, user_id: str, new_password: str,
+                     keep_token: str | None = None) -> dict:
+        """为**尚未设置本站密码**的账号（纯 OAuth 用户）设置密码。
+
+        安全语义：
+          * 仅允许 password_hash IS NULL 的账号调用（已有密码必须走 change_password
+            验证原凭证）；
+          * 调用方（API 层）必须保证请求来自该用户的已认证会话；
+          * 设置成功后撤销该用户其它活跃会话（会话安全惯例，保留当前会话）。
+        """
+        problems = validate_password(new_password)
+        if problems:
+            raise ServiceError("INVALID_REQUEST", "；".join(problems), {"fields": problems})
+        session = self._session_factory()
+        try:
+            user = session.query(User).filter(User.id == user_id).first()
+            if user is None or user.status != "active":
+                raise ServiceError("FORBIDDEN", "账号不可用")
+            if user.password_hash:
+                # 已有密码必须走 change_password（验证原凭证），防止绕过原密码校验
+                raise ServiceError("CONFLICT", "该账号已设置密码，请使用修改密码流程")
+            user.password_hash = hash_password(new_password)
+            session.commit()
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
+        revoked = self.revoke_user_sessions(user_id, keep_token=keep_token)
+        return {"password_set": True, "revoked_sessions": revoked}
+
+    # ------------------------------------------- Phase8-A：会话辅助（OAuth 绑定用）
+    @staticmethod
+    def session_fingerprint(token: str) -> str:
+        """会话 Token 摘要（绑定事务的 initiator_session_digest 口径）。"""
+        return _token_digest(token) if token else ""
+
+    def require_recent_session(self, token: str, *, window_minutes: int) -> dict:
+        """安全敏感操作（解绑第三方账号）要求"近期重新认证"的会话。
+
+        只依赖长期有效的旧登录态不足以支撑解绑：会话签发超过窗口即拒绝，
+        要求用户重新登录后再操作。
+        """
+        if not token or not isinstance(token, str):
+            raise ServiceError("AUTH_REQUIRED", "缺少或非法的访问令牌")
+        now = self._clock()
+        session = self._session_factory()
+        try:
+            row = (session.query(AuthSession)
+                   .filter(AuthSession.token_sha256 == _token_digest(token)).first())
+            if row is None or row.revoked_at is not None:
+                raise ServiceError("AUTH_REQUIRED", "访问令牌无效或已撤销")
+            if row.expires_at <= now:
+                raise ServiceError("AUTH_TOKEN_EXPIRED", "访问令牌已过期")
+            created = row.created_at or now
+            if (now - created).total_seconds() > int(window_minutes) * 60:
+                raise ServiceError("FORBIDDEN",
+                                   f"解绑需要近期重新登录（会话签发超过 {window_minutes} 分钟）",
+                                   {"window_minutes": int(window_minutes)})
+            user = session.query(User).filter(User.id == row.user_id).first()
+            if user is None or user.status != "active":
+                raise ServiceError("FORBIDDEN", "账号不可用")
+            return _public_user(user)
         except Exception:
             session.rollback()
             raise

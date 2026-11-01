@@ -129,13 +129,18 @@ class BusinessServices:
     settings: ServiceSettings
     db_settings: DbSettings
     config: dict = field(default_factory=dict)
+    # Phase8-A：统一 OAuth 服务（未启用时同样装配，仅所有 Provider 处于禁用态）
+    oauth: Any = None
 
 
 def make_business_services(*, database_url: str | None = None,
                            storage_root: Path | str | None = None,
                            settings: ServiceSettings | None = None,
                            core_services: Any = None,
-                           session_factory: Callable | None = None) -> BusinessServices:
+                           session_factory: Callable | None = None,
+                           oauth_settings: Any = None,
+                           oauth_registry: Any = None,
+                           oauth_http: Any = None) -> BusinessServices:
     """构建业务服务容器（连接串/存储根全部可注入，禁止写死）。
 
     Phase5-2R（P1-05）：数据库配置**以显式参数构造**（`DbSettings.from_url`），
@@ -159,11 +164,30 @@ def make_business_services(*, database_url: str | None = None,
     reco = RecommendationService(services=core_services, job_service=jobs,
                                  profile_service=students, session_factory=sf)
     user_settings = UserSettingsService(session_factory=sf)
+
+    # ---- Phase8-A：统一 OAuth（配置可注入；未配置时全部 Provider 安全禁用）----
+    from .oauth.config import OAuthSettings
+    from .oauth.http_client import OAuthHttpClient
+    from .oauth.identity_service import OAuthIdentityService
+    from .oauth.registry import build_registry
+    from .oauth.service import OAuthService
+    from .oauth.ticket_store import OAuthTicketStore
+    from .oauth.transaction_store import OAuthTransactionStore
+
+    oas = oauth_settings or OAuthSettings.from_env()
+    ohttp = oauth_http or OAuthHttpClient()
+    oregistry = oauth_registry or build_registry(oas, ohttp)
+    oauth = OAuthService(
+        settings=oas, registry=oregistry, http=ohttp, accounts=accounts,
+        identities=OAuthIdentityService(session_factory=sf),
+        transactions=OAuthTransactionStore(session_factory=sf),
+        tickets=OAuthTicketStore(session_factory=sf))
+
     return BusinessServices(accounts=accounts, students=students, jobs=jobs,
                             recommendations=reco, user_settings=user_settings,
                             core=core_services, store=store,
                             settings=st, db_settings=db,
-                            config=st.to_config_dict())
+                            config=st.to_config_dict(), oauth=oauth)
 
 
 # ------------------------------------------------------------------ 应用
@@ -621,6 +645,11 @@ def create_business_app(business: BusinessServices | None = None):
 
     for r in (auth_router, profile_router, resumes_router, jobs_router, reco_router):
         app.include_router(r)
+
+    # ---- Phase8-A：统一 OAuth 路由（/api/v1/auth/oauth/*，复用同一信封与错误体）----
+    from .oauth.router import create_oauth_router
+    app.include_router(create_oauth_router(get_biz=get_biz, current_user=current_user,
+                                           bearer_token=bearer_token))
 
     # OpenAPI 说明（分数语义与隐私边界随文档可见）
     app.description = (app.description or "") + (

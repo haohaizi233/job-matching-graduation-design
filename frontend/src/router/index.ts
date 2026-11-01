@@ -62,6 +62,12 @@ const router = createRouter({
       meta: { title: '反馈中心' },
     },
     {
+      path: '/oauth/complete',
+      name: 'oauth-complete',
+      component: () => import('@/views/OAuthCompleteView.vue'),
+      meta: { title: '第三方登录', public: true },
+    },
+    {
       path: '/settings',
       name: 'settings',
       component: () => import('@/views/SettingsView.vue'),

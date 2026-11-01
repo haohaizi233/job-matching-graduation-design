@@ -10,7 +10,12 @@ import { defineConfig, devices } from '@playwright/test'
  *  - 测试账号在用例内注册，用户名带随机后缀，互不干扰。
  */
 const BACKEND_PORT = Number(process.env.JM_E2E_PORT || 8123)
-const FRONTEND_PORT = 5173
+// E2E 前端专用端口（默认 5373，避开日常开发 5173 被其它项目占用导致误连）：
+// 上一轮失败根因就是 5173 被另一项目的 Vite 静默复用（reuseExistingServer），
+// 浏览器连到错误应用全用例超时。现改为专用端口 + 不复用外来服务。
+const FRONTEND_PORT = Number(process.env.JM_E2E_FRONTEND_PORT || 5373)
+// Phase8-A：E2E 用模拟第三方授权服务器（浏览器可访问的假微信/QQ/微博授权页）
+const FAKE_OAUTH_PORT = Number(process.env.JM_E2E_FAKE_OAUTH_PORT || 8125)
 // Python 启动命令：Windows 本地默认 py -3.13；CI（Linux）用 JM_E2E_PYTHON=python 覆盖
 const PY = process.env.JM_E2E_PYTHON || 'py -3.13'
 
@@ -37,6 +42,21 @@ export default defineConfig({
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: [
     {
+      // Phase8-A：模拟第三方授权服务器（仅 E2E；浏览器真实跳转授权页并点击同意/拒绝）
+      command: `${PY} tests/e2e/fake_oauth_server.py`,
+      cwd: '..',
+      url: `http://127.0.0.1:${FAKE_OAUTH_PORT}/health`,
+      reuseExistingServer: true,
+      timeout: 60_000,
+      env: {
+        PYTHONUTF8: '1',
+        JM_E2E_FAKE_OAUTH_PORT: String(FAKE_OAUTH_PORT),
+        JM_E2E_FAKE_REDIRECT_ALLOW: `http://127.0.0.1:${BACKEND_PORT}/api/v1/auth/oauth/`,
+      },
+      stdout: 'pipe',
+      stderr: 'pipe',
+    },
+    {
       command: `${PY} tests/e2e/serve_backend.py`,
       cwd: '..',
       url: `http://127.0.0.1:${BACKEND_PORT}/api/v1/health`,
@@ -46,16 +66,19 @@ export default defineConfig({
         PYTHONUTF8: '1',
         PYTHONPATH: 'src',
         JM_E2E_PORT: String(BACKEND_PORT),
+        JM_E2E_FRONTEND_ORIGIN: `http://127.0.0.1:${FRONTEND_PORT}`,
+        JM_E2E_FAKE_OAUTH_URL: `http://127.0.0.1:${FAKE_OAUTH_PORT}`,
       },
       stdout: 'pipe',
       stderr: 'pipe',
     },
     {
       // Windows 上 vite 默认只监听 ::1，显式绑定 127.0.0.1 与探活 URL 一致；端口占用直接失败
-      command: 'npm run dev -- --host 127.0.0.1 --strictPort',
+      //（不 reuse：外来同端口服务必须显式失败，禁止静默连到错误应用）
+      command: `npm run dev -- --host 127.0.0.1 --port ${FRONTEND_PORT} --strictPort`,
       cwd: '.',
       url: `http://127.0.0.1:${FRONTEND_PORT}`,
-      reuseExistingServer: true,
+      reuseExistingServer: false,
       timeout: 120_000,
       env: {
         VITE_API_TARGET: `http://127.0.0.1:${BACKEND_PORT}`,

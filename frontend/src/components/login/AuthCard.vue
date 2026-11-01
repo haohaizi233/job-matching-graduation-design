@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import IconGlyph from '@/components/common/IconGlyph.vue'
+import { fetchProviders } from '@/api/oauth'
 import { useAuth } from '@/composables/useAuth'
+import { useOAuth } from '@/composables/useOAuth'
 import { useToast } from '@/composables/useToast'
 import type { AuthMode } from '@/types'
 
@@ -20,6 +22,7 @@ const router = useRouter()
 const route = useRoute()
 const { show } = useToast()
 const { login, register } = useAuth()
+const { begin } = useOAuth()
 
 const username = ref('')
 const email = ref('')
@@ -105,13 +108,49 @@ async function handleSubmit() {
 }
 
 const socials = [
-  { key: 'QQ', label: 'QQ', icon: socialQq },
-  { key: '微信', label: '微信', icon: socialWechat },
-  { key: '微博', label: '微博', icon: socialWeibo },
+  { provider: 'qq' as const, label: 'QQ', icon: socialQq },
+  { provider: 'wechat' as const, label: '微信', icon: socialWechat },
+  { provider: 'weibo' as const, label: '微博', icon: socialWeibo },
 ]
 
-function handleSocial(provider: string) {
-  show(`${provider}第三方登录为 UI 演示，尚未接入 OAuth 授权`, 'top')
+const socialStatus = ref<Record<string, { enabled: boolean; reason_code?: string | null }>>({})
+const socialStarting = ref('')
+
+onMounted(async () => {
+  try {
+    const list = await fetchProviders()
+    const map: Record<string, { enabled: boolean; reason_code?: string | null }> = {}
+    for (const p of list) map[p.id] = { enabled: p.enabled, reason_code: p.reason_code }
+    socialStatus.value = map
+  } catch {
+    // 状态拉取失败按未开放处理，不影响密码登录
+  }
+})
+
+function socialDisabled(provider: string): boolean {
+  return socialStatus.value[provider]?.enabled !== true
+}
+
+async function handleSocial(provider: string, label: string) {
+  const meta = socialStatus.value[provider]
+  if (!meta || !meta.enabled) {
+    show(
+      meta?.reason_code === 'OAUTH_PROVIDER_NOT_CONFIGURED'
+        ? `${label}登录暂未开放（平台凭据尚未配置）`
+        : `${label}登录暂未开放`,
+      'top',
+    )
+    return
+  }
+  socialStarting.value = provider
+  try {
+    await begin(provider as 'qq' | 'wechat' | 'weibo', 'login')
+  } catch (e) {
+    socialStarting.value = ''
+    formError.value = e instanceof Error ? e.message : '第三方登录发起失败，请稍后重试'
+    return
+  }
+  socialStarting.value = ''
 }
 </script>
 
@@ -216,14 +255,18 @@ function handleSocial(provider: string) {
       <div v-show="props.mode === 'login'" class="socials">
         <button
           v-for="social in socials"
-          :key="social.key"
+          :key="social.provider"
           type="button"
           class="social-button"
           :aria-label="`${social.label}登录`"
-          @click="handleSocial(social.key)"
+          :disabled="socialDisabled(social.provider) || socialStarting === social.provider"
+          :title="socialDisabled(social.provider) ? `${social.label}登录暂未开放` : `使用${social.label}登录`"
+          @click="handleSocial(social.provider, social.label)"
         >
           <img :src="social.icon" alt="" />
           <span>{{ social.label }}</span>
+          <span v-if="socialDisabled(social.provider)" class="social-off">暂未开放</span>
+          <span v-else-if="socialStarting === social.provider" class="social-off">跳转中...</span>
         </button>
       </div>
 
@@ -484,6 +527,17 @@ function handleSocial(provider: string) {
 }
 .social-button:hover img {
   transform: translateY(-3px);
+}
+.social-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+.social-button:disabled:hover img {
+  transform: none;
+}
+.social-off {
+  font-size: 11px;
+  color: #b3bdcd;
 }
 .notice {
   margin-top: 27px;
