@@ -39,6 +39,26 @@ ERROR_CODES: dict[str, tuple[int, str]] = {
     "FORBIDDEN": (403, "权限不足或资源不属于当前用户"),
     "NOT_FOUND": (404, "资源不存在"),
     "CONFLICT": (409, "资源冲突（重复创建/并发修改）"),
+    # ---- Phase8-A 统一 OAuth 2.0（错误码只做加法，不动既有映射）----
+    # HTTP 状态纪律：400=非法 OAuth 请求；401=需要本站身份验证；403=操作被禁止；
+    # 409=身份/会话冲突；429=限流（复用 RATE_LIMITED）；502=外部 Provider 响应异常；
+    # 503=Provider 未配置或服务不可用。
+    "OAUTH_PROVIDER_NOT_CONFIGURED": (503, "该第三方平台尚未配置（缺 AppID/AppSecret/回调地址）"),
+    "OAUTH_PROVIDER_DISABLED": (503, "该第三方平台已显式禁用"),
+    "OAUTH_INVALID_STATE": (400, "OAuth state 缺失或不匹配（疑似 CSRF/伪造回调）"),
+    "OAUTH_STATE_EXPIRED": (400, "OAuth 授权事务已过期"),
+    "OAUTH_CALLBACK_REPLAY": (400, "OAuth 回调已消费，拒绝重放"),
+    "OAUTH_ACCESS_DENIED": (400, "用户在第三方平台取消或拒绝授权"),
+    "OAUTH_TOKEN_EXCHANGE_FAILED": (502, "第三方平台 code 换 token 失败或响应格式非法"),
+    "OAUTH_PROVIDER_UNAVAILABLE": (502, "第三方平台超时/限流/服务异常"),
+    "OAUTH_INVALID_IDENTITY": (502, "第三方平台未返回可用的稳定身份标识"),
+    "OAUTH_IDENTITY_CONFLICT": (409, "该第三方身份已绑定其他本站账号"),
+    "OAUTH_BIND_REQUIRES_AUTH": (401, "绑定第三方账号需要先登录本站"),
+    "OAUTH_SESSION_CHANGED": (409, "发起授权与完成授权的本站会话不一致，绑定已取消"),
+    "OAUTH_TICKET_EXPIRED": (400, "一次性登录票据已过期"),
+    "OAUTH_TICKET_ALREADY_USED": (400, "一次性登录票据已被消费，拒绝重放"),
+    "OAUTH_LAST_LOGIN_METHOD": (403, "该身份是账号唯一登录方式，解绑将导致账号无法登录"),
+    "OAUTH_INVALID_REDIRECT": (400, "return_path / 回调地址非法（疑似开放重定向）"),
 }
 
 _ABS_PATH_RE = re.compile(r"[A-Za-z]:[\\/][^\s\"'，。；]*")

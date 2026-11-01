@@ -14,7 +14,8 @@ from __future__ import annotations
 
 from .base import (Base, DbSettings, dispose_engines, get_engine, get_session,
                    get_session_factory, init_db, session_scope)
-from .models import (AuthSession, Job, RecommendationFeedback, RecommendationItem,
+from .models import (AuthSession, Job, OAuthAuthTransaction, OAuthIdentity,
+                     OAuthLoginTicket, RecommendationFeedback, RecommendationItem,
                      RecommendationRun, Resume, StudentProfile, User, UserSetting)
 
 __all__ = [
@@ -22,4 +23,5 @@ __all__ = [
     "get_session_factory", "init_db", "session_scope",
     "User", "AuthSession", "UserSetting", "StudentProfile", "Resume", "Job",
     "RecommendationRun", "RecommendationItem", "RecommendationFeedback",
+    "OAuthIdentity", "OAuthAuthTransaction", "OAuthLoginTicket",
 ]
