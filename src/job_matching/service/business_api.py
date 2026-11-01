@@ -657,4 +657,22 @@ def create_business_app(business: BusinessServices | None = None):
         "简历私有存储、岗位管理、推荐快照与反馈闭环。"
         "所有分数为排序参考分（heuristic_score / model_raw_score），不是录用概率；"
         "推荐反馈是用户业务反馈，不得当作人工 Gold 标签。")
+    # Frontend static files (production mode)
+    from pathlib import Path
+    from fastapi.staticfiles import StaticFiles
+    from fastapi.responses import FileResponse
+    frontend_dist = Path(__file__).parent.parent.parent.parent / 'frontend' / 'dist'
+    
+    if frontend_dist.exists():
+        app.mount('/assets', StaticFiles(directory=frontend_dist / 'assets'), name='assets')
+        
+        @app.get('/{path:path}')
+        async def serve_frontend(path: str):
+            if path.startswith('api/'):
+                return {'detail': 'Not Found'}
+            file_path = frontend_dist / path
+            if file_path.is_file():
+                return FileResponse(file_path)
+            return FileResponse(frontend_dist / 'index.html')
+    
     return app

@@ -53,12 +53,22 @@ def pairwise_accuracy(group_ids, pred_scores, rel_scores,
             queries_no_pair += 1
             continue
         diff = rr[:, None] - rr[None, :]
-        iu, ju = np.where(np.triu(diff > tie_eps, k=1))
+        # P0修复：遍历所有无序对，不遗漏反向对
+        # 条件：|Δrel| > tie_eps 的对都有资格参与评价
+        # 根据真实相关性大小确定正确排序方向
+        abs_diff = np.abs(diff)
+        iu, ju = np.where(np.triu(abs_diff > tie_eps, k=1))
         if iu.size == 0:
             queries_no_pair += 1
             continue
+        # 正确排序方向：rel高的应该排前面
+        # diff[i,j] = rr[i] - rr[j] > 0 意味着 i 应该排在 j 前面
         d_pred = pr[iu] - pr[ju]
-        score = np.where(d_pred > 0, 1.0, np.where(d_pred < 0, 0.0, 0.5))
+        d_true = rr[iu] - rr[ju]
+        # 如果 d_true > 0，预测 d_pred > 0 正确；如果 d_true < 0，预测 d_pred < 0 正确
+        correct = np.where(d_true > 0, d_pred > 0, d_pred < 0)
+        ties = (d_pred == 0)
+        score = np.where(ties, 0.5, correct.astype(np.float64))
         accs.append(float(score.mean()))
         pairs_used += int(iu.size)
         queries_used += 1
@@ -164,3 +174,79 @@ def selection_value(report: dict, metric_key: str) -> float:
     if v is None:
         raise ValueError(f"选择指标 {metric_key} 不可评估（None）")
     return float(v)
+
+
+def stratified_evaluation(group_ids, pred_scores, rel_scores, tie_eps: float = 0.001) -> dict:
+    """P0: 候选集规模分层评估（2~4, 5~9, >=10）。"""
+    g = np.asarray(group_ids)
+    p = np.asarray(pred_scores, dtype=np.float64)
+    r = np.asarray(rel_scores, dtype=np.float64)
+    
+    strata = {"2-4": [], "5-9": [], ">=10": []}
+    for key in sorted(set(g.tolist())):
+        m = g == key
+        n = int(m.sum())
+        if n < 2:
+            continue
+        pr, rr = p[m], r[m]
+        if n <= 4:
+            stratum = "2-4"
+        elif n <= 9:
+            stratum = "5-9"
+        else:
+            stratum = ">=10"
+        strata[stratum].append((pr, rr))
+    
+    results = {}
+    for stratum, groups in strata.items():
+        if len(groups) < 3:
+            results[stratum] = {"status": "INSUFFICIENT_GROUPS", "query_count": len(groups)}
+            continue
+        
+        from ..metrics_ranking import ndcg_at_k
+        ndcg5s = []
+        for pr, rr in groups:
+            order = np.argsort(-pr)
+            ideal = np.sort(rr)[::-1]
+            ndcg5s.append(ndcg_at_k(rr[order], ideal, k=5))
+        
+        results[stratum] = {
+            "query_count": len(groups),
+            "ndcg@5_mean": round(float(np.mean(ndcg5s)), 6),
+            "ndcg@5_std": round(float(np.std(ndcg5s)), 6),
+        }
+    
+    return {"stratified_by_group_size": results}
+
+
+def random_ranking_baseline(group_ids, rel_scores, n_repeats: int = 100, seed: int = 42) -> dict:
+    """P0: 随机排序对照基准（固定种子多次重复）。"""
+    rng = np.random.RandomState(seed)
+    g = np.asarray(group_ids)
+    r = np.asarray(rel_scores, dtype=np.float64)
+    
+    from ..metrics_ranking import ndcg_at_k
+    
+    all_ndcg5 = []
+    for _ in range(n_repeats):
+        query_ndcg5 = []
+        for key in sorted(set(g.tolist())):
+            m = g == key
+            rr = r[m]
+            if rr.size < 2:
+                continue
+            # 随机排序
+            perm = rng.permutation(rr.size)
+            ideal = np.sort(rr)[::-1]
+            query_ndcg5.append(ndcg_at_k(rr[perm], ideal, k=5))
+        if query_ndcg5:
+            all_ndcg5.append(float(np.mean(query_ndcg5)))
+    
+    return {
+        "random_mean_ndcg@5": round(float(np.mean(all_ndcg5)), 6),
+        "random_std_ndcg@5": round(float(np.std(all_ndcg5)), 6),
+        "random_ci95_low": round(float(np.percentile(all_ndcg5, 2.5)), 6),
+        "random_ci95_high": round(float(np.percentile(all_ndcg5, 97.5)), 6),
+        "n_repeats": n_repeats,
+        "seed": seed,
+    }
