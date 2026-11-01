@@ -36,7 +36,7 @@ from job_matching.training.trainer import resolve_device, set_seed  # noqa: E402
 def main() -> int:
     ap = argparse.ArgumentParser(description="训练匹配模型")
     ap.add_argument("--model", required=True,
-                    choices=["ridge", "gradient_boosting", "mlp", "ranknet"])
+                    choices=["ridge", "gradient_boosting", "mlp", "ranknet", "lambdamart"])
     ap.add_argument("--protocol", required=True,
                     choices=["candidate_cold", "job_cold", "double_cold"])
     ap.add_argument("--tag", default="final")

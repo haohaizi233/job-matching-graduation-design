@@ -1,7 +1,10 @@
-"""LightGBM LambdaMART Learning-to-Rank 模型（Phase 10 P1）。
+"""LightGBM LambdaMART Learning-to-Rank 模型（Phase 10 P1/R）。
 
 LGBMRanker 是成熟的 LTR 算法，CPU 执行即可。
 复用现有 FeatureMap / FeaturePolicy / 数据切分。
+
+标签映射：weak_positive=1, medium_positive=2, strong_positive=3
+label_gain: [0, 1, 2, 3]
 """
 from __future__ import annotations
 
@@ -10,6 +13,24 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+
+# 标签映射
+LABEL_MAP = {"weak_positive": 1, "medium_positive": 2, "strong_positive": 3}
+LABEL_GAIN = [0, 1, 2, 3]
+
+
+def map_labels_to_int(y: np.ndarray) -> np.ndarray:
+    """将标签映射为整数。支持字符串标签和数值标签。"""
+    if y.dtype.kind in ('U', 'S', 'O'):
+        return np.array([LABEL_MAP.get(str(v), 0) for v in y], dtype=int)
+    return np.round(y).astype(int)
+
+
+def validate_query_groups(group: np.ndarray, X: np.ndarray) -> None:
+    """验证查询组连续性和样本对齐。"""
+    total = int(group.sum())
+    assert total == len(X), f"查询组总和({total}) != 样本数({len(X)})"
+    assert all(g > 0 for g in group), "查询组大小必须>0"
 
 
 class LambdaMARTModel:
@@ -30,7 +51,10 @@ class LambdaMARTModel:
         feature_map = None
         fm_path = d / "feature_map.json"
         if fm_path.exists():
-            from .feature_map import FeatureMap
+            try:
+                from ..feature_map import FeatureMap
+            except ImportError:
+                from .feature_map import FeatureMap
             feature_map = FeatureMap.load(fm_path)
         return cls(blob, feature_map)
 
@@ -58,6 +82,8 @@ def train_lambdamart(
     """训练 LightGBM LambdaMART 模型。"""
     import lightgbm as lgb
 
+    validate_query_groups(group_train, X_train)
+
     default_params = {
         "objective": "lambdarank",
         "metric": "ndcg",
@@ -69,16 +95,18 @@ def train_lambdamart(
         "bagging_freq": 5,
         "verbose": -1,
         "seed": seed,
+        "label_gain": LABEL_GAIN,
     }
     if params:
         default_params.update(params)
 
-    # LightGBM LambdaMART要求整数标签
-    y_train_int = np.round(y_train).astype(int)
+    y_train_int = map_labels_to_int(y_train)
     train_set = lgb.Dataset(X_train, y_train_int, group=group_train)
+
     val_set = None
     if X_val is not None and y_val is not None and group_val is not None:
-        y_val_int = np.round(y_val).astype(int)
+        validate_query_groups(group_val, X_val)
+        y_val_int = map_labels_to_int(y_val)
         val_set = lgb.Dataset(X_val, y_val_int, group=group_val, reference=train_set)
 
     callbacks = [lgb.log_evaluation(period=50)]

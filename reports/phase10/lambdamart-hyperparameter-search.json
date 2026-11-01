@@ -1,0 +1,193 @@
+{
+  "results": [
+    {
+      "params": {
+        "num_leaves": 31,
+        "learning_rate": 0.05,
+        "feature_fraction": 0.8
+      },
+      "ndcg@5": 0.9878043540286741,
+      "train_time": 1.5147731304168701
+    },
+    {
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.03,
+        "feature_fraction": 0.7
+      },
+      "ndcg@5": 0.998963524368322,
+      "train_time": 0.9766550064086914
+    },
+    {
+      "params": {
+        "num_leaves": 15,
+        "learning_rate": 0.1,
+        "feature_fraction": 0.9
+      },
+      "ndcg@5": 0.963372395877785,
+      "train_time": 0.26460909843444824
+    },
+    {
+      "params": {
+        "num_leaves": 31,
+        "learning_rate": 0.05,
+        "feature_fraction": 0.6
+      },
+      "ndcg@5": 0.9817139455400786,
+      "train_time": 0.570375919342041
+    },
+    {
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.05,
+        "feature_fraction": 0.8
+      },
+      "ndcg@5": 0.9999713232702134,
+      "train_time": 1.010009765625
+    },
+    {
+      "params": {
+        "num_leaves": 127,
+        "learning_rate": 0.02,
+        "feature_fraction": 0.5
+      },
+      "ndcg@5": 0.9980484586942197,
+      "train_time": 1.305537223815918
+    },
+    {
+      "params": {
+        "num_leaves": 31,
+        "learning_rate": 0.1,
+        "feature_fraction": 0.7
+      },
+      "ndcg@5": 0.9988114490124209,
+      "train_time": 0.5503056049346924
+    },
+    {
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.03,
+        "feature_fraction": 0.9
+      },
+      "ndcg@5": 0.9988048836646121,
+      "train_time": 1.0505857467651367
+    },
+    {
+      "params": {
+        "num_leaves": 15,
+        "learning_rate": 0.05,
+        "feature_fraction": 0.8
+      },
+      "ndcg@5": 0.9338039109039894,
+      "train_time": 0.2724020481109619
+    },
+    {
+      "params": {
+        "num_leaves": 31,
+        "learning_rate": 0.02,
+        "feature_fraction": 0.6
+      },
+      "ndcg@5": 0.9549463916375833,
+      "train_time": 0.5346100330352783
+    },
+    {
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.07,
+        "feature_fraction": 0.7
+      },
+      "ndcg@5": 1.0,
+      "train_time": 1.0380678176879883
+    },
+    {
+      "params": {
+        "num_leaves": 127,
+        "learning_rate": 0.05,
+        "feature_fraction": 0.8
+      },
+      "ndcg@5": 1.0,
+      "train_time": 1.4006068706512451
+    },
+    {
+      "params": {
+        "num_leaves": 31,
+        "learning_rate": 0.05,
+        "feature_fraction": 0.5
+      },
+      "ndcg@5": 0.9841932843941587,
+      "train_time": 0.535109281539917
+    },
+    {
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.1,
+        "feature_fraction": 0.9
+      },
+      "ndcg@5": 1.0,
+      "train_time": 1.0352020263671875
+    },
+    {
+      "params": {
+        "num_leaves": 15,
+        "learning_rate": 0.03,
+        "feature_fraction": 0.7
+      },
+      "ndcg@5": 0.8932243907587224,
+      "train_time": 0.283707857131958
+    },
+    {
+      "params": {
+        "num_leaves": 31,
+        "learning_rate": 0.07,
+        "feature_fraction": 0.8
+      },
+      "ndcg@5": 0.9956693169739563,
+      "train_time": 0.5801339149475098
+    },
+    {
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.05,
+        "feature_fraction": 0.6
+      },
+      "ndcg@5": 0.9994159713212852,
+      "train_time": 1.2529551982879639
+    },
+    {
+      "params": {
+        "num_leaves": 127,
+        "learning_rate": 0.03,
+        "feature_fraction": 0.7
+      },
+      "ndcg@5": 0.9997022417747248,
+      "train_time": 1.6822590827941895
+    },
+    {
+      "params": {
+        "num_leaves": 31,
+        "learning_rate": 0.05,
+        "feature_fraction": 0.9
+      },
+      "ndcg@5": 0.9853130630194249,
+      "train_time": 0.5327401161193848
+    },
+    {
+      "params": {
+        "num_leaves": 63,
+        "learning_rate": 0.02,
+        "feature_fraction": 0.8
+      },
+      "ndcg@5": 0.9947910054829646,
+      "train_time": 0.9756801128387451
+    }
+  ],
+  "best": {
+    "params": {
+      "num_leaves": 63,
+      "learning_rate": 0.07,
+      "feature_fraction": 0.7
+    },
+    "ndcg@5": 1.0,
+    "train_time": 1.0380678176879883
+  }
+}
