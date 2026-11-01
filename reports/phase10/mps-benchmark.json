@@ -1,0 +1,30 @@
+[
+  {
+    "model": "MLP",
+    "device": "cpu",
+    "time_s": 0.3370480537414551,
+    "throughput_samples_per_s": 379767.806338342,
+    "params": 12545
+  },
+  {
+    "model": "MLP",
+    "device": "mps",
+    "time_s": 0.6930749416351318,
+    "throughput_samples_per_s": 184684.21278948127,
+    "params": 12545
+  },
+  {
+    "model": "RankNet",
+    "device": "cpu",
+    "time_s": 0.11624813079833984,
+    "throughput_samples_per_s": 1101092.9734607653,
+    "params": 4225
+  },
+  {
+    "model": "RankNet",
+    "device": "mps",
+    "time_s": 0.6007270812988281,
+    "throughput_samples_per_s": 213075.1284314535,
+    "params": 4225
+  }
+]

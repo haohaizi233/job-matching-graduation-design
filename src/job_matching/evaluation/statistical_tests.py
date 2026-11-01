@@ -51,11 +51,16 @@ def per_query_pairwise_accuracy(group_ids, pred_scores, rel_scores,
         if pr.size < 2:
             continue
         diff = rr[:, None] - rr[None, :]
-        iu, ju = np.where(np.triu(diff > tie_eps, k=1))
+        # P0修复：遍历所有无序对，|Δrel| > tie_eps 的对都有资格
+        abs_diff = np.abs(diff)
+        iu, ju = np.where(np.triu(abs_diff > tie_eps, k=1))
         if iu.size == 0:
             continue
         d_pred = pr[iu] - pr[ju]
-        score = np.where(d_pred > 0, 1.0, np.where(d_pred < 0, 0.0, 0.5))
+        d_true = rr[iu] - rr[ju]
+        correct = np.where(d_true > 0, d_pred > 0, d_pred < 0)
+        ties = (d_pred == 0)
+        score = np.where(ties, 0.5, correct.astype(np.float64))
         out[str(key)] = float(score.mean())
     return out
 
