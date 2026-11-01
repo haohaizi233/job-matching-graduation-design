@@ -167,6 +167,8 @@ def main() -> int:
             probe = probe_load(ckpt, model_name)
             entry["load_probe"] = probe
             entry["inference_status"] = probe["load_status"]
+            if probe.get("error"):
+                entry["load_error"] = probe["error"]
         entry["limitations"] = []
         if family == "matching":
             entry["limitations"].append(
