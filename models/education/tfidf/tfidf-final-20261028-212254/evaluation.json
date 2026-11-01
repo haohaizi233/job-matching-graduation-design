@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-28T23:38:57",
+  "created_at": "2026-11-01T18:30:32",
   "label_order": [
     "博士",
     "硕士",
@@ -19,7 +19,7 @@
     }
   },
   "run_id": "tfidf-final-20261028-212254",
-  "seconds": 0.69,
+  "seconds": 0.41,
   "sets": {
     "gold_holdout_human": {
       "confusion_counts": {

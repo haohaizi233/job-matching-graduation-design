@@ -1,0 +1,27 @@
+{
+  "direction_check": "passed（全部偏好对满足 final_score_a - final_score_b >= min_score_margin）",
+  "groups_skipped_size_1": 151,
+  "groups_total": 9519,
+  "groups_with_pairs": 9368,
+  "max_group_share": 0.000181,
+  "max_pairs_per_group": 64,
+  "max_total_pairs": 400000,
+  "min_score_margin": 0.001,
+  "near_tie_pairs_dropped": 150,
+  "pairs_per_group": {
+    "max": 64,
+    "mean": 37.726,
+    "median": 36.0,
+    "min": 1
+  },
+  "pairs_total": 353417,
+  "pairs_truncated_by_total_cap": false,
+  "score_diff": {
+    "max": 0.275797,
+    "mean": 0.031094,
+    "median": 0.025087,
+    "min": 0.001001
+  },
+  "seed": 20261201,
+  "strategy": "group_all_pairs_then_cap"
+}

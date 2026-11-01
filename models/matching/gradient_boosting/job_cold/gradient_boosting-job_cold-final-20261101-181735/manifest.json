@@ -1,0 +1,95 @@
+{
+  "ablation_dropped_groups": [],
+  "artifacts": [
+    {
+      "bytes": 4439,
+      "path": "config.json",
+      "sha256": "37d590d97976b8df6246b42d39d9e82f9a04c04b82d2f775a9b652896e862389"
+    },
+    {
+      "bytes": 4912,
+      "path": "feature_map.json",
+      "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1"
+    },
+    {
+      "bytes": 3970,
+      "path": "metrics.json",
+      "sha256": "87eadab455e85e2a1602e9b1023907983105ce4343baf44a4b574f09abbc8cdf"
+    },
+    {
+      "bytes": 376615,
+      "path": "model.pkl",
+      "sha256": "88697ca09164d47d611899ce72b326f90e59b8b35aa0388cc77d06f8d0ebfb5d"
+    }
+  ],
+  "best_epoch": null,
+  "created_at": "2026-11-01T18:19:58",
+  "dataset_version": "dv-0ce28fa6b560",
+  "device": "cpu",
+  "environment": {
+    "cuda_available": false,
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "python": "3.13.11",
+    "sklearn": "1.8.0",
+    "torch": "2.10.0",
+    "torch_cuda": null
+  },
+  "feature_map": {
+    "groups_dropped": [],
+    "groups_enabled": [
+      "skill",
+      "position",
+      "category",
+      "experience"
+    ],
+    "n_features": 49,
+    "raw_columns": [
+      "skill_jaccard",
+      "skill_overlap_ratio_cv",
+      "skill_overlap_ratio_job",
+      "both_skills_empty",
+      "position_token_overlap",
+      "target_position_norm",
+      "category_match",
+      "inferred_category",
+      "job_category",
+      "years_experience"
+    ]
+  },
+  "feature_schema_file": "data/processed/matching/feature_schema.json",
+  "feature_schema_sha256": "ed6334ca241e2ea90a825f50e817bd79bf9b2679ae5b80227663f57783fa1876",
+  "generated_by": "scripts/model_training/train.py",
+  "inference": {
+    "forbidden_inputs": [
+      "final_score",
+      "raw_score",
+      "candidate_rank",
+      "candidate_rank_pct",
+      "label_strength",
+      "semantic_score",
+      "skill_score",
+      "position_score",
+      "category_score",
+      "experience_score",
+      "education_score"
+    ],
+    "interface": "predict_score(resume, job) -> float; rank_jobs(resume, jobs) -> list",
+    "requires_labels": false,
+    "supports_cpu": true
+  },
+  "model_name": "gradient_boosting",
+  "model_parameters": 3100,
+  "pipeline_version": "phase4-matching-v1",
+  "protocol": "job_cold",
+  "rows": {
+    "train": 97887,
+    "validation": 12251
+  },
+  "run_id": "gradient_boosting-job_cold-final-20261101-181735",
+  "seed": 20261201,
+  "smoke": false,
+  "split_manifest_file": "data/splits/matching/job_cold/manifest.json",
+  "split_manifest_sha256": "cf14ec736912193f060770438f970177084aa1e4a992e35ba7ad8c2db234370b",
+  "training_seconds": 10.98
+}

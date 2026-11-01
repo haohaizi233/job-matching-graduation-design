@@ -1,0 +1,14 @@
+{
+  "feature_source": "slot_education_norm + job_title_norm",
+  "input_mode": "slot_title",
+  "label_order": [
+    "博士",
+    "硕士",
+    "本科",
+    "大专",
+    "学历不限",
+    "学历不明"
+  ],
+  "tfidf_features": 284002,
+  "tokenizer_vocab_size": null
+}
