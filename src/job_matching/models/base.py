@@ -12,6 +12,7 @@ MODEL_MODULES = {
     "gradient_boosting": "job_matching.models.gradient_boosting",
     "mlp": "job_matching.models.mlp",
     "ranknet": "job_matching.models.ranknet",
+    "lambdamart": "job_matching.models.lambdamart",
 }
 
 

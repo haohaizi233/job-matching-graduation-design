@@ -1,0 +1,29 @@
+{
+  "candidate_cold": {
+    "protocol": "candidate_cold",
+    "n_queries": 200,
+    "n_val_queries": 40,
+    "ndcg@5": 0.31787243620184025,
+    "recall@5": 0.37648809523809523,
+    "train_time_s": 1.22,
+    "num_trees": 5
+  },
+  "job_cold": {
+    "protocol": "job_cold",
+    "n_queries": 500,
+    "n_val_queries": 100,
+    "ndcg@5": 0.468546647768626,
+    "recall@5": 0.6700000000000002,
+    "train_time_s": 0.35,
+    "num_trees": 14
+  },
+  "double_cold": {
+    "protocol": "double_cold",
+    "n_queries": 150,
+    "n_val_queries": 30,
+    "ndcg@5": 0.43743568145720035,
+    "recall@5": 0.5677777777777777,
+    "train_time_s": 0.12,
+    "num_trees": 1
+  }
+}
