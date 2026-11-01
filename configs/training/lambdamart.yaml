@@ -1,0 +1,36 @@
+# LambdaMART (LightGBM LGBMRanker) - Phase 10-R2
+model:
+  name: lambdamart
+  framework: lightgbm
+  device: cpu  # LightGBM CPU执行
+  artifacts: [model.txt, feature_map.json, manifest.json]
+  
+  hyperparameters:
+    objective: lambdarank
+    metric: ndcg
+    boosting_type: gbdt
+    num_leaves: 63
+    learning_rate: 0.07
+    feature_fraction: 0.7
+    bagging_fraction: 0.8
+    bagging_freq: 5
+    num_boost_round: 500
+    early_stopping_rounds: 50
+    label_gain: [0, 1, 2, 3]
+
+labels:
+  mapping:
+    weak_positive: 1
+    medium_positive: 2
+    strong_positive: 3
+  unknown_label: error  # 未知标签报错，禁止静默映射
+
+query_groups:
+  source: candidate_id
+  validation: "sum(group_sizes) == len(X)"
+  sort: "X, y, groups must be co-sorted by candidate_id"
+
+evaluation:
+  protocols: [candidate_cold, job_cold, double_cold]
+  metrics: [ndcg@5, ndcg@10, mrr@5, recall@5, pairwise_accuracy]
+  test_usage: forbidden  # 禁止Test参与调参

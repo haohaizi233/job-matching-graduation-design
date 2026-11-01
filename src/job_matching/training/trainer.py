@@ -30,12 +30,19 @@ def set_seed(seed: int) -> None:
 
 
 def resolve_device(prefer_gpu: bool = True, gpu_budget_mb: int = 4094) -> torch.device:
-    if prefer_gpu and torch.cuda.is_available():
-        props = torch.cuda.get_device_properties(0)
-        free_mb = props.total_memory / (1024 ** 2)
-        if free_mb <= gpu_budget_mb * 1.5:   # 4GB 卡正常；仅当卡远小于预算时退回 CPU
+    """Auto-detect: CUDA > MPS > CPU. CPU fallback时打印明确日志。"""
+    import logging
+    log = logging.getLogger(__name__)
+    if prefer_gpu:
+        if torch.cuda.is_available():
+            log.info("device=cuda (%s)", torch.cuda.get_device_name(0))
             return torch.device("cuda")
-        return torch.device("cuda")
+        if hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+            log.info("device=mps (Apple Silicon GPU)")
+            return torch.device("mps")
+        log.warning("device=cpu (GPU fallback: CUDA/MPS均不可用)")
+    else:
+        log.info("device=cpu (prefer_gpu=False)")
     return torch.device("cpu")
 
 

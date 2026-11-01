@@ -670,9 +670,9 @@ def create_business_app(business: BusinessServices | None = None):
         async def serve_frontend(path: str):
             if path.startswith('api/'):
                 return {'detail': 'Not Found'}
-            # P0修复：防止目录穿越攻击
+            # P0-R2: Path.is_relative_to() 防目录穿越 + 符号链接
             file_path = (frontend_dist / path).resolve()
-            if not str(file_path).startswith(str(frontend_dist.resolve())):
+            if not file_path.is_relative_to(frontend_dist.resolve()):
                 return {'detail': 'Not Found'}
             if file_path.is_file():
                 return FileResponse(file_path)
