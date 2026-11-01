@@ -1,14 +1,25 @@
 {
-  "run_id": "phase7-reg-20261101-083840",
-  "git_sha": "765ac32e2b01141aa106e7a9d9b378aab766f195",
-  "python_version": "3.11.18",
-  "platform": "Windows-10-10.0.26200-SP0",
+  "run_id": "phase7-reg-20261101-091053",
+  "git_sha": "1b60d2b42388cbd61e4c7a3f712f3d1c590a2896",
+  "python_version": "3.13.2",
+  "python_full_version": "3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]",
+  "python_implementation": "CPython",
+  "actual_python_executable": "D:\\APP\\python 3.13.2\\python.exe",
+  "sys_argv": [
+    "tests/phase7/run_all.py"
+  ],
+  "working_directory": "D:\\desktop\\毕业设计",
+  "execution_command": "'D:\\APP\\python 3.13.2\\python.exe' tests/phase7/run_all.py",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "node_version": "n/a（Python 套件；前端 Node 版本见 frontend-ci 证据）",
+  "started_at": "2026-11-01T09:10:52",
+  "finished_at": "2026-11-01T09:10:53",
+  "seconds": 1.155,
+  "exit_code": 0,
   "dataset_version": "none (Phase7 真实 Gold 未建立；测试仅使用合成夹具)",
   "model_version": "n/a（本套件不加载模型权重）",
-  "execution_command": "py -3.13 tests/phase7/run_all.py",
-  "exit_code": 0,
   "counts": {
-    "PASS": 46,
+    "PASS": 52,
     "FAIL": 0,
     "ERROR": 0,
     "SKIP": 0,
@@ -17,58 +28,59 @@
   },
   "evidence_path": "reports/phase7/11-phase7-regression.json",
   "generated_by": "tests/phase7/run_all.py",
-  "generated_at": "2026-11-01T08:38:40",
+  "generated_at": "2026-11-01T09:10:53",
   "modules": [
     "test_annotation_drill",
     "test_model_artifact_guard",
     "test_preregistration",
+    "test_run_identity",
     "test_sample_size_planning"
   ],
-  "tests_run": 46,
-  "seconds": 0.275,
+  "tests_run": 52,
   "ok": true,
+  "not_ok_reasons": [],
   "load_errors": [],
   "records": [
     {
       "module": "test_annotation_drill",
       "test": "test_all_required_capabilities_covered (test_annotation_drill.TestAnnotationDrill.test_all_required_capabilities_covered)",
       "status": "PASS",
-      "ms": 0.062,
+      "ms": 0.068,
       "detail": ""
     },
     {
       "module": "test_annotation_drill",
       "test": "test_drill_is_explicitly_marked_synthetic (test_annotation_drill.TestAnnotationDrill.test_drill_is_explicitly_marked_synthetic)",
       "status": "PASS",
-      "ms": 0.026,
+      "ms": 0.029,
       "detail": ""
     },
     {
       "module": "test_annotation_drill",
       "test": "test_drill_overall_pass (test_annotation_drill.TestAnnotationDrill.test_drill_overall_pass)",
       "status": "PASS",
-      "ms": 0.025,
+      "ms": 0.029,
       "detail": ""
     },
     {
       "module": "test_annotation_drill",
       "test": "test_each_capability_passed (test_annotation_drill.TestAnnotationDrill.test_each_capability_passed)",
       "status": "PASS",
-      "ms": 0.043,
+      "ms": 0.036,
       "detail": ""
     },
     {
       "module": "test_annotation_drill",
       "test": "test_freeze_refused_without_real_data (test_annotation_drill.TestAnnotationDrill.test_freeze_refused_without_real_data)",
       "status": "PASS",
-      "ms": 0.264,
+      "ms": 0.249,
       "detail": ""
     },
     {
       "module": "test_annotation_drill",
       "test": "test_mirror_detection_flags_full_mirror_only (test_annotation_drill.TestAnnotationDrill.test_mirror_detection_flags_full_mirror_only)",
       "status": "PASS",
-      "ms": 0.473,
+      "ms": 0.438,
       "detail": ""
     },
     {
@@ -82,273 +94,315 @@
       "module": "test_annotation_drill",
       "test": "test_synthetic_pairs_never_gold (test_annotation_drill.TestAnnotationDrill.test_synthetic_pairs_never_gold)",
       "status": "PASS",
-      "ms": 0.192,
+      "ms": 0.169,
       "detail": ""
     },
     {
       "module": "test_annotation_drill",
       "test": "test_workspace_guard_blocks_real_data_dirs (test_annotation_drill.TestAnnotationDrill.test_workspace_guard_blocks_real_data_dirs)",
       "status": "PASS",
-      "ms": 28.083,
+      "ms": 31.806,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_content_tamper_detected_after_registration (test_model_artifact_guard.TestModelArtifactGuard.test_content_tamper_detected_after_registration)",
       "status": "PASS",
-      "ms": 5.385,
+      "ms": 7.556,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_load_event_not_recorded_on_refusal (test_model_artifact_guard.TestModelArtifactGuard.test_load_event_not_recorded_on_refusal)",
       "status": "PASS",
-      "ms": 3.734,
+      "ms": 3.785,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_load_ok_when_checksum_matches (test_model_artifact_guard.TestModelArtifactGuard.test_load_ok_when_checksum_matches)",
       "status": "PASS",
-      "ms": 4.21,
+      "ms": 3.726,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_load_refused_when_artifact_missing (test_model_artifact_guard.TestModelArtifactGuard.test_load_refused_when_artifact_missing)",
       "status": "PASS",
-      "ms": 1.694,
+      "ms": 2.43,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_load_refused_when_checksum_mismatched (test_model_artifact_guard.TestModelArtifactGuard.test_load_refused_when_checksum_mismatched)",
       "status": "PASS",
-      "ms": 6.531,
+      "ms": 5.135,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_no_artifacts_registered_skips_check (test_model_artifact_guard.TestModelArtifactGuard.test_no_artifacts_registered_skips_check)",
       "status": "PASS",
-      "ms": 1.954,
+      "ms": 1.693,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_no_sha256_registered_skips_check (test_model_artifact_guard.TestModelArtifactGuard.test_no_sha256_registered_skips_check)",
       "status": "PASS",
-      "ms": 3.254,
+      "ms": 2.494,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_untrusted_source_documented (test_model_artifact_guard.TestModelArtifactGuard.test_untrusted_source_documented)",
       "status": "PASS",
-      "ms": 2.157,
+      "ms": 1.975,
       "detail": ""
     },
     {
       "module": "test_model_artifact_guard",
       "test": "test_verify_can_be_disabled_explicitly (test_model_artifact_guard.TestModelArtifactGuard.test_verify_can_be_disabled_explicitly)",
       "status": "PASS",
-      "ms": 2.096,
+      "ms": 2.592,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_blind_test_unlock_requires_locked_model (test_preregistration.TestPreregistrationLock.test_blind_test_unlock_requires_locked_model)",
       "status": "PASS",
-      "ms": 0.754,
+      "ms": 0.903,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_blocked_marker_is_not_flagged (test_preregistration.TestPreregistrationLock.test_blocked_marker_is_not_flagged)",
       "status": "PASS",
-      "ms": 0.985,
+      "ms": 0.858,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_no_blind_test_outputs_exist (test_preregistration.TestPreregistrationLock.test_no_blind_test_outputs_exist)",
       "status": "PASS",
-      "ms": 3.057,
+      "ms": 1.997,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_no_downgrade_rule_present (test_preregistration.TestPreregistrationLock.test_no_downgrade_rule_present)",
       "status": "PASS",
-      "ms": 0.384,
+      "ms": 0.454,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_non_json_blind_output_always_flagged (test_preregistration.TestPreregistrationLock.test_non_json_blind_output_always_flagged)",
       "status": "PASS",
-      "ms": 2.95,
+      "ms": 3.415,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_not_computable_policy_forbids_fabrication (test_preregistration.TestPreregistrationLock.test_not_computable_policy_forbids_fabrication)",
       "status": "PASS",
-      "ms": 0.402,
+      "ms": 0.475,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_pinned_hash_matches_file (test_preregistration.TestPreregistrationLock.test_pinned_hash_matches_file)",
       "status": "PASS",
-      "ms": 0.264,
+      "ms": 0.273,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_primary_metric_is_ndcg_at_10 (test_preregistration.TestPreregistrationLock.test_primary_metric_is_ndcg_at_10)",
       "status": "PASS",
-      "ms": 0.334,
+      "ms": 0.337,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_protocol_file_exists (test_preregistration.TestPreregistrationLock.test_protocol_file_exists)",
       "status": "PASS",
-      "ms": 0.173,
+      "ms": 0.054,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_protocol_id_and_status_locked (test_preregistration.TestPreregistrationLock.test_protocol_id_and_status_locked)",
       "status": "PASS",
-      "ms": 0.328,
+      "ms": 0.345,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_real_results_file_would_be_flagged (test_preregistration.TestPreregistrationLock.test_real_results_file_would_be_flagged)",
       "status": "PASS",
-      "ms": 2.53,
+      "ms": 4.115,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_sidecar_lock_matches_file (test_preregistration.TestPreregistrationLock.test_sidecar_lock_matches_file)",
       "status": "PASS",
-      "ms": 0.622,
+      "ms": 1.048,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_split_is_group_level_by_resume (test_preregistration.TestPreregistrationLock.test_split_is_group_level_by_resume)",
       "status": "PASS",
-      "ms": 0.335,
+      "ms": 0.499,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_verify_script_detects_tampering (test_preregistration.TestPreregistrationLock.test_verify_script_detects_tampering)",
       "status": "PASS",
-      "ms": 12.733,
+      "ms": 10.155,
       "detail": ""
     },
     {
       "module": "test_preregistration",
       "test": "test_verify_script_passes (test_preregistration.TestPreregistrationLock.test_verify_script_passes)",
       "status": "PASS",
-      "ms": 4.651,
+      "ms": 3.309,
+      "detail": ""
+    },
+    {
+      "module": "test_run_identity",
+      "test": "test_report_status_count_consistency (test_run_identity.TestRunIdentity.test_report_status_count_consistency)",
+      "status": "PASS",
+      "ms": 225.646,
+      "detail": ""
+    },
+    {
+      "module": "test_run_identity",
+      "test": "test_run_identity_actual_interpreter (test_run_identity.TestRunIdentity.test_run_identity_actual_interpreter)",
+      "status": "PASS",
+      "ms": 114.116,
+      "detail": ""
+    },
+    {
+      "module": "test_run_identity",
+      "test": "test_run_identity_current_git_sha (test_run_identity.TestRunIdentity.test_run_identity_current_git_sha)",
+      "status": "PASS",
+      "ms": 199.824,
+      "detail": ""
+    },
+    {
+      "module": "test_run_identity",
+      "test": "test_runner_import_failure_nonzero (test_run_identity.TestRunIdentity.test_runner_import_failure_nonzero)",
+      "status": "PASS",
+      "ms": 140.237,
+      "detail": ""
+    },
+    {
+      "module": "test_run_identity",
+      "test": "test_runner_no_tests_discovered_nonzero (test_run_identity.TestRunIdentity.test_runner_no_tests_discovered_nonzero)",
+      "status": "PASS",
+      "ms": 156.64,
+      "detail": ""
+    },
+    {
+      "module": "test_run_identity",
+      "test": "test_runner_report_freshness (test_run_identity.TestRunIdentity.test_runner_report_freshness)",
+      "status": "PASS",
+      "ms": 123.933,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_all_planning_values_marked_as_assumptions (test_sample_size_planning.TestSampleSizePlanning.test_all_planning_values_marked_as_assumptions)",
       "status": "PASS",
-      "ms": 0.101,
+      "ms": 0.295,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_deterministic_output (test_sample_size_planning.TestSampleSizePlanning.test_deterministic_output)",
       "status": "PASS",
-      "ms": 0.476,
+      "ms": 1.078,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_mde_decreases_with_groups (test_sample_size_planning.TestSampleSizePlanning.test_mde_decreases_with_groups)",
       "status": "PASS",
-      "ms": 0.033,
+      "ms": 0.069,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_mde_formula_consistency (test_sample_size_planning.TestSampleSizePlanning.test_mde_formula_consistency)",
       "status": "PASS",
-      "ms": 0.034,
+      "ms": 0.154,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_mde_zero_groups_is_none (test_sample_size_planning.TestSampleSizePlanning.test_mde_zero_groups_is_none)",
       "status": "PASS",
-      "ms": 0.03,
+      "ms": 0.093,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_report_payload_is_planning_not_fact (test_sample_size_planning.TestSampleSizePlanning.test_report_payload_is_planning_not_fact)",
       "status": "PASS",
-      "ms": 0.996,
+      "ms": 3.059,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_required_groups_inverse_of_mde (test_sample_size_planning.TestSampleSizePlanning.test_required_groups_inverse_of_mde)",
       "status": "PASS",
-      "ms": 0.048,
+      "ms": 0.062,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_scenario_a_blind_groups_below_stability_threshold (test_sample_size_planning.TestSampleSizePlanning.test_scenario_a_blind_groups_below_stability_threshold)",
       "status": "PASS",
-      "ms": 0.049,
+      "ms": 0.055,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_scenario_b_meets_stability_threshold (test_sample_size_planning.TestSampleSizePlanning.test_scenario_b_meets_stability_threshold)",
       "status": "PASS",
-      "ms": 0.037,
+      "ms": 0.038,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_scenario_c_has_smallest_mde (test_sample_size_planning.TestSampleSizePlanning.test_scenario_c_has_smallest_mde)",
       "status": "PASS",
-      "ms": 0.043,
+      "ms": 0.053,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_split_groups_sums_to_total (test_sample_size_planning.TestSampleSizePlanning.test_split_groups_sums_to_total)",
       "status": "PASS",
-      "ms": 0.028,
+      "ms": 0.035,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_split_is_group_level_not_pair_level (test_sample_size_planning.TestSampleSizePlanning.test_split_is_group_level_not_pair_level)",
       "status": "PASS",
-      "ms": 0.031,
+      "ms": 0.037,
       "detail": ""
     },
     {
       "module": "test_sample_size_planning",
       "test": "test_unjudgeable_sensitivity_monotone (test_sample_size_planning.TestSampleSizePlanning.test_unjudgeable_sensitivity_monotone)",
       "status": "PASS",
-      "ms": 0.044,
+      "ms": 0.046,
       "detail": ""
     }
   ]

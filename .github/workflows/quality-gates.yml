@@ -153,6 +153,75 @@ jobs:
             reports/phase6-r/06-phase6-regression.md
           if-no-files-found: warn
 
+  # ======================= Phase7 门禁（B1）=======================
+  # Phase7 纯软件协议测试统一验收：干净 checkout 即可执行——
+  #   * 协议预注册锁定与 SHA-256 校验（configs/phase7-preregistered-protocol-v1.json）；
+  #   * 样本规模规划确定性、盲标注工具链演练（合成夹具，不冒充真人标注）；
+  #   * 模型产物哈希防篡改（MODEL_ARTIFACT_TAMPERED 503 契约）；
+  #   * 未授权数据拒绝 / 禁止提前输出正式盲测结果；
+  #   * 盲测状态机（合法解锁一次、拒绝伪造/重复/跳步）；
+  #   * 运行器身份与报告一致性（执行证据取自真实进程，零测试发现显式失败）。
+  # 纪律：不读取 data/private/（干净 checkout 中不存在且显式断言）；
+  #       不依赖真实简历 / GPU / BGE 权重 / 本地账号；测试失败真实非零退出。
+  phase7-gates:
+    runs-on: ubuntu-latest
+    env:
+      JM_RUN_ID: phase7-${{ github.run_id }}-${{ github.run_attempt }}
+      PYTHONUTF8: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 依赖安装（服务/测试最小集，版本固定）
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.4 pandas==2.2.3 scikit-learn==1.5.2 joblib==1.4.2 \
+                      pyyaml==6.0.2 fastapi==0.115.6 pydantic==2.10.4 uvicorn==0.34.0 \
+                      httpx==0.28.1 pymupdf==1.24.14 python-docx==1.1.2 \
+                      sqlalchemy==2.0.36 alembic==1.14.0 argon2-cffi==23.1.0 \
+                      python-multipart==0.0.20 jieba==0.42.1
+
+      - name: 隐私边界检查（干净 checkout 不含 data/private 真实数据）
+        run: |
+          if [ -d data/private ]; then
+            echo "::error::data/private 不应进入仓库 checkout（真实简历/授权文件禁止入 CI）"
+            exit 1
+          fi
+          echo "data/private 不存在：干净 checkout 不含真实人工数据"
+
+      - name: 语法与导入检查
+        run: python -m compileall -q src scripts tests/phase7
+
+      - name: Phase7 统一验收（run_all.py，失败/零测试发现非零退出）
+        run: python tests/phase7/run_all.py
+
+      - name: 运行身份一致性校验（拒绝硬编码执行命令 / 旧报告）
+        run: |
+          python - <<'PY'
+          import json, platform, sys, pathlib
+          p = json.loads(pathlib.Path("reports/phase7/11-phase7-regression.json").read_text(encoding="utf-8"))
+          assert p["actual_python_executable"] == sys.executable, (p["actual_python_executable"], sys.executable)
+          assert p["python_version"] == platform.python_version()
+          assert "py -3.13" not in p["execution_command"]
+          assert p["git_sha"] != "UNKNOWN"
+          assert p["exit_code"] == 0 and p["ok"] is True, p.get("not_ok_reasons")
+          assert p["tests_run"] > 0, "零测试发现不得判定为通过"
+          print("运行身份一致：", p["execution_command"], p["python_version"])
+          PY
+
+      - name: 上传 Phase7 证据（逐项结果 JSON/Markdown，失败同样保留）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase7-evidence
+          path: |
+            reports/phase7/11-phase7-regression.json
+            reports/phase7/11-phase7-regression.md
+          if-no-files-found: warn
+
   # ======================= Frontend CI =======================
   # 前端质量门禁：依赖安装 / 类型检查 / 生产构建（不含真实业务数据）。
   frontend-ci:
