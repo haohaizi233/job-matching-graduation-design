@@ -1,0 +1,136 @@
+{
+  "cat_vocabs": {
+    "inferred_category": [
+      "BUSINESS-DEVELOPMENT",
+      "FINANCE",
+      "HR",
+      "INFORMATION-TECHNOLOGY",
+      "SALES",
+      "UNKNOWN",
+      "__OOV__"
+    ],
+    "job_category": [
+      "BUSINESS-DEVELOPMENT",
+      "FINANCE",
+      "HR",
+      "INFORMATION-TECHNOLOGY",
+      "SALES",
+      "__OOV__"
+    ],
+    "target_position_norm": [
+      "AI Engineer",
+      "Asst. Manager/ Manger (Administrative)",
+      "Business Development Executive",
+      "Civil Engineer",
+      "Data Engineer",
+      "Data Science Engineer",
+      "Database Administrator (DBA)",
+      "DevOps Engineer",
+      "Executive - VAT",
+      "Executive/ Senior Executive- Trade Marketing, Hygiene Products",
+      "Executive/ Sr. Executive -IT",
+      "Full Stack Developer (Python,React js)",
+      "HR Officer",
+      "Head of Internal Control & Compliance (ICC) - SEVP/DMD",
+      "Intern (Generative AI Engineering - 2D/3D Image Generation)",
+      "Machine Learning (ML) Engineer",
+      "Management Trainee - Mechanical",
+      "Manager- Human Resource Management (HRM)",
+      "Marketing Officer",
+      "Mechanical Designer",
+      "Mechanical Engineer",
+      "Network Support Engineer",
+      "Project Coordinator (Civil)",
+      "Senior Software Engineer",
+      "Senior iOS Engineer",
+      "Site Engineer",
+      "Sr.Officer / Executive - Internal Audit",
+      "System Administrator (Operation & Maintenance of Server, Storage & Service Desk System)",
+      "__OOV__"
+    ]
+  },
+  "feature_names": [
+    "position_token_overlap",
+    "target_position_norm=AI Engineer",
+    "target_position_norm=Asst. Manager/ Manger (Administrative)",
+    "target_position_norm=Business Development Executive",
+    "target_position_norm=Civil Engineer",
+    "target_position_norm=Data Engineer",
+    "target_position_norm=Data Science Engineer",
+    "target_position_norm=Database Administrator (DBA)",
+    "target_position_norm=DevOps Engineer",
+    "target_position_norm=Executive - VAT",
+    "target_position_norm=Executive/ Senior Executive- Trade Marketing, Hygiene Products",
+    "target_position_norm=Executive/ Sr. Executive -IT",
+    "target_position_norm=Full Stack Developer (Python,React js)",
+    "target_position_norm=HR Officer",
+    "target_position_norm=Head of Internal Control & Compliance (ICC) - SEVP/DMD",
+    "target_position_norm=Intern (Generative AI Engineering - 2D/3D Image Generation)",
+    "target_position_norm=Machine Learning (ML) Engineer",
+    "target_position_norm=Management Trainee - Mechanical",
+    "target_position_norm=Manager- Human Resource Management (HRM)",
+    "target_position_norm=Marketing Officer",
+    "target_position_norm=Mechanical Designer",
+    "target_position_norm=Mechanical Engineer",
+    "target_position_norm=Network Support Engineer",
+    "target_position_norm=Project Coordinator (Civil)",
+    "target_position_norm=Senior Software Engineer",
+    "target_position_norm=Senior iOS Engineer",
+    "target_position_norm=Site Engineer",
+    "target_position_norm=Sr.Officer / Executive - Internal Audit",
+    "target_position_norm=System Administrator (Operation & Maintenance of Server, Storage & Service Desk System)",
+    "target_position_norm=__OOV__",
+    "category_match",
+    "inferred_category=BUSINESS-DEVELOPMENT",
+    "inferred_category=FINANCE",
+    "inferred_category=HR",
+    "inferred_category=INFORMATION-TECHNOLOGY",
+    "inferred_category=SALES",
+    "inferred_category=UNKNOWN",
+    "inferred_category=__OOV__",
+    "job_category=BUSINESS-DEVELOPMENT",
+    "job_category=FINANCE",
+    "job_category=HR",
+    "job_category=INFORMATION-TECHNOLOGY",
+    "job_category=SALES",
+    "job_category=__OOV__",
+    "years_experience"
+  ],
+  "group_order": [
+    "skill",
+    "position",
+    "category",
+    "experience"
+  ],
+  "groups_enabled": [
+    "position",
+    "category",
+    "experience"
+  ],
+  "num_stats": {
+    "category_match": {
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "position_token_overlap": {
+      "mean": 0.0,
+      "std": 1.0
+    },
+    "years_experience": {
+      "mean": 6.3618623060522905,
+      "std": 4.707761644615258
+    }
+  },
+  "raw_columns": [
+    "position_token_overlap",
+    "target_position_norm",
+    "category_match",
+    "inferred_category",
+    "job_category",
+    "years_experience"
+  ],
+  "standardize_columns": [
+    "years_experience"
+  ],
+  "task": "match_ranking"
+}

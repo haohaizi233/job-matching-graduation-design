@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-28T23:36:50",
+  "created_at": "2026-11-01T18:29:48",
   "label_order": [
     "博士",
     "硕士",
@@ -19,7 +19,7 @@
     }
   },
   "run_id": "charcnn-final-highconf-20261028-221117",
-  "seconds": 1.04,
+  "seconds": 2.01,
   "sets": {
     "gold_holdout_human": {
       "confusion_counts": {

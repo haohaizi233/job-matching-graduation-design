@@ -1,6 +1,6 @@
 # 第四阶段 4.1 · 人岗匹配模型训练报告
 
-- 生成时间：2026-10-28 21:05:09
+- 生成时间：2026-11-01 18:30:28
 - 数据版本：`dv-0ce28fa6b560`；协议：candidate_cold / job_cold / double_cold
 - 排序查询单位：`candidate_id`（为一个候选人对其候选岗位排序）
 - 模型选择指标：`ndcg_at_5_ordinal`（只看 validation）
@@ -30,8 +30,8 @@
 | position_token_overlap | 0.988851 | 0.992933 | 0.957734 | 0.970658 | 0.568013 | 第三阶段报告 |
 | **ridge** | 0.984742 | 0.989951 | 0.933519 | 0.951504 | 0.647969 | 本阶段训练 |
 | **gradient_boosting** | 0.989186 | 0.992405 | 0.951459 | 0.962028 | 0.688223 | 本阶段训练 |
-| **mlp** | 0.985708 | 0.990462 | 0.937207 | 0.953482 | 0.656489 | 本阶段训练 |
-| **ranknet** | 0.988734 | 0.992127 | 0.953234 | 0.962594 | 0.689755 | 本阶段训练 |
+| **mlp** | 0.985695 | 0.990457 | 0.937135 | 0.953435 | 0.656505 | 本阶段训练 |
+| **ranknet** | 0.988493 | 0.992037 | 0.952779 | 0.962441 | 0.682722 | 本阶段训练 |
 
 ### 协议 candidate_cold / test
 
@@ -41,18 +41,18 @@
 | embedding_cosine | 0.967769 | 0.978857 | 0.885507 | 0.917631 | 0.584319 | 第三阶段报告 |
 | skill_jaccard | 0.973981 | 0.983967 | 0.905417 | 0.934932 | 0.548965 | 第三阶段报告 |
 | position_token_overlap | 0.989070 | 0.993119 | 0.957500 | 0.970166 | 0.567734 | 第三阶段报告 |
-| **ridge** | 0.985462 | 0.990361 | 0.938592 | 0.953388 | 0.657655 | 本阶段训练 |
+| **ridge** | 0.985467 | 0.990364 | 0.938592 | 0.953388 | 0.657666 | 本阶段训练 |
 | **gradient_boosting** | 0.989550 | 0.992824 | 0.955922 | 0.965210 | 0.700872 | 本阶段训练 |
-| **mlp** | 0.986162 | 0.990746 | 0.940522 | 0.954617 | 0.665079 | 本阶段训练 |
-| **ranknet** | 0.988916 | 0.992221 | 0.956469 | 0.963777 | 0.692953 | 本阶段训练 |
+| **mlp** | 0.986171 | 0.990745 | 0.940632 | 0.954636 | 0.664849 | 本阶段训练 |
+| **ranknet** | 0.988496 | 0.992166 | 0.955752 | 0.963915 | 0.689253 | 本阶段训练 |
 
 ## 高分基线（Position Token Overlap）问题分析
 
 
-- **gradient_boosting**：ordinal NDCG@5 = 0.955922，相对 Position Token Overlap 差 -0.001578；95% CI [-0.007003, 0.003478]，不显著；单对推理 0.00000602s。
-- **mlp**：ordinal NDCG@5 = 0.940522，相对 Position Token Overlap 差 -0.016978；95% CI [-0.022558, -0.011641]，显著；单对推理 0.00000034s。
-- **ranknet**：ordinal NDCG@5 = 0.956469，相对 Position Token Overlap 差 -0.001031；95% CI [-0.006389, 0.004426]，不显著；单对推理 0.00000037s。
-- **ridge**：ordinal NDCG@5 = 0.938592，相对 Position Token Overlap 差 -0.018908；95% CI [-0.024422, -0.013308]，显著；单对推理 0.00000008s。
+- **gradient_boosting**：ordinal NDCG@5 = 0.955922，相对 Position Token Overlap 差 -0.001578；95% CI [-0.007003, 0.003478]，不显著；单对推理 0.00000943s。
+- **mlp**：ordinal NDCG@5 = 0.940632，相对 Position Token Overlap 差 -0.016868；95% CI [-0.02249, -0.011614]，显著；单对推理 0.00000014s。
+- **ranknet**：ordinal NDCG@5 = 0.955752，相对 Position Token Overlap 差 -0.001748；95% CI [-0.007037, 0.003547]，不显著；单对推理 0.00000015s。
+- **ridge**：ordinal NDCG@5 = 0.938592，相对 Position Token Overlap 差 -0.018908；95% CI [-0.024422, -0.013308]，显著；单对推理 0.00000003s。
 
 判定口径：① 绝对提升是否 > Bootstrap 置信区间下界；② 是否以明显更慢的推理与更复杂的模型为代价；③ 若无显著提升，应解释为「模型只学到代理评分系统中已被 position_token_overlap 等简单特征覆盖的部分」，而不是宣称模型无效或有效。
 
@@ -62,15 +62,15 @@
 
 | 协议 | 模型 | 对比基线 | 指标 | 均值差 | 95% CI | 显著 |
 |---|---|---|---|---:|---|---|
-| candidate_cold | ridge | random_ranking | ndcg@5_score | 0.026118 | [0.024233, 0.028053] | 是 |
+| candidate_cold | ridge | random_ranking | ndcg@5_score | 0.026123 | [0.024237, 0.028062] | 是 |
 | candidate_cold | ridge | random_ranking | ndcg@5_ordinal | 0.083139 | [0.074982, 0.091676] | 是 |
-| candidate_cold | ridge | random_ranking | pairwise_accuracy | 0.153048 | [0.13833, 0.16774] | 是 |
-| candidate_cold | ridge | skill_jaccard | ndcg@5_score | 0.011482 | [0.010058, 0.012924] | 是 |
+| candidate_cold | ridge | random_ranking | pairwise_accuracy | 0.15306 | [0.13833, 0.167763] | 是 |
+| candidate_cold | ridge | skill_jaccard | ndcg@5_score | 0.011486 | [0.010058, 0.012924] | 是 |
 | candidate_cold | ridge | skill_jaccard | ndcg@5_ordinal | 0.033175 | [0.02746, 0.039217] | 是 |
-| candidate_cold | ridge | skill_jaccard | pairwise_accuracy | 0.10869 | [0.098168, 0.119259] | 是 |
-| candidate_cold | ridge | position_token_overlap | ndcg@5_score | -0.003608 | [-0.004707, -0.002383] | 是 |
+| candidate_cold | ridge | skill_jaccard | pairwise_accuracy | 0.108701 | [0.098169, 0.119259] | 是 |
+| candidate_cold | ridge | position_token_overlap | ndcg@5_score | -0.003603 | [-0.004699, -0.002375] | 是 |
 | candidate_cold | ridge | position_token_overlap | ndcg@5_ordinal | -0.018908 | [-0.024422, -0.013308] | 是 |
-| candidate_cold | ridge | position_token_overlap | pairwise_accuracy | 0.089921 | [0.079294, 0.100314] | 是 |
+| candidate_cold | ridge | position_token_overlap | pairwise_accuracy | 0.089932 | [0.079294, 0.100314] | 是 |
 | candidate_cold | gradient_boosting | random_ranking | ndcg@5_score | 0.030206 | [0.028352, 0.032054] | 是 |
 | candidate_cold | gradient_boosting | random_ranking | ndcg@5_ordinal | 0.100468 | [0.093052, 0.108073] | 是 |
 | candidate_cold | gradient_boosting | random_ranking | pairwise_accuracy | 0.196265 | [0.182249, 0.210885] | 是 |
@@ -80,24 +80,24 @@
 | candidate_cold | gradient_boosting | position_token_overlap | ndcg@5_score | 0.00048 | [-0.000586, 0.001589] | 否 |
 | candidate_cold | gradient_boosting | position_token_overlap | ndcg@5_ordinal | -0.001579 | [-0.007003, 0.003478] | 否 |
 | candidate_cold | gradient_boosting | position_token_overlap | pairwise_accuracy | 0.133138 | [0.122551, 0.142951] | 是 |
-| candidate_cold | mlp | random_ranking | ndcg@5_score | 0.026818 | [0.02499, 0.028759] | 是 |
-| candidate_cold | mlp | random_ranking | ndcg@5_ordinal | 0.085069 | [0.076885, 0.093115] | 是 |
-| candidate_cold | mlp | random_ranking | pairwise_accuracy | 0.160472 | [0.145829, 0.176114] | 是 |
-| candidate_cold | mlp | skill_jaccard | ndcg@5_score | 0.012182 | [0.010757, 0.013665] | 是 |
-| candidate_cold | mlp | skill_jaccard | ndcg@5_ordinal | 0.035105 | [0.029297, 0.041023] | 是 |
-| candidate_cold | mlp | skill_jaccard | pairwise_accuracy | 0.116114 | [0.105766, 0.126713] | 是 |
-| candidate_cold | mlp | position_token_overlap | ndcg@5_score | -0.002908 | [-0.00395, -0.001672] | 是 |
-| candidate_cold | mlp | position_token_overlap | ndcg@5_ordinal | -0.016978 | [-0.022558, -0.011641] | 是 |
-| candidate_cold | mlp | position_token_overlap | pairwise_accuracy | 0.097345 | [0.087372, 0.107136] | 是 |
-| candidate_cold | ranknet | random_ranking | ndcg@5_score | 0.029572 | [0.02768, 0.031475] | 是 |
-| candidate_cold | ranknet | random_ranking | ndcg@5_ordinal | 0.101016 | [0.093438, 0.108939] | 是 |
-| candidate_cold | ranknet | random_ranking | pairwise_accuracy | 0.188346 | [0.174462, 0.202646] | 是 |
-| candidate_cold | ranknet | skill_jaccard | ndcg@5_score | 0.014935 | [0.013512, 0.016354] | 是 |
-| candidate_cold | ranknet | skill_jaccard | ndcg@5_ordinal | 0.051052 | [0.045497, 0.057024] | 是 |
-| candidate_cold | ranknet | skill_jaccard | pairwise_accuracy | 0.143988 | [0.132186, 0.155721] | 是 |
-| candidate_cold | ranknet | position_token_overlap | ndcg@5_score | -0.000154 | [-0.001245, 0.001084] | 否 |
-| candidate_cold | ranknet | position_token_overlap | ndcg@5_ordinal | -0.001031 | [-0.006389, 0.004426] | 否 |
-| candidate_cold | ranknet | position_token_overlap | pairwise_accuracy | 0.125219 | [0.114925, 0.135912] | 是 |
+| candidate_cold | mlp | random_ranking | ndcg@5_score | 0.026827 | [0.025, 0.028779] | 是 |
+| candidate_cold | mlp | random_ranking | ndcg@5_ordinal | 0.085179 | [0.077081, 0.093185] | 是 |
+| candidate_cold | mlp | random_ranking | pairwise_accuracy | 0.160242 | [0.145636, 0.175764] | 是 |
+| candidate_cold | mlp | skill_jaccard | ndcg@5_score | 0.01219 | [0.010784, 0.013667] | 是 |
+| candidate_cold | mlp | skill_jaccard | ndcg@5_ordinal | 0.035215 | [0.029432, 0.041036] | 是 |
+| candidate_cold | mlp | skill_jaccard | pairwise_accuracy | 0.115884 | [0.10557, 0.126292] | 是 |
+| candidate_cold | mlp | position_token_overlap | ndcg@5_score | -0.002899 | [-0.003945, -0.001665] | 是 |
+| candidate_cold | mlp | position_token_overlap | ndcg@5_ordinal | -0.016868 | [-0.02249, -0.011614] | 是 |
+| candidate_cold | mlp | position_token_overlap | pairwise_accuracy | 0.097115 | [0.087074, 0.106882] | 是 |
+| candidate_cold | ranknet | random_ranking | ndcg@5_score | 0.029152 | [0.027309, 0.031038] | 是 |
+| candidate_cold | ranknet | random_ranking | ndcg@5_ordinal | 0.100299 | [0.092926, 0.108406] | 是 |
+| candidate_cold | ranknet | random_ranking | pairwise_accuracy | 0.184646 | [0.17109, 0.199407] | 是 |
+| candidate_cold | ranknet | skill_jaccard | ndcg@5_score | 0.014516 | [0.013063, 0.015925] | 是 |
+| candidate_cold | ranknet | skill_jaccard | ndcg@5_ordinal | 0.050335 | [0.044752, 0.056058] | 是 |
+| candidate_cold | ranknet | skill_jaccard | pairwise_accuracy | 0.140288 | [0.128661, 0.152948] | 是 |
+| candidate_cold | ranknet | position_token_overlap | ndcg@5_score | -0.000574 | [-0.001679, 0.00059] | 否 |
+| candidate_cold | ranknet | position_token_overlap | ndcg@5_ordinal | -0.001748 | [-0.007037, 0.003547] | 否 |
+| candidate_cold | ranknet | position_token_overlap | pairwise_accuracy | 0.121519 | [0.110742, 0.132295] | 是 |
 | job_cold | ridge | random_ranking | ndcg@5_score | 0.006792 | [0.006397, 0.007224] | 是 |
 | job_cold | ridge | random_ranking | ndcg@5_ordinal | 0.02277 | [0.02077, 0.024848] | 是 |
 | job_cold | ridge | random_ranking | pairwise_accuracy | 0.199375 | [0.181683, 0.217749] | 是 |
@@ -116,24 +116,24 @@
 | job_cold | gradient_boosting | position_token_overlap | ndcg@5_score | -0.001227 | [-0.001442, -0.001015] | 是 |
 | job_cold | gradient_boosting | position_token_overlap | ndcg@5_ordinal | -0.006634 | [-0.007813, -0.005365] | 是 |
 | job_cold | gradient_boosting | position_token_overlap | pairwise_accuracy | 0.093024 | [0.081482, 0.103952] | 是 |
-| job_cold | mlp | random_ranking | ndcg@5_score | 0.00665 | [0.00626, 0.007086] | 是 |
-| job_cold | mlp | random_ranking | ndcg@5_ordinal | 0.022398 | [0.020451, 0.024452] | 是 |
-| job_cold | mlp | random_ranking | pairwise_accuracy | 0.190994 | [0.173677, 0.208506] | 是 |
-| job_cold | mlp | skill_jaccard | ndcg@5_score | 0.001978 | [0.001715, 0.002221] | 是 |
-| job_cold | mlp | skill_jaccard | ndcg@5_ordinal | 0.009773 | [0.008423, 0.011167] | 是 |
-| job_cold | mlp | skill_jaccard | pairwise_accuracy | 0.150058 | [0.137792, 0.161583] | 是 |
-| job_cold | mlp | position_token_overlap | ndcg@5_score | -0.001316 | [-0.001536, -0.0011] | 是 |
-| job_cold | mlp | position_token_overlap | ndcg@5_ordinal | -0.007794 | [-0.009127, -0.006556] | 是 |
-| job_cold | mlp | position_token_overlap | pairwise_accuracy | 0.089785 | [0.079162, 0.100935] | 是 |
-| job_cold | ranknet | random_ranking | ndcg@5_score | 0.006427 | [0.006008, 0.006833] | 是 |
-| job_cold | ranknet | random_ranking | ndcg@5_ordinal | 0.022392 | [0.020461, 0.02436] | 是 |
-| job_cold | ranknet | random_ranking | pairwise_accuracy | 0.190027 | [0.171428, 0.207804] | 是 |
-| job_cold | ranknet | skill_jaccard | ndcg@5_score | 0.001756 | [0.001477, 0.002017] | 是 |
-| job_cold | ranknet | skill_jaccard | ndcg@5_ordinal | 0.009767 | [0.008344, 0.011162] | 是 |
-| job_cold | ranknet | skill_jaccard | pairwise_accuracy | 0.149091 | [0.134801, 0.161424] | 是 |
-| job_cold | ranknet | position_token_overlap | ndcg@5_score | -0.001538 | [-0.001787, -0.001282] | 是 |
-| job_cold | ranknet | position_token_overlap | ndcg@5_ordinal | -0.0078 | [-0.009111, -0.006488] | 是 |
-| job_cold | ranknet | position_token_overlap | pairwise_accuracy | 0.088818 | [0.077678, 0.099864] | 是 |
+| job_cold | mlp | random_ranking | ndcg@5_score | 0.006632 | [0.006244, 0.007073] | 是 |
+| job_cold | mlp | random_ranking | ndcg@5_ordinal | 0.022368 | [0.020431, 0.024427] | 是 |
+| job_cold | mlp | random_ranking | pairwise_accuracy | 0.190774 | [0.173247, 0.208128] | 是 |
+| job_cold | mlp | skill_jaccard | ndcg@5_score | 0.00196 | [0.001694, 0.0022] | 是 |
+| job_cold | mlp | skill_jaccard | ndcg@5_ordinal | 0.009743 | [0.008439, 0.011113] | 是 |
+| job_cold | mlp | skill_jaccard | pairwise_accuracy | 0.149838 | [0.137723, 0.161478] | 是 |
+| job_cold | mlp | position_token_overlap | ndcg@5_score | -0.001333 | [-0.001557, -0.001115] | 是 |
+| job_cold | mlp | position_token_overlap | ndcg@5_ordinal | -0.007824 | [-0.009162, -0.006593] | 是 |
+| job_cold | mlp | position_token_overlap | pairwise_accuracy | 0.089566 | [0.078933, 0.100938] | 是 |
+| job_cold | ranknet | random_ranking | ndcg@5_score | 0.006464 | [0.006071, 0.006884] | 是 |
+| job_cold | ranknet | random_ranking | ndcg@5_ordinal | 0.022687 | [0.020675, 0.024703] | 是 |
+| job_cold | ranknet | random_ranking | pairwise_accuracy | 0.191002 | [0.173244, 0.208508] | 是 |
+| job_cold | ranknet | skill_jaccard | ndcg@5_score | 0.001793 | [0.001535, 0.002052] | 是 |
+| job_cold | ranknet | skill_jaccard | ndcg@5_ordinal | 0.010061 | [0.008645, 0.011481] | 是 |
+| job_cold | ranknet | skill_jaccard | pairwise_accuracy | 0.150067 | [0.136877, 0.162619] | 是 |
+| job_cold | ranknet | position_token_overlap | ndcg@5_score | -0.001501 | [-0.001733, -0.001259] | 是 |
+| job_cold | ranknet | position_token_overlap | ndcg@5_ordinal | -0.007506 | [-0.008838, -0.006203] | 是 |
+| job_cold | ranknet | position_token_overlap | pairwise_accuracy | 0.089794 | [0.078298, 0.100627] | 是 |
 | double_cold | ridge | random_ranking | ndcg@5_score | 0.005437 | [0.004506, 0.006426] | 是 |
 | double_cold | ridge | random_ranking | ndcg@5_ordinal | 0.017144 | [0.011968, 0.022252] | 是 |
 | double_cold | ridge | random_ranking | pairwise_accuracy | 0.119736 | [0.083677, 0.157498] | 是 |
@@ -152,21 +152,21 @@
 | double_cold | gradient_boosting | position_token_overlap | ndcg@5_score | -0.001701 | [-0.002342, -0.0011] | 是 |
 | double_cold | gradient_boosting | position_token_overlap | ndcg@5_ordinal | -0.014862 | [-0.018556, -0.011021] | 是 |
 | double_cold | gradient_boosting | position_token_overlap | pairwise_accuracy | 0.07119 | [0.04509, 0.096605] | 是 |
-| double_cold | mlp | random_ranking | ndcg@5_score | 0.004932 | [0.004002, 0.005941] | 是 |
-| double_cold | mlp | random_ranking | ndcg@5_ordinal | 0.015717 | [0.010831, 0.020934] | 是 |
-| double_cold | mlp | random_ranking | pairwise_accuracy | 0.102687 | [0.065498, 0.142156] | 是 |
-| double_cold | mlp | skill_jaccard | ndcg@5_score | 0.001151 | [0.000618, 0.001766] | 是 |
-| double_cold | mlp | skill_jaccard | ndcg@5_ordinal | 0.003782 | [0.001168, 0.006697] | 是 |
-| double_cold | mlp | skill_jaccard | pairwise_accuracy | 0.067884 | [0.047894, 0.091152] | 是 |
-| double_cold | mlp | position_token_overlap | ndcg@5_score | -0.002171 | [-0.002833, -0.001569] | 是 |
-| double_cold | mlp | position_token_overlap | ndcg@5_ordinal | -0.016003 | [-0.019678, -0.012419] | 是 |
-| double_cold | mlp | position_token_overlap | pairwise_accuracy | 0.053207 | [0.027774, 0.078221] | 是 |
-| double_cold | ranknet | random_ranking | ndcg@5_score | 0.005268 | [0.004318, 0.00626] | 是 |
-| double_cold | ranknet | random_ranking | ndcg@5_ordinal | 0.01868 | [0.013926, 0.02378] | 是 |
-| double_cold | ranknet | random_ranking | pairwise_accuracy | 0.129442 | [0.093406, 0.167175] | 是 |
-| double_cold | ranknet | skill_jaccard | ndcg@5_score | 0.001487 | [0.000968, 0.002086] | 是 |
-| double_cold | ranknet | skill_jaccard | ndcg@5_ordinal | 0.006746 | [0.003755, 0.009883] | 是 |
-| double_cold | ranknet | skill_jaccard | pairwise_accuracy | 0.094639 | [0.070749, 0.117399] | 是 |
-| double_cold | ranknet | position_token_overlap | ndcg@5_score | -0.001835 | [-0.002414, -0.001262] | 是 |
-| double_cold | ranknet | position_token_overlap | ndcg@5_ordinal | -0.01304 | [-0.016707, -0.00938] | 是 |
-| double_cold | ranknet | position_token_overlap | pairwise_accuracy | 0.079962 | [0.05256, 0.104061] | 是 |
+| double_cold | mlp | random_ranking | ndcg@5_score | 0.005373 | [0.004451, 0.006386] | 是 |
+| double_cold | mlp | random_ranking | ndcg@5_ordinal | 0.017595 | [0.012721, 0.022804] | 是 |
+| double_cold | mlp | random_ranking | pairwise_accuracy | 0.118156 | [0.083079, 0.156511] | 是 |
+| double_cold | mlp | skill_jaccard | ndcg@5_score | 0.001591 | [0.001083, 0.002155] | 是 |
+| double_cold | mlp | skill_jaccard | ndcg@5_ordinal | 0.005661 | [0.002837, 0.008604] | 是 |
+| double_cold | mlp | skill_jaccard | pairwise_accuracy | 0.083353 | [0.061027, 0.106595] | 是 |
+| double_cold | mlp | position_token_overlap | ndcg@5_score | -0.001731 | [-0.002227, -0.001202] | 是 |
+| double_cold | mlp | position_token_overlap | ndcg@5_ordinal | -0.014125 | [-0.017553, -0.01091] | 是 |
+| double_cold | mlp | position_token_overlap | pairwise_accuracy | 0.068676 | [0.044328, 0.093538] | 是 |
+| double_cold | ranknet | random_ranking | ndcg@5_score | 0.005459 | [0.004559, 0.006464] | 是 |
+| double_cold | ranknet | random_ranking | ndcg@5_ordinal | 0.019361 | [0.014702, 0.024313] | 是 |
+| double_cold | ranknet | random_ranking | pairwise_accuracy | 0.129509 | [0.093584, 0.168144] | 是 |
+| double_cold | ranknet | skill_jaccard | ndcg@5_score | 0.001677 | [0.001188, 0.002278] | 是 |
+| double_cold | ranknet | skill_jaccard | ndcg@5_ordinal | 0.007426 | [0.00462, 0.01057] | 是 |
+| double_cold | ranknet | skill_jaccard | pairwise_accuracy | 0.094705 | [0.071705, 0.118645] | 是 |
+| double_cold | ranknet | position_token_overlap | ndcg@5_score | -0.001645 | [-0.002189, -0.001125] | 是 |
+| double_cold | ranknet | position_token_overlap | ndcg@5_ordinal | -0.012359 | [-0.015975, -0.008665] | 是 |
+| double_cold | ranknet | position_token_overlap | pairwise_accuracy | 0.080029 | [0.054013, 0.104017] | 是 |

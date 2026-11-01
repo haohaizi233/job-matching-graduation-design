@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-28T23:39:42",
+  "created_at": "2026-11-01T18:31:11",
   "label_order": [
     "博士",
     "硕士",
@@ -19,7 +19,7 @@
     }
   },
   "run_id": "tfidf-final-title-20261028-212332",
-  "seconds": 1.58,
+  "seconds": 0.9,
   "sets": {
     "gold_holdout_human": {
       "confusion_counts": {
@@ -485,7 +485,7 @@
       },
       "group_level": {
         "group_macro_exact_match": 0.77462,
-        "group_modal_match_rate": 0.846154,
+        "group_modal_match_rate": 0.865385,
         "groups": 52
       },
       "hamming_loss": 0.141099,

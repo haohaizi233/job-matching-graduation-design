@@ -1,0 +1,339 @@
+{
+  "artifacts": [
+    "model.pt",
+    "checkpoint_best.pt",
+    "tokenizer.json",
+    "manifest.json",
+    "config.json",
+    "metrics.json",
+    "thresholds.json",
+    "feature_map.json",
+    "history.json"
+  ],
+  "created_at": "2026-11-01T18:18:07",
+  "data": {
+    "dataset_version_note": "数据版本见 reports/phase3-preprocessing-summary.json（dv-0ce28fa6b560）",
+    "eval_rows": 3000,
+    "eval_unique_slots": 25,
+    "split_manifest": "data/splits/education/manifest.json",
+    "threshold_tuning_rows": 3000,
+    "train_rows": 3000,
+    "train_unique_slots": 27
+  },
+  "experiment": "A",
+  "experiment_meaning": "A=已知表达分布（第三阶段固定切分）；B=未见过槽位表达泛化（train 内部按槽位留出）",
+  "gold_policy": "gold_holdout 只做一次性最终评估；未参与训练、阈值选择与模型选择",
+  "holdout_info": null,
+  "input_mode": "slot",
+  "label_order": [
+    "博士",
+    "硕士",
+    "本科",
+    "大专",
+    "学历不限",
+    "学历不明"
+  ],
+  "model_type": "char_cnn",
+  "model_version": "charcnn-smoke-20261101-181751",
+  "n_parameters": 7334,
+  "run_id": "charcnn-smoke-20261101-181751",
+  "sample_weight_strategy": "none",
+  "saved": {
+    "bytes": 32153,
+    "model_file": "model.pt"
+  },
+  "selection": {
+    "best_tune_micro_f1_fixed05": 0.648837,
+    "metric": "micro_f1_on_threshold_tuning_set(early_stopping)"
+  },
+  "subset": "all",
+  "subset_info": null,
+  "threshold_detail": {
+    "博士": {
+      "f1": 0.696219,
+      "threshold": 0.2
+    },
+    "大专": {
+      "f1": 0.957048,
+      "threshold": 0.45
+    },
+    "学历不明": {
+      "f1": 0.367188,
+      "threshold": 0.25
+    },
+    "学历不限": {
+      "f1": 0.636364,
+      "threshold": 0.5
+    },
+    "本科": {
+      "f1": 0.881242,
+      "threshold": 0.2
+    },
+    "硕士": {
+      "f1": 0.7562,
+      "threshold": 0.2
+    }
+  },
+  "threshold_selected_on": "validation_pseudo",
+  "thresholds": [
+    0.2,
+    0.2,
+    0.2,
+    0.45,
+    0.5,
+    0.25
+  ],
+  "train_info": {
+    "best_epoch": 30,
+    "best_monitor_value": 0.377672,
+    "best_val_micro_f1_fixed05": 0.648837,
+    "device": "cpu",
+    "early_stopping_monitor": "val_loss",
+    "epochs_run": 30,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.87743,
+        "val_exact_match_fixed05": 0.372,
+        "val_loss": 0.615446,
+        "val_micro_f1_fixed05": 0.685174
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.785917,
+        "val_exact_match_fixed05": 0.455667,
+        "val_loss": 0.566615,
+        "val_micro_f1_fixed05": 0.724314
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.716971,
+        "val_exact_match_fixed05": 0.473,
+        "val_loss": 0.52284,
+        "val_micro_f1_fixed05": 0.727626
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.686393,
+        "val_exact_match_fixed05": 0.479333,
+        "val_loss": 0.490041,
+        "val_micro_f1_fixed05": 0.740529
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.633128,
+        "val_exact_match_fixed05": 0.479667,
+        "val_loss": 0.465429,
+        "val_micro_f1_fixed05": 0.740817
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.614172,
+        "val_exact_match_fixed05": 0.480333,
+        "val_loss": 0.448616,
+        "val_micro_f1_fixed05": 0.740894
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.588644,
+        "val_exact_match_fixed05": 0.480333,
+        "val_loss": 0.432006,
+        "val_micro_f1_fixed05": 0.741252
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.569265,
+        "val_exact_match_fixed05": 0.366333,
+        "val_loss": 0.420191,
+        "val_micro_f1_fixed05": 0.695185
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.564597,
+        "val_exact_match_fixed05": 0.495667,
+        "val_loss": 0.405553,
+        "val_micro_f1_fixed05": 0.736522
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.550824,
+        "val_exact_match_fixed05": 0.495667,
+        "val_loss": 0.398666,
+        "val_micro_f1_fixed05": 0.736522
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.547808,
+        "val_exact_match_fixed05": 0.274333,
+        "val_loss": 0.395087,
+        "val_micro_f1_fixed05": 0.698553
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.535991,
+        "val_exact_match_fixed05": 0.495667,
+        "val_loss": 0.390442,
+        "val_micro_f1_fixed05": 0.736522
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.540982,
+        "val_exact_match_fixed05": 0.471667,
+        "val_loss": 0.384798,
+        "val_micro_f1_fixed05": 0.63505
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.535471,
+        "val_exact_match_fixed05": 0.472,
+        "val_loss": 0.391717,
+        "val_micro_f1_fixed05": 0.635189
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.522471,
+        "val_exact_match_fixed05": 0.124,
+        "val_loss": 0.390996,
+        "val_micro_f1_fixed05": 0.643737
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.512875,
+        "val_exact_match_fixed05": 0.124,
+        "val_loss": 0.391048,
+        "val_micro_f1_fixed05": 0.643737
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.512638,
+        "val_exact_match_fixed05": 0.124,
+        "val_loss": 0.387084,
+        "val_micro_f1_fixed05": 0.643737
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.510542,
+        "val_exact_match_fixed05": 0.472333,
+        "val_loss": 0.383874,
+        "val_micro_f1_fixed05": 0.634733
+      },
+      {
+        "epoch": 19,
+        "train_loss": 0.505668,
+        "val_exact_match_fixed05": 0.472333,
+        "val_loss": 0.380925,
+        "val_micro_f1_fixed05": 0.634733
+      },
+      {
+        "epoch": 20,
+        "train_loss": 0.503312,
+        "val_exact_match_fixed05": 0.274667,
+        "val_loss": 0.379421,
+        "val_micro_f1_fixed05": 0.698721
+      },
+      {
+        "epoch": 21,
+        "train_loss": 0.509169,
+        "val_exact_match_fixed05": 0.472333,
+        "val_loss": 0.379293,
+        "val_micro_f1_fixed05": 0.634733
+      },
+      {
+        "epoch": 22,
+        "train_loss": 0.505121,
+        "val_exact_match_fixed05": 0.472333,
+        "val_loss": 0.380646,
+        "val_micro_f1_fixed05": 0.634594
+      },
+      {
+        "epoch": 23,
+        "train_loss": 0.504203,
+        "val_exact_match_fixed05": 0.472333,
+        "val_loss": 0.379859,
+        "val_micro_f1_fixed05": 0.634594
+      },
+      {
+        "epoch": 24,
+        "train_loss": 0.501017,
+        "val_exact_match_fixed05": 0.342667,
+        "val_loss": 0.384128,
+        "val_micro_f1_fixed05": 0.589125
+      },
+      {
+        "epoch": 25,
+        "train_loss": 0.507665,
+        "val_exact_match_fixed05": 0.327,
+        "val_loss": 0.377807,
+        "val_micro_f1_fixed05": 0.603357
+      },
+      {
+        "epoch": 26,
+        "train_loss": 0.491215,
+        "val_exact_match_fixed05": 0.327,
+        "val_loss": 0.379436,
+        "val_micro_f1_fixed05": 0.603469
+      },
+      {
+        "epoch": 27,
+        "train_loss": 0.497372,
+        "val_exact_match_fixed05": 0.327,
+        "val_loss": 0.381706,
+        "val_micro_f1_fixed05": 0.603357
+      },
+      {
+        "epoch": 28,
+        "train_loss": 0.493222,
+        "val_exact_match_fixed05": 0.327,
+        "val_loss": 0.383519,
+        "val_micro_f1_fixed05": 0.603357
+      },
+      {
+        "epoch": 29,
+        "train_loss": 0.502803,
+        "val_exact_match_fixed05": 0.456667,
+        "val_loss": 0.3777,
+        "val_micro_f1_fixed05": 0.648837
+      },
+      {
+        "epoch": 30,
+        "train_loss": 0.481806,
+        "val_exact_match_fixed05": 0.456667,
+        "val_loss": 0.377672,
+        "val_micro_f1_fixed05": 0.648837
+      }
+    ],
+    "n_parameters": 7334,
+    "nonfinite_grad_steps": 0,
+    "peak_memory_mb": 0.0,
+    "seconds": 12.42
+  },
+  "train_slot_vocab": [
+    "",
+    "不限",
+    "专科",
+    "专科及以上",
+    "博士",
+    "博士及以上",
+    "博士生",
+    "博士研究生",
+    "博士研究生及以上",
+    "大专",
+    "大专及以上",
+    "大学",
+    "大学专科及以上学历",
+    "大学本科及以上",
+    "大学本科及以上学历",
+    "大学本科毕业",
+    "学历不限",
+    "本科",
+    "本科及以上",
+    "本科及以上学历",
+    "硕士",
+    "硕士,博士",
+    "硕士、博士",
+    "硕士及以上",
+    "硕士研究生",
+    "硕士研究生及以上",
+    "硕士研究生毕业"
+  ]
+}

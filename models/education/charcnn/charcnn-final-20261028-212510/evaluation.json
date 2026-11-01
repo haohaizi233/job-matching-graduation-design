@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-28T23:35:42",
+  "created_at": "2026-11-01T18:29:18",
   "label_order": [
     "博士",
     "硕士",
@@ -14,12 +14,12 @@
       "record_keys_aligned": true
     },
     "validation_pseudo": {
-      "max_abs_diff": 0.00012853741645812988,
+      "max_abs_diff": 0.0001284480094909668,
       "record_keys_aligned": true
     }
   },
   "run_id": "charcnn-final-20261028-212510",
-  "seconds": 0.75,
+  "seconds": 2.03,
   "sets": {
     "gold_holdout_human": {
       "confusion_counts": {

@@ -1,0 +1,115 @@
+{
+  "ablation_dropped_groups": [],
+  "artifacts": [
+    {
+      "bytes": 25037,
+      "path": "checkpoint_best.pt",
+      "sha256": "b6ea0c983c45fcf17a02eca9241f8720b5e2350bee3c7800f9fd96e68bbcbe5f"
+    },
+    {
+      "bytes": 74819,
+      "path": "checkpoint_search_0.pt",
+      "sha256": "d87e622dd1667dc1bf635ce66022a47a2357c0288d7568694700e457d0b974e7"
+    },
+    {
+      "bytes": 5291,
+      "path": "config.json",
+      "sha256": "a7f886004a9209de8bc0a71c13203554c124faea4b61cde47cee066f7448df50"
+    },
+    {
+      "bytes": 4912,
+      "path": "feature_map.json",
+      "sha256": "ec2fd32e175cedb1a6b3059490abf5f1b2c51b58e0c7dbb0f0fa873931ddf8d1"
+    },
+    {
+      "bytes": 1307,
+      "path": "history.json",
+      "sha256": "58eef3cebfa7de0340233199995a86819eb0fbf0226fc0b0e2936ef66971248b"
+    },
+    {
+      "bytes": 4169,
+      "path": "metrics.json",
+      "sha256": "a7780292054f19099e1403810bec3bf3247b2ac5ca303e1899706662777cdce9"
+    },
+    {
+      "bytes": 27277,
+      "path": "model.pt",
+      "sha256": "2ff40508f4163e6768e5420b79499dba261b1dfd54d927512f1c7de30cd749cf"
+    },
+    {
+      "bytes": 681,
+      "path": "pair_stats.json",
+      "sha256": "40e3b90005a622fccf258052e8547f1b6779ff9b39a79303b522facfb6250dbf"
+    }
+  ],
+  "best_epoch": 3,
+  "created_at": "2026-11-01T18:23:20",
+  "dataset_version": "dv-0ce28fa6b560",
+  "device": "cpu",
+  "environment": {
+    "cuda_available": false,
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "python": "3.13.11",
+    "sklearn": "1.8.0",
+    "torch": "2.10.0",
+    "torch_cuda": null
+  },
+  "feature_map": {
+    "groups_dropped": [],
+    "groups_enabled": [
+      "skill",
+      "position",
+      "category",
+      "experience"
+    ],
+    "n_features": 49,
+    "raw_columns": [
+      "skill_jaccard",
+      "skill_overlap_ratio_cv",
+      "skill_overlap_ratio_job",
+      "both_skills_empty",
+      "position_token_overlap",
+      "target_position_norm",
+      "category_match",
+      "inferred_category",
+      "job_category",
+      "years_experience"
+    ]
+  },
+  "feature_schema_file": "data/processed/matching/feature_schema.json",
+  "feature_schema_sha256": "ed6334ca241e2ea90a825f50e817bd79bf9b2679ae5b80227663f57783fa1876",
+  "generated_by": "scripts/model_training/train.py",
+  "inference": {
+    "forbidden_inputs": [
+      "final_score",
+      "raw_score",
+      "candidate_rank",
+      "candidate_rank_pct",
+      "label_strength",
+      "semantic_score",
+      "skill_score",
+      "position_score",
+      "category_score",
+      "experience_score",
+      "education_score"
+    ],
+    "interface": "predict_score(resume, job) -> float; rank_jobs(resume, jobs) -> list",
+    "requires_labels": false,
+    "supports_cpu": true
+  },
+  "model_name": "ranknet",
+  "model_parameters": 5441,
+  "pipeline_version": "phase4-matching-v1",
+  "protocol": "job_cold",
+  "rows": {
+    "train": 97887,
+    "validation": 12251
+  },
+  "run_id": "ranknet-job_cold-final-20261101-181735",
+  "seed": 20261201,
+  "smoke": false,
+  "split_manifest_file": "data/splits/matching/job_cold/manifest.json",
+  "split_manifest_sha256": "cf14ec736912193f060770438f970177084aa1e4a992e35ba7ad8c2db234370b",
+  "training_seconds": 49.98
+}

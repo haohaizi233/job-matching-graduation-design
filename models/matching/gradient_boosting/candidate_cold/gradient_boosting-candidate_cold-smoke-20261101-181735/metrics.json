@@ -1,0 +1,148 @@
+{
+  "best_params": {},
+  "search": {
+    "evaluated": [
+      {
+        "params": {},
+        "selection_value": 0.943615
+      }
+    ],
+    "limit": 1,
+    "space": {}
+  },
+  "selection_metric": "ndcg_at_5_ordinal",
+  "selection_value": 0.943615,
+  "smoke": true,
+  "validation": {
+    "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+    "gain_modes": {
+      "ordinal": {
+        "all": {
+          "mrr@10": 0.830588,
+          "mrr@5": 0.828769,
+          "ndcg@10": 0.959467,
+          "ndcg@5": 0.943615,
+          "queries_evaluated": 157,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.852948,
+          "recall@5": 0.601952
+        },
+        "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+        "gain_mode": "ordinal",
+        "group_size_distribution": {
+          "max": 28,
+          "mean": 12.6582,
+          "median": 11.5,
+          "min": 1,
+          "p25": 7.0,
+          "p75": 17.75
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "queries_size_eq_1": 1,
+        "queries_size_ge_2": 157,
+        "queries_size_ge_min": 157,
+        "queries_total": 158,
+        "size_ge_2": {
+          "mrr@10": 0.830588,
+          "mrr@5": 0.828769,
+          "ndcg@10": 0.959467,
+          "ndcg@5": 0.943615,
+          "queries_evaluated": 157,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.852948,
+          "recall@5": 0.601952
+        },
+        "size_ge_maxk": {
+          "mrr@10": 0.912946,
+          "mrr@5": 0.911458,
+          "ndcg@10": 0.953341,
+          "ndcg@5": 0.939505,
+          "queries_evaluated": 96,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.773888,
+          "recall@5": 0.442939
+        }
+      },
+      "score": {
+        "all": {
+          "mrr@10": 0.830588,
+          "mrr@5": 0.828769,
+          "ndcg@10": 0.991187,
+          "ndcg@5": 0.98633,
+          "queries_evaluated": 157,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.852948,
+          "recall@5": 0.601952
+        },
+        "binary_relevance_rule": "label_strength in {medium_positive, strong_positive}",
+        "gain_mode": "score",
+        "group_size_distribution": {
+          "max": 28,
+          "mean": 12.6582,
+          "median": 11.5,
+          "min": 1,
+          "p25": 7.0,
+          "p75": 17.75
+        },
+        "ks": [
+          5,
+          10
+        ],
+        "queries_size_eq_1": 1,
+        "queries_size_ge_2": 157,
+        "queries_size_ge_min": 157,
+        "queries_total": 158,
+        "size_ge_2": {
+          "mrr@10": 0.830588,
+          "mrr@5": 0.828769,
+          "ndcg@10": 0.991187,
+          "ndcg@5": 0.98633,
+          "queries_evaluated": 157,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.852948,
+          "recall@5": 0.601952
+        },
+        "size_ge_maxk": {
+          "mrr@10": 0.912946,
+          "mrr@5": 0.911458,
+          "ndcg@10": 0.989113,
+          "ndcg@5": 0.983378,
+          "queries_evaluated": 96,
+          "queries_skipped_zero_relevance": 0,
+          "recall@10": 0.773888,
+          "recall@5": 0.442939
+        }
+      }
+    },
+    "ks": [
+      5,
+      10
+    ],
+    "min_group_size_for_ranking": 2,
+    "pairwise": {
+      "pairs_used": 15603,
+      "pairwise_accuracy": 0.653861,
+      "queries_no_valid_pair": 1,
+      "queries_used": 157,
+      "tie_eps": 0.001,
+      "tie_rule": "|Δfinal_score| <= tie_eps 的对不计入；预测分完全相同的对计 0.5",
+      "weighting": "per_query_macro_average"
+    },
+    "per_query_spearman": {
+      "note": "组内样本 < 3 或零方差记为不可评估，不强行填 0",
+      "queries_not_evaluable": 8,
+      "queries_used": 150,
+      "spearman_per_query_mean": 0.444084
+    },
+    "query_unit": "candidate_id",
+    "regression": {
+      "kendall_tau_b": 0.523907,
+      "mae": 0.017628,
+      "rmse": 0.022426,
+      "spearman": 0.704286
+    }
+  }
+}

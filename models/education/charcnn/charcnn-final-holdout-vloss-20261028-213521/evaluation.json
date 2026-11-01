@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-28T23:38:25",
+  "created_at": "2026-11-01T18:30:14",
   "label_order": [
     "博士",
     "硕士",
@@ -10,20 +10,20 @@
   ],
   "reload_consistency": {
     "gold_holdout_human": {
-      "max_abs_diff": 0.00011605024337768555,
+      "max_abs_diff": 0.00011599063873291016,
       "record_keys_aligned": true
     },
     "holdout_unseen_slots_pseudo": {
-      "max_abs_diff": 0.00012603402137756348,
+      "max_abs_diff": 0.00012606382369995117,
       "record_keys_aligned": true
     },
     "validation_pseudo": {
-      "max_abs_diff": 0.0001646280288696289,
+      "max_abs_diff": 0.00016456842422485352,
       "record_keys_aligned": true
     }
   },
   "run_id": "charcnn-final-holdout-vloss-20261028-213521",
-  "seconds": 0.97,
+  "seconds": 2.1,
   "sets": {
     "gold_holdout_human": {
       "confusion_counts": {

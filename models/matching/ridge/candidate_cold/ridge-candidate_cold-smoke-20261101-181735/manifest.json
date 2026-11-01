@@ -1,0 +1,95 @@
+{
+  "ablation_dropped_groups": [],
+  "artifacts": [
+    {
+      "bytes": 4345,
+      "path": "config.json",
+      "sha256": "31f72addc343e0ad5ac79ffd5a20c59adc15f84d904b2f775538b534db570a35"
+    },
+    {
+      "bytes": 4637,
+      "path": "feature_map.json",
+      "sha256": "33fb64c11b390a51f08c327222d6d1f5c01dc138a60001ee15076618984ff6fa"
+    },
+    {
+      "bytes": 4028,
+      "path": "metrics.json",
+      "sha256": "1de4e63eaad56a147ef3fe19b85eb4fa933366f5d4e97a85b7d89a5357220fa2"
+    },
+    {
+      "bytes": 2687,
+      "path": "model.pkl",
+      "sha256": "02a6fa51505047ace55757e8606dea3beea60e670194751552edf493b62af73c"
+    }
+  ],
+  "best_epoch": null,
+  "created_at": "2026-11-01T18:17:38",
+  "dataset_version": "dv-0ce28fa6b560",
+  "device": "cpu",
+  "environment": {
+    "cuda_available": false,
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "python": "3.13.11",
+    "sklearn": "1.8.0",
+    "torch": "2.10.0",
+    "torch_cuda": null
+  },
+  "feature_map": {
+    "groups_dropped": [],
+    "groups_enabled": [
+      "skill",
+      "position",
+      "category",
+      "experience"
+    ],
+    "n_features": 47,
+    "raw_columns": [
+      "skill_jaccard",
+      "skill_overlap_ratio_cv",
+      "skill_overlap_ratio_job",
+      "both_skills_empty",
+      "position_token_overlap",
+      "target_position_norm",
+      "category_match",
+      "inferred_category",
+      "job_category",
+      "years_experience"
+    ]
+  },
+  "feature_schema_file": "data/processed/matching/feature_schema.json",
+  "feature_schema_sha256": "ed6334ca241e2ea90a825f50e817bd79bf9b2679ae5b80227663f57783fa1876",
+  "generated_by": "scripts/model_training/train.py",
+  "inference": {
+    "forbidden_inputs": [
+      "final_score",
+      "raw_score",
+      "candidate_rank",
+      "candidate_rank_pct",
+      "label_strength",
+      "semantic_score",
+      "skill_score",
+      "position_score",
+      "category_score",
+      "experience_score",
+      "education_score"
+    ],
+    "interface": "predict_score(resume, job) -> float; rank_jobs(resume, jobs) -> list",
+    "requires_labels": false,
+    "supports_cpu": true
+  },
+  "model_name": "ridge",
+  "model_parameters": 48,
+  "pipeline_version": "phase4-matching-v1",
+  "protocol": "candidate_cold",
+  "rows": {
+    "train": 2000,
+    "validation": 2000
+  },
+  "run_id": "ridge-candidate_cold-smoke-20261101-181735",
+  "seed": 20261201,
+  "smoke": true,
+  "split_manifest_file": "data/splits/matching/candidate_cold/manifest.json",
+  "split_manifest_sha256": "42557c1b37044d71e293bf446112163ceed7c7dbcf1f538d1c64fa0e9d9fc108",
+  "training_seconds": 0.23
+}
