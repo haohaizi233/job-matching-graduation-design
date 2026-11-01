@@ -63,6 +63,7 @@
 | MODEL_NOT_REGISTERED | `MODEL_MISSING` | `model_not_registered` | model_id 未登记 |
 | MODEL_ARTIFACT_MISSING | `MODEL_MISSING` | `artifact_missing` | 权重文件缺失（FileNotFoundError） |
 | MODEL_ARTIFACT_CORRUPT | `MODEL_CORRUPT` | `artifact_corrupt_or_load_failed` | 文件损坏 / 加载逻辑失败 |
+| MODEL_ARTIFACT_TAMPERED | `MODEL_ARTIFACT_TAMPERED`（新增） | `artifact_checksum_mismatch` | 加载前 sha256 门禁不通过（Phase7 P7-5） |
 | MODEL_ENV_INCOMPATIBLE | `MODEL_ENV_INCOMPATIBLE`（新增） | `env_incompatible` | 旧 scikit-learn 反序列化失败、依赖符号缺失、pickle 协议过高 |
 | MODEL_INPUT_INAPPLICABLE | `MODEL_INAPPLICABLE` | — | 输入缺字段，无法合法构建特征 |
 | MODEL_NOT_VERIFIED | `MODEL_FORMAL_USE_FORBIDDEN` | — | 正式模式拒绝 research_only 模型 |
