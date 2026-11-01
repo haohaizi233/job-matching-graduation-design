@@ -100,6 +100,30 @@ class TestPreregistrationLock(unittest.TestCase):
         hits = vp.find_premature_blind_outputs()
         self.assertEqual([], hits, f"blind_test 结果产物提前存在: {hits}")
 
+    def test_blocked_marker_is_not_flagged(self):
+        """无数据时必须允许产出 BLOCKED 状态记录（任务书要求明确 BLOCKED 报告）。"""
+        self.assertTrue(vp._is_blocked_marker(ROOT / "reports" / "phase7" /
+                                              "04-real-model-evaluation.json"))
+
+    def test_real_results_file_would_be_flagged(self):
+        """负向测试：一旦写入真实指标，必须被判为提前读取盲测。"""
+        import json as _json
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "04-real-model-evaluation.json"
+            p.write_text(_json.dumps({"status": "DONE",
+                                      "results": [{"model": "E02", "ndcg_at_10": 0.42}]}),
+                         encoding="utf-8")
+            self.assertFalse(vp._is_blocked_marker(p),
+                             "含真实 results 的文件必须被判为非阻断记录")
+
+    def test_non_json_blind_output_always_flagged(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "blind_results.md"
+            p.write_text("NDCG@10 = 0.42", encoding="utf-8")
+            self.assertFalse(vp._is_blocked_marker(p))
+
 
 if __name__ == "__main__":
     unittest.main()

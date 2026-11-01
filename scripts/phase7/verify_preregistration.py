@@ -41,12 +41,29 @@ REQUIRED_INVARIANTS = {
     "not_computable_policy.status_value": "not_computable",
 }
 
-#: 正式 blind_test 结果产物（一旦存在即说明预注册前已读取盲测，必须阻断）
+#: 正式 blind_test 结果产物（一旦含真实结果即说明预注册前已读取盲测，必须阻断）。
+#: 允许存在**阻断状态记录**（not_an_experiment_result=true 且 results 为空），
+#: 因为任务书要求在无数据时仍须产出明确的 BLOCKED 报告。
 BLIND_RESULT_GLOBS = (
     "reports/phase7/04-real-model-evaluation.json",
     "reports/phase7/blind_test/**",
     "data/independent_eval/frozen/**/blind_results*.json",
 )
+
+
+def _is_blocked_marker(path: Path) -> bool:
+    """判断文件是否只是「BLOCKED 状态记录」而非真实实验结果。"""
+    if path.suffix.lower() != ".json":
+        return False
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return False
+    if not isinstance(data, dict):
+        return False
+    return (bool(data.get("not_an_experiment_result"))
+            and str(data.get("status", "")).upper() in ("BLOCKED", "NOT_RUN")
+            and not data.get("results"))
 
 
 def _dig(obj, dotted: str):
@@ -77,7 +94,7 @@ def find_premature_blind_outputs() -> list[str]:
     hits: list[str] = []
     for pattern in BLIND_RESULT_GLOBS:
         for p in ROOT.glob(pattern):
-            if p.is_file():
+            if p.is_file() and not _is_blocked_marker(p):
                 hits.append(str(p.relative_to(ROOT)).replace("\\", "/"))
     return sorted(set(hits))
 
