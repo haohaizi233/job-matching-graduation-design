@@ -73,10 +73,13 @@ def train_lambdamart(
     if params:
         default_params.update(params)
 
-    train_set = lgb.Dataset(X_train, y_train, group=group_train)
+    # LightGBM LambdaMART要求整数标签
+    y_train_int = np.round(y_train).astype(int)
+    train_set = lgb.Dataset(X_train, y_train_int, group=group_train)
     val_set = None
     if X_val is not None and y_val is not None and group_val is not None:
-        val_set = lgb.Dataset(X_val, y_val, group=group_val, reference=train_set)
+        y_val_int = np.round(y_val).astype(int)
+        val_set = lgb.Dataset(X_val, y_val_int, group=group_val, reference=train_set)
 
     callbacks = [lgb.log_evaluation(period=50)]
     if val_set is not None:
