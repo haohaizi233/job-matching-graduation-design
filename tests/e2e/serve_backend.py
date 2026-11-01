@@ -157,6 +157,11 @@ def main() -> int:
     os.environ.setdefault("JM_OAUTH_START_RATE_LIMIT", "100000")
     os.environ.setdefault("JM_OAUTH_CALLBACK_RATE_LIMIT", "100000")
     os.environ.setdefault("JM_OAUTH_EXCHANGE_RATE_LIMIT", "100000")
+    # 全局 API 限流（api.py rate_limit_per_minute，生产默认 300/分钟）同样会
+    # 阻塞全量套件：E01–E15 一轮真实请求可达数百次，且集中在若干个 60s 窗口内，
+    # CI 上曾把 E13-6 的票据交换与 E14 的注册直接打成 RATE_LIMITED（429）。
+    # 隔离环境放宽；生产默认 300/分钟不变。
+    os.environ.setdefault("JM_RATE_LIMIT_PER_MINUTE", "100000")
 
     from job_matching.infra.persistence import dispose_engines
     dispose_engines()

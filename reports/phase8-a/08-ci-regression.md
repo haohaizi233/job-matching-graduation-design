@@ -66,15 +66,16 @@ E2E 纪律：真实 Vue + 真实 FastAPI + Alembic 迁移库 + 真实跳转模�
 
 ## 6. CI 失败根因与整改记录（真实历史，不抹除）
 
-第一轮推送（`0b68497` / `0086595`）真实出现过 3 个失败 Job，逐项定位并整改：
+前三轮推送（`0b68497` / `0086595` / `c753dd6`）真实出现过失败 Job，逐项定位并整改：
 
-| Job | 失败用例 | 根因 | 整改 |
+| Job | 失败用例 | 根因（证据） | 整改 |
 |---|---|---|---|
 | `core-ci (3.11)`、`oauth-backend` | `test_no_secret_material_in_tracked_files` | `tests/phase8a/test_provider_protocol.py` 的脱敏探针常量值被 C4 密钥扫描判定为疑似明文密钥 | 探针值改为 `example/` 前缀的占位符形态（C4 明确放行的测试夹具写法），语义不变 |
-| `browser-e2e`（quality-gates） | E13-6（偶发 E14-3） | **Vite dev watcher 把 Playwright 产物当成页面变更**：outputDir `e2e/.artifacts/` 在 Vite 根内，trace 资源快照（`*.html`）测试运行中被实时写入，Vite 向所有客户端广播 `full-reload`，被测页面中途整页刷新，OAuth 完成页状态被重置（CI 日志可见 `page reload e2e/.artifacts/.playwright-artifacts-*/traces/resources/*.html` 与失败窗口重合） | `frontend/vite.config.ts` 增加 `server.watch.ignored` 排除 `**/e2e/.artifacts/**`；两个 E2E 证据上传步骤补 `include-hidden-files: true`，失败时 Trace/截图可真正归档 |
+| `browser-e2e`（quality-gates） | E13-6（两轮稳定复现），E14-1/E14-2/E14-3（伴随出现） | **E2E 后端全局 API 限流（300/分钟）被全量套件击穿**：`api.py rate_limit_per_minute` 生产默认 300，E01–E15 一轮真实请求集中在若干 60s 窗口内超过上限，票据交换 / 注册被打成 429。证据：失败工件 `error-context.md` 显示完成页停在 `/?/oauth/complete` 且 detail=`RATE_LIMITED`，E14 注册报 `请求频率超过限制（300/分钟）` | `tests/e2e/serve_backend.py` 放宽 `JM_RATE_LIMIT_PER_MINUTE`（与既有 register/OAuth 限流放宽同口径，生产默认不变）；限流代码路径仍生效 |
+| `browser-e2e`（伴随噪声） | 无直接失败，但加剧不稳定性 | **Vite dev watcher 把 Playwright 产物当页面变更**：outputDir `e2e/.artifacts/` 在 Vite 根内，trace 资源快照（`*.html`）测试中被实时写入，Vite 向客户端广播 `full-reload`，被测页面中途整页刷新（日志 `page reload e2e/.artifacts/.playwright-artifacts-*` 与失败窗口重合） | `frontend/vite.config.ts` 增加 `server.watch.ignored` 排除 `**/e2e/.artifacts/**`；两个 E2E 证据上传步骤补 `include-hidden-files: true`，失败 Trace/截图/error-context 可真正归档（本次根因正是靠该工件定位） |
 
-整改后本地全量复跑：**E01–E15 35/35 PASS**，且 `page reload` 噪声由 N 次降为 **0 次**
-（复跑耗时也从 6.1 分钟降到 2.6 分钟，印证整页刷新风暴被消除）。
+整改后本地全量复跑：**E01–E15 35/35 PASS**，`page reload` 噪声降为 **0 次**，
+复跑耗时从 6.1 分钟降到 2.6 分钟（整页刷新风暴被消除）。
 
 ## 7. 验收结论
 
