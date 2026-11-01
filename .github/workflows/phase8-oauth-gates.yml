@@ -185,6 +185,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: phase8-oauth-e2e-evidence
+          include-hidden-files: true
           path: |
             frontend/e2e/.artifacts/
           if-no-files-found: warn

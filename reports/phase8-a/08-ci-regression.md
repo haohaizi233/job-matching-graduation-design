@@ -64,7 +64,19 @@ E2E 纪律：真实 Vue + 真实 FastAPI + Alembic 迁移库 + 真实跳转模�
 - 简历、画像、推荐、反馈的用户级隔离：core-ci + E10 覆盖，均 PASS；
 - 既有 `/api/v1/auth/*` 契约不变：core-ci + E01/E09 覆盖，均 PASS。
 
-## 6. 验收结论
+## 6. CI 失败根因与整改记录（真实历史，不抹除）
+
+第一轮推送（`0b68497` / `0086595`）真实出现过 3 个失败 Job，逐项定位并整改：
+
+| Job | 失败用例 | 根因 | 整改 |
+|---|---|---|---|
+| `core-ci (3.11)`、`oauth-backend` | `test_no_secret_material_in_tracked_files` | `tests/phase8a/test_provider_protocol.py` 的脱敏探针常量值被 C4 密钥扫描判定为疑似明文密钥 | 探针值改为 `example/` 前缀的占位符形态（C4 明确放行的测试夹具写法），语义不变 |
+| `browser-e2e`（quality-gates） | E13-6（偶发 E14-3） | **Vite dev watcher 把 Playwright 产物当成页面变更**：outputDir `e2e/.artifacts/` 在 Vite 根内，trace 资源快照（`*.html`）测试运行中被实时写入，Vite 向所有客户端广播 `full-reload`，被测页面中途整页刷新，OAuth 完成页状态被重置（CI 日志可见 `page reload e2e/.artifacts/.playwright-artifacts-*/traces/resources/*.html` 与失败窗口重合） | `frontend/vite.config.ts` 增加 `server.watch.ignored` 排除 `**/e2e/.artifacts/**`；两个 E2E 证据上传步骤补 `include-hidden-files: true`，失败时 Trace/截图可真正归档 |
+
+整改后本地全量复跑：**E01–E15 35/35 PASS**，且 `page reload` 噪声由 N 次降为 **0 次**
+（复跑耗时也从 6.1 分钟降到 2.6 分钟，印证整页刷新风暴被消除）。
+
+## 7. 验收结论
 
 新增 `phase8-oauth-gates` 无真实凭据亦全绿；既有核心回归（core-ci / phase5-2 /
 phase5-2R / phase6 / phase7 / 浏览器 E2E）全部未被破坏。

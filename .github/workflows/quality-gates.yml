@@ -373,6 +373,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: browser-e2e-evidence
+          include-hidden-files: true
           path: |
             reports/phase5-3/e2e-results.json
             reports/phase5-3/e2e-results.md
