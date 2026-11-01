@@ -1,0 +1,70 @@
+{
+  "artifact": "phase7-real-model-evaluation",
+  "artifact_type": "blocked_status_record",
+  "not_an_experiment_result": true,
+  "warning": "本文件不是实验结果。它是「真实中文 Gold 评估尚无数据、实验未执行」的状态记录。任何把本文件当作模型效果证据的引用都是违规结论。",
+  "status": "BLOCKED",
+  "generated_at": "2026-10-31T22:55:00+08:00",
+  "branch": "feat/phase7-gold-evaluation",
+  "protocol_id": "phase7-eval-protocol-v1",
+  "preregistration_sha256": "7112e151e2553f52bf16530ab717ad2bf4278b3660b97dfbfd252b2b95eb65f5",
+  "blocked_reasons": [
+    "有效真实中文简历 0 份（consent_verified=0, intake_accepted=0, eligible_for_gold=0）",
+    "真实人岗配对 0 组（协议门禁 G1-b 要求 >= 300）",
+    "双人独立标注 0 条 / 独立标注员 0 人（协议门禁 G2-a 要求 >= 2 人）",
+    "Gold 未冻结（freeze_written=false / freeze_verified=false）",
+    "blind_test 有效查询组 0 个（协议门禁 G4 要求 >= 20）"
+  ],
+  "evaluation_task": "chinese_resume_job_relevance_ranking",
+  "query_group_key": "resume_id",
+  "primary_metric": "NDCG@10",
+  "secondary_metrics": ["NDCG@5", "Recall@10", "MRR", "Precision@5"],
+  "top_k": [5, 10],
+  "split": {
+    "dev_validation": {"groups": 0, "pairs": 0, "status": "BLOCKED"},
+    "blind_test": {"groups": 0, "pairs": 0, "status": "BLOCKED", "accessed": false}
+  },
+  "models_planned": [
+    {"id": "E00", "name": "规则 Baseline（技能 Jaccard）", "status": "NOT_RUN", "requires_training_labels": false},
+    {"id": "E01", "name": "TF-IDF + Cosine", "status": "NOT_RUN", "requires_training_labels": false},
+    {"id": "E02", "name": "BM25", "status": "NOT_RUN", "requires_training_labels": false},
+    {"id": "E03", "name": "BGE Embedding 余弦", "status": "NOT_RUN", "requires_training_labels": false},
+    {"id": "E04", "name": "Embedding + 结构化特征融合", "status": "NOT_RUN", "requires_training_labels": false},
+    {"id": "E05", "name": "BM25/TF-IDF + Cross-Encoder 精排", "status": "NOT_RUN", "requires_training_labels": false},
+    {"id": "E06", "name": "完整融合推荐策略 zh_research_*_v1", "status": "NOT_RUN", "requires_training_labels": false},
+    {"id": "E07", "name": "有条件监督微调", "status": "BLOCKED", "requires_training_labels": true,
+     "blocked_reason": "无独立合规训练标签；盲测 Gold 严禁入训"}
+  ],
+  "results": [],
+  "results_note": "results 为空数组是真实状态，不是遗漏。禁止用合成数据、英文代理标签或业务用户反馈填充本数组。",
+  "metrics_computed": [],
+  "statistical_analysis": {
+    "status": "not_computable",
+    "reason": "无真实 Gold 查询组，Bootstrap 无对象",
+    "resampling_unit": "resume_id",
+    "n_boot": 1000,
+    "seed": 20261205
+  },
+  "gate_status": {
+    "G1_data": "BLOCKED",
+    "G2_annotation": "BLOCKED",
+    "G3_freeze": "BLOCKED",
+    "G4_statistical": "BLOCKED",
+    "G5_effect": "NOT_RUN"
+  },
+  "what_would_unblock": [
+    "经授权真实中文简历 >= 30（Scenario A）或 >= 70（Scenario B）",
+    "真实人岗配对 >= 300 且组级可分",
+    "两名真实人类标注员完成双人独立标注",
+    "人类仲裁员处理全部分歧",
+    "Gold 冻结并通过 SHA-256 复验",
+    "dev_validation 上锁定 selected_model_id / hyperparameters 后，才允许一次性 blind_test"
+  ],
+  "discipline": [
+    "不伪造真实简历或人工标注",
+    "不把合成数据或英文代理标签当中文人工真值",
+    "不提前读取 blind_test 指标",
+    "不为达到结果临时降低 H2 门禁",
+    "不为毕业论文制造显著性、准确率或模型提升"
+  ]
+}
