@@ -1,0 +1,518 @@
+{
+  "artifact": "phase7-annotation-drill",
+  "checks": {
+    "agreement_metrics": {
+      "detail": "仅证明一致性统计代码可运行；数值来自合成夹具，不代表任何真实标注质量",
+      "report": {
+        "annotators": [
+          "DrillAnnotatorA",
+          "DrillAnnotatorB"
+        ],
+        "cohens_kappa": {
+          "n": 7,
+          "pe": 0.306122,
+          "po": 0.0,
+          "status": "ok",
+          "value": -0.441176
+        },
+        "disagreements": [
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-1f10ec044390",
+            "relevance_a": "0",
+            "relevance_b": "1"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-2c1d1916b3a7",
+            "relevance_a": "unjudgeable",
+            "relevance_b": "0"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-2f1d87c2da2e",
+            "relevance_a": "unjudgeable",
+            "relevance_b": "2"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-35ac40405ea9",
+            "relevance_a": "unjudgeable",
+            "relevance_b": "1"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-36efb46b8435",
+            "relevance_a": "1",
+            "relevance_b": "0"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-696d7447e367",
+            "relevance_a": "2",
+            "relevance_b": "unjudgeable"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-8d2b1db3ee4a",
+            "relevance_a": "0",
+            "relevance_b": "1"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-997789771f45",
+            "relevance_a": "0",
+            "relevance_b": "1"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-b1a9398aa66b",
+            "relevance_a": "0",
+            "relevance_b": "1"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-b3f34b6e47b5",
+            "relevance_a": "1",
+            "relevance_b": "unjudgeable"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-dfedb5be812c",
+            "relevance_a": "0",
+            "relevance_b": "1"
+          },
+          {
+            "annotator_a": "DrillAnnotatorA",
+            "annotator_b": "DrillAnnotatorB",
+            "pair_id": "pair-f7f2852461ee",
+            "relevance_a": "1",
+            "relevance_b": "2"
+          }
+        ],
+        "label_distribution_a": {
+          "0": 5,
+          "1": 3,
+          "2": 1,
+          "unjudgeable": 3
+        },
+        "label_distribution_b": {
+          "0": 2,
+          "1": 6,
+          "2": 2,
+          "unjudgeable": 2
+        },
+        "n_disagreements": 12,
+        "n_judgeable": 7,
+        "n_paired": 12,
+        "per_category": {
+          "UNKNOWN": {
+            "cohens_kappa": -0.441176,
+            "n_judgeable": 7,
+            "n_paired": 12,
+            "raw_agreement": 0.0,
+            "status": "ok",
+            "weighted_kappa_linear": -0.25641
+          }
+        },
+        "raw_agreement": {
+          "agreements": 0,
+          "both_unjudgeable": 0,
+          "n_judgeable": 7,
+          "n_paired": 12,
+          "one_side_unjudgeable": 5,
+          "status": "ok",
+          "value": 0.0
+        },
+        "status": "ok",
+        "weighted_kappa_linear": {
+          "n": 7,
+          "status": "ok",
+          "value": -0.25641,
+          "weights": "linear"
+        },
+        "weighted_kappa_quadratic": {
+          "n": 7,
+          "status": "ok",
+          "value": 0.0,
+          "weights": "quadratic"
+        }
+      },
+      "status": "COMPUTED_ON_DRILL_FIXTURE_ONLY"
+    },
+    "annotation_import_valid": {
+      "detail": "A 有效 12 行 / B 有效 12 行",
+      "errors": [],
+      "status": "PASS"
+    },
+    "annotation_progress_stats": {
+      "detail": "进度统计可计算：annotation_status=blocked",
+      "stats": {
+        "annotation_status": "blocked",
+        "blocking": [
+          "12 个配对缺少最终标签: ['pair-1f10ec044390', 'pair-2c1d1916b3a7', 'pair-2f1d87c2da2e', 'pair-35ac40405ea9', 'pair-36efb46b8435', 'pair-696d7447e367', 'pair-8d2b1db3ee4a', 'pair-997789771f45', 'pair-b1a9398aa66b', 'pair-b3f34b6e47b5', 'pair-dfedb5be812c', 'pair-f7f2852461ee']"
+        ],
+        "checks": {
+          "annotator_independence": {
+            "blocking_codes": [],
+            "ok": true,
+            "review_codes": [],
+            "status": "ok",
+            "violations": []
+          },
+          "annotators_registered": {
+            "ok": true,
+            "value": [
+              "DrillAnnotatorA",
+              "DrillAnnotatorB"
+            ]
+          },
+          "arbitration_status": {
+            "ok": true,
+            "value": "not_required"
+          },
+          "dual_annotation": {
+            "missing_pair_ids": [],
+            "ok": true,
+            "pairs_missing": 0,
+            "pairs_total": 12,
+            "unknown_pair_ids": []
+          },
+          "final_label_integrity": {
+            "duplicate_pair_ids": [],
+            "invalid_label_pair_ids": [],
+            "labels_total": 0,
+            "missing_pair_ids": [
+              "pair-1f10ec044390",
+              "pair-2c1d1916b3a7",
+              "pair-2f1d87c2da2e",
+              "pair-35ac40405ea9",
+              "pair-36efb46b8435",
+              "pair-696d7447e367",
+              "pair-8d2b1db3ee4a",
+              "pair-997789771f45",
+              "pair-b1a9398aa66b",
+              "pair-b3f34b6e47b5",
+              "pair-dfedb5be812c",
+              "pair-f7f2852461ee"
+            ],
+            "ok": false,
+            "pairs_total": 12,
+            "problems": [
+              "12 个配对缺少最终标签: ['pair-1f10ec044390', 'pair-2c1d1916b3a7', 'pair-2f1d87c2da2e', 'pair-35ac40405ea9', 'pair-36efb46b8435', 'pair-696d7447e367', 'pair-8d2b1db3ee4a', 'pair-997789771f45', 'pair-b1a9398aa66b', 'pair-b3f34b6e47b5', 'pair-dfedb5be812c', 'pair-f7f2852461ee']"
+            ],
+            "unfinalized_pair_ids": [],
+            "unknown_pair_ids": []
+          },
+          "import_reports": {
+            "errors": 0,
+            "files": {},
+            "ok": true,
+            "warnings": 0
+          },
+          "protocol_version": {
+            "ok": true,
+            "value": [
+              "phase4-3a-annotation-v1"
+            ]
+          },
+          "unjudgeable_forced": {
+            "ok": true,
+            "value": 0
+          }
+        },
+        "counts": {
+          "annotation_rows": 24,
+          "blocking_findings": 1,
+          "disagreements": 0,
+          "incomplete_findings": 0,
+          "pairs_total": 12,
+          "review_findings": 0
+        },
+        "incomplete": [],
+        "reason": "存在阻断性标注质量问题，禁止宣布标注完成",
+        "reasons": [
+          "12 个配对缺少最终标签: ['pair-1f10ec044390', 'pair-2c1d1916b3a7', 'pair-2f1d87c2da2e', 'pair-35ac40405ea9', 'pair-36efb46b8435', 'pair-696d7447e367', 'pair-8d2b1db3ee4a', 'pair-997789771f45', 'pair-b1a9398aa66b', 'pair-b3f34b6e47b5', 'pair-dfedb5be812c', 'pair-f7f2852461ee']"
+        ],
+        "review": [],
+        "status": "blocked",
+        "vocabulary": [
+          "pending",
+          "in_progress",
+          "needs_review",
+          "blocked",
+          "complete"
+        ]
+      },
+      "status": "PASS"
+    },
+    "annotation_save": {
+      "detail": "先标一半 → 中断 → 续标剩余，导入校验通过且无遗漏",
+      "rows_saved": 12,
+      "status": "PASS"
+    },
+    "arbitration_flow": {
+      "detail": "分歧 12 组 → 最终标签 12 条，双方原始结论均保留（A=12, B=12）",
+      "disagreements": 12,
+      "final_labels": 12,
+      "integrity": {
+        "duplicate_pair_ids": [],
+        "invalid_label_pair_ids": [],
+        "labels_total": 12,
+        "missing_pair_ids": [],
+        "ok": true,
+        "pairs_total": 12,
+        "problems": [],
+        "unfinalized_pair_ids": [],
+        "unknown_pair_ids": []
+      },
+      "note": "演练仲裁由脚本机械判定，绝不是人类仲裁结论，不构成 Gold",
+      "status": "PASS"
+    },
+    "freeze_refused_without_real_data": {
+      "detail": "precheck status=blocked passed=False",
+      "reasons": [
+        "真实数据授权记录不完整（consent 未全部 granted/licensed）",
+        "数据来源与使用许可不满足准入（source/license 缺失或失效）",
+        "真实中文简历 0 份：无法建立真实人岗配对与人工 Gold",
+        "真实有效配对 0 组：双盲标注与 Gold 冻结无对象",
+        "双人独立标注未完成（annotation_status != complete）"
+      ],
+      "status": "PASS"
+    },
+    "illegal_label_rejected": {
+      "detail": "非法标签错误码=['invalid_relevance']；机器标识标注员错误码=['machine_annotator']",
+      "illegal_label_errors": [
+        {
+          "code": "invalid_relevance",
+          "message": "标签值非法: '3'，合法值为 ('0', '1', '2', 'unjudgeable')",
+          "row": 2
+        }
+      ],
+      "machine_id_errors": [
+        {
+          "code": "machine_annotator",
+          "message": "标注人员 ID 形似机器/模型输出，禁止冒充人工标注: 'gpt_annotator'",
+          "row": 2
+        }
+      ],
+      "status": "PASS"
+    },
+    "independent_export": {
+      "detail": "两人各一份独立标注包；列白名单通过；无模型预测/难度层/split/他人答案列",
+      "files": {
+        "DrillAnnotatorA": {
+          "path": "packet_DrillAnnotatorA.csv",
+          "rows": 12,
+          "sha256": "187a997a509502658066ee044a70a22a952528f2f9848482fad9f0a720fe9ac9"
+        },
+        "DrillAnnotatorB": {
+          "path": "packet_DrillAnnotatorB.csv",
+          "rows": 12,
+          "sha256": "187a997a509502658066ee044a70a22a952528f2f9848482fad9f0a720fe9ac9"
+        }
+      },
+      "hidden_columns_leaked": [],
+      "status": "PASS"
+    },
+    "mirrored_answer_detection": {
+      "detail": "全表镜像检出=['mirrored_annotations']；独立标注未误报=[]",
+      "full_mirror": {
+        "annotators_a": [
+          "DrillAnnotatorA"
+        ],
+        "annotators_b": [
+          "DrillAnnotatorB"
+        ],
+        "mirrored_pairs": 12,
+        "shared_pairs": 12,
+        "status": "violation",
+        "violations": [
+          {
+            "code": "mirrored_annotations",
+            "message": "两位标注员在全部共同样本上的记录逐字一致，疑似同一人重复提交，不得视为独立双标注",
+            "shared_pairs": 12
+          }
+        ]
+      },
+      "independent": {
+        "annotators_a": [
+          "DrillAnnotatorA"
+        ],
+        "annotators_b": [
+          "DrillAnnotatorB"
+        ],
+        "mirrored_pairs": 0,
+        "shared_pairs": 12,
+        "status": "ok",
+        "violations": []
+      },
+      "status": "PASS"
+    },
+    "privacy_residual_scan": {
+      "detail": "干净合成文本通过=True；注入手机号/邮箱后被拦截=True",
+      "injected_findings": [
+        "字段 resume_text 残留个人信息 email x1",
+        "字段 resume_text 残留个人信息 mobile_cn x1",
+        "字段 resume_text 残留个人信息 qq_wechat_id x2"
+      ],
+      "status": "PASS"
+    },
+    "required_field_check": {
+      "detail": "缺列文件被拒收，错误码=['missing_columns']",
+      "errors": [
+        {
+          "code": "missing_columns",
+          "message": "缺少标注字段: ['confidence', 'reason', 'evidence', 'annotation_timestamp', 'protocol_version']",
+          "row": null
+        }
+      ],
+      "status": "PASS"
+    },
+    "resume_partial_annotation": {
+      "detail": "断点续标：半程中断后可继续，最终无遗漏",
+      "full_stage_missing": {
+        "missing_detail": [],
+        "note": "缺失标注只登记不填补；无标注样本不得进入任何指标分母",
+        "pairs_fully_annotated": 12,
+        "pairs_missing_annotations": 0,
+        "pairs_total": 12,
+        "required_annotators": 1
+      },
+      "half_stage_missing": {
+        "missing_detail": [
+          {
+            "annotations_received": 1,
+            "annotations_required": 2,
+            "pair_id": "pair-8d2b1db3ee4a"
+          },
+          {
+            "annotations_received": 1,
+            "annotations_required": 2,
+            "pair_id": "pair-696d7447e367"
+          },
+          {
+            "annotations_received": 1,
+            "annotations_required": 2,
+            "pair_id": "pair-36efb46b8435"
+          },
+          {
+            "annotations_received": 1,
+            "annotations_required": 2,
+            "pair_id": "pair-1f10ec044390"
+          },
+          {
+            "annotations_received": 1,
+            "annotations_required": 2,
+            "pair_id": "pair-2f1d87c2da2e"
+          },
+          {
+            "annotations_received": 1,
+            "annotations_required": 2,
+            "pair_id": "pair-b3f34b6e47b5"
+          },
+          {
+            "annotations_received": 0,
+            "annotations_required": 2,
+            "pair_id": "pair-2c1d1916b3a7"
+          },
+          {
+            "annotations_received": 0,
+            "annotations_required": 2,
+            "pair_id": "pair-f7f2852461ee"
+          },
+          {
+            "annotations_received": 0,
+            "annotations_required": 2,
+            "pair_id": "pair-35ac40405ea9"
+          },
+          {
+            "annotations_received": 0,
+            "annotations_required": 2,
+            "pair_id": "pair-b1a9398aa66b"
+          },
+          {
+            "annotations_received": 0,
+            "annotations_required": 2,
+            "pair_id": "pair-997789771f45"
+          },
+          {
+            "annotations_received": 0,
+            "annotations_required": 2,
+            "pair_id": "pair-dfedb5be812c"
+          }
+        ],
+        "note": "缺失标注只登记不填补；无标注样本不得进入任何指标分母",
+        "pairs_fully_annotated": 0,
+        "pairs_missing_annotations": 12,
+        "pairs_total": 12,
+        "required_annotators": 2
+      },
+      "status": "PASS"
+    },
+    "same_person_two_annotators_rejected": {
+      "detail": "同一 annotator_id 出现在两份标注中，检测到 ['shared_annotator_id']",
+      "status": "PASS",
+      "violations": [
+        {
+          "annotator_ids": [
+            "DrillAnnotatorA"
+          ],
+          "code": "shared_annotator_id",
+          "message": "两份标注使用同一 annotator_id，同一标注员不得冒充两名独立标注员"
+        }
+      ]
+    },
+    "synthetic_not_gold": {
+      "count_real_gold": {
+        "non_gold_excluded": 0,
+        "note": "合成样本、未授权、非中文、被隔离记录一律不计入真实 Gold 数量",
+        "real_gold": 0,
+        "synthetic_excluded": 12,
+        "total_records": 12
+      },
+      "detail": "合成配对经 is_real_gold_record 计数 = {'real_gold': 0, 'synthetic_excluded': 12, 'non_gold_excluded': 0, 'total_records': 12, 'note': '合成样本、未授权、非中文、被隔离记录一律不计入真实 Gold 数量'}",
+      "status": "PASS"
+    },
+    "workspace_guard": {
+      "detail": "真实数据目录（data/private、data/independent_eval/frozen）均拒绝执行；项目根（生产工作区）与隔离临时目录允许",
+      "status": "PASS",
+      "unexpected": []
+    }
+  },
+  "discipline": [
+    "不伪造真实简历：夹具全部为合成文本并带水印声明",
+    "不让 AI 冒充人工标注员：标签由 PRNG 机械生成，标注员 ID 带 Drill 前缀",
+    "不把演练结果当作 Gold：synthetic_not_gold 负向校验保证",
+    "不触碰 data/private 与 data/independent_eval 真实对象"
+  ],
+  "drill_only": true,
+  "fixture": {
+    "eligible_for_gold": false,
+    "is_synthetic": true,
+    "pairs": 12,
+    "seed": 20261031
+  },
+  "generated_at": "2026-10-31T22:40:00+08:00",
+  "nature": "工具链演练：合成夹具 + 机械标签（固定种子 PRNG，与模型输出无关）。演练中的 '标注员' 不是真人，本结果不计为真实人工标注，不解除 H2 阻断。",
+  "protocol_version": "phase4-3a-annotation-v1",
+  "status": "PASS",
+  "summary": {
+    "fail": 0,
+    "failed": [],
+    "pass": 14,
+    "total": 15
+  },
+  "workspace": "<temp>"
+}

@@ -87,12 +87,16 @@ class ModelRegistration:
 class ModelRegistry:
     """模型注册 + 惰性加载缓存。load 只在初始化或 cache_clear 后真正执行。"""
 
-    def __init__(self, loader_impl: Callable[[ModelRegistration], Any] | None = None):
+    def __init__(self, loader_impl: Callable[[ModelRegistration], Any] | None = None,
+                 *, verify_before_load: bool = True):
         self._regs: dict[str, ModelRegistration] = {}
         self._cache: dict[str, Any] = {}
         self._loader_impl = loader_impl or self._default_loader
         self.load_events: list[dict] = []
         self.cache_hits = 0
+        #: 可信哈希门禁：加载**之前**逐个校验 manifest 登记的 sha256（Phase7 P7-5）。
+        #: 只在登记了 artifacts 且带 sha256 时生效；未登记的模型跳过（保持兼容）。
+        self.verify_before_load = bool(verify_before_load)
 
     # ---------------------------------------------------------- 注册
     def register(self, reg: ModelRegistration) -> ModelRegistration:
@@ -136,6 +140,19 @@ class ModelRegistry:
                 f"模型 {model_id} 仅为 future_verified 预留槽位，"
                 f"当前 evaluation_status={reg.evaluation_status}，无可加载权重",
                 {"model_id": model_id, "evaluation_status": reg.evaluation_status})
+        # Phase7 / P7-5：反序列化（joblib.load / torch.load / pickle.load）可执行任意代码，
+        # 因此在真正 load 之前先做可信哈希校验；不匹配一律拒绝加载，绝不"尽力而为"。
+        if self.verify_before_load:
+            guard = self.verify_checksum(model_id)
+            if guard.get("checksum_ok") is False:
+                raise ServiceError(
+                    "MODEL_ARTIFACT_TAMPERED",
+                    f"模型产物哈希校验失败，拒绝加载（防止不受信权重经反序列化执行代码）: "
+                    f"{model_id} ({guard.get('mismatch') or guard.get('missing')})",
+                    {"model_id": model_id, "failure_kind": "artifact_checksum_mismatch",
+                     "detail": guard,
+                     "hint": "请核对 weights 与 manifest.json 的 sha256；"
+                             "不受信来源的权重一律禁止加载"})
         try:
             obj = self._loader_impl(reg)
         except ServiceError:
