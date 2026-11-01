@@ -308,14 +308,14 @@ class OAuthService:
 
     def apply_callback_cookies(self, response, callback_result: dict) -> None:
         set_ticket_cookie(
-            response, callback_result["ticket"],
+            response, callback_result["rid"], callback_result["ticket"],
             max_age=self.settings.ticket_ttl_seconds,
             secure=self.settings.cookie_secure)
 
     def apply_exchange_cleanup(self, response, rid: str | None) -> None:
         if rid:
             clear_binding_cookie(response, rid, secure=self.settings.cookie_secure)
-        clear_ticket_cookie(response, secure=self.settings.cookie_secure)
+            clear_ticket_cookie(response, rid, secure=self.settings.cookie_secure)
 
     # ================================================================ 辅助
     def completion_redirect(self, *, rid: str, mode: str, status: str,

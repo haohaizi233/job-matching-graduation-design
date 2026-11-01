@@ -25,8 +25,10 @@ from urllib.parse import unquote, urlsplit
 from .exceptions import InvalidRedirect
 
 # ---- Cookie 名称（受限 Path；名称本身不含敏感信息）----
-BINDING_COOKIE_PREFIX = "jm_oauth_bb_"     # + rid（事务短标识，非秘密）
-TICKET_COOKIE_NAME = "jm_oauth_ticket"
+# 绑定凭据与票据 Cookie 均按**事务 rid** 隔离（jm_oauth_bb_<rid> / jm_oauth_ticket_<rid>），
+# 多标签页并发授权互不覆盖单个全局 Cookie。
+BINDING_COOKIE_PREFIX = "jm_oauth_bb_"
+TICKET_COOKIE_PREFIX = "jm_oauth_ticket_"
 OAUTH_COOKIE_PATH = "/api/v1/auth/oauth"
 
 # 票据明文熵：32 字节 = 256 位（≥128 位要求）
@@ -116,6 +118,9 @@ def sanitize_return_path(raw: str | None) -> str:
     if parts.netloc != "app.invalid" or parts.scheme != "https":
         raise InvalidRedirect("return_path 解析出站外地址", {"field": "return_path"})
     normalized = parts.path or "/dashboard"
+    segs = normalized.split("/")
+    if any(s in ("..", ".") for s in segs):
+        raise InvalidRedirect("return_path 含路径穿越片段", {"field": "return_path"})
     if not any(normalized == p.rstrip("/") or normalized.startswith(p)
                for p in _ALLOWED_RETURN_PREFIXES):
         raise InvalidRedirect("return_path 不在允许的站内路由白名单", {"field": "return_path"})
@@ -137,10 +142,18 @@ def is_trusted_frontend_origin(origin: str | None, allowed_origins: tuple[str, .
 
 
 # ---------------------------------------------------------------- Cookie
-def binding_cookie_name(rid: str) -> str:
+def _check_rid(rid: str) -> str:
     if not re.fullmatch(r"[0-9a-f]{8,32}", str(rid or "")):
         raise InvalidRedirect("rid 非法", {"field": "rid"})
-    return BINDING_COOKIE_PREFIX + str(rid)
+    return str(rid)
+
+
+def binding_cookie_name(rid: str) -> str:
+    return BINDING_COOKIE_PREFIX + _check_rid(rid)
+
+
+def ticket_cookie_name(rid: str) -> str:
+    return TICKET_COOKIE_PREFIX + _check_rid(rid)
 
 
 def _cookie_kwargs(*, max_age: int, secure: bool) -> dict:
@@ -163,11 +176,12 @@ def clear_binding_cookie(response, rid: str, *, secure: bool) -> None:
                            secure=bool(secure), httponly=True, samesite="lax")
 
 
-def set_ticket_cookie(response, value: str, *, max_age: int, secure: bool) -> None:
-    response.set_cookie(TICKET_COOKIE_NAME, value, **_cookie_kwargs(
+def set_ticket_cookie(response, rid: str, value: str, *, max_age: int,
+                      secure: bool) -> None:
+    response.set_cookie(ticket_cookie_name(rid), value, **_cookie_kwargs(
         max_age=max_age, secure=secure))
 
 
-def clear_ticket_cookie(response, *, secure: bool) -> None:
-    response.delete_cookie(TICKET_COOKIE_NAME, path=OAUTH_COOKIE_PATH,
+def clear_ticket_cookie(response, rid: str, *, secure: bool) -> None:
+    response.delete_cookie(ticket_cookie_name(rid), path=OAUTH_COOKIE_PATH,
                            secure=bool(secure), httponly=True, samesite="lax")

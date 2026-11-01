@@ -30,6 +30,11 @@ if (typeof window !== 'undefined') {
 export function useAuth() {
   async function login(username: string, password: string): Promise<AuthUser> {
     const result = await apiLogin(username, password)
+    return applyLoginResult(result)
+  }
+
+  /** 采纳一次已成功的登录结果（密码登录 / OAuth 票据交换共用，登录态只此一处） */
+  function applyLoginResult(result: { token: string; user: AuthUser }): AuthUser {
     state.token = result.token
     state.user = result.user
     setToken(result.token)
@@ -80,5 +85,6 @@ export function useAuth() {
     register,
     logout,
     restore,
+    applyLoginResult,
   }
 }

@@ -4,6 +4,8 @@ import { onMounted, reactive, ref } from 'vue'
 import TopBar from '@/components/dashboard/TopBar.vue'
 import SideNav from '@/components/dashboard/SideNav.vue'
 import { useToast } from '@/composables/useToast'
+import { useOAuth } from '@/composables/useOAuth'
+import { setOAuthPassword, type OAuthProvider, type OAuthProviderStatus } from '@/api/oauth'
 import {
   changePassword,
   getUserSettings,
@@ -66,6 +68,90 @@ const pwBusy = ref(false)
 const sessions = ref<SessionItem[]>([])
 const sessionsError = ref('')
 
+// ---------------------------------------------------------------- 第三方账号绑定
+const {
+  providers: oauthProviders,
+  loadProviders,
+  identities: oauthIdentities,
+  loadIdentities,
+  begin,
+  unbind,
+} = useOAuth()
+const oauthBusy = ref('')
+const showSetPwForm = ref(false)
+const setPwNew = ref('')
+const setPwNew2 = ref('')
+const setPwBusy = ref(false)
+
+const providerLabel: Record<OAuthProvider, string> = {
+  wechat: '微信', qq: 'QQ', weibo: '微博',
+}
+
+function identityOf(provider: OAuthProvider) {
+  return oauthIdentities.value?.items.find((i) => i.provider === provider) ?? null
+}
+
+function providerState(provider: OAuthProvider): OAuthProviderStatus | undefined {
+  return oauthProviders.value.find((p) => p.id === provider)
+}
+
+async function refreshOAuth() {
+  await Promise.all([loadProviders(), loadIdentities()])
+}
+
+async function handleBind(provider: OAuthProvider) {
+  oauthBusy.value = provider
+  try {
+    await begin(provider, 'bind')
+  } catch (e) {
+    oauthBusy.value = ''
+    show(e instanceof ApiError ? `发起绑定失败：${e.message}` : '发起绑定失败，请重试')
+  }
+}
+
+async function handleUnbind(provider: OAuthProvider) {
+  oauthBusy.value = provider
+  try {
+    await unbind(provider)
+    show(`${providerLabel[provider]} 账号已解绑`)
+  } catch (e) {
+    if (e instanceof ApiError && e.code === 'OAUTH_LAST_LOGIN_METHOD') {
+      show('该身份是账号唯一登录方式，请先设置本站密码或绑定其它登录方式后再解绑')
+    } else if (e instanceof ApiError && e.status === 403) {
+      show('解绑需要近期重新登录，请重新登录后再操作')
+    } else {
+      show(e instanceof ApiError ? `解绑失败：${e.message}` : '解绑失败，请重试')
+    }
+  } finally {
+    oauthBusy.value = ''
+    await loadIdentities()
+  }
+}
+
+async function submitSetPassword() {
+  if (setPwNew.value.length < 10) {
+    show('新密码至少 10 位')
+    return
+  }
+  if (setPwNew.value !== setPwNew2.value) {
+    show('两次输入的新密码不一致')
+    return
+  }
+  setPwBusy.value = true
+  try {
+    const out = await setOAuthPassword(setPwNew.value)
+    show(`密码已设置，其他 ${out.revoked_sessions} 个登录会话已退出`)
+    setPwNew.value = setPwNew2.value = ''
+    showSetPwForm.value = false
+    await refreshOAuth()
+    await loadSessions()
+  } catch (e) {
+    show(e instanceof ApiError ? `设置失败：${e.message}` : '设置失败，请重试')
+  } finally {
+    setPwBusy.value = false
+  }
+}
+
 function applySettings(s: UserSettings) {
   Object.assign(form, s.basic)
   Object.assign(notifyState, { ...s.notifications })
@@ -89,6 +175,7 @@ async function loadAll() {
   try {
     applySettings(await getUserSettings())
     await loadSessions()
+    await refreshOAuth()
   } catch (e) {
     loadError.value = e instanceof ApiError ? e.message : '设置加载失败，请重试'
   } finally {
@@ -421,6 +508,40 @@ async function handleOfflineOthers() {
             </button>
             <p class="panel-note">修改成功后，除当前设备外的所有登录会话将立即失效</p>
           </div>
+          <div
+            v-if="oauthIdentities && !oauthIdentities.password_login_available"
+            class="password-form"
+          >
+            <p class="panel-note">
+              当前账号为第三方登录账号（尚未设置本站密码），无需输入原密码，可直接设置密码：
+            </p>
+            <button type="button" class="btn-outline" @click="showSetPwForm = !showSetPwForm">
+              {{ showSetPwForm ? '收起' : '设置本站密码' }}
+            </button>
+            <template v-if="showSetPwForm">
+              <label class="field">
+                <span>新密码</span>
+                <input
+                  v-model="setPwNew"
+                  type="password"
+                  autocomplete="new-password"
+                  placeholder="至少 10 位，含字母与数字"
+                />
+              </label>
+              <label class="field">
+                <span>确认新密码</span>
+                <input v-model="setPwNew2" type="password" autocomplete="new-password" />
+              </label>
+              <button
+                type="button"
+                class="btn-primary"
+                :disabled="setPwBusy"
+                @click="submitSetPassword"
+              >
+                {{ setPwBusy ? '提交中…' : '确认设置密码' }}
+              </button>
+            </template>
+          </div>
         </section>
 
         <section class="panel">
@@ -459,6 +580,59 @@ async function handleOfflineOthers() {
             @keyup.enter="addTag"
           />
           <button type="button" class="btn-outline" @click="addTag">添加标签</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 class="panel-title">第三方账号绑定</h2>
+        <p class="panel-note">
+          绑定后可用第三方账号登录本站；解绑后若账号将失去全部登录方式会被拒绝，请先设置本站密码
+        </p>
+        <div
+          v-for="provider in (['wechat', 'qq', 'weibo'] as OAuthProvider[])"
+          :key="provider"
+          class="device-row"
+        >
+          <div>
+            <strong>
+              {{ providerLabel[provider] }}
+              <span v-if="identityOf(provider)" class="current-badge">已绑定</span>
+              <span v-else class="unavailable-badge">未绑定</span>
+            </strong>
+            <span>
+              <template v-if="identityOf(provider)">
+                {{ identityOf(provider)?.display_name || '第三方账号' }}
+                <template v-if="identityOf(provider)?.last_login_at">
+                  · 最近登录 {{ formatTime(identityOf(provider)?.last_login_at ?? null) }}
+                </template>
+              </template>
+              <template v-else-if="providerState(provider)?.enabled === false">
+                <template v-if="providerState(provider)?.reason_code === 'OAUTH_PROVIDER_NOT_CONFIGURED'">
+                  该平台暂未开放（凭据尚未配置）
+                </template>
+                <template v-else>该平台暂未开放</template>
+              </template>
+              <template v-else>未绑定该平台账号</template>
+            </span>
+          </div>
+          <button
+            v-if="identityOf(provider)"
+            type="button"
+            class="btn-outline"
+            :disabled="oauthBusy === provider"
+            @click="handleUnbind(provider)"
+          >
+            {{ oauthBusy === provider ? '处理中…' : '解绑' }}
+          </button>
+          <button
+            v-else
+            type="button"
+            class="btn-outline"
+            :disabled="oauthBusy === provider || providerState(provider)?.enabled === false"
+            @click="handleBind(provider)"
+          >
+            {{ oauthBusy === provider ? '跳转中…' : '绑定' }}
+          </button>
         </div>
       </section>
 

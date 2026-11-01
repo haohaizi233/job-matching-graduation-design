@@ -162,10 +162,15 @@ def create_oauth_router(*, get_biz: Callable, current_user: Callable,
             raise ServiceError("RATE_LIMITED",
                                f"票据交换频率超过限制（{_EXCHANGE_LIMIT}/分钟）")
         rid = (body.rid or "").strip() or None
-        ticket = request.cookies.get("jm_oauth_ticket") or None
+        ticket = None
         binding_secret = None
         if rid:
-            binding_secret = request.cookies.get(f"jm_oauth_bb_{rid}") or None
+            from .security import binding_cookie_name, ticket_cookie_name
+            try:
+                ticket = request.cookies.get(ticket_cookie_name(rid)) or None
+                binding_secret = request.cookies.get(binding_cookie_name(rid)) or None
+            except Exception:  # noqa: BLE001 - rid 非法时按缺票据处理
+                ticket, binding_secret = None, None
         token = bearer_token(request)
         user = current_user(request, biz) if token else None
         out = svc.exchange_login_ticket(
